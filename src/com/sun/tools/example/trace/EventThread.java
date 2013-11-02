@@ -110,13 +110,11 @@ public class EventThread extends Thread {
                 
         while (connected) {
             try {
-            	            	            	
-                EventSet eventSet = queue.remove();
-                EventIterator it = eventSet.eventIterator();
-                while (it.hasNext()) {
-                    handleEvent(it.nextEvent());
-                }
-                eventSet.resume();
+	            	EventSet eventSet = queue.remove();
+	                EventIterator it = eventSet.eventIterator();
+			               while (it.hasNext()) 
+			                   handleEvent(it.nextEvent());
+			        eventSet.resume();
             } catch (InterruptedException exc) {
                 // Ignore
             } catch (VMDisconnectedException discExc) {
@@ -180,16 +178,14 @@ public class EventThread extends Thread {
         final String baseIndent;
         static final String threadDelta = "                     ";
         StringBuffer indent;
+        
 
         ThreadTrace(ThreadReference thread) {
             this.thread = thread;
             this.baseIndent = nextBaseIndent;
             indent = new StringBuffer(baseIndent);
             nextBaseIndent += threadDelta;
-            println("====== " + thread.name() + " ======");
-            
             EventRequestManager mgr = vm.eventRequestManager();
-            
             StepRequest request = mgr.createStepRequest(this.thread, StepRequest.STEP_LINE, StepRequest.STEP_OVER);
             request.setSuspendPolicy(EventRequest.SUSPEND_ALL);
             request.addCountFilter(1);
@@ -197,24 +193,19 @@ public class EventThread extends Thread {
             
         }
 
-        private void println(String str) {
-            writer.print(indent);
-            writer.println(str);
-        }
-
-        void methodEntryEvent(MethodEntryEvent event)  {     
+         void methodEntryEvent(MethodEntryEvent event)  {     
         	
-        	System.out.println("Línea del método invocado: " + (event.location().lineNumber()-1));
-        	System.out.println("Se ha invocado al método: " + event.method().name());
-        	System.out.println("Con los argumentos: ");
-        	try {
+        	 System.out.println("************ "+ event.method().name()+" ************");
+        	
+        	 try {
 				List<LocalVariable> methodArgs = event.method().arguments();
 				StackFrame frame = thread.frame(0);
 				for (int i=0;i<methodArgs.size();i++){
 					LocalVariable variable = methodArgs.get(i);
 					Value v = frame.getValue(variable);
-					System.out.println("\tArgumento "+i+": " + variable.name() + " valor: " + v.toString());
-				}
+					System.out.println("\t|Argumento "+i+": " + variable.name() + " valor: " + v.toString()+"|");
+					}
+				System.out.println("\n");
 			} catch (AbsentInformationException | IncompatibleThreadStateException e) {
 				e.printStackTrace();
 			}
@@ -232,54 +223,33 @@ public class EventThread extends Thread {
         	 * El tipo de valores que devuelve un método en el caso que lo haga.
         	 */
 			
-        	
-        	/**
-        	 * Los valores de las variables antes de salir del método
-        	 */
-        	System.out.println("Los valores de las variables antes de salir del método son : ");
-        	for(int i=0;i<numArgs;i++){
-        		try {
-        			StackFrame frame = thread.frame(0);
-        			LocalVariable variable =event.method().variables().get(i);
-        			Value v = frame.getValue(variable);
-        			System.out.println("\tVariable: "+variable.name().toString() +"="+ v.toString());
-				} catch (AbsentInformationException | IncompatibleThreadStateException e) {
-					e.printStackTrace();
-				}
-        	}
-        	
-        	if(event.method().returnTypeName().equals("void")){
-        		System.out.println("El método "+ event.method().name() + " no devuelve ningún valor porque es Void");
-        	}else {
+        	if(!event.method().returnTypeName().equals("void"))
         		System.out.println("El método "+ event.method().name() + " devuelve el valor " + event.returnValue() + " del tipo " + event.method().returnTypeName());
-        	}
         	
-            System.out.println("Se ha finalizado el método " + event.method().name());
+        	
+            try{
+	            List<LocalVariable> variables = event.method().variables();
+	            StackFrame frame = thread.frame(0);
+				System.out.println("\t Al finalizar " +event.method().name()+":");
+				for (int i=0;i<variables.size();i++)
+					System.out.println("\t\t"+variables.get(i).name()+ " = " + frame.getValue(variables.get(i)));
+				System.out.println("\n");
+			 }
+            catch(Exception e){}
+            
+            //System.out.println("************ " + event.method().name()+ " ************\n");
+           
         }
-
-        /*void methodExitEvent(MethodExitEvent event)  {
-           try{
-        	StackFrame frame = thread.frame(0);
-			List<LocalVariable> variables = frame.visibleVariables();
-			for (int i=0;i<variables.size();i++){
-				System.out.println("\tVariable visibles: " + variables.get(i).name());
-			}}
-           catch(Exception e){}
-        	System.out.println("Se ha finalizado el método " + event.method().name());
-        
-        }*/
 
         void fieldWatchEvent(ModificationWatchpointEvent event){
             Field field = event.field();
             Value value = event.valueToBe();
-            System.out.println("La variable " + field.name() + " ha tomado el valor de " + value.toString());
+            System.out.println(field.name() + " = " + value.toString()+" (Variable global)");
         }
 
         void exceptionEvent(ExceptionEvent event) {
-            println("Exception: " + event.exception() +
-                    " catch: " + event.catchLocation());
-
-            // Step to the catch
+            
+        	// Step to the catch
             EventRequestManager mgr = vm.eventRequestManager();
             try {StepRequest req = mgr.createStepRequest(thread, StepRequest.STEP_LINE, StepRequest.STEP_INTO);
             req.addCountFilter(1);  // next step only
@@ -293,14 +263,16 @@ public class EventThread extends Thread {
         // Step to exception catch
         void stepEvent(StepEvent event){
         	try {
+        		/*VARIABLES VISIBLES EN CADA STEP*/
         		
-        		System.out.println("Step de la línea " + (event.location().lineNumber()-1));
-        		
-				StackFrame frame = thread.frame(0);
+        		/*StackFrame frame = thread.frame(0);
 				List<LocalVariable> variables = frame.visibleVariables();
+				
+				
 				for (int i=0;i<variables.size();i++){
 					System.out.println("\tVariable visibles: " + variables.get(i).name());
-				}
+				}*/
+				
 	            // Adjust call depth
 	            int cnt = 0;
 	            indent = new StringBuffer(baseIndent);
@@ -327,9 +299,9 @@ public class EventThread extends Thread {
 
         void threadDeathEvent(ThreadDeathEvent event)  {
             indent = new StringBuffer(baseIndent);
-            println("====== " + thread.name() + " end ======");
-        }
-    }
+           }
+         }
+    
 
     /**
      * Returns the ThreadTrace instance for the specified thread,
@@ -362,15 +334,11 @@ public class EventThread extends Thread {
             threadDeathEvent((ThreadDeathEvent)event);
         } else if (event instanceof ClassPrepareEvent) {
             classPrepareEvent((ClassPrepareEvent)event);
-        } else if (event instanceof VMStartEvent) {
-            vmStartEvent((VMStartEvent)event);
         } else if (event instanceof VMDeathEvent) {
             vmDeathEvent((VMDeathEvent)event);
         } else if (event instanceof VMDisconnectEvent) {
             vmDisconnectEvent((VMDisconnectEvent)event);
-        } else {
-            throw new Error("Unexpected event type");
-        }
+        } 
     }
 
     /***
@@ -394,15 +362,13 @@ public class EventThread extends Thread {
                     }
                 }
                 eventSet.resume(); // Resume the VM
+                
             } catch (InterruptedException exc) {
                 // ignore
             }
         }
     }
 
-    private void vmStartEvent(VMStartEvent event)  {
-         writer.println("-- VM Started --");
-    }
 
     // Forward event for thread specific processing
     private void methodEntryEvent(MethodEntryEvent event)  {
@@ -429,6 +395,9 @@ public class EventThread extends Thread {
         if (trace != null) {  // only want threads we care about
             trace.threadDeathEvent(event);   // Forward event
         }
+        
+        String s=event.virtualMachine().allClasses().get(1).toString();
+        System.out.println(s.substring(0, s.length()-65)+ "\n");
     }
 
     /**
@@ -447,7 +416,9 @@ public class EventThread extends Thread {
             req.setSuspendPolicy(EventRequest.SUSPEND_NONE);
             req.enable();
         }
-        System.out.println("prepare event");
+        String s=event.virtualMachine().allClasses().get(0).toString();
+        System.out.println(s.substring(0, s.length()-65)+ "\n");
+    
     }
 
     private void exceptionEvent(ExceptionEvent event) {
@@ -458,14 +429,11 @@ public class EventThread extends Thread {
     }
 
     public void vmDeathEvent(VMDeathEvent event) {
-        vmDied = true;
-        writer.println("-- The application exited --");
-    }
+    	vmDied = true;
+       }
 
     public void vmDisconnectEvent(VMDisconnectEvent event) {
         connected = false;
-        if (!vmDied) {
-            writer.println("-- The application has been disconnected --");
         }
-    }
+
 }
