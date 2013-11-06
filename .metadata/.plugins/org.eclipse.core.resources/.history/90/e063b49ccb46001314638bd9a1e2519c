@@ -1,0 +1,13 @@
+import java.io.FileWriter;
+
+
+public class SavePersons {
+
+	public static void main(String[] args) {
+	
+		FileWriter file = FileWrite("Database.xml");
+		
+
+	}
+
+}

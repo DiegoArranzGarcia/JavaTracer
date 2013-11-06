@@ -1,0 +1,7 @@
+INDEX VERSION 1.126+C:\Users\Diego\Documents\GitHub\JavaTracer\.metadata\.plugins\org.eclipse.jdt.core
+238350938.index
+440113767.index
+1417790755.index
+3889868900.index
+638485935.index
+1021887606.index

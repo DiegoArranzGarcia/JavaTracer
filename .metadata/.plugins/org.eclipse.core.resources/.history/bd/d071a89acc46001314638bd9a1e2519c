@@ -1,0 +1,15 @@
+import java.io.FileWriter;
+
+
+public class SavePersons {
+
+	public static void main(String[] args) throws Exception {
+	
+		FileWriter file = new FileWriter("Database.xml");
+		
+		Person person1 = new Person(22,"Juan","Sánchez");
+		Person person2 = new Person(21,"Diego","Arranz",person1);
+
+	}
+
+}

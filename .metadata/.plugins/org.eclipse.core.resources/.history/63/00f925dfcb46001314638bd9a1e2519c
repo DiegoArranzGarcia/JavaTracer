@@ -1,0 +1,13 @@
+
+public class Person {
+	
+	int age;
+	String name;
+	String lastName;
+	Person brother;
+	
+	Person(int age,String name,String lastName,Person brother){
+		
+	}
+
+}

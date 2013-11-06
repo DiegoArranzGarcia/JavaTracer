@@ -1,0 +1,13 @@
+<list id="1">
+  <Person id="2">
+    <age>22</age>
+    <name>Juan</name>
+    <lastName>Sánchez</lastName>
+  </Person>
+  <Person id="3">
+    <age>21</age>
+    <name>Diego</name>
+    <lastName>Arranz</lastName>
+    <bestFriend reference="2"/>
+  </Person>
+</list>
