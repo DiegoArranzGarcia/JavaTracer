@@ -1,38 +1,4 @@
-/*
- * Copyright (c) 2001, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- */
-
-/*
- * This source code is provided to illustrate the usage of a given feature
- * or technique and has been deliberately simplified. Additionals
- * required for a production-quality application, such as security checks,
- * input validation and proper error handling, might not be present in
- * this sample code.
- */
-
-
-package com.sun.tools.example.trace;
+package Tracer;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,12 +14,12 @@ import com.sun.jdi.connect.LaunchingConnector;
 import com.sun.jdi.connect.VMStartException;
 
 /**
- * This program traces the execution of another program.
- * See "java Trace -help".
- * It is a simple example of the use of the Java Debug Interface.
- *
- * @author Robert Field
- */
+* This program traces the execution of another program.
+* See "java Trace -help".
+* It is a simple example of the use of the Java Debug Interface.
+*
+* @author Robert Field
+*/
 public class Trace {
 
     // Running remote VM
@@ -68,7 +34,7 @@ public class Trace {
     // Mode for tracing the Trace program (default= 0 off)
     private int debugTraceMode = VirtualMachine.TRACE_NONE;
 
-    //  Do we want to watch assignments to fields
+    // Do we want to watch assignments to fields
     private boolean watchFields = false;
 
     // Class patterns for which we don't want events
@@ -76,18 +42,18 @@ public class Trace {
                                  "com.sun.*"};
 
     /**
-     * main
-     */
+* main
+*/
     public static void main(String[] args) {
         new Trace(args);
         System.exit(0);
     }
 
     /**
-     * Parse the command line arguments.
-     * Launch target VM.
-     * Generate the trace.
-     */
+* Parse the command line arguments.
+* Launch target VM.
+* Generate the trace.
+*/
     Trace(String[] args) {
         PrintWriter writer = new PrintWriter(System.out);
         int inx;
@@ -101,7 +67,7 @@ public class Trace {
                     writer = new PrintWriter(new FileWriter(args[++inx]));
                 } catch (IOException exc) {
                     System.err.println("Cannot open output file: " + args[inx]
-                                       + " - " +  exc);
+                                       + " - " + exc);
                     System.exit(1);
                 }
             } else if (arg.equals("-all")) {
@@ -136,14 +102,14 @@ public class Trace {
 
 
     /**
-     * Generate the trace.
-     * Enable events, start thread to display events,
-     * start threads to forward remote error and output streams,
-     * resume the remote VM, wait for the final event, and shutdown.
-     */
+* Generate the trace.
+* Enable events, start thread to display events,
+* start threads to forward remote error and output streams,
+* resume the remote VM, wait for the final event, and shutdown.
+*/
     void generateTrace(PrintWriter writer) {
-    	vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm, excludes, writer);
+            vm.setDebugTraceMode(debugTraceMode);
+        EventThread eventThread = new EventThread(vm, excludes);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         redirectOutput();
@@ -160,9 +126,9 @@ public class Trace {
     }
 
     /**
-     * Launch target VM.
-     * Forward target's output and error.
-     */
+* Launch target VM.
+* Forward target's output and error.
+*/
     VirtualMachine launchTarget(String mainArgs) {
         LaunchingConnector connector = findLaunchingConnector();
         Map<String, Connector.Argument> arguments =
@@ -194,8 +160,8 @@ public class Trace {
     }
 
     /**
-     * Find a com.sun.jdi.CommandLineLaunch connector
-     */
+* Find a com.sun.jdi.CommandLineLaunch connector
+*/
     LaunchingConnector findLaunchingConnector() {
         List<Connector> connectors = Bootstrap.virtualMachineManager().allConnectors();
         for (Connector connector : connectors) {
@@ -207,8 +173,8 @@ public class Trace {
     }
 
     /**
-     * Return the launching connector's arguments.
-     */
+* Return the launching connector's arguments.
+*/
     Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, String mainArgs) {
         Map<String, Connector.Argument> arguments = connector.defaultArguments();
         Connector.Argument mainArg =
@@ -231,17 +197,17 @@ public class Trace {
     }
 
     /**
-     * Print command line usage help
-     */
+* Print command line usage help
+*/
     void usage() {
         System.err.println("Usage: java Trace <options> <class> <args>");
         System.err.println("<options> are:");
         System.err.println(
-"  -output <filename>   Output trace to <filename>");
+" -output <filename> Output trace to <filename>");
         System.err.println(
-"  -all                 Include system classes in output");
+" -all Include system classes in output");
         System.err.println(
-"  -help                Print this help message");
+" -help Print this help message");
         System.err.println("<class> is the program to trace");
         System.err.println("<args> are the arguments to <class>");
     }
