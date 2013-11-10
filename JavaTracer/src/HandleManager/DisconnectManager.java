@@ -8,6 +8,6 @@ public class DisconnectManager {
 	
 	public boolean vmDisconnectEvent(VMDisconnectEvent event) {
         return false;
-        }
+    }
 
 }

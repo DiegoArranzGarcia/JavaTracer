@@ -3,6 +3,9 @@ package Tracer;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import DataBase.DataBaseWriter;
+import DataBase.XStreamWriter;
 import HandleManager.DeathManager;
 import HandleManager.DisconnectManager;
 import HandleManager.ExceptionManager;
@@ -12,6 +15,7 @@ import HandleManager.MethodExitManager;
 import HandleManager.PrepareManager;
 import HandleManager.StepManager;
 import HandleManager.ThreadDeathManager;
+
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
@@ -59,27 +63,29 @@ public class EventThread extends Thread {
        private MethodExitManager methodexit;
        private StepManager step;
        private PrepareManager prepare;
+       private DataBaseWriter dbw;
 
     EventThread(VirtualMachine vm, String[] excludes) {
         super("event-handler");
         this.vm = vm;
         this.excludes = excludes;
-       
+        dbw = new XStreamWriter();
+        
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
         
         fieldwatch=new FieldWatchManager(traceMap,vm);
-        methodentry=new MethodEntryManager(traceMap,vm);
-        methodexit=new MethodExitManager(traceMap,vm);
+        methodentry=new MethodEntryManager(traceMap,vm,dbw);
+        methodexit=new MethodExitManager(traceMap,vm,dbw);
         step=new StepManager(traceMap,vm);
         prepare=new PrepareManager(excludes,vm);
     }
 
     /**
-* Run the event handling thread.
-* As long as we are connected, get event sets off
-* the queue and dispatch the events within them.
-*/
+	* Run the event handling thread.
+	* As long as we are connected, get event sets off
+	* the queue and dispatch the events within them.
+	*/
     @Override
     public void run() {
         EventQueue queue = vm.eventQueue();
@@ -101,11 +107,11 @@ public class EventThread extends Thread {
     }
 
     /**
-* Create the desired event requests, and enable
-* them so that we will get events.
-* @param excludes Class patterns for which we don't want events
-* @param watchFields Do we want to watch assignments to fields
-*/
+	* Create the desired event requests, and enable
+	* them so that we will get events.
+	* @param excludes Class patterns for which we don't want events
+	* @param watchFields Do we want to watch assignments to fields
+	*/
     void setEventRequests(boolean watchFields) {
             
         EventRequestManager mgr = vm.eventRequestManager();
@@ -147,8 +153,8 @@ public class EventThread extends Thread {
 
 
     /**
-* Dispatch incoming events
-*/
+	* Dispatch incoming events
+	*/
     private void handleEvent(Event event) {
         if (event instanceof ExceptionEvent) {
             exception.exceptionEvent((ExceptionEvent)event);
@@ -165,18 +171,18 @@ public class EventThread extends Thread {
         } else if (event instanceof ClassPrepareEvent) {
             prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
-            vmDied=death.vmDeathEvent((VMDeathEvent)event);
+        	dbw.close();
         } else if (event instanceof VMDisconnectEvent) {
             connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
         }
     }
 
     /***
-* A VMDisconnectedException has happened while dealing with
-* another event. We need to flush the event queue, dealing only
-* with exit events (VMDeath, VMDisconnect) so that we terminate
-* correctly.
-*/
+	* A VMDisconnectedException has happened while dealing with
+	* another event. We need to flush the event queue, dealing only
+	* with exit events (VMDeath, VMDisconnect) so that we terminate
+	* correctly.
+	*/
     synchronized void handleDisconnectedException() {
         EventQueue queue = vm.eventQueue();
         while (connected) {

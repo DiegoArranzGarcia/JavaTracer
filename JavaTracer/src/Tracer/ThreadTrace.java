@@ -46,25 +46,6 @@ import com.sun.jdi.request.StepRequest;
           request.enable();
           
       }
-
-       public void methodEntryEvent(MethodEntryEvent event) {
-              
-               System.out.println("************ "+ event.method().name()+" ************");
-              
-               try {
-                              List<LocalVariable> methodArgs = event.method().arguments();
-                              StackFrame frame = thread.frame(0);
-                              for (int i=0;i<methodArgs.size();i++){
-                                      LocalVariable variable = methodArgs.get(i);
-                                      Value v = frame.getValue(variable);
-                                      System.out.println("\t|Argumento "+i+": " + variable.name() + " valor: " + v.toString()+"|");
-                                      }
-                              System.out.println("\n");
-                      } catch (AbsentInformationException | IncompatibleThreadStateException e) {
-                              e.printStackTrace();
-                      }
-              
-      }
       
       public void methodExitEvent(MethodExitEvent event) {
               int numArgs = 0;
@@ -153,6 +134,7 @@ import com.sun.jdi.request.StepRequest;
 
       public void threadDeathEvent(ThreadDeathEvent event) {
           indent = new StringBuffer(baseIndent);
+          
          }
        }
 

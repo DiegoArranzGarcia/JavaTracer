@@ -5,9 +5,8 @@ import java.io.*;
 /**
 * StreamRedirectThread is a thread which copies it's input to
 * it's output and terminates when it completes.
-*
-* @author Robert Field
 */
+
 class StreamRedirectThread extends Thread {
 
     private final Reader in;
@@ -16,11 +15,12 @@ class StreamRedirectThread extends Thread {
     private static final int BUFFER_SIZE = 2048;
 
     /**
-* Set up for copy.
-* @param name Name of the thread
-* @param in Stream to copy from
-* @param out Stream to copy to
-*/
+	 * Set up for copy.
+	 * @param name Name of the thread
+	 * @param in Stream to copy from
+	 * @param out Stream to copy to
+	 */
+    
     StreamRedirectThread(String name, InputStream in, OutputStream out) {
         super(name);
         this.in = new InputStreamReader(in);
@@ -29,9 +29,9 @@ class StreamRedirectThread extends Thread {
     }
 
     /**
-* Copy.
-*/
-    @Override
+     * Copy.
+     */
+    
     public void run() {
         try {
             char[] cbuf = new char[BUFFER_SIZE];

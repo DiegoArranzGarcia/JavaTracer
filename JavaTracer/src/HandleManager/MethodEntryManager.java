@@ -1,36 +1,74 @@
 package HandleManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import DataBase.DataBaseWriter;
+import DataBase.MethodEntryInfo;
 import Tracer.ThreadTrace;
+import Tracer.VarUtilities;
 
+import com.sun.jdi.ArrayReference;
+import com.sun.jdi.Method;
+import com.sun.jdi.PrimitiveValue;
+import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
+import com.sun.jdi.Value;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.MethodEntryEvent;
 
-public class MethodEntryManager {
+public class MethodEntryManager extends VMEventsManager{
 
 	private Map<ThreadReference, ThreadTrace> traceMap;
 	private VirtualMachine vm; // Running VM
 		
-		public MethodEntryManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm)
-		{
-			this.traceMap=traceMap;
-			this.vm=vm;
-		}
+	public MethodEntryManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm, DataBaseWriter dbw)
+	{
+		super(dbw);
+		this.traceMap=traceMap;
+		this.vm=vm;
+	}
 	
 	
 	
-	  // Forward event for thread specific processing
+	// Forward event for thread specific processing
     public void methodEntryEvent(MethodEntryEvent event) {
-         threadTrace(event.thread()).methodEntryEvent(event);
+
+       	ThreadReference thread = event.thread();
+       	Method method = event.method();
+       	String methodName = method.name();
+        List<Object> arguments = processArguments(method,thread);
+        MethodEntryInfo info = new MethodEntryInfo(methodName,"",arguments,null);
+        writeOutput(info);
     }
     
     
-    /**
-* Returns the ThreadTrace instance for the specified thread,
-* creating one if needed.
-*/
+    private List<Object> processArguments(Method method, ThreadReference thread) {
+    	  
+    	List<Object> arguments = new ArrayList<>();
+    	
+    	try {
+			StackFrame stack = thread.frame(0);
+			List<Value> argsValue = stack.getArgumentValues();
+			Object varObj = null;
+			for (int i=0;i<argsValue.size();i++){
+				varObj = VarUtilities.getObj(argsValue.get(i));
+				arguments.add(varObj);
+			}
+		} catch (Exception e) {
+			
+		}
+
+    	return arguments;
+	}
+
+
+
+	/**
+	 * Returns the ThreadTrace instance for the specified thread,
+	 * creating one if needed.
+	 */
     public ThreadTrace threadTrace(ThreadReference thread) {
         ThreadTrace trace = traceMap.get(thread);
         if (trace == null) {

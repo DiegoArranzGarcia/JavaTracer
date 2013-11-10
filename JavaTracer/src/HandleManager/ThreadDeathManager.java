@@ -23,7 +23,7 @@ private  Map<ThreadReference, ThreadTrace> traceMap;
         }
         
         String s=event.virtualMachine().allClasses().get(1).toString();
-        System.out.println(s.substring(0, s.length()-65)+ "\n");
+
     }
 	
 }

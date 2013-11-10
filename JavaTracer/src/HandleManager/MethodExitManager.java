@@ -2,34 +2,36 @@ package HandleManager;
 
 import java.util.Map;
 
+import DataBase.DataBaseWriter;
 import Tracer.ThreadTrace;
 
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.MethodExitEvent;
 
-public class MethodExitManager {
+public class MethodExitManager extends VMEventsManager{
 
 	private Map<ThreadReference, ThreadTrace> traceMap;
 	private VirtualMachine vm; // Running VM
 		
-		public MethodExitManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm)
-		{
-			this.traceMap=traceMap;
-			this.vm=vm;
-		}
-	
+	public MethodExitManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm, DataBaseWriter dbw)
+	{
+		super(dbw);
+		this.traceMap=traceMap;
+		this.vm=vm;
+	}
 	
 	// Forward event for thread specific processing
-   public void methodExitEvent(MethodExitEvent event) {
-         threadTrace(event.thread()).methodExitEvent(event);
+    public void methodExitEvent(MethodExitEvent event) {
+         //threadTrace(event.thread()).methodExitEvent(event);
     }
    
    
-   /**
-* Returns the ThreadTrace instance for the specified thread,
-* creating one if needed.
-*/
+    /**
+     * Returns the ThreadTrace instance for the specified thread,
+	 * creating one if needed.
+	 */
+   
    public ThreadTrace threadTrace(ThreadReference thread) {
        ThreadTrace trace = traceMap.get(thread);
        if (trace == null) {
