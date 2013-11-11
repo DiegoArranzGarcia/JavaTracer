@@ -1,6 +1,6 @@
 package Tracer;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +26,7 @@ public class TracerUtilities {
 	public static Object getObj(Value value){
 		Object object = null;
 		if (value instanceof ArrayReference){
-			ArrayReference arrayReference = (ArrayReference)value;
-			List<Value> arrayValues = arrayReference.getValues();
-			Object array = Array.newInstance(String.class,arrayValues.size());
-			for (int i=0;i<arrayValues.size();i++){
-				Array.set(array, i, TracerUtilities.getObj(arrayValues.get(i)));
-			}
-			object = array;
+			object = getObjectFromArrayReference((ArrayReference)value);
 		} else if (value instanceof PrimitiveValue){
 			object = getPrimitiveObject(value);
 		} else if (value instanceof StringReference){
@@ -43,6 +37,18 @@ public class TracerUtilities {
 		return object;
 	}
 	
+
+	private static Object getObjectFromArrayReference(ArrayReference value) {
+		List<Object> elements = new ArrayList<>();
+		List<Value> values = value.getValues();
+		for (int i=0;i<values.size();i++){
+			Value v = values.get(i);
+			elements.add(getObj(v));
+		}
+		Object object = new ArrayInfo(getClass(value.referenceType()),elements);
+		return object;
+	}
+
 
 	private static Object getObjectFromReference(ObjectReference value) {
 		List<Field> fields = value.referenceType().allFields();
@@ -83,7 +89,17 @@ public class TracerUtilities {
 
 	public static String getClass(ReferenceType declaringType) {
 		String className = "";
-		className = declaringType.toString().split(" ")[1];
+		String[] aux = declaringType.toString().split(" ");
+		boolean found = false;
+		int i = 0;
+		while (!found && i<aux.length){
+			if (aux[i].equals("class")){
+				className = aux[i+1];
+				found = true;
+			}
+			i++;
+		}
+		if (className.contains("[]")) className = className.replace("[]", "");
 		return className;
 	}
 	

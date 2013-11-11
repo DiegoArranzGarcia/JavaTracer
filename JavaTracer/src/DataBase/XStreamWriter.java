@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import Tracer.ArrayInfo;
+
 import com.thoughtworks.xstream.XStream;
 
 public class XStreamWriter implements DataBaseWriter {
@@ -19,6 +21,8 @@ public class XStreamWriter implements DataBaseWriter {
 			this.fileWriter = new FileWriter(OUTPUT_PATH+OUTPUT_NAME);
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			this.xstream = new XStream();
+			xstream.alias("array",ArrayInfo.class);
+			xstream.alias("methodentryevent",MethodEntryInfo.class);
 		} catch (IOException e) {
 			//TODO : process error
 		}  
