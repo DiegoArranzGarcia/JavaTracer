@@ -7,7 +7,7 @@ import java.util.Map;
 import DataBase.DataBaseWriter;
 import DataBase.MethodEntryInfo;
 import Tracer.ThreadTrace;
-import Tracer.VarUtilities;
+import Tracer.TracerUtilities;
 
 import com.sun.jdi.Method;
 import com.sun.jdi.StackFrame;
@@ -35,7 +35,8 @@ public class MethodEntryManager extends VMEventsManager{
        	Method method = event.method();
        	String methodName = method.name();
         List<Object> arguments = processArguments(method,thread);
-        MethodEntryInfo info = new MethodEntryInfo(methodName,"",arguments);
+        String className = TracerUtilities.getClass(method.declaringType());
+        MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments);
         writeOutput(info);
     }
 
@@ -48,7 +49,7 @@ public class MethodEntryManager extends VMEventsManager{
 			List<Value> argsValue = stack.getArgumentValues();
 			Object varObj = null;
 			for (int i=0;i<argsValue.size();i++){
-				varObj = VarUtilities.getObj(argsValue.get(i));
+				varObj = TracerUtilities.getObj(argsValue.get(i));
 				arguments.add(varObj);
 			}
 		} catch (Exception e) {

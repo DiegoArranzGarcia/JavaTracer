@@ -1,11 +1,6 @@
 package Tracer;
 
-import java.util.List;
-
-import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.Field;
-import com.sun.jdi.LocalVariable;
-import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
 import com.sun.jdi.VirtualMachine;
@@ -46,29 +41,7 @@ import com.sun.jdi.request.StepRequest;
       }
       
       public void methodExitEvent(MethodExitEvent event) {
-            /*  int numArgs = 0;
-                      try {
-                              numArgs = event.method().variables().size();
-                      } catch (AbsentInformationException e1) {
-                              e1.printStackTrace();
-                      }
-              
-        El tipo de valores que devuelve un método en el caso que lo haga.
-       
-                      
-              if(!event.method().returnTypeName().equals("void"))
-                      System.out.println("El método "+ event.method().name() + " devuelve el valor " + event.returnValue() + " del tipo " + event.method().returnTypeName());
-              
-              
-          try{
-       List<LocalVariable> variables = event.method().variables();
-       StackFrame frame = thread.frame(0);
-                              System.out.println("\t Al finalizar " +event.method().name()+":");
-                              for (int i=0;i<variables.size();i++)
-                                      System.out.println("\t\t"+variables.get(i).name()+ " = " + frame.getValue(variables.get(i)));
-                              System.out.println("\n");
-                       }
-          catch(Exception e){}
+            /*  
           */
           //System.out.println("************ " + event.method().name()+ " ************\n");
          
@@ -77,7 +50,7 @@ import com.sun.jdi.request.StepRequest;
       public void fieldWatchEvent(ModificationWatchpointEvent event){
           Field field = event.field();
           Value value = event.valueToBe();
-          System.out.println(field.name() + " = " + value.toString()+" (Variable global)");
+          //System.out.println(field.name() + " = " + value.toString()+" (Variable global)");
       }
 
       public void exceptionEvent(ExceptionEvent event) {

@@ -1,3 +1,4 @@
+package com.prueba;
 import java.util.Random;
 
 public class MergeSort{

@@ -16,11 +16,12 @@ import com.sun.jdi.IntegerValue;
 import com.sun.jdi.LongValue;
 import com.sun.jdi.ObjectReference;
 import com.sun.jdi.PrimitiveValue;
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.ShortValue;
 import com.sun.jdi.StringReference;
 import com.sun.jdi.Value;
 
-public class VarUtilities {
+public class TracerUtilities {
 	
 	public static Object getObj(Value value){
 		Object object = null;
@@ -29,7 +30,7 @@ public class VarUtilities {
 			List<Value> arrayValues = arrayReference.getValues();
 			Object array = Array.newInstance(String.class,arrayValues.size());
 			for (int i=0;i<arrayValues.size();i++){
-				Array.set(array, i, VarUtilities.getObj(arrayValues.get(i)));
+				Array.set(array, i, TracerUtilities.getObj(arrayValues.get(i)));
 			}
 			object = array;
 		} else if (value instanceof PrimitiveValue){
@@ -51,7 +52,7 @@ public class VarUtilities {
 			Value v = value.getValue(f);
 			Object object = null;
 			if (v instanceof ObjectReference && ! (v instanceof StringReference)) object = ((ObjectReference)v).uniqueID(); 
-			else object = VarUtilities.getObj(v);
+			else object = TracerUtilities.getObj(v);
 			values.put(f.name(),object);
 		}
 		Object result = new ObjectInfo("class",values,value.uniqueID());
@@ -80,4 +81,10 @@ public class VarUtilities {
 		return object;
 	}
 
+	public static String getClass(ReferenceType declaringType) {
+		String className = "";
+		className = declaringType.toString().split(" ")[1];
+		return className;
+	}
+	
 }

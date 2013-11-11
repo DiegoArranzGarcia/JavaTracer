@@ -38,7 +38,7 @@ public class PrepareManager {
 	            req.enable();
 	        }
 	        String s=event.virtualMachine().allClasses().get(0).toString();
-	        System.out.println(s.substring(0, s.length()-65)+ "\n");
+	       // System.out.println(s.substring(0, s.length()-65)+ "\n");
 	    
 	    }
 
