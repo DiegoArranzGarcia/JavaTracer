@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +20,16 @@ public class SavePersons {
 		
 		list.add(person1);
 		list.add(person2);
+		Person[] array = {person1,person2};
 		
-		xstream.toXML(list,file);
+		xstream.toXML(array,file);
 		
-		List<Person> resultList = new ArrayList<>();
+		/*List<Person> resultList = new ArrayList<>();
 		resultList = (List) xstream.fromXML(new File("Database.xml"));
 		for (int i=0;i<resultList.size();i++){
 			Person p = resultList.get(i);
 			p.imprime();
-		}
+		}*/
 	}
 
 }

@@ -7,15 +7,11 @@ public class MethodEntryInfo {
 	String methodName;
 	String calledFromClass;
 	List<Object> arguments;
-	Object returnObject;
 	
-	public MethodEntryInfo(String methodName, String calledFromClass, List<Object> value,
-	Object returnObject){
+	public MethodEntryInfo(String methodName, String calledFromClass, List<Object> value){
 		this.methodName = methodName;
 		this.calledFromClass = calledFromClass; 
-		this.arguments = value;
-		this.returnObject = returnObject;
-		
+		this.arguments = value;		
 	}
 	
 }

@@ -4,14 +4,12 @@ import java.util.List;
 
 import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.Field;
-import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.ExceptionEvent;
-import com.sun.jdi.event.MethodEntryEvent;
 import com.sun.jdi.event.MethodExitEvent;
 import com.sun.jdi.event.ModificationWatchpointEvent;
 import com.sun.jdi.event.StepEvent;
@@ -48,15 +46,15 @@ import com.sun.jdi.request.StepRequest;
       }
       
       public void methodExitEvent(MethodExitEvent event) {
-              int numArgs = 0;
+            /*  int numArgs = 0;
                       try {
                               numArgs = event.method().variables().size();
                       } catch (AbsentInformationException e1) {
                               e1.printStackTrace();
                       }
-              /**
-       * El tipo de valores que devuelve un método en el caso que lo haga.
-       */
+              
+        El tipo de valores que devuelve un método en el caso que lo haga.
+       
                       
               if(!event.method().returnTypeName().equals("void"))
                       System.out.println("El método "+ event.method().name() + " devuelve el valor " + event.returnValue() + " del tipo " + event.method().returnTypeName());
@@ -71,7 +69,7 @@ import com.sun.jdi.request.StepRequest;
                               System.out.println("\n");
                        }
           catch(Exception e){}
-          
+          */
           //System.out.println("************ " + event.method().name()+ " ************\n");
          
       }

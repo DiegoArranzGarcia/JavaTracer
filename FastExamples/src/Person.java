@@ -24,7 +24,7 @@ public class Person {
 		System.out.println("Age: " + age);
 		System.out.println("Name: " + name);
 		System.out.println("Last name: " + lastName);
-		if (bestFriend!=null) System.out.println("My best friend is: " + bestFriend.name);
+		//if (bestFriend!=null) System.out.println("My best friend is: " + bestFriend.name);
 		System.out.println("*******************************************");
 	}
 

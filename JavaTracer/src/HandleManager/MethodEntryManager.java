@@ -9,9 +9,7 @@ import DataBase.MethodEntryInfo;
 import Tracer.ThreadTrace;
 import Tracer.VarUtilities;
 
-import com.sun.jdi.ArrayReference;
 import com.sun.jdi.Method;
-import com.sun.jdi.PrimitiveValue;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
@@ -30,8 +28,6 @@ public class MethodEntryManager extends VMEventsManager{
 		this.vm=vm;
 	}
 	
-	
-	
 	// Forward event for thread specific processing
     public void methodEntryEvent(MethodEntryEvent event) {
 
@@ -39,12 +35,11 @@ public class MethodEntryManager extends VMEventsManager{
        	Method method = event.method();
        	String methodName = method.name();
         List<Object> arguments = processArguments(method,thread);
-        MethodEntryInfo info = new MethodEntryInfo(methodName,"",arguments,null);
+        MethodEntryInfo info = new MethodEntryInfo(methodName,"",arguments);
         writeOutput(info);
     }
-    
-    
-    private List<Object> processArguments(Method method, ThreadReference thread) {
+
+	private List<Object> processArguments(Method method, ThreadReference thread) {
     	  
     	List<Object> arguments = new ArrayList<>();
     	
@@ -57,18 +52,17 @@ public class MethodEntryManager extends VMEventsManager{
 				arguments.add(varObj);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 
     	return arguments;
 	}
 
-
-
 	/**
 	 * Returns the ThreadTrace instance for the specified thread,
 	 * creating one if needed.
 	 */
+	
     public ThreadTrace threadTrace(ThreadReference thread) {
         ThreadTrace trace = traceMap.get(thread);
         if (trace == null) {

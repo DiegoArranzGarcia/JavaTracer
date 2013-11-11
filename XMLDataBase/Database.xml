@@ -1,4 +1,4 @@
-<list id="1">
+<Person-array id="1">
   <Person id="2">
     <age>22</age>
     <name>Juan</name>
@@ -10,4 +10,4 @@
     <lastName>Arranz</lastName>
     <bestFriend reference="2"/>
   </Person>
-</list>
+</Person-array>

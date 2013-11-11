@@ -21,9 +21,6 @@ private  Map<ThreadReference, ThreadTrace> traceMap;
         if (trace != null) { // only want threads we care about
             trace.threadDeathEvent(event); // Forward event
         }
-        
-        String s=event.virtualMachine().allClasses().get(1).toString();
-
     }
 	
 }
