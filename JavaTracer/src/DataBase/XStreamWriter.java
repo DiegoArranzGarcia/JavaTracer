@@ -18,13 +18,13 @@ public class XStreamWriter implements DataBaseWriter {
 	
 	public XStreamWriter(){
 		try {
-			this.fileWriter = new FileWriter(OUTPUT_PATH+OUTPUT_NAME);
+			this.fileWriter = new FileWriter(OUTPUT_NAME);
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			this.xstream = new XStream();
 			xstream.alias("array",ArrayInfo.class);
 			xstream.alias("methodentryevent",MethodEntryInfo.class);
 		} catch (IOException e) {
-			//TODO : process error
+			e.printStackTrace();
 		}  
 	}
 	
@@ -40,7 +40,6 @@ public class XStreamWriter implements DataBaseWriter {
 	public void close() {
 		try {
 			bufferedWriter.close();
-			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
