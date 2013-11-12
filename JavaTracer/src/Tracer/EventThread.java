@@ -75,8 +75,8 @@ public class EventThread extends Thread {
         //or array excludes created in Trace class  
         
         fieldwatch=new FieldWatchManager(traceMap,vm);
-        methodentry=new MethodEntryManager(traceMap,vm,dbw);
-        methodexit=new MethodExitManager(traceMap,vm,dbw);
+        methodentry=new MethodEntryManager(null);
+        methodexit=new MethodExitManager(dbw);
         step=new StepManager(traceMap,vm);
         prepare=new PrepareManager(excludes,vm);
     }

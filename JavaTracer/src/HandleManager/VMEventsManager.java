@@ -1,6 +1,7 @@
 package HandleManager;
 
 import DataBase.DataBaseWriter;
+import DataBase.InterfaceInfo;
 
 /**
  * When a new type of event has to be register, the manager must extends this class.  
@@ -32,7 +33,7 @@ public class VMEventsManager {
 	 * @param dataBaseWriter - The DataBaseWriter to user.
 	 */
 	public VMEventsManager(DataBaseWriter dataBaseWriter){
-		this.enableOutput = (dataBaseWriter!=null);
+		this.enableOutput = true;
 		this.dataBaseWriter = dataBaseWriter;
 	}
 	
@@ -71,10 +72,10 @@ public class VMEventsManager {
 	 * if it's null System.out will be used. 
 	 * @param output - The output that will be displayed.
 	 */
-	public void writeOutput(Object output){
+	public void writeOutput(InterfaceInfo output){
 		if (enableOutput){
 			if (dataBaseWriter!=null) dataBaseWriter.writeOutput(output);
-			else System.out.println(output);
+			else System.out.println(output.toString());
 		}
 	}
 	

@@ -2,7 +2,7 @@ package DataBase;
 
 import java.util.List;
 
-public class MethodEntryInfo {
+public class MethodEntryInfo implements InterfaceInfo {
 
 	String methodName;
 	String calledFromClass;
@@ -12,6 +12,10 @@ public class MethodEntryInfo {
 		this.methodName = methodName;
 		this.calledFromClass = calledFromClass; 
 		this.arguments = value;		
+	}
+
+	public String toString() {
+		return "";
 	}
 	
 }

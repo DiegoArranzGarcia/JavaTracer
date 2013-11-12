@@ -9,7 +9,8 @@ public class Main {
 		prueba(1,p1,p2);
 	}
 	
-	public static void prueba(int i,Person p1,Person p2){
+	public static Person prueba(int i,Person p1,Person p2){
 		i = 0;
+		return p2.bestFriend;
 	}
 }

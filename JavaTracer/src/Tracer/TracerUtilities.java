@@ -61,7 +61,7 @@ public class TracerUtilities {
 			else object = TracerUtilities.getObj(v);
 			values.put(f.name(),object);
 		}
-		Object result = new ObjectInfo("class",values,value.uniqueID());
+		Object result = new ObjectInfo(getClass(value.referenceType()),values,value.uniqueID());
 		return result;
 	}
 

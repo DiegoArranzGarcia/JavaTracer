@@ -2,30 +2,24 @@ package HandleManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import DataBase.DataBaseWriter;
 import DataBase.MethodEntryInfo;
-import Tracer.ThreadTrace;
 import Tracer.TracerUtilities;
 
 import com.sun.jdi.Method;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
-import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.MethodEntryEvent;
 
 public class MethodEntryManager extends VMEventsManager{
 
-	private Map<ThreadReference, ThreadTrace> traceMap;
-	private VirtualMachine vm; // Running VM
-		
-	public MethodEntryManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm, DataBaseWriter dbw)
+	public MethodEntryManager(){};
+	
+	public MethodEntryManager(DataBaseWriter dbw)
 	{
 		super(dbw);
-		this.traceMap=traceMap;
-		this.vm=vm;
 	}
 	
 	// Forward event for thread specific processing
@@ -55,22 +49,7 @@ public class MethodEntryManager extends VMEventsManager{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
     	return arguments;
 	}
-
-	/**
-	 * Returns the ThreadTrace instance for the specified thread,
-	 * creating one if needed.
-	 */
-	
-    public ThreadTrace threadTrace(ThreadReference thread) {
-        ThreadTrace trace = traceMap.get(thread);
-        if (trace == null) {
-            trace = new ThreadTrace(thread,vm);
-            traceMap.put(thread, trace);
-        }
-        return trace;
-    }
 
 }

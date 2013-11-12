@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import Tracer.ArrayInfo;
+import Tracer.ObjectInfo;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -23,6 +24,7 @@ public class XStreamWriter implements DataBaseWriter {
 			this.xstream = new XStream();
 			xstream.alias("array",ArrayInfo.class);
 			xstream.alias("methodentryevent",MethodEntryInfo.class);
+			xstream.alias("object",ObjectInfo.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  

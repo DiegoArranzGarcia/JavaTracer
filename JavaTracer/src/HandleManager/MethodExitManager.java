@@ -1,29 +1,35 @@
 package HandleManager;
 
-import java.util.Map;
-
 import DataBase.DataBaseWriter;
-import Tracer.ThreadTrace;
+import DataBase.MethodExitInfo;
+import Tracer.TracerUtilities;
 
-import com.sun.jdi.ThreadReference;
-import com.sun.jdi.VirtualMachine;
+import com.sun.jdi.Method;
+import com.sun.jdi.Value;
+import com.sun.jdi.VoidValue;
 import com.sun.jdi.event.MethodExitEvent;
 
 public class MethodExitManager extends VMEventsManager{
-
-	private Map<ThreadReference, ThreadTrace> traceMap;
-	private VirtualMachine vm; // Running VM
-		
-	public MethodExitManager(Map<ThreadReference, ThreadTrace> traceMap, VirtualMachine vm, DataBaseWriter dbw)
+	
+	public MethodExitManager(){};	
+	
+	public MethodExitManager(DataBaseWriter dbw)
 	{
 		super(dbw);
-		this.traceMap=traceMap;
-		this.vm=vm;
 	}
 	
 	// Forward event for thread specific processing
     public void methodExitEvent(MethodExitEvent event) {
-         //threadTrace(event.thread()).methodExitEvent(event);
+         Method method = event.method();
+         String methodName = method.name();
+         String className = TracerUtilities.getClass(method.declaringType());
+         Value returnValue = event.returnValue();
+         Object returnObject = null; 
+         if (!(returnValue instanceof VoidValue)){ 
+          returnObject = TracerUtilities.getObj(returnValue);
+         }
+         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject);
+         writeOutput(info);
     }
    
    
@@ -31,13 +37,5 @@ public class MethodExitManager extends VMEventsManager{
      * Returns the ThreadTrace instance for the specified thread,
 	 * creating one if needed.
 	 */
-   
-   public ThreadTrace threadTrace(ThreadReference thread) {
-       ThreadTrace trace = traceMap.get(thread);
-       if (trace == null) {
-           trace = new ThreadTrace(thread,vm);
-           traceMap.put(thread, trace);
-       }
-       return trace;
-   }
+  
 }

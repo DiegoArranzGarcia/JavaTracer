@@ -39,13 +39,6 @@ import com.sun.jdi.request.StepRequest;
           request.enable();
           
       }
-      
-      public void methodExitEvent(MethodExitEvent event) {
-            /*  
-          */
-          //System.out.println("************ " + event.method().name()+ " ************\n");
-         
-      }
 
       public void fieldWatchEvent(ModificationWatchpointEvent event){
           Field field = event.field();
