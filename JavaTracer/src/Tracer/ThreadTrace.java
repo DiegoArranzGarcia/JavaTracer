@@ -39,66 +39,44 @@ import com.sun.jdi.request.StepRequest;
           request.enable();
           
       }
-
-      public void fieldWatchEvent(ModificationWatchpointEvent event){
-          Field field = event.field();
-          Value value = event.valueToBe();
-          //System.out.println(field.name() + " = " + value.toString()+" (Variable global)");
+      
+      public ThreadReference getThreadReference()
+      {
+    	  return thread;
+    	  
       }
-
-      public void exceptionEvent(ExceptionEvent event) {
-          
-              // Step to the catch
-          EventRequestManager mgr = vm.eventRequestManager();
-          try {StepRequest req = mgr.createStepRequest(thread, StepRequest.STEP_LINE, StepRequest.STEP_INTO);
-          req.addCountFilter(1); // next step only
-          req.setSuspendPolicy(EventRequest.SUSPEND_ALL);
-          req.enable();}
-          catch(Exception e){
-                  
-         }
+      
+      public String getBaseIndent()
+      {
+    	  return baseIndent;
+    	  
       }
+      
+            
 
-      // Step to exception catch
-      public void stepEvent(StepEvent event){
-              try {
-                      /*VARIABLES VISIBLES EN CADA STEP*/
-                      
-                      /*StackFrame frame = thread.frame(0);
-                              List<LocalVariable> variables = frame.visibleVariables();
-                              
-                              
-                              for (int i=0;i<variables.size();i++){
-                                      System.out.println("\tVariable visibles: " + variables.get(i).name());
-                              }*/
-                              
-       // Adjust call depth
-       int cnt = 0;
-       indent = new StringBuffer(baseIndent);
-      
-       cnt = thread.frameCount();
-      
-       while (cnt-- > 0) {
-       indent.append("| ");
-       }
+	public static String getThreaddelta() {
+		return threadDelta;
+	}
 
-       EventRequestManager mgr = vm.eventRequestManager();
-       mgr.deleteEventRequest(event.request());
-      
-       StepRequest request = mgr.createStepRequest(this.thread, StepRequest.STEP_LINE, StepRequest.STEP_INTO);
-       request.setSuspendPolicy(EventRequest.SUSPEND_ALL);
-       request.addCountFilter(1);
-       request.enable();
-      
-                      } catch (Exception e) {
-                              
-                      }
-              
-      }
+	public StringBuffer getIndent() {
+		return indent;
+	}
 
-      public void threadDeathEvent(ThreadDeathEvent event) {
-          indent = new StringBuffer(baseIndent);
-          
-         }
+	public static String getNextBaseIndent() {
+		return nextBaseIndent;
+	}
+
+	public VirtualMachine getVm() {
+		return vm;
+	}
+
+	
+	public void SetIndent(StringBuffer indent)
+	{
+		this.indent=indent;
+	}
+	
+	
+	
        }
 

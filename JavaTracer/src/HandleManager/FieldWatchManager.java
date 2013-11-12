@@ -4,7 +4,9 @@ import java.util.Map;
 
 import Tracer.ThreadTrace;
 
+import com.sun.jdi.Field;
 import com.sun.jdi.ThreadReference;
+import com.sun.jdi.Value;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.ModificationWatchpointEvent;
 
@@ -22,9 +24,18 @@ private VirtualMachine vm; // Running VM
 	
 	  // Forward event for thread specific processing
     public void fieldWatchEvent(ModificationWatchpointEvent event){
-         threadTrace(event.thread()).fieldWatchEvent(event);
+    	
+    	fieldWatchEvent_Thread(event,threadTrace(event.thread()));
     }
 
+    
+    public void fieldWatchEvent_Thread(ModificationWatchpointEvent event, ThreadTrace thread){
+       
+    	Field field = event.field();
+        Value value = event.valueToBe();
+        //System.out.println(field.name() + " = " + value.toString()+" (Variable global)");
+    }
+    
     
     /**
 * Returns the ThreadTrace instance for the specified thread,

@@ -7,6 +7,9 @@ import Tracer.ThreadTrace;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.StepEvent;
+import com.sun.jdi.request.EventRequest;
+import com.sun.jdi.request.EventRequestManager;
+import com.sun.jdi.request.StepRequest;
 
 public class StepManager {
 	
@@ -21,9 +24,49 @@ public class StepManager {
 
 	// Forward event for thread specific processing
     public void stepEvent(StepEvent event) {
-         threadTrace(event.thread()).stepEvent(event);
+         stepEvent_Thread(event,threadTrace(event.thread()));
     }
     
+   
+    // Step to exception catch
+    public void stepEvent_Thread(StepEvent event,ThreadTrace thread){
+            try {
+                    /*VARIABLES VISIBLES EN CADA STEP*/
+                    
+                    /*StackFrame frame = thread.frame(0);
+                            List<LocalVariable> variables = frame.visibleVariables();
+                            
+                            
+                            for (int i=0;i<variables.size();i++){
+                                    System.out.println("\tVariable visibles: " + variables.get(i).name());
+                            }*/
+                            
+     // Adjust call depth
+     int cnt = 0;
+      thread.SetIndent(new StringBuffer(thread.getBaseIndent())); 
+    
+    
+     cnt = thread.getThreadReference().frameCount();
+    
+     while (cnt-- > 0) {
+    	 thread.SetIndent(thread.getIndent().append("| "));
+    	 
+     }
+
+     EventRequestManager mgr = vm.eventRequestManager();
+     mgr.deleteEventRequest(event.request());
+    
+     StepRequest request = mgr.createStepRequest(thread.getThreadReference(), StepRequest.STEP_LINE, StepRequest.STEP_INTO);
+     request.setSuspendPolicy(EventRequest.SUSPEND_ALL);
+     request.addCountFilter(1);
+     request.enable();
+    
+                    } catch (Exception e) {
+                            
+                    }
+            
+    }
+
     
     /**
 * Returns the ThreadTrace instance for the specified thread,

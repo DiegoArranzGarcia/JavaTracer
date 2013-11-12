@@ -19,8 +19,14 @@ private  Map<ThreadReference, ThreadTrace> traceMap;
 	public void threadDeathEvent(ThreadDeathEvent event) {
         ThreadTrace trace = traceMap.get(event.thread());
         if (trace != null) { // only want threads we care about
-            trace.threadDeathEvent(event); // Forward event
+        	threadDeathEvent_Thread(event,trace);// Forward event
         }
     }
+	
+	public void threadDeathEvent_Thread(ThreadDeathEvent event,ThreadTrace thread) {
+        thread.SetIndent(new StringBuffer(thread.getBaseIndent()));
+		
+        
+       }
 	
 }

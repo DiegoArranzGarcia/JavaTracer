@@ -56,7 +56,7 @@ public class EventThread extends Thread {
        //Managers
        private DeathManager death=new DeathManager();
        private DisconnectManager disconnect=new DisconnectManager();
-       private ExceptionManager exception=new ExceptionManager(traceMap);
+       private ExceptionManager exception;
        private ThreadDeathManager threadeath=new ThreadDeathManager(traceMap);
        private FieldWatchManager fieldwatch;
        private MethodEntryManager methodentry;
@@ -79,6 +79,7 @@ public class EventThread extends Thread {
         methodexit=new MethodExitManager(dbw);
         step=new StepManager(traceMap,vm);
         prepare=new PrepareManager(excludes,vm);
+		exception=new ExceptionManager(traceMap,vm);
     }
 
     /**
