@@ -14,8 +14,6 @@ import com.sun.jdi.Value;
 import com.sun.jdi.event.MethodEntryEvent;
 
 public class MethodEntryManager extends VMEventsManager{
-
-	public MethodEntryManager(){};
 	
 	public MethodEntryManager(DataBaseWriter dbw)
 	{

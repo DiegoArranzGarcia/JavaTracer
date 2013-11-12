@@ -24,6 +24,7 @@ public class XStreamWriter implements DataBaseWriter {
 			this.xstream = new XStream();
 			xstream.alias("array",ArrayInfo.class);
 			xstream.alias("methodentryevent",MethodEntryInfo.class);
+			xstream.alias("methodexitevent",MethodExitInfo.class);
 			xstream.alias("object",ObjectInfo.class);
 		} catch (IOException e) {
 			e.printStackTrace();
