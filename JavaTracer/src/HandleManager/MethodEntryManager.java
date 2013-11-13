@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataBase.DataBaseWriter;
-import DataBase.MethodEntryInfo;
+import Info.MethodEntryInfo;
 import Tracer.TracerUtilities;
 
 import com.sun.jdi.Method;

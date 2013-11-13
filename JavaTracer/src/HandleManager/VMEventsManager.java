@@ -1,7 +1,7 @@
 package HandleManager;
 
 import DataBase.DataBaseWriter;
-import DataBase.InterfaceInfo;
+import Info.InterfaceInfo;
 
 /**
  * When a new type of event has to be register, the manager must extends this class.  

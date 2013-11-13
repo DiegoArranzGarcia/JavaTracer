@@ -1,4 +1,4 @@
-package DataBase;
+package Info;
 
 public interface InterfaceInfo {
 	

@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Tracer.ArrayInfo;
-import Tracer.ObjectInfo;
+import Info.ArrayInfo;
+import Info.MethodEntryInfo;
+import Info.MethodExitInfo;
+import Info.ObjectInfo;
 
 import com.thoughtworks.xstream.XStream;
 

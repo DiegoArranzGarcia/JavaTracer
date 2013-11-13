@@ -1,4 +1,5 @@
-package DataBase;
+package Info;
+
 
 public class MethodExitInfo implements InterfaceInfo{
 

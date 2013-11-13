@@ -1,7 +1,7 @@
 package HandleManager;
 
 import DataBase.DataBaseWriter;
-import DataBase.MethodExitInfo;
+import Info.MethodExitInfo;
 import Tracer.TracerUtilities;
 
 import com.sun.jdi.Method;

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Info.ArrayInfo;
+import Info.ObjectInfo;
+
 import com.sun.jdi.ArrayReference;
 import com.sun.jdi.BooleanValue;
 import com.sun.jdi.ByteValue;
