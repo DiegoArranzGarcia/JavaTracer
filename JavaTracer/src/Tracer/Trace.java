@@ -45,8 +45,9 @@ public class Trace {
 * main
 */
     public static void main(String[] args) {
-        new Trace(args);
-        System.exit(0);
+    	WindowPath wp= new WindowPath();
+    	wp.setVisible(true); 
+        //System.exit(0);
     }
 
     /**
@@ -96,7 +97,7 @@ public class Trace {
             sb.append(' ');
             sb.append(args[inx]);
         }
-        vm = launchTarget(sb.toString());
+        vm = launchTarget(args);
         generateTrace(writer);
     }
 
@@ -129,7 +130,7 @@ public class Trace {
 * Launch target VM.
 * Forward target's output and error.
 */
-    VirtualMachine launchTarget(String mainArgs) {
+    VirtualMachine launchTarget(String[] mainArgs) {
         LaunchingConnector connector = findLaunchingConnector();
         Map<String, Connector.Argument> arguments =
            connectorArguments(connector, mainArgs);
@@ -175,14 +176,14 @@ public class Trace {
     /**
 * Return the launching connector's arguments.
 */
-    Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, String mainArgs) {
+    Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, String[] mainArgs) { 
         Map<String, Connector.Argument> arguments = connector.defaultArguments();
         Connector.Argument mainArg =
                            (Connector.Argument)arguments.get("main");
         if (mainArg == null) {
             throw new Error("Bad launching connector");
         }
-        mainArg.setValue(mainArgs);
+        mainArg.setValue(mainArgs[1]);
 
         if (true) {
             // We need a VM that supports watchpoints
@@ -191,7 +192,9 @@ public class Trace {
             if (optionArg == null) {
                 throw new Error("Bad launching connector");
             }
-            optionArg.setValue("-classic");
+            String optionValue = "-classpath " + mainArgs[0];
+            optionArg.setValue(optionValue);
+            //optionArg.setValue("-classic");
         }
         return arguments;
     }
