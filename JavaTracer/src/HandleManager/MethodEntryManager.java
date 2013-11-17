@@ -1,5 +1,6 @@
 package HandleManager;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +8,14 @@ import DataBase.DataBaseWriter;
 import Info.MethodEntryInfo;
 import Tracer.TracerUtilities;
 
+
+import com.sun.jdi.Field;
 import com.sun.jdi.Method;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
 import com.sun.jdi.event.MethodEntryEvent;
+
 
 public class MethodEntryManager extends VMEventsManager{
 	
@@ -22,13 +26,14 @@ public class MethodEntryManager extends VMEventsManager{
 	
 	// Forward event for thread specific processing
     public void methodEntryEvent(MethodEntryEvent event) {
-
-       	ThreadReference thread = event.thread();
+    	
+    	ThreadReference thread = event.thread();
        	Method method = event.method();
        	String methodName = method.name();
         List<Object> arguments = processArguments(method,thread);
         String className = TracerUtilities.getClass(method.declaringType());
-        MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments);
+        List<Object> arguments_this = processThis(event);
+        MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,arguments_this);
         writeOutput(info);
     }
 
@@ -49,5 +54,29 @@ public class MethodEntryManager extends VMEventsManager{
 		}
     	return arguments;
 	}
+
+
+	private List<Object> processThis(MethodEntryEvent event) {
+	
+	Field f=null;
+	String tipo="";
+	Object valor=null;
+	Object varObj=null;
+	List<Object> arguments_this = new ArrayList<>();
+	List<Field> s=event.virtualMachine().allClasses().get(0).allFields();
+	
+	while (!s.isEmpty()){
+		f = s.get(0);
+		//tipo = f.typeName();
+		valor=event.virtualMachine().allClasses().get(0).getValue(f);
+		varObj = TracerUtilities.getObj((Value)valor);
+		arguments_this.add(varObj);
+	    s.remove(0);
+	   }
+	
+		return arguments_this;
+	}
+
+
 
 }
