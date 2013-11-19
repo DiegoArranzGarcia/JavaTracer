@@ -74,7 +74,7 @@ public class WindowPath extends JFrame {
 				
 		      JOptionPane.setDefaultLocale(new Locale("en"));
                JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
-               		+ "	lanuched "); 
+               		+ "	launched "); 
 			
 				} catch (Exception e1) {
 					
@@ -98,11 +98,17 @@ public class WindowPath extends JFrame {
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					String sf=chooser.getSelectedFile().toString();				
 					String s=chooser.getSelectedFile().getName();
+					String esClass = s.substring(s.length()-5, s.length()); 
 					
-					String file = sf.substring(0, sf.lastIndexOf('.'));
-					String[] args= processPath(chooser.getSelectedFile().toString(),file);
-					path.setText(args[0]+args[1]);
-					new Trace(args);
+					if(esClass.equals("class"))
+					{
+						String file = sf.substring(0, sf.lastIndexOf('.'));
+						String[] args= processPath(chooser.getSelectedFile().toString(),file);
+						path.setText(args[0]+args[1]);
+						new Trace(args);
+					
+					}else {JOptionPane.showMessageDialog(new JFrame(), "The file must be .Class"); }
+					
 				} else {
 					chooser.cancelSelection();
 				}
@@ -117,7 +123,7 @@ public class WindowPath extends JFrame {
 		add(examine);
 		add(cancel);
 		add(labelPath);
-		
+		this.repaint();
 
 	}
 	
