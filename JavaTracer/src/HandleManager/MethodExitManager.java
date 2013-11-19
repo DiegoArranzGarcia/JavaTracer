@@ -9,6 +9,8 @@ import Tracer.TracerUtilities;
 
 import com.sun.jdi.Field;
 import com.sun.jdi.Method;
+import com.sun.jdi.StackFrame;
+import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
 import com.sun.jdi.VoidValue;
 import com.sun.jdi.event.MethodExitEvent;
@@ -24,10 +26,11 @@ public class MethodExitManager extends VMEventsManager{
 	
 	// Forward event for thread specific processing
     public void methodExitEvent(MethodExitEvent event) {
-         
-
+    	ThreadReference thread = event.thread();
     	 Method method = event.method();
          String methodName = method.name();
+         List<Object> arguments = processArguments(method,thread);
+         
          String className = TracerUtilities.getClass(method.declaringType());
          Value returnValue = event.returnValue();
          Object returnObject = null; 
@@ -35,12 +38,11 @@ public class MethodExitManager extends VMEventsManager{
           returnObject = TracerUtilities.getObj(returnValue);
          }
          List<Object> arguments_this = processThis(event);
-         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments_this);
+         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments_this,arguments);
          writeOutput(info);
     }
    
-    private List<Object> processThis(MethodExitEvent event) {
-    	
+    private List<Object> processThis(MethodExitEvent event) {   	
     	Field f=null;
     	String tipo="";
     	Object valor=null;
@@ -61,7 +63,24 @@ public class MethodExitManager extends VMEventsManager{
     	}
 
 
-   
+    private List<Object> processArguments(Method method, ThreadReference thread) {
+    	  
+    	List<Object> arguments = new ArrayList<>();
+    	
+    	try {
+			StackFrame stack = thread.frame(0);
+		
+			List<Value> argsValue = stack.getArgumentValues();
+			Object varObj = null;
+			for (int i=0;i<argsValue.size();i++){
+				varObj = TracerUtilities.getObj(argsValue.get(i));
+				arguments.add(varObj);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return arguments;
+	}
     /**
      * Returns the ThreadTrace instance for the specified thread,
 	 * creating one if needed.

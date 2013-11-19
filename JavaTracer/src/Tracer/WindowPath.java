@@ -1,81 +1,127 @@
 package Tracer;
 
-import java.awt.Container;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 
-public class WindowPath extends JFrame implements ActionListener {
+public class WindowPath extends JFrame {
 
-	private Container contenedor;/**declaramos el contenedor*/
-	JButton changeButton;/**declaramos el objeto Boton*/
-	JLabel labelPath;/**declaramos el objeto Label*/
-	JTextField path; /**Recoge informacíon sobre la ruta*/
+	private JButton debug,examine,cancel;
+	private TextField path;
+	private JPanel panel;
+	private JFileChooser chooser;
+	private JLabel labelPath;
 	
-	public WindowPath(){
-		 /**permite iniciar las propiedades de los componentes*/
-		  iniciarComponentes();
-		  /**Asigna un titulo a la barra de titulo*/
-		  setTitle("Ruta del archivo ");
-		  /**tamaño de la ventana*/
-		  setSize(600,280);
-		  /**pone la ventana en el Centro de la pantalla*/
-		  setLocationRelativeTo(null);
+	public WindowPath() {
+		initialice();
+		} 
+	public void initialice(){
 		
+		panel = new JPanel();
+		
+		setTitle("Java Tracer");
+		setSize(700, 300);  
+		setLocationRelativeTo(null);
+		setResizable(false); 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true); 		
+		
+		labelPath = new JLabel("Select the Main class");
+		labelPath.setBounds(new Rectangle(540,30));
+		labelPath.setLocation(20, 15); 
+		labelPath.setBackground(Color.white); 
+		
+		path = new TextField();
+		path.setBounds(new Rectangle(540,30));
+		path.setLocation(20, 60); 
+		path.setBackground(Color.white); 
+		
+		cancel =new JButton("Cancel");
+		cancel.setBounds(new Rectangle(100,40));
+		cancel.setLocation(350, 150); 
+		cancel.setBackground(Color.white); 
+		cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0); 
+				
+			}
+		});
+		
+		debug = new JButton("Trace");
+		debug.setLayout(new GridLayout(1,1)); 
+		debug.setBounds(new Rectangle(100,40));
+		debug.setLocation(200, 150); 
+		debug.setBackground(Color.white); 
+		debug.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String s=chooser.getSelectedFile().toString();
+				//String file = s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'));
+				String file = s.substring(0, s.lastIndexOf('.'));
+				String[] args= processPath(chooser.getSelectedFile().toString(),file);
+				new Trace(args);
+				
+			}
+		});
+		
+		examine = new JButton("Examine"); 
+		examine.setLayout(new GridLayout(1,1)); 
+		examine.setBounds(new Rectangle(100,30));
+		examine.setLocation(585, 60); 
+		examine.setBackground(Color.LIGHT_GRAY); 
+		examine.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				chooser = new JFileChooser();
+				//Titulo que llevara la ventana
+				chooser.setDialogTitle("Titulo");
+			
+				//Si seleccionamos algún archivo retornaremos su directorio
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					String sf=chooser.getSelectedFile().toString();				
+					String s=chooser.getSelectedFile().getName();
+					
+					String file = sf.substring(0, sf.lastIndexOf('.'));
+					String[] args= processPath(chooser.getSelectedFile().toString(),file);
+					path.setText(args[0]+args[1]);
+					new Trace(args);
+				} else {
+					chooser.cancelSelection();
+				}
+				
+			}
+		});
+		
+		
+		setLayout(new BorderLayout());
+		panel.setLayout(null);
+		add(panel);
+		panel.add(path);
+		panel.add(debug);
+		panel.add(examine);
+		panel.add(cancel);
+		panel.add(labelPath); 
+		
+
 	}
-
-	private void iniciarComponentes() {
-		  contenedor=getContentPane();/**instanciamos el contenedor*/
-		  /**con esto definmos nosotros mismos los tamaños y posición
-		   * de los componentes*/
-		  contenedor.setLayout(null);
-		  
-		  /**Etiqueta para pedir los datos
-		   */
-		   
-		  labelPath = new JLabel("Escriba la ruta: ");
-		  labelPath.setVisible(true);
-		  labelPath.setSize(100, 150); 
-		  
-		  /**
-		   * Recolección de datos
-		   */
-		  path = new JTextField();
-		  path.setVisible(true);
-		  path.setBounds(100, 60, 400, 35);
-		//  path.setSize(500, 50);
-		  
-		  /**Propiedades del boton, lo instanciamos, posicionamos y
-		   * activamos los eventos*/
-		  changeButton= new JButton();
-		  changeButton.setText("Ejecutar");
-		  changeButton.setBounds(250, 150, 90, 23);
-		  changeButton.addActionListener(this);
-
-		  contenedor.add(labelPath);
-		  contenedor.add(path);
-		  contenedor.add(changeButton);
-		  
-		 }
 	
-	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource().getClass().getSimpleName().equals("JButton")){
-			String[] args= processPath(path.getText());
-			 new Trace(args);
-		}
-		
-	}
+	private String[] processPath(String path,String nameClass) {
 
-	private String[] processPath(String path) {
-		
 		String filePath= path.substring(0,path.indexOf("bin")+4);
-		String nameClass = path.substring(path.indexOf("bin")+4).replaceAll("/", ".");
-		String[] args={filePath,nameClass};
+		String nameClassA = nameClass.substring(nameClass.indexOf("bin")+4).replaceAll("\\\\", ".");
+		String[] args={filePath,nameClassA};
 		return args;
 	}
+	
+	
 }
+

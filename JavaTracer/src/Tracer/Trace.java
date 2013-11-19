@@ -46,7 +46,7 @@ public class Trace {
 */
     public static void main(String[] args) {
     	WindowPath wp= new WindowPath();
-    	wp.setVisible(true); 
+    	 
         //System.exit(0);
     }
 

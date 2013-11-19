@@ -1,7 +1,7 @@
 <trace>
 <methodentryevent>
   <methodName>main</methodName>
-  <calledFromClass>Main</calledFromClass>
+  <calledFromClass>AdiosMundo</calledFromClass>
   <arguments>
     <array>
       <className>java.lang.String</className>
@@ -11,139 +11,33 @@
   <argumentsThis/>
 </methodentryevent>
 <methodentryevent>
-  <methodName>&lt;init&gt;</methodName>
-  <calledFromClass>Person</calledFromClass>
+  <methodName>init</methodName>
+  <calledFromClass>AdiosMundo</calledFromClass>
   <arguments>
     <int>1</int>
-    <string></string>
-    <string>b</string>
+    <int>2</int>
   </arguments>
   <argumentsThis/>
 </methodentryevent>
 <methodexitevent>
-  <methodName>&lt;init&gt;</methodName>
-  <className>Person</className>
+  <methodName>init</methodName>
+  <className>AdiosMundo</className>
+  <returnObject class="int">9</returnObject>
   <ArgumentsThis/>
-</methodexitevent>
-<methodentryevent>
-  <methodName>&lt;init&gt;</methodName>
-  <calledFromClass>Person</calledFromClass>
   <arguments>
-    <int>1</int>
-    <string></string>
-    <string>b</string>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <null/>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>396</id>
-    </object>
+    <int>7</int>
+    <int>2</int>
   </arguments>
-  <argumentsThis/>
-</methodentryevent>
-<methodexitevent>
-  <methodName>&lt;init&gt;</methodName>
-  <className>Person</className>
-  <ArgumentsThis/>
-</methodexitevent>
-<methodentryevent>
-  <methodName>prueba</methodName>
-  <calledFromClass>Main</calledFromClass>
-  <arguments>
-    <int>1</int>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <long>397</long>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>396</id>
-    </object>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <long>396</long>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>397</id>
-    </object>
-  </arguments>
-  <argumentsThis/>
-</methodentryevent>
-<methodexitevent>
-  <methodName>prueba</methodName>
-  <className>Main</className>
-  <returnObject>
-    <className>Person</className>
-    <fields>
-      <entry>
-        <string>lastName</string>
-        <string>b</string>
-      </entry>
-      <entry>
-        <string>bestFriend</string>
-        <long>397</long>
-      </entry>
-      <entry>
-        <string>name</string>
-        <string></string>
-      </entry>
-      <entry>
-        <string>age</string>
-        <int>1</int>
-      </entry>
-    </fields>
-    <id>396</id>
-  </returnObject>
-  <ArgumentsThis/>
 </methodexitevent>
 <methodexitevent>
   <methodName>main</methodName>
-  <className>Main</className>
+  <className>AdiosMundo</className>
   <ArgumentsThis/>
+  <arguments>
+    <array>
+      <className>java.lang.String</className>
+      <values/>
+    </array>
+  </arguments>
 </methodexitevent>
 </trace>
