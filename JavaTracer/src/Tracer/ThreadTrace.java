@@ -1,14 +1,7 @@
 package Tracer;
 
-import com.sun.jdi.Field;
 import com.sun.jdi.ThreadReference;
-import com.sun.jdi.Value;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.event.ExceptionEvent;
-import com.sun.jdi.event.MethodExitEvent;
-import com.sun.jdi.event.ModificationWatchpointEvent;
-import com.sun.jdi.event.StepEvent;
-import com.sun.jdi.event.ThreadDeathEvent;
 import com.sun.jdi.request.EventRequest;
 import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.StepRequest;
@@ -42,41 +35,40 @@ import com.sun.jdi.request.StepRequest;
       
       public ThreadReference getThreadReference()
       {
-    	  return thread;
-    	  
+              return thread;
+              
       }
       
       public String getBaseIndent()
       {
-    	  return baseIndent;
-    	  
+              return baseIndent;
+              
       }
       
             
 
-	public static String getThreaddelta() {
-		return threadDelta;
-	}
+        public static String getThreaddelta() {
+                return threadDelta;
+        }
 
-	public StringBuffer getIndent() {
-		return indent;
-	}
+        public StringBuffer getIndent() {
+                return indent;
+        }
 
-	public static String getNextBaseIndent() {
-		return nextBaseIndent;
-	}
+        public static String getNextBaseIndent() {
+                return nextBaseIndent;
+        }
 
-	public VirtualMachine getVm() {
-		return vm;
-	}
+        public VirtualMachine getVm() {
+                return vm;
+        }
 
-	
-	public void SetIndent(StringBuffer indent)
-	{
-		this.indent=indent;
-	}
-	
-	
-	
+        
+        public void SetIndent(StringBuffer indent)
+        {
+                this.indent=indent;
+        }
+        
+        
+        
        }
-

@@ -46,8 +46,6 @@ public class Trace {
 */
     public static void main(String[] args) {
     	WindowPath wp= new WindowPath();
-    	 
-        //System.exit(0);
     }
 
     /**
