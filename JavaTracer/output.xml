@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="UTF-16"?>
 <trace>
-<methodentryevent>
+<method-call>
+<methodEntryEvent>
   <methodName>main</methodName>
-  <calledFromClass>AdiosMundo</calledFromClass>
+  <calledFromClass>Main</calledFromClass>
   <arguments>
     <array>
       <className>java.lang.String</className>
@@ -9,29 +11,339 @@
     </array>
   </arguments>
   <argumentsThis/>
-</methodentryevent>
-<methodentryevent>
-  <methodName>init</methodName>
-  <calledFromClass>AdiosMundo</calledFromClass>
+</methodEntryEvent>
+<called-methods>
+<method-call>
+<methodEntryEvent>
+  <methodName>&lt;init&gt;</methodName>
+  <calledFromClass>Person</calledFromClass>
   <arguments>
     <int>1</int>
-    <int>2</int>
+    <string></string>
+    <string>b</string>
   </arguments>
   <argumentsThis/>
-</methodentryevent>
-<methodexitevent>
-  <methodName>init</methodName>
-  <className>AdiosMundo</className>
-  <returnObject class="int">9</returnObject>
+</methodEntryEvent>
+<called-methods>
+</called-methods>
+<methodExitEvent>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
   <ArgumentsThis/>
   <arguments>
-    <int>7</int>
-    <int>2</int>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
   </arguments>
-</methodexitevent>
-<methodexitevent>
+</methodExitEvent>
+</method-call>
+<method-call>
+<methodEntryEvent>
+  <methodName>&lt;init&gt;</methodName>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <null/>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+  </arguments>
+  <argumentsThis/>
+</methodEntryEvent>
+<called-methods>
+</called-methods>
+<methodExitEvent>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <ArgumentsThis/>
+  <arguments>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <null/>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+  </arguments>
+</methodExitEvent>
+</method-call>
+<method-call>
+<methodEntryEvent>
+  <methodName>prueba</methodName>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <int>1</int>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <object>
+            <className>Person</className>
+            <fields>
+              <entry>
+                <string>lastName</string>
+                <string>b</string>
+              </entry>
+              <entry>
+                <string>bestFriend</string>
+                <long>396</long>
+              </entry>
+              <entry>
+                <string>name</string>
+                <string></string>
+              </entry>
+              <entry>
+                <string>age</string>
+                <int>1</int>
+              </entry>
+            </fields>
+            <id>397</id>
+          </object>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <object>
+            <className>Person</className>
+            <fields>
+              <entry>
+                <string>lastName</string>
+                <string>b</string>
+              </entry>
+              <entry>
+                <string>bestFriend</string>
+                <long>397</long>
+              </entry>
+              <entry>
+                <string>name</string>
+                <string></string>
+              </entry>
+              <entry>
+                <string>age</string>
+                <int>1</int>
+              </entry>
+            </fields>
+            <id>396</id>
+          </object>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>397</id>
+    </object>
+  </arguments>
+  <argumentsThis/>
+</methodEntryEvent>
+<called-methods>
+</called-methods>
+<methodExitEvent>
+  <methodName>prueba</methodName>
+  <className>Main</className>
+  <returnObject>
+    <className>Person</className>
+    <fields>
+      <entry>
+        <string>lastName</string>
+        <string>b</string>
+      </entry>
+      <entry>
+        <string>bestFriend</string>
+        <object>
+          <className>Person</className>
+          <fields>
+            <entry>
+              <string>lastName</string>
+              <string>b</string>
+            </entry>
+            <entry>
+              <string>bestFriend</string>
+              <long>396</long>
+            </entry>
+            <entry>
+              <string>name</string>
+              <string></string>
+            </entry>
+            <entry>
+              <string>age</string>
+              <int>1</int>
+            </entry>
+          </fields>
+          <id>397</id>
+        </object>
+      </entry>
+      <entry>
+        <string>name</string>
+        <string></string>
+      </entry>
+      <entry>
+        <string>age</string>
+        <int>1</int>
+      </entry>
+    </fields>
+    <id>396</id>
+  </returnObject>
+  <ArgumentsThis/>
+  <arguments>
+    <int>0</int>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <object>
+            <className>Person</className>
+            <fields>
+              <entry>
+                <string>lastName</string>
+                <string>b</string>
+              </entry>
+              <entry>
+                <string>bestFriend</string>
+                <long>396</long>
+              </entry>
+              <entry>
+                <string>name</string>
+                <string></string>
+              </entry>
+              <entry>
+                <string>age</string>
+                <int>1</int>
+              </entry>
+            </fields>
+            <id>397</id>
+          </object>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <object>
+            <className>Person</className>
+            <fields>
+              <entry>
+                <string>lastName</string>
+                <string>b</string>
+              </entry>
+              <entry>
+                <string>bestFriend</string>
+                <long>397</long>
+              </entry>
+              <entry>
+                <string>name</string>
+                <string></string>
+              </entry>
+              <entry>
+                <string>age</string>
+                <int>1</int>
+              </entry>
+            </fields>
+            <id>396</id>
+          </object>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>397</id>
+    </object>
+  </arguments>
+</methodExitEvent>
+</method-call>
+</called-methods>
+<methodExitEvent>
   <methodName>main</methodName>
-  <className>AdiosMundo</className>
+  <className>Main</className>
   <ArgumentsThis/>
   <arguments>
     <array>
@@ -39,5 +351,6 @@
       <values/>
     </array>
   </arguments>
-</methodexitevent>
+</methodExitEvent>
+</method-call>
 </trace>
