@@ -1,6 +1,7 @@
-package Info;
+
 
 import java.util.List;
+
 
 public class MethodEntryInfo implements InterfaceInfo {
 

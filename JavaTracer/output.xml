@@ -1,0 +1,149 @@
+<trace>
+<methodentryevent>
+  <methodName>main</methodName>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <array>
+      <className>java.lang.String</className>
+      <values/>
+    </array>
+  </arguments>
+  <argumentsThis/>
+</methodentryevent>
+<methodentryevent>
+  <methodName>&lt;init&gt;</methodName>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+  </arguments>
+  <argumentsThis/>
+</methodentryevent>
+<methodexitevent>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <ArgumentsThis/>
+</methodexitevent>
+<methodentryevent>
+  <methodName>&lt;init&gt;</methodName>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <null/>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+  </arguments>
+  <argumentsThis/>
+</methodentryevent>
+<methodexitevent>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <ArgumentsThis/>
+</methodexitevent>
+<methodentryevent>
+  <methodName>prueba</methodName>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <int>1</int>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <long>397</long>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <long>396</long>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>397</id>
+    </object>
+  </arguments>
+  <argumentsThis/>
+</methodentryevent>
+<methodexitevent>
+  <methodName>prueba</methodName>
+  <className>Main</className>
+  <returnObject>
+    <className>Person</className>
+    <fields>
+      <entry>
+        <string>lastName</string>
+        <string>b</string>
+      </entry>
+      <entry>
+        <string>bestFriend</string>
+        <long>397</long>
+      </entry>
+      <entry>
+        <string>name</string>
+        <string></string>
+      </entry>
+      <entry>
+        <string>age</string>
+        <int>1</int>
+      </entry>
+    </fields>
+    <id>396</id>
+  </returnObject>
+  <ArgumentsThis/>
+</methodexitevent>
+<methodexitevent>
+  <methodName>main</methodName>
+  <className>Main</className>
+  <ArgumentsThis/>
+</methodexitevent>
+</trace>

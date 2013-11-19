@@ -1,4 +1,4 @@
-package Info;
+
 
 
 public interface InterfaceInfo {

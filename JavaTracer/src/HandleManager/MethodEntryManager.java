@@ -8,7 +8,6 @@ import DataBase.DataBaseWriter;
 import Info.MethodEntryInfo;
 import Tracer.TracerUtilities;
 
-
 import com.sun.jdi.Field;
 import com.sun.jdi.Method;
 import com.sun.jdi.StackFrame;

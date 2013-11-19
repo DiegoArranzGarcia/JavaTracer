@@ -11,7 +11,6 @@ import com.sun.jdi.Field;
 import com.sun.jdi.Method;
 import com.sun.jdi.Value;
 import com.sun.jdi.VoidValue;
-import com.sun.jdi.event.MethodEntryEvent;
 import com.sun.jdi.event.MethodExitEvent;
 
 public class MethodExitManager extends VMEventsManager{

@@ -13,8 +13,9 @@ import com.thoughtworks.xstream.XStream;
 
 public class XStreamWriter implements DataBaseWriter {
 
-	private static String OUTPUT_PATH = "C:\\Users\\Diego\\Desktop\\";
-	private static String OUTPUT_NAME = "output.xml"; 
+	private final String OUTPUT_PATH = "C:\\Users\\Diego\\Desktop\\";
+	private final String OUTPUT_NAME = "output.xml";
+	private final String TAG_TRACE = "trace";
 	private XStream xstream;
 	private FileWriter fileWriter;
 	private BufferedWriter bufferedWriter;
@@ -24,6 +25,7 @@ public class XStreamWriter implements DataBaseWriter {
 			this.fileWriter = new FileWriter(OUTPUT_NAME);
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			this.xstream = new XStream();
+			bufferedWriter.write("<" + TAG_TRACE + ">" + "\n");
 			xstream.alias("array",ArrayInfo.class);
 			xstream.alias("methodentryevent",MethodEntryInfo.class);
 			xstream.alias("methodexitevent",MethodExitInfo.class);
@@ -44,6 +46,7 @@ public class XStreamWriter implements DataBaseWriter {
 
 	public void close() {
 		try {
+			bufferedWriter.write("</" + TAG_TRACE + ">");
 			bufferedWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
