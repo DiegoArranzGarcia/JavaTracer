@@ -10,10 +10,13 @@ import Tracer.TracerUtilities;
 
 import com.sun.jdi.Field;
 import com.sun.jdi.Method;
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
 import com.sun.jdi.event.MethodEntryEvent;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+
 
 
 public class MethodEntryManager extends VMEventsManager{
@@ -28,10 +31,11 @@ public class MethodEntryManager extends VMEventsManager{
     	
     	ThreadReference thread = event.thread();
        	Method method = event.method();
+       	ReferenceType ref=method.declaringType();
        	String methodName = method.name();
         List<Object> arguments = processArguments(method,thread);
         String className = TracerUtilities.getClass(method.declaringType());
-        List<Object> arguments_this = processThis(event);
+        List<Object> arguments_this = processThis(event,ref);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,arguments_this);
         writeOutput(info);
     }
@@ -43,6 +47,7 @@ public class MethodEntryManager extends VMEventsManager{
     	try {
 			StackFrame stack = thread.frame(0);
 			List<Value> argsValue = stack.getArgumentValues();
+			//stack.thisObject().getValue(f);
 			Object varObj = null;
 			for (int i=0;i<argsValue.size();i++){
 				varObj = TracerUtilities.getObj(argsValue.get(i));
@@ -55,19 +60,25 @@ public class MethodEntryManager extends VMEventsManager{
 	}
 
 
-	private List<Object> processThis(MethodEntryEvent event) {
+	private List<Object> processThis(MethodEntryEvent event, ReferenceType ref) {
 	
 	Field f=null;
 	String tipo="";
 	Object valor=null;
 	Object varObj=null;
 	List<Object> arguments_this = new ArrayList<>();
-	List<Field> s=event.virtualMachine().allClasses().get(0).allFields();
+
+	
+	
+	
+	//List<Field> s=event.virtualMachine().allClasses().get(0).allFields();
+	List<Field> s=ref.allFields();
+	
 	
 	while (!s.isEmpty()){
 		f = s.get(0);
 		//tipo = f.typeName();
-		valor=event.virtualMachine().allClasses().get(0).getValue(f);
+		valor=ref.getValue(f);
 		varObj = TracerUtilities.getObj((Value)valor);
 		arguments_this.add(varObj);
 	    s.remove(0);

@@ -12,7 +12,7 @@ public class MethodExitInfo implements InterfaceInfo{
 	List<Object> arguments;
 	
 	public MethodExitInfo(String methodName, String className,
-			Object returnObject, List<Object> Values_this,List<Object> value) {
+			Object returnObject,List<Object> value, List<Object> Values_this) {
 		this.methodName = methodName;
 		this.className = className;
 		this.returnObject = returnObject;

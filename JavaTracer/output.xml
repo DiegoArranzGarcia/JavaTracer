@@ -22,14 +22,24 @@
     <string></string>
     <string>b</string>
   </arguments>
-  <argumentsThis/>
+  <argumentsThis>
+    <int>0</int>
+    <null/>
+    <null/>
+    <null/>
+  </argumentsThis>
 </methodEntryEvent>
 <called-methods>
 </called-methods>
 <methodExitEvent>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
-  <ArgumentsThis/>
+  <ArgumentsThis>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <null/>
+  </ArgumentsThis>
   <arguments>
     <int>1</int>
     <string></string>
@@ -68,14 +78,45 @@
       <id>396</id>
     </object>
   </arguments>
-  <argumentsThis/>
+  <argumentsThis>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <null/>
+  </argumentsThis>
 </methodEntryEvent>
 <called-methods>
 </called-methods>
 <methodExitEvent>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
-  <ArgumentsThis/>
+  <ArgumentsThis>
+    <int>1</int>
+    <string></string>
+    <string>b</string>
+    <object>
+      <className>Person</className>
+      <fields>
+        <entry>
+          <string>lastName</string>
+          <string>b</string>
+        </entry>
+        <entry>
+          <string>bestFriend</string>
+          <long>396</long>
+        </entry>
+        <entry>
+          <string>name</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>age</string>
+          <int>1</int>
+        </entry>
+      </fields>
+      <id>396</id>
+    </object>
+  </ArgumentsThis>
   <arguments>
     <int>1</int>
     <string></string>
@@ -89,7 +130,7 @@
         </entry>
         <entry>
           <string>bestFriend</string>
-          <null/>
+          <long>396</long>
         </entry>
         <entry>
           <string>name</string>
@@ -129,7 +170,7 @@
               </entry>
               <entry>
                 <string>bestFriend</string>
-                <long>396</long>
+                <long>397</long>
               </entry>
               <entry>
                 <string>name</string>
@@ -163,28 +204,7 @@
         </entry>
         <entry>
           <string>bestFriend</string>
-          <object>
-            <className>Person</className>
-            <fields>
-              <entry>
-                <string>lastName</string>
-                <string>b</string>
-              </entry>
-              <entry>
-                <string>bestFriend</string>
-                <long>397</long>
-              </entry>
-              <entry>
-                <string>name</string>
-                <string></string>
-              </entry>
-              <entry>
-                <string>age</string>
-                <int>1</int>
-              </entry>
-            </fields>
-            <id>396</id>
-          </object>
+          <long>397</long>
         </entry>
         <entry>
           <string>name</string>
@@ -214,28 +234,7 @@
       </entry>
       <entry>
         <string>bestFriend</string>
-        <object>
-          <className>Person</className>
-          <fields>
-            <entry>
-              <string>lastName</string>
-              <string>b</string>
-            </entry>
-            <entry>
-              <string>bestFriend</string>
-              <long>396</long>
-            </entry>
-            <entry>
-              <string>name</string>
-              <string></string>
-            </entry>
-            <entry>
-              <string>age</string>
-              <int>1</int>
-            </entry>
-          </fields>
-          <id>397</id>
-        </object>
+        <long>397</long>
       </entry>
       <entry>
         <string>name</string>
@@ -246,7 +245,7 @@
         <int>1</int>
       </entry>
     </fields>
-    <id>396</id>
+    <id>397</id>
   </returnObject>
   <ArgumentsThis/>
   <arguments>
@@ -269,7 +268,7 @@
               </entry>
               <entry>
                 <string>bestFriend</string>
-                <long>396</long>
+                <long>397</long>
               </entry>
               <entry>
                 <string>name</string>
@@ -303,28 +302,7 @@
         </entry>
         <entry>
           <string>bestFriend</string>
-          <object>
-            <className>Person</className>
-            <fields>
-              <entry>
-                <string>lastName</string>
-                <string>b</string>
-              </entry>
-              <entry>
-                <string>bestFriend</string>
-                <long>397</long>
-              </entry>
-              <entry>
-                <string>name</string>
-                <string></string>
-              </entry>
-              <entry>
-                <string>age</string>
-                <int>1</int>
-              </entry>
-            </fields>
-            <id>396</id>
-          </object>
+          <long>397</long>
         </entry>
         <entry>
           <string>name</string>

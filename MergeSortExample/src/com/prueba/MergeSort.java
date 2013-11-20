@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class MergeSort{
 
-	 private int[] array;
+	 public int[] array;
 	 
 	 public MergeSort(){
 		 this.array = new int[10];
