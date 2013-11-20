@@ -1,10 +1,10 @@
 
 public class Person {
 	
-	static int age;
-	static String name;
-	static String lastName;
-	static Person bestFriend;
+	 int age;
+	 String name;
+	 String lastName;
+	 Person bestFriend;
 	
 	Person(int age,String name,String lastName){
 		this.age = age;
