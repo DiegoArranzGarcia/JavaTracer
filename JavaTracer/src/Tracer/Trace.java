@@ -96,8 +96,7 @@ public class Trace {
             sb.append(' ');
             sb.append(args[inx]);
         }
-        System.out.println("ARG0 "+args[0]);
-        System.out.println("ARG1 "+args[1]);
+
         vm = launchTarget(args);
         generateTrace(writer);
     }

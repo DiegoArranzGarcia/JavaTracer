@@ -63,9 +63,7 @@ public class WindowPath extends JFrame {
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				try {
-	
-				
+				try {		
 				String file =path.getText();
 				//String file = s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'));
 				//String file = s.substring(0, s.lastIndexOf('.'));
@@ -77,7 +75,9 @@ public class WindowPath extends JFrame {
                		+ "	launched "); 
 			
 				} catch (Exception e1) {
+					
 					e1.printStackTrace();
+					
 				}
 			}
 		});
@@ -92,16 +92,19 @@ public class WindowPath extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				chooser = new JFileChooser();
 				//Titulo que llevara la ventana
-				chooser.setDialogTitle("Titulo");
+				chooser.setDialogTitle("Java Tracer");
 			
 				//Si seleccionamos algún archivo retornaremos su directorio
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-					String sf=chooser.getSelectedFile().toString();				
-					path.setText(sf);
+ 					String s=chooser.getSelectedFile().getName();
+ 					String sf=chooser.getSelectedFile().toString();
+					String esClass = s.substring(s.length()-5, s.length()); 
 				
-				} else {
-					chooser.cancelSelection();
-				}
+					if(esClass.equals("class"))
+						path.setText(sf);
+					else JOptionPane.showMessageDialog(new JFrame(), "The file must be .class"); 		
+				
+				} else chooser.cancelSelection();
 				
 			}
 		});
