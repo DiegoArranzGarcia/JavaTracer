@@ -8,7 +8,9 @@ import Info.MethodExitInfo;
 import Tracer.TracerUtilities;
 
 import com.sun.jdi.Field;
+import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.Method;
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.Value;
@@ -37,26 +39,32 @@ public class MethodExitManager extends VMEventsManager{
          if (!(returnValue instanceof VoidValue)){ 
           returnObject = TracerUtilities.getObj(returnValue);
          }
-         List<Object> arguments_this = processThis(event);
-         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments_this,arguments);
+         ReferenceType ref=method.declaringType(); // "class" where is declaring the method
+         List<Object> arguments_this = processThis(event,ref, thread);
+         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,arguments_this);
          writeOutput(info);
     }
    
-    private List<Object> processThis(MethodExitEvent event) {   	
+    private List<Object> processThis(MethodExitEvent event, ReferenceType ref,ThreadReference thread ) {   	
     	Field f=null;
-    	String tipo="";
     	Object valor=null;
     	Object varObj=null;
+    	StackFrame stack=null;
     	List<Object> arguments_this = new ArrayList<>();
-    	List<Field> s=event.virtualMachine().allClasses().get(0).allFields();
+    	List<Field> fields=ref.allFields();
     	
-    	while (!s.isEmpty()){
-    		f = s.get(0);
-    		//tipo = f.typeName();
-    		valor=event.virtualMachine().allClasses().get(0).getValue(f);
+    	try {
+    		stack = thread.frame(0);
+    		} catch (IncompatibleThreadStateException e) {
+    			e.printStackTrace();
+    		}
+    	
+    	while (!fields.isEmpty()){
+    		f = fields.get(0);
+    		valor = stack.thisObject().getValue(f);
     		varObj = TracerUtilities.getObj((Value)valor);
     		arguments_this.add(varObj);
-    	    s.remove(0);
+    	    fields.remove(0);
     	   }
     	
     		return arguments_this;
