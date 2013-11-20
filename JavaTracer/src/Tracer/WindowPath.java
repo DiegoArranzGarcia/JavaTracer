@@ -26,7 +26,7 @@ public class WindowPath extends JFrame {
 	} 
 	
 	public void initialice(){
-		
+
 		setTitle("Java Tracer");
 		setSize(700, 300);  
 		setLocationRelativeTo(null);
@@ -66,10 +66,10 @@ public class WindowPath extends JFrame {
 				try {
 	
 				
-				String s=chooser.getSelectedFile().toString();
+				String file =path.getText();
 				//String file = s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'));
-				String file = s.substring(0, s.lastIndexOf('.'));
-				String[] args= processPath(chooser.getSelectedFile().toString(),file);
+				//String file = s.substring(0, s.lastIndexOf('.'));
+				String[] args= processPath(file);
 				new Trace(args); 
 				
 		      JOptionPane.setDefaultLocale(new Locale("en"));
@@ -77,7 +77,7 @@ public class WindowPath extends JFrame {
                		+ "	launched "); 
 			
 				} catch (Exception e1) {
-					
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -97,18 +97,8 @@ public class WindowPath extends JFrame {
 				//Si seleccionamos algún archivo retornaremos su directorio
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					String sf=chooser.getSelectedFile().toString();				
-					String s=chooser.getSelectedFile().getName();
-					String esClass = s.substring(s.length()-5, s.length()); 
-					
-					if(esClass.equals("class"))
-					{
-						String file = sf.substring(0, sf.lastIndexOf('.'));
-						String[] args= processPath(chooser.getSelectedFile().toString(),file);
-						path.setText(args[0]+args[1]);
-						new Trace(args);
-					
-					}else {JOptionPane.showMessageDialog(new JFrame(), "The file must be .Class"); }
-					
+					path.setText(sf);
+				
 				} else {
 					chooser.cancelSelection();
 				}
@@ -127,11 +117,13 @@ public class WindowPath extends JFrame {
 
 	}
 	
-	private String[] processPath(String path,String nameClass) {
+	private String[] processPath(String path) {
 
-		String filePath= path.substring(0,path.indexOf("bin")+4);
-		String nameClassA = nameClass.substring(nameClass.indexOf("bin")+4).replaceAll("\\\\", ".");
-		String[] args={filePath,nameClassA};
+		if (path.contains(".class")) path = path.replaceAll(".class", "");
+		System.out.println(path);
+		String filePath= path.substring(0,path.indexOf("bin")+3);
+		String nameClass = path.substring(filePath.indexOf("bin")+4).replaceAll("\\\\", ".");
+		String[] args={filePath,nameClass};
 		return args;
 	}
 	

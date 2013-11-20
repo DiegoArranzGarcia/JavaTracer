@@ -40,6 +40,7 @@ public class Trace {
     // Class patterns for which we don't want events
     private String[] excludes = {"java.*", "javax.*", "sun.*",
                                  "com.sun.*"};
+    private static String s;
 
     /**
 * main
@@ -95,6 +96,8 @@ public class Trace {
             sb.append(' ');
             sb.append(args[inx]);
         }
+        System.out.println("ARG0 "+args[0]);
+        System.out.println("ARG1 "+args[1]);
         vm = launchTarget(args);
         generateTrace(writer);
     }
@@ -190,7 +193,7 @@ public class Trace {
             if (optionArg == null) {
                 throw new Error("Bad launching connector");
             }
-            String optionValue = "-classpath " + mainArgs[0];
+            String optionValue = "-cp " + '"' + mainArgs[0] + ";\"";
             optionArg.setValue(optionValue);
             //optionArg.setValue("-classic");
         }
