@@ -1,4 +1,4 @@
-package Tracer;
+package Interface;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -13,6 +13,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import Tracer.Trace;
 
 public class WindowPath extends JFrame {
 
@@ -63,7 +65,8 @@ public class WindowPath extends JFrame {
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				try {		
+				try {
+					
 				String file =path.getText();
 				//String file = s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'));
 				//String file = s.substring(0, s.lastIndexOf('.'));
@@ -96,13 +99,9 @@ public class WindowPath extends JFrame {
 			
 				//Si seleccionamos algún archivo retornaremos su directorio
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
- 					String s=chooser.getSelectedFile().getName();
  					String sf=chooser.getSelectedFile().toString();
-					String esClass = s.substring(s.length()-5, s.length()); 
-				
-					if(esClass.equals("class"))
-						path.setText(sf);
-					else JOptionPane.showMessageDialog(new JFrame(), "The file must be .class"); 		
+					path.setText(sf);
+					 		
 				
 				} else chooser.cancelSelection();
 				

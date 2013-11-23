@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import Interface.WindowPath;
+
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.connect.Connector;
@@ -54,7 +56,7 @@ public class Trace {
 * Launch target VM.
 * Generate the trace.
 */
-    Trace(String[] args) {
+    public Trace(String[] args) {
         PrintWriter writer = new PrintWriter(System.out);
         int inx;
         for (inx = 0; inx < args.length; ++inx) {

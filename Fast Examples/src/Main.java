@@ -7,6 +7,7 @@ public class Main {
 		Person p2 = new Person(1, "", "b",p1);
 		p1.bestFriend = p2;
 		prueba(1,p1,p2);
+		p2.imprime();
 	}
 	
 	public static Person prueba(int i,Person p1,Person p2){

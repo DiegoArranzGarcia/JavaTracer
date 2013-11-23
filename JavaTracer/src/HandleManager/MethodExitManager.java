@@ -59,7 +59,7 @@ public class MethodExitManager extends VMEventsManager{
     			e.printStackTrace();
     		}
     	
-    	while (!fields.isEmpty()){
+    	while (!fields.isEmpty()&& stack.thisObject()!=null){
     		f = fields.get(0);
     		valor = stack.thisObject().getValue(f);
     		varObj = TracerUtilities.getObj((Value)valor);

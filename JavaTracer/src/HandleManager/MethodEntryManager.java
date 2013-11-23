@@ -1,6 +1,7 @@
 package HandleManager;
 
 
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import Tracer.TracerUtilities;
 
 import com.sun.jdi.Field;
 import com.sun.jdi.IncompatibleThreadStateException;
+import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
@@ -48,7 +50,6 @@ public class MethodEntryManager extends VMEventsManager{
     	try {
 			StackFrame stack = thread.frame(0);
 			List<Value> argsValue = stack.getArgumentValues();
-			//stack.thisObject().getValue(f);
 			Object varObj = null;
 			for (int i=0;i<argsValue.size();i++){
 				varObj = TracerUtilities.getObj(argsValue.get(i));
@@ -77,8 +78,7 @@ public class MethodEntryManager extends VMEventsManager{
 				e.printStackTrace();
 			}
 	
-	
-	while (!fields.isEmpty()){
+	while (!fields.isEmpty() && stack.thisObject()!=null){
 		f = fields.get(0);
 		//tipo = f.typeName();
 		//valor=ref.getValue(f);
