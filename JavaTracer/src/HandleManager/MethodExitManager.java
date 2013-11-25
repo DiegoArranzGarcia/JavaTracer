@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataBase.DataBaseWriter;
+import Info.ArgumentInfo;
 import Info.MethodExitInfo;
 import Tracer.TracerUtilities;
 
 import com.sun.jdi.Field;
 import com.sun.jdi.IncompatibleThreadStateException;
+import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
@@ -31,7 +33,7 @@ public class MethodExitManager extends VMEventsManager{
     	ThreadReference thread = event.thread();
     	 Method method = event.method();
          String methodName = method.name();
-         List<Object> arguments = processArguments(method,thread);
+         List<ArgumentInfo> arguments = processArguments(method,thread);
          
          String className = TracerUtilities.getClass(method.declaringType());
          Value returnValue = event.returnValue();
@@ -39,6 +41,7 @@ public class MethodExitManager extends VMEventsManager{
          if (!(returnValue instanceof VoidValue)){ 
           returnObject = TracerUtilities.getObj(returnValue);
          }
+         
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
          List<Object> arguments_this = processThis(event,ref, thread);
          MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,arguments_this);
@@ -71,23 +74,24 @@ public class MethodExitManager extends VMEventsManager{
     	}
 
 
-    private List<Object> processArguments(Method method, ThreadReference thread) {
+    private List<ArgumentInfo> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<Object> arguments = new ArrayList<>();
+    	List<ArgumentInfo> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
-		
-			List<Value> argsValue = stack.getArgumentValues();
-			Object varObj = null;
-			for (int i=0;i<argsValue.size();i++){
-				varObj = TracerUtilities.getObj(argsValue.get(i));
-				arguments.add(varObj);
+			List<LocalVariable> variables = method.arguments();
+			for (int i=0;i<variables.size();i++){
+				LocalVariable var = variables.get(i);
+				Object varObj = TracerUtilities.getObj(stack.getValue(var));
+				String nameVar = var.name();
+				arguments.add(new ArgumentInfo(nameVar,varObj));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return arguments;
+
 	}
     /**
      * Returns the ThreadTrace instance for the specified thread,

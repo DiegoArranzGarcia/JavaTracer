@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import Info.ArgumentInfo;
 import Info.ArrayInfo;
 import Info.InterfaceInfo;
 import Info.MethodEntryInfo;
@@ -43,6 +44,7 @@ public class XStreamWriter implements DataBaseWriter {
 		xstream.alias("methodEntryEvent",MethodEntryInfo.class);
 		xstream.alias("methodExitEvent",MethodExitInfo.class);
 		xstream.alias("object",ObjectInfo.class);
+		xstream.alias("argument",ArgumentInfo.class);
 	}
 
 	public void writeOutput(InterfaceInfo info){
