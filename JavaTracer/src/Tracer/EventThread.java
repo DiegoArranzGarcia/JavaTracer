@@ -2,6 +2,7 @@ package Tracer;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import DataBase.DataBaseWriter;
@@ -16,6 +17,7 @@ import HandleManager.PrepareManager;
 import HandleManager.StepManager;
 import HandleManager.ThreadDeathManager;
 
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
@@ -115,7 +117,7 @@ public class EventThread extends Thread {
 	*/
     void setEventRequests(boolean watchFields) {
             
-        EventRequestManager mgr = vm.eventRequestManager();
+    	EventRequestManager mgr = vm.eventRequestManager();
 
         // want all exceptions
         ExceptionRequest excReq = mgr.createExceptionRequest(null,

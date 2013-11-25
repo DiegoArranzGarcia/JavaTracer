@@ -2,13 +2,22 @@ package Tracer;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Interface.WindowPath;
 
 import com.sun.jdi.Bootstrap;
+import com.sun.jdi.ReferenceType;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.connect.Connector;
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
@@ -42,13 +51,17 @@ public class Trace {
     // Class patterns for which we don't want events
     private String[] excludes = {"java.*", "javax.*", "sun.*",
                                  "com.sun.*"};
-    private static String s;
-
+    
+    private boolean mistake=false;
+    
+   
+    private static final int BUFFER_SIZE = 2048;
     /**
 * main
 */
     public static void main(String[] args) {
     	WindowPath wp= new WindowPath();
+    	
     }
 
     /**
@@ -116,10 +129,10 @@ public class Trace {
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         redirectOutput();
-
+ 
         // Shutdown begins when event thread terminates
         try {
-            eventThread.join();
+        	eventThread.join();
             errThread.join(); // Make sure output is forwarded
             outThread.join(); // before we exit
         } catch (InterruptedException exc) {
@@ -149,8 +162,12 @@ public class Trace {
     }
 
     void redirectOutput() {
-        Process process = vm.process();
-
+    	
+    	Process process = vm.process();
+        
+        
+        
+        
         // Copy target's output and error to our output and error.
         errThread = new StreamRedirectThread("error reader",
                                              process.getErrorStream(),
@@ -158,8 +175,18 @@ public class Trace {
         outThread = new StreamRedirectThread("output reader",
                                              process.getInputStream(),
                                              System.out);
+       
+      
+        
+        catchError(process);
+        
         errThread.start();
         outThread.start();
+        
+        catchError(process);
+        
+       
+  
     }
 
     /**
@@ -216,4 +243,60 @@ public class Trace {
         System.err.println("<class> is the program to trace");
         System.err.println("<args> are the arguments to <class>");
     }
+	
+    private void ShowError(String error) {
+		
+		
+		String errorMain="no se ha encontrado el método principal";
+        String errorLoadClass="no se ha encontrado o cargado la clase principal";
+		
+		if(error.contains(errorMain))
+			{JOptionPane.showMessageDialog(new JFrame(),"This class must contain the method: public" 
+		       +"static void main(String[] args)");
+			mistake=true;
+			}
+		
+		if(error.contains(errorLoadClass))
+			{JOptionPane.showMessageDialog(new JFrame(),"was not found or loaded main class");
+             mistake=true;
+			}
+	}
+    
+   private void catchError(Process process)
+   {
+	   
+	   Reader in = new InputStreamReader( process.getErrorStream());
+       Writer out = new OutputStreamWriter(System.err);
+         
+       try {
+           char[] cbuf = new char[BUFFER_SIZE];
+           int count;
+           String error="";
+           int i=0;
+           while ((count = in.read(cbuf, 0, BUFFER_SIZE)) >= 0) {
+               out.write(cbuf, 0, count);
+           }
+           
+           while(i<BUFFER_SIZE)
+           {
+            error=error+cbuf[i];
+            i++;
+           }
+ 
+           ShowError(error);
+           out.flush();
+         
+       } catch(IOException exc) {
+           System.err.println("Child I/O Transfer - " + exc);
+       }
+	   
+   } 
+
+  public boolean getMistake()
+  {
+	  return mistake;
+	  
+  }
+   
+   
 }

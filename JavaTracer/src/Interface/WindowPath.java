@@ -1,5 +1,6 @@
 package Interface;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -7,12 +8,13 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 
 import Tracer.Trace;
 
@@ -29,6 +31,8 @@ public class WindowPath extends JFrame {
 	
 	public void initialice(){
 
+		//Inspector i= new Inspector();
+		
 		setTitle("Java Tracer");
 		setSize(700, 300);  
 		setLocationRelativeTo(null);
@@ -68,14 +72,19 @@ public class WindowPath extends JFrame {
 				try {
 					
 				String file =path.getText();
-				//String file = s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'));
-				//String file = s.substring(0, s.lastIndexOf('.'));
-				String[] args= processPath(file);
-				new Trace(args); 
 				
-		      JOptionPane.setDefaultLocale(new Locale("en"));
-               JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
-               		+ "	launched "); 
+				if(file!=null && file!="" && !file.equals("")){
+					
+					String[] args= processPath(file);
+					Trace trace=new Trace(args); 
+			  
+						if(!trace.getMistake()){
+							JOptionPane.setDefaultLocale(new Locale("en"));
+							JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
+									+ "	launched ");
+						}
+					
+				 }else JOptionPane.showMessageDialog(new JFrame(), " White text area");
 			
 				} catch (Exception e1) {
 					
@@ -94,10 +103,10 @@ public class WindowPath extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				chooser = new JFileChooser();
-				//Titulo que llevara la ventana
+				//Title window
 				chooser.setDialogTitle("Java Tracer");
 			
-				//Si seleccionamos algún archivo retornaremos su directorio
+				//return directory file
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
  					String sf=chooser.getSelectedFile().toString();
 					path.setText(sf);
