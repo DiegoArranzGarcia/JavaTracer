@@ -8,6 +8,8 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -16,14 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
+
 import Tracer.Trace;
 
 public class WindowPath extends JFrame {
 
-	private JButton tracer,examine,cancel;
-	private TextField path;
+	private JButton tracer,examine,cancel,helpPath,helpNameClass;
+	private TextField path,nameClass;
 	private JFileChooser chooser;
-	private JLabel labelPath;
+	private JLabel labelPath,labelNameClass;
 	
 	public WindowPath() {
 		initialice();
@@ -34,25 +37,52 @@ public class WindowPath extends JFrame {
 		//Inspector i= new Inspector();
 		
 		setTitle("Java Tracer");
-		setSize(700, 300);  
+		setSize(850, 300);  
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true); 		
 		
-		labelPath = new JLabel("Select the Main class");
+		labelPath = new JLabel("Select the directory ");
 		labelPath.setBounds(new Rectangle(540,30));
-		labelPath.setLocation(20, 15); 
+		labelPath.setLocation(20, 60); 
 		labelPath.setBackground(Color.white); 
 		
+		labelNameClass = new JLabel("Insert the name of Main class");
+		labelNameClass.setBounds(new Rectangle(540,30));
+		labelNameClass.setLocation(20, 120); 
+		labelNameClass.setBackground(Color.white); 
+		
 		path = new TextField();
-		path.setBounds(new Rectangle(540,30));
-		path.setLocation(20, 60); 
+		path.setBounds(new Rectangle(450,30));
+		path.setLocation(250, 60); 
 		path.setBackground(Color.white); 
+		
+		nameClass = new TextField();
+		nameClass.setBounds(new Rectangle(450,30));
+		nameClass.setLocation(250, 120); 
+		nameClass.setBackground(Color.white); 
+		
+		helpPath = new JButton();
+		helpPath.setBounds(new Rectangle(25,25));
+		helpPath.setLocation(210, 62); 
+		String curDir = System.getProperty("user.dir");
+		String dirImage=curDir+"\\src\\resource\\image6.jpe";
+		helpPath.setIcon(new ImageIcon(dirImage));
+		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
+		
+		helpNameClass = new JButton();
+		helpNameClass.setBounds(new Rectangle(25,25));
+		helpNameClass.setLocation(210, 120); 
+		helpNameClass.setIcon(new ImageIcon(dirImage));
+		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
+			 
+	
+		
 		
 		cancel =new JButton("Cancel");
 		cancel.setBounds(new Rectangle(100,40));
-		cancel.setLocation(350, 150); 
+		cancel.setLocation(450, 190); 
 		cancel.setBackground(Color.white); 
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,8 +94,8 @@ public class WindowPath extends JFrame {
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
 		tracer.setBounds(new Rectangle(100,40));
-		tracer.setLocation(200, 150); 
-		tracer.setBackground(Color.white); 
+		tracer.setLocation(300, 190); 
+		tracer.setBackground(Color.white);  
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -74,10 +104,12 @@ public class WindowPath extends JFrame {
 				String file =path.getText();
 				
 				if(file!=null && file!="" && !file.equals("")){
-					
-					String[] args= processPath(file);
+			
+					String[] args = new String[2];
+					args[0]=path.getText();
+					args[1]=nameClass.getText();
 					Trace trace=new Trace(args); 
-			  
+					
 						if(!trace.getMistake()){
 							JOptionPane.setDefaultLocale(new Locale("en"));
 							JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
@@ -97,7 +129,7 @@ public class WindowPath extends JFrame {
 		examine = new JButton("Examine"); 
 		examine.setLayout(new GridLayout(1,1)); 
 		examine.setBounds(new Rectangle(100,30));
-		examine.setLocation(585, 60); 
+		examine.setLocation(730, 60); 
 		examine.setBackground(Color.LIGHT_GRAY); 
 		examine.addActionListener(new ActionListener() {
 			
@@ -105,7 +137,8 @@ public class WindowPath extends JFrame {
 				chooser = new JFileChooser();
 				//Title window
 				chooser.setDialogTitle("Java Tracer");
-			
+				chooser.setCurrentDirectory(new java.io.File("."));
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				//return directory file
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
  					String sf=chooser.getSelectedFile().toString();
@@ -124,8 +157,11 @@ public class WindowPath extends JFrame {
 		add(examine);
 		add(cancel);
 		add(labelPath);
+		add(nameClass);
+		add(labelNameClass);
+		add(helpPath);
+		add(helpNameClass);
 		this.repaint();
-
 	}
 	
 	private String[] processPath(String path) {
