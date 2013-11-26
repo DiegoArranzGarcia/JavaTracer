@@ -107,13 +107,8 @@ public class WindowPath extends JFrame {
 					String[] args = new String[2];
 					args[0]=path.getText();
 					args[1]=nameClass.getText();
-					controller.startTrace(args); 
 					
-						/*if(!trace.getMistake()){
-							JOptionPane.setDefaultLocale(new Locale("en"));
-							JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
-									+ "	launched ");
-						}*/
+					controller.startTrace(args); 
 					
 				 }else JOptionPane.showMessageDialog(new JFrame(), " White text area");
 			

@@ -1,11 +1,13 @@
 package com.javatracer.controller;
 
 import com.javatracer.model.Tracer;
+import com.javatracer.model.writers.TraceInspectorWriter;
 import com.javatracer.view.WindowPath;
 
 public class TracerController {
 	
 	Tracer tracer;
+	TraceInspectorWriter traceInspectorWriter;
 	WindowPath view;
 	
 	public TracerController(){
@@ -26,7 +28,9 @@ public class TracerController {
 	}
 
 	public void finishedTrace() {
-		view.finishedTrace();		
+		view.finishedTrace();
+		this.traceInspectorWriter = new TraceInspectorWriter();
+		traceInspectorWriter.generateFinalTrace();
 	}
 	
 	

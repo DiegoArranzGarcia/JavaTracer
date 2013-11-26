@@ -49,21 +49,6 @@ public class XmlManager {
 		   e.printStackTrace();
 	   }
    }
-	   
-   public void read(){  
-     try {
-       String expression = "/trace/*[1]";  
-       XPath xPath = XPathFactory.newInstance().newXPath();
-       XPathExpression xPathExpression = xPath.compile(expression);
-       Node node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-       do {
-         node = node.getNextSibling();      
-       } while (node != null);
-   
-     } catch (Exception e){
-       e.printStackTrace();
-     }
-   }
 
    public NodeList getChilds(Node node) {
 	   return node.getChildNodes();

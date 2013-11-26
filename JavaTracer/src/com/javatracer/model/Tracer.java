@@ -110,11 +110,11 @@ public class Tracer {
     }
 
 	/**
-* Generate the trace.
-* Enable events, start thread to display events,
-* start threads to forward remote error and output streams,
-* resume the remote VM, wait for the final event, and shutdown.
-*/
+	* Generate the trace.
+	* Enable events, start thread to display events,
+	* start threads to forward remote error and output streams,
+	* resume the remote VM, wait for the final event, and shutdown.
+	*/
     void generateTrace(PrintWriter writer) {
             vm.setDebugTraceMode(debugTraceMode);
         EventThread eventThread = new EventThread(vm, excludes);
@@ -135,9 +135,9 @@ public class Tracer {
     }
 
     /**
-* Launch target VM.
-* Forward target's output and error.
-*/
+	* Launch target VM.
+	* Forward target's output and error.
+	*/
     VirtualMachine launchTarget(String[] mainArgs) {
         LaunchingConnector connector = findLaunchingConnector();
         Map<String, Connector.Argument> arguments =
@@ -269,6 +269,6 @@ public class Tracer {
            System.err.println("Child I/O Transfer - " + exc);
        }
 	   
-   }  
+   }
    
 }

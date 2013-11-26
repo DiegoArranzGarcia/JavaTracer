@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<method-call>
+<info>
+  <name>main</name>
+  <calledFromClass>Main</calledFromClass>
+</info>
+<called-methods>
+<method-call>
+<info>
+  <name>&lt;init&gt;</name>
+  <calledFromClass>Person</calledFromClass>
+</info>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call>
+<info>
+  <name>&lt;init&gt;</name>
+  <calledFromClass>Person</calledFromClass>
+</info>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call>
+<info>
+  <name>prueba</name>
+  <calledFromClass>Main</calledFromClass>
+</info>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call>
+<info>
+  <name>imprime</name>
+  <calledFromClass>Person</calledFromClass>
+</info>
+<called-methods>
+</called-methods>
+</method-call>
+</called-methods>
+</method-call>
+</trace>

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <trace>
 <method-call>
-<methodEntryEvent>
+<method-entry-event>
   <methodName>main</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
@@ -14,10 +14,10 @@
     </argument>
   </arguments>
   <argumentsThis/>
-</methodEntryEvent>
+</method-entry-event>
 <called-methods>
 <method-call>
-<methodEntryEvent>
+<method-entry-event>
   <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
@@ -40,7 +40,7 @@
     <null/>
     <null/>
   </argumentsThis>
-</methodEntryEvent>
+</method-entry-event>
 <called-methods>
 </called-methods>
 <methodExitEvent>
@@ -69,7 +69,7 @@
 </methodExitEvent>
 </method-call>
 <method-call>
-<methodEntryEvent>
+<method-entry-event>
   <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
@@ -117,7 +117,7 @@
     <null/>
     <null/>
   </argumentsThis>
-</methodEntryEvent>
+</method-entry-event>
 <called-methods>
 </called-methods>
 <methodExitEvent>
@@ -192,7 +192,7 @@
 </methodExitEvent>
 </method-call>
 <method-call>
-<methodEntryEvent>
+<method-entry-event>
   <methodName>prueba</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
@@ -294,7 +294,7 @@
     </argument>
   </arguments>
   <argumentsThis/>
-</methodEntryEvent>
+</method-entry-event>
 <called-methods>
 </called-methods>
 <methodExitEvent>
@@ -445,7 +445,7 @@
 </methodExitEvent>
 </method-call>
 <method-call>
-<methodEntryEvent>
+<method-entry-event>
   <methodName>imprime</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments/>
@@ -497,7 +497,7 @@
       <id>61</id>
     </object>
   </argumentsThis>
-</methodEntryEvent>
+</method-entry-event>
 <called-methods>
 </called-methods>
 <methodExitEvent>
