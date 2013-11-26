@@ -100,17 +100,27 @@ public class WindowPath extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
-				String file =path.getText();
+					String file =path.getText();
+					String name = nameClass.getText();
+					String IsPuntoClass="";
+					
+						if(name.length() > 5)
+							IsPuntoClass = name.substring(name.length()-5, name.length());
+					
+						if (IsPuntoClass.equals("class")||IsPuntoClass.equals("Class"))JOptionPane.showMessageDialog(new JFrame(), "insert class name without .class");
+						else{
+					
+								if(file!=null && file!="" && !file.equals("") && name!=null && name!="" && !name.equals("")){
 				
-				if(file!=null && file!="" && !file.equals("")){
-			
-					String[] args = new String[2];
-					args[0]=path.getText();
-					args[1]=nameClass.getText();
+									String[] args = new String[2];
+									args[0]=file;
+									args[1]=name;
 					
-					controller.startTrace(args); 
 					
-				 }else JOptionPane.showMessageDialog(new JFrame(), " White text area");
+									controller.startTrace(args); 
+					
+								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
+						}
 			
 				} catch (Exception e1) {
 					

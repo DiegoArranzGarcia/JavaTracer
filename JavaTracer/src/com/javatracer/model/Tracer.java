@@ -40,7 +40,7 @@ public class Tracer {
     private int debugTraceMode = VirtualMachine.TRACE_NONE;
 
     // Do we want to watch assignments to fields
-    private boolean watchFields = false;
+    private boolean watchFields,wasError = false;
 
     // Class patterns for which we don't want events
     private String[] excludes = {"java.*", "javax.*", "sun.*",
@@ -234,11 +234,14 @@ public class Tracer {
 		String errorMain="no se ha encontrado el método principal";
         String errorLoadClass="no se ha encontrado o cargado la clase principal";
 		
-		if(error.contains(errorMain))
+		if(error.contains(errorMain)){
 			tracerController.showErrorMain();
+			wasError=true;}
 		
-		if(error.contains(errorLoadClass))
+		if(error.contains(errorLoadClass)){
 			tracerController.showErrorLoadClass();
+		    wasError=true;	
+		 }
     }
     
    private void catchError(Process process)
@@ -268,6 +271,13 @@ public class Tracer {
        } catch(IOException exc) {
            System.err.println("Child I/O Transfer - " + exc);
        }
+	   
+   }
+   
+   
+   public boolean getWasError()
+   {
+	   return wasError;
 	   
    }
    

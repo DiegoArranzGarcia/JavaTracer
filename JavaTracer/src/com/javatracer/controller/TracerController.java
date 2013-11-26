@@ -28,9 +28,13 @@ public class TracerController {
 	}
 
 	public void finishedTrace() {
-		view.finishedTrace();
-		this.traceInspectorWriter = new TraceInspectorWriter();
-		traceInspectorWriter.generateFinalTrace();
+		
+		
+		if(!tracer.getWasError()){
+			view.finishedTrace();
+			this.traceInspectorWriter = new TraceInspectorWriter();
+			traceInspectorWriter.generateFinalTrace();
+			}
 	}
 	
 	
