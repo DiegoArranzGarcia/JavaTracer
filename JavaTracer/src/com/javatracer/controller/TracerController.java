@@ -15,7 +15,6 @@ public class TracerController {
     }
 
 	public void startTrace(String[] args) {
-		view.InitLoading();
 		tracer = new Tracer(this);
 		tracer.trace(args);
 	}
@@ -32,7 +31,6 @@ public class TracerController {
 		
 		
 		if(!tracer.getWasError()){
-			view.FinishedLoading();
 			view.finishedTrace();
 			this.traceInspectorWriter = new TraceInspectorWriter();
 			traceInspectorWriter.generateFinalTrace();

@@ -1,6 +1,7 @@
 package com.javatracer.view;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.TextField;
@@ -26,6 +27,7 @@ public class WindowPath extends JFrame {
 	private JLabel labelPath,labelNameClass;
 	private TracerController controller;
 	private LoadingMain loading;
+	private Container contentPane;
 	
 	public WindowPath(TracerController controller) {
 		this.controller = controller;
@@ -101,6 +103,8 @@ public class WindowPath extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
+					contentPane=getContentPane();
+					InitLoading();
 					String file =path.getText();
 					String name = nameClass.getText();
 					String IsPuntoClass="";
@@ -121,7 +125,10 @@ public class WindowPath extends JFrame {
 									controller.startTrace(args); 
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
+						
 						}
+					
+					FinishedLoading();
 			
 				} catch (Exception e1) {
 					
@@ -197,13 +204,19 @@ public class WindowPath extends JFrame {
 	
 
 
+
 	public void InitLoading(){
 		loading=new LoadingMain();
-		loading.addScreen();	
+		loading.addScreen();
+		setContentPane(loading.getContentPane());
+		setSize(400, 300);
+		JOptionPane.showMessageDialog(new JFrame(), "Loading...");
+		
 	}
 
 	public void FinishedLoading(){
-		loading.removeScreen();
+		setContentPane(contentPane);
+		setSize(850, 300);
   	}
 
 }
