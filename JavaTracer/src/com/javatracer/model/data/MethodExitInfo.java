@@ -8,15 +8,15 @@ public class MethodExitInfo implements InterfaceInfo{
 	String methodName;
 	String className;
 	Object returnObject;
-	List<Object> ArgumentsThis;
-	List<ArgumentInfo> arguments;
+	List<VariableInfo> argumentsThis;
+	List<VariableInfo> arguments;
 	
-	public MethodExitInfo(String methodName, String className,Object returnObject,List<ArgumentInfo> arguments, 
-			List<Object> Values_this) {
+	public MethodExitInfo(String methodName, String className,Object returnObject,List<VariableInfo> arguments, 
+			List<VariableInfo> argumentsThis) {
 		this.methodName = methodName;
 		this.className = className;
 		this.returnObject = returnObject;
-		this.ArgumentsThis=Values_this;
+		this.argumentsThis=argumentsThis;
 		this.arguments = arguments;
 	}
 

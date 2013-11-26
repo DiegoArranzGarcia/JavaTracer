@@ -1,12 +1,11 @@
 package com.javatracer.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.sun.jdi.ArrayReference;
 import com.sun.jdi.BooleanValue;
 import com.sun.jdi.ByteValue;
@@ -66,7 +65,7 @@ public class TracerUtilities {
 		} else {
 			objectsProcessed.add(objectId);
 			List<Field> fields = value.referenceType().allFields();
-			Map<String,Object> values = new HashMap<>();
+			List<VariableInfo> values = new ArrayList<>();
 			for (int i=0;i<fields.size();i++){
 				Field f = fields.get(i);
 				Value v = value.getValue(f);
@@ -76,7 +75,7 @@ public class TracerUtilities {
 					 object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
 				}
 				else object = TracerUtilities.getObj(v);
-				values.put(f.name(),object);
+				values.add(new VariableInfo(f.name(),object));
 			}
 			result = new ObjectInfo(getClass(value.referenceType()),values,value.uniqueID());
 		}		

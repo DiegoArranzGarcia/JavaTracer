@@ -1,16 +1,16 @@
 package com.javatracer.model.data;
 
-import java.util.Map;
+import java.util.List;
 
 public class ObjectInfo {
 
 	private String className;
-	private Map<String,Object> fields;
+	private List<VariableInfo> fields;
 	private long id;
 	
-	public ObjectInfo(String className,Map<String,Object> values,long id){
+	public ObjectInfo(String className,List<VariableInfo> fields,long id){
 		this.className = className;
-		this.fields = values;
+		this.fields = fields;
 		this.id = id;
 	}
 
@@ -24,7 +24,7 @@ public class ObjectInfo {
 	/**
 	 * @return the fields
 	 */
-	public Map<String,Object> getFields() {
+	public List<VariableInfo> getFields() {
 		return fields;
 	}
 
@@ -45,7 +45,7 @@ public class ObjectInfo {
 	/**
 	 * @param fields the fields to set
 	 */
-	public void setFields(Map<String,Object>  fields) {
+	public void setFields(List<VariableInfo>  fields) {
 		this.fields = fields;
 	}
 

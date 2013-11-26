@@ -5,13 +5,13 @@
   <methodName>main</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
-    <argument>
-      <variable>args</variable>
+    <variable>
+      <name>args</name>
       <value class="array">
         <className>java.lang.String</className>
         <values/>
       </value>
-    </argument>
+    </variable>
   </arguments>
   <argumentsThis/>
 </method-entry-event>
@@ -21,24 +21,33 @@
   <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
-    <argument>
-      <variable>age</variable>
+    <variable>
+      <name>age</name>
       <value class="int">1</value>
-    </argument>
-    <argument>
-      <variable>name</variable>
+    </variable>
+    <variable>
+      <name>name</name>
       <value class="string"></value>
-    </argument>
-    <argument>
-      <variable>lastName</variable>
+    </variable>
+    <variable>
+      <name>lastName</name>
       <value class="string">b</value>
-    </argument>
+    </variable>
   </arguments>
   <argumentsThis>
-    <int>0</int>
-    <null/>
-    <null/>
-    <null/>
+    <variable>
+      <name>age</name>
+      <value class="int">0</value>
+    </variable>
+    <variable>
+      <name>name</name>
+    </variable>
+    <variable>
+      <name>lastName</name>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+    </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
@@ -46,25 +55,36 @@
 <methodExitEvent>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
-  <ArgumentsThis>
-    <int>1</int>
-    <string></string>
-    <string>b</string>
-    <null/>
-  </ArgumentsThis>
-  <arguments>
-    <argument>
-      <variable>age</variable>
+  <argumentsThis>
+    <variable>
+      <name>age</name>
       <value class="int">1</value>
-    </argument>
-    <argument>
-      <variable>name</variable>
+    </variable>
+    <variable>
+      <name>name</name>
       <value class="string"></value>
-    </argument>
-    <argument>
-      <variable>lastName</variable>
+    </variable>
+    <variable>
+      <name>lastName</name>
       <value class="string">b</value>
-    </argument>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string"></value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string">b</value>
+    </variable>
   </arguments>
 </methodExitEvent>
 </method-call>
@@ -73,49 +93,57 @@
   <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
-    <argument>
-      <variable>age</variable>
+    <variable>
+      <name>age</name>
       <value class="int">1</value>
-    </argument>
-    <argument>
-      <variable>name</variable>
+    </variable>
+    <variable>
+      <name>name</name>
       <value class="string"></value>
-    </argument>
-    <argument>
-      <variable>lastName</variable>
+    </variable>
+    <variable>
+      <name>lastName</name>
       <value class="string">b</value>
-    </argument>
-    <argument>
-      <variable>bestFriend</variable>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <null/>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+          </variable>
         </fields>
         <id>61</id>
       </value>
-    </argument>
+    </variable>
   </arguments>
   <argumentsThis>
-    <int>0</int>
-    <null/>
-    <null/>
-    <null/>
+    <variable>
+      <name>age</name>
+      <value class="int">0</value>
+    </variable>
+    <variable>
+      <name>name</name>
+    </variable>
+    <variable>
+      <name>lastName</name>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+    </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
@@ -123,71 +151,81 @@
 <methodExitEvent>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
-  <ArgumentsThis>
-    <int>1</int>
-    <string></string>
-    <string>b</string>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <null/>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>61</id>
-    </object>
-  </ArgumentsThis>
-  <arguments>
-    <argument>
-      <variable>age</variable>
+  <argumentsThis>
+    <variable>
+      <name>age</name>
       <value class="int">1</value>
-    </argument>
-    <argument>
-      <variable>name</variable>
+    </variable>
+    <variable>
+      <name>name</name>
       <value class="string"></value>
-    </argument>
-    <argument>
-      <variable>lastName</variable>
+    </variable>
+    <variable>
+      <name>lastName</name>
       <value class="string">b</value>
-    </argument>
-    <argument>
-      <variable>bestFriend</variable>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <null/>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+          </variable>
         </fields>
         <id>61</id>
       </value>
-    </argument>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string"></value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string">b</value>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+      <value>
+        <className>Person</className>
+        <fields>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+          </variable>
+        </fields>
+        <id>61</id>
+      </value>
+    </variable>
   </arguments>
 </methodExitEvent>
 </method-call>
@@ -196,102 +234,102 @@
   <methodName>prueba</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
-    <argument>
-      <variable>i</variable>
+    <variable>
+      <name>i</name>
       <value class="int">1</value>
-    </argument>
-    <argument>
-      <variable>p1</variable>
+    </variable>
+    <variable>
+      <name>p1</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <object>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
               <className>Person</className>
               <fields>
-                <entry>
-                  <string>lastName</string>
-                  <string>b</string>
-                </entry>
-                <entry>
-                  <string>bestFriend</string>
-                  <long>61</long>
-                </entry>
-                <entry>
-                  <string>name</string>
-                  <string></string>
-                </entry>
-                <entry>
-                  <string>age</string>
-                  <int>1</int>
-                </entry>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">61</value>
+                </variable>
               </fields>
               <id>62</id>
-            </object>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+            </value>
+          </variable>
         </fields>
         <id>61</id>
       </value>
-    </argument>
-    <argument>
-      <variable>p2</variable>
+    </variable>
+    <variable>
+      <name>p2</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <object>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
               <className>Person</className>
               <fields>
-                <entry>
-                  <string>lastName</string>
-                  <string>b</string>
-                </entry>
-                <entry>
-                  <string>bestFriend</string>
-                  <long>62</long>
-                </entry>
-                <entry>
-                  <string>name</string>
-                  <string></string>
-                </entry>
-                <entry>
-                  <string>age</string>
-                  <int>1</int>
-                </entry>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">62</value>
+                </variable>
               </fields>
               <id>61</id>
-            </object>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+            </value>
+          </variable>
         </fields>
         <id>62</id>
       </value>
-    </argument>
+    </variable>
   </arguments>
   <argumentsThis/>
 </method-entry-event>
@@ -303,144 +341,144 @@
   <returnObject>
     <className>Person</className>
     <fields>
-      <entry>
-        <string>lastName</string>
-        <string>b</string>
-      </entry>
-      <entry>
-        <string>bestFriend</string>
-        <object>
+      <variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </variable>
+      <variable>
+        <name>name</name>
+        <value class="string"></value>
+      </variable>
+      <variable>
+        <name>lastName</name>
+        <value class="string">b</value>
+      </variable>
+      <variable>
+        <name>bestFriend</name>
+        <value>
           <className>Person</className>
           <fields>
-            <entry>
-              <string>lastName</string>
-              <string>b</string>
-            </entry>
-            <entry>
-              <string>bestFriend</string>
-              <long>61</long>
-            </entry>
-            <entry>
-              <string>name</string>
-              <string></string>
-            </entry>
-            <entry>
-              <string>age</string>
-              <int>1</int>
-            </entry>
+            <variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </variable>
+            <variable>
+              <name>name</name>
+              <value class="string"></value>
+            </variable>
+            <variable>
+              <name>lastName</name>
+              <value class="string">b</value>
+            </variable>
+            <variable>
+              <name>bestFriend</name>
+              <value class="long">61</value>
+            </variable>
           </fields>
           <id>62</id>
-        </object>
-      </entry>
-      <entry>
-        <string>name</string>
-        <string></string>
-      </entry>
-      <entry>
-        <string>age</string>
-        <int>1</int>
-      </entry>
+        </value>
+      </variable>
     </fields>
     <id>61</id>
   </returnObject>
-  <ArgumentsThis/>
+  <argumentsThis/>
   <arguments>
-    <argument>
-      <variable>i</variable>
+    <variable>
+      <name>i</name>
       <value class="int">0</value>
-    </argument>
-    <argument>
-      <variable>p1</variable>
+    </variable>
+    <variable>
+      <name>p1</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <object>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
               <className>Person</className>
               <fields>
-                <entry>
-                  <string>lastName</string>
-                  <string>b</string>
-                </entry>
-                <entry>
-                  <string>bestFriend</string>
-                  <long>61</long>
-                </entry>
-                <entry>
-                  <string>name</string>
-                  <string></string>
-                </entry>
-                <entry>
-                  <string>age</string>
-                  <int>1</int>
-                </entry>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">61</value>
+                </variable>
               </fields>
               <id>62</id>
-            </object>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+            </value>
+          </variable>
         </fields>
         <id>61</id>
       </value>
-    </argument>
-    <argument>
-      <variable>p2</variable>
+    </variable>
+    <variable>
+      <name>p2</name>
       <value>
         <className>Person</className>
         <fields>
-          <entry>
-            <string>lastName</string>
-            <string>b</string>
-          </entry>
-          <entry>
-            <string>bestFriend</string>
-            <object>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
               <className>Person</className>
               <fields>
-                <entry>
-                  <string>lastName</string>
-                  <string>b</string>
-                </entry>
-                <entry>
-                  <string>bestFriend</string>
-                  <long>62</long>
-                </entry>
-                <entry>
-                  <string>name</string>
-                  <string></string>
-                </entry>
-                <entry>
-                  <string>age</string>
-                  <int>1</int>
-                </entry>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">62</value>
+                </variable>
               </fields>
               <id>61</id>
-            </object>
-          </entry>
-          <entry>
-            <string>name</string>
-            <string></string>
-          </entry>
-          <entry>
-            <string>age</string>
-            <int>1</int>
-          </entry>
+            </value>
+          </variable>
         </fields>
         <id>62</id>
       </value>
-    </argument>
+    </variable>
   </arguments>
 </methodExitEvent>
 </method-call>
@@ -450,52 +488,64 @@
   <calledFromClass>Person</calledFromClass>
   <arguments/>
   <argumentsThis>
-    <int>1</int>
-    <string></string>
-    <string>b</string>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <object>
-            <className>Person</className>
-            <fields>
-              <entry>
-                <string>lastName</string>
-                <string>b</string>
-              </entry>
-              <entry>
-                <string>bestFriend</string>
-                <long>61</long>
-              </entry>
-              <entry>
-                <string>name</string>
-                <string></string>
-              </entry>
-              <entry>
-                <string>age</string>
-                <int>1</int>
-              </entry>
-            </fields>
-            <id>62</id>
-          </object>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>61</id>
-    </object>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string"></value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string">b</value>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+      <value>
+        <className>Person</className>
+        <fields>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
+              <className>Person</className>
+              <fields>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">61</value>
+                </variable>
+              </fields>
+              <id>62</id>
+            </value>
+          </variable>
+        </fields>
+        <id>61</id>
+      </value>
+    </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
@@ -503,54 +553,66 @@
 <methodExitEvent>
   <methodName>imprime</methodName>
   <className>Person</className>
-  <ArgumentsThis>
-    <int>1</int>
-    <string></string>
-    <string>b</string>
-    <object>
-      <className>Person</className>
-      <fields>
-        <entry>
-          <string>lastName</string>
-          <string>b</string>
-        </entry>
-        <entry>
-          <string>bestFriend</string>
-          <object>
-            <className>Person</className>
-            <fields>
-              <entry>
-                <string>lastName</string>
-                <string>b</string>
-              </entry>
-              <entry>
-                <string>bestFriend</string>
-                <long>61</long>
-              </entry>
-              <entry>
-                <string>name</string>
-                <string></string>
-              </entry>
-              <entry>
-                <string>age</string>
-                <int>1</int>
-              </entry>
-            </fields>
-            <id>62</id>
-          </object>
-        </entry>
-        <entry>
-          <string>name</string>
-          <string></string>
-        </entry>
-        <entry>
-          <string>age</string>
-          <int>1</int>
-        </entry>
-      </fields>
-      <id>61</id>
-    </object>
-  </ArgumentsThis>
+  <argumentsThis>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string"></value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string">b</value>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+      <value>
+        <className>Person</className>
+        <fields>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string"></value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string">b</value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value>
+              <className>Person</className>
+              <fields>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string"></value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string">b</value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="long">61</value>
+                </variable>
+              </fields>
+              <id>62</id>
+            </value>
+          </variable>
+        </fields>
+        <id>61</id>
+      </value>
+    </variable>
+  </argumentsThis>
   <arguments/>
 </methodExitEvent>
 </method-call>
@@ -558,15 +620,15 @@
 <methodExitEvent>
   <methodName>main</methodName>
   <className>Main</className>
-  <ArgumentsThis/>
+  <argumentsThis/>
   <arguments>
-    <argument>
-      <variable>args</variable>
+    <variable>
+      <name>args</name>
       <value class="array">
         <className>java.lang.String</className>
         <values/>
       </value>
-    </argument>
+    </variable>
   </arguments>
 </methodExitEvent>
 </method-call>

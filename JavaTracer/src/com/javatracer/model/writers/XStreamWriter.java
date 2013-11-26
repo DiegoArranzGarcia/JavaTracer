@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.javatracer.model.data.ArgumentInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.InterfaceInfo;
 import com.javatracer.model.data.MethodEntryInfo;
@@ -22,6 +22,10 @@ public class XStreamWriter implements DataBaseWriter {
 	public static String TAG_CALLED_METHODS = "called-methods";
 	public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
 	public static String TAG_METHOD_EXIT_EVENT = "methodExitEvent";
+	public static String TAG_VARIABLE = "variable";
+	public static String TAG_OBJECT = "object";
+	public static String TAG_ARRAY = "array";
+
 	
 	private XStream xStream;
 	private BufferedWriter bufferedWriter;
@@ -32,6 +36,7 @@ public class XStreamWriter implements DataBaseWriter {
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			
 			this.xStream = new XStream();
+
 			addAlias();
 			
 			write(TAG_XML);
@@ -43,11 +48,11 @@ public class XStreamWriter implements DataBaseWriter {
 	}
 	
 	private void addAlias() {
-		xStream.alias("array",ArrayInfo.class);
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.alias("object",ObjectInfo.class);
-		xStream.alias("argument",ArgumentInfo.class);
+		xStream.alias(TAG_VARIABLE,VariableInfo.class);
+		xStream.alias(TAG_OBJECT, ObjectInfo.class);
+		xStream.alias(TAG_ARRAY, ArrayInfo.class);
 	}
 
 	public void writeOutput(InterfaceInfo info){

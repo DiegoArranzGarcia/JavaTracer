@@ -16,7 +16,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.data.ArgumentInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.MethodInfo;
 import com.javatracer.model.data.ObjectInfo;
@@ -174,7 +174,7 @@ public class TraceInspectorWriter {
 		xStream.alias("array",ArrayInfo.class);
 		xStream.alias(TAG_METHOD_INFO, MethodInfo.class);
 		xStream.alias("object",ObjectInfo.class);
-		xStream.alias("argument",ArgumentInfo.class);
+		xStream.alias("argument",VariableInfo.class);
 	}
 	
 	private void write(String string) throws IOException {

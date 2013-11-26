@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.TracerUtilities;
-import com.javatracer.model.data.ArgumentInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.MethodEntryInfo;
 import com.javatracer.model.writers.DataBaseWriter;
 import com.sun.jdi.Field;
@@ -34,16 +34,16 @@ public class MethodEntryManager extends VMEventsManager{
        	Method method = event.method();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
        	String methodName = method.name();
-        List<ArgumentInfo> arguments = processArguments(method,thread);
+        List<VariableInfo> arguments = processArguments(method,thread);
         String className = TracerUtilities.getClass(method.declaringType());
-        List<Object> argument_this = processThis(event,ref,thread);
+        List<VariableInfo> argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
         writeOutput(info);
     }
 
-	private List<ArgumentInfo> processArguments(Method method, ThreadReference thread) {
+	private List<VariableInfo> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<ArgumentInfo> arguments = new ArrayList<>();
+    	List<VariableInfo> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
@@ -52,7 +52,7 @@ public class MethodEntryManager extends VMEventsManager{
 				LocalVariable var = variables.get(i);
 				Object varObj = TracerUtilities.getObj(stack.getValue(var));
 				String nameVar = var.name();
-				arguments.add(new ArgumentInfo(nameVar,varObj));
+				arguments.add(new VariableInfo(nameVar,varObj));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,33 +61,33 @@ public class MethodEntryManager extends VMEventsManager{
 	}
 
 
-	private List<Object> processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
+	private List<VariableInfo> processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
 	
-	Field f=null;
-	Object valor=null;
-	Object varObj=null;
-	StackFrame stack=null;
-	List<Object> arguments_this = new ArrayList<>();
-	List<Field> fields=ref.allFields();
-	
-	
-	try {
-		stack = thread.frame(0);
-		} catch (IncompatibleThreadStateException e) {
-				e.printStackTrace();
-			}
-	
-	while (!fields.isEmpty() && stack.thisObject()!=null){
-		f = fields.get(0);
-		//tipo = f.typeName();
-		//valor=ref.getValue(f);
-		valor = stack.thisObject().getValue(f);
-		varObj = TracerUtilities.getObj((Value)valor);
-		arguments_this.add(varObj);
-	    fields.remove(0);
-	   }
-	
-		return arguments_this;
+		Field field=null;
+		Value valor=null;
+		Object varObj=null;
+		StackFrame stack=null;
+		List<VariableInfo> argument_this = new ArrayList<>();
+		List<Field> fields=ref.allFields();
+		
+		try {
+			stack = thread.frame(0);
+			} catch (IncompatibleThreadStateException e) {
+					e.printStackTrace();
+				}
+		
+		while (!fields.isEmpty() && stack.thisObject()!=null){
+			field = fields.get(0);
+			//tipo = f.typeName();
+			//valor=ref.getValue(f);
+			valor = stack.thisObject().getValue(field);
+			varObj = TracerUtilities.getObj(valor);
+			String nameVar = field.name();
+			argument_this.add(new VariableInfo(nameVar,varObj));
+		    fields.remove(0);
+		   }
+		
+		return argument_this;
 	}
 
 

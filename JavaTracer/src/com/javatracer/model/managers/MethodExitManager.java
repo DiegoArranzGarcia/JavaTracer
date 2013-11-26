@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.TracerUtilities;
-import com.javatracer.model.data.ArgumentInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.MethodExitInfo;
 import com.javatracer.model.writers.DataBaseWriter;
 import com.sun.jdi.Field;
@@ -32,7 +32,7 @@ public class MethodExitManager extends VMEventsManager{
     	ThreadReference thread = event.thread();
     	 Method method = event.method();
          String methodName = method.name();
-         List<ArgumentInfo> arguments = processArguments(method,thread);
+         List<VariableInfo> arguments = processArguments(method,thread);
          
          String className = TracerUtilities.getClass(method.declaringType());
          Value returnValue = event.returnValue();
@@ -42,17 +42,17 @@ public class MethodExitManager extends VMEventsManager{
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
-         List<Object> arguments_this = processThis(event,ref, thread);
+         List<VariableInfo> arguments_this = processThis(event,ref, thread);
          MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,arguments_this);
          writeOutput(info);
     }
    
-    private List<Object> processThis(MethodExitEvent event, ReferenceType ref,ThreadReference thread ) {   	
+    private List<VariableInfo> processThis(MethodExitEvent event, ReferenceType ref,ThreadReference thread ) {   	
     	Field f=null;
     	Object valor=null;
     	Object varObj=null;
     	StackFrame stack=null;
-    	List<Object> arguments_this = new ArrayList<>();
+    	List<VariableInfo> arguments_this = new ArrayList<>();
     	List<Field> fields=ref.allFields();
     	
     	try {
@@ -65,7 +65,7 @@ public class MethodExitManager extends VMEventsManager{
     		f = fields.get(0);
     		valor = stack.thisObject().getValue(f);
     		varObj = TracerUtilities.getObj((Value)valor);
-    		arguments_this.add(varObj);
+    		arguments_this.add(new VariableInfo(f.name(),varObj));
     	    fields.remove(0);
     	   }
     	
@@ -73,9 +73,9 @@ public class MethodExitManager extends VMEventsManager{
     	}
 
 
-    private List<ArgumentInfo> processArguments(Method method, ThreadReference thread) {
+    private List<VariableInfo> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<ArgumentInfo> arguments = new ArrayList<>();
+    	List<VariableInfo> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
@@ -84,7 +84,7 @@ public class MethodExitManager extends VMEventsManager{
 				LocalVariable var = variables.get(i);
 				Object varObj = TracerUtilities.getObj(stack.getValue(var));
 				String nameVar = var.name();
-				arguments.add(new ArgumentInfo(nameVar,varObj));
+				arguments.add(new VariableInfo(nameVar,varObj));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

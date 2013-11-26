@@ -6,7 +6,7 @@ public class MethodInfo {
 	
 	String name;
 	String calledFromClass;
-	List<ArgumentInfo> arguments;
+	List<VariableInfo> arguments;
 	List<Object> thisObject;
 	List<String> changes;
 
