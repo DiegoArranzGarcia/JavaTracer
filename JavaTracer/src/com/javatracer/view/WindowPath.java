@@ -25,6 +25,7 @@ public class WindowPath extends JFrame {
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass;
 	private TracerController controller;
+	private LoadingMain loading;
 	
 	public WindowPath(TracerController controller) {
 		this.controller = controller;
@@ -194,5 +195,15 @@ public class WindowPath extends JFrame {
 	}
 	
 	
-}
 
+
+	public void InitLoading(){
+		loading=new LoadingMain();
+		loading.addScreen();	
+	}
+
+	public void FinishedLoading(){
+		loading.removeScreen();
+  	}
+
+}
