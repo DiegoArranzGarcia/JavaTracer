@@ -209,9 +209,7 @@ public class WindowPath extends JFrame {
 		loading=new LoadingMain();
 		loading.addScreen();
 		setContentPane(loading.getContentPane());
-		setSize(400, 300);
-		JOptionPane.showMessageDialog(new JFrame(), "Loading...");
-		
+		setSize(400, 300);		
 	}
 
 	public void FinishedLoading(){
