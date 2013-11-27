@@ -21,17 +21,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.info.ArgumentInfo;
 import com.javatracer.model.info.ArrayInfo;
 import com.javatracer.model.info.MethodEntryInfo;
 import com.javatracer.model.info.MethodExitInfo;
+import com.javatracer.model.info.NullObject;
 import com.javatracer.model.info.ObjectInfo;
+import com.javatracer.model.info.VariableInfo;
 import com.thoughtworks.xstream.XStream;
 import com.traceinspector.datamodel.MethodNode;
 
 public class XmlManager {
  
    public final String OUTPUT_NAME = "output.xml";
+   
+   public static String TAG_TRACE = "trace";
+   public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+   public static String TAG_METHOD = "method-call";
+   public static String TAG_CALLED_METHODS = "called-methods";
+   public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
+   public static String TAG_METHOD_EXIT_EVENT = "method-exit-event";
+   public static String TAG_VARIABLE = "variable";
+   public static String TAG_OBJECT = "object-info";
+   public static String TAG_ARRAY = "array";
+   public static String TAG_NULL = "null";
 	   
    private Document xmlDocument;
    private XStream xStream;
@@ -39,11 +51,13 @@ public class XmlManager {
    public XmlManager(String fileName) {
 	   try {
 		   xStream = new XStream();
-		   xStream.alias("array",ArrayInfo.class);
-		   xStream.alias("methodEntryEvent",MethodEntryInfo.class);
-		   xStream.alias("methodExitEvent",MethodExitInfo.class);
-		   xStream.alias("object",ObjectInfo.class);
-		   xStream.alias("argument",ArgumentInfo.class);
+			xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
+			xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+			
+			xStream.alias(TAG_VARIABLE,VariableInfo.class);
+			xStream.alias(TAG_OBJECT, ObjectInfo.class);
+			xStream.alias(TAG_ARRAY, ArrayInfo.class);
+			xStream.alias(TAG_NULL,NullObject.class);
 		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse("C:\\Users\\Diego\\Documents\\GitHub\\JavaTracer\\JavaTracer\\" + fileName);
 	   } catch (Exception e){
 		   e.printStackTrace();
@@ -74,7 +88,7 @@ public class XmlManager {
 	public MethodNode getMethodInfoFromNode(Node node) {
 		MethodNode info = null;
 		try{
-			String expression = "./methodEntryEvent";  
+			String expression = "./method-entry-event";  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    Node infoNode = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
@@ -95,8 +109,8 @@ public class XmlManager {
 		return info;
 	}
 
-	private List<ArgumentInfo> loadArgumets(Node infoNode) throws XPathExpressionException{
-		List<ArgumentInfo> arguments = new ArrayList<>();
+	private List<VariableInfo> loadArgumets(Node infoNode) throws XPathExpressionException{
+		List<VariableInfo> arguments = new ArrayList<>();
 		String expression = "./arguments/*";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
@@ -107,8 +121,8 @@ public class XmlManager {
 		return arguments;
 	}
 
-	private ArgumentInfo getArgument(Node node) {
-		ArgumentInfo info = (ArgumentInfo) xStream.fromXML(nodeToString(node));
+	private VariableInfo getArgument(Node node) {
+		VariableInfo info = (VariableInfo) xStream.fromXML(nodeToString(node));
 		return info;
 	}
 
