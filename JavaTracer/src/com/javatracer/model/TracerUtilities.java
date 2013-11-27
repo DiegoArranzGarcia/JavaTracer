@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.data.ArrayInfo;
+import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.sun.jdi.ArrayReference;
@@ -34,7 +35,9 @@ public class TracerUtilities {
 			object = (String)value.toString().replaceAll("\"","");
 		} else if (value instanceof ObjectReference){
 			object = getObjectFromObjectReference((ObjectReference)value);
-		} 
+		} else if (value == null){
+			object = new NullObject();
+		}
 		return object;
 	}
 	

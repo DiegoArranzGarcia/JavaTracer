@@ -41,18 +41,21 @@
     </variable>
     <variable>
       <name>name</name>
+      <value class="null"/>
     </variable>
     <variable>
       <name>lastName</name>
+      <value class="null"/>
     </variable>
     <variable>
       <name>bestFriend</name>
+      <value class="null"/>
     </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
 </called-methods>
-<methodExitEvent>
+<method-exit-event>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
   <argumentsThis>
@@ -70,6 +73,7 @@
     </variable>
     <variable>
       <name>bestFriend</name>
+      <value class="null"/>
     </variable>
   </argumentsThis>
   <arguments>
@@ -86,7 +90,7 @@
       <value class="string">b</value>
     </variable>
   </arguments>
-</methodExitEvent>
+</method-exit-event>
 </method-call>
 <method-call>
 <method-entry-event>
@@ -107,27 +111,7 @@
     </variable>
     <variable>
       <name>bestFriend</name>
-      <value>
-        <className>Person</className>
-        <fields>
-          <variable>
-            <name>age</name>
-            <value class="int">1</value>
-          </variable>
-          <variable>
-            <name>name</name>
-            <value class="string"></value>
-          </variable>
-          <variable>
-            <name>lastName</name>
-            <value class="string">b</value>
-          </variable>
-          <variable>
-            <name>bestFriend</name>
-          </variable>
-        </fields>
-        <id>61</id>
-      </value>
+      <value class="null"/>
     </variable>
   </arguments>
   <argumentsThis>
@@ -137,18 +121,21 @@
     </variable>
     <variable>
       <name>name</name>
+      <value class="null"/>
     </variable>
     <variable>
       <name>lastName</name>
+      <value class="null"/>
     </variable>
     <variable>
       <name>bestFriend</name>
+      <value class="null"/>
     </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
 </called-methods>
-<methodExitEvent>
+<method-exit-event>
   <methodName>&lt;init&gt;</methodName>
   <className>Person</className>
   <argumentsThis>
@@ -166,27 +153,7 @@
     </variable>
     <variable>
       <name>bestFriend</name>
-      <value>
-        <className>Person</className>
-        <fields>
-          <variable>
-            <name>age</name>
-            <value class="int">1</value>
-          </variable>
-          <variable>
-            <name>name</name>
-            <value class="string"></value>
-          </variable>
-          <variable>
-            <name>lastName</name>
-            <value class="string">b</value>
-          </variable>
-          <variable>
-            <name>bestFriend</name>
-          </variable>
-        </fields>
-        <id>61</id>
-      </value>
+      <value class="null"/>
     </variable>
   </argumentsThis>
   <arguments>
@@ -204,30 +171,10 @@
     </variable>
     <variable>
       <name>bestFriend</name>
-      <value>
-        <className>Person</className>
-        <fields>
-          <variable>
-            <name>age</name>
-            <value class="int">1</value>
-          </variable>
-          <variable>
-            <name>name</name>
-            <value class="string"></value>
-          </variable>
-          <variable>
-            <name>lastName</name>
-            <value class="string">b</value>
-          </variable>
-          <variable>
-            <name>bestFriend</name>
-          </variable>
-        </fields>
-        <id>61</id>
-      </value>
+      <value class="null"/>
     </variable>
   </arguments>
-</methodExitEvent>
+</method-exit-event>
 </method-call>
 <method-call>
 <method-entry-event>
@@ -240,7 +187,7 @@
     </variable>
     <variable>
       <name>p1</name>
-      <value>
+      <value class="object-info">
         <className>Person</className>
         <fields>
           <variable>
@@ -257,7 +204,7 @@
           </variable>
           <variable>
             <name>bestFriend</name>
-            <value>
+            <value class="object-info">
               <className>Person</className>
               <fields>
                 <variable>
@@ -274,7 +221,7 @@
                 </variable>
                 <variable>
                   <name>bestFriend</name>
-                  <value class="long">61</value>
+                  <value class="null"/>
                 </variable>
               </fields>
               <id>62</id>
@@ -286,7 +233,7 @@
     </variable>
     <variable>
       <name>p2</name>
-      <value>
+      <value class="object-info">
         <className>Person</className>
         <fields>
           <variable>
@@ -303,28 +250,7 @@
           </variable>
           <variable>
             <name>bestFriend</name>
-            <value>
-              <className>Person</className>
-              <fields>
-                <variable>
-                  <name>age</name>
-                  <value class="int">1</value>
-                </variable>
-                <variable>
-                  <name>name</name>
-                  <value class="string"></value>
-                </variable>
-                <variable>
-                  <name>lastName</name>
-                  <value class="string">b</value>
-                </variable>
-                <variable>
-                  <name>bestFriend</name>
-                  <value class="long">62</value>
-                </variable>
-              </fields>
-              <id>61</id>
-            </value>
+            <value class="null"/>
           </variable>
         </fields>
         <id>62</id>
@@ -335,52 +261,10 @@
 </method-entry-event>
 <called-methods>
 </called-methods>
-<methodExitEvent>
+<method-exit-event>
   <methodName>prueba</methodName>
   <className>Main</className>
-  <returnObject>
-    <className>Person</className>
-    <fields>
-      <variable>
-        <name>age</name>
-        <value class="int">1</value>
-      </variable>
-      <variable>
-        <name>name</name>
-        <value class="string"></value>
-      </variable>
-      <variable>
-        <name>lastName</name>
-        <value class="string">b</value>
-      </variable>
-      <variable>
-        <name>bestFriend</name>
-        <value>
-          <className>Person</className>
-          <fields>
-            <variable>
-              <name>age</name>
-              <value class="int">1</value>
-            </variable>
-            <variable>
-              <name>name</name>
-              <value class="string"></value>
-            </variable>
-            <variable>
-              <name>lastName</name>
-              <value class="string">b</value>
-            </variable>
-            <variable>
-              <name>bestFriend</name>
-              <value class="long">61</value>
-            </variable>
-          </fields>
-          <id>62</id>
-        </value>
-      </variable>
-    </fields>
-    <id>61</id>
-  </returnObject>
+  <returnObject class="null"/>
   <argumentsThis/>
   <arguments>
     <variable>
@@ -389,7 +273,7 @@
     </variable>
     <variable>
       <name>p1</name>
-      <value>
+      <value class="object-info">
         <className>Person</className>
         <fields>
           <variable>
@@ -406,7 +290,7 @@
           </variable>
           <variable>
             <name>bestFriend</name>
-            <value>
+            <value class="object-info">
               <className>Person</className>
               <fields>
                 <variable>
@@ -423,7 +307,7 @@
                 </variable>
                 <variable>
                   <name>bestFriend</name>
-                  <value class="long">61</value>
+                  <value class="null"/>
                 </variable>
               </fields>
               <id>62</id>
@@ -435,7 +319,7 @@
     </variable>
     <variable>
       <name>p2</name>
-      <value>
+      <value class="object-info">
         <className>Person</className>
         <fields>
           <variable>
@@ -452,35 +336,14 @@
           </variable>
           <variable>
             <name>bestFriend</name>
-            <value>
-              <className>Person</className>
-              <fields>
-                <variable>
-                  <name>age</name>
-                  <value class="int">1</value>
-                </variable>
-                <variable>
-                  <name>name</name>
-                  <value class="string"></value>
-                </variable>
-                <variable>
-                  <name>lastName</name>
-                  <value class="string">b</value>
-                </variable>
-                <variable>
-                  <name>bestFriend</name>
-                  <value class="long">62</value>
-                </variable>
-              </fields>
-              <id>61</id>
-            </value>
+            <value class="null"/>
           </variable>
         </fields>
         <id>62</id>
       </value>
     </variable>
   </arguments>
-</methodExitEvent>
+</method-exit-event>
 </method-call>
 <method-call>
 <method-entry-event>
@@ -502,55 +365,13 @@
     </variable>
     <variable>
       <name>bestFriend</name>
-      <value>
-        <className>Person</className>
-        <fields>
-          <variable>
-            <name>age</name>
-            <value class="int">1</value>
-          </variable>
-          <variable>
-            <name>name</name>
-            <value class="string"></value>
-          </variable>
-          <variable>
-            <name>lastName</name>
-            <value class="string">b</value>
-          </variable>
-          <variable>
-            <name>bestFriend</name>
-            <value>
-              <className>Person</className>
-              <fields>
-                <variable>
-                  <name>age</name>
-                  <value class="int">1</value>
-                </variable>
-                <variable>
-                  <name>name</name>
-                  <value class="string"></value>
-                </variable>
-                <variable>
-                  <name>lastName</name>
-                  <value class="string">b</value>
-                </variable>
-                <variable>
-                  <name>bestFriend</name>
-                  <value class="long">61</value>
-                </variable>
-              </fields>
-              <id>62</id>
-            </value>
-          </variable>
-        </fields>
-        <id>61</id>
-      </value>
+      <value class="null"/>
     </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
 </called-methods>
-<methodExitEvent>
+<method-exit-event>
   <methodName>imprime</methodName>
   <className>Person</className>
   <argumentsThis>
@@ -568,56 +389,14 @@
     </variable>
     <variable>
       <name>bestFriend</name>
-      <value>
-        <className>Person</className>
-        <fields>
-          <variable>
-            <name>age</name>
-            <value class="int">1</value>
-          </variable>
-          <variable>
-            <name>name</name>
-            <value class="string"></value>
-          </variable>
-          <variable>
-            <name>lastName</name>
-            <value class="string">b</value>
-          </variable>
-          <variable>
-            <name>bestFriend</name>
-            <value>
-              <className>Person</className>
-              <fields>
-                <variable>
-                  <name>age</name>
-                  <value class="int">1</value>
-                </variable>
-                <variable>
-                  <name>name</name>
-                  <value class="string"></value>
-                </variable>
-                <variable>
-                  <name>lastName</name>
-                  <value class="string">b</value>
-                </variable>
-                <variable>
-                  <name>bestFriend</name>
-                  <value class="long">61</value>
-                </variable>
-              </fields>
-              <id>62</id>
-            </value>
-          </variable>
-        </fields>
-        <id>61</id>
-      </value>
+      <value class="null"/>
     </variable>
   </argumentsThis>
   <arguments/>
-</methodExitEvent>
+</method-exit-event>
 </method-call>
 </called-methods>
-<methodExitEvent>
+<method-exit-event>
   <methodName>main</methodName>
   <className>Main</className>
   <argumentsThis/>
@@ -630,6 +409,6 @@
       </value>
     </variable>
   </arguments>
-</methodExitEvent>
+</method-exit-event>
 </method-call>
 </trace>

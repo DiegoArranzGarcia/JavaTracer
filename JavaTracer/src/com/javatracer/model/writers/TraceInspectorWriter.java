@@ -3,9 +3,17 @@ package com.javatracer.model.writers;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -16,10 +24,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.MethodInfo;
+import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.thoughtworks.xstream.XStream;
 
 public class TraceInspectorWriter {
@@ -94,10 +103,10 @@ public class TraceInspectorWriter {
 				
 		String name = getNameMethod(node);
 		String className = getCalledFromClass(node);
-		getArguments(node);
-		getThis(node);
+		List<VariableInfo> arguments = getArguments(node);
+		List<VariableInfo> thisObject = getThis(node);
 		
-		MethodInfo info = new MethodInfo(name,className);
+		MethodInfo info = new MethodInfo(name,className,arguments,thisObject);
 		xStream.toXML(info,bufferedWriter);
 		write("");
 						
@@ -142,12 +151,39 @@ public class TraceInspectorWriter {
 		return null;
 	}
 
-	private void getThis(Node node) {
-				
+	private List<VariableInfo> getThis(Node node) throws Exception {
+		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/argumentsThis/variable" ;  
+		
+		XPathExpression xPathExpression = xPath.compile(expression);
+		NodeList thisArguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		
+		List<VariableInfo> thisArgumentList = new ArrayList<>();
+		
+		for (int i=0;i<thisArguments.getLength();i++){
+			String nodeString = nodeToString(thisArguments.item(i));
+			VariableInfo variable = (VariableInfo) xStream.fromXML(nodeString);
+			thisArgumentList.add(variable);
+		}
+		
+		return thisArgumentList;		
 	}
 
-	private void getArguments(Node node) {
-				
+	@SuppressWarnings("unchecked")
+	private List<VariableInfo> getArguments(Node node) throws Exception {
+		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/arguments/*";  
+		
+		XPathExpression xPathExpression = xPath.compile(expression);
+		NodeList arguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		
+		List<VariableInfo> argumentList = new ArrayList<>();
+		
+		for (int i=0;i<arguments.getLength();i++){
+			String nodeString = nodeToString(arguments.item(i));
+			VariableInfo variable = (VariableInfo) xStream.fromXML(nodeString);
+			argumentList.add(variable);
+		}
+		
+		return argumentList;
 	}
 
 	private String getCalledFromClass(Node node) throws XPathExpressionException {
@@ -171,10 +207,12 @@ public class TraceInspectorWriter {
 	}
 
 	private void addAlias() {
-		xStream.alias("array",ArrayInfo.class);
 		xStream.alias(TAG_METHOD_INFO, MethodInfo.class);
-		xStream.alias("object",ObjectInfo.class);
-		xStream.alias("argument",VariableInfo.class);
+		
+		xStream.alias(XStreamWriter.TAG_ARRAY,ArrayInfo.class);
+		xStream.alias(XStreamWriter.TAG_OBJECT,ObjectInfo.class);
+		xStream.alias(XStreamWriter.TAG_VARIABLE,VariableInfo.class);
+		xStream.alias(XStreamWriter.TAG_NULL,NullObject.class);
 	}
 	
 	private void write(String string) throws IOException {
@@ -187,6 +225,23 @@ public class TraceInspectorWriter {
 
 	private String endTag(String tag) {
 		return "</" + tag + ">";
+	}
+	
+	private String nodeToString(Node node) {
+
+		StringWriter sw = new StringWriter();
+		String nodeString;
+		try {
+			 Transformer t = TransformerFactory.newInstance().newTransformer();
+			 t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			 t.transform(new DOMSource(node), new StreamResult(sw));
+			 nodeString = sw.toString();
+			 nodeString = nodeString.replaceAll("\r\n\\s*", "");
+		} catch (TransformerException e) {
+			nodeString = "error";
+		}
+
+		return nodeString;
 	}
 
 }

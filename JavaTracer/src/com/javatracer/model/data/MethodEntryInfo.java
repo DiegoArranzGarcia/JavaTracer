@@ -9,11 +9,11 @@ public class MethodEntryInfo implements InterfaceInfo {
 	List<VariableInfo> arguments;
 	List<VariableInfo> argumentsThis;
 	
-	public MethodEntryInfo(String methodName, String calledFromClass, List<VariableInfo> arguments, List<VariableInfo> values_this){
+	public MethodEntryInfo(String methodName, String calledFromClass, List<VariableInfo> arguments, List<VariableInfo> argumentsThis){
 		this.methodName = methodName;
 		this.calledFromClass = calledFromClass; 
 		this.arguments = arguments;	
-		this.argumentsThis= values_this;
+		this.argumentsThis= argumentsThis;
 	}
 
 	public String toString() {

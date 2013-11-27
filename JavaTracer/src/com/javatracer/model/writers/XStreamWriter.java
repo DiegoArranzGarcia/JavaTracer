@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.InterfaceInfo;
@@ -21,11 +22,11 @@ public class XStreamWriter implements DataBaseWriter {
 	public static String TAG_METHOD = "method-call";
 	public static String TAG_CALLED_METHODS = "called-methods";
 	public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
-	public static String TAG_METHOD_EXIT_EVENT = "methodExitEvent";
+	public static String TAG_METHOD_EXIT_EVENT = "method-exit-event";
 	public static String TAG_VARIABLE = "variable";
-	public static String TAG_OBJECT = "object";
+	public static String TAG_OBJECT = "object-info";
 	public static String TAG_ARRAY = "array";
-
+	public static String TAG_NULL = "null";
 	
 	private XStream xStream;
 	private BufferedWriter bufferedWriter;
@@ -50,9 +51,11 @@ public class XStreamWriter implements DataBaseWriter {
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		
 		xStream.alias(TAG_VARIABLE,VariableInfo.class);
 		xStream.alias(TAG_OBJECT, ObjectInfo.class);
 		xStream.alias(TAG_ARRAY, ArrayInfo.class);
+		xStream.alias(TAG_NULL,NullObject.class);
 	}
 
 	public void writeOutput(InterfaceInfo info){
