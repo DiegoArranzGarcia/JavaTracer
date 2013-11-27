@@ -30,23 +30,18 @@ public class TreeGenerator {
 
 	private int generateTree(Node node,TreeNode tree, int currentLevel, int numNodes) {
 		
-		TreeNode treeNode = new TreeNode();
 		MethodNode methodInfo = xml.getMethodInfoFromNode(node);
-		treeNode.setNode(methodInfo);
-		
-		tree.getCalledMethods().add(treeNode);
+		tree.setNode(methodInfo);		
 		numNodes++;
-		
-		System.out.println("Num nodes: " + numNodes);
-		System.out.println("Depth: " + currentLevel);
-		System.out.println(methodInfo.getMethodName());
 		
 		if (currentLevel<DEFAULT_NUM_LEVELS_DEPTH){
 			
 			int i = 0;
 			NodeList childs = xml.getChildsOfNode(node);
 			while (numNodes<DEFAULT_NUM_NODES && i < childs.getLength()){
-				numNodes = generateTree(childs.item(i),treeNode,currentLevel+1,numNodes);
+				TreeNode treeChild = new TreeNode();
+				numNodes = generateTree(childs.item(i),treeChild,currentLevel+1,numNodes);
+				tree.getCalledMethods().add(treeChild);
 				i++;
 			}
 			
