@@ -58,7 +58,7 @@ public class XmlManager {
 			xStream.alias(TAG_OBJECT, ObjectInfo.class);
 			xStream.alias(TAG_ARRAY, ArrayInfo.class);
 			xStream.alias(TAG_NULL,NullObject.class);
-		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse("C:\\Users\\Diego\\Documents\\GitHub\\JavaTracer\\JavaTracer\\" + fileName);
+		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(fileName);
 	   } catch (Exception e){
 		   e.printStackTrace();
 	   }
