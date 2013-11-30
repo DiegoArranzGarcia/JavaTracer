@@ -3,13 +3,14 @@ package com.traceinspector.model;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.javatracer.model.configuration.Configuration;
 import com.traceinspector.datamodel.MethodNode;
 import com.traceinspector.datamodel.TreeNode;
 
 public class TreeGenerator {
 
-	private final int DEFAULT_NUM_LEVELS_DEPTH = 4;
-	private final int DEFAULT_NUM_NODES = 30;
+	private int DEFAULT_NUM_LEVELS_DEPTH;
+	private int DEFAULT_NUM_NODES;
 	
 	private XmlManager xml;
 	
@@ -29,6 +30,9 @@ public class TreeGenerator {
 	}
 
 	private int generateTree(Node node,TreeNode tree, int currentLevel, int numNodes) {
+		Configuration configuration = new Configuration();
+		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
+		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
 		
 		MethodNode methodInfo = xml.getMethodInfoFromNode(node);
 		tree.setNode(methodInfo);		

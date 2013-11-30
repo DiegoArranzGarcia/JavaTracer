@@ -9,8 +9,10 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.javatracer.controller.TracerController;
+import com.javatracer.model.configuration.Configuration;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.connect.Connector;
@@ -43,8 +45,10 @@ public class Tracer {
     private boolean watchFields,wasError = false;
 
     // Class patterns for which we don't want events
-    private String[] excludes = {"java.*", "javax.*", "sun.*",
-                                 "com.sun.*"};
+   /*private String[] excludes = {"java.*", "javax.*", "sun.*",
+                                "com.sun.*"};*/
+    
+   private String[] excludes;
     
 	private TracerController tracerController;
    
@@ -63,7 +67,14 @@ public class Tracer {
  	  * Generate the trace.
 	  */
     public void trace(String[] args) {
+
+    	Configuration configuration = new Configuration();
+    	excludes=configuration.getExcludes();
+    	for(int i=0;i<excludes.length;i++)
+    		System.out.println("excludes "+excludes[i]);
+    		
         PrintWriter writer = new PrintWriter(System.out);
+        
         int inx;
         for (inx = 0; inx < args.length; ++inx) {
             String arg = args[inx];

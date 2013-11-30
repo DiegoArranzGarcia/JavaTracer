@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
@@ -81,6 +82,7 @@ public class TreeInspector {
 
 	 private void showInDialog(JComponent panel) {
 		  JDialog dialog = new JDialog();
+		  dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); 
 		  Container contentPane = dialog.getContentPane();
 		  ((JComponent) contentPane).setBorder(BorderFactory.createEmptyBorder(
 		    10, 10, 10, 10));
@@ -88,5 +90,6 @@ public class TreeInspector {
 		  dialog.pack();
 		  dialog.setLocationRelativeTo(null);
 		  dialog.setVisible(true);
+
 	}
 }
