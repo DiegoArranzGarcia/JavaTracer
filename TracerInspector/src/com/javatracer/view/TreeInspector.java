@@ -17,6 +17,7 @@ import org.abego.treelayout.demo.swing.TextInBoxTreePane;
 import org.abego.treelayout.util.DefaultConfiguration;
 import org.abego.treelayout.util.DefaultTreeForTreeLayout;
 
+import com.javatracer.model.info.VariableInfo;
 import com.traceinspector.datamodel.TreeNode;
 
 public class TreeInspector {
@@ -51,9 +52,9 @@ public class TreeInspector {
 	 private DefaultTreeForTreeLayout<TextInBox> createTree(TreeNode rootNode){
 		 
 		int width = 0;
-		String name = rootNode.getNode().getMethodName();
+		String name = GiveMeTextInBox(rootNode);
 		if (name.length()>2) width = 5*name.length();
-	    TextInBox root = new TextInBox(rootNode.getNode().getMethodName(), 40 + width, 30);
+	    TextInBox root = new TextInBox(name, 40 + width, 30);
 	    DefaultTreeForTreeLayout<TextInBox> treeLayout = new DefaultTreeForTreeLayout<TextInBox>(root);
 	    
 	    painTree(rootNode,root,treeLayout); 
@@ -70,7 +71,7 @@ public class TreeInspector {
 		 while(iterator.hasNext()){
 			 child=iterator.next();
 			 int width = 0;
-			 String name = child.getNode().getMethodName();
+			 String name = GiveMeTextInBox(child);
 			 if (name.length()>2) width = 5*name.length();
 			 TextInBox n1 = new TextInBox(name,30+width,30);
 			 treeLayout.addChild(tree, n1);
@@ -92,4 +93,33 @@ public class TreeInspector {
 		  dialog.setVisible(true);
 
 	}
+
+	 private String GiveMeTextInBox(TreeNode node) {
+			
+			
+		 List<VariableInfo> var=node.getNode().getVariables();
+		 int i=0;
+		 
+		 String name = node.getNode().getMethodName() + " (";
+		 
+		 while(i<var.size()){
+			 
+			name= name + var.get(i).CompleteArgumentString();
+	    	i++;
+		 }
+		 
+		 
+		 
+		 if(i==0)
+			 name = name.substring(0, name.length()) +" )";
+		 else 
+			 name = name.substring(0, name.length()-2) +" )";
+		 
+		 return name;
+		}
+
+
+
+
+
 }
