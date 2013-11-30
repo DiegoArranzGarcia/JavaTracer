@@ -22,10 +22,7 @@ public class Configuration {
             ex.printStackTrace();
         }
     }
- 
-    public String aux(){
-    	return properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH);
-    }
+
     public int getDefaultNumLevelsDepth(){
     	return Integer.parseInt(properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH));
     }
