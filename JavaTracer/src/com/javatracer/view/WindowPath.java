@@ -7,10 +7,12 @@ import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +24,8 @@ import com.javatracer.controller.TracerController;
 public class WindowPath extends JFrame {
 
 	private JButton tracer,examine,cancel,helpPath,helpNameClass;
-	private TextField path,nameClass;
+	private TextField path;
+	private JComboBox nameClass;
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass;
 	private TracerController controller;
@@ -60,7 +63,7 @@ public class WindowPath extends JFrame {
 		path.setLocation(250, 60); 
 		path.setBackground(Color.white); 
 		
-		nameClass = new TextField();
+		nameClass = new JComboBox();
 		nameClass.setBounds(new Rectangle(450,30));
 		nameClass.setLocation(250, 120); 
 		nameClass.setBackground(Color.white); 
@@ -106,14 +109,14 @@ public class WindowPath extends JFrame {
 					contentPane=getContentPane();
 					InitLoading();
 					String file =path.getText();
-					String name = nameClass.getText();
+					String name= (String) nameClass.getSelectedItem();
 					String IsPuntoClass="";
 					
 						if(name.length() > 5)
 							IsPuntoClass = name.substring(name.length()-5, name.length());
 					
-						if (IsPuntoClass.equals("class")||IsPuntoClass.equals("Class"))JOptionPane.showMessageDialog(new JFrame(), "insert class name without .class");
-						else{
+						if (IsPuntoClass.equals("class")||IsPuntoClass.equals("Class")) name=name.substring(0, name.length()-6);
+						
 					
 								if(file!=null && file!="" && !file.equals("") && name!=null && name!="" && !name.equals("")){
 				
@@ -126,7 +129,7 @@ public class WindowPath extends JFrame {
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
 						
-						}
+						
 					
 					FinishedLoading();
 			
@@ -155,6 +158,19 @@ public class WindowPath extends JFrame {
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
  					String sf=chooser.getSelectedFile().toString();
 					path.setText(sf);
+					
+					File dir = new File(sf);
+					String[] files = dir.list();
+					int i=0;
+					while(i<files.length)
+					{
+						
+						nameClass.addItem(files[i]);	
+						i++;
+					}
+					
+					
+					
 					 		
 				
 				} else chooser.cancelSelection();
@@ -209,7 +225,8 @@ public class WindowPath extends JFrame {
 		loading=new LoadingMain();
 		loading.addScreen();
 		setContentPane(loading.getContentPane());
-		setSize(400, 300);		
+		setSize(400, 300);
+		JOptionPane.showMessageDialog(new JFrame(),"Loading ...");
 	}
 
 	public void FinishedLoading(){
