@@ -162,6 +162,7 @@ public class WindowPath extends JFrame {
 					File dir = new File(sf);
 					String[] files = dir.list();
 					int i=0;
+					nameClass.removeAllItems();
 					while(i<files.length)
 					{
 						
