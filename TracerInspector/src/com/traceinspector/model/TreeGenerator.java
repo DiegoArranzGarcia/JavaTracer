@@ -1,5 +1,8 @@
 package com.traceinspector.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -18,6 +21,10 @@ public class TreeGenerator {
 		
 		this.xml = new XmlManager(string);
 		
+		Configuration configuration = new Configuration();
+		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
+		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
+		
 		int currentLevel = 0;
 		int numNodes = 0;
 		TreeNode tree = new TreeNode();
@@ -30,9 +37,6 @@ public class TreeGenerator {
 	}
 
 	private int generateTree(Node node,TreeNode tree, int currentLevel, int numNodes) {
-		Configuration configuration = new Configuration();
-		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
-		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
 		
 		MethodNode methodInfo = xml.getMethodInfoFromNode(node);
 		tree.setNode(methodInfo);		
@@ -53,6 +57,30 @@ public class TreeGenerator {
 
 		return numNodes;
 		
+	}
+
+	public TreeNode expandTreeWithNode(TreeNode tree, long id) {
+		TreeNode nodeToExpand = tree.searchNode(tree,id);
+		if (nodeToExpand != null){
+			List<TreeNode> childs = loadChildsOfNode(id);
+			nodeToExpand.addChilds(childs);
+		}
+		
+		return nodeToExpand;
+	}
+
+	private List<TreeNode> loadChildsOfNode(long id) {
+		List<TreeNode> childs = new ArrayList<>();
+		
+		Node node = xml.getNode(id);
+		NodeList xmlNodechilds = xml.getChildsOfNode(node);
+		
+		for (int i=0;i<xmlNodechilds.getLength();i++){
+			TreeNode treeNode = new TreeNode(xml.getMethodInfoFromNode(xmlNodechilds.item(i)));
+			childs.add(treeNode);
+		}
+		
+		return childs;
 	}
 	
 }

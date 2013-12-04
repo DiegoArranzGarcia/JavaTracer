@@ -43,6 +43,7 @@ public class TraceInspectorWriter {
 	private BufferedWriter bufferedWriter;
 	private Document xmlDocument;
 	private XPath xPath;
+	private int idNode;
 	
 	public TraceInspectorWriter() {
 		
@@ -55,6 +56,7 @@ public class TraceInspectorWriter {
 			
 			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(XStreamWriter.FILE_NAME);
 			xPath = XPathFactory.newInstance().newXPath();
+			this.idNode = 1;
 			
 		} catch (Exception e){
 			e.printStackTrace();
@@ -99,7 +101,7 @@ public class TraceInspectorWriter {
 	private void generateXml(Node node) throws Exception{
 		
 		//Write <method-call>
-		write(startTag(XStreamWriter.TAG_METHOD)); 
+		write("<" + XStreamWriter.TAG_METHOD + " id=\"" + idNode + "\"" + ">"); 
 				
 		String name = getNameMethod(node);
 		String className = getCalledFromClass(node);
@@ -113,6 +115,8 @@ public class TraceInspectorWriter {
 		//processChanges(getChanges(node));
 		
 		write(startTag(XStreamWriter.TAG_CALLED_METHODS));
+		idNode++;
+		
 		
 		NodeList childs = getCalledMethods(node);
 		
@@ -189,7 +193,7 @@ public class TraceInspectorWriter {
 	private String getCalledFromClass(Node node) throws XPathExpressionException {
 		
 		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/calledFromClass";  
-		
+			
 		XPathExpression xPathExpression = xPath.compile(expression);
 		String className = (String) xPathExpression.evaluate(node,XPathConstants.STRING);
 		

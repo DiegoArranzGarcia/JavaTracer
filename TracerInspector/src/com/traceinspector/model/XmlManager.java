@@ -85,33 +85,35 @@ public class XmlManager {
 		return node;
 	}
 
-	public MethodNode getMethodInfoFromNode(Node node) {
+	public MethodNode getMethodInfoFromNode(Node infoNode){
 		MethodNode info = null;
 		try{
-			String expression = "./method-entry-event";  
-		    XPath xPath = XPathFactory.newInstance().newXPath();
-		    XPathExpression xPathExpression = xPath.compile(expression);
-		    Node infoNode = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
-		    info= createMethodNode(infoNode);
+			String name = getName(infoNode);
+			long id = getIdFromNode(infoNode);
+			info = new MethodNode(name,id);
+			info.setVariables(loadArgumets(infoNode));
 		} catch (Exception e){
 			e.printStackTrace();
 		}
 		return info;
 	}
+	
+	private long getIdFromNode(Node infoNode) throws Exception {
+		String id = infoNode.getAttributes().getNamedItem("id").getNodeValue();
+		return Long.parseLong(id);
+	}
 
-	private MethodNode createMethodNode(Node infoNode) throws XPathExpressionException {
-		String expression = "./methodName";  
+	private String getName(Node infoNode) throws Exception{
+		String expression = "./info/name";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    String methodName = (String) xPathExpression.evaluate(infoNode,XPathConstants.STRING);
-		MethodNode info = new MethodNode(methodName);
-		info.setVariables(loadArgumets(infoNode));
-		return info;
+	    return methodName;
 	}
 
 	private List<VariableInfo> loadArgumets(Node infoNode) throws XPathExpressionException{
 		List<VariableInfo> arguments = new ArrayList<>();
-		String expression = "./arguments/*";  
+		String expression = "./info/arguments/*";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    NodeList argumentsXml = (NodeList) xPathExpression.evaluate(infoNode,XPathConstants.NODESET);
@@ -156,4 +158,22 @@ public class XmlManager {
 		nodeString = nodeString.replaceAll("\r\n\\s*", "");
 		return nodeString;
 	}
+
+	public Node getNode(long id) {
+		
+		Node node = null;
+		
+		try{
+			String expression = ".//method-call[@id=" + id + "]";  
+		    XPath xPath = XPathFactory.newInstance().newXPath();
+		    XPathExpression xPathExpression = xPath.compile(expression);
+		    node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+		    		    
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return node;
+	}
+
 }

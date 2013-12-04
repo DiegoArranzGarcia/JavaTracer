@@ -38,7 +38,7 @@ public class MergeSort{
         return L;
     }
  
-    private int[] delte(int [] l){
+    private int[] delete(int [] l){
         int [] L = new int[l.length-1];
         for(int i = 1; i < l.length; i++){
             L[i-1] = l[i];
@@ -52,21 +52,21 @@ public class MergeSort{
          while ((L1.length != 0) && (L2.length != 0)) {
              if (L1[0] < L2[0]){
                  L[i++] = L1[0];
-                 L1 = delte(L1);
+                 L1 = delete(L1);
                  if (L1.length == 0){
                      while (L2.length != 0) {
                          L[i++] = L2[0];
-                         L2 = delte(L2);
+                         L2 = delete(L2);
                      }
                  }
              }
              else{
                  L[i++] = L2[0];
-                 L2 = delte(L2);
+                 L2 = delete(L2);
                  if (L2.length == 0) {
                     while (L1.length != 0) {
                          L[i++] = L1[0];
-                         L1 = delte(L1);
+                         L1 = delete(L1);
                     }
                  }
              }
