@@ -30,11 +30,13 @@
 package com.javatracer.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
@@ -42,7 +44,7 @@ import org.abego.treelayout.TreeLayout;
 import com.javatracer.view.tree.TextInBox;
 
 @SuppressWarnings("serial")
-public class TreePanel extends JComponent {
+public class TreePanel extends JPanel {
 	
 	private TreeLayout<TextInBox> treeLayout;
 
@@ -60,19 +62,21 @@ public class TreePanel extends JComponent {
 	
 	public void setTree(TreeLayout<TextInBox> treeLayout){
 		this.treeLayout = treeLayout;
+		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 	}
 
 	public TreePanel(TreeLayout<TextInBox> treeLayout) {
+		
 		this.treeLayout = treeLayout;
+		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
+		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
+		
 	}
 
-	// -------------------------------------------------------------------
-	// painting
-
-	private final static int ARC_SIZE = 10;
-	private final static Color BOX_COLOR = Color.orange;
+	private final static int ARC_SIZE = 20;
+	private final static Color BOX_COLOR = new Color(0x008EAB);
 	private final static Color BORDER_COLOR = Color.darkGray;
-	private final static Color TEXT_COLOR = Color.black;
+	private final static Color TEXT_COLOR = Color.white;
 
 	private void paintEdges(Graphics g, TextInBox parent) {
 		if (!getTree().isLeaf(parent)) {
@@ -90,7 +94,7 @@ public class TreePanel extends JComponent {
 	}
 
 	private void paintBox(Graphics g, TextInBox textInBox) {
-		// draw the box in the background
+		
 		g.setColor(BOX_COLOR);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
@@ -99,12 +103,11 @@ public class TreePanel extends JComponent {
 		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 
-		// draw the text on top of the box (possibly multiple lines)
 		g.setColor(TEXT_COLOR);
 		String[] lines = textInBox.text.split("\n");
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
-		int y = (int) box.y + m.getAscent() + m.getLeading() + 1;
+		int y = (int) box.y + textInBox.height/2 + m.getAscent()/2;// - m.getLeading() + 1;
 		for (int i = 0; i < lines.length; i++) {
 			g.drawString(lines[i], x, y);
 			y += m.getHeight();
@@ -114,14 +117,12 @@ public class TreePanel extends JComponent {
 	public void paint(Graphics g) {
 		super.paint(g);	
 		
-		if (treeLayout!=null){
-			
+		if (treeLayout!=null){			
 			paintEdges(g, getTree().getRoot());
 	
 			for (TextInBox textInBox : treeLayout.getNodeBounds().keySet()) {
 				paintBox(g, textInBox);
 			}
-			
 		}
 	}
 }

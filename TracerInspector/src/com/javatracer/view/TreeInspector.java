@@ -1,7 +1,5 @@
 package com.javatracer.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D.Double;
@@ -11,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
@@ -25,6 +24,10 @@ import com.traceinspector.datamodel.TreeNode;
 
 @SuppressWarnings("serial")
 public class TreeInspector extends JFrame implements MouseListener{
+	
+	private static final int DEFAULT_WIDTH_BOX = 80;
+	private static final int DEFAULT_HEIGHT_BOX = 60;
+	private static final int WIDTH_BY_LETTER = 8;
 
 	TreeController controller;
 	
@@ -39,6 +42,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 	public TreeInspector(TreeNode root,TreeController controller) {
 
 		this.controller = controller;
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		
 		tree = createTree(root);
 	    
@@ -48,7 +52,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 		configuration = new DefaultConfiguration<TextInBox>(gapBetweenLevels, gapBetweenNodes);
 
 		// create the NodeExtentProvider for TextInBox nodes
-		nodeExtentProvider = new TextInBoxNodeExtentProvider();
+		nodeExtentProvider = new TextInBoxNodeExtentProvider();	
 		
 		//create the layout
 		treeLayout = new TreeLayout<TextInBox>(tree,nodeExtentProvider,configuration);
@@ -57,12 +61,12 @@ public class TreeInspector extends JFrame implements MouseListener{
 		panel = new TreePanel(treeLayout);
 		panel.addMouseListener(this);
 		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(screenSize);
-		
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		
-		this.add(panel);
+		JScrollPane scroller = new JScrollPane(panel);
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+	    setContentPane(scroller);
+	    pack();
 		
 	}
  
@@ -71,8 +75,9 @@ public class TreeInspector extends JFrame implements MouseListener{
 		int width = 0;
 		String name = giveMeTextInBox(rootNode);
 		long id = rootNode.getNode().getId();
-		if (name.length()>2) width = 5*name.length();
-	    TextInBoxExt root = new TextInBoxExt(id,name, 40 + width, 30);
+		if (name.length()>2) width = WIDTH_BY_LETTER*name.length();
+		
+	    TextInBoxExt root = new TextInBoxExt(id,name, DEFAULT_WIDTH_BOX + width,DEFAULT_HEIGHT_BOX);
 	    DefaultTreeLayout<TextInBox> treeLayout = new DefaultTreeLayout<TextInBox>(root);
 	    
 	    paintTree(rootNode,root,treeLayout); 
@@ -92,9 +97,9 @@ public class TreeInspector extends JFrame implements MouseListener{
 			 int width = 0;
 			 long id = child.getNode().getId();
 			 String name = giveMeTextInBox(child);
-			 if (name.length()>2) width = 5*name.length();
+			 if (name.length()>2) width = WIDTH_BY_LETTER*name.length();
 			 
-			 TextInBoxExt n1 = new TextInBoxExt(id,name,30+width,30);
+			 TextInBoxExt n1 = new TextInBoxExt(id,name,DEFAULT_WIDTH_BOX+width,DEFAULT_HEIGHT_BOX);
 			 
 			 treeLayout.addChild(tree,n1);
 			 
@@ -194,8 +199,8 @@ public class TreeInspector extends JFrame implements MouseListener{
 			 int width = 0;
 			 long id = child.getNode().getId();
 			 String name = giveMeTextInBox(child);
-			 if (name.length()>2) width = 5*name.length();
-			 TextInBoxExt n1 = new TextInBoxExt(id,name,30+width,30);
+			 if (name.length()>2) width = WIDTH_BY_LETTER*name.length();
+			 TextInBoxExt n1 = new TextInBoxExt(id,name,DEFAULT_WIDTH_BOX+width,DEFAULT_HEIGHT_BOX);
 			 tree.addChild(textInBoxExt, n1);
 		 }
 		
