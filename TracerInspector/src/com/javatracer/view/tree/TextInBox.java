@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javatracer.view;
+package com.javatracer.view.tree;
 
 /**
  * Represents a text to be displayed in a box of a given size.
@@ -39,13 +39,10 @@ public class TextInBox {
 	public final String text;
 	public final int height;
 	public final int width;
-	
-	private boolean expanded;
 
 	public TextInBox(String text, int width, int height) {
 		this.text = text;
 		this.width = width;
 		this.height = height;
-		this.expanded = true;
 	}
 }

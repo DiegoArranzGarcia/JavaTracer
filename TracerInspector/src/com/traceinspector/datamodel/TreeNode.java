@@ -48,7 +48,7 @@ public class TreeNode{
 		this.calledMethods = calledMethods;
 	}
 	
-	public TreeNode searchNode(TreeNode tree,long id){
+	public TreeNode getNode(TreeNode tree,long id){
 		TreeNode node = null;
 		if (tree.node.getId()==id)
 			node = tree;
@@ -59,13 +59,12 @@ public class TreeNode{
 			List<TreeNode> childs = tree.calledMethods;
 			
 			while (!found && i<childs.size()){
-				node = searchNode(childs.get(i), id);
+				node = getNode(childs.get(i), id);
 				found = (node != null);
 				i++;
 			}
 			
 			if (!found) node = null;
-						
 		}
 		
 		return node;
@@ -73,6 +72,14 @@ public class TreeNode{
 
 	public void addChilds(List<TreeNode> childs) {
 		this.calledMethods.addAll(childs);		
+	}
+
+	public boolean hasChilds() {
+		return (calledMethods!=null && calledMethods.size()>0);
+	}
+
+	public void clearCalledMethods() {
+		calledMethods.clear();		
 	}
 	
 }

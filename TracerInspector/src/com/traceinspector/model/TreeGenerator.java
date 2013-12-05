@@ -59,14 +59,11 @@ public class TreeGenerator {
 		
 	}
 
-	public TreeNode expandTreeWithNode(TreeNode tree, long id) {
-		TreeNode nodeToExpand = tree.searchNode(tree,id);
-		if (nodeToExpand != null){
-			List<TreeNode> childs = loadChildsOfNode(id);
-			nodeToExpand.addChilds(childs);
-		}
+	public void expandNode(TreeNode nodeToExpand, long id) {
+
+		List<TreeNode> childs = loadChildsOfNode(id);
+		nodeToExpand.addChilds(childs);
 		
-		return nodeToExpand;
 	}
 
 	private List<TreeNode> loadChildsOfNode(long id) {
@@ -81,6 +78,10 @@ public class TreeGenerator {
 		}
 		
 		return childs;
+	}
+
+	public void foldNode(TreeNode node) {
+		node.clearCalledMethods();		
 	}
 	
 }

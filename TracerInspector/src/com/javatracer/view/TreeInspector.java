@@ -1,6 +1,7 @@
 package com.javatracer.view;
 
-import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D.Double;
@@ -9,29 +10,31 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
-import org.abego.treelayout.util.DefaultTreeForTreeLayout;
 
 import com.javatracer.controller.TreeController;
 import com.javatracer.model.info.VariableInfo;
+import com.javatracer.view.tree.DefaultTreeLayout;
+import com.javatracer.view.tree.TextInBox;
+import com.javatracer.view.tree.TextInBoxExt;
+import com.javatracer.view.tree.TextInBoxNodeExtentProvider;
 import com.traceinspector.datamodel.TreeNode;
 
-public class TreeInspector implements MouseListener{
+@SuppressWarnings("serial")
+public class TreeInspector extends JFrame implements MouseListener{
 
 	TreeController controller;
 	
 	TreeLayout<TextInBox> treeLayout;
 	
-	DefaultTreeForTreeLayout<TextInBox> tree;
+	DefaultTreeLayout<TextInBox> tree;
 	TextInBoxNodeExtentProvider nodeExtentProvider;
 	DefaultConfiguration<TextInBox> configuration;
 	
-	TextInBoxTreePane panel;
+	TreePanel panel;
 	
 	public TreeInspector(TreeNode root,TreeController controller) {
 
@@ -51,21 +54,26 @@ public class TreeInspector implements MouseListener{
 		treeLayout = new TreeLayout<TextInBox>(tree,nodeExtentProvider,configuration);
 
 		// Create a panel that draws the nodes and edges and show the panel
-		panel = new TextInBoxTreePane(treeLayout);
+		panel = new TreePanel(treeLayout);
 		panel.addMouseListener(this);
 		
-		showInDialog(panel);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screenSize);
+		
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		
+		this.add(panel);
 		
 	}
  
-	 private DefaultTreeForTreeLayout<TextInBox> createTree(TreeNode rootNode){
+	 private DefaultTreeLayout<TextInBox> createTree(TreeNode rootNode){
 		 
 		int width = 0;
 		String name = giveMeTextInBox(rootNode);
 		long id = rootNode.getNode().getId();
 		if (name.length()>2) width = 5*name.length();
 	    TextInBoxExt root = new TextInBoxExt(id,name, 40 + width, 30);
-	    DefaultTreeForTreeLayout<TextInBox> treeLayout = new DefaultTreeForTreeLayout<TextInBox>(root);
+	    DefaultTreeLayout<TextInBox> treeLayout = new DefaultTreeLayout<TextInBox>(root);
 	    
 	    paintTree(rootNode,root,treeLayout); 
 	    
@@ -73,37 +81,29 @@ public class TreeInspector implements MouseListener{
 	    
 	 }
  
-	 private void paintTree(TreeNode treeNode,TextInBoxExt tree, DefaultTreeForTreeLayout<TextInBox> treeLayout ){
+	 private void paintTree(TreeNode treeNode,TextInBoxExt tree, DefaultTreeLayout<TextInBox> treeLayout ){
 		 List<TreeNode> listcalledMethods= treeNode.getCalledMethods();
 		 Iterator<TreeNode> iterator=listcalledMethods.iterator();
 		 TreeNode child;  
 	   
 		 while(iterator.hasNext()){
+			 
 			 child=iterator.next();
 			 int width = 0;
 			 long id = child.getNode().getId();
 			 String name = giveMeTextInBox(child);
 			 if (name.length()>2) width = 5*name.length();
+			 
 			 TextInBoxExt n1 = new TextInBoxExt(id,name,30+width,30);
-			 treeLayout.addChild(tree, n1);
+			 
+			 treeLayout.addChild(tree,n1);
+			 
 			 if(child.getCalledMethods().size()!=0){
 				 paintTree(child,n1,treeLayout);
 			 }
+			 
 		 }
 	 } 
-
-	 private void showInDialog(JComponent panel) {
-		  JDialog dialog = new JDialog();
-		  dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); 
-		  Container contentPane = dialog.getContentPane();
-		  ((JComponent) contentPane).setBorder(BorderFactory.createEmptyBorder(
-		    10, 10, 10, 10));
-		  contentPane.add(panel);
-		  dialog.pack();
-		  dialog.setLocationRelativeTo(null);
-		  dialog.setVisible(true);
-
-	}
 
 	 private String giveMeTextInBox(TreeNode node) {
 			
@@ -141,7 +141,8 @@ public class TreeInspector implements MouseListener{
 			TextInBoxExt textInBoxExt = clickedOnTree(e.getX(),e.getY());
 			
 			if (textInBoxExt!=null){
-				controller.expandTree(textInBoxExt);
+							
+				controller.clickedOnNode(textInBoxExt);
 			}
 		
 		}
@@ -170,7 +171,7 @@ public class TreeInspector implements MouseListener{
 
 	public void expandTreeNode(TextInBoxExt textInBoxExt,TreeNode node) {
 				   
-		updateTree(textInBoxExt,node);
+		updateNode(textInBoxExt,node);
 		repaintTree();
 		 
 	}
@@ -184,9 +185,9 @@ public class TreeInspector implements MouseListener{
 		
 	}
 
-	private void updateTree(TextInBoxExt textInBoxExt, TreeNode node) {
+	private void updateNode(TextInBoxExt textInBoxExt, TreeNode node) {
 		
-		Iterator<TreeNode> iterator = node.getCalledMethods().iterator();
+		Iterator<TreeNode> iterator = node.getCalledMethods().iterator();	
 		
 		 while(iterator.hasNext()){
 			 TreeNode child=iterator.next();
@@ -198,6 +199,11 @@ public class TreeInspector implements MouseListener{
 			 tree.addChild(textInBoxExt, n1);
 		 }
 		
+	}
+
+	public void foldNode(TextInBoxExt textInBoxExt) {
+		tree.removeChilds(textInBoxExt);
+		repaintTree();
 	}
 
 	

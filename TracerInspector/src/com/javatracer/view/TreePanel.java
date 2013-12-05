@@ -30,7 +30,6 @@
 package com.javatracer.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
@@ -40,8 +39,10 @@ import javax.swing.JComponent;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
 
+import com.javatracer.view.tree.TextInBox;
+
 @SuppressWarnings("serial")
-public class TextInBoxTreePane extends JComponent {
+public class TreePanel extends JComponent {
 	
 	private TreeLayout<TextInBox> treeLayout;
 
@@ -59,16 +60,10 @@ public class TextInBoxTreePane extends JComponent {
 	
 	public void setTree(TreeLayout<TextInBox> treeLayout){
 		this.treeLayout = treeLayout;
-		
-		Dimension size = treeLayout.getBounds().getBounds().getSize();
-		setSize(size.width, size.height);
 	}
 
-	public TextInBoxTreePane(TreeLayout<TextInBox> treeLayout) {
+	public TreePanel(TreeLayout<TextInBox> treeLayout) {
 		this.treeLayout = treeLayout;
-
-		Dimension size = treeLayout.getBounds().getBounds().getSize();
-		setPreferredSize(size);
 	}
 
 	// -------------------------------------------------------------------
