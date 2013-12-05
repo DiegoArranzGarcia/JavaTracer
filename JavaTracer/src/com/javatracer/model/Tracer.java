@@ -9,7 +9,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import com.javatracer.controller.TracerController;
 import com.javatracer.model.configuration.Configuration;

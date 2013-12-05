@@ -8,6 +8,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
@@ -82,9 +83,6 @@ public class WindowPath extends JFrame {
 		helpNameClass.setIcon(new ImageIcon(dirImage));
 		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
 			 
-	
-		
-		
 		cancel =new JButton("Cancel");
 		cancel.setBounds(new Rectangle(100,40));
 		cancel.setLocation(450, 190); 
@@ -129,8 +127,6 @@ public class WindowPath extends JFrame {
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
 						
-						
-					
 					FinishedLoading();
 			
 				} catch (Exception e1) {
@@ -158,21 +154,7 @@ public class WindowPath extends JFrame {
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
  					String sf=chooser.getSelectedFile().toString();
 					path.setText(sf);
-					
-					File dir = new File(sf);
-					String[] files = dir.list();
-					int i=0;
-					nameClass.removeAllItems();
-					while(i<files.length)
-					{
-						
-						nameClass.addItem(files[i]);	
-						i++;
-					}
-					
-					
-					
-					 		
+					controller.loadClassFromPath(sf);
 				
 				} else chooser.cancelSelection();
 				
@@ -227,12 +209,20 @@ public class WindowPath extends JFrame {
 		loading.addScreen();
 		setContentPane(loading.getContentPane());
 		setSize(400, 300);
-		JOptionPane.showMessageDialog(new JFrame(),"Loading ...");
 	}
 
 	public void FinishedLoading(){
 		setContentPane(contentPane);
 		setSize(850, 300);
   	}
+
+
+	public void loadClasses(List<String> classes) {
+		
+		for (int i=0;i<classes.size();i++){
+			nameClass.addItem(classes.get(i));
+		}
+		
+	}
 
 }
