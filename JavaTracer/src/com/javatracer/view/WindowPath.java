@@ -74,13 +74,15 @@ public class WindowPath extends JFrame {
 		helpPath.setLocation(210, 62); 
 		String curDir = System.getProperty("user.dir");
 		String dirImage=curDir+"\\src\\resource\\image6.jpe";
-		helpPath.setIcon(new ImageIcon(dirImage));
+		//helpPath.setIcon(new ImageIcon(dirImage));
+		helpPath.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
 		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
 		
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(210, 120); 
-		helpNameClass.setIcon(new ImageIcon(dirImage));
+		helpNameClass.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
+		//helpNameClass.setIcon(new ImageIcon(dirImage));
 		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
 			 
 		cancel =new JButton("Cancel");

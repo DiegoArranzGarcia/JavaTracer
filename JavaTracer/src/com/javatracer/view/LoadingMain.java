@@ -24,7 +24,8 @@ public class LoadingMain extends JWindow {
     
 	String curDir = System.getProperty("user.dir");
 	String dirImage=curDir+"\\src\\resource\\LoadingSmall.gif";
-	imageIcon = new ImageIcon(dirImage);
+	imageIcon =new ImageIcon(getClass().getResource("LoadingSmall.gif"));
+	//imageIcon = new ImageIcon(dirImage);
     setLocationRelativeTo(null);
     
    

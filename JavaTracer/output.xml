@@ -1,3 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <trace>
+<method-call>
+<method-entry-event>
+  <methodName>main</methodName>
+  <calledFromClass>Principal</calledFromClass>
+  <arguments>
+    <variable>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis/>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>&lt;init&gt;</methodName>
+  <calledFromClass>HelloW</calledFromClass>
+  <arguments>
+    <variable>
+      <name>y</name>
+      <value class="int">7</value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>x</name>
+      <value class="int">0</value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>HelloW</className>
+  <argumentsThis>
+    <variable>
+      <name>x</name>
+      <value class="int">7</value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>y</name>
+      <value class="int">7</value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>cambiaValor</methodName>
+  <calledFromClass>HelloW</calledFromClass>
+  <arguments>
+    <variable>
+      <name>i</name>
+      <value class="int">0</value>
+    </variable>
+    <variable>
+      <name>j</name>
+      <value class="int">5</value>
+    </variable>
+  </arguments>
+  <argumentsThis/>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>cambiaValor</methodName>
+  <className>HelloW</className>
+  <argumentsThis/>
+  <arguments>
+    <variable>
+      <name>i</name>
+      <value class="int">5</value>
+    </variable>
+    <variable>
+      <name>j</name>
+      <value class="int">5</value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
 </trace>
