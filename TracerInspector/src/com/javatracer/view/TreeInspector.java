@@ -64,6 +64,8 @@ public class TreeInspector extends JFrame implements MouseListener{
 		JScrollPane scroller = new JScrollPane(panel);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 	    setContentPane(scroller);
 	    pack();
