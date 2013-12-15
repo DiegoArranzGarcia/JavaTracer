@@ -26,7 +26,7 @@ public class WindowPath extends JFrame {
 
 	private JButton tracer,examine,cancel,helpPath,helpNameClass;
 	private TextField path;
-	private JComboBox nameClass;
+	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass;
 	private TracerController controller;
@@ -177,15 +177,6 @@ public class WindowPath extends JFrame {
 		this.repaint();
 	}
 	
-	private String[] processPath(String path) {
-
-		if (path.contains(".class")) path = path.replaceAll(".class", "");
-		System.out.println(path);
-		String filePath= path.substring(0,path.indexOf("bin")+3);
-		String nameClass = path.substring(filePath.indexOf("bin")+4).replaceAll("\\\\", ".");
-		String[] args={filePath,nameClass};
-		return args;
-	}
 
 	public void showErrorMain() {
 		JOptionPane.showMessageDialog(new JFrame(),"This class must contain the method: public" 
@@ -220,6 +211,8 @@ public class WindowPath extends JFrame {
 
 
 	public void loadClasses(List<String> classes) {
+	
+		nameClass.removeAllItems();
 		
 		for (int i=0;i<classes.size();i++){
 			nameClass.addItem(classes.get(i));
