@@ -3,7 +3,7 @@
 <method-call>
 <method-entry-event>
   <methodName>main</methodName>
-  <calledFromClass>Principal</calledFromClass>
+  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
   <arguments>
     <variable>
       <name>args</name>
@@ -19,51 +19,5466 @@
 <method-call>
 <method-entry-event>
   <methodName>&lt;init&gt;</methodName>
-  <calledFromClass>HelloW</calledFromClass>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments/>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="null"/>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>randomizeArray</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
   <arguments>
     <variable>
-      <name>y</name>
-      <value class="int">7</value>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+        </values>
+      </value>
     </variable>
   </arguments>
   <argumentsThis>
     <variable>
-      <name>x</name>
-      <value class="int">0</value>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+          <int>0</int>
+        </values>
+      </value>
     </variable>
   </argumentsThis>
 </method-entry-event>
 <called-methods>
 </called-methods>
 <method-exit-event>
-  <methodName>&lt;init&gt;</methodName>
-  <className>HelloW</className>
+  <methodName>randomizeArray</methodName>
+  <className>com.prueba.MergeSort</className>
   <argumentsThis>
     <variable>
-      <name>x</name>
-      <value class="int">7</value>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
     </variable>
   </argumentsThis>
   <arguments>
     <variable>
-      <name>y</name>
-      <value class="int">7</value>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>com.prueba.MergeSort</className>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments/>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+        </values>
+      </value>
     </variable>
   </arguments>
 </method-exit-event>
 </method-call>
 <method-call>
 <method-entry-event>
-  <methodName>cambiaValor</methodName>
-  <calledFromClass>HelloW</calledFromClass>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
   <arguments>
     <variable>
-      <name>i</name>
-      <value class="int">0</value>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>5860</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+        </values>
+      </value>
     </variable>
     <variable>
-      <name>j</name>
-      <value class="int">5</value>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+      <int>5860</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+      <int>5860</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6495</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>5860</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6495</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6495</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>2553</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>2553</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>2553</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>5860</int>
+      <int>6495</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6495</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>2553</int>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6495</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>2553</int>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6495</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6003</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>6003</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>6003</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6133</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>mergesort</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>3947</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>3947</int>
+      <int>6133</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>3947</int>
+      <int>6133</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6003</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6133</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>3947</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>3947</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>merge</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>3947</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6495</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>2553</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6003</int>
+      <int>6133</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>3947</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>5860</int>
+      <int>6495</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6495</int>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>6133</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6003</int>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6133</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>8136</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>6495</int>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>8136</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>delete</methodName>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values/>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>l</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>2553</int>
+      <int>3947</int>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>6495</int>
+      <int>8136</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L1</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+    <variable>
+      <name>L2</name>
+      <value class="array">
+        <className>int</className>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>2553</int>
+      <int>3947</int>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>6495</int>
+      <int>8136</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments>
+    <variable>
+      <name>L</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>2553</int>
+          <int>3947</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>9984</int>
+        </values>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <returnObject class="array">
+    <className>int</className>
+    <values>
+      <int>1210</int>
+      <int>2553</int>
+      <int>3947</int>
+      <int>4624</int>
+      <int>5860</int>
+      <int>6003</int>
+      <int>6133</int>
+      <int>6495</int>
+      <int>8136</int>
+      <int>9984</int>
+    </values>
+  </returnObject>
+  <argumentsThis>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>2553</int>
+          <int>1210</int>
+          <int>9984</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>3947</int>
+        </values>
+      </value>
+    </variable>
+  </argumentsThis>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>printArray</methodName>
+  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
+  <arguments>
+    <variable>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>2553</int>
+          <int>3947</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>9984</int>
+        </values>
+      </value>
     </variable>
   </arguments>
   <argumentsThis/>
@@ -71,17 +5486,43 @@
 <called-methods>
 </called-methods>
 <method-exit-event>
-  <methodName>cambiaValor</methodName>
-  <className>HelloW</className>
+  <methodName>printArray</methodName>
+  <className>com.prueba.MergeSortLauncher</className>
   <argumentsThis/>
   <arguments>
     <variable>
-      <name>i</name>
-      <value class="int">5</value>
+      <name>array</name>
+      <value class="array">
+        <className>int</className>
+        <values>
+          <int>1210</int>
+          <int>2553</int>
+          <int>3947</int>
+          <int>4624</int>
+          <int>5860</int>
+          <int>6003</int>
+          <int>6133</int>
+          <int>6495</int>
+          <int>8136</int>
+          <int>9984</int>
+        </values>
+      </value>
     </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>com.prueba.MergeSortLauncher</className>
+  <argumentsThis/>
+  <arguments>
     <variable>
-      <name>j</name>
-      <value class="int">5</value>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <values/>
+      </value>
     </variable>
   </arguments>
 </method-exit-event>
