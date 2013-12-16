@@ -12,22 +12,40 @@ import java.util.Properties;
 
 public class Configuration {
  
-    Properties properties = null;
- 
-    /** Configuration file name */
-    public final static String CONFIG_FILE_NAME = "configuration.properties";
-    public final static String DEFAULT_NUM_LEVELS_DEPTH = "depth";
-    public final static String DEFAULT_NUM_NODES = "nodes";
-    public FileInputStream fileInput;
-    public  FileWriter fileWriter;
+    private final static String CONFIG_FILE_NAME = "configuration.properties";
+    private final static String DEFAULT_NUM_LEVELS_DEPTH = "depth";
+    private final static String DEFAULT_NUM_NODES = "nodes";
+    private FileInputStream fileInput;
+    private  FileWriter fileWriter;
+    private Properties properties;
     
     public Configuration() {
+    	fileInput= null;
+    	fileWriter =null;
+    	/**
+    	 * Create a file configuration
+    	 */
         this.properties = new Properties();
         try {
+        	/**
+        	 * The file is created on disk
+        	 */
         	fileWriter = new FileWriter(CONFIG_FILE_NAME);
+        	/**
+        	 * The file is uploaded to a File to use the Load method
+        	 */
         	fileInput = new FileInputStream(CONFIG_FILE_NAME);
+        	/**
+        	 * With the method load, we can load the object properties
+        	 */
             properties.load(fileInput);
+            /**
+             * Now we add information to the properties through a Hashmap
+             */
             properties.putAll(getConfig());
+            /**
+             * Save the data on the properties
+             */
             properties.store(new FileOutputStream("configuration.properties"),"Config");
             fileWriter.close();
         } catch (IOException ex) {

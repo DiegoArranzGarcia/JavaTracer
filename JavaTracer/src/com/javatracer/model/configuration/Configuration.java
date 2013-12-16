@@ -11,23 +11,41 @@ import java.util.Properties;
 public class Configuration {
  
    
-	public Properties properties;
-    /** Configuration file name */
-    public final static String CONFIG_FILE_NAME = "configuration.properties";
-    public final static String EXCLUDES = "excludes";
-    public FileInputStream fileInput;
-    public  FileWriter fileWriter;
+	private Properties properties;
+	private final static String CONFIG_FILE_NAME = "configuration.properties";
+	private final static String EXCLUDES = "excludes";
+	private FileInputStream fileInput;
+	private  FileWriter fileWriter;
  
     public Configuration() {
     	fileInput= null;
     	fileWriter =null;
+    	/**
+    	 * Create a file configuration
+    	 */
 
         this.properties = new Properties();
         try {
-        	fileWriter = new FileWriter("configuration.properties");
+        	/**
+        	 * The file is created on disk
+        	 */
+        	fileWriter = new FileWriter(CONFIG_FILE_NAME);
+        	/**
+        	 * The file is uploaded to a File to use the Load method
+        	 */
         	fileInput = new FileInputStream(CONFIG_FILE_NAME);
+        	fileInput = new FileInputStream(CONFIG_FILE_NAME);
+        	/**
+        	 * With the method load, we can load the object properties
+        	 */
             properties.load(fileInput);
+            /**
+             * Now we add information to the properties through a Hashmap
+             */
             properties.putAll(getConfig());
+            /**
+             * Save the data on the properties
+             */
             properties.store(new FileOutputStream("configuration.properties"),"Config");
             fileWriter.close();
         } catch (IOException ex) {
