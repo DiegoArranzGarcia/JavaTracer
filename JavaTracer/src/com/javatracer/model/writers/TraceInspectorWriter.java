@@ -24,7 +24,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.javatracer.model.ChangeDetector;
 import com.javatracer.model.data.ArrayInfo;
+import com.javatracer.model.data.ChangeInfo;
 import com.javatracer.model.data.MethodInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
@@ -33,10 +35,11 @@ import com.thoughtworks.xstream.XStream;
 
 public class TraceInspectorWriter {
 	
-	private static boolean DELETE_TMP_TRACE = false;
+	//private static boolean DELETE_TMP_TRACE = false;
 	private static String NAME_FILE = "trace.xml";
 	
 	private static String TAG_CHANGES = "changes";
+	private static String TAG_CHANGE = "change";
 	private static String TAG_METHOD_INFO = "info";
 	
 	private XStream xStream;
@@ -99,24 +102,34 @@ public class TraceInspectorWriter {
 	}
 	
 	private void generateXml(Node node) throws Exception{
-		
-		//Write <method-call>
-		write("<" + XStreamWriter.TAG_METHOD + " id=\"" + idNode + "\"" + ">"); 
 				
-		String name = getNameMethod(node);
-		String className = getCalledFromClass(node);
-		List<VariableInfo> arguments = getArguments(node);
-		List<VariableInfo> thisObject = getThis(node);
-		
-		MethodInfo info = new MethodInfo(name,className,arguments,thisObject);
-		xStream.toXML(info,bufferedWriter);
-		write("");
-						
-		//processChanges(getChanges(node));
-		
-		write(startTag(XStreamWriter.TAG_CALLED_METHODS));
+		write("<" + XStreamWriter.TAG_METHOD + " id=\"" + idNode + "\"" + ">"); 
 		idNode++;
 		
+		writeNodeInfo(node);	
+		writeChanges(node);
+		writeCalledMethods(node);
+		
+		write(endTag(XStreamWriter.TAG_METHOD));
+				
+	}
+
+	private void writeNodeInfo(Node node) throws Exception {
+						
+		String name = getNameMethod(node);
+		String className = getCalledFromClass(node);
+		List<VariableInfo> arguments = getEntryArguments(node);
+		List<VariableInfo> thisObject = getThis(node);
+				
+		MethodInfo info = new MethodInfo(name,className,arguments,thisObject);
+		writeXStream(info);
+		write("");
+		
+	}
+
+	private void writeCalledMethods(Node node) throws Exception{
+		
+		write(startTag(XStreamWriter.TAG_CALLED_METHODS));	
 		
 		NodeList childs = getCalledMethods(node);
 		
@@ -126,8 +139,25 @@ public class TraceInspectorWriter {
 		
 		write(endTag(XStreamWriter.TAG_CALLED_METHODS));
 		
-		write(endTag(XStreamWriter.TAG_METHOD));
+	}
+
+	private void writeChanges(Node node) throws Exception{
 		
+		write(startTag(TAG_CHANGES));
+		
+		List<ChangeInfo> changes = getChangesArguments(node);
+		changes.addAll(getChangesThis(node));
+		
+		for (int i=0;i<changes.size();i++){
+			writeXStream(changes.get(i));
+		}
+		
+		write(endTag(TAG_CHANGES));
+		
+	}
+
+	private List<ChangeInfo> getChangesThis(Node node) {
+		return new ArrayList<ChangeInfo>();
 	}
 
 	private NodeList getCalledMethods(Node node) throws Exception {
@@ -135,24 +165,39 @@ public class TraceInspectorWriter {
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
 		NodeList calledMethods = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		
 		return calledMethods;
 	}
 
-	private void processChanges(List<Object> changes) throws IOException {
+	private List<ChangeInfo> getChangesArguments(Node node) throws Exception{
 		
-		if (changes != null && changes.size()!=0){
-			
-			write(startTag(TAG_CHANGES));
-			
-			
-			
-			write(endTag(TAG_CHANGES));
-			
+		List<VariableInfo> entryArguments = getEntryArguments(node);
+		List<VariableInfo> exitArguments = getExitArguments(node);
+		ChangeDetector detector = new ChangeDetector();
+		List<ChangeInfo> changes = new ArrayList<>();
+		
+		for (int i=0;i<exitArguments.size();i++){
+			changes.addAll(detector.getChangesBetween(entryArguments.get(i), exitArguments.get(i)));
 		}
+		
+		return changes;
 	}
-
-	private List<Object> getChanges(Node node) {
-		return null;
+	
+	private List<VariableInfo> getExitArguments(Node node) throws Exception {
+		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/arguments/*";  
+		
+		XPathExpression xPathExpression = xPath.compile(expression);
+		NodeList arguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		
+		List<VariableInfo> argumentList = new ArrayList<>();
+		
+		for (int i=0;i<arguments.getLength();i++){
+			String nodeString = nodeToString(arguments.item(i));
+			VariableInfo variable = (VariableInfo) xStream.fromXML(nodeString);
+			argumentList.add(variable);
+		}
+		
+		return argumentList;
 	}
 
 	private List<VariableInfo> getThis(Node node) throws Exception {
@@ -172,8 +217,7 @@ public class TraceInspectorWriter {
 		return thisArgumentList;		
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<VariableInfo> getArguments(Node node) throws Exception {
+	private List<VariableInfo> getEntryArguments(Node node) throws Exception {
 		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/arguments/*";  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
@@ -212,6 +256,7 @@ public class TraceInspectorWriter {
 
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_INFO, MethodInfo.class);
+		xStream.alias(TAG_CHANGE, ChangeInfo.class);
 		
 		xStream.alias(XStreamWriter.TAG_ARRAY,ArrayInfo.class);
 		xStream.alias(XStreamWriter.TAG_OBJECT,ObjectInfo.class);
@@ -248,4 +293,8 @@ public class TraceInspectorWriter {
 		return nodeString;
 	}
 
+	private void writeXStream(Object object){
+		xStream.toXML(object, bufferedWriter);
+	}
+	
 }

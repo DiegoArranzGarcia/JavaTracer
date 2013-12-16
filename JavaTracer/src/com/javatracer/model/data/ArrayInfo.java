@@ -11,5 +11,22 @@ public class ArrayInfo {
 		this.className = className;
 		this.values = values;
 	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public List<Object> getValues() {
+		return values;
+	}
+
+	public void setValues(List<Object> values) {
+		this.values = values;
+	}
+
 	
 }

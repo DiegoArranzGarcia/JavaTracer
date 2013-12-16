@@ -73,7 +73,7 @@ public class TracerUtilities {
 				Field f = fields.get(i);
 				Value v = value.getValue(f);
 				Object object = null;
-				if (v instanceof ObjectReference && ! (v instanceof StringReference)){
+				if (v instanceof ObjectReference && !(v instanceof StringReference) && !(v instanceof ArrayReference)){
 					 ObjectReference objectValue = (ObjectReference)v;
 					 object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
 				}
