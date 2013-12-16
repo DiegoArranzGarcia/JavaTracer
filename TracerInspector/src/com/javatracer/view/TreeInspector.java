@@ -32,6 +32,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 	TreeController controller;
 	
 	TreeLayout<TextInBox> treeLayout;
+	JScrollPane scroller;
 	
 	DefaultTreeLayout<TextInBox> tree;
 	TextInBoxNodeExtentProvider nodeExtentProvider;
@@ -61,9 +62,9 @@ public class TreeInspector extends JFrame implements MouseListener{
 		panel = new TreePanel(treeLayout);
 		panel.addMouseListener(this);
 		
-		JScrollPane scroller = new JScrollPane(panel);
-		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroller = new JScrollPane(panel);
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

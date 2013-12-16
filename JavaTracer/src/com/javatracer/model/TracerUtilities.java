@@ -41,8 +41,13 @@ public class TracerUtilities {
 		return object;
 	}
 	
-
 	private static Object getArrayFromArrayReference(ArrayReference value) {
+		List<Long> objectsProcessed = new ArrayList<Long>(); 
+		Object result = getArrayFromArrayReferenceRec(value, objectsProcessed);
+		return result;
+	}
+
+	private static Object getArrayFromArrayReferenceRec(ArrayReference value, List<Long> objectProcessed) {
 		List<Object> elements = new ArrayList<>();
 		List<Value> values = value.getValues();
 		for (int i=0;i<values.size();i++){
@@ -73,9 +78,13 @@ public class TracerUtilities {
 				Field f = fields.get(i);
 				Value v = value.getValue(f);
 				Object object = null;
-				if (v instanceof ObjectReference && !(v instanceof StringReference) && !(v instanceof ArrayReference)){
-					 ObjectReference objectValue = (ObjectReference)v;
-					 object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
+				if ((v instanceof ArrayReference)){
+					ArrayReference objectValue = (ArrayReference)v;
+					object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
+				}
+				else if (v instanceof ObjectReference && !(v instanceof StringReference)){
+					ObjectReference objectValue = (ObjectReference)v;
+					object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
 				}
 				else object = TracerUtilities.getObj(v);
 				values.add(new VariableInfo(f.name(),object));

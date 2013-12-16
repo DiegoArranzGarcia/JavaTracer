@@ -23,15 +23,31 @@ public class ChangeDetector {
 		} else if (variable1 instanceof ObjectInfo && variable2 instanceof ObjectInfo){
 			changes = compareObjects(name,(ObjectInfo)variable1,(ObjectInfo)variable2);
 		} else if (variable1 instanceof ObjectInfo && variable2 instanceof NullObject){
-			changes = getChangesNullObject((ObjectInfo)variable1,variable2);
+			changes = getChangesDeletedObject(name);
 		} else if (variable1 instanceof NullObject && variable2 instanceof ObjectInfo){
-			changes = getChangesNullObject((ObjectInfo)variable2,variable1);
+			changes = getChangesCreatedObject(name,(ObjectInfo)variable2);
 		}		
 		return changes;
 	}
 	
-	private List<ChangeInfo> getChangesNullObject(ObjectInfo variable1,Object variable2) {
-		return new ArrayList<ChangeInfo>();
+	private List<ChangeInfo> getChangesDeletedObject(String name) {
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		ChangeInfo changeInfo = new ChangeInfo(name,new NullObject());
+		changes.add(changeInfo);
+		
+		return changes;
+	}
+
+	private List<ChangeInfo> getChangesCreatedObject(String name,ObjectInfo variable2){
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		ChangeInfo changeInfo = new ChangeInfo(name,variable2);
+		changes.add(changeInfo);
+		
+		return changes;
 	}
 
 	private List<ChangeInfo> compareObjects(String name,ObjectInfo variable1, ObjectInfo variable2) {
