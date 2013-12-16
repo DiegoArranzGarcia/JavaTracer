@@ -120,11 +120,10 @@ public class WindowPath extends JFrame {
 					
 								if(file!=null && file!="" && !file.equals("") && name!=null && name!="" && !name.equals("")){
 				
-									String[] args = new String[2];
-									args[0]=file;
-									args[1]=name;
-					
-					
+									
+									String[] args=ProcessPath(file,name);
+									
+								
 									controller.startTrace(args); 
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
@@ -137,6 +136,8 @@ public class WindowPath extends JFrame {
 					
 				}
 			}
+
+			
 		});
 		
 		examine = new JButton("Examine"); 
@@ -220,4 +221,54 @@ public class WindowPath extends JFrame {
 		
 	}
 
+	private String[] ProcessPath(String file, String name) {
+		
+		
+		boolean equals=false;
+		String[] args = new String[2];
+		
+		String Path_file=controller.giveMePathController(name);
+		
+		if(Path_file.substring(1,Path_file.length()).contains("\\")){
+		
+				Path_file=Path_file.replaceAll("\\\\", ".");
+	    
+				while(!equals){
+	    	
+						if(!(Path_file.substring(0, Path_file.indexOf(".")).equals(name.substring(0, name.indexOf(".")))))
+								file=file+"\\" + Path_file.substring(0, Path_file.indexOf("."));
+						else 
+							equals=true;
+	    	
+						Path_file=Path_file.substring(Path_file.indexOf(".")+1, Path_file.length());
+	    	
+							}
+		}else {
+			
+			Path_file=file.replaceAll("\\\\", ".");
+			
+				while(!equals){
+		    	
+					if(name.contains(Path_file.substring(Path_file.lastIndexOf(".")+1,Path_file.length())))
+							file=file.substring(0, file.lastIndexOf("\\"));
+					else 
+						equals=true;
+	
+					Path_file=Path_file.substring(0, Path_file.lastIndexOf("."));
+	
+					}
+			
+				}
+	
+	
+		
+	  args[0]=file;
+	  args[1]=name;
+		
+	  return args;
+	}
+	
+	
+	
+	
 }

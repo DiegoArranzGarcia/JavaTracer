@@ -12,6 +12,7 @@ public class TracerController {
 	Tracer tracer;
 	TraceInspectorWriter traceInspectorWriter;
 	WindowPath view;
+	ClassFinder finder = new ClassFinder();
 	
 	public TracerController(){
 		 view = new WindowPath(this);
@@ -40,11 +41,15 @@ public class TracerController {
 	}
 
 	public void loadClassFromPath(String path) {
-		ClassFinder finder = new ClassFinder();
 		List<String> classes = finder.getAllClasesFromPath(path);
 		view.loadClasses(classes);
 	}
 	
 	
+	public String giveMePathController(String key){
+		
+		return finder.giveMePath(key);
+		
+	}
 
 }

@@ -3,12 +3,17 @@ package com.javatracer.model.classfinder;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 
 public class ClassFinder {
+	
+	
+	private HashMap<String,String> PathsForFile=new HashMap<String,String>(); 
+	private String path="";
 	
 	public List<String> getAllClasesFromPath(String path) {
 		
@@ -31,14 +36,15 @@ public class ClassFinder {
 	private List<String> getClassesFromFile(File file){
 		
 		List<String> classes = new ArrayList<String>();
-	
-		if (file.isDirectory()){
+	    
+	    if (file.isDirectory()){
+			path=path + "\\" + file.getName();
 			
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++){
 			
 				if (folderFiles[i].isDirectory()){
-					
+					//path=path + "\\" + folderFiles[i].getName();
 					List<String> classesFile = getClassesFromFile(folderFiles[i]);
 					classes.addAll(classesFile);
 					
@@ -56,6 +62,8 @@ public class ClassFinder {
 							JavaClass jc = cp.parse();
 							String class_name = jc.getClassName();
 							classes.add(class_name);
+							String PathParse= path.substring(path.indexOf("\\", 1)+1, path.length());
+							PathsForFile.put(class_name, PathParse);
 							
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -69,7 +77,10 @@ public class ClassFinder {
 						
 		}
 		
-		else classes.add(file.getName());
+		else {classes.add(file.getName());
+			String PathParser= path.substring(path.indexOf("\\", 1)+1, path.length());
+			PathsForFile.put(file.getName(), PathParser);
+		      }
 		
 		return classes;
 		
@@ -86,4 +97,10 @@ public class ClassFinder {
 		return extension;
 	}
 	
+	
+	
+	public String giveMePath(String key){
+		return PathsForFile.get(key);
+		
+	}
 }
