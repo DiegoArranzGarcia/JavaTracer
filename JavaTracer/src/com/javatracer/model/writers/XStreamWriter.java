@@ -51,6 +51,8 @@ public class XStreamWriter implements DataBaseWriter {
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		xStream.aliasField("object-this", MethodEntryInfo.class, "objectThis");
+		xStream.aliasField("object-this", MethodExitInfo.class, "objectThis");
 		
 		xStream.alias(TAG_VARIABLE,VariableInfo.class);
 		xStream.alias(TAG_OBJECT, ObjectInfo.class);

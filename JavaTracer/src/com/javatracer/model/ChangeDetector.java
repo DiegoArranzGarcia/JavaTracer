@@ -66,7 +66,7 @@ public class ChangeDetector {
 				VariableInfo field1 = fields1.get(i);
 				VariableInfo field2 = fields2.get(i);
 				
-				if (isPrimitive(field1.getClass())){
+				if (isPrimitive(field1.getValue().getClass())){
 					if (!field1.getValue().equals(field2.getValue())){
 						ChangeInfo change = new ChangeInfo(name + "." + field1.getName(),field2.getValue());
 						changes.add(change);

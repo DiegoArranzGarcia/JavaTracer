@@ -7,13 +7,13 @@ public class MethodEntryInfo implements InterfaceInfo {
 	String methodName;
 	String calledFromClass;
 	List<VariableInfo> arguments;
-	List<VariableInfo> argumentsThis;
+	VariableInfo objectThis;
 	
-	public MethodEntryInfo(String methodName, String calledFromClass, List<VariableInfo> arguments, List<VariableInfo> argumentsThis){
+	public MethodEntryInfo(String methodName, String calledFromClass, List<VariableInfo> arguments, VariableInfo objectThis){
 		this.methodName = methodName;
 		this.calledFromClass = calledFromClass; 
 		this.arguments = arguments;	
-		this.argumentsThis= argumentsThis;
+		this.objectThis= objectThis;
 	}
 
 	public String toString() {

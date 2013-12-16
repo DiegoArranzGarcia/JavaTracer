@@ -12,6 +12,7 @@ public class Main {
 	
 	public static Person prueba(int i,Person p1,Person p2){
 		i = 0;
+		p2.age = 0;
 		return p2.bestFriend;
 	}
 }

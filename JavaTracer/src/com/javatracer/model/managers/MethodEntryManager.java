@@ -5,17 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.TracerUtilities;
-import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.MethodEntryInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.writers.DataBaseWriter;
-import com.sun.jdi.Field;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
-import com.sun.jdi.Value;
 import com.sun.jdi.event.MethodEntryEvent;
 
 
@@ -36,7 +34,7 @@ public class MethodEntryManager extends VMEventsManager{
        	String methodName = method.name();
         List<VariableInfo> arguments = processArguments(method,thread);
         String className = TracerUtilities.getClass(method.declaringType());
-        List<VariableInfo> argument_this = processThis(event,ref,thread);
+        VariableInfo argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
         writeOutput(info);
     }
@@ -61,33 +59,20 @@ public class MethodEntryManager extends VMEventsManager{
 	}
 
 
-	private List<VariableInfo> processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
+	private VariableInfo processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
 	
-		Field field=null;
-		Value valor=null;
-		Object varObj=null;
 		StackFrame stack=null;
-		List<VariableInfo> argument_this = new ArrayList<>();
-		List<Field> fields=ref.allFields();
-		
+
 		try {
 			stack = thread.frame(0);
-			} catch (IncompatibleThreadStateException e) {
-					e.printStackTrace();
-				}
+		} catch (IncompatibleThreadStateException e) {
+			e.printStackTrace();
+		}
 		
-		while (!fields.isEmpty() && stack.thisObject()!=null){
-			field = fields.get(0);
-			//tipo = f.typeName();
-			//valor=ref.getValue(f);
-			valor = stack.thisObject().getValue(field);
-			varObj = TracerUtilities.getObj(valor);
-			String nameVar = field.name();
-			argument_this.add(new VariableInfo(nameVar,varObj));
-		    fields.remove(0);
-		   }
+		Object valueThis = TracerUtilities.getObj(stack.thisObject());
+		VariableInfo variableThis = new VariableInfo("this", valueThis);
 		
-		return argument_this;
+		return variableThis;
 	}
 
 

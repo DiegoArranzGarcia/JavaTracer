@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.TracerUtilities;
-import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.MethodExitInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.writers.DataBaseWriter;
-import com.sun.jdi.Field;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
@@ -42,35 +41,27 @@ public class MethodExitManager extends VMEventsManager{
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
-         List<VariableInfo> arguments_this = processThis(event,ref, thread);
-         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,arguments_this);
+         VariableInfo object_this = processThis(event,ref, thread);
+         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
          writeOutput(info);
     }
    
-    private List<VariableInfo> processThis(MethodExitEvent event, ReferenceType ref,ThreadReference thread ) {   	
-    	Field f=null;
-    	Object valor=null;
-    	Object varObj=null;
-    	StackFrame stack=null;
-    	List<VariableInfo> arguments_this = new ArrayList<>();
-    	List<Field> fields=ref.allFields();
-    	
-    	try {
-    		stack = thread.frame(0);
-    		} catch (IncompatibleThreadStateException e) {
-    			e.printStackTrace();
-    		}
-    	
-    	while (!fields.isEmpty()&& stack.thisObject()!=null){
-    		f = fields.get(0);
-    		valor = stack.thisObject().getValue(f);
-    		varObj = TracerUtilities.getObj((Value)valor);
-    		arguments_this.add(new VariableInfo(f.name(),varObj));
-    	    fields.remove(0);
-    	   }
-    	
-    		return arguments_this;
-    	}
+
+	private VariableInfo processThis(MethodExitEvent event, ReferenceType ref, ThreadReference thread) {
+	
+		StackFrame stack=null;
+
+		try {
+			stack = thread.frame(0);
+		} catch (IncompatibleThreadStateException e) {
+			e.printStackTrace();
+		}
+		
+		Object valueThis = TracerUtilities.getObj(stack.thisObject());
+		VariableInfo variableThis = new VariableInfo("this", valueThis);
+		
+		return variableThis;
+	}
 
 
     private List<VariableInfo> processArguments(Method method, ThreadReference thread) {

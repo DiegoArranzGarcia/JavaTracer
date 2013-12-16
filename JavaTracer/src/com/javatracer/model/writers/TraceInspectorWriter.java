@@ -119,7 +119,7 @@ public class TraceInspectorWriter {
 		String name = getNameMethod(node);
 		String className = getCalledFromClass(node);
 		List<VariableInfo> arguments = getEntryArguments(node);
-		List<VariableInfo> thisObject = getEntryThis(node);
+		VariableInfo thisObject = getEntryThis(node);
 				
 		MethodInfo info = new MethodInfo(name,className,arguments,thisObject);
 		writeXStream(info);
@@ -158,53 +158,41 @@ public class TraceInspectorWriter {
 
 	private List<ChangeInfo> getChangesThis(Node node) throws Exception{
 		
-		List<VariableInfo> entryThis = getEntryThis(node);
-		List<VariableInfo> exitThis = getExitThis(node);
+		VariableInfo entryThis = getEntryThis(node);
+		VariableInfo exitThis = getExitThis(node);
 		ChangeDetector detector = new ChangeDetector();
 		
-		List<ChangeInfo> changes = new ArrayList<>();
-		
-		for (int i=0;i<exitThis.size();i++){
-			changes.addAll(detector.getChangesBetween(entryThis.get(i), exitThis.get(i)));
-		}
+		List<ChangeInfo> changes = detector.getChangesBetween(entryThis, exitThis);
 		
 		return changes;
 		
 	}
 
-	private List<VariableInfo> getExitThis(Node node) throws Exception {
+	private VariableInfo getExitThis(Node node) throws Exception {
 		
-		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/argumentsThis/variable" ;  
+		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/object-this" ;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
-		NodeList thisArguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		Node nodeThis = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
 		
-		List<VariableInfo> thisArgumentList = new ArrayList<>();
+		String nodeString = nodeToString(nodeThis);
+		nodeString = nodeString.replaceAll("object-this", "variable");
+		VariableInfo objectThis = (VariableInfo) xStream.fromXML(nodeString);
 		
-		for (int i=0;i<thisArguments.getLength();i++){
-			String nodeString = nodeToString(thisArguments.item(i));
-			VariableInfo variable = (VariableInfo) xStream.fromXML(nodeString);
-			thisArgumentList.add(variable);
-		}
-		
-		return thisArgumentList;	
+		return objectThis;	
 	}
 	
-	private List<VariableInfo> getEntryThis(Node node) throws Exception {
-		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/argumentsThis/variable" ;  
+	private VariableInfo getEntryThis(Node node) throws Exception {
+		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/object-this" ;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
-		NodeList thisArguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
+		Node nodeThis = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
 		
-		List<VariableInfo> thisArgumentList = new ArrayList<>();
-		
-		for (int i=0;i<thisArguments.getLength();i++){
-			String nodeString = nodeToString(thisArguments.item(i));
-			VariableInfo variable = (VariableInfo) xStream.fromXML(nodeString);
-			thisArgumentList.add(variable);
-		}
-		
-		return thisArgumentList;		
+		String nodeString = nodeToString(nodeThis);
+		nodeString = nodeString.replaceAll("object-this", "variable");
+		VariableInfo objectThis = (VariableInfo) xStream.fromXML(nodeString);
+
+		return objectThis;		
 	}
 
 	private NodeList getCalledMethods(Node node) throws Exception {

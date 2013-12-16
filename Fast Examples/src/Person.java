@@ -20,6 +20,7 @@ public class Person {
 	}
 
 	public void imprime() {
+		this.age += 1;
 		System.out.println("*************** Person ********************");
 		System.out.println("Age: " + age);
 		System.out.println("Name: " + name);
