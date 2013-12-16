@@ -228,23 +228,8 @@ public class WindowPath extends JFrame {
 		String[] args = new String[2];
 		
 		String Path_file=controller.giveMePathController(name);
+		file=Path_file.substring(0, Path_file.lastIndexOf("\\"));
 		
-		if(Path_file.substring(1,Path_file.length()).contains("\\")){
-		
-				Path_file=Path_file.replaceAll("\\\\", ".");
-	    
-				while(!equals){
-	    	
-						if(!(Path_file.substring(0, Path_file.indexOf(".")).equals(name.substring(0, name.indexOf(".")))))
-								file=file+"\\" + Path_file.substring(0, Path_file.indexOf("."));
-						else 
-							equals=true;
-	    	
-						Path_file=Path_file.substring(Path_file.indexOf(".")+1, Path_file.length());
-	    	
-							}
-		}else {
-			
 			Path_file=file.replaceAll("\\\\", ".");
 			
 				while(!equals){
@@ -258,7 +243,7 @@ public class WindowPath extends JFrame {
 	
 					}
 			
-				}
+				
 	
 	
 		

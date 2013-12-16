@@ -13,7 +13,7 @@ public class ClassFinder {
 	
 	
 	private HashMap<String,String> PathsForFile=new HashMap<String,String>(); 
-	private String path="";
+	
 	
 	public List<String> getAllClasesFromPath(String path) {
 		
@@ -38,13 +38,12 @@ public class ClassFinder {
 		List<String> classes = new ArrayList<String>();
 	    
 	    if (file.isDirectory()){
-			path=path + "\\" + file.getName();
+			
 			
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++){
 			
 				if (folderFiles[i].isDirectory()){
-					//path=path + "\\" + folderFiles[i].getName();
 					List<String> classesFile = getClassesFromFile(folderFiles[i]);
 					classes.addAll(classesFile);
 					
@@ -62,8 +61,7 @@ public class ClassFinder {
 							JavaClass jc = cp.parse();
 							String class_name = jc.getClassName();
 							classes.add(class_name);
-							String PathParse= path.substring(path.indexOf("\\", 1)+1, path.length());
-							PathsForFile.put(class_name, PathParse);
+							PathsForFile.put(class_name, folderFiles[i].getAbsolutePath());
 							
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -78,8 +76,7 @@ public class ClassFinder {
 		}
 		
 		else {classes.add(file.getName());
-			String PathParser= path.substring(path.indexOf("\\", 1)+1, path.length());
-			PathsForFile.put(file.getName(), PathParser);
+			PathsForFile.put(file.getName(), file.getAbsolutePath());
 		      }
 		
 		return classes;
