@@ -1,6 +1,8 @@
 package com.javatracer.controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,7 +11,7 @@ import com.javatracer.view.tree.TextInBoxExt;
 import com.traceinspector.datamodel.TreeNode;
 import com.traceinspector.model.TreeGenerator;
 
-public class TreeController implements MouseListener{
+public class TraceInspectorController implements MouseListener{
 
 	TreeGenerator treeGenerator;
 	TreeNode tree;
@@ -17,7 +19,7 @@ public class TreeController implements MouseListener{
 	
 	TextInBoxExt lastSelected;
 	
-	public TreeController(){
+	public TraceInspectorController(){
 		treeGenerator = new TreeGenerator();
 		tree = treeGenerator.loadFromFile("trace.xml");
 		view = new TraceInpectorView(tree,this);
@@ -83,6 +85,10 @@ public class TreeController implements MouseListener{
 
 	public void mouseReleased(MouseEvent e) {
 
+	}
+
+	public void clickedOpen(){
+		System.out.println("olaf q ase");
 	}
 	
 }

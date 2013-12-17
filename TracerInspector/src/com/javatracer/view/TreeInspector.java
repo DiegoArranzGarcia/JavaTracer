@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
 
-import com.javatracer.controller.TreeController;
+import com.javatracer.controller.TraceInspectorController;
 import com.javatracer.model.info.VariableInfo;
 import com.javatracer.view.tree.DefaultTreeLayout;
 import com.javatracer.view.tree.TextInBox;
@@ -26,7 +26,7 @@ public class TreeInspector extends JScrollPane {
 	private static final int DEFAULT_HEIGHT_BOX = 60;
 	private static final int WIDTH_BY_LETTER = 8;
 
-	TreeController controller;
+	TraceInspectorController controller;
 	
 	static TreeLayout<TextInBox> treeLayout;
 	
@@ -36,7 +36,7 @@ public class TreeInspector extends JScrollPane {
 	
 	static TreePanel panel;
 	
-	public TreeInspector(TreeNode root,TreeController controller) {
+	public TreeInspector(TreeNode root,TraceInspectorController controller) {
 		super(createTreePanel(root, controller));
 		
 		this.controller = controller;
@@ -46,7 +46,7 @@ public class TreeInspector extends JScrollPane {
 		
 	}
  
-	 private static TreePanel createTreePanel(TreeNode root,TreeController controller) {
+	 private static TreePanel createTreePanel(TreeNode root,TraceInspectorController controller) {
 		tree = createTree(root);
 		//setup the tree layout configuration
 		double gapBetweenLevels = 50;
