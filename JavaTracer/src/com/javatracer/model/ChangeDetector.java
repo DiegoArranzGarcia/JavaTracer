@@ -90,8 +90,41 @@ public class ChangeDetector {
 		List<Object> values1 = variable1.getValues();
 		List<Object> values2 = variable2.getValues();
 		
-		for (int i=0;i<values1.size();i++){
-				
+		if (variable1.getLength()<variable2.getLength()){
+			
+			changes = compareTo(name, values1, values2,variable1.getLength());
+			
+			for (int i=variable1.getLength();i<variable2.getLength();i++){
+				ChangeInfo change = new ChangeInfo(name + "[" + i + "]" ,values2.get(i));
+				changes.add(change);
+			}
+			
+			ChangeInfo changeSize = new ChangeInfo(name + ".lenght",variable2.getLength());
+			changes.add(changeSize);
+						
+		} else if (variable2.getLength()<variable1.getLength()) {
+			
+			changes = compareTo(name, values1, values2,variable2.getLength());
+			
+			ChangeInfo changeSize = new ChangeInfo(name + ".lenght",variable2.getLength());
+			changes.add(changeSize);
+			
+		} else {
+			
+			changes = compareTo(name,values1,values2,variable1.getLength());
+			
+		}
+
+		return changes;
+	}
+
+	
+	private List<ChangeInfo> compareTo(String name,List<Object> values1,List<Object> values2, int to) {
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		for (int i=0;i<to;i++){
+			
 			Object value1 = values1.get(i);
 			Object value2 = values2.get(i);
 		
@@ -106,13 +139,11 @@ public class ChangeDetector {
 				List<ChangeInfo> fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);
 				changes.addAll(fieldChanges);
 			}
-		
 		}
-
+		
 		return changes;
 	}
 
-	
 	public boolean isPrimitive(Class<?> c) {
 		  if (c.isPrimitive()) {
 		    return true;

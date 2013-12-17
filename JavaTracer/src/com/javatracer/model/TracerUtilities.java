@@ -25,47 +25,34 @@ import com.sun.jdi.Value;
 
 public class TracerUtilities {
 	
-	public static Object getObj(Value value){
+	public static Object getObj(Value value,List<Long> objectProcessed){
 		Object object = null;
 		if (value instanceof ArrayReference){
-			object = getArrayFromArrayReference((ArrayReference)value);
+			object = getArrayFromArrayReference((ArrayReference)value,objectProcessed);
 		} else if (value instanceof PrimitiveValue){
 			object = getPrimitiveObject(value);
 		} else if (value instanceof StringReference){
 			object = (String)value.toString().replaceAll("\"","");
 		} else if (value instanceof ObjectReference){
-			object = getObjectFromObjectReference((ObjectReference)value);
+			object = getObjectFromObjectReference((ObjectReference)value,objectProcessed);
 		} else if (value == null){
 			object = new NullObject();
 		}
 		return object;
 	}
-	
-	private static Object getArrayFromArrayReference(ArrayReference value) {
-		List<Long> objectsProcessed = new ArrayList<Long>(); 
-		Object result = getArrayFromArrayReferenceRec(value, objectsProcessed);
-		return result;
-	}
 
-	private static Object getArrayFromArrayReferenceRec(ArrayReference value, List<Long> objectProcessed) {
+	private static Object getArrayFromArrayReference(ArrayReference value, List<Long> objectProcessed) {
 		List<Object> elements = new ArrayList<>();
 		List<Value> values = value.getValues();
 		for (int i=0;i<values.size();i++){
 			Value v = values.get(i);
-			elements.add(getObj(v));
+			elements.add(getObj(v,objectProcessed));
 		}
-		Object object = new ArrayInfo(getClass(value.referenceType()),elements);
+		Object object = new ArrayInfo(getClass(value.referenceType()),value.length(),elements);
 		return object;
 	}
-
-
-	private static Object getObjectFromObjectReference(ObjectReference value) {
-		List<Long> objectsProcessed = new ArrayList<Long>(); 
-		Object result = getObjectFromObjectReferenceRec(value, objectsProcessed);
-		return result;
-	}
 	
-	private static Object getObjectFromObjectReferenceRec(ObjectReference value,List<Long> objectsProcessed){
+	private static Object getObjectFromObjectReference(ObjectReference value,List<Long> objectsProcessed){
 		long objectId = value.uniqueID();
 		Object result = null;
 		if (objectsProcessed.contains(objectId)){
@@ -80,13 +67,13 @@ public class TracerUtilities {
 				Object object = null;
 				if ((v instanceof ArrayReference)){
 					ArrayReference objectValue = (ArrayReference)v;
-					object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
+					object = getArrayFromArrayReference(objectValue,objectsProcessed);
 				}
 				else if (v instanceof ObjectReference && !(v instanceof StringReference)){
 					ObjectReference objectValue = (ObjectReference)v;
-					object = getObjectFromObjectReferenceRec(objectValue,objectsProcessed);
+					object = getObjectFromObjectReference(objectValue,objectsProcessed);
 				}
-				else object = TracerUtilities.getObj(v);
+				else object = TracerUtilities.getObj(v,objectsProcessed);
 				values.add(new VariableInfo(f.name(),object));
 			}
 			result = new ObjectInfo(getClass(value.referenceType()),values,value.uniqueID());

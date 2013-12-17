@@ -1,14 +1,11 @@
 package com.javatracer.view;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import org.abego.treelayout.TreeLayout;
@@ -23,7 +20,7 @@ import com.javatracer.view.tree.TextInBoxNodeExtentProvider;
 import com.traceinspector.datamodel.TreeNode;
 
 @SuppressWarnings("serial")
-public class TreeInspector extends JFrame implements MouseListener{
+public class TreeInspector extends JScrollPane {
 	
 	private static final int DEFAULT_WIDTH_BOX = 80;
 	private static final int DEFAULT_HEIGHT_BOX = 60;
@@ -31,22 +28,26 @@ public class TreeInspector extends JFrame implements MouseListener{
 
 	TreeController controller;
 	
-	TreeLayout<TextInBox> treeLayout;
-	JScrollPane scroller;
+	static TreeLayout<TextInBox> treeLayout;
 	
-	DefaultTreeLayout<TextInBox> tree;
-	TextInBoxNodeExtentProvider nodeExtentProvider;
-	DefaultConfiguration<TextInBox> configuration;
+	static DefaultTreeLayout<TextInBox> tree;
+	static TextInBoxNodeExtentProvider nodeExtentProvider;
+	static DefaultConfiguration<TextInBox> configuration;
 	
-	TreePanel panel;
+	static TreePanel panel;
 	
 	public TreeInspector(TreeNode root,TreeController controller) {
-
-		this.controller = controller;
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		super(createTreePanel(root, controller));
 		
+		this.controller = controller;
+		
+		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+	}
+ 
+	 private static TreePanel createTreePanel(TreeNode root,TreeController controller) {
 		tree = createTree(root);
-	    
 		//setup the tree layout configuration
 		double gapBetweenLevels = 50;
 		double gapBetweenNodes = 10;
@@ -54,26 +55,17 @@ public class TreeInspector extends JFrame implements MouseListener{
 
 		// create the NodeExtentProvider for TextInBox nodes
 		nodeExtentProvider = new TextInBoxNodeExtentProvider();	
-		
+			
 		//create the layout
 		treeLayout = new TreeLayout<TextInBox>(tree,nodeExtentProvider,configuration);
 
 		// Create a panel that draws the nodes and edges and show the panel
 		panel = new TreePanel(treeLayout);
-		panel.addMouseListener(this);
-		
-		scroller = new JScrollPane(panel);
-		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-	    setContentPane(scroller);
-	    pack();
-		
+		panel.addMouseListener(controller);
+		return panel;
 	}
- 
-	 private DefaultTreeLayout<TextInBox> createTree(TreeNode rootNode){
+
+	private static DefaultTreeLayout<TextInBox> createTree(TreeNode rootNode){
 		 
 		int width = 0;
 		String name = giveMeTextInBox(rootNode);
@@ -89,7 +81,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 	    
 	 }
  
-	 private void paintTree(TreeNode treeNode,TextInBoxExt tree, DefaultTreeLayout<TextInBox> treeLayout ){
+	 private static void paintTree(TreeNode treeNode,TextInBoxExt tree, DefaultTreeLayout<TextInBox> treeLayout ){
 		 List<TreeNode> listcalledMethods= treeNode.getCalledMethods();
 		 Iterator<TreeNode> iterator=listcalledMethods.iterator();
 		 TreeNode child;  
@@ -113,7 +105,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 		 }
 	 } 
 
-	 private String giveMeTextInBox(TreeNode node) {
+	 private static String giveMeTextInBox(TreeNode node) {
 			
 		 List<VariableInfo> var=node.getNode().getVariables();
 		 int i=0;
@@ -132,29 +124,6 @@ public class TreeInspector extends JFrame implements MouseListener{
 			 name = name.substring(0, name.length()-2) +" )";
 		 
 		 return name;
-		}
-
-	public void mouseClicked(MouseEvent e) {
-		
-		if (e.getButton()==MouseEvent.BUTTON1){
-			
-			if (e.getClickCount()==2)
-				controller.doubleClickedOnNode(e.getPoint());				
-			else
-				controller.clickedOnNode(e.getPoint());		
-		}
-	}
-
-	public void mouseEntered(MouseEvent e) {}
-
-	public void mouseExited(MouseEvent e) {}
-	
-	public void mousePressed(MouseEvent e) {}
-
-	public void mouseReleased(MouseEvent e) {
-		
-		
-		
 	}
 
 	public TextInBoxExt clickedOnTree(int x, int y) {

@@ -1,24 +1,26 @@
 package com.javatracer.controller;
 
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import com.javatracer.view.TreeInspector;
+import com.javatracer.view.TraceInpectorView;
 import com.javatracer.view.tree.TextInBoxExt;
 import com.traceinspector.datamodel.TreeNode;
 import com.traceinspector.model.TreeGenerator;
 
-public class TreeController {
+public class TreeController implements MouseListener{
 
 	TreeGenerator treeGenerator;
 	TreeNode tree;
-	TreeInspector view;
+	TraceInpectorView view;
 	
 	TextInBoxExt lastSelected;
 	
 	public TreeController(){
 		treeGenerator = new TreeGenerator();
 		tree = treeGenerator.loadFromFile("trace.xml");
-		view = new TreeInspector(tree,this);
+		view = new TraceInpectorView(tree,this);
 		view.setVisible(true);
 	}
 
@@ -54,6 +56,33 @@ public class TreeController {
 			}
 			
 		}
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		
+		if (e.getButton()==MouseEvent.BUTTON1){
+			
+			if (e.getClickCount()==2)
+				doubleClickedOnNode(e.getPoint());				
+			else
+				clickedOnNode(e.getPoint());		
+		}
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	
+	}
+
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	public void mouseReleased(MouseEvent e) {
+
 	}
 	
 }

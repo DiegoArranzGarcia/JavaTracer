@@ -37,7 +37,7 @@ public class MethodExitManager extends VMEventsManager{
          Value returnValue = event.returnValue();
          Object returnObject = null; 
          if (!(returnValue instanceof VoidValue)){ 
-          returnObject = TracerUtilities.getObj(returnValue);
+        	 returnObject = TracerUtilities.getObj(returnValue,new ArrayList<Long>());
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
@@ -57,7 +57,7 @@ public class MethodExitManager extends VMEventsManager{
 			e.printStackTrace();
 		}
 		
-		Object valueThis = TracerUtilities.getObj(stack.thisObject());
+		Object valueThis = TracerUtilities.getObj(stack.thisObject(),new ArrayList<Long>());
 		VariableInfo variableThis = new VariableInfo("this", valueThis);
 		
 		return variableThis;
@@ -73,7 +73,7 @@ public class MethodExitManager extends VMEventsManager{
 			List<LocalVariable> variables = method.arguments();
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
-				Object varObj = TracerUtilities.getObj(stack.getValue(var));
+				Object varObj = TracerUtilities.getObj(stack.getValue(var),new ArrayList<Long>());
 				String nameVar = var.name();
 				arguments.add(new VariableInfo(nameVar,varObj));
 			}

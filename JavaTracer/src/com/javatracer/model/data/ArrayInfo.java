@@ -4,11 +4,13 @@ import java.util.List;
 
 public class ArrayInfo {
 	
-	String className;
-	List<Object> values;
+	private String className;
+	private int length;
+	private List<Object> values;
 	
-	public ArrayInfo(String className,List<Object> values){
+	public ArrayInfo(String className,int length,List<Object> values){
 		this.className = className;
+		this.length = length;
 		this.values = values;
 	}
 
@@ -26,6 +28,14 @@ public class ArrayInfo {
 
 	public void setValues(List<Object> values) {
 		this.values = values;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
 	}
 
 	

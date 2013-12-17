@@ -150,6 +150,7 @@ public class TraceInspectorWriter {
 		
 		for (int i=0;i<changes.size();i++){
 			writeXStream(changes.get(i));
+			write("");
 		}
 		
 		write(endTag(TAG_CHANGES));
