@@ -64,13 +64,12 @@ public class Tracer {
 	  * Parse the command line arguments.
       * Launch target VM.
  	  * Generate the trace.
+     * @param nameXlm 
 	  */
-    public void trace(String[] args) {
+    public void trace(String[] args, String nameXlm) {
 
     	Configuration configuration = new Configuration();
     	excludes=configuration.getExcludes();
-    	for(int i=0;i<excludes.length;i++)
-    		System.out.println("excludes "+excludes[i]);
     		
         PrintWriter writer = new PrintWriter(System.out);
         
@@ -116,7 +115,7 @@ public class Tracer {
         }
 
         vm = launchTarget(args);
-        generateTrace(writer);
+        generateTrace(writer,nameXlm);
     }
 
 	/**
@@ -124,10 +123,11 @@ public class Tracer {
 	* Enable events, start thread to display events,
 	* start threads to forward remote error and output streams,
 	* resume the remote VM, wait for the final event, and shutdown.
+	 * @param nameXlm 
 	*/
-    void generateTrace(PrintWriter writer) {
+    void generateTrace(PrintWriter writer, String nameXlm) {
             vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm, excludes);
+        EventThread eventThread = new EventThread(vm, excludes,nameXlm);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         redirectOutput();
@@ -141,7 +141,7 @@ public class Tracer {
             // we don't interrupt
         }
         writer.close();
-        tracerController.finishedTrace();
+        tracerController.finishedTrace(nameXlm);
     }
 
     /**

@@ -25,10 +25,10 @@ import com.javatracer.controller.TracerController;
 public class WindowPath extends JFrame {
 
 	private JButton tracer,examine,cancel,helpPath,helpNameClass;
-	private TextField path;
+	private TextField path,nameXml;
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
-	private JLabel labelPath,labelNameClass;
+	private JLabel labelPath,labelNameClass,labelXml;
 	private TracerController controller;
 	private LoadingMain loading;
 	private Container contentPane;
@@ -78,6 +78,15 @@ public class WindowPath extends JFrame {
 		helpPath.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
 		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
 		
+		
+		labelXml = new JLabel("Insert the name's xml otuput ");
+		labelXml.setBounds(new Rectangle(200,30)); 
+		labelXml.setLocation(20, 170); 
+		
+		nameXml = new TextField();
+		nameXml.setBounds(new Rectangle(450,30));
+		nameXml.setLocation(250,170);
+		
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(210, 120); 
@@ -87,7 +96,7 @@ public class WindowPath extends JFrame {
 			 
 		cancel =new JButton("Cancel");
 		cancel.setBounds(new Rectangle(100,40));
-		cancel.setLocation(450, 190); 
+		cancel.setLocation(450, 220); 
 		cancel.setBackground(Color.white); 
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,7 +108,7 @@ public class WindowPath extends JFrame {
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
 		tracer.setBounds(new Rectangle(100,40));
-		tracer.setLocation(300, 190); 
+		tracer.setLocation(300, 220); 
 		tracer.setBackground(Color.white);  
 		tracer.addActionListener(new ActionListener() {
 			
@@ -122,9 +131,9 @@ public class WindowPath extends JFrame {
 				
 									
 									String[] args=ProcessPath(file,name);
-									
-								
-									controller.startTrace(args); 
+									String nameXlm = nameXml.getText();
+									if (nameXlm.equals("")) nameXlm ="default";
+									controller.startTrace(args,nameXlm); 
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
 						
@@ -175,6 +184,8 @@ public class WindowPath extends JFrame {
 		add(labelNameClass);
 		add(helpPath);
 		add(helpNameClass);
+		add(labelXml);
+		add(nameXml);
 		this.repaint();
 	}
 	

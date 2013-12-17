@@ -48,16 +48,17 @@ public class TraceInspectorWriter {
 	private XPath xPath;
 	private int idNode;
 	
-	public TraceInspectorWriter() {
+	public TraceInspectorWriter(String nameXlm) {
 		
 		try {
-			FileWriter fileWriter = new FileWriter(NAME_FILE);
+			FileWriter fileWriter = new FileWriter( nameXlm+".xml");
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			
 			this.xStream = new XStream();
 			addAlias();
 			
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(XStreamWriter.FILE_NAME);
+			//xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(XStreamWriter.FILE_NAME);
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(nameXlm+"_temp.xml");
 			xPath = XPathFactory.newInstance().newXPath();
 			this.idNode = 1;
 			

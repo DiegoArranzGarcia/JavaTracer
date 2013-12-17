@@ -63,11 +63,11 @@ public class EventThread extends Thread {
        private PrepareManager prepare;
        private DataBaseWriter dbw;
 
-    EventThread(VirtualMachine vm, String[] excludes) {
+    EventThread(VirtualMachine vm, String[] excludes, String nameXlm) {
         super("event-handler");
         this.vm = vm;
         this.excludes = excludes;
-        dbw = new XStreamWriter();
+        dbw = new XStreamWriter(nameXlm);
         
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  

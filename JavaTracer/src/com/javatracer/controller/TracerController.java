@@ -18,9 +18,9 @@ public class TracerController {
 		 view = new WindowPath(this);
     }
 
-	public void startTrace(String[] args) {
+	public void startTrace(String[] args, String nameXlm) {
 		tracer = new Tracer(this);
-		tracer.trace(args);
+		tracer.trace(args,nameXlm);
 	}
 
 	public void showErrorMain() {
@@ -31,11 +31,11 @@ public class TracerController {
 		view.showErrorLoadClass();
 	}
 
-	public void finishedTrace() {
+	public void finishedTrace(String nameXlm) {
 		
 		if(!tracer.getWasError()){
 			view.finishedTrace();
-			this.traceInspectorWriter = new TraceInspectorWriter();
+			this.traceInspectorWriter = new TraceInspectorWriter(nameXlm);
 			traceInspectorWriter.generateFinalTrace();
 		}
 	}

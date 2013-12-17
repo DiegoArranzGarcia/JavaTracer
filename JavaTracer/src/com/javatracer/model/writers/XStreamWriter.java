@@ -31,9 +31,9 @@ public class XStreamWriter implements DataBaseWriter {
 	private XStream xStream;
 	private BufferedWriter bufferedWriter;
 	
-	public XStreamWriter(){
+	public XStreamWriter(String nameXlm){
 		try {
-			FileWriter fileWriter = new FileWriter(FILE_NAME);
+			FileWriter fileWriter = new FileWriter(nameXlm+"_temp.xml");
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			
 			this.xStream = new XStream();
