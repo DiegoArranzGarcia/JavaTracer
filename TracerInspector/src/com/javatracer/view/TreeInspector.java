@@ -134,7 +134,16 @@ public class TreeInspector extends JFrame implements MouseListener{
 		 return name;
 		}
 
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		
+		if (e.getButton()==MouseEvent.BUTTON1){
+			
+			if (e.getClickCount()==2)
+				controller.doubleClickedOnNode(e.getPoint());				
+			else
+				controller.clickedOnNode(e.getPoint());		
+		}
+	}
 
 	public void mouseEntered(MouseEvent e) {}
 
@@ -144,20 +153,11 @@ public class TreeInspector extends JFrame implements MouseListener{
 
 	public void mouseReleased(MouseEvent e) {
 		
-		if (e.getButton()==MouseEvent.BUTTON1){
-			
-			TextInBoxExt textInBoxExt = clickedOnTree(e.getX(),e.getY());
-			
-			if (textInBoxExt!=null){
-							
-				controller.clickedOnNode(textInBoxExt);
-			}
 		
-		}
 		
 	}
 
-	private TextInBoxExt clickedOnTree(int x, int y) {
+	public TextInBoxExt clickedOnTree(int x, int y) {
 		
 		TextInBoxExt textInBoxExt = null;
 		
@@ -184,7 +184,7 @@ public class TreeInspector extends JFrame implements MouseListener{
 		 
 	}
 	
-	private void repaintTree() {
+	public void repaintTree() {
 		
 		treeLayout = new TreeLayout<TextInBox>(tree,nodeExtentProvider,configuration);
 		

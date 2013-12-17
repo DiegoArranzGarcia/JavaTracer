@@ -37,6 +37,7 @@ package com.javatracer.view.tree;
 public class TextInBox {
 
 	public final String text;
+	public boolean selected;
 	public final int height;
 	public final int width;
 
@@ -44,5 +45,6 @@ public class TextInBox {
 		this.text = text;
 		this.width = width;
 		this.height = height;
+		this.selected = false;
 	}
 }

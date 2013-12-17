@@ -1,5 +1,7 @@
 package com.javatracer.controller;
 
+import java.awt.Point;
+
 import com.javatracer.view.TreeInspector;
 import com.javatracer.view.tree.TextInBoxExt;
 import com.traceinspector.datamodel.TreeNode;
@@ -11,6 +13,8 @@ public class TreeController {
 	TreeNode tree;
 	TreeInspector view;
 	
+	TextInBoxExt lastSelected;
+	
 	public TreeController(){
 		treeGenerator = new TreeGenerator();
 		tree = treeGenerator.loadFromFile("trace.xml");
@@ -18,17 +22,37 @@ public class TreeController {
 		view.setVisible(true);
 	}
 
-	public void clickedOnNode(TextInBoxExt textInBoxExt) {
+	public void clickedOnNode(Point point) {
 		
-		TreeNode node = tree.getNode(tree,textInBoxExt.getId());
+		TextInBoxExt textInBoxExt = view.clickedOnTree(point.x, point.y);
+				
+		if (lastSelected!=null)
+			lastSelected.selected = false;
 		
-		if (!node.hasChilds()){
-			treeGenerator.expandNode(node,textInBoxExt.getId());
-			view.expandTreeNode(textInBoxExt,node);
-		}
-		else {
-			treeGenerator.foldNode(node);
-			view.foldNode(textInBoxExt);
+		if (textInBoxExt!=null)
+			textInBoxExt.selected = true;
+		
+		lastSelected = textInBoxExt;
+		view.repaintTree();
+	}
+
+	public void doubleClickedOnNode(Point point) {
+		
+		TextInBoxExt textInBoxExt = view.clickedOnTree(point.x, point.y);
+		
+		if (textInBoxExt!=null){
+			
+			TreeNode node = tree.getNode(tree,textInBoxExt.getId());
+			
+			if (!node.hasChilds()){
+				treeGenerator.expandNode(node,textInBoxExt.getId());
+				view.expandTreeNode(textInBoxExt,node);
+			}
+			else {
+				treeGenerator.foldNode(node);
+				view.foldNode(textInBoxExt);
+			}
+			
 		}
 	}
 	

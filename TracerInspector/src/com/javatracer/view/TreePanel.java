@@ -29,11 +29,13 @@
  */
 package com.javatracer.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
@@ -95,19 +97,29 @@ public class TreePanel extends JPanel {
 
 	private void paintBox(Graphics g, TextInBox textInBox) {
 		
+		//Graphics2D g2D = (Graphics2D)g; 
+		//g2D.setStroke(new BasicStroke(10));
 		g.setColor(BOX_COLOR);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
-		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
-				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
-
+		if (textInBox.selected){
+			Graphics2D g2D = (Graphics2D)g; 
+			g2D.setStroke(new BasicStroke(5));
+			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
+					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+			g2D.setStroke(new BasicStroke());
+		} 
+		else {
+			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
+					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+		}
 		g.setColor(TEXT_COLOR);
 		String[] lines = textInBox.text.split("\n");
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
-		int y = (int) box.y + textInBox.height/2 + m.getAscent()/2;// - m.getLeading() + 1;
+		int y = (int) box.y + textInBox.height/2 + m.getAscent()/2;
 		for (int i = 0; i < lines.length; i++) {
 			g.drawString(lines[i], x, y);
 			y += m.getHeight();
