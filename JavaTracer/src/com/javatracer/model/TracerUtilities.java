@@ -56,7 +56,7 @@ public class TracerUtilities {
 		long objectId = value.uniqueID();
 		Object result = null;
 		if (objectsProcessed.contains(objectId)){
-			result = value.uniqueID();
+			result = new ObjectInfo(getClass(value.referenceType()),value.uniqueID());
 		} else {
 			objectsProcessed.add(objectId);
 			List<Field> fields = value.referenceType().allFields();
