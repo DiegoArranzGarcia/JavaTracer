@@ -12,7 +12,7 @@ import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
 
 import com.javatracer.controller.TraceInspectorController;
-import com.javatracer.model.info.VariableInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.view.tree.DefaultTreeLayout;
 import com.javatracer.view.tree.TextInBox;
 import com.javatracer.view.tree.TextInBoxExt;

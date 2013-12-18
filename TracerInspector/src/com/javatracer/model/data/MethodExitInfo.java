@@ -1,4 +1,4 @@
-package com.javatracer.model.info;
+package com.javatracer.model.data;
 
 import java.util.List;
 
@@ -8,15 +8,15 @@ public class MethodExitInfo implements InterfaceInfo{
 	String methodName;
 	String className;
 	Object returnObject;
-	List<VariableInfo> argumentsThis;
+	VariableInfo objectThis;
 	List<VariableInfo> arguments;
 	
 	public MethodExitInfo(String methodName, String className,Object returnObject,List<VariableInfo> arguments, 
-			List<VariableInfo> argumentsThis) {
+			VariableInfo objectThis) {
 		this.methodName = methodName;
 		this.className = className;
 		this.returnObject = returnObject;
-		this.argumentsThis=argumentsThis;
+		this.objectThis=objectThis;
 		this.arguments = arguments;
 	}
 

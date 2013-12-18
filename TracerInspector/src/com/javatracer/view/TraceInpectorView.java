@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,7 +13,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JSplitPane;
 
 import com.javatracer.controller.TraceInspectorController;
+import com.javatracer.model.data.VariableInfo;
 import com.javatracer.view.tree.TextInBoxExt;
+import com.javatracer.viewlogic.ObjectInspector;
 import com.traceinspector.datamodel.TreeNode;
 
 @SuppressWarnings("serial")
@@ -38,7 +41,7 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		
 		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		split.setLeftComponent(treeInspector);
-		split.setRightComponent(objectInspector);
+		split.setRightComponent(objectInspector.getView());
 		split.setEnabled(false);
 				
 		setContentPane(split);
@@ -92,6 +95,11 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		if (e.getSource() == items[0]){
 			controller.clickedOpen();
 		}
+	}
+
+	public void loadNewVariables(List<VariableInfo> list) {
+		objectInspector.clear();
+		objectInspector.loadVariables(list);
 	}
 
 }

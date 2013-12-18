@@ -3,7 +3,7 @@ package com.traceinspector.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javatracer.model.info.VariableInfo;
+import com.javatracer.model.data.VariableInfo;
 
 public class MethodNode{
 	

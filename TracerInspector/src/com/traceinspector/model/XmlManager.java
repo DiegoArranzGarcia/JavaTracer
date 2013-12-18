@@ -21,12 +21,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.info.ArrayInfo;
-import com.javatracer.model.info.MethodEntryInfo;
-import com.javatracer.model.info.MethodExitInfo;
-import com.javatracer.model.info.NullObject;
-import com.javatracer.model.info.ObjectInfo;
-import com.javatracer.model.info.VariableInfo;
+import com.javatracer.model.data.ArrayInfo;
+import com.javatracer.model.data.MethodEntryInfo;
+import com.javatracer.model.data.MethodExitInfo;
+import com.javatracer.model.data.NullObject;
+import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.thoughtworks.xstream.XStream;
 import com.traceinspector.datamodel.MethodNode;
 

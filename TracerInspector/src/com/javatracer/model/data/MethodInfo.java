@@ -1,4 +1,4 @@
-package com.javatracer.model.info;
+package com.javatracer.model.data;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ public class MethodInfo {
 	String name;
 	String calledFromClass;
 	List<VariableInfo> arguments;
-	List<VariableInfo> thisObject;
+	VariableInfo thisObject;
 	List<String> changes;
 
-	public MethodInfo(String name, String calledFromClass, List<VariableInfo> arguments,List<VariableInfo> thisObject) {
+	public MethodInfo(String name, String calledFromClass, List<VariableInfo> arguments,VariableInfo thisObject) {
 		this.name = name;
 		this.calledFromClass = calledFromClass;
 		this.arguments = arguments;

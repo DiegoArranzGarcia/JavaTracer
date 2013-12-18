@@ -3,6 +3,8 @@ package com.traceinspector.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javatracer.model.data.VariableInfo;
+
 public class TreeNode{
 
 	MethodNode node;
@@ -48,18 +50,17 @@ public class TreeNode{
 		this.calledMethods = calledMethods;
 	}
 	
-	public TreeNode getNode(TreeNode tree,long id){
+	public TreeNode getNode(long id){
 		TreeNode node = null;
-		if (tree.node.getId()==id)
-			node = tree;
+		if (this.node.getId()==id)
+			node = this;
 		else {
-			
 			boolean found = false;
 			int i = 0;
-			List<TreeNode> childs = tree.calledMethods;
+			List<TreeNode> childs = this.calledMethods;
 			
 			while (!found && i<childs.size()){
-				node = getNode(childs.get(i), id);
+				node = childs.get(i).getNode(id);
 				found = (node != null);
 				i++;
 			}
@@ -69,7 +70,7 @@ public class TreeNode{
 		
 		return node;
 	}
-
+	
 	public void addChilds(List<TreeNode> childs) {
 		this.calledMethods.addAll(childs);		
 	}
@@ -80,6 +81,17 @@ public class TreeNode{
 
 	public void clearCalledMethods() {
 		calledMethods.clear();		
+	}
+
+	public List<VariableInfo> getVariablesFrom(long id) {
+		
+		List<VariableInfo> variables = new ArrayList<VariableInfo>();
+		
+		TreeNode node = getNode(id);
+		if (node!=null) 
+			variables = node.getNode().getVariables();
+		
+		return variables;
 	}
 	
 }

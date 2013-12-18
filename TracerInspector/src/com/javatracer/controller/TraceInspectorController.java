@@ -1,8 +1,6 @@
 package com.javatracer.controller;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -33,9 +31,10 @@ public class TraceInspectorController implements MouseListener{
 		if (lastSelected!=null)
 			lastSelected.selected = false;
 		
-		if (textInBoxExt!=null)
+		if (textInBoxExt!=null){
 			textInBoxExt.selected = true;
-		
+			view.loadNewVariables(tree.getVariablesFrom(textInBoxExt.getId()));
+		}
 		lastSelected = textInBoxExt;
 		view.repaintTree();
 	}
@@ -46,7 +45,7 @@ public class TraceInspectorController implements MouseListener{
 		
 		if (textInBoxExt!=null){
 			
-			TreeNode node = tree.getNode(tree,textInBoxExt.getId());
+			TreeNode node = tree.getNode(textInBoxExt.getId());
 			
 			if (!node.hasChilds()){
 				treeGenerator.expandNode(node,textInBoxExt.getId());
@@ -71,21 +70,13 @@ public class TraceInspectorController implements MouseListener{
 		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
-	
-	}
+	public void mouseEntered(MouseEvent e){}
 
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent e){}
 
-	}
+	public void mousePressed(MouseEvent e){}
 
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	public void mouseReleased(MouseEvent e) {
-
-	}
+	public void mouseReleased(MouseEvent e){}
 
 	public void clickedOpen(){
 		System.out.println("olaf q ase");

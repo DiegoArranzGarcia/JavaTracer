@@ -1,4 +1,4 @@
-package com.javatracer.model.info;
+package com.javatracer.model.data;
 
 import java.util.List;
 
