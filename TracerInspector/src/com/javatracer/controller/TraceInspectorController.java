@@ -3,6 +3,9 @@ package com.javatracer.controller;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
 
 import com.javatracer.view.TraceInpectorView;
 import com.javatracer.view.tree.TextInBoxExt;
@@ -19,8 +22,7 @@ public class TraceInspectorController implements MouseListener{
 	
 	public TraceInspectorController(){
 		treeGenerator = new TreeGenerator();
-		tree = treeGenerator.loadFromFile("trace.xml");
-		view = new TraceInpectorView(tree,this);
+		view = new TraceInpectorView(this);
 		view.setVisible(true);
 	}
 
@@ -79,7 +81,23 @@ public class TraceInspectorController implements MouseListener{
 	public void mouseReleased(MouseEvent e){}
 
 	public void clickedOpen(){
-		System.out.println("olaf q ase");
+		
+		JFileChooser chooser = new JFileChooser();
+		//Title window
+		chooser.setDialogTitle("Java Tracer");
+		chooser.setCurrentDirectory(new java.io.File("."));
+		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
+		//return directory file
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			try {
+				tree = treeGenerator.loadFromFile(chooser.getSelectedFile().getCanonicalPath());
+				view.createTree(tree);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		} else chooser.cancelSelection();
+		
 	}
 	
 }

@@ -54,7 +54,7 @@ public class ObjectInspector {
 		} else if (value instanceof ObjectInfo){
 			stringValue = "(id=" + ((ObjectInfo)value).getId() + ")";
 		} else if (value instanceof NullObject){
-			stringValue = null;
+			stringValue = "null";
 		} else {
 			stringValue = value.toString();
 		}

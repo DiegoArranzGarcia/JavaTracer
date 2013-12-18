@@ -1,5 +1,6 @@
 package com.javatracer.view;
 
+import java.awt.Component;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.Iterator;
 import java.util.List;
@@ -37,16 +38,15 @@ public class TreeInspector extends JScrollPane {
 	static TreePanel panel;
 	
 	public TreeInspector(TreeNode root,TraceInspectorController controller) {
-		super(createTreePanel(root, controller));
+		super(createTreePanel(root,controller));
 		
 		this.controller = controller;
-		
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 	}
- 
-	 private static TreePanel createTreePanel(TreeNode root,TraceInspectorController controller) {
+	 
+	 public static Component createTreePanel(TreeNode root,TraceInspectorController controller) {
 		tree = createTree(root);
 		//setup the tree layout configuration
 		double gapBetweenLevels = 50;
@@ -62,7 +62,9 @@ public class TreeInspector extends JScrollPane {
 		// Create a panel that draws the nodes and edges and show the panel
 		panel = new TreePanel(treeLayout);
 		panel.addMouseListener(controller);
+		
 		return panel;
+
 	}
 
 	private static DefaultTreeLayout<TextInBox> createTree(TreeNode rootNode){

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import com.javatracer.controller.TraceInspectorController;
@@ -27,7 +28,7 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 	private JSplitPane split;
 	private JMenuItem[] items;
 	
-	public TraceInpectorView(TreeNode tree, TraceInspectorController controller) {
+	public TraceInpectorView(TraceInspectorController controller) {
 		
 		this.controller = controller;
 		
@@ -36,11 +37,11 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		setTitle("TraceInspector");
 		addComponentListener(this);
 		
-		treeInspector = new TreeInspector(tree, controller);
+		//treeInspector = new TreeInspector(controller);
 		objectInspector = new ObjectInspector();
 		
 		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		split.setLeftComponent(treeInspector);
+		split.setLeftComponent(new JPanel());
 		split.setRightComponent(objectInspector.getView());
 		split.setEnabled(false);
 				
@@ -100,6 +101,12 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 	public void loadNewVariables(List<VariableInfo> list) {
 		objectInspector.clear();
 		objectInspector.loadVariables(list);
+	}
+
+	public void createTree(TreeNode tree) {
+		treeInspector = new TreeInspector(tree,controller);
+		split.setLeftComponent(treeInspector);
+		split.setDividerLocation(0.75f);
 	}
 
 }

@@ -31,9 +31,7 @@ import com.thoughtworks.xstream.XStream;
 import com.traceinspector.datamodel.MethodNode;
 
 public class XmlManager {
- 
-   public final String OUTPUT_NAME = "output.xml";
-   
+    
    public static String TAG_TRACE = "trace";
    public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
    public static String TAG_METHOD = "method-call";
