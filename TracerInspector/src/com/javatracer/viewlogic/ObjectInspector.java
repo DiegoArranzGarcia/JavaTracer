@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.data.ArrayInfo;
+import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.javatracer.view.ObjectInspectorView;
@@ -52,6 +53,8 @@ public class ObjectInspector {
 			stringValue += "]";
 		} else if (value instanceof ObjectInfo){
 			stringValue = "(id=" + ((ObjectInfo)value).getId() + ")";
+		} else if (value instanceof NullObject){
+			stringValue = null;
 		} else {
 			stringValue = value.toString();
 		}
