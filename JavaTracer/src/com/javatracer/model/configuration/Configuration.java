@@ -18,8 +18,7 @@ public class Configuration {
 	private  FileWriter fileWriter;
  
     public Configuration() {
-    	fileInput= null;
-    	fileWriter =null;
+
     	/*
     	 * Create a file configuration
     	 */
@@ -29,8 +28,8 @@ public class Configuration {
         	/*
         	 * The file is created on disk
         	 */
-        	File file = new File(CONFIG_FILE_NAME);
-        	if(!file.exists()){
+        	
+        		System.out.println("FICHERO NO EXISTE ");
         		fileWriter = new FileWriter(CONFIG_FILE_NAME);
             	
             	/*
@@ -45,13 +44,16 @@ public class Configuration {
                 /*
                  * Now we add information to the properties through a Hashmap
                  */
-                properties.putAll(getConfig());
+           
+                	properties.putAll(getConfig());
                 /*
                  * Save the data on the properties
                  */
                 properties.store(new FileOutputStream("configuration.properties"),"Config");
                 fileWriter.close();
-        	}
+                fileInput.close();
+        	
+        	System.out.println("FICHERO  EXISTE ");
         	
         } catch (IOException ex) {
             ex.printStackTrace();
