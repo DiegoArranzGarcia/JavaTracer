@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.javatracer.view.TraceInpectorView;
 import com.javatracer.view.tree.TextInBoxExt;
@@ -83,6 +84,8 @@ public class TraceInspectorController implements MouseListener{
 	public void clickedOpen(){
 		
 		JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("xml","xml");
+	    chooser.setFileFilter(filtroImagen);
 		//Title window
 		chooser.setDialogTitle("Java Tracer");
 		chooser.setCurrentDirectory(new java.io.File("."));

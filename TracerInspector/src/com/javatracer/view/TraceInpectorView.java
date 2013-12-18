@@ -52,18 +52,22 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 
 	private void createMenu(TraceInspectorController controller) {
 		JMenuBar menuBar = new JMenuBar();
-		items = new JMenuItem[1];
+		items = new JMenuItem[2];
 		
 		JMenu menuFile = new JMenu("File");
 		menuBar.add(menuFile);
 		
 		JMenuItem menuOpen = new JMenuItem("Open");
+		JMenuItem menuExit = new JMenuItem("Exit");
 		menuFile.add(menuOpen,0);
+		menuFile.add(menuExit,1);
 		items[0] = menuOpen;
+		items[1] = menuExit;
 		
 		setJMenuBar(menuBar);
 		
 		menuOpen.addActionListener(this);
+		menuExit.addActionListener(this); 
 	}
 
 	public TextInBoxExt clickedOnTree(int x, int y) {
@@ -95,7 +99,8 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == items[0]){
 			controller.clickedOpen();
-		}
+		}else if(e.getSource() == items[1])
+				System.exit(0);
 	}
 
 	public void loadNewVariables(List<VariableInfo> list) {
