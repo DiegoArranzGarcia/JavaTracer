@@ -63,7 +63,7 @@ public class Configuration {
  
     private HashMap getConfig() {
     	HashMap map= new HashMap();
-    	map.put("excludes", "java.*,javax.*,sun.*,com.sun.*,java.awt.*,java.swing*");
+    	map.put("excludes", "java.*,javax.*,sun.*,com.sun.*");
         return map;
 
 	}

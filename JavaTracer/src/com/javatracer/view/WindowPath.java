@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -57,8 +58,13 @@ public class WindowPath extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true); 		
+		Image icon = new ImageIcon(getClass().getResource("j4.jpe")).getImage();
+		setIconImage(icon);
 	
+		
+		setVisible(true); 	
+
+		
 		labelPath = new JLabel("Select the directory ");
 		labelPath.setBounds(new Rectangle(540,30));
 		labelPath.setLocation(FIRST_COL, FIRST_ROW); 
@@ -68,6 +74,7 @@ public class WindowPath extends JFrame {
 		path = new TextField();
 		path.setBounds(new Rectangle(450,30));
 		path.setLocation(SECOND_COL, FIRST_ROW); 
+		path.setEditable(false);
 		path.setBackground(Color.white);	
 		
 		helpPath = new JButton();
@@ -86,6 +93,8 @@ public class WindowPath extends JFrame {
 		nameClass.setBounds(new Rectangle(450,30));
 		nameClass.setLocation(SECOND_COL, SECOND_ROW); 
 		nameClass.setBackground(Color.white); 
+		nameClass.setEditable(false);
+		nameClass.setEnabled(false); 
 		
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
@@ -101,6 +110,7 @@ public class WindowPath extends JFrame {
 		nameXml = new TextField();
 		nameXml.setBounds(new Rectangle(450,30));
 		nameXml.setLocation(SECOND_COL,THIRD_ROW);
+		nameXml.setEnabled(false); 
 			 
 		helpXmlFile = new JButton();
 		helpXmlFile.setBounds(new Rectangle(25,25));
@@ -126,6 +136,7 @@ public class WindowPath extends JFrame {
 		tracer.setLocation(TRACER_COL, CANCEL_TRACER_ROW); 
 		tracer.setBackground(Color.white);  
 		tracer.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
+		tracer.setEnabled(false); 
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -148,8 +159,13 @@ public class WindowPath extends JFrame {
 									
 									String[] args=ProcessPath(file,name);
 									String nameXlm = nameXml.getText();
-									if (nameXlm.equals("")) nameXlm ="default";
-									controller.startTrace(args,nameXlm); 
+									if (nameXlm.contains(".xml") || nameXlm.contains(".XML")){
+										errorNameXml();
+									} else {
+											if (nameXlm.equals("")) nameXlm ="default";
+											controller.startTrace(args,nameXlm); 	
+									}
+									
 					
 								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
 						
@@ -180,11 +196,13 @@ public class WindowPath extends JFrame {
 				chooser.setCurrentDirectory(new java.io.File("."));
 				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				//return directory file
-				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {		
+					 
  					String sf=chooser.getSelectedFile().toString();
+ 					nameClass.setEnabled(true);
+ 					nameXml.setEnabled(true); 
 					path.setText(sf);
-					controller.loadClassFromPath(sf);
-				
+					controller.loadClassFromPath(sf);		
 				} else chooser.cancelSelection();
 				
 			}
@@ -224,7 +242,11 @@ public class WindowPath extends JFrame {
 	}
 	
 	
-
+	public void errorNameXml(){
+		JOptionPane.setDefaultLocale(new Locale("en"));
+		JOptionPane.showMessageDialog(new JFrame(), "The file name is invalid, should not lead extension "
+				+ "	launched ");
+	}
 
 
 	public void InitLoading(){
@@ -247,7 +269,7 @@ public class WindowPath extends JFrame {
 		for (int i=0;i<classes.size();i++){
 			nameClass.addItem(classes.get(i));
 		}
-		
+		tracer.setEnabled(true);
 	}
 
 	private String[] ProcessPath(String file, String name) {
