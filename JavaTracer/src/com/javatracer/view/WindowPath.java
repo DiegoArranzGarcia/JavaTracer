@@ -2,12 +2,12 @@ package com.javatracer.view;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,7 +24,7 @@ import com.javatracer.controller.TracerController;
 @SuppressWarnings("serial")
 public class WindowPath extends JFrame {
 
-	private JButton tracer,examine,cancel,helpPath,helpNameClass;
+	private JButton tracer,examine,cancel,helpPath,helpNameClass,helpXmlFile;
 	private TextField path,nameXml;
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
@@ -32,15 +32,25 @@ public class WindowPath extends JFrame {
 	private TracerController controller;
 	private LoadingMain loading;
 	private Container contentPane;
+	private static int FIRST_ROW = 60;
+	private static int SECOND_ROW = 120;
+	private static int THIRD_ROW = 170;
+	private static int FIRST_COL= 35;
+	private static int SECOND_COL = 320;
+	private static int THIRD_COL = 790;
+	private static int EXAMINE_COL = 220;
+	private static int CANCEL_TRACER_ROW = 220;
+	private static int CANCEL_COL = 480;
+	private static int TRACER_COL = 300;
+	private static int LABELS_SIZE = 14;
+
 	
 	public WindowPath(TracerController controller) {
 		this.controller = controller;
-		initialice();
+		initialice();	
 	} 
 	
 	public void initialice(){
-
-		//Inspector i= new Inspector();
 		
 		setTitle("Java Tracer");
 		setSize(850, 300);  
@@ -48,56 +58,61 @@ public class WindowPath extends JFrame {
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true); 		
-		
+	
 		labelPath = new JLabel("Select the directory ");
 		labelPath.setBounds(new Rectangle(540,30));
-		labelPath.setLocation(20, 60); 
+		labelPath.setLocation(FIRST_COL, FIRST_ROW); 
 		labelPath.setBackground(Color.white); 
-		
-		labelNameClass = new JLabel("Insert the name of Main class");
-		labelNameClass.setBounds(new Rectangle(540,30));
-		labelNameClass.setLocation(20, 120); 
-		labelNameClass.setBackground(Color.white); 
+		labelPath.setFont(new Font("Comic Sans MS",Font.ROMAN_BASELINE, LABELS_SIZE)); 
 		
 		path = new TextField();
 		path.setBounds(new Rectangle(450,30));
-		path.setLocation(250, 60); 
-		path.setBackground(Color.white); 
-		
-		nameClass = new JComboBox();
-		nameClass.setBounds(new Rectangle(450,30));
-		nameClass.setLocation(250, 120); 
-		nameClass.setBackground(Color.white); 
+		path.setLocation(SECOND_COL, FIRST_ROW); 
+		path.setBackground(Color.white);	
 		
 		helpPath = new JButton();
 		helpPath.setBounds(new Rectangle(25,25));
-		helpPath.setLocation(210, 62); 
-		String curDir = System.getProperty("user.dir");
-		String dirImage=curDir+"\\src\\resource\\image6.jpe";
-		//helpPath.setIcon(new ImageIcon(dirImage));
+		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
 		helpPath.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
 		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
 		
-		
-		labelXml = new JLabel("Insert the name's xml otuput ");
-		labelXml.setBounds(new Rectangle(200,30)); 
-		labelXml.setLocation(20, 170); 
-		
-		nameXml = new TextField();
-		nameXml.setBounds(new Rectangle(450,30));
-		nameXml.setLocation(250,170);
+		labelNameClass = new JLabel("Insert the name of Main class");
+		labelNameClass.setBounds(new Rectangle(540,30));
+		labelNameClass.setLocation(FIRST_COL, SECOND_ROW); 
+		labelNameClass.setBackground(Color.white); 
+		labelNameClass.setFont(new Font("Comic Sans MS",Font.ROMAN_BASELINE, LABELS_SIZE));
+				
+		nameClass = new JComboBox();
+		nameClass.setBounds(new Rectangle(450,30));
+		nameClass.setLocation(SECOND_COL, SECOND_ROW); 
+		nameClass.setBackground(Color.white); 
 		
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
-		helpNameClass.setLocation(210, 120); 
+		helpNameClass.setLocation(THIRD_COL, SECOND_ROW); 
 		helpNameClass.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
-		//helpNameClass.setIcon(new ImageIcon(dirImage));
 		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
+			
+		labelXml = new JLabel("Insert xml name");
+		labelXml.setBounds(new Rectangle(200,30)); 
+		labelXml.setLocation(FIRST_COL, THIRD_ROW); 
+		labelXml.setFont(new Font("Comic Sans MS",Font.ROMAN_BASELINE, LABELS_SIZE));
+		
+		nameXml = new TextField();
+		nameXml.setBounds(new Rectangle(450,30));
+		nameXml.setLocation(SECOND_COL,THIRD_ROW);
 			 
+		helpXmlFile = new JButton();
+		helpXmlFile.setBounds(new Rectangle(25,25));
+		helpXmlFile.setLocation(THIRD_COL, THIRD_ROW); 
+		helpXmlFile.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
+		helpXmlFile.setToolTipText("Filename without extension");
+		
 		cancel =new JButton("Cancel");
 		cancel.setBounds(new Rectangle(100,40));
-		cancel.setLocation(450, 220); 
+		cancel.setLocation(CANCEL_COL, CANCEL_TRACER_ROW); 
 		cancel.setBackground(Color.white); 
+		cancel.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0); 
@@ -108,8 +123,9 @@ public class WindowPath extends JFrame {
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
 		tracer.setBounds(new Rectangle(100,40));
-		tracer.setLocation(300, 220); 
+		tracer.setLocation(TRACER_COL, CANCEL_TRACER_ROW); 
 		tracer.setBackground(Color.white);  
+		tracer.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -151,9 +167,10 @@ public class WindowPath extends JFrame {
 		
 		examine = new JButton("Examine"); 
 		examine.setLayout(new GridLayout(1,1)); 
-		examine.setBounds(new Rectangle(100,30));
-		examine.setLocation(730, 60); 
+		examine.setBounds(new Rectangle(90,30));
+		examine.setLocation(EXAMINE_COL, FIRST_ROW); 
 		examine.setBackground(Color.LIGHT_GRAY); 
+		examine.setFont(new Font("Comic Sans MS",Font.BOLD, 12)); 
 		examine.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -186,6 +203,7 @@ public class WindowPath extends JFrame {
 		add(helpNameClass);
 		add(labelXml);
 		add(nameXml);
+		add(helpXmlFile);
 		this.repaint();
 	}
 	
