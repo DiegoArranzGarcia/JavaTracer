@@ -1,4 +1,4 @@
-package com.javatracer.controller;
+package com.traceinspector.controller;
 
 
 public class LaunchTraceInspector {

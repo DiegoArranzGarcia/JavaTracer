@@ -12,12 +12,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.javatracer.controller.TraceInspectorController;
+import com.traceinspector.controller.TraceInspectorController;
 
 @SuppressWarnings("serial")
 public class TraceInpectorView extends JFrame implements ComponentListener,ActionListener{
 	
-	private static double DIVIDER_SPLIT = 0.7;
+	private static double DIVIDER_SPLIT = 0.75;
 	
 	private TraceInspectorController controller;
 	
@@ -91,7 +91,7 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		if (e.getSource() == items[0]){
 			controller.clickedOpen();
 		}else if(e.getSource() == items[1])
-				System.exit(0);
+			System.exit(0);
 	}
 
 }

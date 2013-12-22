@@ -6,10 +6,10 @@ import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.configuration.Configuration;
 import com.javatracer.model.data.VariableInfo;
-import com.javatracer.treeinspectorview.tree.DefaultTreeLayout;
-import com.javatracer.treeinspectorview.tree.TextInBoxExt;
+import com.traceinspector.model.configuration.Configuration;
+import com.traceinspector.treeinspectorview.DefaultTreeLayout;
+import com.traceinspector.treeinspectorview.TextInBoxExt;
 
 public class TreeManager {
 
@@ -46,8 +46,9 @@ public class TreeManager {
 			long id = xml.getIdFromNode(node);
 			String name = xml.getName(node);
 			List<VariableInfo> arguments = xml.loadArguments(node);
-			VariableInfo returnValue = xml.loadReturnValue(node);			
-			root = new TextInBoxExt(id,name,arguments,returnValue);
+			VariableInfo returnValue = xml.loadReturnValue(node);
+			VariableInfo thisValue = xml.loadThisValue(node);
+			root = new TextInBoxExt(id,name,arguments,returnValue,thisValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

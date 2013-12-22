@@ -8,10 +8,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.awt.geom.Rectangle2D.Double;
 
-import com.javatracer.controller.TraceInspectorController;
-import com.javatracer.treeinspectorview.tree.DefaultTreeLayout;
-import com.javatracer.treeinspectorview.tree.TextInBoxExt;
+import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
+import com.traceinspector.treeinspectorview.DefaultTreeLayout;
+import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.view.TreeInspectorView;
 
 public class TreeInspector implements MouseListener {

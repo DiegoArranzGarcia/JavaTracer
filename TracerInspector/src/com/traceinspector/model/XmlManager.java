@@ -165,4 +165,9 @@ public class XmlManager {
 		return null;
 	}
 
+	public VariableInfo loadThisValue(Node node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,38 +1,93 @@
 package com.traceinspector.view;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+
+import org.jdesktop.swingx.JXTable;
+import org.jdesktop.swingx.JXTreeTable;
+import org.jdesktop.swingx.decorator.Highlighter;
+import org.jdesktop.swingx.decorator.HighlighterFactory;
+import org.jdesktop.swingx.renderer.DefaultTableRenderer;
+import org.jdesktop.swingx.renderer.StringValue;
+
+import com.traceinspector.objectinspectorview.MyTreeModel;
+import com.traceinspector.objectinspectorview.TableRowData;
+import com.traceinspector.objectinspectorview.TreeTableCellRenderer;
 
 @SuppressWarnings("serial")
 public class ObjectInspectorView extends JScrollPane{
 	
-	static DefaultTableModel model;
+	static MyTreeModel model;
+	static JXTreeTable binTree;
 	
 	public ObjectInspectorView() {
    	    super(createTable());   
 	}
 
-	private static Component createTable() {
+	private static Component createTable(){
 		
-		String[] columnNames = {"Variable","Value"};
-		model = new DefaultTableModel(columnNames,0);
+		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(new TableRowData("Name","Value",true));
+		model = new MyTreeModel(rootNode);
+		binTree = new JXTreeTable(model);
+    	
+    	Highlighter highligher = HighlighterFactory.createSimpleStriping(HighlighterFactory.BEIGE);
+    	binTree.setHighlighters(highligher);
+        binTree.setShowGrid(false);
+        binTree.setShowsRootHandles(false);
+        configureCommonTableProperties(binTree);
+        binTree.setTreeCellRenderer(new TreeTableCellRenderer());
+        binTree.setExpandsSelectedPaths(true);
+              
+        return binTree;
+    }
+    
+    private static void  configureCommonTableProperties(JXTable table) {
+        table.setColumnControlVisible(true);
+        StringValue toString = new StringValue() {
 
-		JTable table = new JTable(model);
-		return table;
+            public String getString(Object value) {
+                if (value instanceof Point) {
+                    Point p = (Point) value;
+                    return createString(p.x, p.y);
+                } else if (value instanceof Dimension) {
+                    Dimension dim = (Dimension) value;
+                    return createString(dim.width, dim.height);
+                }
+               return "";
+            }
+
+            private String createString(int width, int height) {
+                return "(" + width + ", " + height + ")";
+            }
+            
+        };
+        TableCellRenderer renderer = new DefaultTableRenderer(toString);
+        table.setDefaultRenderer(Point.class, renderer);
+        table.setDefaultRenderer(Dimension.class, renderer);
 	}
 
 	public void addVariable(String name, String value) {
-		Object[] variable = {name,value};
-		model.addRow(variable);
+		
+		model.addNode(name,value,false);
+		binTree.updateUI();
 	}
 
 	public void clear() {
-		model.setRowCount(0);		
+				
+		model.clearTable();
+		binTree.updateUI();
+
 	}
 
-
+	public void showVariables() {
+        binTree.expandPath(new TreePath(model.getRoot()));
+        binTree.updateUI();
+	}
 
 }

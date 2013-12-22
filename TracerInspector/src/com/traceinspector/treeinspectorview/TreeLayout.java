@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.javatracer.treeinspectorview.tree;
+package com.traceinspector.treeinspectorview;
 
 import static org.abego.treelayout.internal.util.Contract.checkArg;
 
@@ -46,8 +46,8 @@ import org.abego.treelayout.NodeExtentProvider;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
 
-import com.javatracer.treeinspectorview.tree.Configuration.AlignmentInLevel;
-import com.javatracer.treeinspectorview.tree.Configuration.Location;
+import com.traceinspector.treeinspectorview.Configuration.AlignmentInLevel;
+import com.traceinspector.treeinspectorview.Configuration.Location;
 
 /**
  * Implements the actual tree layout algorithm.

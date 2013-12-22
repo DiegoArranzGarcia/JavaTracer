@@ -1,6 +1,5 @@
-package com.javatracer.treeinspectorview.tree;
+package com.traceinspector.treeinspectorview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.data.ArrayInfo;
@@ -15,18 +14,21 @@ public class TextInBoxExt {
 	private String methodName;
 	private List<VariableInfo> arguments;
 	private VariableInfo returnValue;
+	private VariableInfo thisValue;
 	private boolean expanded;
 	private boolean selected;
 	
 	public TextInBoxExt(){
-		this.arguments = new ArrayList<>();
+		this.expanded = true;
+		this.selected = false;
 	}
 
-	public TextInBoxExt(long id, String name, List<VariableInfo> arguments,	VariableInfo returnValue) {
+	public TextInBoxExt(long id, String name, List<VariableInfo> arguments,	VariableInfo returnValue,VariableInfo thisValue) {
 		this.id = id;
 		this.methodName = name;
 		this.arguments = arguments;
 		this.returnValue = returnValue;
+		this.thisValue = thisValue;
 		this.expanded = false;
 		this.selected = false;
 	}
@@ -117,6 +119,14 @@ public class TextInBoxExt {
 			name= name + " = " + value.toString() + ", " ;		
 		
 		return name;
+	}
+
+	public VariableInfo getThisValue() {
+		return thisValue;
+	}
+
+	public void setThisValue(VariableInfo thisValue) {
+		this.thisValue = thisValue;
 	}
 	
 	

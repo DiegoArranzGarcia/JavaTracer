@@ -9,10 +9,10 @@ import javax.swing.JScrollPane;
 import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
 
-import com.javatracer.treeinspectorview.tree.DefaultTreeLayout;
-import com.javatracer.treeinspectorview.tree.TextInBoxExt;
-import com.javatracer.treeinspectorview.tree.TextInBoxNodeExtentProvider;
-import com.javatracer.treeinspectorview.tree.TreePanel;
+import com.traceinspector.treeinspectorview.DefaultTreeLayout;
+import com.traceinspector.treeinspectorview.TextInBoxExt;
+import com.traceinspector.treeinspectorview.TextInBoxNodeExtentProvider;
+import com.traceinspector.treeinspectorview.TreePanel;
 import com.traceinspector.viewlogic.TreeInspector;
 
 @SuppressWarnings("serial")

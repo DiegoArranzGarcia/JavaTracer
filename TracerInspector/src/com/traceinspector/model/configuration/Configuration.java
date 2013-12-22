@@ -1,4 +1,4 @@
-package com.javatracer.model.configuration;
+package com.traceinspector.model.configuration;
 
 
 import java.io.File;

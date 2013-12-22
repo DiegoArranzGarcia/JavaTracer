@@ -1,12 +1,12 @@
-package com.javatracer.controller;
+package com.traceinspector.controller;
 
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.javatracer.treeinspectorview.tree.TextInBoxExt;
 import com.traceinspector.model.TreeManager;
+import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.view.TraceInpectorView;
 import com.traceinspector.viewlogic.ObjectInspector;
 import com.traceinspector.viewlogic.TreeInspector;
