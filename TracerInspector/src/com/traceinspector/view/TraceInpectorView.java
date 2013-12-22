@@ -1,10 +1,9 @@
-package com.javatracer.view;
+package com.traceinspector.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,17 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import com.javatracer.controller.TraceInspectorController;
-import com.javatracer.model.data.VariableInfo;
-import com.javatracer.view.tree.TextInBoxExt;
-import com.javatracer.viewlogic.ObjectInspector;
-import com.traceinspector.datamodel.TreeNode;
 
 @SuppressWarnings("serial")
 public class TraceInpectorView extends JFrame implements ComponentListener,ActionListener{
 	
-	private TreeInspector treeInspector;
+	private static double DIVIDER_SPLIT = 0.7;
+	
 	private TraceInspectorController controller;
-	private ObjectInspector objectInspector;
+	
 	private JSplitPane split;
 	private JMenuItem[] items;
 	
@@ -36,20 +32,31 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("TraceInspector");
 		addComponentListener(this);
-		
-		//treeInspector = new TreeInspector(controller);
-		objectInspector = new ObjectInspector();
-		
+				
 		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		split.setLeftComponent(new JPanel());
-		split.setRightComponent(objectInspector.getView());
+		split.setRightComponent(new JPanel());
+		split.setDividerLocation(DIVIDER_SPLIT);
 		split.setEnabled(false);
 				
 		setContentPane(split);
 		
 		createMenu(controller);
 	}	
+	
+	public void loadTreeInspector(TreeInspectorView treeInspectorView){
+		
+		split.setLeftComponent(treeInspectorView);
+		split.setDividerLocation(DIVIDER_SPLIT);
+	}
+	
+	public void loadObjectInspector(ObjectInspectorView objectInspectorView){
 
+		split.setRightComponent(objectInspectorView);
+		split.setDividerLocation(DIVIDER_SPLIT);
+		
+	}
+	
 	private void createMenu(TraceInspectorController controller) {
 		JMenuBar menuBar = new JMenuBar();
 		items = new JMenuItem[2];
@@ -70,28 +77,12 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 		menuExit.addActionListener(this); 
 	}
 
-	public TextInBoxExt clickedOnTree(int x, int y) {
-		return treeInspector.clickedOnTree(x, y);
-	}
-
-	public void repaintTree() {
-		treeInspector.repaintTree();
-	}
-
-	public void expandTreeNode(TextInBoxExt textInBoxExt, TreeNode node) {
-		treeInspector.expandTreeNode(textInBoxExt, node);
-	}
-
-	public void foldNode(TextInBoxExt textInBoxExt) {
-		treeInspector.foldNode(textInBoxExt);
-	}
-
 	public void componentHidden(ComponentEvent e) {}
 
 	public void componentMoved(ComponentEvent e) {}
 
 	public void componentResized(ComponentEvent e) {
-		split.setDividerLocation(0.75f);
+		split.setDividerLocation(DIVIDER_SPLIT);
 	}
 
 	public void componentShown(ComponentEvent e) {}
@@ -101,17 +92,6 @@ public class TraceInpectorView extends JFrame implements ComponentListener,Actio
 			controller.clickedOpen();
 		}else if(e.getSource() == items[1])
 				System.exit(0);
-	}
-
-	public void loadNewVariables(List<VariableInfo> list) {
-		objectInspector.clear();
-		objectInspector.loadVariables(list);
-	}
-
-	public void createTree(TreeNode tree) {
-		treeInspector = new TreeInspector(tree,controller);
-		split.setLeftComponent(treeInspector);
-		split.setDividerLocation(0.75f);
 	}
 
 }

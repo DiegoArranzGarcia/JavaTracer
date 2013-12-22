@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javatracer.view.tree;
+package com.javatracer.treeinspectorview.tree;
 
 import org.abego.treelayout.NodeExtentProvider;
 
@@ -40,15 +40,19 @@ import org.abego.treelayout.NodeExtentProvider;
  * @author Udo Borkowski (ub@abego.org)
  */
 public class TextInBoxNodeExtentProvider implements
-		NodeExtentProvider<TextInBox> {
+		NodeExtentProvider<TextInBoxExt> {
 
-	@Override
-	public double getWidth(TextInBox treeNode) {
-		return treeNode.width;
+	public double getHeight(TextInBoxExt arg0) {
+		return TreePanel.DEFAULT_HEIGHT_BOX;
 	}
 
-	@Override
-	public double getHeight(TextInBox treeNode) {
-		return treeNode.height;
+	public double getWidth(TextInBoxExt arg0) {
+		
+		double width = 0;
+		String name = arg0.giveMeTextInBox();
+		 if (name.length()>2) width = TreePanel.WIDTH_BY_LETTER * name.length() + TreePanel.DEFAULT_WIDTH_BOX;
+		return width;
 	}
+
+
 }

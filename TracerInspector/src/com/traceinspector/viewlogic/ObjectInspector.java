@@ -1,32 +1,43 @@
-package com.javatracer.viewlogic;
+package com.traceinspector.viewlogic;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javatracer.controller.TraceInspectorController;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
 import com.javatracer.model.data.VariableInfo;
-import com.javatracer.view.ObjectInspectorView;
+import com.javatracer.treeinspectorview.tree.TextInBoxExt;
+import com.traceinspector.model.TreeManager;
+import com.traceinspector.view.ObjectInspectorView;
 
 public class ObjectInspector {
 
+	private TraceInspectorController controller;
+	private TreeManager treeManager;
+	
 	private int numFilledrows;
 	private List<VariableInfo> variables;
 	private ObjectInspectorView view;
 	
-	public ObjectInspector(){
-		numFilledrows = 0;
-		variables =  new ArrayList<>();
-		view = new ObjectInspectorView();
+	public ObjectInspector(TraceInspectorController controller, TreeManager treeManager){
+		
+		this.controller = controller;
+		this.treeManager = treeManager;
+		
+		this.numFilledrows = 0;
+		this.variables =  new ArrayList<>();
+		this.view = new ObjectInspectorView();
 	}
 	
 	public ObjectInspectorView getView(){
 		return view;
 	}
 
-	public void loadVariables(List<VariableInfo> variables) {
-		this.variables = variables;
+	public void addVariables(TextInBoxExt box) {
+		
+		this.variables = box.getArguments();
 		numFilledrows += variables.size();
 		
 		for (int i=0;i<variables.size();i++){

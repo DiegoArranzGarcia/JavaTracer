@@ -26,27 +26,4 @@ public class VariableInfo {
 		this.value = value;
 	}
 	
-	public String CompleteArgumentString() {
-				
-		String name="";
-		if (value instanceof ArrayInfo)
-			name=((ArrayInfo)value).className +"[ ]"+" "+this.name + ", " ;
-		else
-			if (value instanceof ObjectInfo)
-					name=((ObjectInfo)value).getClassName() +" "+this.name + ", " ;
-				 else 
-					 if (value instanceof NullObject)
-							name= this.name + " = null, " ;
-					 else
-						 if (value instanceof String)
-							       name= this.name + " = \"" + value.toString() + "\", " ;
-						 else
-							 name= this.name + " = " + value.toString() + ", " ;
-			
-		
-		
-		return name;
-	}
-
-	
 }

@@ -1,4 +1,4 @@
-package com.javatracer.view;
+package com.traceinspector.view;
 
 import java.awt.Component;
 

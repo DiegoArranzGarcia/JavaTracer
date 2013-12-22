@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javatracer.view;
+package com.javatracer.treeinspectorview.tree;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -43,35 +43,37 @@ import javax.swing.JPanel;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
 
-import com.javatracer.view.tree.TextInBox;
-
 @SuppressWarnings("serial")
 public class TreePanel extends JPanel {
 	
-	private TreeLayout<TextInBox> treeLayout;
+	static final double DEFAULT_WIDTH_BOX = 80;
+	static final double DEFAULT_HEIGHT_BOX = 60;
+	static final double WIDTH_BY_LETTER = 8;
+	
+	private TreeLayout<TextInBoxExt> treeLayout;
 
-	private TreeForTreeLayout<TextInBox> getTree() {
+	private TreeForTreeLayout<TextInBoxExt> getTree() {
 		return treeLayout.getTree();
 	}
 
-	private Iterable<TextInBox> getChildren(TextInBox parent) {
+	private Iterable<TextInBoxExt> getChildren(TextInBoxExt parent) {
 		return getTree().getChildren(parent);
 	}
 
-	private Rectangle2D.Double getBoundsOfNode(TextInBox node) {
+	private Rectangle2D.Double getBoundsOfNode(TextInBoxExt node) {
 		return treeLayout.getNodeBounds().get(node);
 	}
 	
-	public void setTree(TreeLayout<TextInBox> treeLayout){
+	public void setTree(TreeLayout<TextInBoxExt> treeLayout){
 		this.treeLayout = treeLayout;
 		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 	}
 
-	public TreePanel(TreeLayout<TextInBox> treeLayout) {
+	public TreePanel(TreeLayout<TextInBoxExt> treeLayout2) {
 		
-		this.treeLayout = treeLayout;
+		this.treeLayout = treeLayout2;
 		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
-		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
+		setPreferredSize(new Dimension((int)treeLayout2.getBounds().getWidth()+1,(int)treeLayout2.getBounds().getHeight()+1));
 		
 	}
 
@@ -80,12 +82,12 @@ public class TreePanel extends JPanel {
 	private final static Color BORDER_COLOR = Color.darkGray;
 	private final static Color TEXT_COLOR = Color.white;
 
-	private void paintEdges(Graphics g, TextInBox parent) {
+	private void paintEdges(Graphics g, TextInBoxExt parent) {
 		if (!getTree().isLeaf(parent)) {
 			Rectangle2D.Double b1 = getBoundsOfNode(parent);
 			double x1 = b1.getCenterX();
 			double y1 = b1.getCenterY();
-			for (TextInBox child : getChildren(parent)) {
+			for (TextInBoxExt child : getChildren(parent)) {
 				Rectangle2D.Double b2 = getBoundsOfNode(child);
 				g.drawLine((int) x1, (int) y1, (int) b2.getCenterX(),
 						(int) b2.getCenterY());
@@ -95,7 +97,7 @@ public class TreePanel extends JPanel {
 		}
 	}
 
-	private void paintBox(Graphics g, TextInBox textInBox) {
+	private void paintBox(Graphics g, TextInBoxExt textInBox) {
 		
 		//Graphics2D g2D = (Graphics2D)g; 
 		//g2D.setStroke(new BasicStroke(10));
@@ -104,7 +106,7 @@ public class TreePanel extends JPanel {
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
-		if (textInBox.selected){
+		if (textInBox.isSelected()){
 			Graphics2D g2D = (Graphics2D)g; 
 			g2D.setStroke(new BasicStroke(5));
 			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
@@ -116,23 +118,23 @@ public class TreePanel extends JPanel {
 					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		}
 		g.setColor(TEXT_COLOR);
-		String[] lines = textInBox.text.split("\n");
+		String[] lines = textInBox.giveMeTextInBox().split("\n");
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
-		int y = (int) box.y + textInBox.height/2 + m.getAscent()/2;
+		int y = (int) box.y + (int)DEFAULT_HEIGHT_BOX/2 + m.getAscent()/2;
 		for (int i = 0; i < lines.length; i++) {
 			g.drawString(lines[i], x, y);
 			y += m.getHeight();
 		}
 	}
-
+	
 	public void paint(Graphics g) {
 		super.paint(g);	
 		
 		if (treeLayout!=null){			
 			paintEdges(g, getTree().getRoot());
 	
-			for (TextInBox textInBox : treeLayout.getNodeBounds().keySet()) {
+			for (TextInBoxExt textInBox : treeLayout.getNodeBounds().keySet()) {
 				paintBox(g, textInBox);
 			}
 		}

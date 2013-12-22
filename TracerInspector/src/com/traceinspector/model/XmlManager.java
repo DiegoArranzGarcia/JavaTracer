@@ -28,7 +28,6 @@ import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.thoughtworks.xstream.XStream;
-import com.traceinspector.datamodel.MethodNode;
 
 public class XmlManager {
     
@@ -82,26 +81,13 @@ public class XmlManager {
 		}
 		return node;
 	}
-
-	public MethodNode getMethodInfoFromNode(Node infoNode){
-		MethodNode info = null;
-		try{
-			String name = getName(infoNode);
-			long id = getIdFromNode(infoNode);
-			info = new MethodNode(name,id);
-			info.setVariables(loadArgumets(infoNode));
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		return info;
-	}
 	
-	private long getIdFromNode(Node infoNode) throws Exception {
+	public long getIdFromNode(Node infoNode) throws Exception {
 		String id = infoNode.getAttributes().getNamedItem("id").getNodeValue();
 		return Long.parseLong(id);
 	}
 
-	private String getName(Node infoNode) throws Exception{
+	public String getName(Node infoNode) throws Exception{
 		String expression = "./info/name";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
@@ -109,7 +95,7 @@ public class XmlManager {
 	    return methodName;
 	}
 
-	private List<VariableInfo> loadArgumets(Node infoNode) throws XPathExpressionException{
+	public List<VariableInfo> loadArguments(Node infoNode) throws XPathExpressionException{
 		List<VariableInfo> arguments = new ArrayList<>();
 		String expression = "./info/arguments/*";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
@@ -172,6 +158,11 @@ public class XmlManager {
 		}
 		
 		return node;
+	}
+
+	public VariableInfo loadReturnValue(Node node) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javatracer.view.tree;
+package com.javatracer.treeinspectorview.tree;
 
 import static org.abego.treelayout.internal.util.Contract.checkArg;
 
@@ -57,7 +57,7 @@ import org.abego.treelayout.util.AbstractTreeForTreeLayout;
  * @param <TreeNode>
  */
 public class DefaultTreeLayout<E> extends
-		AbstractTreeForTreeLayout<E> {
+			AbstractTreeForTreeLayout<E> {
 
 	private List<E> emptyList;
 
@@ -118,8 +118,7 @@ public class DefaultTreeLayout<E> extends
 		}
 		list.add(node);
 		parents.put(node, parentNode);
-		
-		
+				
 		
 	}
 	
