@@ -3,6 +3,7 @@ package com.traceinspector.model.configuration;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,34 +27,47 @@ public class Configuration {
     	/*
     	 * Create a file configuration
     	 */
-        this.properties = new Properties();
-        try {
-        	
-	        	/*
-	        	 * The file is created on disk
-	        	 */
-	        	fileWriter = new FileWriter(CONFIG_FILE_NAME);
-	        	/*
-	        	 * The file is uploaded to a File to use the Load method
-	        	 */
-	        	fileInput = new FileInputStream(CONFIG_FILE_NAME);
-	        	/*
-	        	 * With the method load, we can load the object properties
-	        	 */
-	            properties.load(fileInput);
-	            /*
-	             * Now we add information to the properties through a Hashmap
-	             */
-	            properties.putAll(getConfig());
-	            /*
-	             * Save the data on the properties
-	             */
-	            properties.store(new FileOutputStream("configuration.properties"),"Config");
-	            fileWriter.close();
-        	
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    	this.properties = new Properties();
+    	
+    	File f = new File(CONFIG_FILE_NAME);
+    	if (f.exists()){
+    		try {
+				this.properties.load(new FileInputStream(CONFIG_FILE_NAME));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	else{	
+		        try {
+		        	
+			        	/*
+			        	 * The file is created on disk
+			        	 */
+			        	fileWriter = new FileWriter(CONFIG_FILE_NAME);
+			        	/*
+			        	 * The file is uploaded to a File to use the Load method
+			        	 */
+			        	fileInput = new FileInputStream(CONFIG_FILE_NAME);
+			        	/*
+			        	 * With the method load, we can load the object properties
+			        	 */
+			            properties.load(fileInput);
+			            /*
+			             * Now we add information to the properties through a Hashmap
+			             */
+			            properties.putAll(getConfig());
+			            /*
+			             * Save the data on the properties
+			             */
+			            properties.store(new FileOutputStream("configuration.properties"),"Config");
+			            fileWriter.close();
+		        	
+		        } catch (IOException ex) {
+		            ex.printStackTrace();
+		        }
+    	}
     }
 
     private HashMap getConfig() {
