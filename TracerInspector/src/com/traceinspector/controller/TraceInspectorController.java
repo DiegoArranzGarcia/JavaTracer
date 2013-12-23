@@ -28,8 +28,8 @@ public class TraceInspectorController {
 	public void clickedOpen(){
 		
 		JFileChooser chooser = new JFileChooser();
-	    FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("xml","xml");
-	    chooser.setFileFilter(filtroImagen);
+	    FileNameExtensionFilter filtroXml=new FileNameExtensionFilter("xml","xml");
+	    chooser.setFileFilter(filtroXml);
 		//Title window
 		chooser.setDialogTitle("Java Tracer");
 		chooser.setCurrentDirectory(new java.io.File("."));

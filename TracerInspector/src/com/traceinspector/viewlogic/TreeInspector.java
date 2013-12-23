@@ -53,11 +53,9 @@ public class TreeInspector implements MouseListener {
 	}
 
 
-	private void fold(TextInBoxExt box) {
-		
+	private void fold(TextInBoxExt box) {	
 		treeManager.foldNode(tree,box);
 		view.repaintTree(tree);
-		
 	}
 
 
