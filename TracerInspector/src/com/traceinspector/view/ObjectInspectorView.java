@@ -19,15 +19,18 @@ import org.jdesktop.swingx.renderer.StringValue;
 import com.traceinspector.objectinspectorview.MyTreeModel;
 import com.traceinspector.objectinspectorview.TableRowData;
 import com.traceinspector.objectinspectorview.TreeTableCellRenderer;
+import com.traceinspector.viewlogic.ObjectInspector;
 
 @SuppressWarnings("serial")
 public class ObjectInspectorView extends JScrollPane{
 	
 	static MyTreeModel model;
 	static JXTreeTable binTree;
+	private ObjectInspector controller;
 	
-	public ObjectInspectorView() {
-   	    super(createTable());   
+	public ObjectInspectorView(ObjectInspector controller) {
+   	    super(createTable());
+   	    this.controller = controller;
 	}
 
 	private static Component createTable(){
@@ -38,12 +41,10 @@ public class ObjectInspectorView extends JScrollPane{
     	
     	Highlighter highligher = HighlighterFactory.createSimpleStriping(HighlighterFactory.BEIGE);
     	binTree.setHighlighters(highligher);
-        binTree.setShowGrid(false);
         binTree.setShowsRootHandles(false);
         configureCommonTableProperties(binTree);
         binTree.setTreeCellRenderer(new TreeTableCellRenderer());
-        binTree.setExpandsSelectedPaths(true);
-              
+        
         return binTree;
     }
     
@@ -72,10 +73,19 @@ public class ObjectInspectorView extends JScrollPane{
         table.setDefaultRenderer(Dimension.class, renderer);
 	}
 
-	public void addVariable(String name, String value) {
+	public DefaultMutableTreeNode addVariable(String name, String value) {
 		
-		model.addNode(name,value,false);
+		DefaultMutableTreeNode node = model.addNodeToRoot(name,value,true);		
 		binTree.updateUI();
+		return node;
+	}
+
+	
+	public DefaultMutableTreeNode addVariableToNode(String name, String value,DefaultMutableTreeNode node) {
+		
+		DefaultMutableTreeNode addedNode = model.addNodeToNode(node,name,value,false);		
+		binTree.updateUI();
+		return addedNode;
 	}
 
 	public void clear() {

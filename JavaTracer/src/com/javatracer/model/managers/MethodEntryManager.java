@@ -1,6 +1,5 @@
 package com.javatracer.model.managers;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +15,35 @@ import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.event.MethodEntryEvent;
 
-
-
+/**
+ * This class handles every time that a method is called. In there the information 
+ * is registred in the trace or used for profiling porpurses. 
+ */
 public class MethodEntryManager extends VMEventsManager{
-	
+		
+	/**
+	 * Constructor that need a DataBaseWriter to register the method information.
+	 * @param dbw
+	 */
 	public MethodEntryManager(DataBaseWriter dbw)
 	{
 		super(dbw);
 	}
 	
-	// Forward event for thread specific processing
+	/**
+	 * This method is trigger every time one method (in not excluded classes) is called. </br>
+	 * The information that is collected is the following: </br>
+	 * </ul>
+	 * 		<li>Method's name</li>
+	 * 		<li>Method's Class (Class where the method is called)</li>
+	 * 		<li>Method's arguments</li>
+	 * 		<li>Method's Class information (State of the "this" object where the mehotd is called)</li>
+	 * </ul>
+	 * @param event - The event that is going to be processed.
+	 */
+	
     public void methodEntryEvent(MethodEntryEvent event) {
-    	
+    	   	
     	ThreadReference thread = event.thread();
        	Method method = event.method();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
@@ -74,7 +90,5 @@ public class MethodEntryManager extends VMEventsManager{
 		
 		return variableThis;
 	}
-
-
 
 }

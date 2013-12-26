@@ -3,6 +3,13 @@ package com.traceinspector.viewlogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.event.TreeWillExpandListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.ExpandVetoException;
+
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
@@ -12,7 +19,7 @@ import com.traceinspector.model.TreeManager;
 import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.view.ObjectInspectorView;
 
-public class ObjectInspector {
+public class ObjectInspector  {
 
 	private TraceInspectorController controller;
 	private TreeManager treeManager;
@@ -26,7 +33,7 @@ public class ObjectInspector {
 		this.treeManager = treeManager;
 		
 		this.variables =  new ArrayList<>();
-		this.view = new ObjectInspectorView();
+		this.view = new ObjectInspectorView(this);
 	}
 	
 	public ObjectInspectorView getView(){
@@ -39,41 +46,38 @@ public class ObjectInspector {
 		
 		for (int i=0;i<variables.size();i++){
 			VariableInfo variable = variables.get(i);
-			String value = getValueFromVariable(variable.getValue());
-			view.addVariable(variable.getName(),value);
+			addVariable(variable);
 		}
 		
 		view.showVariables();
 	}
 
-	private String getValueFromVariable(Object value) {
+	private void addVariable(VariableInfo variable) {
 		
-		String stringValue = "";
+		Object value = variable.getValue();
+		
 		if (value instanceof ArrayInfo){
 			ArrayInfo array = ((ArrayInfo)value);
 			List<Object> values = array.getValues();
-			stringValue = "[";
-			for (int i=0;i<values.size();i++){
-				if (i != 0){
-					stringValue += ",";
-				} 
-				stringValue += values.get(i).toString();
-			}
+			String name = variable.getName();
 			
-			stringValue += "]";
+			DefaultMutableTreeNode node = view.addVariable(name,"(id=ToDoArrayId)");
+			
+			for (int i=0;i<values.size();i++)
+				view.addVariableToNode(name + "[ + i + ]","ToDoValue",node);
+			
 		} else if (value instanceof ObjectInfo){
-			stringValue = "(id=" + ((ObjectInfo)value).getId() + ")";
+			//stringValue = "(id=" + ((ObjectInfo)value).getId() + ")";
 		} else if (value instanceof NullObject){
-			stringValue = "null";
+			//stringValue = "null";
 		} else {
-			stringValue = value.toString();
+			//stringValue = value.toString();
 		}
 		
-		return stringValue;
 	}
 
 	public void clear() {
 		view.clear();
 	}
-	
+
 }

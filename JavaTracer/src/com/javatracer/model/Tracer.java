@@ -44,8 +44,6 @@ public class Tracer {
     private boolean watchFields,wasError = false;
 
     // Class patterns for which we don't want events
-   /*private String[] excludes = {"java.*", "javax.*", "sun.*",
-                                "com.sun.*"};*/
     
    private String[] excludes;
     
@@ -125,9 +123,11 @@ public class Tracer {
 	* resume the remote VM, wait for the final event, and shutdown.
 	 * @param nameXlm 
 	*/
+    
     void generateTrace(PrintWriter writer, String nameXlm) {
-            vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm, excludes,nameXlm);
+        
+    	vm.setDebugTraceMode(debugTraceMode);
+        EventThread eventThread = new EventThread(vm, excludes,nameXlm,false);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         redirectOutput();
@@ -203,8 +203,7 @@ public class Tracer {
 	*/
     Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, String[] mainArgs) { 
         Map<String, Connector.Argument> arguments = connector.defaultArguments();
-        Connector.Argument mainArg =
-                           (Connector.Argument)arguments.get("main");
+        Connector.Argument mainArg = (Connector.Argument)arguments.get("main");
         if (mainArg == null) {
             throw new Error("Bad launching connector");
         }

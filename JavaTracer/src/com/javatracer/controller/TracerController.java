@@ -2,17 +2,18 @@ package com.javatracer.controller;
 
 import java.util.List;
 
+import com.javatracer.model.ClassFinder;
 import com.javatracer.model.Tracer;
-import com.javatracer.model.classfinder.ClassFinder;
 import com.javatracer.model.writers.TraceInspectorWriter;
 import com.javatracer.view.WindowPath;
 
 public class TracerController {
 	
-	Tracer tracer;
-	TraceInspectorWriter traceInspectorWriter;
-	WindowPath view;
-	ClassFinder finder = new ClassFinder();
+	private WindowPath view;
+	
+	private Tracer tracer;
+	private TraceInspectorWriter traceInspectorWriter;
+	private ClassFinder finder = new ClassFinder();
 	
 	public TracerController(){
 		 view = new WindowPath(this);
@@ -38,6 +39,7 @@ public class TracerController {
 			this.traceInspectorWriter = new TraceInspectorWriter(nameXlm);
 			traceInspectorWriter.generateFinalTrace();
 		}
+		
 	}
 
 	public void loadClassFromPath(String path) {

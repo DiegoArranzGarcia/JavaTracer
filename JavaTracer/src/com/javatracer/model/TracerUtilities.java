@@ -41,14 +41,26 @@ public class TracerUtilities {
 		return object;
 	}
 
-	private static Object getArrayFromArrayReference(ArrayReference value, List<Long> objectProcessed) {
+	private static Object getArrayFromArrayReference(ArrayReference value, List<Long> objectsProcessed) {
+		
+		long arrayID = value.uniqueID();
+		Object object = null;
+		
+		if (objectsProcessed.contains(arrayID)){
+			object = new ObjectInfo(getClass(value.referenceType())+ "[]",value.uniqueID());
+		}
+		
 		List<Object> elements = new ArrayList<>();
 		List<Value> values = value.getValues();
+		objectsProcessed.add(arrayID);
+		
 		for (int i=0;i<values.size();i++){
 			Value v = values.get(i);
-			elements.add(getObj(v,objectProcessed));
+			elements.add(getObj(v,objectsProcessed));
 		}
-		Object object = new ArrayInfo(getClass(value.referenceType()),value.length(),elements);
+		
+		object = new ArrayInfo(getClass(value.referenceType()),arrayID,value.length(),elements);
+		
 		return object;
 	}
 	

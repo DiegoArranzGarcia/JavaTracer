@@ -1,7 +1,6 @@
 package com.traceinspector.objectinspectorview;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
 
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
@@ -108,11 +107,20 @@ public class MyTreeModel extends AbstractTreeTableModel
 			
 	}
 	 
-	public void addNode(String name, String value, boolean b) {
+	public DefaultMutableTreeNode addNodeToRoot(String name, String value, boolean b) {
 		
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
-		root.add(new DefaultMutableTreeNode(new TableRowData(name,value,b)));
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TableRowData(name,value,b));
+		root.add(node);
+		return node;
+	}
+
+	public DefaultMutableTreeNode addNodeToNode(DefaultMutableTreeNode node,
+			String name, String value, boolean b) {
 		
+		DefaultMutableTreeNode addedNode = new DefaultMutableTreeNode(new TableRowData(name,value,b));
+		node.add(addedNode);
+		return addedNode;
 	}
 
 }

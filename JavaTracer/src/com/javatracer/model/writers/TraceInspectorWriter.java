@@ -52,7 +52,7 @@ public class TraceInspectorWriter {
 		
 		try {
 			FileWriter fileWriter = new FileWriter( nameXlm+".xml");
-			this.bufferedWriter = new BufferedWriter(fileWriter);
+			this.bufferedWriter = new BufferedWriter(fileWriter,8192);
 			
 			this.xStream = new XStream();
 			addAlias();

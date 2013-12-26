@@ -15,6 +15,7 @@ import com.javatracer.model.managers.StepManager;
 import com.javatracer.model.managers.ThreadDeathManager;
 import com.javatracer.model.writers.DataBaseWriter;
 import com.javatracer.model.writers.XStreamWriter;
+import com.javatracer.profiler.Profiler;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
@@ -45,39 +46,50 @@ public class EventThread extends Thread {
     private final VirtualMachine vm; // Running VM
     private final String[] excludes; // Packages to exclude
     private boolean connected = true; // Connected to VM
+    private boolean enableProfiling;
 	private boolean vmDied = false; // VMDeath occurred
     
     // Maps ThreadReference to ThreadTrace instances
     private Map<ThreadReference, ThreadTrace> traceMap =
        new HashMap<>();
        
-       //Managers
-       private DeathManager death=new DeathManager();
-       private DisconnectManager disconnect=new DisconnectManager();
-       private ExceptionManager exception;
-       private ThreadDeathManager threadeath=new ThreadDeathManager(traceMap);
-       private FieldWatchManager fieldwatch;
-       private MethodEntryManager methodentry;
-       private MethodExitManager methodexit;
-       private StepManager step;
-       private PrepareManager prepare;
-       private DataBaseWriter dbw;
+    //Managers
+    private DeathManager death;
+    private Profiler profiler;
+    private DisconnectManager disconnect;
+    private ExceptionManager exception;
+    private ThreadDeathManager threadeath;
+    private FieldWatchManager fieldwatch;
+    private MethodEntryManager methodentry;
+    private MethodExitManager methodexit;
+    private StepManager step;
+    private PrepareManager prepare;
+    private DataBaseWriter dbw;
 
-    EventThread(VirtualMachine vm, String[] excludes, String nameXlm) {
+    EventThread(VirtualMachine vm, String[] excludes, String nameXlm, boolean enableProfiling){
         super("event-handler");
         this.vm = vm;
+        this.enableProfiling = enableProfiling;
         this.excludes = excludes;
         dbw = new XStreamWriter(nameXlm);
-        
+               
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
         
+        death = new DeathManager();
+        disconnect = new DisconnectManager();
+        threadeath = new ThreadDeathManager(traceMap);
         fieldwatch=new FieldWatchManager(traceMap,vm);
         methodentry=new MethodEntryManager(dbw);
         methodexit=new MethodExitManager(dbw);
         step=new StepManager(traceMap,vm);
         prepare=new PrepareManager(excludes,vm);
 		exception=new ExceptionManager(traceMap,vm);
+		
+		if (enableProfiling){
+			profiler = new Profiler();			
+		}
+		
     }
 
     /**
@@ -159,8 +171,10 @@ public class EventThread extends Thread {
             exception.exceptionEvent((ExceptionEvent)event);
         } else if (event instanceof ModificationWatchpointEvent) {
         	fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
-        } else if (event instanceof MethodEntryEvent) {
+        } else if (event instanceof MethodEntryEvent) {	
             methodentry.methodEntryEvent((MethodEntryEvent)event);
+            if (enableProfiling)
+            	profiler .profileEvent((MethodEntryEvent)event);
         } else if (event instanceof MethodExitEvent) {
         	methodexit.methodExitEvent((MethodExitEvent)event);
         } else if (event instanceof StepEvent) {
@@ -170,13 +184,20 @@ public class EventThread extends Thread {
         } else if (event instanceof ClassPrepareEvent) {
             prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
-        	dbw.close();
+        	finishTrace();
         } else if (event instanceof VMDisconnectEvent) {
             connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
         }
     }
 
-    /***
+    private void finishTrace() {
+		dbw.close();
+		
+		if (enableProfiling)
+			profiler.showProfile();
+	}
+
+	/***
 	* A VMDisconnectedException has happened while dealing with
 	* another event. We need to flush the event queue, dealing only
 	* with exit events (VMDeath, VMDisconnect) so that we terminate

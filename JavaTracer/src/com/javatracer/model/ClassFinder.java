@@ -1,4 +1,4 @@
-package com.javatracer.model.classfinder;
+package com.javatracer.model;
 
 import java.io.File;
 import java.io.IOException;
