@@ -1,6 +1,7 @@
 package com.javatracer.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -9,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.javatracer.controller.TracerController;
+import com.javatracer.model.classfinder.ClassFinder;
 
 @SuppressWarnings("serial")
 public class WindowPath extends JFrame {
@@ -159,11 +162,23 @@ public class WindowPath extends JFrame {
 									
 									String[] args=ProcessPath(file,name);
 									String nameXlm = nameXml.getText();
+									
 									if (nameXlm.contains(".xml") || nameXlm.contains(".XML")){
 										errorNameXml();
 									} else {
 											if (nameXlm.equals("")) nameXlm ="default";
-											controller.startTrace(args,nameXlm); 	
+											if(ExistFileXml(nameXlm+".xml")){
+												
+												int seleccion = JOptionPane.showOptionDialog(
+													    null,nameXlm+" already exists,"+" are you sure you want to overwrite the current file?","Overwrite current file", 
+													    JOptionPane.YES_NO_CANCEL_OPTION,
+													    JOptionPane.QUESTION_MESSAGE, null, null, null);
+											
+											    if(seleccion==0)
+											    	controller.startTrace(args,nameXlm);
+											
+											}else 
+											  controller.startTrace(args,nameXlm); 	
 									}
 									
 					
@@ -305,6 +320,23 @@ public class WindowPath extends JFrame {
 	}
 	
 	
+	private boolean ExistFileXml(String name){
+		
+		int i=0;
+		boolean found=false;
+		File files = new File("./");
+		String[] classes=files.list();
+		
+		while(i<classes.length && !found){
+			
+			if(classes[i].equals(name)) found=true;
+			i++;
+			
+		}
+		
+		return found;
+		
+	}
 	
 	
 }
