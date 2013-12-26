@@ -6,8 +6,11 @@ public class Main {
 		Person p1 = new Person(1, "", "b");
 		Person p2 = new Person(1, "", "b",null);
 		p1.bestFriend = p2;
-		prueba(1,p1,p2);
-		p2.imprime();
+		Person p=prueba(1,p1,p2);
+		String s=p2.imprime();
+		String nam=p2.getName();
+		int ag=p2.getAge();
+		
 	}
 	
 	public static Person prueba(int i,Person p1,Person p2){

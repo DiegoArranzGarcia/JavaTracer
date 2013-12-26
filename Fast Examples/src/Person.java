@@ -6,6 +6,22 @@ public class Person {
 	 String lastName;
 	 Person bestFriend;
 	
+	public int getAge() {
+		return age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public Person getBestFriend() {
+		return bestFriend;
+	}
+
 	Person(int age,String name,String lastName){
 		this.age = age;
 		this.name = name;
@@ -19,7 +35,7 @@ public class Person {
 		this.bestFriend = bestFriend;
 	}
 
-	public void imprime() {
+	public String imprime() {
 		this.age += 1;
 		System.out.println("*************** Person ********************");
 		System.out.println("Age: " + age);
@@ -27,6 +43,11 @@ public class Person {
 		System.out.println("Last name: " + lastName);
 		//if (bestFriend!=null) System.out.println("My best friend is: " + bestFriend.name);
 		System.out.println("*******************************************");
+	    return "hecho";
+	
 	}
 
+	
+	
+	
 }

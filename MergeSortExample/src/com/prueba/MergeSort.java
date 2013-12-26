@@ -19,7 +19,7 @@ public class MergeSort{
 		 return mergesort(this.array);
 	 }
 	 
-     private int[] mergesort(int[] L) {
+     public int[] mergesort(int[] L) {
         int n = L.length;
  
         if (n > 1){
@@ -38,7 +38,7 @@ public class MergeSort{
         return L;
     }
  
-    private int[] delete(int [] l){
+    public int[] delete(int [] l){
         int [] L = new int[l.length-1];
         for(int i = 1; i < l.length; i++){
             L[i-1] = l[i];
@@ -46,7 +46,7 @@ public class MergeSort{
         return L;
     }
  
-    private int[] merge(int[] L1, int[] L2) {
+    public int[] merge(int[] L1, int[] L2) {
          int[] L = new int[L1.length+L2.length];
          int i = 0;
          while ((L1.length != 0) && (L2.length != 0)) {

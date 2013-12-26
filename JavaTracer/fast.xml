@@ -271,6 +271,78 @@
 <called-methods>
 </called-methods>
 </method-call>
+<method-call id="6">
+<info>
+  <name>getName</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="7">
+<info>
+  <name>getAge</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
 </called-methods>
 </method-call>
 </trace>

@@ -99,24 +99,33 @@ public class TextInBoxExt {
 		 else 
 			 name = name.substring(0, name.length()-2) +" )";
 		 
-		 return name;
+		 
+		 if(returnValue!=null){
+			String nameAux=name + "return "+completeArgumentString(returnValue);
+			return nameAux.substring(0, nameAux.length()-1);
+		 }else 
+			 return name;
 	} 
 
 	public String completeArgumentString(VariableInfo var) {
 		
-		String name=var.getName();
-		Object value = var.getValue();
+		String name="";
 		
-		if (value instanceof ArrayInfo)
-			name=((ArrayInfo)value).getClassName() +"[ ]"+" "+ name + ", " ;
-		else if (value instanceof ObjectInfo)
-			name=((ObjectInfo)value).getClassName() +" "+ name + ", " ;
-		else if (value instanceof NullObject)
-			name= name + " = null, " ;
-		else if (value instanceof String)
-			name= name + " = \"" + value.toString() + "\", " ;
-		else
-			name= name + " = " + value.toString() + ", " ;		
+		if(var!=null){
+			name=var.getName();
+			Object value = var.getValue();
+		
+			if (value instanceof ArrayInfo)
+				name=((ArrayInfo)value).getClassName() +"[ ]"+" "+ name + ", " ;
+			else if (value instanceof ObjectInfo)
+				name=((ObjectInfo)value).getClassName() +" "+ name + ", " ;
+			else if (value instanceof NullObject)
+				name= name + " = null, " ;
+			else if (value instanceof String)
+				name= name + " = \"" + value.toString() + "\", " ;
+			else
+				name= name + " = " + value.toString() + ", " ;		
+			}
 		
 		return name;
 	}

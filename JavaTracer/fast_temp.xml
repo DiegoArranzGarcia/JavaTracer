@@ -419,6 +419,137 @@
 <method-exit-event>
   <methodName>imprime</methodName>
   <className>Person</className>
+  <returnObject class="string">hecho</returnObject>
+  <object-this>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>getName</methodName>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <object-this>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>getName</methodName>
+  <className>Person</className>
+  <returnObject class="string"></returnObject>
+  <object-this>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodName>getAge</methodName>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <object-this>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string"></value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string">b</value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>getAge</methodName>
+  <className>Person</className>
+  <returnObject class="int">1</returnObject>
   <object-this>
     <name>this</name>
     <value class="object-info">
