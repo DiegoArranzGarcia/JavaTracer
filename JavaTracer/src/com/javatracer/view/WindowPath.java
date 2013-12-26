@@ -1,7 +1,6 @@
 package com.javatracer.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -23,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.javatracer.controller.TracerController;
-import com.javatracer.model.classfinder.ClassFinder;
 
 @SuppressWarnings("serial")
 public class WindowPath extends JFrame {

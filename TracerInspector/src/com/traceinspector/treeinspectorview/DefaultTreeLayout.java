@@ -125,10 +125,12 @@ public class DefaultTreeLayout<E> extends
 	public void removeChilds(E node){
 		checkArg(hasNode(node), "node is not in the tree");
 		List<E> childs = childrenMap.get(node);
-		for (int i=0;i<childs.size();i++){
-			parents.remove(childs.get(i));
+		if (childs !=null){
+			for (int i=0;i<childs.size();i++){
+				parents.remove(childs.get(i));
+			}
+			childs.clear();
 		}
-		childs.clear();
 	}
 
 	@SuppressWarnings("unchecked")
