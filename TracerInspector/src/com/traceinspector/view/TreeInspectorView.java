@@ -34,6 +34,8 @@ public class TreeInspectorView extends JScrollPane {
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
+		
+		
 	}
 	 
 	public static Component createTreePanel(DefaultTreeLayout<TextInBoxExt> root,TreeInspector controller) {
@@ -78,4 +80,5 @@ public class TreeInspectorView extends JScrollPane {
 	public static void setTreeLayout(TreeLayout<TextInBoxExt> treeLayout) {
 		TreeInspectorView.treeLayout = treeLayout;
 	}
+	
 }

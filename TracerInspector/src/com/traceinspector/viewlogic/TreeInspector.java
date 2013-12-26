@@ -1,13 +1,14 @@
 package com.traceinspector.viewlogic;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.awt.geom.Rectangle2D.Double;
-
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
@@ -27,9 +28,22 @@ public class TreeInspector implements MouseListener {
 		this.controller = controller;
 		this.treeManager = treeManager;
 		this.tree = treeManager.loadTree();
-		
 		this.view = new TreeInspectorView(tree, this);
-		this.lastSelected = null;
+		
+	    
+		///////center scroll ////////////////
+		Rectangle bounds = view.getViewport().getViewRect();
+	    Dimension size = view.getViewport().getViewSize();
+	    
+	    int x = (size.width - bounds.width) / 3;
+	    int y = (size.height - bounds.height) / 3;
+        
+	    view.getViewport().setViewPosition(new Point(x, y));
+		///////////////////////////////////////
+        
+        this.lastSelected = null;
+	   
+	 
 	}
 	
 	
@@ -128,4 +142,5 @@ public class TreeInspector implements MouseListener {
 		
 	}
 
+	
 }

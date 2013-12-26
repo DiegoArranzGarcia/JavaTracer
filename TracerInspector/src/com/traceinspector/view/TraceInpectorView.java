@@ -14,6 +14,7 @@ import javax.swing.JSplitPane;
 
 import com.traceinspector.controller.TraceInspectorController;
 
+
 @SuppressWarnings("serial")
 public class TraceInpectorView extends JFrame implements ComponentListener,ActionListener{
 	
