@@ -3,6 +3,10 @@ package com.traceinspector.view;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.table.TableCellRenderer;
@@ -22,18 +26,18 @@ import com.traceinspector.objectinspectorview.TreeTableCellRenderer;
 import com.traceinspector.viewlogic.ObjectInspector;
 
 @SuppressWarnings("serial")
-public class ObjectInspectorView extends JScrollPane{
+public class ObjectInspectorView extends JScrollPane implements KeyListener,MouseListener{
 	
 	static MyTreeModel model;
 	static JXTreeTable binTree;
-	private ObjectInspector controller;
 	
 	public ObjectInspectorView(ObjectInspector controller) {
-   	    super(createTable());
-   	    this.controller = controller;
+   	    super(createTable(controller));   	    
+   	    binTree.addMouseListener(this);
+   	    binTree.addKeyListener(this);
 	}
 
-	private static Component createTable(){
+	private static Component createTable(ObjectInspector controller){
 		
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(new TableRowData("Name","Value",true));
 		model = new MyTreeModel(rootNode);
@@ -43,7 +47,7 @@ public class ObjectInspectorView extends JScrollPane{
     	binTree.setHighlighters(highligher);
         binTree.setShowsRootHandles(false);
         configureCommonTableProperties(binTree);
-        binTree.setTreeCellRenderer(new TreeTableCellRenderer());
+        binTree.setTreeCellRenderer(new TreeTableCellRenderer());        	
         
         return binTree;
     }
@@ -99,5 +103,48 @@ public class ObjectInspectorView extends JScrollPane{
         binTree.expandPath(new TreePath(model.getRoot()));
         binTree.updateUI();
 	}
+
+	public void mouseClicked(MouseEvent e) {
+		
+		if (e.getX() < 20){
+			TreePath path = binTree.getPathForLocation(e.getX(),e.getY());
+			if (path != null)
+				expandOrCollapse(path);
+		}
+				
+	}
+
+	private void expandOrCollapse(TreePath path) {
+		if (binTree.isExpanded(path))
+			binTree.collapsePath(path);
+		else
+			binTree.expandAll();
+	}
+
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+
+	public void keyPressed(KeyEvent e) {
+		int selectedRow = binTree.getSelectedRow();
+		
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+			
+			if (!binTree.isExpanded(selectedRow)){
+				binTree.expandRow(selectedRow);
+			}
+			
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+			
+			if (binTree.isExpanded(selectedRow)){
+				binTree.collapseRow(selectedRow);
+			}
+			
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {}
 
 }

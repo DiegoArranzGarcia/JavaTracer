@@ -97,26 +97,30 @@ public class TreePanel extends JPanel {
 		}
 	}
 
-	private void paintBox(Graphics g, TextInBoxExt textInBox) {
+	private void paintBox(Graphics g,TextInBoxExt textInBox) {
 		
-		//Graphics2D g2D = (Graphics2D)g; 
-		//g2D.setStroke(new BasicStroke(10));
 		g.setColor(BOX_COLOR);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
+		
 		if (textInBox.isSelected()){
+			
 			Graphics2D g2D = (Graphics2D)g; 
 			g2D.setStroke(new BasicStroke(5));
 			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 			g2D.setStroke(new BasicStroke());
+			
 		} 
 		else {
+			
 			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+			
 		}
+		
 		g.setColor(TEXT_COLOR);
 		String[] lines = textInBox.giveMeTextInBox().split("\n");
 		FontMetrics m = getFontMetrics(getFont());

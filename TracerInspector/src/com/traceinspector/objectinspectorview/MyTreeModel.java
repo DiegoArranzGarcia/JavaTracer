@@ -95,6 +95,8 @@ public class MyTreeModel extends AbstractTreeTableModel
 		return 0;
 	}
 	
+	
+	
 	 public boolean isLeaf(Object node) 
 	 {
 	        return getChildCount(node) == 0;

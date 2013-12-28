@@ -53,6 +53,5 @@ public class TextInBoxNodeExtentProvider implements
 		 if (name.length()>2) width = TreePanel.WIDTH_BY_LETTER * name.length() + TreePanel.DEFAULT_WIDTH_BOX;
 		return width;
 	}
-
-
+	
 }
