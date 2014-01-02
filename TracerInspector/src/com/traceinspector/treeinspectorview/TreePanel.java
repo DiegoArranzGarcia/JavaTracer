@@ -113,9 +113,8 @@ public class TreePanel extends JPanel {
 		BufferedImage imagePlus= null;
 		BufferedImage imageMinus=null;
 		try {
-			imagePlus = ImageIO.read(getClass().getResource("../../../resource/plus1.jpe"));
-			imageMinus = ImageIO.read(getClass().getResource("../../../resource/minus1.jpe"));
-			//imageMinus = ImageIO.read(getClass().getResource("../../../resource/minus.png"));
+			imagePlus = ImageIO.read(getClass().getResource("plus1.jpe"));
+			imageMinus = ImageIO.read(getClass().getResource("minus1.jpe"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

@@ -19,7 +19,6 @@ public class LoadingMain extends JWindow {
 
   public LoadingMain() {
     InitScreen();
-	
     }
 
   private void InitScreen() {
