@@ -45,6 +45,7 @@ public class WindowPath extends JFrame {
 	private static int CANCEL_COL = 480;
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
+	private static String PATH_IMAGE_HELP = "../../../resource/imageHelp.jpe";
 
 	
 	public WindowPath(TracerController controller) {
@@ -59,7 +60,7 @@ public class WindowPath extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image icon = new ImageIcon(getClass().getResource("j4.jpe")).getImage();
+		Image icon = new ImageIcon(getClass().getResource("../../../resource/j4.jpe")).getImage();
 		setIconImage(icon);
 	
 		
@@ -81,7 +82,7 @@ public class WindowPath extends JFrame {
 		helpPath = new JButton();
 		helpPath.setBounds(new Rectangle(25,25));
 		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
-		helpPath.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
+		helpPath.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
 		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
 		
 		labelNameClass = new JLabel("Insert the name of Main class");
@@ -100,7 +101,7 @@ public class WindowPath extends JFrame {
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(THIRD_COL, SECOND_ROW); 
-		helpNameClass.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
+		helpNameClass.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
 		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
 			
 		labelXml = new JLabel("Insert xml name");
@@ -116,7 +117,7 @@ public class WindowPath extends JFrame {
 		helpXmlFile = new JButton();
 		helpXmlFile.setBounds(new Rectangle(25,25));
 		helpXmlFile.setLocation(THIRD_COL, THIRD_ROW); 
-		helpXmlFile.setIcon(new ImageIcon(getClass().getResource("image6.jpe")));
+		helpXmlFile.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
 		helpXmlFile.setToolTipText("Filename without extension");
 		
 		cancel =new JButton("Cancel");

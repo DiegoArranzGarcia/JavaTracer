@@ -13,6 +13,8 @@ public class LoadingMain extends JWindow {
 	  BorderLayout borderLayout1 = new BorderLayout();
 	  JLabel imageLabel = new JLabel();
 	  ImageIcon imageIcon;
+	  private static String PATH_IMAGE_lOADING = "../../../resource/LoadingSmall.gif";
+
     
 
   public LoadingMain() {
@@ -21,11 +23,7 @@ public class LoadingMain extends JWindow {
     }
 
   private void InitScreen() {
-    
-	String curDir = System.getProperty("user.dir");
-	String dirImage=curDir+"\\src\\resource\\LoadingSmall.gif";
-	imageIcon =new ImageIcon(getClass().getResource("LoadingSmall.gif"));
-	//imageIcon = new ImageIcon(dirImage);
+	imageIcon =new ImageIcon(getClass().getResource(PATH_IMAGE_lOADING));
     setLocationRelativeTo(null);
     
    
