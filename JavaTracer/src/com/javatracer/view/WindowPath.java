@@ -68,7 +68,7 @@ public class WindowPath extends JFrame {
 		setVisible(true); 	
 
 		
-		labelPath = new JLabel("Select the directory ");
+		labelPath = new JLabel(new Message(1).getMessage());
 		labelPath.setBounds(new Rectangle(540,30));
 		labelPath.setLocation(FIRST_COL, FIRST_ROW); 
 		labelPath.setBackground(Color.white); 
@@ -84,9 +84,9 @@ public class WindowPath extends JFrame {
 		helpPath.setBounds(new Rectangle(25,25));
 		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
 		helpPath.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
-		helpPath.setToolTipText("You should choose the directory where are all files .class"); 
+		helpPath.setToolTipText(new Message(2).getMessage()); 
 		
-		labelNameClass = new JLabel("Insert the name of Main class");
+		labelNameClass = new JLabel(new Message(3).getMessage());
 		labelNameClass.setBounds(new Rectangle(540,30));
 		labelNameClass.setLocation(FIRST_COL, SECOND_ROW); 
 		labelNameClass.setBackground(Color.white); 
@@ -103,9 +103,9 @@ public class WindowPath extends JFrame {
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(THIRD_COL, SECOND_ROW); 
 		helpNameClass.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
-		helpNameClass.setToolTipText("Name of main class, if your main class there is in a package you should insert the name of the package");
+		helpNameClass.setToolTipText(new Message(4).getMessage());
 			
-		labelXml = new JLabel("Insert xml name");
+		labelXml = new JLabel(new Message(5).getMessage());
 		labelXml.setBounds(new Rectangle(200,30)); 
 		labelXml.setLocation(FIRST_COL, THIRD_ROW); 
 		labelXml.setFont(new Font("Comic Sans MS",Font.ROMAN_BASELINE, LABELS_SIZE));
@@ -119,7 +119,7 @@ public class WindowPath extends JFrame {
 		helpXmlFile.setBounds(new Rectangle(25,25));
 		helpXmlFile.setLocation(THIRD_COL, THIRD_ROW); 
 		helpXmlFile.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
-		helpXmlFile.setToolTipText("Filename without extension");
+		helpXmlFile.setToolTipText(new Message(6).getMessage());
 		
 		cancel =new JButton("Cancel");
 		cancel.setBounds(new Rectangle(100,40));
@@ -170,7 +170,7 @@ public class WindowPath extends JFrame {
 											if(ExistFileXml(nameXlm+".xml")){
 												
 												int seleccion = JOptionPane.showOptionDialog(
-													    null,nameXlm+" already exists,"+" are you sure you want to overwrite the current file?","Overwrite current file", 
+													    null,nameXlm+new Message(7).getMessage(),new Message(8).getMessage(), 
 													    JOptionPane.YES_NO_CANCEL_OPTION,
 													    JOptionPane.QUESTION_MESSAGE, null, null, null);
 											
@@ -182,7 +182,7 @@ public class WindowPath extends JFrame {
 									}
 									
 					
-								}else JOptionPane.showMessageDialog(new JFrame(), "White text area");
+								}else JOptionPane.showMessageDialog(new JFrame(), new Message(9).getMessage());
 						
 					FinishedLoading();
 			
@@ -242,25 +242,22 @@ public class WindowPath extends JFrame {
 	
 
 	public void showErrorMain() {
-		JOptionPane.showMessageDialog(new JFrame(),"This class must contain the method: public" 
-	       +"static void main(String[] args)");
+		JOptionPane.showMessageDialog(new JFrame(),new Message(10).getMessage());
 	}
 
 	public void showErrorLoadClass() {
-		JOptionPane.showMessageDialog(new JFrame(),"was not found or loaded main class");
+		JOptionPane.showMessageDialog(new JFrame(),new Message(11).getMessage());
 	}
 
 	public void finishedTrace() {
 		JOptionPane.setDefaultLocale(new Locale("en"));
-		JOptionPane.showMessageDialog(new JFrame(), "JavaTracer has finished. You can see the trace at the file created in the same directory that you "
-				+ "	launched ");
+		JOptionPane.showMessageDialog(new JFrame(), new Message(12).getMessage());
 	}
 	
 	
 	public void errorNameXml(){
 		JOptionPane.setDefaultLocale(new Locale("en"));
-		JOptionPane.showMessageDialog(new JFrame(), "The file name is invalid, should not lead extension "
-				+ "	launched ");
+		JOptionPane.showMessageDialog(new JFrame(), new Message(13).getMessage());
 	}
 
 
