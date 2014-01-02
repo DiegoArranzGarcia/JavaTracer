@@ -2,6 +2,7 @@ package com.traceinspector.objectinspectorview;
 
 import java.awt.Component;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -10,8 +11,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
 
 	public TreeTableCellRenderer(){
-		setOpenIcon(new ImageIcon("resource/plus.gif"));
-    	setClosedIcon(new ImageIcon("resource/minus.gif"));
+		setOpenIcon(new ImageIcon(getClass().getResource("plus.gif")));
+    	setClosedIcon(new ImageIcon(getClass().getResource("minus.gif")));
 	}
 	
 	public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,
@@ -26,8 +27,8 @@ public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
         	setText(item.getName());
         	if (item.isExpandable())
         	{
-        		setClosedIcon(new ImageIcon("resource/minus.gif"));
-        		setOpenIcon(new ImageIcon("resource/plus.gif"));
+        		setClosedIcon(new ImageIcon(getClass().getResource("plus.gif")));
+        		setOpenIcon(new ImageIcon(getClass().getResource("plus.gif")));
         	}
         	else
         	{
