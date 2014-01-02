@@ -45,7 +45,8 @@ public class WindowPath extends JFrame {
 	private static int CANCEL_COL = 480;
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
-	private static String PATH_IMAGE_HELP = "../../../resource/imageHelp.jpe";
+	//private static String PATH_IMAGE_HELP = "../../../resource/imageHelp.jpe";
+	private static String PATH_IMAGE_HELP = "imageHelp.jpe";
 
 	
 	public WindowPath(TracerController controller) {
@@ -60,7 +61,7 @@ public class WindowPath extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image icon = new ImageIcon(getClass().getResource("../../../resource/j4.jpe")).getImage();
+		Image icon = new ImageIcon(getClass().getResource("j4.jpe")).getImage();
 		setIconImage(icon);
 	
 		
