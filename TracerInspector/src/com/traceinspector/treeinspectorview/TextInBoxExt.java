@@ -17,13 +17,14 @@ public class TextInBoxExt {
 	private VariableInfo thisValue;
 	private boolean expanded;
 	private boolean selected;
+	private boolean haveChildren;
 	
 	public TextInBoxExt(){
 		this.expanded = true;
 		this.selected = false;
 	}
 
-	public TextInBoxExt(long id, String name, List<VariableInfo> arguments,	VariableInfo returnValue,VariableInfo thisValue) {
+	public TextInBoxExt(long id, String name, List<VariableInfo> arguments,	VariableInfo returnValue,VariableInfo thisValue,boolean haveChildren) {
 		this.id = id;
 		this.methodName = name;
 		this.arguments = arguments;
@@ -31,8 +32,9 @@ public class TextInBoxExt {
 		this.thisValue = thisValue;
 		this.expanded = false;
 		this.selected = false;
+		this.setHaveChildren(haveChildren);
 	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -136,6 +138,14 @@ public class TextInBoxExt {
 
 	public void setThisValue(VariableInfo thisValue) {
 		this.thisValue = thisValue;
+	}
+
+	public boolean haveChildren() {
+		return haveChildren;
+	}
+
+	public void setHaveChildren(boolean haveChildren) {
+		this.haveChildren = haveChildren;
 	}
 	
 	

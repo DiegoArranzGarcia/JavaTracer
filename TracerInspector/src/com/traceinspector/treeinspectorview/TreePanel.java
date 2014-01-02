@@ -36,8 +36,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.abego.treelayout.TreeForTreeLayout;
@@ -104,6 +109,37 @@ public class TreePanel extends JPanel {
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
+		
+		BufferedImage imagePlus= null;
+		BufferedImage imageMinus=null;
+		try {
+			imagePlus = ImageIO.read(getClass().getResource("../../../resource/plus1.jpe"));
+			imageMinus = ImageIO.read(getClass().getResource("../../../resource/minus1.jpe"));
+			//imageMinus = ImageIO.read(getClass().getResource("../../../resource/minus.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		if(textInBox.haveChildren()){
+			if(!textInBox.isExpanded()){
+				Graphics2D  g2D = (Graphics2D)g;
+				g2D.drawImage(imagePlus,(int) box.getMaxX()-20, (int) box.getMaxY()-20, new ImageObserver() {
+					public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3,
+							int arg4, int arg5) {
+						return false;
+					}
+				});
+			}else{
+				Graphics2D  g2D = (Graphics2D)g;
+				g2D.drawImage(imageMinus,(int) box.getMaxX()-20, (int) box.getMaxY()-20, new ImageObserver() {
+					public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3,
+							int arg4, int arg5) {
+						return false;
+					}
+				});
+				
+			}
+		}
 		
 		if (textInBox.isSelected()){
 			

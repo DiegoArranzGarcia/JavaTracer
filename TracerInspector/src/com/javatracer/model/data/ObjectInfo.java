@@ -14,6 +14,11 @@ public class ObjectInfo {
 		this.id = id;
 	}
 
+	public ObjectInfo(String className, long id) {
+		this.className = className;
+		this.id = id;
+	}
+
 	/**
 	 * @return the className
 	 */

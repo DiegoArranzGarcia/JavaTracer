@@ -159,14 +159,25 @@ public class XmlManager {
 		
 		return node;
 	}
+	
+	public boolean haveChildrenOfNode(Node node) {
+		boolean childs = false;
+		try{
+			String expression = "./called-methods/method-call";  
+		    XPath xPath = XPathFactory.newInstance().newXPath();
+		    XPathExpression xPathExpression = xPath.compile(expression);
+		    childs = (boolean) xPathExpression.evaluate(node,XPathConstants.BOOLEAN);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return childs;
+	}
 
 	public VariableInfo loadReturnValue(Node node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public VariableInfo loadThisValue(Node node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

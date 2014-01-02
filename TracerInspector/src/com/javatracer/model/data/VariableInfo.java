@@ -26,4 +26,5 @@ public class VariableInfo {
 		this.value = value;
 	}
 	
+	
 }

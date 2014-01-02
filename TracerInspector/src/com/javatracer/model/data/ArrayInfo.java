@@ -4,12 +4,14 @@ import java.util.List;
 
 public class ArrayInfo {
 	
-	String className;
+	private String className;
+	private long id;
 	private int length;
 	private List<Object> values;
 	
-	public ArrayInfo(String className,int length,List<Object> values){
+	public ArrayInfo(String className,long l,int length,List<Object> values){
 		this.className = className;
+		this.id = l;
 		this.length = length;
 		this.values = values;
 	}
@@ -36,6 +38,14 @@ public class ArrayInfo {
 
 	public void setLength(int length) {
 		this.length = length;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	

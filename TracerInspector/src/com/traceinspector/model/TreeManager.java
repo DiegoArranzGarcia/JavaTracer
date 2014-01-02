@@ -48,7 +48,8 @@ public class TreeManager {
 			List<VariableInfo> arguments = xml.loadArguments(node);
 			VariableInfo returnValue = xml.loadReturnValue(node);
 			VariableInfo thisValue = xml.loadThisValue(node);
-			root = new TextInBoxExt(id,name,arguments,returnValue,thisValue);
+			boolean haveChildren = xml.haveChildrenOfNode(node);
+			root = new TextInBoxExt(id,name,arguments,returnValue,thisValue,haveChildren);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
