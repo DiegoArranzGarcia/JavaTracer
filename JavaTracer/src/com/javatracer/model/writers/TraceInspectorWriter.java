@@ -30,14 +30,13 @@ import com.javatracer.model.data.ChangeInfo;
 import com.javatracer.model.data.MethodInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.StringInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.thoughtworks.xstream.XStream;
 
 public class TraceInspectorWriter {
 	
 	//private static boolean DELETE_TMP_TRACE = false;
-	private static String NAME_FILE = "trace.xml";
-	
 	private static String TAG_CHANGES = "changes";
 	private static String TAG_CHANGE = "change";
 	private static String TAG_METHOD_INFO = "info";
@@ -57,7 +56,6 @@ public class TraceInspectorWriter {
 			this.xStream = new XStream();
 			addAlias();
 			
-			//xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(XStreamWriter.FILE_NAME);
 			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(nameXlm+"_temp.xml");
 			xPath = XPathFactory.newInstance().newXPath();
 			this.idNode = 1;
@@ -280,8 +278,13 @@ public class TraceInspectorWriter {
 		xStream.alias(TAG_CHANGE, ChangeInfo.class);
 		
 		xStream.alias(XStreamWriter.TAG_ARRAY,ArrayInfo.class);
+		/**
+		 * FIXME: Cambiado el alias
+		 */ 
+		
 		xStream.alias(XStreamWriter.TAG_OBJECT,ObjectInfo.class);
 		xStream.alias(XStreamWriter.TAG_VARIABLE,VariableInfo.class);
+		xStream.alias(XStreamWriter.TAG_STRING, StringInfo.class);
 		xStream.alias(XStreamWriter.TAG_NULL,NullObject.class);
 	}
 	

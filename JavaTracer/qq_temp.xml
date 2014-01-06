@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<method-call>
+<method-entry-event>
+  <methodName>main</methodName>
+  <calledFromClass>principal.AdiosMundo</calledFromClass>
+  <arguments>
+    <variable>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <id>54</id>
+        <length>0</length>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+  <object-this>
+    <name>this</name>
+    <value class="null"/>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodName>init</methodName>
+  <calledFromClass>principal.AdiosMundo</calledFromClass>
+  <arguments>
+    <variable>
+      <name>adios</name>
+      <value class="string">
+        <id>58</id>
+        <value>Adios</value>
+      </value>
+    </variable>
+    <variable>
+      <name>hola2</name>
+      <value class="string">
+        <id>59</id>
+        <value>kk</value>
+      </value>
+    </variable>
+  </arguments>
+  <object-this>
+    <name>this</name>
+    <value class="null"/>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>init</methodName>
+  <className>principal.AdiosMundo</className>
+  <object-this>
+    <name>this</name>
+    <value class="null"/>
+  </object-this>
+  <arguments>
+    <variable>
+      <name>adios</name>
+      <value class="string">
+        <id>60</id>
+        <value>hola</value>
+      </value>
+    </variable>
+    <variable>
+      <name>hola2</name>
+      <value class="string">
+        <id>59</id>
+        <value>kk</value>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>principal.AdiosMundo</className>
+  <object-this>
+    <name>this</name>
+    <value class="null"/>
+  </object-this>
+  <arguments>
+    <variable>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <id>54</id>
+        <length>0</length>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</trace>

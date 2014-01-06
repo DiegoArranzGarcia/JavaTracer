@@ -6,6 +6,7 @@ import java.util.List;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.StringInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.sun.jdi.ArrayReference;
 import com.sun.jdi.BooleanValue;
@@ -25,6 +26,7 @@ import com.sun.jdi.Value;
 
 public class TracerUtilities {
 	
+
 	public static Object getObj(Value value,List<Long> objectProcessed){
 		Object object = null;
 		if (value instanceof ArrayReference){
@@ -32,7 +34,8 @@ public class TracerUtilities {
 		} else if (value instanceof PrimitiveValue){
 			object = getPrimitiveObject(value);
 		} else if (value instanceof StringReference){
-			object = (String)value.toString().replaceAll("\"","");
+			//object = (String)value.toString().replaceAll("\"","");
+			object = getStringFromStringReference((StringReference)value,objectProcessed);
 		} else if (value instanceof ObjectReference){
 			object = getObjectFromObjectReference((ObjectReference)value,objectProcessed);
 		} else if (value == null){
@@ -60,6 +63,23 @@ public class TracerUtilities {
 		}
 		
 		object = new ArrayInfo(getClass(value.referenceType()),arrayID,value.length(),elements);
+		
+		return object;
+	}
+	
+	private static Object getStringFromStringReference(StringReference value, List<Long> objectsProcessed) {
+		
+		long stringID = value.uniqueID();
+		Object object = null;
+		
+		if (objectsProcessed.contains(stringID)){
+			object = new ObjectInfo(getClass(value.referenceType())+ "[]",value.uniqueID());
+		}
+		
+		objectsProcessed.add(stringID);
+
+		
+		object = new StringInfo(stringID,value.toString().replaceAll("\"",""));
 		
 		return object;
 	}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<method-call id="1">
+<info>
+  <name>main</name>
+  <calledFromClass>principal.AdiosMundo</calledFromClass>
+  <arguments>
+    <variable>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <id>54</id>
+        <length>0</length>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="null"/>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+<method-call id="2">
+<info>
+  <name>init</name>
+  <calledFromClass>principal.AdiosMundo</calledFromClass>
+  <arguments>
+    <variable>
+      <name>adios</name>
+      <value class="string">
+        <id>58</id>
+        <value>Adios</value>
+      </value>
+    </variable>
+    <variable>
+      <name>hola2</name>
+      <value class="string">
+        <id>59</id>
+        <value>kk</value>
+      </value>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="null"/>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+</called-methods>
+</method-call>
+</trace>

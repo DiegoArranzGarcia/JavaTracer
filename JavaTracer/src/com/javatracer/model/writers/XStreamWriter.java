@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import com.javatracer.model.data.NullObject;
+import com.javatracer.model.data.StringInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.InterfaceInfo;
@@ -26,6 +27,7 @@ public class XStreamWriter implements DataBaseWriter {
 	public static String TAG_VARIABLE = "variable";
 	public static String TAG_OBJECT = "object-info";
 	public static String TAG_ARRAY = "array";
+	public static String TAG_STRING = "string";
 	public static String TAG_NULL = "null";
 	
 	private XStream xStream;
@@ -56,7 +58,11 @@ public class XStreamWriter implements DataBaseWriter {
 		
 		xStream.alias(TAG_VARIABLE,VariableInfo.class);
 		xStream.alias(TAG_OBJECT, ObjectInfo.class);
+		/**
+		 * FIXME: Cambiado el alias
+		 */
 		xStream.alias(TAG_ARRAY, ArrayInfo.class);
+		xStream.alias(TAG_STRING,StringInfo.class);
 		xStream.alias(TAG_NULL,NullObject.class);
 	}
 
