@@ -28,7 +28,7 @@ public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
         	if (item.isExpandable())
         	{
         		setClosedIcon(new ImageIcon(getClass().getResource("plus.gif")));
-        		setOpenIcon(new ImageIcon(getClass().getResource("plus.gif")));
+        		setOpenIcon(new ImageIcon(getClass().getResource("minus.gif")));
         	}
         	else
         	{

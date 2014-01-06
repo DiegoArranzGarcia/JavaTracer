@@ -8,12 +8,14 @@ import java.util.List;
 
 import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
+import com.sun.org.apache.bcel.internal.classfile.Method;
+import com.sun.org.apache.bcel.internal.generic.Type;
+import com.sun.org.apache.bcel.internal.generic.ArrayType;
 
 public class ClassFinder {
 	
 	
-	private HashMap<String,String> PathsForFile=new HashMap<String,String>(); 
-	
+	private HashMap<String,String> pathsForFile=new HashMap<String,String>();
 	
 	public List<String> getAllClasesFromPath(String path) {
 		
@@ -60,8 +62,11 @@ public class ClassFinder {
 							cp = new ClassParser(folderFiles[i].getPath());
 							JavaClass jc = cp.parse();
 							String class_name = jc.getClassName();
-							classes.add(class_name);
-							PathsForFile.put(class_name, folderFiles[i].getAbsolutePath());
+							
+							if (hasMain(jc)){
+								classes.add(class_name);
+								pathsForFile.put(class_name, folderFiles[i].getAbsolutePath());
+							}
 							
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -76,13 +81,36 @@ public class ClassFinder {
 		}
 		
 		else {classes.add(file.getName());
-			PathsForFile.put(file.getName(), file.getAbsolutePath());
+			pathsForFile.put(file.getName(), file.getAbsolutePath());
 		      }
 		
 		return classes;
 		
 	}
 	
+	private boolean hasMain(JavaClass jc) {
+		boolean hasMain = false;
+		int i = 0;
+		Method[] methods = jc.getMethods();
+		
+		while (!hasMain && i<methods.length){
+			Method method = methods[i];
+			hasMain = isMainMethod(method);
+			i++;
+		}
+
+		return hasMain;
+	}
+
+	private boolean isMainMethod(Method method) {
+		boolean isMain = false;
+		Type[] argumentTypes = method.getArgumentTypes();
+		
+		isMain = (method.getName().equals("main") && argumentTypes.length == 1  && method.getReturnType().equals(Type.VOID) 
+					&& method.isPublic() && method.isStatic() && argumentTypes[0].toString().equals("java.lang.String[]"));				
+		return isMain;
+	}
+
 	private String getExtension(File file) {
 		String extension = "";
 
@@ -97,7 +125,7 @@ public class ClassFinder {
 	
 	
 	public String giveMePath(String key){
-		return PathsForFile.get(key);
+		return pathsForFile.get(key);
 		
 	}
 }
