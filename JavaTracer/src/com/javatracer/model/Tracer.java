@@ -150,8 +150,7 @@ public class Tracer {
 	*/
     VirtualMachine launchTarget(String[] mainArgs) {
         LaunchingConnector connector = findLaunchingConnector();
-        Map<String, Connector.Argument> arguments =
-           connectorArguments(connector, mainArgs);
+        Map<String, Connector.Argument> arguments = connectorArguments(connector, mainArgs);
         try {
             return connector.launch(arguments);
         } catch (IOException exc) {
@@ -159,8 +158,7 @@ public class Tracer {
         } catch (IllegalConnectorArgumentsException exc) {
             throw new Error("Internal error: " + exc);
         } catch (VMStartException exc) {
-            throw new Error("Target VM failed to initialize: " +
-                            exc.getMessage());
+            throw new Error("Target VM failed to initialize: " + exc.getMessage());
         }
     }
 
@@ -169,12 +167,8 @@ public class Tracer {
     	Process process = vm.process();
         
         // Copy target's output and error to our output and error.
-        errThread = new StreamRedirectThread("error reader",
-                                             process.getErrorStream(),
-                                             System.err);
-        outThread = new StreamRedirectThread("output reader",
-                                             process.getInputStream(),
-                                             System.out);
+        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err);
+        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out);
        
         catchError(process);
         
@@ -216,7 +210,8 @@ public class Tracer {
             if (optionArg == null) {
                 throw new Error("Bad launching connector");
             }
-            String optionValue = "-cp " + '"' + mainArgs[0] + ";\"";
+            String optionValue = "-cp " + '"' + mainArgs[0] + ";" + mainArgs[2] + "\"";
+            //String optionValue = "-cp " + '"' + mainArgs[0] + ";C:\\Users\\Diego\\Documents\\GitHub\\JavaTracer\\ProyectoConJar\\lib\\*\"";
             optionArg.setValue(optionValue);
             //optionArg.setValue("-classic");
         }

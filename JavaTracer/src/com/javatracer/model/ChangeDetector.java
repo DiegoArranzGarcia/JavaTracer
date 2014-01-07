@@ -71,19 +71,19 @@ public class ChangeDetector {
 	
 	private List<ChangeInfo> getChangesDeletedString(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
 	private List<ChangeInfo> getChangesCreatedString(String name,
 			StringInfo variable2) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
 	private List<ChangeInfo> compareStrings(String name, StringInfo variable1,
 			StringInfo variable2) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
 	/**

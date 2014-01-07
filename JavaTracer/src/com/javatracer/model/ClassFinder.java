@@ -10,10 +10,8 @@ import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import com.sun.org.apache.bcel.internal.classfile.Method;
 import com.sun.org.apache.bcel.internal.generic.Type;
-import com.sun.org.apache.bcel.internal.generic.ArrayType;
 
 public class ClassFinder {
-	
 	
 	private HashMap<String,String> pathsForFile=new HashMap<String,String>();
 	
@@ -40,7 +38,6 @@ public class ClassFinder {
 		List<String> classes = new ArrayList<String>();
 	    
 	    if (file.isDirectory()){
-			
 			
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++){
@@ -80,9 +77,10 @@ public class ClassFinder {
 						
 		}
 		
-		else {classes.add(file.getName());
+		else {
+			classes.add(file.getName());
 			pathsForFile.put(file.getName(), file.getAbsolutePath());
-		      }
+		}
 		
 		return classes;
 		
@@ -124,8 +122,8 @@ public class ClassFinder {
 	
 	
 	
-	public String giveMePath(String key){
-		return pathsForFile.get(key);
+	public String giveMePath(String className){
+		return pathsForFile.get(className);
 		
 	}
 }

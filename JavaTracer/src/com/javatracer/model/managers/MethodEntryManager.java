@@ -69,7 +69,7 @@ public class MethodEntryManager extends VMEventsManager{
 				arguments.add(new VariableInfo(nameVar,varObj));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
     	return arguments;
 	}

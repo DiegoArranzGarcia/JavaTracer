@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
@@ -143,56 +142,14 @@ public class WindowPath extends JFrame {
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				try {
-					
+				
+					controller.startTrace();
 					contentPane=getContentPane();
 					InitLoading();
-					String file =path.getText();
-					String name= (String) nameClass.getSelectedItem();
-					String IsPuntoClass="";
 					
-						if(name.length() > 5)
-							IsPuntoClass = name.substring(name.length()-5, name.length());
-					
-						if (IsPuntoClass.equals("class")||IsPuntoClass.equals("Class")) name=name.substring(0, name.length()-6);
-						
-					
-								if(file!=null && file!="" && !file.equals("") && name!=null && name!="" && !name.equals("")){
-				
-									
-									String[] args=ProcessPath(file,name);
-									String nameXlm = nameXml.getText();
-									
-									if (nameXlm.contains(".xml") || nameXlm.contains(".XML")){
-										errorNameXml();
-									} else {
-											if (nameXlm.equals("")) nameXlm ="default";
-											if(ExistFileXml(nameXlm+".xml")){
-												
-												int seleccion = JOptionPane.showOptionDialog(
-													    null,nameXlm+new Message(7).getMessage(),new Message(8).getMessage(), 
-													    JOptionPane.YES_NO_CANCEL_OPTION,
-													    JOptionPane.QUESTION_MESSAGE, null, null, null);
-											
-											    if(seleccion==0)
-											    	controller.startTrace(args,nameXlm);
-											
-											}else 
-											  controller.startTrace(args,nameXlm); 	
-									}
-									
-					
-								}else JOptionPane.showMessageDialog(new JFrame(), new Message(9).getMessage());
 						
 					FinishedLoading();
-			
-				} catch (Exception e1) {
-					
-					e1.printStackTrace();
-					
-				}
 			}
-
 			
 		});
 		
@@ -218,7 +175,8 @@ public class WindowPath extends JFrame {
  					nameXml.setEnabled(true); 
 					path.setText(sf);
 					controller.loadClassFromPath(sf);		
-				} else chooser.cancelSelection();
+				} else 
+					chooser.cancelSelection();
 				
 			}
 		});
@@ -284,55 +242,16 @@ public class WindowPath extends JFrame {
 		tracer.setEnabled(true);
 	}
 
-	private String[] ProcessPath(String file, String name) {
-		
-		
-		boolean equals=false;
-		String[] args = new String[2];
-		
-		String Path_file=controller.giveMePathController(name);
-		file=Path_file.substring(0, Path_file.lastIndexOf("\\"));
-		
-			Path_file=file.replaceAll("\\\\", ".");
-			
-				while(!equals){
-		    	
-					if(name.contains(Path_file.substring(Path_file.lastIndexOf(".")+1,Path_file.length())))
-							file=file.substring(0, file.lastIndexOf("\\"));
-					else 
-						equals=true;
-	
-					Path_file=Path_file.substring(0, Path_file.lastIndexOf("."));
-	
-					}
-			
-				
-	
-	
-		
-	  args[0]=file;
-	  args[1]=name;
-		
-	  return args;
+	public String getPath() {
+		return path.getText();
 	}
-	
-	
-	private boolean ExistFileXml(String name){
-		
-		int i=0;
-		boolean found=false;
-		File files = new File("./");
-		String[] classes=files.list();
-		
-		while(i<classes.length && !found){
-			
-			if(classes[i].equals(name)) found=true;
-			i++;
-			
-		}
-		
-		return found;
-		
+
+	public String getMainClass() {
+		return (String)nameClass.getSelectedItem();
+	}
+
+	public String getNameXml() {
+		return nameXml.getText();
 	}
 	
 	
