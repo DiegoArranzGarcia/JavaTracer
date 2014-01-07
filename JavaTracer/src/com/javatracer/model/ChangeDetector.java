@@ -7,6 +7,7 @@ import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.ChangeInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.StringInfo;
 import com.javatracer.model.data.VariableInfo;
 
 /**
@@ -52,6 +53,12 @@ public class ChangeDetector {
 		
 		if (variable1 instanceof ArrayInfo && variable2 instanceof ArrayInfo){
 			changes = compareArrays(name,(ArrayInfo)variable1,(ArrayInfo)variable2);
+		} else if (variable1 instanceof StringInfo && variable2 instanceof StringInfo){
+			changes = compareStrings(name,(StringInfo)variable1,(StringInfo)variable2);
+		} else if (variable1 instanceof StringInfo && variable2 instanceof NullObject){
+			changes = getChangesDeletedString(name);
+		} else if (variable1 instanceof NullObject && variable2 instanceof StringInfo){
+			changes = getChangesCreatedString(name,(StringInfo)variable2);
 		} else if (variable1 instanceof ObjectInfo && variable2 instanceof ObjectInfo){
 			changes = compareObjects(name,(ObjectInfo)variable1,(ObjectInfo)variable2);
 		} else if (variable1 instanceof ObjectInfo && variable2 instanceof NullObject){
@@ -62,7 +69,23 @@ public class ChangeDetector {
 		return changes;
 	}
 	
-	
+	private List<ChangeInfo> getChangesDeletedString(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<ChangeInfo> getChangesCreatedString(String name,
+			StringInfo variable2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<ChangeInfo> compareStrings(String name, StringInfo variable1,
+			StringInfo variable2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * Returns the changes when the object has been deleted.
 	 * 

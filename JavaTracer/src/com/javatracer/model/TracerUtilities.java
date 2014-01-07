@@ -34,8 +34,7 @@ public class TracerUtilities {
 		} else if (value instanceof PrimitiveValue){
 			object = getPrimitiveObject(value);
 		} else if (value instanceof StringReference){
-			//object = (String)value.toString().replaceAll("\"","");
-			object = getStringFromStringReference((StringReference)value,objectProcessed);
+			object = getStringFromStringReference((StringReference)value);
 		} else if (value instanceof ObjectReference){
 			object = getObjectFromObjectReference((ObjectReference)value,objectProcessed);
 		} else if (value == null){
@@ -67,18 +66,11 @@ public class TracerUtilities {
 		return object;
 	}
 	
-	private static Object getStringFromStringReference(StringReference value, List<Long> objectsProcessed) {
+	private static Object getStringFromStringReference(StringReference value) {
 		
 		long stringID = value.uniqueID();
 		Object object = null;
-		
-		if (objectsProcessed.contains(stringID)){
-			object = new ObjectInfo(getClass(value.referenceType())+ "[]",value.uniqueID());
-		}
-		
-		objectsProcessed.add(stringID);
-
-		
+				
 		object = new StringInfo(stringID,value.toString().replaceAll("\"",""));
 		
 		return object;
