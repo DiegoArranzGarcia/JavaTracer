@@ -29,38 +29,39 @@ public class TracerController {
 	public void startTrace(){
 				
 		String[] args = getArguments();
-		String nameXlm = view.getNameXml();
+		String nameXml = getNameXml();
 		
-		boolean error = checkErrors(args,nameXlm);
+		boolean error = checkErrors(args,nameXml);
 		
 		if (!error){
 			tracer = new Tracer(this);
-			tracer.trace(args,nameXlm);
+			tracer.trace(args,nameXml);
 		}
 	}
 
-	private boolean checkErrors(String[] args, String nameXlm) { 
+	private String getNameXml() {
+		String nameXml = view.getNameXml();
+		if (nameXml.equals(""))
+			nameXml = "default";
+		return nameXml;
+	}
+
+	private boolean checkErrors(String[] args, String nameXml) { 
 		
 		boolean error = false;
 		
-		if (nameXlm.contains(".xml") || nameXlm.contains(".XML")){
+		if (nameXml.contains(".xml") || nameXml.contains(".XML")){
 			view.errorNameXml();
 		} else {
-			if (nameXlm.equals("")) nameXlm ="default";
-			if(existFileXml(nameXlm+".xml")){
+			if(existFileXml(nameXml+".xml")){
 					
-				int seleccion = JOptionPane.showOptionDialog(null,nameXlm+new Message(7).getMessage(),new Message(8).getMessage(), 
+				int seleccion = JOptionPane.showOptionDialog(null,nameXml+new Message(7).getMessage(),new Message(8).getMessage(), 
 						    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				
 				error = (seleccion!=0);				    															   	
 			}
 		}
-				
-		if (!error && args[2].equals("")){
-			error = true;
-			view.showErrorMain();
-		}
-					
+								
 		return error;
 	}
 
