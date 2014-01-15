@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.ChangeInfo;
+import com.javatracer.model.data.IgnoredClass;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
 import com.javatracer.model.data.StringInfo;
@@ -65,7 +66,9 @@ public class ChangeDetector {
 			changes = getChangesDeletedObject(name);
 		} else if (variable1 instanceof NullObject && variable2 instanceof ObjectInfo){
 			changes = getChangesCreatedObject(name,(ObjectInfo)variable2);
-		}		
+		} else if (variable1 instanceof IgnoredClass || variable2 instanceof IgnoredClass){
+			changes = new ArrayList<>();
+		}
 		return changes;
 	}
 	
