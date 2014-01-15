@@ -27,6 +27,7 @@ import org.w3c.dom.NodeList;
 import com.javatracer.model.ChangeDetector;
 import com.javatracer.model.data.ArrayInfo;
 import com.javatracer.model.data.ChangeInfo;
+import com.javatracer.model.data.IgnoredClass;
 import com.javatracer.model.data.MethodInfo;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
@@ -278,10 +279,7 @@ public class TraceInspectorWriter {
 		xStream.alias(TAG_CHANGE, ChangeInfo.class);
 		
 		xStream.alias(XStreamWriter.TAG_ARRAY,ArrayInfo.class);
-		/**
-		 * FIXME: Cambiado el alias
-		 */ 
-		
+		xStream.alias(XStreamWriter.TAG_IGNORED,IgnoredClass.class);
 		xStream.alias(XStreamWriter.TAG_OBJECT,ObjectInfo.class);
 		xStream.alias(XStreamWriter.TAG_VARIABLE,VariableInfo.class);
 		xStream.alias(XStreamWriter.TAG_STRING, StringInfo.class);

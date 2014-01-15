@@ -7,11 +7,8 @@ import java.util.Map;
 import com.javatracer.model.managers.DeathManager;
 import com.javatracer.model.managers.DisconnectManager;
 import com.javatracer.model.managers.ExceptionManager;
-import com.javatracer.model.managers.FieldWatchManager;
 import com.javatracer.model.managers.MethodEntryManager;
 import com.javatracer.model.managers.MethodExitManager;
-import com.javatracer.model.managers.PrepareManager;
-import com.javatracer.model.managers.StepManager;
 import com.javatracer.model.managers.ThreadDeathManager;
 import com.javatracer.model.writers.DataBaseWriter;
 import com.javatracer.model.writers.XStreamWriter;
@@ -59,11 +56,11 @@ public class EventThread extends Thread {
     private DisconnectManager disconnect;
     private ExceptionManager exception;
     private ThreadDeathManager threadeath;
-    private FieldWatchManager fieldwatch;
+    //private FieldWatchManager fieldwatch;
     private MethodEntryManager methodentry;
     private MethodExitManager methodexit;
-    private StepManager step;
-    private PrepareManager prepare;
+    //private StepManager step;
+    //private PrepareManager prepare;
     private DataBaseWriter dbw;
 
     EventThread(VirtualMachine vm, String[] excludes, String nameXlm, boolean enableProfiling){
@@ -79,11 +76,13 @@ public class EventThread extends Thread {
         death = new DeathManager();
         disconnect = new DisconnectManager();
         threadeath = new ThreadDeathManager(traceMap);
-        fieldwatch=new FieldWatchManager(traceMap,vm);
-        methodentry=new MethodEntryManager(dbw);
-        methodexit=new MethodExitManager(dbw);
-        step=new StepManager(traceMap,vm);
-        prepare=new PrepareManager(excludes,vm);
+        //fieldwatch=new FieldWatchManager(traceMap,vm);
+        
+        ClassUtils utils = new ClassUtils(excludes);
+        methodentry=new MethodEntryManager(dbw,utils);
+        methodexit=new MethodExitManager(dbw,utils);
+        //step=new StepManager(traceMap,vm);
+        //prepare=new PrepareManager(excludes,vm);
 		exception=new ExceptionManager(traceMap,vm);
 		
 		if (enableProfiling){
@@ -170,7 +169,7 @@ public class EventThread extends Thread {
         if (event instanceof ExceptionEvent) {
             exception.exceptionEvent((ExceptionEvent)event);
         } else if (event instanceof ModificationWatchpointEvent) {
-        	fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
+        	//fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
         } else if (event instanceof MethodEntryEvent) {	
             methodentry.methodEntryEvent((MethodEntryEvent)event);
             if (enableProfiling)
@@ -178,11 +177,11 @@ public class EventThread extends Thread {
         } else if (event instanceof MethodExitEvent) {
         	methodexit.methodExitEvent((MethodExitEvent)event);
         } else if (event instanceof StepEvent) {
-            step.stepEvent((StepEvent)event);
+            //step.stepEvent((StepEvent)event);
         } else if (event instanceof ThreadDeathEvent) {
             threadeath.threadDeathEvent((ThreadDeathEvent)event);
         } else if (event instanceof ClassPrepareEvent) {
-            prepare.classPrepareEvent((ClassPrepareEvent)event);
+            //prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
         	finishTrace();
         } else if (event instanceof VMDisconnectEvent) {

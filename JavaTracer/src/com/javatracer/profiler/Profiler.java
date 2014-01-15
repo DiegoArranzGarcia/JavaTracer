@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.javatracer.model.TracerUtilities;
+import com.javatracer.model.ClassUtils;
 import com.sun.jdi.Method;
 import com.sun.jdi.event.MethodEntryEvent;
 
@@ -21,7 +21,7 @@ public class Profiler {
 		
 		Method method = event.method();
 		
-		String className = TracerUtilities.getClass(method.declaringType());
+		String className = ClassUtils.getClass(method.declaringType());
 		String methodName = method.toString();
 		
 		registerMethod(className,methodName);

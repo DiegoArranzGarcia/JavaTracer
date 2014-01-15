@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.javatracer.model.data.IgnoredClass;
 import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.StringInfo;
 import com.javatracer.model.data.VariableInfo;
@@ -29,6 +30,8 @@ public class XStreamWriter implements DataBaseWriter {
 	public static String TAG_ARRAY = "array";
 	public static String TAG_STRING = "string";
 	public static String TAG_NULL = "null";
+	public static String TAG_IGNORED = "ignored";
+	public static String TAG_THIS = "object-this";
 	
 	private XStream xStream;
 	private BufferedWriter bufferedWriter;
@@ -53,14 +56,11 @@ public class XStreamWriter implements DataBaseWriter {
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.aliasField("object-this", MethodEntryInfo.class, "objectThis");
-		xStream.aliasField("object-this", MethodExitInfo.class, "objectThis");
-		
+		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"objectThis");
+		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"objectThis");
 		xStream.alias(TAG_VARIABLE,VariableInfo.class);
 		xStream.alias(TAG_OBJECT, ObjectInfo.class);
-		/**
-		 * FIXME: Cambiado el alias
-		 */
+		xStream.alias(TAG_IGNORED, IgnoredClass.class);
 		xStream.alias(TAG_ARRAY, ArrayInfo.class);
 		xStream.alias(TAG_STRING,StringInfo.class);
 		xStream.alias(TAG_NULL,NullObject.class);

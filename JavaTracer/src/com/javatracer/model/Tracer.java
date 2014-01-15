@@ -51,8 +51,6 @@ public class Tracer {
    
     private static final int BUFFER_SIZE = 2048;
     
-    public Tracer(){}
-    
     public Tracer(TracerController tracerController) {
 		this.tracerController = tracerController;
   	}

@@ -3,7 +3,7 @@ package com.javatracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javatracer.model.TracerUtilities;
+import com.javatracer.model.ClassUtils;
 import com.javatracer.model.data.MethodExitInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.writers.DataBaseWriter;
@@ -18,12 +18,13 @@ import com.sun.jdi.VoidValue;
 import com.sun.jdi.event.MethodExitEvent;
 
 public class MethodExitManager extends VMEventsManager{
+		
+	private ClassUtils utils; 
 	
-	public MethodExitManager(){};	
-	
-	public MethodExitManager(DataBaseWriter dbw)
+	public MethodExitManager(DataBaseWriter dbw, ClassUtils utils)
 	{
 		super(dbw);
+		this.utils = utils;
 	}
 	
 	// Forward event for thread specific processing
@@ -33,11 +34,11 @@ public class MethodExitManager extends VMEventsManager{
          String methodName = method.name();
          List<VariableInfo> arguments = processArguments(method,thread);
          
-         String className = TracerUtilities.getClass(method.declaringType());
+         String className = ClassUtils.getClass(method.declaringType());
          Value returnValue = event.returnValue();
          Object returnObject = null; 
          if (!(returnValue instanceof VoidValue)){ 
-        	 returnObject = TracerUtilities.getObj(returnValue,new ArrayList<Long>());
+        	 returnObject = utils.getObj(returnValue,new ArrayList<Long>());
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
@@ -57,7 +58,7 @@ public class MethodExitManager extends VMEventsManager{
 			e.printStackTrace();
 		}
 		
-		Object valueThis = TracerUtilities.getObj(stack.thisObject(),new ArrayList<Long>());
+		Object valueThis = utils.getObj(stack.thisObject(),new ArrayList<Long>());
 		VariableInfo variableThis = new VariableInfo("this", valueThis);
 		
 		return variableThis;
@@ -73,7 +74,7 @@ public class MethodExitManager extends VMEventsManager{
 			List<LocalVariable> variables = method.arguments();
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
-				Object varObj = TracerUtilities.getObj(stack.getValue(var),new ArrayList<Long>());
+				Object varObj = utils.getObj(stack.getValue(var),new ArrayList<Long>());
 				String nameVar = var.name();
 				arguments.add(new VariableInfo(nameVar,varObj));
 			}

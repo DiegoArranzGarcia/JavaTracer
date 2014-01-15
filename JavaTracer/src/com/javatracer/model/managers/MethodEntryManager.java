@@ -3,7 +3,7 @@ package com.javatracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javatracer.model.TracerUtilities;
+import com.javatracer.model.ClassUtils;
 import com.javatracer.model.data.MethodEntryInfo;
 import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.writers.DataBaseWriter;
@@ -13,6 +13,7 @@ import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
+import com.sun.jdi.Value;
 import com.sun.jdi.event.MethodEntryEvent;
 
 /**
@@ -20,14 +21,19 @@ import com.sun.jdi.event.MethodEntryEvent;
  * is registred in the trace or used for profiling porpurses. 
  */
 public class MethodEntryManager extends VMEventsManager{
-		
+	
+	private ClassUtils utils;
+			
 	/**
-	 * Constructor that need a DataBaseWriter to register the method information.
+	 * Constructor that need a DataBaseWriter to register the method information. Excludes classes are not
+	 * printed and ignore called methods from excludes classes.
 	 * @param dbw
+	 * @param utils 
 	 */
-	public MethodEntryManager(DataBaseWriter dbw)
+	public MethodEntryManager(DataBaseWriter dbw, ClassUtils utils)
 	{
 		super(dbw);
+		this.utils = utils;
 	}
 	
 	/**
@@ -43,13 +49,13 @@ public class MethodEntryManager extends VMEventsManager{
 	 */
 	
     public void methodEntryEvent(MethodEntryEvent event) {
-    	   	
+    	
     	ThreadReference thread = event.thread();
        	Method method = event.method();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
        	String methodName = method.name();
         List<VariableInfo> arguments = processArguments(method,thread);
-        String className = TracerUtilities.getClass(method.declaringType());
+        String className = ClassUtils.getClass(method.declaringType());
         VariableInfo argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
         writeOutput(info);
@@ -64,7 +70,8 @@ public class MethodEntryManager extends VMEventsManager{
 			List<LocalVariable> variables = method.arguments();
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
-				Object varObj = TracerUtilities.getObj(stack.getValue(var),new ArrayList<Long>());
+				Value value = stack.getValue(var);
+				Object varObj = utils.getObj(value,new ArrayList<Long>());
 				String nameVar = var.name();
 				arguments.add(new VariableInfo(nameVar,varObj));
 			}
@@ -73,7 +80,6 @@ public class MethodEntryManager extends VMEventsManager{
 		}
     	return arguments;
 	}
-
 
 	private VariableInfo processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
 	
@@ -85,8 +91,12 @@ public class MethodEntryManager extends VMEventsManager{
 			e.printStackTrace();
 		}
 		
-		Object valueThis = TracerUtilities.getObj(stack.thisObject(),new ArrayList<Long>());
-		VariableInfo variableThis = new VariableInfo("this", valueThis);
+		VariableInfo variableThis = null;
+		Value value = stack.thisObject();
+		
+		
+		Object valueThis = utils.getObj(value,new ArrayList<Long>());
+		variableThis = new VariableInfo("this", valueThis);
 		
 		return variableThis;
 	}

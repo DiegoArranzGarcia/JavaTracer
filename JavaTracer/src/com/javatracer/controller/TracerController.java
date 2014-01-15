@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.javatracer.model.ClassFinder;
 import com.javatracer.model.Tracer;
+import com.javatracer.model.finders.ClassFinder;
+import com.javatracer.model.finders.JarFinder;
 import com.javatracer.model.writers.TraceInspectorWriter;
 import com.javatracer.view.Message;
 import com.javatracer.view.WindowPath;
