@@ -4,18 +4,17 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.javatracer.model.data.IgnoredClass;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.StringInfo;
-import com.javatracer.model.data.VariableInfo;
 import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.InterfaceInfo;
+import com.javatracer.model.data.IgnoredClass;
 import com.javatracer.model.data.MethodEntryInfo;
 import com.javatracer.model.data.MethodExitInfo;
+import com.javatracer.model.data.NullObject;
 import com.javatracer.model.data.ObjectInfo;
+import com.javatracer.model.data.StringInfo;
+import com.javatracer.model.data.VariableInfo;
 import com.thoughtworks.xstream.XStream;
 
-public class XStreamWriter implements DataBaseWriter {
+public class XStreamWriter {
 
 	public static String FILE_NAME = "output.xml";
 	
@@ -66,17 +65,21 @@ public class XStreamWriter implements DataBaseWriter {
 		xStream.alias(TAG_NULL,NullObject.class);
 	}
 
-	public void writeOutput(InterfaceInfo info){
+	public void writeOutput(MethodEntryInfo info){
+			try {
+				String xmlString = xStream.toXML(info);
+				processMethodEntryEvent(xmlString);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public void writeOutput(MethodExitInfo info){
 		try {
 			String xmlString = xStream.toXML(info);
-			if (info instanceof MethodEntryInfo){
-				processMethodEntryEvent(xmlString);
-			}
-			else if (info instanceof MethodExitInfo){
-				processMethodExitEvent(xmlString);
-			}			
+			processMethodExitEvent(xmlString);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

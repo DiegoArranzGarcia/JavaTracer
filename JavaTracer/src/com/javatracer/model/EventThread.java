@@ -10,7 +10,6 @@ import com.javatracer.model.managers.ExceptionManager;
 import com.javatracer.model.managers.MethodEntryManager;
 import com.javatracer.model.managers.MethodExitManager;
 import com.javatracer.model.managers.ThreadDeathManager;
-import com.javatracer.model.writers.DataBaseWriter;
 import com.javatracer.model.writers.XStreamWriter;
 import com.javatracer.profiler.Profiler;
 import com.sun.jdi.ThreadReference;
@@ -61,14 +60,14 @@ public class EventThread extends Thread {
     private MethodExitManager methodexit;
     //private StepManager step;
     //private PrepareManager prepare;
-    private DataBaseWriter dbw;
+    private XStreamWriter writer;
 
     EventThread(VirtualMachine vm, String[] excludes, String nameXlm, boolean enableProfiling){
         super("event-handler");
         this.vm = vm;
         this.enableProfiling = enableProfiling;
         this.excludes = excludes;
-        dbw = new XStreamWriter(nameXlm);
+        writer = new XStreamWriter(nameXlm);
                
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
@@ -79,8 +78,8 @@ public class EventThread extends Thread {
         //fieldwatch=new FieldWatchManager(traceMap,vm);
         
         ClassUtils utils = new ClassUtils(excludes);
-        methodentry=new MethodEntryManager(dbw,utils);
-        methodexit=new MethodExitManager(dbw,utils);
+        methodentry=new MethodEntryManager(writer,utils);
+        methodexit=new MethodExitManager(writer,utils);
         //step=new StepManager(traceMap,vm);
         //prepare=new PrepareManager(excludes,vm);
 		exception=new ExceptionManager(traceMap,vm);
@@ -190,7 +189,7 @@ public class EventThread extends Thread {
     }
 
     private void finishTrace() {
-		dbw.close();
+    	writer.close();
 		
 		if (enableProfiling)
 			profiler.showProfile();

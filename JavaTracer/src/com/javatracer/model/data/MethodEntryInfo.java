@@ -2,7 +2,7 @@ package com.javatracer.model.data;
 
 import java.util.List;
 
-public class MethodEntryInfo implements InterfaceInfo {
+public class MethodEntryInfo {
 
 	String methodName;
 	String calledFromClass;
@@ -14,10 +14,6 @@ public class MethodEntryInfo implements InterfaceInfo {
 		this.calledFromClass = calledFromClass; 
 		this.arguments = arguments;	
 		this.objectThis= objectThis;
-	}
-
-	public String toString() {
-		return "";
 	}
 	
 }

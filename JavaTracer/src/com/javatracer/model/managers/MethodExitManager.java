@@ -6,7 +6,7 @@ import java.util.List;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.data.MethodExitInfo;
 import com.javatracer.model.data.VariableInfo;
-import com.javatracer.model.writers.DataBaseWriter;
+import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
@@ -17,13 +17,14 @@ import com.sun.jdi.Value;
 import com.sun.jdi.VoidValue;
 import com.sun.jdi.event.MethodExitEvent;
 
-public class MethodExitManager extends VMEventsManager{
+public class MethodExitManager{
 		
 	private ClassUtils utils; 
+	private XStreamWriter writer;
 	
-	public MethodExitManager(DataBaseWriter dbw, ClassUtils utils)
+	public MethodExitManager(XStreamWriter writer, ClassUtils utils)
 	{
-		super(dbw);
+		this.writer = writer;
 		this.utils = utils;
 	}
 	
@@ -44,7 +45,7 @@ public class MethodExitManager extends VMEventsManager{
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
          VariableInfo object_this = processThis(event,ref, thread);
          MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
-         writeOutput(info);
+         writer.writeOutput(info);
     }
    
 

@@ -6,7 +6,7 @@ import java.util.List;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.data.MethodEntryInfo;
 import com.javatracer.model.data.VariableInfo;
-import com.javatracer.model.writers.DataBaseWriter;
+import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
@@ -20,9 +20,10 @@ import com.sun.jdi.event.MethodEntryEvent;
  * This class handles every time that a method is called. In there the information 
  * is registred in the trace or used for profiling porpurses. 
  */
-public class MethodEntryManager extends VMEventsManager{
+public class MethodEntryManager{
 	
 	private ClassUtils utils;
+	private XStreamWriter writer;
 			
 	/**
 	 * Constructor that need a DataBaseWriter to register the method information. Excludes classes are not
@@ -30,9 +31,9 @@ public class MethodEntryManager extends VMEventsManager{
 	 * @param dbw
 	 * @param utils 
 	 */
-	public MethodEntryManager(DataBaseWriter dbw, ClassUtils utils)
+	public MethodEntryManager(XStreamWriter writer, ClassUtils utils)
 	{
-		super(dbw);
+		this.writer = writer;
 		this.utils = utils;
 	}
 	
@@ -58,7 +59,7 @@ public class MethodEntryManager extends VMEventsManager{
         String className = ClassUtils.getClass(method.declaringType());
         VariableInfo argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
-        writeOutput(info);
+        writer.writeOutput(info);
     }
 
 	private List<VariableInfo> processArguments(Method method, ThreadReference thread) {

@@ -3,7 +3,7 @@ package com.javatracer.model.data;
 import java.util.List;
 
 
-public class MethodExitInfo implements InterfaceInfo{
+public class MethodExitInfo {
 
 	String methodName;
 	String className;
@@ -18,12 +18,6 @@ public class MethodExitInfo implements InterfaceInfo{
 		this.returnObject = returnObject;
 		this.objectThis=objectThis;
 		this.arguments = arguments;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
