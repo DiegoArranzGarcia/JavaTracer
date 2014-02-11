@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.ClassUtils;
-import com.javatracer.model.data.MethodExitInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
@@ -33,23 +32,23 @@ public class MethodExitManager{
     	ThreadReference thread = event.thread();
     	 Method method = event.method();
          String methodName = method.name();
-         List<VariableInfo> arguments = processArguments(method,thread);
+         List<Object> arguments = processArguments(method,thread);
          
          String className = ClassUtils.getClass(method.declaringType());
          Value returnValue = event.returnValue();
          Object returnObject = null; 
          if (!(returnValue instanceof VoidValue)){ 
-        	 returnObject = utils.getObj(returnValue,new ArrayList<Long>());
+        	 returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
-         VariableInfo object_this = processThis(event,ref, thread);
+         Object object_this = processThis(event,ref, thread);
          MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
          writer.writeOutput(info);
     }
    
 
-	private VariableInfo processThis(MethodExitEvent event, ReferenceType ref, ThreadReference thread) {
+	private Object processThis(MethodExitEvent event, ReferenceType ref, ThreadReference thread) {
 	
 		StackFrame stack=null;
 
@@ -59,25 +58,24 @@ public class MethodExitManager{
 			e.printStackTrace();
 		}
 		
-		Object valueThis = utils.getObj(stack.thisObject(),new ArrayList<Long>());
-		VariableInfo variableThis = new VariableInfo("this", valueThis);
+		Object valueThis = utils.getObj("this",stack.thisObject(),new ArrayList<Long>());
 		
-		return variableThis;
+		return valueThis;
 	}
 
 
-    private List<VariableInfo> processArguments(Method method, ThreadReference thread) {
+    private List<Object> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<VariableInfo> arguments = new ArrayList<>();
+    	List<Object> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
 			List<LocalVariable> variables = method.arguments();
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
-				Object varObj = utils.getObj(stack.getValue(var),new ArrayList<Long>());
 				String nameVar = var.name();
-				arguments.add(new VariableInfo(nameVar,varObj));
+				Object varObj = utils.getObj(nameVar,stack.getValue(var),new ArrayList<Long>());
+				arguments.add(varObj);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

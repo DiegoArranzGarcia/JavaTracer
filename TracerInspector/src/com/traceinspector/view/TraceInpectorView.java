@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import com.traceinspector.controller.TraceInspectorController;
+import com.traceinspector.objectinspectorview.ObjectInspectorView;
+import com.traceinspector.treeinspectorview.TreeInspectorView;
 
 
 @SuppressWarnings("serial")

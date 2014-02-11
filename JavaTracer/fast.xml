@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<method-call id="1">
+<info>
+  <name>main</name>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <variable>
+      <name>args</name>
+      <value class="array">
+        <className>java.lang.String</className>
+        <id>53</id>
+        <length>0</length>
+        <values/>
+      </value>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="null"/>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+<method-call id="2">
+<info>
+  <name>&lt;init&gt;</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string-info">
+        <id>58</id>
+        <value></value>
+      </value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string-info">
+        <id>59</id>
+        <value>b</value>
+      </value>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">0</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="null"/>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="null"/>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>60</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+<change>
+  <variable>this.age</variable>
+  <value class="int">1</value>
+</change>
+<change>
+  <variable>this.name</variable>
+  <value class="string-info">
+    <id>58</id>
+    <value></value>
+  </value>
+</change>
+<change>
+  <variable>this.lastName</variable>
+  <value class="string-info">
+    <id>59</id>
+    <value>b</value>
+  </value>
+</change>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="3">
+<info>
+  <name>&lt;init&gt;</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>name</name>
+      <value class="string-info">
+        <id>58</id>
+        <value></value>
+      </value>
+    </variable>
+    <variable>
+      <name>lastName</name>
+      <value class="string-info">
+        <id>59</id>
+        <value>b</value>
+      </value>
+    </variable>
+    <variable>
+      <name>bestFriend</name>
+      <value class="null"/>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">0</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="null"/>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="null"/>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+<change>
+  <variable>this.age</variable>
+  <value class="int">1</value>
+</change>
+<change>
+  <variable>this.name</variable>
+  <value class="string-info">
+    <id>58</id>
+    <value></value>
+  </value>
+</change>
+<change>
+  <variable>this.lastName</variable>
+  <value class="string-info">
+    <id>59</id>
+    <value>b</value>
+  </value>
+</change>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="4">
+<info>
+  <name>prueba</name>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <variable>
+      <name>i</name>
+      <value class="int">1</value>
+    </variable>
+    <variable>
+      <name>p1</name>
+      <value class="object-info">
+        <className>Person</className>
+        <fields>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string-info">
+              <id>58</id>
+              <value></value>
+            </value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string-info">
+              <id>59</id>
+              <value>b</value>
+            </value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value class="object-info">
+              <className>Person</className>
+              <fields>
+                <variable>
+                  <name>age</name>
+                  <value class="int">1</value>
+                </variable>
+                <variable>
+                  <name>name</name>
+                  <value class="string-info">
+                    <id>58</id>
+                    <value></value>
+                  </value>
+                </variable>
+                <variable>
+                  <name>lastName</name>
+                  <value class="string-info">
+                    <id>59</id>
+                    <value>b</value>
+                  </value>
+                </variable>
+                <variable>
+                  <name>bestFriend</name>
+                  <value class="null"/>
+                </variable>
+              </fields>
+              <id>62</id>
+            </value>
+          </variable>
+        </fields>
+        <id>60</id>
+      </value>
+    </variable>
+    <variable>
+      <name>p2</name>
+      <value class="object-info">
+        <className>Person</className>
+        <fields>
+          <variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </variable>
+          <variable>
+            <name>name</name>
+            <value class="string-info">
+              <id>58</id>
+              <value></value>
+            </value>
+          </variable>
+          <variable>
+            <name>lastName</name>
+            <value class="string-info">
+              <id>59</id>
+              <value>b</value>
+            </value>
+          </variable>
+          <variable>
+            <name>bestFriend</name>
+            <value class="null"/>
+          </variable>
+        </fields>
+        <id>62</id>
+      </value>
+    </variable>
+  </arguments>
+  <thisObject>
+    <name>this</name>
+    <value class="null"/>
+  </thisObject>
+</info>
+<changes>
+<change>
+  <variable>p1.bestFriend.age</variable>
+  <value class="int">0</value>
+</change>
+<change>
+  <variable>p2.age</variable>
+  <value class="int">0</value>
+</change>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="5">
+<info>
+  <name>imprime</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">0</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string-info">
+            <id>58</id>
+            <value></value>
+          </value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string-info">
+            <id>59</id>
+            <value>b</value>
+          </value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+<change>
+  <variable>this.age</variable>
+  <value class="int">1</value>
+</change>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="6">
+<info>
+  <name>getName</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string-info">
+            <id>58</id>
+            <value></value>
+          </value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string-info">
+            <id>59</id>
+            <value>b</value>
+          </value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="7">
+<info>
+  <name>getAge</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject>
+    <name>this</name>
+    <value class="object-info">
+      <className>Person</className>
+      <fields>
+        <variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </variable>
+        <variable>
+          <name>name</name>
+          <value class="string-info">
+            <id>58</id>
+            <value></value>
+          </value>
+        </variable>
+        <variable>
+          <name>lastName</name>
+          <value class="string-info">
+            <id>59</id>
+            <value>b</value>
+          </value>
+        </variable>
+        <variable>
+          <name>bestFriend</name>
+          <value class="null"/>
+        </variable>
+      </fields>
+      <id>62</id>
+    </value>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+</called-methods>
+</method-call>
+</trace>

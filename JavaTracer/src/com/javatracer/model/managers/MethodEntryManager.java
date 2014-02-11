@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.ClassUtils;
-import com.javatracer.model.data.MethodEntryInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
@@ -55,16 +54,16 @@ public class MethodEntryManager{
        	Method method = event.method();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
        	String methodName = method.name();
-        List<VariableInfo> arguments = processArguments(method,thread);
+        List<Object> arguments = processArguments(method,thread);
         String className = ClassUtils.getClass(method.declaringType());
-        VariableInfo argument_this = processThis(event,ref,thread);
+        Object argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
         writer.writeOutput(info);
     }
 
-	private List<VariableInfo> processArguments(Method method, ThreadReference thread) {
+	private List<Object> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<VariableInfo> arguments = new ArrayList<>();
+    	List<Object> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
@@ -72,9 +71,9 @@ public class MethodEntryManager{
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
 				Value value = stack.getValue(var);
-				Object varObj = utils.getObj(value,new ArrayList<Long>());
 				String nameVar = var.name();
-				arguments.add(new VariableInfo(nameVar,varObj));
+				Object varObj = utils.getObj(nameVar,value,new ArrayList<Long>());
+				arguments.add(varObj);
 			}
 		} catch (Exception e) {
 			
@@ -82,7 +81,7 @@ public class MethodEntryManager{
     	return arguments;
 	}
 
-	private VariableInfo processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
+	private Object processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
 	
 		StackFrame stack=null;
 
@@ -92,14 +91,11 @@ public class MethodEntryManager{
 			e.printStackTrace();
 		}
 		
-		VariableInfo variableThis = null;
 		Value value = stack.thisObject();
 		
+		Object this_data = utils.getObj("this",value,new ArrayList<Long>());
 		
-		Object valueThis = utils.getObj(value,new ArrayList<Long>());
-		variableThis = new VariableInfo("this", valueThis);
-		
-		return variableThis;
+		return this_data;
 	}
 
 }

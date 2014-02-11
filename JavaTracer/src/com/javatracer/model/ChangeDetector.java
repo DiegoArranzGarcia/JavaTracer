@@ -3,13 +3,8 @@ package com.javatracer.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.ChangeInfo;
-import com.javatracer.model.data.IgnoredClass;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.ObjectInfo;
-import com.javatracer.model.data.StringInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.methods.data.ChangeInfo;
+import com.sun.xml.internal.bind.v2.model.core.ArrayInfo;
 
 /**
  * Class used to detect changes between VariableInfo objects. The changes are return in

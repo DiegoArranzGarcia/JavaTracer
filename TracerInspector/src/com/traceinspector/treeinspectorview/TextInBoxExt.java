@@ -2,19 +2,20 @@ package com.traceinspector.treeinspectorview;
 
 import java.util.List;
 
-import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.ObjectInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.NullData;
+import com.javatracer.model.variables.data.ObjectData;
+import com.javatracer.model.variables.data.SimpleData;
+import com.javatracer.model.variables.data.StringData;
 
 
 public class TextInBoxExt {
 
 	private long id;
 	private String methodName;
-	private List<VariableInfo> arguments;
-	private VariableInfo returnValue;
-	private VariableInfo thisValue;
+	private List<Object> arguments;
+	private Object returnValue;
+	private Object thisValue;
 	private boolean expanded;
 	private boolean selected;
 	private boolean haveChildren;
@@ -24,7 +25,7 @@ public class TextInBoxExt {
 		this.selected = false;
 	}
 
-	public TextInBoxExt(long id, String name, List<VariableInfo> arguments,	VariableInfo returnValue,VariableInfo thisValue,boolean haveChildren) {
+	public TextInBoxExt(long id, String name, List<Object> arguments,	Object returnValue,Object thisValue,boolean haveChildren) {
 		this.id = id;
 		this.methodName = name;
 		this.arguments = arguments;
@@ -51,19 +52,19 @@ public class TextInBoxExt {
 		this.methodName = methodName;
 	}
 
-	public List<VariableInfo> getArguments() {
+	public List<Object> getArguments() {
 		return arguments;
 	}
 
-	public void setArguments(List<VariableInfo> arguments) {
+	public void setArguments(List<Object> arguments) {
 		this.arguments = arguments;
 	}
 
-	public VariableInfo getReturnValue() {
+	public Object getReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(VariableInfo returnValue) {
+	public void setReturnValue(Object returnValue) {
 		this.returnValue = returnValue;
 	}
 
@@ -85,7 +86,7 @@ public class TextInBoxExt {
 	
 	public String giveMeTextInBox() {
 		
-		 List<VariableInfo> var = getArguments();
+		 List<Object> var = getArguments();
 		 int i=0;
 		 
 		 String name = getMethodName() + " (";
@@ -109,34 +110,34 @@ public class TextInBoxExt {
 			 return name;
 	} 
 
-	public String completeArgumentString(VariableInfo var) {
+	public String completeArgumentString(Object var) {
+
+		String text = "";
 		
-		String name="";
+		if (var instanceof ArrayData){
+			ArrayData array = ((ArrayData)var);
+			text= array.getClassName() +"[ ]"+" "+ array.getName() + ", " ;
+		}else if (var instanceof ObjectData){
+			ObjectData object = ((ObjectData)var);
+			text= object.getClassName() +" "+ object.getName() + ", " ;
+		}else if (var instanceof NullData){
+			text= ((NullData) var).getName() + " = null, " ;
+		}else if (var instanceof StringData){
+			StringData string = ((StringData)var);
+			text= string.getName() + " = \"" + string.getValue() + "\", " ;
+		}else if (var instanceof SimpleData){
+			SimpleData data = ((SimpleData)var);
+			text= data.getName() + " = " + data.getValue().toString() + ", " ;		
+		}
 		
-		if(var!=null){
-			name=var.getName();
-			Object value = var.getValue();
-		
-			if (value instanceof ArrayInfo)
-				name=((ArrayInfo)value).getClassName() +"[ ]"+" "+ name + ", " ;
-			else if (value instanceof ObjectInfo)
-				name=((ObjectInfo)value).getClassName() +" "+ name + ", " ;
-			else if (value instanceof NullObject)
-				name= name + " = null, " ;
-			else if (value instanceof String)
-				name= name + " = \"" + value.toString() + "\", " ;
-			else
-				name= name + " = " + value.toString() + ", " ;		
-			}
-		
-		return name;
+		return text;
 	}
 
-	public VariableInfo getThisValue() {
+	public Object getThisValue() {
 		return thisValue;
 	}
 
-	public void setThisValue(VariableInfo thisValue) {
+	public void setThisValue(Object thisValue) {
 		this.thisValue = thisValue;
 	}
 

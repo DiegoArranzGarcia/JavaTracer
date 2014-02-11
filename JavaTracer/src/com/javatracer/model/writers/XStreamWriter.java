@@ -4,14 +4,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.IgnoredClass;
-import com.javatracer.model.data.MethodEntryInfo;
-import com.javatracer.model.data.MethodExitInfo;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.ObjectInfo;
-import com.javatracer.model.data.StringInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.methods.data.MethodEntryInfo;
+import com.javatracer.model.methods.data.MethodExitInfo;
+import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.IgnoredData;
+import com.javatracer.model.variables.data.NullData;
+import com.javatracer.model.variables.data.ObjectData;
+import com.javatracer.model.variables.data.SimpleData;
+import com.javatracer.model.variables.data.StringData;
 import com.thoughtworks.xstream.XStream;
 
 public class XStreamWriter {
@@ -24,12 +24,14 @@ public class XStreamWriter {
 	public static String TAG_CALLED_METHODS = "called-methods";
 	public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
 	public static String TAG_METHOD_EXIT_EVENT = "method-exit-event";
-	public static String TAG_VARIABLE = "variable";
-	public static String TAG_OBJECT = "object-info";
-	public static String TAG_ARRAY = "array";
-	public static String TAG_STRING = "string";
+	public static String TAG_SIMPLE_DATA = "simple-variable";
+	public static String TAG_OBJECT = "object-variable";
+	public static String TAG_ARRAY = "array-variable";
+	public static String TAG_STRING = "string-variable";
 	public static String TAG_NULL = "null";
 	public static String TAG_IGNORED = "ignored";
+	public static String TAG_FIELDS = "fields";
+	public static String TAG_CONTENT = "content";
 	public static String TAG_THIS = "object-this";
 	
 	private XStream xStream;
@@ -57,12 +59,14 @@ public class XStreamWriter {
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
 		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"objectThis");
 		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"objectThis");
-		xStream.alias(TAG_VARIABLE,VariableInfo.class);
-		xStream.alias(TAG_OBJECT, ObjectInfo.class);
-		xStream.alias(TAG_IGNORED, IgnoredClass.class);
-		xStream.alias(TAG_ARRAY, ArrayInfo.class);
-		xStream.alias(TAG_STRING,StringInfo.class);
-		xStream.alias(TAG_NULL,NullObject.class);
+		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
+		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
+		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
+		xStream.alias(TAG_OBJECT, ObjectData.class);
+		xStream.alias(TAG_IGNORED, IgnoredData.class);
+		xStream.alias(TAG_ARRAY, ArrayData.class);
+		xStream.alias(TAG_STRING,StringData.class);
+		xStream.alias(TAG_NULL,NullData.class);
 	}
 
 	public void writeOutput(MethodEntryInfo info){

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.IgnoredClass;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.ObjectInfo;
-import com.javatracer.model.data.StringInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.IgnoredData;
+import com.javatracer.model.variables.data.NullData;
+import com.javatracer.model.variables.data.ObjectData;
+import com.javatracer.model.variables.data.SimpleData;
+import com.javatracer.model.variables.data.StringData;
 import com.sun.jdi.ArrayReference;
 import com.sun.jdi.BooleanValue;
 import com.sun.jdi.ByteValue;
@@ -101,34 +101,34 @@ public class ClassUtils {
 				type.equals("java.lang.Short") || type.equals("java.lang.Long") || type.equals("java.lang.Boolean"));
 	}
 
-	public Object getObj(Value value,List<Long> objectProcessed){
+	public Object getObj(String name,Value value,List<Long> objectProcessed){
 		
 
 		Object object = null;
 		if (value instanceof ArrayReference){
-			object = getArrayFromArrayReference((ArrayReference)value,objectProcessed);
+			object = getArrayFromArrayReference(name,(ArrayReference)value,objectProcessed);
 		} else if (value instanceof PrimitiveValue){
-			object = getPrimitiveObject(value);
+			object = getPrimitiveObject(name,value);
 		} else if (value instanceof StringReference){
-			object = getStringFromStringReference((StringReference)value);
+			object = getStringFromStringReference(name,(StringReference)value);
 		} else if (value instanceof ObjectReference){
-			object = getObjectFromObjectReference((ObjectReference)value,objectProcessed);
+			object = getObjectFromObjectReference(name,(ObjectReference)value,objectProcessed);
 		} else if (value == null){
-			object = new NullObject();
+			object = new NullData(name);
 		}
 		return object;
 	}
 
-	private Object getArrayFromArrayReference(ArrayReference value, List<Long> objectsProcessed) {
+	private Object getArrayFromArrayReference(String name,ArrayReference value, List<Long> objectsProcessed) {
 		
 		Object object = null;
+		long arrayID = value.uniqueID();
 		
 		if (!isExcludedClass(value)){ 
 		
-			long arrayID = value.uniqueID();
 			if (objectsProcessed.contains(arrayID)){
 				
-				object = new ObjectInfo(getClass(value.referenceType())+ "[]",value.uniqueID());
+				object = new ObjectData(name,value.uniqueID(),null,getClass(value.referenceType())+ "[]");
 				
 			} else {
 			
@@ -138,44 +138,43 @@ public class ClassUtils {
 				
 				for (int i=0;i<values.size();i++){
 					Value v = values.get(i);
-					elements.add(getObj(v,objectsProcessed));
+					elements.add(getObj("["+i+"]",v,objectsProcessed));
 				}
 				
-				object = new ArrayInfo(getClass(value.referenceType()),arrayID,value.length(),elements);
+				object = new ArrayData(name,arrayID,elements,value.length(),getClass(value.referenceType()));
 			}
 		
 		} else {
-			object = new IgnoredClass();
+			object = new IgnoredData(name);
 		}
 		
 		return object;
 	}
 	
-	private Object getStringFromStringReference(StringReference value) {
+	private Object getStringFromStringReference(String name,StringReference value) {
 		
 		long stringID = value.uniqueID();
 		Object object = null;
 				
-		object = new StringInfo(stringID,value.toString().replaceAll("\"",""));
+		object = new StringData(name,stringID,value.toString().replaceAll("\"",""));
 		
 		return object;
 	}
 	
-	private Object getObjectFromObjectReference(ObjectReference value,List<Long> objectsProcessed){
+	private Object getObjectFromObjectReference(String name,ObjectReference value,List<Long> objectsProcessed){
 		
 		Object result = null;
+		long objectId = value.uniqueID();
 		
 		if (!isExcludedClass(value)){
-			
-			long objectId = value.uniqueID();
-			
+						
 			if (objectsProcessed.contains(objectId)){
-				result = new ObjectInfo(getClass(value.referenceType()),value.uniqueID());
+				result = new ObjectData(name,objectId,null,getClass(value.referenceType()));
 			} else {
 				
 				objectsProcessed.add(objectId);
 				List<Field> fields = value.referenceType().allFields();
-				List<VariableInfo> values = new ArrayList<>();
+				List<Object> values = new ArrayList<>();
 				
 				for (int i=0;i<fields.size();i++){
 					Field f = fields.get(i);
@@ -184,46 +183,46 @@ public class ClassUtils {
 					
 					if ((v instanceof ArrayReference)){
 						ArrayReference objectValue = (ArrayReference)v;
-						object = getArrayFromArrayReference(objectValue,objectsProcessed);
+						object = getArrayFromArrayReference(f.name(),objectValue,objectsProcessed);
 					}
 					else if (v instanceof ObjectReference && !(v instanceof StringReference)){
 						ObjectReference objectValue = (ObjectReference)v;
-						object = getObjectFromObjectReference(objectValue,objectsProcessed);
+						object = getObjectFromObjectReference(f.name(),objectValue,objectsProcessed);
 					}
 					else {
-						object = getObj(v,objectsProcessed);
+						object = getObj(f.name(),v,objectsProcessed);
 					}
 					
-					values.add(new VariableInfo(f.name(),object));
+					values.add(object);
 				}
 				
-				result = new ObjectInfo(getClass(value.referenceType()),values,value.uniqueID());
+				result = new ObjectData(name,objectId,values,getClass(value.referenceType()));
 			}		
 		} else {
-			result = new IgnoredClass();
+			result = new IgnoredData(name);
 		}
 		return result;
 	}
 
 
-	private Object getPrimitiveObject(Value value) {
+	private Object getPrimitiveObject(String name, Value value) {
 		Object object = null;
 		if (value instanceof BooleanValue)
-			object = ((BooleanValue) value).booleanValue();
+			object = new SimpleData(name,((BooleanValue) value).booleanValue());
 		else if (value instanceof ByteValue)
-			object = ((ByteValue) value).byteValue();
+			object = new SimpleData(name,((ByteValue) value).byteValue());
 		else if (value instanceof CharValue)
-			object = ((CharValue) value).charValue();
+			object = new SimpleData(name,((CharValue) value).charValue());
 		else if (value instanceof DoubleValue)
-			object = ((DoubleValue) value).doubleValue();
+			object = new SimpleData(name,((DoubleValue) value).doubleValue());
 		else if (value instanceof FloatValue)
-			object = ((FloatValue) value).floatValue();
+			object = new SimpleData(name,((FloatValue) value).floatValue());
 		else if (value instanceof IntegerValue)
-			object = ((IntegerValue) value).intValue();
+			object = new SimpleData(name,((IntegerValue) value).intValue());
 		else if (value instanceof LongValue)
-			object = ((LongValue) value).longValue();
+			object = new SimpleData(name,((LongValue) value).longValue());
 		else if (value instanceof ShortValue)
-			object = ((ShortValue)value).shortValue();
+			object = new SimpleData(name,((ShortValue)value).shortValue());
 		return object;
 	}
 

@@ -11,8 +11,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
 
 	public TreeTableCellRenderer(){
-		setOpenIcon(new ImageIcon(getClass().getResource("plus.gif")));
-    	setClosedIcon(new ImageIcon(getClass().getResource("minus.gif")));
+		//setClosedIcon(new ImageIcon(getClass().getResource("plus.gif")));
+		//setOpenIcon(new ImageIcon(getClass().getResource("minus.gif")));
 	}
 	
 	public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,

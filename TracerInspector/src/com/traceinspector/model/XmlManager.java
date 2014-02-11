@@ -21,12 +21,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.data.ArrayInfo;
-import com.javatracer.model.data.MethodEntryInfo;
-import com.javatracer.model.data.MethodExitInfo;
-import com.javatracer.model.data.NullObject;
-import com.javatracer.model.data.ObjectInfo;
-import com.javatracer.model.data.VariableInfo;
+import com.javatracer.model.methods.data.MethodEntryInfo;
+import com.javatracer.model.methods.data.MethodExitInfo;
+import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.IgnoredData;
+import com.javatracer.model.variables.data.NullData;
+import com.javatracer.model.variables.data.ObjectData;
+import com.javatracer.model.variables.data.SimpleData;
+import com.javatracer.model.variables.data.StringData;
 import com.thoughtworks.xstream.XStream;
 
 public class XmlManager {
@@ -37,10 +39,15 @@ public class XmlManager {
    public static String TAG_CALLED_METHODS = "called-methods";
    public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
    public static String TAG_METHOD_EXIT_EVENT = "method-exit-event";
-   public static String TAG_VARIABLE = "variable";
-   public static String TAG_OBJECT = "object-info";
-   public static String TAG_ARRAY = "array";
+   public static String TAG_SIMPLE_DATA = "simple-variable";
+   public static String TAG_OBJECT = "object-variable";
+   public static String TAG_ARRAY = "array-variable";
+   public static String TAG_STRING = "string-variable";
    public static String TAG_NULL = "null";
+   public static String TAG_IGNORED = "ignored";
+   public static String TAG_FIELDS = "fields";
+   public static String TAG_CONTENT = "content";
+   public static String TAG_THIS = "object-this";
 	   
    private Document xmlDocument;
    private XStream xStream;
@@ -48,20 +55,31 @@ public class XmlManager {
    public XmlManager(String fileName) {
 	   try {
 		   xStream = new XStream();
-			xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
-			xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-			
-			xStream.alias(TAG_VARIABLE,VariableInfo.class);
-			xStream.alias(TAG_OBJECT, ObjectInfo.class);
-			xStream.alias(TAG_ARRAY, ArrayInfo.class);
-			xStream.alias(TAG_NULL,NullObject.class);
+		   
+		   addAlias(); 
+		
 		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(fileName);
 	   } catch (Exception e){
 		   e.printStackTrace();
 	   }
    }
 
-   public NodeList getChilds(Node node) {
+   private void addAlias() {
+		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
+		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"objectThis");
+		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"objectThis");
+		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
+		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
+		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
+		xStream.alias(TAG_OBJECT, ObjectData.class);
+		xStream.alias(TAG_IGNORED, IgnoredData.class);
+		xStream.alias(TAG_ARRAY, ArrayData.class);
+		xStream.alias(TAG_STRING,StringData.class);
+		xStream.alias(TAG_NULL,NullData.class);
+}
+
+public NodeList getChilds(Node node) {
 	   return node.getChildNodes();
 	}
 
@@ -95,8 +113,8 @@ public class XmlManager {
 	    return methodName;
 	}
 
-	public List<VariableInfo> loadArguments(Node infoNode) throws XPathExpressionException{
-		List<VariableInfo> arguments = new ArrayList<>();
+	public List<Object> loadArguments(Node infoNode) throws XPathExpressionException{
+		List<Object> arguments = new ArrayList<>();
 		String expression = "./info/arguments/*";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
@@ -107,8 +125,8 @@ public class XmlManager {
 		return arguments;
 	}
 
-	private VariableInfo getArgument(Node node) {
-		VariableInfo info = (VariableInfo) xStream.fromXML(nodeToString(node));
+	private Object getArgument(Node node) {
+		Object info = xStream.fromXML(nodeToString(node));
 		return info;
 	}
 
@@ -173,11 +191,11 @@ public class XmlManager {
 		return childs;
 	}
 
-	public VariableInfo loadReturnValue(Node node) {
+	public Object loadReturnValue(Node node) {
 		return null;
 	}
 
-	public VariableInfo loadThisValue(Node node) {
+	public Object loadThisValue(Node node) {
 		return null;
 	}
 
