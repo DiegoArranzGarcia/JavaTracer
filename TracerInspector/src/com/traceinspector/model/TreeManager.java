@@ -6,6 +6,7 @@ import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.javatracer.model.variables.data.Data;
 import com.traceinspector.model.configuration.Configuration;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
 import com.traceinspector.treeinspectorview.TextInBoxExt;
@@ -44,9 +45,9 @@ public class TreeManager {
 		try {
 			long id = xml.getIdFromNode(node);
 			String name = xml.getName(node);
-			List<Object> arguments = xml.loadArguments(node);
-			Object returnValue = xml.loadReturnValue(node);
-			Object thisValue = xml.loadThisValue(node);
+			List<Data> arguments = xml.loadArguments(node);
+			Data returnValue = xml.loadReturnValue(node);
+			Data thisValue = xml.loadThisValue(node);
 			boolean haveChildren = xml.haveChildrenOfNode(node);
 			root = new TextInBoxExt(id,name,arguments,returnValue,thisValue,haveChildren);
 		} catch (Exception e) {

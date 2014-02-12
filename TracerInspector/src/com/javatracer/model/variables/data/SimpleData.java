@@ -1,6 +1,6 @@
 package com.javatracer.model.variables.data;
 
-public class SimpleData {
+public class SimpleData extends Data{
 	
 	private String name;
 	private Object value;
@@ -24,6 +24,10 @@ public class SimpleData {
 	
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public void accept(InfoVisitor visitor) {	
+		visitor.visit(this);
 	}
 
 }

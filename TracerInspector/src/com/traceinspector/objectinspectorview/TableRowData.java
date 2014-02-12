@@ -39,7 +39,6 @@ public class TableRowData
 		this.value = value;
 	}
 	
-
 	public boolean isExpandable() {
 		return isExpandable;
 	}

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.variables.data.IgnoredData;
 import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
@@ -101,10 +102,10 @@ public class ClassUtils {
 				type.equals("java.lang.Short") || type.equals("java.lang.Long") || type.equals("java.lang.Boolean"));
 	}
 
-	public Object getObj(String name,Value value,List<Long> objectProcessed){
+	public Data getObj(String name,Value value,List<Long> objectProcessed){
 		
 
-		Object object = null;
+		Data object = null;
 		if (value instanceof ArrayReference){
 			object = getArrayFromArrayReference(name,(ArrayReference)value,objectProcessed);
 		} else if (value instanceof PrimitiveValue){
@@ -119,9 +120,9 @@ public class ClassUtils {
 		return object;
 	}
 
-	private Object getArrayFromArrayReference(String name,ArrayReference value, List<Long> objectsProcessed) {
+	private Data getArrayFromArrayReference(String name,ArrayReference value, List<Long> objectsProcessed) {
 		
-		Object object = null;
+		Data object = null;
 		long arrayID = value.uniqueID();
 		
 		if (!isExcludedClass(value)){ 
@@ -132,7 +133,7 @@ public class ClassUtils {
 				
 			} else {
 			
-				List<Object> elements = new ArrayList<>();
+				List<Data> elements = new ArrayList<>();
 				List<Value> values = value.getValues();
 				objectsProcessed.add(arrayID);
 				
@@ -151,19 +152,17 @@ public class ClassUtils {
 		return object;
 	}
 	
-	private Object getStringFromStringReference(String name,StringReference value) {
+	private Data getStringFromStringReference(String name,StringReference value) {
 		
-		long stringID = value.uniqueID();
-		Object object = null;
-				
-		object = new StringData(name,stringID,value.toString().replaceAll("\"",""));
+		long stringID = value.uniqueID();				
+		Data object = new StringData(name,stringID,value.toString().replaceAll("\"",""));
 		
 		return object;
 	}
 	
-	private Object getObjectFromObjectReference(String name,ObjectReference value,List<Long> objectsProcessed){
+	private Data getObjectFromObjectReference(String name,ObjectReference value,List<Long> objectsProcessed){
 		
-		Object result = null;
+		Data result = null;
 		long objectId = value.uniqueID();
 		
 		if (!isExcludedClass(value)){
@@ -174,12 +173,12 @@ public class ClassUtils {
 				
 				objectsProcessed.add(objectId);
 				List<Field> fields = value.referenceType().allFields();
-				List<Object> values = new ArrayList<>();
+				List<Data> values = new ArrayList<>();
 				
 				for (int i=0;i<fields.size();i++){
 					Field f = fields.get(i);
 					Value v = value.getValue(f);
-					Object object = null;
+					Data object = null;
 					
 					if ((v instanceof ArrayReference)){
 						ArrayReference objectValue = (ArrayReference)v;
@@ -205,8 +204,8 @@ public class ClassUtils {
 	}
 
 
-	private Object getPrimitiveObject(String name, Value value) {
-		Object object = null;
+	private Data getPrimitiveObject(String name, Value value) {
+		Data object = null;
 		if (value instanceof BooleanValue)
 			object = new SimpleData(name,((BooleanValue) value).booleanValue());
 		else if (value instanceof ByteValue)

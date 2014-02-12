@@ -3,19 +3,18 @@
 <method-call id="1">
 <info>
   <name>main</name>
-  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
+  <calledFromClass>Main</calledFromClass>
   <arguments>
     <array-variable>
       <name>args</name>
-      <content class="list"/>
       <className>java.lang.String</className>
       <id>0</id>
       <length>0</length>
+      <content/>
     </array-variable>
   </arguments>
   <thisObject class="null">
     <name>this</name>
-    <value class="string">null</value>
   </thisObject>
 </info>
 <changes>
@@ -24,73 +23,42 @@
 <method-call id="2">
 <info>
   <name>&lt;init&gt;</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments/>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="3">
-<info>
-  <name>randomizeArray</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <calledFromClass>Person</calledFromClass>
   <arguments>
-    <array-variable>
-      <name>array</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[5]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[6]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[7]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[8]</name>
-          <value class="int">0</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[9]</name>
-          <value class="int">0</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>10</length>
-    </array-variable>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>58</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>59</id>
+    </string-variable>
   </arguments>
-  <thisObject class="ignored">
+  <thisObject class="object-variable">
     <name>this</name>
-    <value class="string">ignored</value>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>60</id>
+    <className>Person</className>
   </thisObject>
 </info>
 <changes>
@@ -98,2208 +66,356 @@
 <called-methods>
 </called-methods>
 </method-call>
+<method-call id="3">
+<info>
+  <name>&lt;init&gt;</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>58</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>59</id>
+    </string-variable>
+    <object-variable>
+      <name>bestFriend</name>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>58</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>59</id>
+        </string-variable>
+        <null>
+          <name>bestFriend</name>
+        </null>
+      </fields>
+      <id>60</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+  <thisObject class="object-variable">
+    <name>this</name>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>62</id>
+    <className>Person</className>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
 </called-methods>
 </method-call>
 <method-call id="4">
 <info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments/>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="5">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <name>prueba</name>
+  <calledFromClass>Main</calledFromClass>
   <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[5]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[6]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[7]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[8]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[9]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>10</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="6">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="7">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="8">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">313</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="9">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="10">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="11">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="12">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="13">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="14">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="15">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="16">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="17">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="18">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="19">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="20">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="21">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="22">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="23">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="24">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="25">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="26">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="27">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="28">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="29">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="30">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="31">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="32">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="33">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="34">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="35">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="36">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="37">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="38">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="39">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="40">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="41">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="42">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="43">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="44">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="45">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="46">
-<info>
-  <name>mergesort</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="47">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="48">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="49">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="50">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="51">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="52">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="53">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="54">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="55">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="56">
-<info>
-  <name>merge</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>L1</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-    <array-variable>
-      <name>L2</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-<method-call id="57">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="58">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>5</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="59">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>4</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="60">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="61">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>4</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="62">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="63">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>3</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="64">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>2</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="65">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-<method-call id="66">
-<info>
-  <name>delete</name>
-  <calledFromClass>com.prueba.MergeSort</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>l</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>1</length>
-    </array-variable>
-  </arguments>
-  <thisObject class="ignored">
-    <name>this</name>
-    <value class="string">ignored</value>
-  </thisObject>
-</info>
-<changes>
-</changes>
-<called-methods>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-</called-methods>
-</method-call>
-<method-call id="67">
-<info>
-  <name>printArray</name>
-  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
-  <arguments>
-    <array-variable>
-      <name>array</name>
-      <content class="list">
-        <simple-variable>
-          <name>[0]</name>
-          <value class="int">313</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[1]</name>
-          <value class="int">2840</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[2]</name>
-          <value class="int">3546</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[3]</name>
-          <value class="int">4138</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[4]</name>
-          <value class="int">4177</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[5]</name>
-          <value class="int">5758</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[6]</name>
-          <value class="int">6155</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[7]</name>
-          <value class="int">6482</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[8]</name>
-          <value class="int">8146</value>
-        </simple-variable>
-        <simple-variable>
-          <name>[9]</name>
-          <value class="int">9220</value>
-        </simple-variable>
-      </content>
-      <className>int</className>
-      <id>0</id>
-      <length>10</length>
-    </array-variable>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <object-variable>
+      <name>p1</name>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>58</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>59</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>58</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>59</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>60</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>62</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>60</id>
+      <className>Person</className>
+    </object-variable>
+    <object-variable>
+      <name>p2</name>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>58</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>59</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>58</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>59</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>62</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>60</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>62</id>
+      <className>Person</className>
+    </object-variable>
   </arguments>
   <thisObject class="null">
     <name>this</name>
-    <value class="string">null</value>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="5">
+<info>
+  <name>imprime</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject class="object-variable">
+    <name>this</name>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>58</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>59</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>58</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>59</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>62</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>60</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>62</id>
+    <className>Person</className>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="6">
+<info>
+  <name>getName</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject class="object-variable">
+    <name>this</name>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>58</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>59</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>58</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>59</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>62</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>60</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>62</id>
+    <className>Person</className>
+  </thisObject>
+</info>
+<changes>
+</changes>
+<called-methods>
+</called-methods>
+</method-call>
+<method-call id="7">
+<info>
+  <name>getAge</name>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <thisObject class="object-variable">
+    <name>this</name>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>58</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>59</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>58</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>59</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>62</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>60</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>62</id>
+    <className>Person</className>
   </thisObject>
 </info>
 <changes>

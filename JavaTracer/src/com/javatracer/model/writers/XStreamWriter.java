@@ -1,8 +1,6 @@
 package com.javatracer.model.writers;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
@@ -35,21 +33,19 @@ public class XStreamWriter {
 	public static String TAG_THIS = "object-this";
 	
 	private XStream xStream;
-	private BufferedWriter bufferedWriter;
+	private FileWriter fileWriter;
 	
 	public XStreamWriter(String nameXlm){
 		try {
-			FileWriter fileWriter = new FileWriter(nameXlm+"_temp.xml");
-			this.bufferedWriter = new BufferedWriter(fileWriter);
-			
-			this.xStream = new XStream();
+			fileWriter = new FileWriter(nameXlm+"_temp.xml");
+			xStream = new XStream();
 
 			addAlias();
 			
 			write(TAG_XML);
 			write(startTag(TAG_TRACE));
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}  
 	}
@@ -90,14 +86,16 @@ public class XStreamWriter {
 	public void close() {
 		try {
 			write(endTag(TAG_TRACE));
-			bufferedWriter.close();
-		} catch (IOException e) {
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void write(String string) throws IOException {
-		bufferedWriter.write(string + "\n");
+	private void write(String string) throws Exception {
+		fileWriter.write(string + "\n");
+		System.out.flush();
 	}
 
 	private String startTag(String tag){
@@ -111,7 +109,7 @@ public class XStreamWriter {
 	private void processMethodExitEvent(String info) throws Exception {
 		write(endTag(TAG_CALLED_METHODS));
 		write(info);
-		write(endTag(TAG_METHOD));		
+		write(endTag(TAG_METHOD));
 	}
 	
 	private void processMethodEntryEvent(String info) throws Exception {

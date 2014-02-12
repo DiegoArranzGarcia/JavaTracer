@@ -24,6 +24,7 @@ import org.w3c.dom.NodeList;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.variables.data.IgnoredData;
 import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
@@ -113,8 +114,8 @@ public NodeList getChilds(Node node) {
 	    return methodName;
 	}
 
-	public List<Object> loadArguments(Node infoNode) throws XPathExpressionException{
-		List<Object> arguments = new ArrayList<>();
+	public List<Data> loadArguments(Node infoNode) throws XPathExpressionException{
+		List<Data> arguments = new ArrayList<>();
 		String expression = "./info/arguments/*";  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
@@ -125,8 +126,8 @@ public NodeList getChilds(Node node) {
 		return arguments;
 	}
 
-	private Object getArgument(Node node) {
-		Object info = xStream.fromXML(nodeToString(node));
+	private Data getArgument(Node node) {
+		Data info = (Data) xStream.fromXML(nodeToString(node));
 		return info;
 	}
 
@@ -191,11 +192,11 @@ public NodeList getChilds(Node node) {
 		return childs;
 	}
 
-	public Object loadReturnValue(Node node) {
+	public Data loadReturnValue(Node node) {
 		return null;
 	}
 
-	public Object loadThisValue(Node node) {
+	public Data loadThisValue(Node node) {
 		return null;
 	}
 

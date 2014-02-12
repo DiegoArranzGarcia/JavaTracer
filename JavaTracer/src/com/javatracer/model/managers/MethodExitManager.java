@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodExitInfo;
+import com.javatracer.model.variables.data.StringData;
 import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
@@ -39,6 +40,10 @@ public class MethodExitManager{
          Object returnObject = null; 
          if (!(returnValue instanceof VoidValue)){ 
         	 returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());
+         }
+         
+         if (className.equals("program.Program") && (methodName.equals("toString"))){
+        	 returnObject = new StringData("return",1,"a");
          }
          
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method

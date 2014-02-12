@@ -6,7 +6,7 @@ public interface InfoVisitor {
 	public void visit(StringData info);
 	public void visit(NullData info);
 	public void visit(ObjectData info);
-	public void visit(Object value);
+	public void visit(SimpleData info);
 	public void visit(IgnoredData ignoredClass);
 	
 }

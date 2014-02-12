@@ -107,8 +107,9 @@ public class EventThread extends Thread {
                          handleEvent(it.nextEvent());
                          eventSet.resume();
             } catch (InterruptedException exc) {
-                // Ignore
+               exc.printStackTrace();
             } catch (VMDisconnectedException discExc) {
+            	discExc.printStackTrace();
                 handleDisconnectedException();
                 break;
             }
@@ -213,13 +214,12 @@ public class EventThread extends Thread {
                         vmDied=death.vmDeathEvent((VMDeathEvent)event);
                     } else if (event instanceof VMDisconnectEvent) {
                         connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
-                    	
                     }
                 }
                 eventSet.resume(); // Resume the VM
                 
             } catch (InterruptedException exc) {
-                // ignore
+                exc.printStackTrace();
             }
         }
     }

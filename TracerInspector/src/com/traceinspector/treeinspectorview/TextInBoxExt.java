@@ -3,6 +3,7 @@ package com.traceinspector.treeinspectorview;
 import java.util.List;
 
 import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
 import com.javatracer.model.variables.data.SimpleData;
@@ -13,9 +14,9 @@ public class TextInBoxExt {
 
 	private long id;
 	private String methodName;
-	private List<Object> arguments;
-	private Object returnValue;
-	private Object thisValue;
+	private List<Data> arguments;
+	private Data returnValue;
+	private Data thisValue;
 	private boolean expanded;
 	private boolean selected;
 	private boolean haveChildren;
@@ -25,7 +26,7 @@ public class TextInBoxExt {
 		this.selected = false;
 	}
 
-	public TextInBoxExt(long id, String name, List<Object> arguments,	Object returnValue,Object thisValue,boolean haveChildren) {
+	public TextInBoxExt(long id, String name, List<Data> arguments,	Data returnValue,Data thisValue,boolean haveChildren) {
 		this.id = id;
 		this.methodName = name;
 		this.arguments = arguments;
@@ -52,11 +53,11 @@ public class TextInBoxExt {
 		this.methodName = methodName;
 	}
 
-	public List<Object> getArguments() {
+	public List<Data> getArguments() {
 		return arguments;
 	}
 
-	public void setArguments(List<Object> arguments) {
+	public void setArguments(List<Data> arguments) {
 		this.arguments = arguments;
 	}
 
@@ -64,7 +65,7 @@ public class TextInBoxExt {
 		return returnValue;
 	}
 
-	public void setReturnValue(Object returnValue) {
+	public void setReturnValue(Data returnValue) {
 		this.returnValue = returnValue;
 	}
 
@@ -86,7 +87,7 @@ public class TextInBoxExt {
 	
 	public String giveMeTextInBox() {
 		
-		 List<Object> var = getArguments();
+		 List<Data> var = getArguments();
 		 int i=0;
 		 
 		 String name = getMethodName() + " (";
@@ -137,7 +138,7 @@ public class TextInBoxExt {
 		return thisValue;
 	}
 
-	public void setThisValue(Object thisValue) {
+	public void setThisValue(Data thisValue) {
 		this.thisValue = thisValue;
 	}
 
