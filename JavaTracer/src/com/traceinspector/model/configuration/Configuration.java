@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class Configuration {
  
-    private final static String CONFIG_FILE_NAME = "configuration.properties";
+    private final static String CONFIG_FILE_NAME = "inspector.properties";
     private final static String DEFAULT_NUM_LEVELS_DEPTH = "depth";
     private final static String DEFAULT_NUM_NODES = "nodes";
     private FileInputStream fileInput;

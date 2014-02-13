@@ -13,7 +13,7 @@ public class Configuration {
  
    
 	private Properties properties;
-	private final static String CONFIG_FILE_NAME = "configuration.properties";
+	private final static String CONFIG_FILE_NAME = "tracer.properties";
 	private final static String EXCLUDES = "excludes";
 	private FileInputStream fileInput;
 	private  FileWriter fileWriter;
