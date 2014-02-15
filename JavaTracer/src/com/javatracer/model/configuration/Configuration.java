@@ -60,7 +60,7 @@ public class Configuration {
                     /*
                      * Save the data on the properties
                      */
-                    properties.store(new FileOutputStream("configuration.properties"),"Config");
+                    properties.store(new FileOutputStream(CONFIG_FILE_NAME),"Config Tracer");
                     fileWriter.close();
                     fileInput.close();
             	

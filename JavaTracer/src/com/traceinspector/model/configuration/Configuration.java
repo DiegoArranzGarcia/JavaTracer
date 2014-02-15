@@ -22,8 +22,6 @@ public class Configuration {
     private Properties properties;
     
     public Configuration() {
-    	fileInput= null;
-    	fileWriter =null;
     	/*
     	 * Create a file configuration
     	 */
@@ -61,7 +59,7 @@ public class Configuration {
 			            /*
 			             * Save the data on the properties
 			             */
-			            properties.store(new FileOutputStream("configuration.properties"),"Config");
+			            properties.store(new FileOutputStream(CONFIG_FILE_NAME),"ConfigT Trace Inspector");
 			            fileWriter.close();
 		        	
 		        } catch (IOException ex) {
@@ -79,6 +77,7 @@ public class Configuration {
 	}
     
     public int getDefaultNumLevelsDepth(){
+    	System.out.println("num levels: "+properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH));
     	return Integer.parseInt(properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH));
     }
     
