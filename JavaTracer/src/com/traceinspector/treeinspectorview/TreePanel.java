@@ -131,30 +131,17 @@ public class TreePanel extends JPanel {
 		BufferedImage imagePlus= null;
 		BufferedImage imageMinus=null;
 		try {
-			imagePlus = ImageIO.read(getClass().getResource("plus1.jpe"));
-			imageMinus = ImageIO.read(getClass().getResource("minus1.jpe"));
+			imagePlus = ImageIO.read(getClass().getResource("plus1.png"));
+			imageMinus = ImageIO.read(getClass().getResource("minus1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
 		
 		if(textInBox.haveChildren()){
 			if(!textInBox.isExpanded()){
-				Graphics2D  g2D = (Graphics2D)g;
-				g2D.drawImage(imagePlus,(int) box.getMaxX()-20, (int) box.getMaxY()-20, new ImageObserver() {
-					public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3,
-							int arg4, int arg5) {
-						return false;
-					}
-				});
+				g.drawImage(imagePlus,(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
 			}else{
-				Graphics2D  g2D = (Graphics2D)g;
-				g2D.drawImage(imageMinus,(int) box.getMaxX()-20, (int) box.getMaxY()-20, new ImageObserver() {
-					public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3,
-							int arg4, int arg5) {
-						return false;
-					}
-				});
-				
+				g.drawImage(imageMinus,(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
 			}
 		}
 		
