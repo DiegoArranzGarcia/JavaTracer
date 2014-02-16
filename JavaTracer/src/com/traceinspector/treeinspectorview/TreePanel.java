@@ -54,8 +54,25 @@ public class TreePanel extends JPanel {
 	static final double DEFAULT_WIDTH_BOX = 80;
 	static final double DEFAULT_HEIGHT_BOX = 60;
 	static final double WIDTH_BY_LETTER = 8;
+	static final int DEFAULT_STROKE = 2;
+	static final int SELECTED_STROKE = 5;
+
+	private final static int ARC_SIZE = 20;
+	private final static Color BOX_COLOR = new Color(0x008EAB);
+	private final static Color BORDER_COLOR = Color.darkGray;
+	private final static Color TEXT_COLOR = Color.white;
+	
+	private double verticalGap;
 	
 	private TreeLayout<TextInBoxExt> treeLayout;
+	
+	public TreePanel(TreeLayout<TextInBoxExt> treeLayout2) {
+		this.verticalGap = TreeInspectorView.GAP_BETWEEN_LEVELS;
+		this.treeLayout = treeLayout2;
+		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
+		setPreferredSize(new Dimension((int)treeLayout2.getBounds().getWidth()+1,(int)treeLayout2.getBounds().getHeight()+1));
+		setBackground(Color.WHITE);
+	}
 
 	private TreeForTreeLayout<TextInBoxExt> getTree() {
 		return treeLayout.getTree();
@@ -74,31 +91,32 @@ public class TreePanel extends JPanel {
 		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 	}
 
-	public TreePanel(TreeLayout<TextInBoxExt> treeLayout2) {
-		
-		this.treeLayout = treeLayout2;
-		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
-		setPreferredSize(new Dimension((int)treeLayout2.getBounds().getWidth()+1,(int)treeLayout2.getBounds().getHeight()+1));
-		
-	}
-
-	private final static int ARC_SIZE = 20;
-	private final static Color BOX_COLOR = new Color(0x008EAB);
-	private final static Color BORDER_COLOR = Color.darkGray;
-	private final static Color TEXT_COLOR = Color.white;
-
 	private void paintEdges(Graphics g, TextInBoxExt parent) {
 		if (!getTree().isLeaf(parent)) {
+			
+			Graphics2D  g2D = (Graphics2D)g;
 			Rectangle2D.Double b1 = getBoundsOfNode(parent);
 			double x1 = b1.getCenterX();
-			double y1 = b1.getCenterY();
+			double y1 = b1.getMaxY();
+			
+			g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
+			g.drawLine((int)x1,(int)y1,(int)x1,(int)(y1+verticalGap/2));
+			
 			for (TextInBoxExt child : getChildren(parent)) {
+				
 				Rectangle2D.Double b2 = getBoundsOfNode(child);
-				g.drawLine((int) x1, (int) y1, (int) b2.getCenterX(),
-						(int) b2.getCenterY());
-
+				double x2 = b2.getCenterX();
+				
+				g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
+				g.drawLine((int)x1,(int)(y1+verticalGap/2),(int)x2,(int)(y1+verticalGap/2));
+				g.drawLine((int)x2,(int)(y1+verticalGap/2),(int)x2,(int)(y1+verticalGap));
+				g2D.setStroke(new BasicStroke());
+				
 				paintEdges(g, child);
+				
 			}
+			g2D.setStroke(new BasicStroke());
+			
 		}
 	}
 
@@ -140,22 +158,17 @@ public class TreePanel extends JPanel {
 			}
 		}
 		
-		if (textInBox.isSelected()){
-			
-			Graphics2D g2D = (Graphics2D)g; 
-			g2D.setStroke(new BasicStroke(5));
-			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
-					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
-			g2D.setStroke(new BasicStroke());
-			
-		} 
-		else {
-			
-			g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
-					(int) box.height - 1, ARC_SIZE, ARC_SIZE);
-			
-		}
 		
+		Graphics2D g2D = (Graphics2D)g; 
+		
+		if (textInBox.isSelected())
+			g2D.setStroke(new BasicStroke(SELECTED_STROKE));
+		else 
+			g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
+		
+		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
+				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+		g2D.setStroke(new BasicStroke());
 		g.setColor(TEXT_COLOR);
 		String[] lines = textInBox.giveMeTextInBox().split("\n");
 		FontMetrics m = getFontMetrics(getFont());

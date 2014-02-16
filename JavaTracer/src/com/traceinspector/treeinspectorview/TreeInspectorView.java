@@ -15,6 +15,8 @@ import com.traceinspector.viewlogic.TreeInspector;
 public class TreeInspectorView extends JScrollPane {
 
 	TreeInspector controller;
+	static double GAP_BETWEEN_LEVELS = 50;
+	static double GAP_BETWEEN_NODES= 10;
 	
 	private static TreeLayout<TextInBoxExt> treeLayout;
 	
@@ -29,17 +31,14 @@ public class TreeInspectorView extends JScrollPane {
 		this.controller = controller;
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		
-		
+	
 	}
 	 
 	public static Component createTreePanel(DefaultTreeLayout<TextInBoxExt> root,TreeInspector controller) {
 		
 		//setup the tree layout configuration
-		double gapBetweenLevels = 50;
-		double gapBetweenNodes = 10;
-		configuration = new DefaultConfiguration<TextInBoxExt>(gapBetweenLevels, gapBetweenNodes);
+
+		configuration = new DefaultConfiguration<TextInBoxExt>(GAP_BETWEEN_LEVELS,GAP_BETWEEN_NODES);
 
 		// create the NodeExtentProvider for TextInBox nodes
 		nodeExtentProvider = new TextInBoxNodeExtentProvider();	
