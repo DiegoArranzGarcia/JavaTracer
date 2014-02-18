@@ -1,4 +1,4 @@
-package com.traceinspector.objectinspectorview;
+package com.traceinspector.objectinspector.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -20,7 +20,7 @@ import org.jdesktop.swingx.decorator.HighlighterFactory;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.StringValue;
 
-import com.traceinspector.viewlogic.ObjectInspector;
+import com.traceinspector.objectinspector.logic.ObjectInspector;
 
 @SuppressWarnings("serial")
 public class ObjectInspectorView extends JScrollPane implements KeyListener,MouseListener{

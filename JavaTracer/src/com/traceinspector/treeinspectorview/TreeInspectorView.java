@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
 
-import com.traceinspector.viewlogic.TreeInspector;
+import com.traceinspector.treeinspector.logic.TreeInspector;
 
 @SuppressWarnings("serial")
 public class TreeInspectorView extends JScrollPane {

@@ -30,26 +30,12 @@ import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
 import com.javatracer.model.variables.data.SimpleData;
 import com.javatracer.model.variables.data.StringData;
+import com.javatracer.model.writers.TraceInspectorWriter;
+import com.javatracer.model.writers.XStreamWriter;
 import com.thoughtworks.xstream.XStream;
 
 public class XmlManager {
-    
-   public static String TAG_TRACE = "trace";
-   public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-   public static String TAG_METHOD = "method-call";
-   public static String TAG_CALLED_METHODS = "called-methods";
-   public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
-   public static String TAG_METHOD_EXIT_EVENT = "method-exit-event";
-   public static String TAG_SIMPLE_DATA = "simple-variable";
-   public static String TAG_OBJECT = "object-variable";
-   public static String TAG_ARRAY = "array-variable";
-   public static String TAG_STRING = "string-variable";
-   public static String TAG_NULL = "null";
-   public static String TAG_IGNORED = "ignored";
-   public static String TAG_FIELDS = "fields";
-   public static String TAG_CONTENT = "content";
-   public static String TAG_THIS = "object-this";
-	   
+      
    private Document xmlDocument;
    private XStream xStream;
 	   
@@ -66,18 +52,19 @@ public class XmlManager {
    }
 
    private void addAlias() {
-		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
-		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"objectThis");
-		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"objectThis");
-		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
-		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
-		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
-		xStream.alias(TAG_OBJECT, ObjectData.class);
-		xStream.alias(TAG_IGNORED, IgnoredData.class);
-		xStream.alias(TAG_ARRAY, ArrayData.class);
-		xStream.alias(TAG_STRING,StringData.class);
-		xStream.alias(TAG_NULL,NullData.class);
+		xStream.alias(XStreamWriter.TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
+		xStream.alias(XStreamWriter.TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		xStream.aliasField(XStreamWriter.TAG_THIS, MethodEntryInfo.class,"this_data");
+		xStream.aliasField(XStreamWriter.TAG_THIS, MethodExitInfo.class,"this_data");
+		xStream.aliasField(XStreamWriter.TAG_RETURN, MethodExitInfo.class,"return_data");
+		xStream.aliasField(XStreamWriter.TAG_CONTENT, ArrayData.class,"value");
+		xStream.aliasField(XStreamWriter.TAG_FIELDS, ObjectData.class,"value");
+		xStream.alias(XStreamWriter.TAG_SIMPLE_DATA, SimpleData.class);
+		xStream.alias(XStreamWriter.TAG_OBJECT, ObjectData.class);
+		xStream.alias(XStreamWriter.TAG_IGNORED, IgnoredData.class);
+		xStream.alias(XStreamWriter.TAG_ARRAY, ArrayData.class);
+		xStream.alias(XStreamWriter.TAG_STRING,StringData.class);
+		xStream.alias(XStreamWriter.TAG_NULL,NullData.class);
 }
 
 public NodeList getChilds(Node node) {
@@ -192,12 +179,33 @@ public NodeList getChilds(Node node) {
 		return childs;
 	}
 
-	public Data loadReturnValue(Node node) {
-		return null;
+	public Data loadReturnValue(Node node) throws XPathExpressionException {
+		
+		Data return_data = null;
+		
+		String expression = "./info/" + XStreamWriter.TAG_RETURN;  
+	    XPath xPath = XPathFactory.newInstance().newXPath();
+	    XPathExpression xPathExpression = xPath.compile(expression);
+	    Node return_node = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
+	    
+	    if (return_node!=null)
+	    	return_data = (Data) xStream.fromXML(nodeToString(return_node));
+	    
+	    return return_data;
 	}
 
-	public Data loadThisValue(Node node) {
-		return null;
+	public Data loadThisValue(Node node) throws XPathExpressionException {
+
+		Data this_data = null;
+		
+		String expression = "./info/" + XStreamWriter.TAG_THIS;  
+	    XPath xPath = XPathFactory.newInstance().newXPath();
+	    XPathExpression xPathExpression = xPath.compile(expression);
+	    Node return_node = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
+	    this_data = (Data) xStream.fromXML(nodeToString(return_node));
+	    
+	    return this_data;
+		
 	}
 
 }

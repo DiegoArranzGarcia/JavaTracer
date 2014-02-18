@@ -6,10 +6,10 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.traceinspector.model.TreeManager;
+import com.traceinspector.objectinspector.logic.ObjectInspector;
+import com.traceinspector.treeinspector.logic.TreeInspector;
 import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.view.TraceInpectorView;
-import com.traceinspector.viewlogic.ObjectInspector;
-import com.traceinspector.viewlogic.TreeInspector;
 
 public class TraceInspectorController {
 
@@ -61,7 +61,7 @@ public class TraceInspectorController {
 		objectInspector.clear();
 		
 		if (box!=null)
-			objectInspector.addVariables(box);
+			objectInspector.addNodeInfo(box.getThisValue(),box.getReturnValue(),box.getArguments());
 		
 	}
 	

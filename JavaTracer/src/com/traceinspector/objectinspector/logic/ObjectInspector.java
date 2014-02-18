@@ -1,4 +1,4 @@
-package com.traceinspector.viewlogic;
+package com.traceinspector.objectinspector.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.variables.data.InfoVisitor;
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
-import com.traceinspector.objectinspectorview.ObjectInspectorView;
+import com.traceinspector.objectinspector.view.ObjectInspectorView;
 import com.traceinspector.treeinspectorview.TextInBoxExt;
 
 public class ObjectInspector {
@@ -30,20 +30,24 @@ public class ObjectInspector {
 	public ObjectInspectorView getView(){
 		return view;
 	}
+	
+	public void clear() {
+		view.clear();
+	}
 
-	public void addVariables(TextInBoxExt box) {
+	public void addNodeInfo(Data thisValue, Data returnValue,List<Data> variables) {
 		
+		this.variables = variables;
 		InfoVisitor visitor = new ObjectInspectorVisitor(view);
-		variables = box.getArguments();
+		
+		thisValue.accept(visitor);
+		if (returnValue != null)
+			returnValue.accept(visitor);
 		
 		for (int i=0;i<variables.size();i++)
 			variables.get(i).accept(visitor);
 		
 		view.showVariables();
-	}
-	
-	public void clear() {
-		view.clear();
 	}
 
 }

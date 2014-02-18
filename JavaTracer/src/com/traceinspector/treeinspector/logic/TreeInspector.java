@@ -1,4 +1,4 @@
-package com.traceinspector.viewlogic;
+package com.traceinspector.treeinspector.logic;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -31,7 +31,6 @@ public class TreeInspector implements MouseListener {
 		this.tree = treeManager.loadTree();
 		this.view = new TreeInspectorView(tree, this);
 		
-	    
 		///////center scroll ////////////////
 		Rectangle bounds = view.getViewport().getViewRect();
 	    Dimension size = view.getViewport().getViewSize();

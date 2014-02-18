@@ -1,23 +1,23 @@
 package com.javatracer.model.methods.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.javatracer.model.variables.data.Data;
 
 public class MethodExitInfo {
 
 	String methodName;
 	String className;
-	Object returnObject;
-	Object objectThis;
-	List<Object> arguments;
+	Data return_data;
+	Data this_data;
+	List<Data> arguments;
 	
-	public MethodExitInfo(String methodName, String className,Object returnObject,List<Object> arguments, Object objectThis) {
+	public MethodExitInfo(String methodName, String className,Data return_data,List<Data> arguments,Data this_data) {
 		this.methodName = methodName;
 		this.className = className;
-		this.returnObject = returnObject;
-		this.objectThis=objectThis;
-		this.arguments = new ArrayList<>();
+		this.return_data = return_data;
+		this.this_data = this_data;
+		this.arguments = arguments;
 	}
 
 }

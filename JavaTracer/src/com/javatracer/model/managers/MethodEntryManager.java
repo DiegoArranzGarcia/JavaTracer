@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodEntryInfo;
+import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.writers.XStreamWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
@@ -54,16 +55,16 @@ public class MethodEntryManager{
        	Method method = event.method();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
        	String methodName = method.name();
-        List<Object> arguments = processArguments(method,thread);
+        List<Data> arguments = processArguments(method,thread);
         String className = ClassUtils.getClass(method.declaringType());
-        Object argument_this = processThis(event,ref,thread);
+        Data argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
         writer.writeOutput(info);
     }
 
-	private List<Object> processArguments(Method method, ThreadReference thread) {
+	private List<Data> processArguments(Method method, ThreadReference thread) {
     	  
-    	List<Object> arguments = new ArrayList<>();
+    	List<Data> arguments = new ArrayList<>();
     	
     	try {
 			StackFrame stack = thread.frame(0);
@@ -72,7 +73,7 @@ public class MethodEntryManager{
 				LocalVariable var = variables.get(i);
 				Value value = stack.getValue(var);
 				String nameVar = var.name();
-				Object varObj = utils.getObj(nameVar,value,new ArrayList<Long>());
+				Data varObj = utils.getObj(nameVar,value,new ArrayList<Long>());
 				arguments.add(varObj);
 			}
 		} catch (Exception e) {
@@ -81,7 +82,7 @@ public class MethodEntryManager{
     	return arguments;
 	}
 
-	private Object processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
+	private Data processThis(MethodEntryEvent event, ReferenceType ref, ThreadReference thread) {
 	
 		StackFrame stack=null;
 
@@ -93,7 +94,7 @@ public class MethodEntryManager{
 		
 		Value value = stack.thisObject();
 		
-		Object this_data = utils.getObj("this",value,new ArrayList<Long>());
+		Data this_data = utils.getObj("this",value,new ArrayList<Long>());
 		
 		return this_data;
 	}

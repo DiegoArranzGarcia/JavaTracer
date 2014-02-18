@@ -24,11 +24,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.javatracer.model.ChangeDetector;
 import com.javatracer.model.methods.data.ChangeInfo;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.methods.data.MethodInfo;
 import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.Data;
 import com.javatracer.model.variables.data.IgnoredData;
 import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
@@ -39,9 +41,9 @@ import com.thoughtworks.xstream.XStream;
 public class TraceInspectorWriter {
 	
 	//private static boolean DELETE_TMP_TRACE = false;
-	private static String TAG_CHANGES = "changes";
-	private static String TAG_CHANGE = "change";
-	private static String TAG_METHOD_INFO = "info";
+	public static String TAG_CHANGES = "changes";
+	public static String TAG_CHANGE = "change";
+	public static String TAG_METHOD_INFO = "info";
 	
 	private XStream xStream;
 	private BufferedWriter bufferedWriter;
@@ -119,10 +121,11 @@ public class TraceInspectorWriter {
 						
 		String name = getNameMethod(node);
 		String className = getCalledFromClass(node);
-		List<Object> arguments = getEntryArguments(node);
-		Object thisObject = getEntryThis(node);
+		List<Data> arguments = getEntryArguments(node);
+		Data this_data = getEntryThis(node);
+		Data return_data = getReturn(node);
 				
-		MethodInfo info = new MethodInfo(name,className,arguments,thisObject);
+		MethodInfo info = new MethodInfo(name,className,arguments,this_data,return_data);
 		writeXStream(info);
 		write("");
 		
@@ -160,9 +163,9 @@ public class TraceInspectorWriter {
 
 	private List<ChangeInfo> getChangesThis(Node node) throws Exception{
 		
-		Object entryThis = getEntryThis(node);
-		Object exitThis = getExitThis(node);
-		//ChangeDetector detector = new ChangeDetector();
+		Data entryThis = getEntryThis(node);
+		Data exitThis = getExitThis(node);
+		ChangeDetector detector = new ChangeDetector();
 		List<ChangeInfo> changes = new ArrayList<>();
 		//List<ChangeInfo> changes = detector.getChangesBetween(entryThis, exitThis);
 		
@@ -170,7 +173,7 @@ public class TraceInspectorWriter {
 		
 	}
 
-	private Object getExitThis(Node node) throws Exception {
+	private Data getExitThis(Node node) throws Exception {
 		
 		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/object-this" ;  
 		
@@ -178,23 +181,37 @@ public class TraceInspectorWriter {
 		Node nodeThis = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
 		
 		String nodeString = nodeToString(nodeThis);
-		nodeString = nodeString.replaceAll("object-this", "variable");
-		Object objectThis = xStream.fromXML(nodeString);
+		Data objectThis = (Data) xStream.fromXML(nodeString);
 		
 		return objectThis;	
 	}
 	
-	private Object getEntryThis(Node node) throws Exception {
-		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/object-this" ;  
+	private Data getEntryThis(Node node) throws Exception {
+		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/" + XStreamWriter.TAG_THIS ;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
 		Node nodeThis = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
 		
 		String nodeString = nodeToString(nodeThis);
-		nodeString = nodeString.replaceAll("object-this", "variable");
-		Object objectThis = xStream.fromXML(nodeString);
+		Data objectThis = (Data) xStream.fromXML(nodeString);
 
 		return objectThis;		
+	}
+	
+	private Data getReturn(Node node) throws Exception{
+		
+		Data return_data = null;
+		
+		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/" + XStreamWriter.TAG_RETURN;  
+		XPathExpression xPathExpression = xPath.compile(expression);
+		Node node_return = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
+		
+		if (node_return!=null){
+			String nodeString = nodeToString(node_return);
+			return_data = (Data) xStream.fromXML(nodeString);
+		}
+
+		return return_data;	
 	}
 
 	private NodeList getCalledMethods(Node node) throws Exception {
@@ -208,9 +225,9 @@ public class TraceInspectorWriter {
 
 	private List<ChangeInfo> getChangesArguments(Node node) throws Exception{
 		
-		List<Object> entryArguments = getEntryArguments(node);
-		List<Object> exitArguments = getExitArguments(node);
-		//ChangeDetector detector = new ChangeDetector();
+		List<Data> entryArguments = getEntryArguments(node);
+		List<Data> exitArguments = getExitArguments(node);
+		ChangeDetector detector = new ChangeDetector();
 		
 		List<ChangeInfo> changes = new ArrayList<>();
 		
@@ -221,34 +238,34 @@ public class TraceInspectorWriter {
 		return changes;
 	}
 	
-	private List<Object> getExitArguments(Node node) throws Exception {
+	private List<Data> getExitArguments(Node node) throws Exception {
 		String expression = "./" + XStreamWriter.TAG_METHOD_EXIT_EVENT + "/arguments/*";  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
 		NodeList arguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
 		
-		List<Object> argumentList = new ArrayList<>();
+		List<Data> argumentList = new ArrayList<>();
 		
 		for (int i=0;i<arguments.getLength();i++){
 			String nodeString = nodeToString(arguments.item(i));
-			Object variable = xStream.fromXML(nodeString);
+			Data variable = (Data) xStream.fromXML(nodeString);
 			argumentList.add(variable);
 		}
 		
 		return argumentList;
 	}
 
-	private List<Object> getEntryArguments(Node node) throws Exception {
+	private List<Data> getEntryArguments(Node node) throws Exception {
 		String expression = "./" + XStreamWriter.TAG_METHOD_ENTRY_EVENT + "/arguments/*";  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
 		NodeList arguments = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
 		
-		List<Object> argumentList = new ArrayList<>();
+		List<Data> argumentList = new ArrayList<>();
 		
 		for (int i=0;i<arguments.getLength();i++){
 			String nodeString = nodeToString(arguments.item(i));
-			Object variable = xStream.fromXML(nodeString);
+			Data variable = (Data) xStream.fromXML(nodeString);
 			argumentList.add(variable);
 		}
 		
@@ -281,8 +298,11 @@ public class TraceInspectorWriter {
 		
 		xStream.alias(XStreamWriter.TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(XStreamWriter.TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.aliasField(XStreamWriter.TAG_THIS, MethodEntryInfo.class,"objectThis");
-		xStream.aliasField(XStreamWriter.TAG_THIS, MethodExitInfo.class,"objectThis");
+		xStream.aliasField(XStreamWriter.TAG_THIS, MethodEntryInfo.class,"this_data");
+		xStream.aliasField(XStreamWriter.TAG_THIS, MethodExitInfo.class,"this_data");
+		xStream.aliasField(XStreamWriter.TAG_THIS, MethodInfo.class,"this_data");
+		xStream.aliasField(XStreamWriter.TAG_RETURN, MethodInfo.class,"return_data");
+		xStream.aliasField(XStreamWriter.TAG_RETURN, MethodExitInfo.class,"return_data");
 		xStream.aliasField(XStreamWriter.TAG_CONTENT, ArrayData.class,"value");
 		xStream.aliasField(XStreamWriter.TAG_FIELDS, ObjectData.class,"value");
 		xStream.alias(XStreamWriter.TAG_SIMPLE_DATA, SimpleData.class);

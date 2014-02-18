@@ -1,4 +1,4 @@
-package com.traceinspector.viewlogic;
+package com.traceinspector.objectinspector.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.javatracer.model.variables.data.NullData;
 import com.javatracer.model.variables.data.ObjectData;
 import com.javatracer.model.variables.data.SimpleData;
 import com.javatracer.model.variables.data.StringData;
-import com.traceinspector.objectinspectorview.ObjectInspectorView;
+import com.traceinspector.objectinspector.view.ObjectInspectorView;
 
 public class ObjectInspectorVisitor implements InfoVisitor{
 	

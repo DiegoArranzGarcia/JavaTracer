@@ -1,4 +1,4 @@
-package com.traceinspector.objectinspectorview;
+package com.traceinspector.objectinspector.view;
 
 public class TableRowData
 {

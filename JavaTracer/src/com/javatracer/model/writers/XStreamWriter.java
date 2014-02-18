@@ -31,6 +31,7 @@ public class XStreamWriter {
 	public static String TAG_FIELDS = "fields";
 	public static String TAG_CONTENT = "content";
 	public static String TAG_THIS = "object-this";
+	public static String TAG_RETURN = "return";
 	
 	private XStream xStream;
 	private FileWriter fileWriter;
@@ -53,8 +54,9 @@ public class XStreamWriter {
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"objectThis");
-		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"objectThis");
+		xStream.aliasField(TAG_THIS, MethodEntryInfo.class,"this_data");
+		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"this_data");
+		xStream.aliasField(TAG_RETURN, MethodExitInfo.class,"return_data");
 		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
 		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
 		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
