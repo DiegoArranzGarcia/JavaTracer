@@ -1,12 +1,6 @@
 package com.javatracer.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 
 /**
 * StreamRedirectThread is a thread which copies it's input to
@@ -18,7 +12,7 @@ class StreamRedirectThread extends Thread {
     private final Reader in;
     private final Writer out;
     private static final int BUFFER_SIZE = 2048;
-    
+    private static String FILE_OUTPUT_NAME = "output.txt";
 
     /**
 	 * Set up for copy.
@@ -28,12 +22,29 @@ class StreamRedirectThread extends Thread {
      * @param wp 
 	 */
     
-    StreamRedirectThread(String name, InputStream in, OutputStream out) {
+   /* StreamRedirectThread(String name, InputStream in, OutputStream out) {
         super(name);
         this.in = new InputStreamReader(in);
         this.out = new OutputStreamWriter(out);
         setPriority(Thread.MAX_PRIORITY-1);
+    }*/
+    
+    StreamRedirectThread(String name, InputStream in, OutputStream out) {
+        super(name);
+        this.in = new InputStreamReader(in);
+        this.out = new OutputStreamWriter(out);
+      
+		PrintStream g = null;
+        try {
+	        g = new PrintStream(new File(FILE_OUTPUT_NAME));
+        }
+        catch (FileNotFoundException ex) {
+	        ex.printStackTrace();
+        }
+		System.setOut(g );
+        setPriority(Thread.MAX_PRIORITY-1);
     }
+
 
     /**
      * Copy.

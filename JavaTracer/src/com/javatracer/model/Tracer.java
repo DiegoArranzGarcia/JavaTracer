@@ -1,12 +1,6 @@
 package com.javatracer.model;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
@@ -163,13 +157,12 @@ public class Tracer {
     void redirectOutput() {
     	
     	Process process = vm.process();
-        
         // Copy target's output and error to our output and error.
         errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err);
         outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out);
        
         catchError(process);
-        
+       
         errThread.start();
         outThread.start();
         
