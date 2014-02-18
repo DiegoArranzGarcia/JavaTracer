@@ -9,7 +9,7 @@ public class ImageLoader {
 	private static String APPLICATION_IMAGE = "app.jpe";
 	private static String EXPANDED_ICON = "expanded.gif";
 	private static String FOLDED_ICON = "folded.gif";
-	private static String PLUS_ICON = "minus.png";
+	private static String PLUS_ICON = "plus.png";
 	private static String MINUS_ICON = "minus.png";
 	
 	private ImageIcon applicationIcon;
