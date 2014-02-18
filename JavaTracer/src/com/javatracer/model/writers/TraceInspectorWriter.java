@@ -166,8 +166,8 @@ public class TraceInspectorWriter {
 		Data entryThis = getEntryThis(node);
 		Data exitThis = getExitThis(node);
 		ChangeDetector detector = new ChangeDetector();
-		List<ChangeInfo> changes = new ArrayList<>();
-		//List<ChangeInfo> changes = detector.getChangesBetween(entryThis, exitThis);
+		//List<ChangeInfo> changes = new ArrayList<>();
+		List<ChangeInfo> changes = detector.getChangesBetween(entryThis, exitThis);
 		
 		return changes;
 		
@@ -232,7 +232,7 @@ public class TraceInspectorWriter {
 		List<ChangeInfo> changes = new ArrayList<>();
 		
 		for (int i=0;i<exitArguments.size();i++){
-			//changes.addAll(detector.getChangesBetween(entryArguments.get(i), exitArguments.get(i)));
+			changes.addAll(detector.getChangesBetween(entryArguments.get(i), exitArguments.get(i)));
 		}
 		
 		return changes;

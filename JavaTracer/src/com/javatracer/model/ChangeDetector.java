@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javatracer.model.methods.data.ChangeInfo;
-import com.sun.xml.internal.bind.v2.model.core.ArrayInfo;
+import com.javatracer.model.variables.data.ArrayData;
+import com.javatracer.model.variables.data.Data;
+import com.javatracer.model.variables.data.IgnoredData;
+import com.javatracer.model.variables.data.NullData;
+import com.javatracer.model.variables.data.ObjectData;
+import com.javatracer.model.variables.data.SimpleData;
+import com.javatracer.model.variables.data.StringData;
 
 /**
- * Class used to detect changes between VariableInfo objects. The changes are return in
+ * Class used to detect changes between Data objects. The changes are return in
  * ChangeInfo objects.
  */
 
@@ -19,9 +25,9 @@ public class ChangeDetector {
 	 * the changes are evaluated in different ways. If the two variables are primitive values, no changes
 	 * are notified. 
 	 * 
-	 * @see {@link #compareArrays(String, ArrayInfo, ArrayInfo)} </br>
-	 * @see {@link #compareObjects(String, ObjectInfo, ObjectInfo)} </br>
-	 * @see {@link #getChangesCreatedObject(String, ObjectInfo)} </br> 
+	 * @see {@link #compareArrays(String, ArrayData, ArrayData)} </br>
+	 * @see {@link #compareObjects(String, ObjectData, ObjectData)} </br>
+	 * @see {@link #getChangesCreatedObject(String, ObjectData)} </br> 
 	 * @see {@link #getChangesDeletedObject(String)}
 	 * 
 	 * @param variable1 - The variable with is compared the second one.
@@ -30,8 +36,8 @@ public class ChangeDetector {
 	 * @return A list of the changes between the two variables.
 	 */
 	
-	public List<ChangeInfo> getChangesBetween(VariableInfo variable1,VariableInfo variable2){
-		return getChangesBetweenRec(variable1.getName(),variable1.getValue(),variable2.getValue());
+	public List<ChangeInfo> getChangesBetween(Data variable1,Data variable2){
+		return getChangesBetweenRec(variable1.getName(),variable1,variable2);
 	}
 
 	/**
@@ -44,44 +50,57 @@ public class ChangeDetector {
 	 * @return A list of the changes between the two variables.
 	 */
 	
-	private List<ChangeInfo> getChangesBetweenRec(String name,Object variable1,Object variable2){
+	private List<ChangeInfo> getChangesBetweenRec(String name,Data variable1,Data variable2){
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
-		if (variable1 instanceof ArrayInfo && variable2 instanceof ArrayInfo){
-			changes = compareArrays(name,(ArrayInfo)variable1,(ArrayInfo)variable2);
-		} else if (variable1 instanceof StringInfo && variable2 instanceof StringInfo){
-			changes = compareStrings(name,(StringInfo)variable1,(StringInfo)variable2);
-		} else if (variable1 instanceof StringInfo && variable2 instanceof NullObject){
+		if (variable1 instanceof ArrayData && variable2 instanceof ArrayData){
+			changes = compareArrays(name,(ArrayData)variable1,(ArrayData)variable2);
+		} else if (variable1 instanceof StringData && variable2 instanceof StringData){
+			changes = compareStrings(name,(StringData)variable1,(StringData)variable2);
+		} else if (variable1 instanceof StringData && variable2 instanceof NullData){
 			changes = getChangesDeletedString(name);
-		} else if (variable1 instanceof NullObject && variable2 instanceof StringInfo){
-			changes = getChangesCreatedString(name,(StringInfo)variable2);
-		} else if (variable1 instanceof ObjectInfo && variable2 instanceof ObjectInfo){
-			changes = compareObjects(name,(ObjectInfo)variable1,(ObjectInfo)variable2);
-		} else if (variable1 instanceof ObjectInfo && variable2 instanceof NullObject){
+		} else if (variable1 instanceof NullData && variable2 instanceof StringData){
+			changes = getChangesCreatedString(name,(StringData)variable2);
+		} else if (variable1 instanceof ObjectData && variable2 instanceof ObjectData){
+			changes = compareObjects(name,(ObjectData)variable1,(ObjectData)variable2);
+		} else if (variable1 instanceof ObjectData && variable2 instanceof NullData){
 			changes = getChangesDeletedObject(name);
-		} else if (variable1 instanceof NullObject && variable2 instanceof ObjectInfo){
-			changes = getChangesCreatedObject(name,(ObjectInfo)variable2);
-		} else if (variable1 instanceof IgnoredClass || variable2 instanceof IgnoredClass){
+		} else if (variable1 instanceof NullData && variable2 instanceof ObjectData){
+			changes = getChangesCreatedObject(name,(ObjectData)variable2);
+		} else if (variable1 instanceof IgnoredData || variable2 instanceof IgnoredData){
 			changes = new ArrayList<>();
 		}
+		
 		return changes;
 	}
 	
+	private List<ChangeInfo> getChangesSimpleData(String name,SimpleData variable1,SimpleData variable2) {
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		if (!variable1.getValue().equals(variable2.getValue())){
+			ChangeInfo changeInfo = new ChangeInfo(name,variable2);
+			changes.add(changeInfo);
+		}
+		
+		return changes;
+	}
+
 	private List<ChangeInfo> getChangesDeletedString(String name) {
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
-		ChangeInfo changeInfo = new ChangeInfo(name,new NullObject());
+		ChangeInfo changeInfo = new ChangeInfo(name,new NullData(name));
 		changes.add(changeInfo);
 		return changes;
 	}
 
-	private List<ChangeInfo> getChangesCreatedString(String name, StringInfo variable2) {
+	private List<ChangeInfo> getChangesCreatedString(String name, StringData variable2) {
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		ChangeInfo changeInfo = new ChangeInfo(name,variable2);
 		changes.add(changeInfo);
 		return changes;
 	}
 
-	private List<ChangeInfo> compareStrings(String name, StringInfo variable1, StringInfo variable2) {
+	private List<ChangeInfo> compareStrings(String name, StringData variable1, StringData variable2) {
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
 		if (!variable1.getValue().equals(variable2.getValue())){
@@ -103,7 +122,7 @@ public class ChangeDetector {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
-		ChangeInfo changeInfo = new ChangeInfo(name,new NullObject());
+		ChangeInfo changeInfo = new ChangeInfo(name,new NullData(name));
 		changes.add(changeInfo);
 		
 		return changes;
@@ -118,7 +137,7 @@ public class ChangeDetector {
 	 * @return The list of the changes of the created object.
 	 */
 	
-	private List<ChangeInfo> getChangesCreatedObject(String name,ObjectInfo variable2){
+	private List<ChangeInfo> getChangesCreatedObject(String name,ObjectData variable2){
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
@@ -139,7 +158,7 @@ public class ChangeDetector {
 	 * @return A list with the changes listed above.
 	 */
 	
-	private List<ChangeInfo> compareObjects(String name,ObjectInfo variable1, ObjectInfo variable2) {
+	private List<ChangeInfo> compareObjects(String name,ObjectData variable1, ObjectData variable2) {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
@@ -148,21 +167,25 @@ public class ChangeDetector {
 			changes.add(change);
 		} else{
 			
-			List<VariableInfo> fields1 = variable1.getFields();
-			List<VariableInfo> fields2 = variable2.getFields();
+			List<Data> fields1 = variable1.getValue();
+			List<Data> fields2 = variable2.getValue();
 			
-			for (int i=0;i<fields1.size();i++){
-				VariableInfo field1 = fields1.get(i);
-				VariableInfo field2 = fields2.get(i);
+			if (fields1!=null){
 				
-				if (isPrimitive(field1.getValue().getClass())){
-					if (!field1.getValue().equals(field2.getValue())){
-						ChangeInfo change = new ChangeInfo(name + "." + field1.getName(),field2.getValue());
-						changes.add(change);
-					}
-				} else {
-					List<ChangeInfo> fieldChanges = getChangesBetweenRec(name + "." + field1.getName() , field1.getValue(), field2.getValue());
+				for (int i=0;i<fields1.size();i++){
+					
+					Data field1 = fields1.get(i);
+					Data field2 = fields2.get(i);
+					
+					List<ChangeInfo> fieldChanges;
+					
+					if (field1 instanceof SimpleData && field2 instanceof SimpleData)
+						fieldChanges = getChangesSimpleData(name + "." + field1.getName(),(SimpleData)field1,(SimpleData)field2);
+					else 
+						fieldChanges = getChangesBetweenRec(name + "." + field1.getName() , field1, field2);
+					
 					changes.addAll(fieldChanges);
+									
 				}
 				
 			}
@@ -184,12 +207,12 @@ public class ChangeDetector {
 	 * @return A list with the changes between the two arrays.
 	 */
 	
-	private List<ChangeInfo> compareArrays(String name,ArrayInfo variable1, ArrayInfo variable2) {
+	private List<ChangeInfo> compareArrays(String name,ArrayData variable1, ArrayData variable2) {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
-		List<Object> values1 = variable1.getValues();
-		List<Object> values2 = variable2.getValues();
+		List<Data> values1 = variable1.getValue();
+		List<Data> values2 = variable2.getValue();
 		
 		if (variable1.getLength()<variable2.getLength()){
 			
@@ -230,26 +253,24 @@ public class ChangeDetector {
 	 * @return A list with the changes in the positions (0-to)
 	 */
 	
-	private List<ChangeInfo> compareTo(String name,List<Object> values1,List<Object> values2, int to) {
+	private List<ChangeInfo> compareTo(String name,List<Data> values1,List<Data> values2, int to) {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
 		for (int i=0;i<to;i++){
 			
-			Object value1 = values1.get(i);
-			Object value2 = values2.get(i);
+			Data value1 = values1.get(i);
+			Data value2 = values2.get(i);
 		
-			if (isPrimitive(values1.get(0).getClass())){
-				if (!value1.equals(value2)){
-					ChangeInfo change = new ChangeInfo(name + "[" + i + "]" ,value2);
-					changes.add(change);
-				}
-			}
+			List<ChangeInfo> fieldChanges;
 				
-			else {
-				List<ChangeInfo> fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);
-				changes.addAll(fieldChanges);
-			}
+			if (value1 instanceof SimpleData || value2 instanceof SimpleData)
+				fieldChanges = getChangesSimpleData(name + "[" + i + "]", (SimpleData)value1, (SimpleData)value2);
+			else
+				fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);				
+				
+			changes.addAll(fieldChanges);
+						
 		}
 		
 		return changes;
