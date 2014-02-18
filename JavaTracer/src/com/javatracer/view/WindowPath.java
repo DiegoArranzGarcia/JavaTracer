@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -20,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.imageresources.ImageLoader;
 import com.javatracer.controller.TracerController;
 
 @SuppressWarnings("serial")
@@ -44,9 +44,6 @@ public class WindowPath extends JFrame {
 	private static int CANCEL_COL = 480;
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
-	//private static String PATH_IMAGE_HELP = "../../../resource/imageHelp.jpe";
-	private static String PATH_IMAGE_HELP = "imageHelp.jpe";
-
 	
 	public WindowPath(TracerController controller) {
 		this.controller = controller;
@@ -55,17 +52,15 @@ public class WindowPath extends JFrame {
 	
 	public void initialice(){
 		
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		
 		setTitle("Java Tracer");
 		setSize(850, 300);  
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image icon = new ImageIcon(getClass().getResource("j4.jpe")).getImage();
+		Image icon = imageLoader.getApplicationIcon().getImage();
 		setIconImage(icon);
-	
-		
-		setVisible(true); 	
-
 		
 		labelPath = new JLabel(new Message(1).getMessage());
 		labelPath.setBounds(new Rectangle(540,30));
@@ -82,7 +77,7 @@ public class WindowPath extends JFrame {
 		helpPath = new JButton();
 		helpPath.setBounds(new Rectangle(25,25));
 		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
-		helpPath.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
+		helpPath.setIcon(imageLoader.getHelpIcon());
 		helpPath.setToolTipText(new Message(2).getMessage()); 
 		
 		labelNameClass = new JLabel(new Message(3).getMessage());
@@ -91,7 +86,7 @@ public class WindowPath extends JFrame {
 		labelNameClass.setBackground(Color.white); 
 		labelNameClass.setFont(new Font("Comic Sans MS",Font.ROMAN_BASELINE, LABELS_SIZE));
 				
-		nameClass = new JComboBox();
+		nameClass = new JComboBox<String>();
 		nameClass.setBounds(new Rectangle(450,30));
 		nameClass.setLocation(SECOND_COL, SECOND_ROW); 
 		nameClass.setBackground(Color.white); 
@@ -101,7 +96,7 @@ public class WindowPath extends JFrame {
 		helpNameClass = new JButton();
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(THIRD_COL, SECOND_ROW); 
-		helpNameClass.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
+		helpNameClass.setIcon(imageLoader.getHelpIcon());
 		helpNameClass.setToolTipText(new Message(4).getMessage());
 			
 		labelXml = new JLabel(new Message(5).getMessage());
@@ -117,7 +112,7 @@ public class WindowPath extends JFrame {
 		helpXmlFile = new JButton();
 		helpXmlFile.setBounds(new Rectangle(25,25));
 		helpXmlFile.setLocation(THIRD_COL, THIRD_ROW); 
-		helpXmlFile.setIcon(new ImageIcon(getClass().getResource(PATH_IMAGE_HELP)));
+		helpXmlFile.setIcon(imageLoader.getHelpIcon());
 		helpXmlFile.setToolTipText(new Message(6).getMessage());
 		
 		cancel =new JButton("Cancel");
@@ -195,7 +190,8 @@ public class WindowPath extends JFrame {
 		add(labelXml);
 		add(nameXml);
 		add(helpXmlFile);
-		this.repaint();
+	
+		setVisible(true); 	;
 	}
 	
 

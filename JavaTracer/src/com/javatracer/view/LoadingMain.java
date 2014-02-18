@@ -1,7 +1,5 @@
 package com.javatracer.view;
 
-
-
 import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
@@ -14,8 +12,6 @@ public class LoadingMain extends JWindow {
 	  JLabel imageLabel = new JLabel();
 	  ImageIcon imageIcon;
 	  //private static String PATH_IMAGE_lOADING = "../../../resource/LoadingSmall.gif";
-
-    
 
   public LoadingMain() {
     InitScreen();

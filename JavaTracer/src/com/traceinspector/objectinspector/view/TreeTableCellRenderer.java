@@ -2,17 +2,21 @@ package com.traceinspector.objectinspector.view;
 
 import java.awt.Component;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import com.imageresources.ImageLoader;
+
+@SuppressWarnings("serial")
 public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
+	
+	ImageLoader imageLoader;
 
 	public TreeTableCellRenderer(){
-		//setClosedIcon(new ImageIcon(getClass().getResource("plus.gif")));
-		//setOpenIcon(new ImageIcon(getClass().getResource("minus.gif")));
+		this.imageLoader = ImageLoader.getInstance();
+		setClosedIcon(imageLoader.getExpandedIcon());
+		setOpenIcon(imageLoader.getFoldedIcon());
 	}
 	
 	public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,
@@ -27,8 +31,8 @@ public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
         	setText(item.getName());
         	if (item.isExpandable())
         	{
-        		setClosedIcon(new ImageIcon(getClass().getResource("plus.gif")));
-        		setOpenIcon(new ImageIcon(getClass().getResource("minus.gif")));
+        		setClosedIcon(imageLoader.getExpandedIcon());
+        		setOpenIcon(imageLoader.getFoldedIcon());
         	}
         	else
         	{

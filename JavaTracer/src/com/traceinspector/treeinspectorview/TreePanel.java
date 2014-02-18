@@ -36,17 +36,14 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
+
+import com.imageresources.ImageLoader;
 
 @SuppressWarnings("serial")
 public class TreePanel extends JPanel {
@@ -61,16 +58,17 @@ public class TreePanel extends JPanel {
 	private final static Color BOX_COLOR = new Color(0x008EAB);
 	private final static Color BORDER_COLOR = Color.darkGray;
 	private final static Color TEXT_COLOR = Color.white;
-	
-	private double verticalGap;
-	
+		
 	private TreeLayout<TextInBoxExt> treeLayout;
+	private double verticalGap;
+	private ImageLoader imageLoader;
 	
-	public TreePanel(TreeLayout<TextInBoxExt> treeLayout2) {
+	public TreePanel(TreeLayout<TextInBoxExt> treeLayout) {
 		this.verticalGap = TreeInspectorView.GAP_BETWEEN_LEVELS;
-		this.treeLayout = treeLayout2;
+		this.treeLayout = treeLayout;
+		this.imageLoader = ImageLoader.getInstance();
 		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
-		setPreferredSize(new Dimension((int)treeLayout2.getBounds().getWidth()+1,(int)treeLayout2.getBounds().getHeight()+1));
+		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 		setBackground(Color.WHITE);
 	}
 
@@ -127,24 +125,14 @@ public class TreePanel extends JPanel {
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
-		
-		BufferedImage imagePlus= null;
-		BufferedImage imageMinus=null;
-		try {
-			imagePlus = ImageIO.read(getClass().getResource("plus1.png"));
-			imageMinus = ImageIO.read(getClass().getResource("minus1.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		
+				
 		if(textInBox.haveChildren()){
 			if(!textInBox.isExpanded()){
-				g.drawImage(imagePlus,(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
+				g.drawImage(imageLoader.getPlusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
 			}else{
-				g.drawImage(imageMinus,(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
+				g.drawImage(imageLoader.getMinusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
 			}
 		}
-		
 		
 		Graphics2D g2D = (Graphics2D)g; 
 		
