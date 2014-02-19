@@ -31,6 +31,8 @@ package com.traceinspector.treeinspectorview;
 
 import org.abego.treelayout.NodeExtentProvider;
 
+import com.traceinspector.treeinspector.data.MethodBox;
+
 /**
  * A {@link NodeExtentProvider} for nodes of type {@link TextInBox}.
  * <p>
@@ -40,16 +42,16 @@ import org.abego.treelayout.NodeExtentProvider;
  * @author Udo Borkowski (ub@abego.org)
  */
 public class TextInBoxNodeExtentProvider implements
-		NodeExtentProvider<TextInBoxExt> {
+		NodeExtentProvider<MethodBox> {
 
-	public double getHeight(TextInBoxExt arg0) {
+	public double getHeight(MethodBox arg0) {
 		return TreePanel.DEFAULT_HEIGHT_BOX;
 	}
 
-	public double getWidth(TextInBoxExt arg0) {
+	public double getWidth(MethodBox arg0) {
 		
 		double width = 0;
-		String name = arg0.giveMeTextInBox();
+		String name = arg0.getBoxText();
 		 if (name.length()>2) width = TreePanel.WIDTH_BY_LETTER * name.length() + TreePanel.DEFAULT_WIDTH_BOX;
 		return width;
 	}

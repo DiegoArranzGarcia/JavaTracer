@@ -8,7 +8,7 @@ import com.javatracer.model.variables.data.InfoVisitor;
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.view.ObjectInspectorView;
-import com.traceinspector.treeinspectorview.TextInBoxExt;
+import com.traceinspector.treeinspector.data.MethodBox;
 
 public class ObjectInspector {
 	

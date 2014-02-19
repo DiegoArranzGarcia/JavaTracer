@@ -7,8 +7,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.logic.ObjectInspector;
+import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspector.logic.TreeInspector;
-import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.view.TraceInpectorView;
 
 public class TraceInspectorController {
@@ -54,7 +54,7 @@ public class TraceInspectorController {
 		} else chooser.cancelSelection();	
 	}
 
-	public void clickedOnNode(TextInBoxExt box) {
+	public void clickedOnNode(MethodBox box) {
 		
 		treeInspector.selectNode(box);
 		

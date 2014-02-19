@@ -8,8 +8,8 @@ import org.w3c.dom.NodeList;
 
 import com.javatracer.model.variables.data.Data;
 import com.traceinspector.model.configuration.Configuration;
+import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
-import com.traceinspector.treeinspectorview.TextInBoxExt;
 
 public class TreeManager {
 
@@ -22,7 +22,7 @@ public class TreeManager {
 		xml = new XmlManager(xmlDocument);
 	}
 	
-	public DefaultTreeLayout<TextInBoxExt> loadTree() {
+	public DefaultTreeLayout<MethodBox> loadTree() {
 		
 		Configuration configuration = new Configuration();
 		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
@@ -32,16 +32,16 @@ public class TreeManager {
 		int numNodes = 0;
 			
 		Node rootNode = xml.getRootNode();
-		TextInBoxExt root = getTextInBoxExtFromNode(rootNode);
-		DefaultTreeLayout<TextInBoxExt> tree = new DefaultTreeLayout<TextInBoxExt>(root); 
+		MethodBox root = getTextInBoxExtFromNode(rootNode);
+		DefaultTreeLayout<MethodBox> tree = new DefaultTreeLayout<MethodBox>(root); 
 				
 		generateTree(tree,root,rootNode,currentLevel, numNodes);
 		
 		return tree;
 	}
 
-	private TextInBoxExt getTextInBoxExtFromNode(Node node) {
-		TextInBoxExt root = null;
+	private MethodBox getTextInBoxExtFromNode(Node node) {
+		MethodBox root = null;
 		try {
 			long id = xml.getIdFromNode(node);
 			String name = xml.getName(node);
@@ -49,7 +49,7 @@ public class TreeManager {
 			Data returnValue = xml.loadReturnValue(node);
 			Data thisValue = xml.loadThisValue(node);
 			boolean haveChildren = xml.haveChildrenOfNode(node);
-			root = new TextInBoxExt(id,name,arguments,returnValue,thisValue,haveChildren);
+			root = new MethodBox(id,name,arguments,returnValue,thisValue,haveChildren);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class TreeManager {
 
 
 
-	private int generateTree(DefaultTreeLayout<TextInBoxExt> tree,TextInBoxExt treeNode, Node node,int currentLevel, int numNodes){
+	private int generateTree(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode, Node node,int currentLevel, int numNodes){
 				
 		if (currentLevel<DEFAULT_NUM_LEVELS_DEPTH){
 			
@@ -71,7 +71,7 @@ public class TreeManager {
 			while (numNodes<DEFAULT_NUM_NODES && i < childs.getLength()){
 				
 				Node childNode = childs.item(i);
-				TextInBoxExt childTreeNode = getTextInBoxExtFromNode(childNode);
+				MethodBox childTreeNode = getTextInBoxExtFromNode(childNode);
 				tree.addChild(treeNode,childTreeNode);
 				
 				numNodes = generateTree(tree,childTreeNode,childNode,currentLevel+1,numNodes);
@@ -84,15 +84,15 @@ public class TreeManager {
 		
 	}
 
-	public TextInBoxExt getTextInBoxFromId(DefaultTreeLayout<TextInBoxExt> tree, long id){
+	public MethodBox getTextInBoxFromId(DefaultTreeLayout<MethodBox> tree, long id){
 		
-		TextInBoxExt textInBoxExt = null;
+		MethodBox textInBoxExt = null;
 		boolean found = false;
-		Iterator<TextInBoxExt> allChildren = tree.getChildren(tree.getRoot()).iterator();
+		Iterator<MethodBox> allChildren = tree.getChildren(tree.getRoot()).iterator();
 		
 		while(!found && allChildren.hasNext()){
 			
-			TextInBoxExt child = allChildren.next();
+			MethodBox child = allChildren.next();
 			found = (child.getId() == id);
 			if (found){
 				textInBoxExt = child;
@@ -103,7 +103,7 @@ public class TreeManager {
 		return textInBoxExt;
 	}
 
-	public void expandNode(DefaultTreeLayout<TextInBoxExt> tree,TextInBoxExt treeNode) {
+	public void expandNode(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode) {
 				
 		Node node = xml.getNode(treeNode.getId());
 		NodeList nodeChilds = xml.getChildsOfNode(node);
@@ -111,13 +111,13 @@ public class TreeManager {
 		
 		for (int i=0;i<nodeChilds.getLength();i++){
 			Node childNode = nodeChilds.item(i);
-			TextInBoxExt child = getTextInBoxExtFromNode(childNode);
+			MethodBox child = getTextInBoxExtFromNode(childNode);
 			tree.addChild(treeNode, child);
 		}
 				
 	}
 
-	public void foldNode(DefaultTreeLayout<TextInBoxExt> tree,TextInBoxExt treeNode) {
+	public void foldNode(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode) {
 		
 		tree.removeChilds(treeNode);
 		treeNode.setExpanded(false);

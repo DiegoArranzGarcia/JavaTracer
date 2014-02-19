@@ -44,6 +44,7 @@ import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
 
 import com.imageresources.ImageLoader;
+import com.traceinspector.treeinspector.data.MethodBox;
 
 @SuppressWarnings("serial")
 public class TreePanel extends JPanel {
@@ -59,11 +60,11 @@ public class TreePanel extends JPanel {
 	private final static Color BORDER_COLOR = Color.darkGray;
 	private final static Color TEXT_COLOR = Color.white;
 		
-	private TreeLayout<TextInBoxExt> treeLayout;
+	private TreeLayout<MethodBox> treeLayout;
 	private double verticalGap;
 	private ImageLoader imageLoader;
 	
-	public TreePanel(TreeLayout<TextInBoxExt> treeLayout) {
+	public TreePanel(TreeLayout<MethodBox> treeLayout) {
 		this.verticalGap = TreeInspectorView.GAP_BETWEEN_LEVELS;
 		this.treeLayout = treeLayout;
 		this.imageLoader = ImageLoader.getInstance();
@@ -72,24 +73,24 @@ public class TreePanel extends JPanel {
 		setBackground(Color.WHITE);
 	}
 
-	private TreeForTreeLayout<TextInBoxExt> getTree() {
+	private TreeForTreeLayout<MethodBox> getTree() {
 		return treeLayout.getTree();
 	}
 
-	private Iterable<TextInBoxExt> getChildren(TextInBoxExt parent) {
+	private Iterable<MethodBox> getChildren(MethodBox parent) {
 		return getTree().getChildren(parent);
 	}
 
-	private Rectangle2D.Double getBoundsOfNode(TextInBoxExt node) {
+	private Rectangle2D.Double getBoundsOfNode(MethodBox node) {
 		return treeLayout.getNodeBounds().get(node);
 	}
 	
-	public void setTree(TreeLayout<TextInBoxExt> treeLayout){
+	public void setTree(TreeLayout<MethodBox> treeLayout){
 		this.treeLayout = treeLayout;
 		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 	}
 
-	private void paintEdges(Graphics g, TextInBoxExt parent) {
+	private void paintEdges(Graphics g, MethodBox parent) {
 		if (!getTree().isLeaf(parent)) {
 			
 			Graphics2D  g2D = (Graphics2D)g;
@@ -100,7 +101,7 @@ public class TreePanel extends JPanel {
 			g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
 			g.drawLine((int)x1,(int)y1,(int)x1,(int)(y1+verticalGap/2));
 			
-			for (TextInBoxExt child : getChildren(parent)) {
+			for (MethodBox child : getChildren(parent)) {
 				
 				Rectangle2D.Double b2 = getBoundsOfNode(child);
 				double x2 = b2.getCenterX();
@@ -118,7 +119,7 @@ public class TreePanel extends JPanel {
 		}
 	}
 
-	private void paintBox(Graphics g,TextInBoxExt textInBox) {
+	private void paintBox(Graphics g,MethodBox textInBox) {
 		
 		g.setColor(BOX_COLOR);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
@@ -145,7 +146,7 @@ public class TreePanel extends JPanel {
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g2D.setStroke(new BasicStroke());
 		g.setColor(TEXT_COLOR);
-		String[] lines = textInBox.giveMeTextInBox().split("\n");
+		String[] lines = textInBox.getBoxText().split("\n");
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
 		int y = (int) box.y + (int)DEFAULT_HEIGHT_BOX/2 + m.getAscent()/2;
@@ -161,7 +162,7 @@ public class TreePanel extends JPanel {
 		if (treeLayout!=null){			
 			paintEdges(g, getTree().getRoot());
 	
-			for (TextInBoxExt textInBox : treeLayout.getNodeBounds().keySet()) {
+			for (MethodBox textInBox : treeLayout.getNodeBounds().keySet()) {
 				paintBox(g, textInBox);
 			}
 		}

@@ -1,4 +1,4 @@
-package com.traceinspector.treeinspectorview;
+package com.traceinspector.treeinspector.data;
 
 import java.util.List;
 
@@ -10,41 +10,27 @@ import com.javatracer.model.variables.data.SimpleData;
 import com.javatracer.model.variables.data.StringData;
 
 
-public class TextInBoxExt {
+public class MethodBox extends Box {
 
-	private long id;
 	private String methodName;
 	private List<Data> arguments;
 	private Data returnValue;
 	private Data thisValue;
-	private boolean expanded;
-	private boolean selected;
-	private boolean haveChildren;
 	
-	public TextInBoxExt(){
-		this.expanded = true;
-		this.selected = false;
-	}
-
-	public TextInBoxExt(long id, String name, List<Data> arguments,	Data returnValue,Data thisValue,boolean haveChildren) {
-		this.id = id;
+	public MethodBox(long id,String name,List<Data> arguments,	Data returnValue,Data thisValue,boolean haveChildren){
+		super(id,haveChildren);
 		this.methodName = name;
 		this.arguments = arguments;
 		this.returnValue = returnValue;
 		this.thisValue = thisValue;
-		this.expanded = false;
-		this.selected = false;
-		this.setHaveChildren(haveChildren);
 	}
 	
-	public String giveMeTextInBox() {
+	public String getBoxText() {
 		
 		 int i=0;
-		 
 		 String name = getMethodName() + " (";
 		 
 		 while(i<arguments.size()){
-			 
 			name= name + completeArgumentString(arguments.get(i));
 	    	i++;
 		 }		 
@@ -53,7 +39,6 @@ public class TextInBoxExt {
 			 name = name.substring(0, name.length()) +" )";
 		 else 
 			 name = name.substring(0, name.length()-2) +" )";
-		 
 		 
 		 if(returnValue != null)
 			name += " return " + returnString(returnValue);
@@ -106,14 +91,6 @@ public class TextInBoxExt {
 		return text;
 	}
 	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getMethodName() {
 		return methodName;
 	}
@@ -137,22 +114,6 @@ public class TextInBoxExt {
 	public void setReturnValue(Data returnValue) {
 		this.returnValue = returnValue;
 	}
-
-	public boolean isExpanded() {
-		return expanded;
-	}
-
-	public void setExpanded(boolean expanded) {
-		this.expanded = expanded;
-	}
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
 	
 	public Data getThisValue() {
 		return thisValue;
@@ -161,15 +122,5 @@ public class TextInBoxExt {
 	public void setThisValue(Data thisValue) {
 		this.thisValue = thisValue;
 	}
-
-	public boolean haveChildren() {
-		return haveChildren;
-	}
-
-	public void setHaveChildren(boolean haveChildren) {
-		this.haveChildren = haveChildren;
-	}
-	
-	
 
 }

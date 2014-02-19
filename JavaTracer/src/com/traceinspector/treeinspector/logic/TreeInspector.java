@@ -12,8 +12,8 @@ import java.awt.geom.Rectangle2D.Double;
 
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
+import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
-import com.traceinspector.treeinspectorview.TextInBoxExt;
 import com.traceinspector.treeinspectorview.TreeInspectorView;
 
 public class TreeInspector implements MouseListener {
@@ -22,8 +22,8 @@ public class TreeInspector implements MouseListener {
 	private TreeInspectorView view;
 	private TreeManager treeManager;
 	
-	private DefaultTreeLayout<TextInBoxExt> tree;
-	private TextInBoxExt lastSelected;
+	private DefaultTreeLayout<MethodBox> tree;
+	private MethodBox lastSelected;
 	
 	public TreeInspector(TraceInspectorController controller, TreeManager treeManager){
 		this.controller = controller;
@@ -47,7 +47,7 @@ public class TreeInspector implements MouseListener {
 	}
 	
 	
-	public void doubleClickedOnNode(TextInBoxExt box) {
+	public void doubleClickedOnNode(MethodBox box) {
 			
 		if (box!=null){
 			
@@ -59,7 +59,7 @@ public class TreeInspector implements MouseListener {
 		}	
 	}
 
-	private void expand(TextInBoxExt box) {
+	private void expand(MethodBox box) {
 		
 		treeManager.expandNode(tree,box);
 		view.repaintTree(tree);
@@ -67,7 +67,7 @@ public class TreeInspector implements MouseListener {
 	}
 
 
-	private void fold(TextInBoxExt box) {	
+	private void fold(MethodBox box) {	
 		treeManager.foldNode(tree,box);
 		view.repaintTree(tree);
 	}
@@ -81,7 +81,7 @@ public class TreeInspector implements MouseListener {
 		
 		if (e.getButton() == MouseEvent.BUTTON1){
 			
-			TextInBoxExt box = clickedOnTree(e.getPoint());
+			MethodBox box = clickedOnTree(e.getPoint());
 			
 			if (e.getClickCount() == 1)
 				controller.clickedOnNode(box);		
@@ -93,19 +93,19 @@ public class TreeInspector implements MouseListener {
 			
 	}
 
-	public TextInBoxExt clickedOnTree(Point clickPoint) {
+	public MethodBox clickedOnTree(Point clickPoint) {
 		
-		TextInBoxExt textInBoxExt = null;
+		MethodBox textInBoxExt = null;
 		
 		boolean clickedOnNode = false;
-		Set<Entry<TextInBoxExt, Double>> nodes = view.getNodeBounds().entrySet();
-		Iterator<Entry<TextInBoxExt,Double>> iterator = nodes.iterator();
+		Set<Entry<MethodBox, Double>> nodes = view.getNodeBounds().entrySet();
+		Iterator<Entry<MethodBox,Double>> iterator = nodes.iterator();
 		
 		while (iterator.hasNext() && !clickedOnNode){
-			Entry<TextInBoxExt,Double> entry = iterator.next();
+			Entry<MethodBox,Double> entry = iterator.next();
 			Double rec = entry.getValue();
 			if (rec.contains(clickPoint)) {
-				textInBoxExt = (TextInBoxExt)entry.getKey();
+				textInBoxExt = (MethodBox)entry.getKey();
 				clickedOnNode = true;
 			}
 		}
@@ -121,7 +121,7 @@ public class TreeInspector implements MouseListener {
 
 	public void mouseReleased(MouseEvent e) {}
 
-	public void selectNode(TextInBoxExt box) {
+	public void selectNode(MethodBox box) {
 		
 		boolean needRepaint = false;
 		
