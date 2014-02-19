@@ -15,13 +15,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.general.model.variables.data.Data;
+import com.javatracer.model.methods.data.MethodInfo;
+import com.javatracer.model.methods.data.ThreadInfo;
 import com.javatracer.model.writers.XStreamUtil;
-import com.thoughtworks.xstream.XStream;
 
 public class XmlManager extends XStreamUtil{
       
    private Document xmlDocument;
-   private XStream xStream;
 	   
    public XmlManager(String fileName) {
 	   
@@ -43,7 +43,7 @@ public class XmlManager extends XStreamUtil{
 	public Node getRootNode() {
 		Node node = null;
 		try {
-			String expression = "/" + TAG_TRACE + "/" + TAG_METHOD;  
+			String expression = "/" + TAG_TRACE + "/" + TAG_THREAD;  
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			XPathExpression xPathExpression = xPath.compile(expression);
 			node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
@@ -86,7 +86,7 @@ public class XmlManager extends XStreamUtil{
 	public NodeList getChildsOfNode(Node node) {
 		NodeList childs = null;
 		try{
-			String expression = "./" + TAG_CALLED_METHODS +"/" + TAG_METHOD;  
+			String expression = "./" + TAG_CALLED_METHODS +"/*";  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    childs = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
@@ -153,6 +153,24 @@ public class XmlManager extends XStreamUtil{
 	    
 	    return this_data;
 		
+	}
+
+	public ThreadInfo getThreadName(Node infoNode) throws XPathExpressionException {
+		String expression = "./" + TAG_THREAD_INFO   ;  
+	    XPath xPath = XPathFactory.newInstance().newXPath();
+	    XPathExpression xPathExpression = xPath.compile(expression);
+	    Node node = (Node) xPathExpression.evaluate(infoNode,XPathConstants.NODE);
+	    ThreadInfo thread = (ThreadInfo) xStream.fromXML(nodeToString(node)); 
+	    return thread;
+	}
+
+	public MethodInfo getInfoMethod(Node infoNode) throws XPathExpressionException {
+		String expression = "./" + TAG_METHOD_INFO;  
+	    XPath xPath = XPathFactory.newInstance().newXPath();
+	    XPathExpression xPathExpression = xPath.compile(expression);
+	    Node node = (Node) xPathExpression.evaluate(infoNode,XPathConstants.NODE);
+	    MethodInfo thread = (MethodInfo) xStream.fromXML(nodeToString(node)); 
+		return thread;
 	}
 
 }

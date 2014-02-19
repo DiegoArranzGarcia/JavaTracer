@@ -1,14 +1,16 @@
 package com.traceinspector.model;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.general.model.configuration.TraceInspectorConfiguration;
-import com.general.model.variables.data.Data;
+import com.javatracer.model.methods.data.MethodInfo;
+import com.javatracer.model.methods.data.ThreadInfo;
+import com.traceinspector.treeinspector.data.Box;
 import com.traceinspector.treeinspector.data.MethodBox;
+import com.traceinspector.treeinspector.data.ThreadBox;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
 
 public class TreeManager {
@@ -22,7 +24,7 @@ public class TreeManager {
 		xml = new XmlManager(xmlDocument);
 	}
 	
-	public DefaultTreeLayout<MethodBox> loadTree() {
+	public DefaultTreeLayout<Box> loadTree() {
 		
 		TraceInspectorConfiguration configuration = new TraceInspectorConfiguration();
 		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
@@ -32,24 +34,32 @@ public class TreeManager {
 		int numNodes = 0;
 			
 		Node rootNode = xml.getRootNode();
-		MethodBox root = getTextInBoxExtFromNode(rootNode);
-		DefaultTreeLayout<MethodBox> tree = new DefaultTreeLayout<MethodBox>(root); 
+		ThreadBox threadBox = getThreadBoxFromNode(rootNode);
+		DefaultTreeLayout<Box> tree = new DefaultTreeLayout<Box>(threadBox); 
 				
-		generateTree(tree,root,rootNode,currentLevel, numNodes);
+		generateTree(tree,threadBox,rootNode,currentLevel, numNodes);
 		
 		return tree;
+	}
+
+	private ThreadBox getThreadBoxFromNode(Node rootNode) {
+		ThreadBox threadBox = null;
+		try{
+			ThreadInfo threadInfo = xml.getThreadName(rootNode);
+			threadBox = new ThreadBox(0,threadInfo.getNameThread());
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return threadBox;
 	}
 
 	private MethodBox getTextInBoxExtFromNode(Node node) {
 		MethodBox root = null;
 		try {
 			long id = xml.getIdFromNode(node);
-			String name = xml.getName(node);
-			List<Data> arguments = xml.loadArguments(node);
-			Data returnValue = xml.loadReturnValue(node);
-			Data thisValue = xml.loadThisValue(node);
+			MethodInfo method = xml.getInfoMethod(node);
 			boolean haveChildren = xml.haveChildrenOfNode(node);
-			root = new MethodBox(id,name,arguments,returnValue,thisValue,haveChildren);
+			root = new MethodBox(id,method,haveChildren);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,7 +69,7 @@ public class TreeManager {
 
 
 
-	private int generateTree(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode, Node node,int currentLevel, int numNodes){
+	private int generateTree(DefaultTreeLayout<Box> tree,Box treeNode, Node node,int currentLevel, int numNodes){
 				
 		if (currentLevel<DEFAULT_NUM_LEVELS_DEPTH){
 			
@@ -103,7 +113,7 @@ public class TreeManager {
 		return textInBoxExt;
 	}
 
-	public void expandNode(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode) {
+	public void expandNode(DefaultTreeLayout<Box> tree,Box treeNode) {
 				
 		Node node = xml.getNode(treeNode.getId());
 		NodeList nodeChilds = xml.getChildsOfNode(node);
@@ -117,7 +127,7 @@ public class TreeManager {
 				
 	}
 
-	public void foldNode(DefaultTreeLayout<MethodBox> tree,MethodBox treeNode) {
+	public void foldNode(DefaultTreeLayout<Box> tree,Box treeNode) {
 		
 		tree.removeChilds(treeNode);
 		treeNode.setExpanded(false);

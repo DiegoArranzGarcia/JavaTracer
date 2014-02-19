@@ -47,7 +47,7 @@ public abstract class XStreamUtil {
 	public static String TAG_ARGUMENTS = "arguments";
 	public static String TAG_METHOD_INFO = "info";
 	public static String TAG_CALLED_FROM_CLASS = "calledFromClass";
-	public static String TAG_METHOD_NAME = "methodName";
+	public static String TAG_METHOD_NAME = "methodame";
 	public static String TAG_THREAD = "thread";
 	public static String TAG_THREAD_INFO = "thread-info";
 	public static String TAG_EXCEPTION = "exception";
@@ -79,6 +79,7 @@ public abstract class XStreamUtil {
 		
 		//MethodExitInfo alias
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		
 		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"this_data");
 		xStream.aliasField(TAG_ARGUMENTS, MethodExitInfo.class, "arguments");
 		xStream.aliasField(TAG_RETURN, MethodExitInfo.class,"return_data");

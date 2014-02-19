@@ -4,31 +4,32 @@ import java.util.List;
 
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
 import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
+import com.javatracer.model.methods.data.MethodInfo;
 
 
 public class MethodBox extends Box {
 
-	private String methodName;
-	private List<Data> arguments;
-	private Data returnValue;
-	private Data thisValue;
+	private MethodInfo method;
 	
 	public MethodBox(long id,String name,List<Data> arguments,	Data returnValue,Data thisValue,boolean haveChildren){
 		super(id,haveChildren);
-		this.methodName = name;
-		this.arguments = arguments;
-		this.returnValue = returnValue;
-		this.thisValue = thisValue;
 	}
 	
+	public MethodBox(long id, MethodInfo method, boolean haveChildren) {
+		super(id,haveChildren);
+		this.method = method;
+	}
+
 	public String getBoxText() {
 		
 		 int i=0;
-		 String name = getMethodName() + " (";
+		 String name = method.getMethodName() + " (";
+		 List<Data> arguments = method.getArguments();
 		 
 		 while(i<arguments.size()){
 			name= name + completeArgumentString(arguments.get(i));
@@ -40,6 +41,7 @@ public class MethodBox extends Box {
 		 else 
 			 name = name.substring(0, name.length()-2) +" )";
 		 
+		 Data returnValue = method.getReturn_data();
 		 if(returnValue != null)
 			name += " return " + returnString(returnValue);
 		 
@@ -63,6 +65,9 @@ public class MethodBox extends Box {
 		}else if (var instanceof SimpleData){
 			SimpleData data = ((SimpleData)var);
 			text= data.getValue().toString();		
+		}else if (var instanceof IgnoredData){
+			IgnoredData data = ((IgnoredData)var);
+			text= data.getName().toString();	
 		}
 		
 		return text;
@@ -86,41 +91,16 @@ public class MethodBox extends Box {
 		}else if (var instanceof SimpleData){
 			SimpleData data = ((SimpleData)var);
 			text= data.getName() + " = " + data.getValue().toString() + ", " ;		
+		}else if (var instanceof IgnoredData){
+			IgnoredData data = ((IgnoredData)var);
+			text = data.getClassName() +" "+ data.getName() + ", " ;
 		}
 		
 		return text;
 	}
 	
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public List<Data> getArguments() {
-		return arguments;
-	}
-
-	public void setArguments(List<Data> arguments) {
-		this.arguments = arguments;
-	}
-
-	public Data getReturnValue() {
-		return returnValue;
-	}
-
-	public void setReturnValue(Data returnValue) {
-		this.returnValue = returnValue;
-	}
-	
-	public Data getThisValue() {
-		return thisValue;
-	}
-
-	public void setThisValue(Data thisValue) {
-		this.thisValue = thisValue;
+	public MethodInfo getMethodInfo(){
+		return this.method;
 	}
 
 }

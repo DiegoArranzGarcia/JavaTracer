@@ -282,8 +282,9 @@ public class TraceInspectorWriter extends XStreamUtil{
 		bufferedWriter.write(string + "\n");
 	}
 	
-	private void writeXStream(Object object){
-		xStream.toXML(object, bufferedWriter);
+	private void writeXStream(Object object) throws Exception{
+		String string = xStream.toXML(object);
+		write(string);
 	}
 	
 }

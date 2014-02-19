@@ -5,8 +5,10 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.javatracer.model.methods.data.MethodInfo;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.logic.ObjectInspector;
+import com.traceinspector.treeinspector.data.Box;
 import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspector.logic.TreeInspector;
 import com.traceinspector.view.TraceInpectorView;
@@ -54,15 +56,16 @@ public class TraceInspectorController {
 		} else chooser.cancelSelection();	
 	}
 
-	public void clickedOnNode(MethodBox box) {
+	public void clickedOnNode(Box box) {
 		
 		treeInspector.selectNode(box);
 		
 		objectInspector.clear();
 		
-		if (box!=null)
-			objectInspector.addNodeInfo(box.getThisValue(),box.getReturnValue(),box.getArguments());
-		
+		if (box!=null && box instanceof MethodBox){
+			MethodInfo method = ((MethodBox)box).getMethodInfo(); 
+			objectInspector.addNodeInfo(method);
+		}
 	}
 	
 }

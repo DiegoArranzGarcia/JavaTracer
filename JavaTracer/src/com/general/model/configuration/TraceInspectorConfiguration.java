@@ -76,7 +76,6 @@ public class TraceInspectorConfiguration {
 	}
     
     public int getDefaultNumLevelsDepth(){
-    	System.out.println("num levels: "+properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH));
     	return Integer.parseInt(properties.getProperty(DEFAULT_NUM_LEVELS_DEPTH));
     }
     

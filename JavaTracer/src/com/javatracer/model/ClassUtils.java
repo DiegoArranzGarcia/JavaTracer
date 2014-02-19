@@ -146,7 +146,7 @@ public class ClassUtils {
 			}
 		
 		} else {
-			object = new IgnoredData(name);
+			object = new IgnoredData(getClass(value.referenceType()),name);
 		}
 		
 		return object;
@@ -198,7 +198,7 @@ public class ClassUtils {
 				result = new ObjectData(name,objectId,values,getClass(value.referenceType()));
 			}		
 		} else {
-			result = new IgnoredData(name);
+			result = new IgnoredData(getClass(value.referenceType()),name);
 		}
 		return result;
 	}

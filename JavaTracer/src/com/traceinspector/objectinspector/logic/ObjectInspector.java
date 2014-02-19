@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
+import com.javatracer.model.methods.data.MethodInfo;
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.view.ObjectInspectorView;
@@ -35,17 +36,26 @@ public class ObjectInspector {
 		view.clear();
 	}
 
-	public void addNodeInfo(Data thisValue, Data returnValue,List<Data> variables) {
+	public void addNodeInfo(MethodInfo method) {
 		
-		this.variables = variables;
 		InfoVisitor visitor = new ObjectInspectorVisitor(view);
+		List<Data> arguments = method.getArguments();
+		Data thisValue = method.getThis_data();
+		Data returnValue = method.getReturn_data();
 		
+		variables.add(thisValue);
 		thisValue.accept(visitor);
-		if (returnValue != null)
-			returnValue.accept(visitor);
 		
-		for (int i=0;i<variables.size();i++)
-			variables.get(i).accept(visitor);
+		if (returnValue != null){
+			returnValue.accept(visitor);
+			variables.add(returnValue);
+		}
+		
+		for (int i=0;i<arguments.size();i++){
+			Data data = arguments.get(i);
+			data.accept(visitor);
+			variables.add(data);
+		}
 		
 		view.showVariables();
 	}
