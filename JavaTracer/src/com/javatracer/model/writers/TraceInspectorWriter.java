@@ -3,17 +3,10 @@ package com.javatracer.model.writers;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -28,8 +21,9 @@ import com.general.model.variables.data.Data;
 import com.javatracer.model.ChangeDetector;
 import com.javatracer.model.methods.data.ChangeInfo;
 import com.javatracer.model.methods.data.MethodInfo;
+import com.javatracer.model.methods.data.ThreadInfo;
 
-public class TraceInspectorWriter extends XStreamWriter{
+public class TraceInspectorWriter extends XStreamUtil{
 	
 	private String FILE_EXT = ".xml";
 	
@@ -58,12 +52,13 @@ public class TraceInspectorWriter extends XStreamWriter{
 			
 			write(TAG_XML);
 			write(startTag(TAG_TRACE));		
+			write(startTag(TAG_THREAD));
 			
-			Node root = getRootNode();
-			generateXml(root);
+			writeThreadInfo();
+			writeCalledMethods(getRootNode());
 			
+			write(endTag(TAG_THREAD));
 			write(endTag(TAG_TRACE));
-			
 			bufferedWriter.close();
 			
 		} catch (Exception e){
@@ -71,12 +66,20 @@ public class TraceInspectorWriter extends XStreamWriter{
 		}
 	}
 	
+	private void writeThreadInfo() throws Exception{
+		String expression = "/" + TAG_TRACE + "/" + TAG_THREAD + "/" + TAG_THREAD_INFO; 
+		XPathExpression xPathExpression = xPath.compile(expression);
+		Node node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+		ThreadInfo thread = (ThreadInfo) xStream.fromXML(nodeToString(node));
+		writeXStream(thread);
+	}
+
 	public Node getRootNode() {
 		Node node = null;
 		
 		try {
 			
-			String expression = "/" + TAG_TRACE + "/" + TAG_METHOD;  
+			String expression = "/" + TAG_TRACE;  
 			
 			XPathExpression xPathExpression = xPath.compile(expression);
 			node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
@@ -90,7 +93,7 @@ public class TraceInspectorWriter extends XStreamWriter{
 	
 	private void generateXml(Node node) throws Exception{
 				
-		write(startTag(TAG_METHOD + ATTR_ID + idNode + DOUBLE_QUOTES)); 
+		write(startTag(TAG_METHOD + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
 		idNode++;
 		
 		writeNodeInfo(node);	
@@ -158,7 +161,7 @@ public class TraceInspectorWriter extends XStreamWriter{
 
 	private Data getExitThis(Node node) throws Exception {
 		
-		String expression = "./" + TAG_METHOD_EXIT_EVENT + "/" + "TAG_THIS" ;  
+		String expression = "./" + TAG_METHOD_EXIT_EVENT + "/" + TAG_THIS ;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
 		Node nodeThis = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
@@ -279,23 +282,6 @@ public class TraceInspectorWriter extends XStreamWriter{
 		bufferedWriter.write(string + "\n");
 	}
 	
-	private String nodeToString(Node node) {
-
-		StringWriter sw = new StringWriter();
-		String nodeString;
-		try {
-			 Transformer t = TransformerFactory.newInstance().newTransformer();
-			 t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			 t.transform(new DOMSource(node), new StreamResult(sw));
-			 nodeString = sw.toString();
-			 nodeString = nodeString.replaceAll("\r\n\\s*", "");
-		} catch (TransformerException e) {
-			nodeString = "error";
-		}
-
-		return nodeString;
-	}
-
 	private void writeXStream(Object object){
 		xStream.toXML(object, bufferedWriter);
 	}

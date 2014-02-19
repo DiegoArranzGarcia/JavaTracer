@@ -1,5 +1,16 @@
 package com.javatracer.model.writers;
 
+import java.io.StringWriter;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Node;
+
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.IgnoredData;
 import com.general.model.variables.data.NullData;
@@ -10,9 +21,10 @@ import com.javatracer.model.methods.data.ChangeInfo;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.methods.data.MethodInfo;
+import com.javatracer.model.methods.data.ThreadInfo;
 import com.thoughtworks.xstream.XStream;
 
-public abstract class XStreamWriter {
+public abstract class XStreamUtil {
 	
 	public static String TAG_TRACE = "trace";
 	public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -36,14 +48,17 @@ public abstract class XStreamWriter {
 	public static String TAG_METHOD_INFO = "info";
 	public static String TAG_CALLED_FROM_CLASS = "calledFromClass";
 	public static String TAG_METHOD_NAME = "methodName";
+	public static String TAG_THREAD = "thread";
+	public static String TAG_THREAD_INFO = "thread-info";
+	public static String TAG_EXCEPTION = "exception";
 	
-	public static String ATTR_ID = "id=\"";
+	public static String ATTR_ID = "id";
 	
 	public static String DOUBLE_QUOTES = "\"";
 	
 	protected XStream xStream;
 	
-	public XStreamWriter(){
+	public XStreamUtil(){
 		this.xStream = new XStream();
 		addAlias();
 	}
@@ -51,6 +66,9 @@ public abstract class XStreamWriter {
 	private void addAlias() {
 		xStream.alias(TAG_METHOD_INFO, MethodInfo.class);
 		xStream.alias(TAG_CHANGE, ChangeInfo.class);
+		
+		//ThreadInfo alias
+		xStream.alias(TAG_THREAD_INFO,ThreadInfo.class);
 		
 		//MethodEntryInfo alias
 		xStream.alias(TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
@@ -87,6 +105,23 @@ public abstract class XStreamWriter {
 
 	protected String endTag(String tag) {
 		return "</" + tag + ">";
+	}
+	
+	protected String nodeToString(Node node) {
+
+		StringWriter sw = new StringWriter();
+		String nodeString;
+		try {
+			 Transformer t = TransformerFactory.newInstance().newTransformer();
+			 t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			 t.transform(new DOMSource(node), new StreamResult(sw));
+			 nodeString = sw.toString();
+			 nodeString = nodeString.replaceAll("\r\n\\s*", "");
+		} catch (TransformerException e) {
+			nodeString = "error";
+		}
+
+		return nodeString;
 	}
 	
 }

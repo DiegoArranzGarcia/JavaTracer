@@ -7,9 +7,7 @@ import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.methods.data.ThreadInfo;
 
-public class JavaTraceWriter extends XStreamWriter{
-
-	private static final String TAG_THREAD = null;
+public class JavaTraceWriter extends XStreamUtil{
 
 	public static String FILE_EXT = "_temp.xml";
 		
@@ -60,6 +58,7 @@ public class JavaTraceWriter extends XStreamWriter{
 			write(startTag(TAG_THREAD));
 			write(xmlString);
 			write(endTag(TAG_THREAD));
+			write(startTag(TAG_CALLED_METHODS));
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -68,9 +67,9 @@ public class JavaTraceWriter extends XStreamWriter{
 	public void writeExceptionInfo(ExceptionInfo threadInfo){
 		try{
 			String xmlString = xStream.toXML(threadInfo);
-			write(startTag(TAG_THREAD));
+			write(startTag(TAG_EXCEPTION));
 			write(xmlString);
-			write(endTag(TAG_THREAD));
+			write(endTag(TAG_EXCEPTION));
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -79,6 +78,7 @@ public class JavaTraceWriter extends XStreamWriter{
 	public void close(){
 		
 		try {
+			write(endTag(TAG_CALLED_METHODS));
 			write(endTag(TAG_TRACE));
 			fileWriter.close();
 		} catch (Exception e) {

@@ -10,7 +10,8 @@ import com.sun.jdi.request.StepRequest;
 * This class keeps context on events in one thread.
 * In this implementation, context is the indentation prefix.
 */
-  public class ThreadTrace {
+
+public class ThreadTrace {
       final ThreadReference thread;
       final String baseIndent;
       static final String threadDelta = " ";

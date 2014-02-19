@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <trace>
+<thread>
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+</thread>
+<called-methods>
 <method-call>
 <method-entry-event>
   <methodName>main</methodName>
@@ -659,4 +665,5 @@
   </arguments>
 </method-exit-event>
 </method-call>
+</called-methods>
 </trace>

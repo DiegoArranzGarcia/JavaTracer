@@ -27,6 +27,7 @@ import com.sun.jdi.event.MethodExitEvent;
 import com.sun.jdi.event.ModificationWatchpointEvent;
 import com.sun.jdi.event.StepEvent;
 import com.sun.jdi.event.ThreadDeathEvent;
+import com.sun.jdi.event.ThreadStartEvent;
 import com.sun.jdi.event.VMDeathEvent;
 import com.sun.jdi.event.VMDisconnectEvent;
 import com.sun.jdi.request.ClassPrepareRequest;
@@ -69,8 +70,8 @@ public class EventThread extends Thread {
         this.excludes = excludes;
         
         writer = new JavaTraceWriter(nameXlm);
-        //writer.writeThreadInfo(new ThreadInfo());
-        
+        writer.writeThreadInfo(new ThreadInfo());
+                
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
         
@@ -130,7 +131,6 @@ public class EventThread extends Thread {
     void setEventRequests(boolean watchFields) {
             
     	EventRequestManager mgr = vm.eventRequestManager();
-    	
         // want all exceptions
         ExceptionRequest excReq = mgr.createExceptionRequest(null,true, true);
         // suspend so we can step
@@ -150,7 +150,7 @@ public class EventThread extends Thread {
         }
         mexr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         mexr.enable();
-
+        
         ThreadDeathRequest tdr = mgr.createThreadDeathRequest();
         // Make sure we sync on thread death
         tdr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
@@ -190,6 +190,8 @@ public class EventThread extends Thread {
         	finishTrace();
         } else if (event instanceof VMDisconnectEvent) {
             connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
+        } else if (event instanceof ThreadStartEvent){
+        	System.out.println(((ThreadStartEvent)event).thread().name());
         }
     }
 
