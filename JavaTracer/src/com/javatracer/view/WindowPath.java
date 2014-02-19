@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import com.imageresources.ImageLoader;
+import com.general.imageresources.ImageLoader;
 import com.javatracer.controller.TracerController;
 
 @SuppressWarnings("serial")

@@ -2,12 +2,12 @@ package com.traceinspector.treeinspector.data;
 
 import java.util.List;
 
-import com.javatracer.model.variables.data.ArrayData;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.variables.data.NullData;
-import com.javatracer.model.variables.data.ObjectData;
-import com.javatracer.model.variables.data.SimpleData;
-import com.javatracer.model.variables.data.StringData;
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 
 
 public class MethodBox extends Box {

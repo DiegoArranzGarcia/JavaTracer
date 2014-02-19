@@ -3,10 +3,10 @@ package com.javatracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.variables.data.Data;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.writers.XStreamWriter;
+import com.javatracer.model.writers.JavaTraceWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
@@ -20,9 +20,9 @@ import com.sun.jdi.event.MethodExitEvent;
 public class MethodExitManager{
 		
 	private ClassUtils utils; 
-	private XStreamWriter writer;
+	private JavaTraceWriter writer;
 	
-	public MethodExitManager(XStreamWriter writer, ClassUtils utils)
+	public MethodExitManager(JavaTraceWriter writer, ClassUtils utils)
 	{
 		this.writer = writer;
 		this.utils = utils;
@@ -49,7 +49,7 @@ public class MethodExitManager{
          ReferenceType ref=method.declaringType(); // "class" where is declaring the method
          Data object_this = processThis(event,ref, thread);
          MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
-         writer.writeOutput(info);
+         writer.writeMethodExitInfo(info);
     }
    
 

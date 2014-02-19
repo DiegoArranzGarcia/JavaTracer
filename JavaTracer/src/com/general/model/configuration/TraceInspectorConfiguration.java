@@ -1,4 +1,4 @@
-package com.traceinspector.model.configuration;
+package com.general.model.configuration;
 
 
 import java.io.File;
@@ -7,12 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
 
-public class Configuration {
+public class TraceInspectorConfiguration {
  
     private final static String CONFIG_FILE_NAME = "inspector.properties";
     private final static String DEFAULT_NUM_LEVELS_DEPTH = "depth";
@@ -21,7 +20,7 @@ public class Configuration {
     private  FileWriter fileWriter;
     private Properties properties;
     
-    public Configuration() {
+    public TraceInspectorConfiguration() {
     	/*
     	 * Create a file configuration
     	 */
@@ -68,8 +67,8 @@ public class Configuration {
     	}
     }
 
-    private HashMap getConfig() {
-    	HashMap map= new HashMap();
+    private HashMap<String, String> getConfig() {
+    	HashMap<String, String> map= new HashMap<>();
     	map.put("depth", "4");
     	map.put("nodes", "30");
         return map;

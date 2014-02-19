@@ -1,4 +1,4 @@
-package com.javatracer.model.configuration;
+package com.general.model.configuration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 
-public class Configuration {
+public class JavaTracerConfiguration {
  
    
 	private Properties properties;
@@ -18,7 +18,7 @@ public class Configuration {
 	private FileInputStream fileInput;
 	private  FileWriter fileWriter;
  
-    public Configuration() {
+    public JavaTracerConfiguration() {
 
     	/*
     	 * Create a file configuration
@@ -56,7 +56,7 @@ public class Configuration {
                      * Now we add information to the properties through a Hashmap
                      */
                
-                    	properties.putAll(getConfig());
+                    properties.putAll(getConfig());
                     /*
                      * Save the data on the properties
                      */
@@ -73,8 +73,8 @@ public class Configuration {
         
     }
  
-    private HashMap getConfig() {
-    	HashMap map= new HashMap();
+    private HashMap<String, String> getConfig() {
+    	HashMap<String, String> map= new HashMap<>();
     	map.put("excludes", "java.*,javax.*,sun.*,com.sun.*");
         return map;
 

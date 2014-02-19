@@ -3,10 +3,10 @@ package com.javatracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.variables.data.Data;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodEntryInfo;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.writers.XStreamWriter;
+import com.javatracer.model.writers.JavaTraceWriter;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Method;
@@ -23,7 +23,7 @@ import com.sun.jdi.event.MethodEntryEvent;
 public class MethodEntryManager{
 	
 	private ClassUtils utils;
-	private XStreamWriter writer;
+	private JavaTraceWriter writer;
 			
 	/**
 	 * Constructor that need a DataBaseWriter to register the method information. Excludes classes are not
@@ -31,7 +31,7 @@ public class MethodEntryManager{
 	 * @param dbw
 	 * @param utils 
 	 */
-	public MethodEntryManager(XStreamWriter writer, ClassUtils utils)
+	public MethodEntryManager(JavaTraceWriter writer, ClassUtils utils)
 	{
 		this.writer = writer;
 		this.utils = utils;
@@ -59,7 +59,7 @@ public class MethodEntryManager{
         String className = ClassUtils.getClass(method.declaringType());
         Data argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
-        writer.writeOutput(info);
+        writer.writeMethodEntryInfo(info);
     }
 
 	private List<Data> processArguments(Method method, ThreadReference thread) {

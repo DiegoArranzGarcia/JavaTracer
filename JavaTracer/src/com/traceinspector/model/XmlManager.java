@@ -21,17 +21,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.variables.data.ArrayData;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.variables.data.IgnoredData;
-import com.javatracer.model.variables.data.NullData;
-import com.javatracer.model.variables.data.ObjectData;
-import com.javatracer.model.variables.data.SimpleData;
-import com.javatracer.model.variables.data.StringData;
-import com.javatracer.model.writers.TraceInspectorWriter;
-import com.javatracer.model.writers.XStreamWriter;
+import com.javatracer.model.writers.JavaTraceWriter;
 import com.thoughtworks.xstream.XStream;
 
 public class XmlManager {
@@ -52,19 +51,19 @@ public class XmlManager {
    }
 
    private void addAlias() {
-		xStream.alias(XStreamWriter.TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
-		xStream.alias(XStreamWriter.TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
-		xStream.aliasField(XStreamWriter.TAG_THIS, MethodEntryInfo.class,"this_data");
-		xStream.aliasField(XStreamWriter.TAG_THIS, MethodExitInfo.class,"this_data");
-		xStream.aliasField(XStreamWriter.TAG_RETURN, MethodExitInfo.class,"return_data");
-		xStream.aliasField(XStreamWriter.TAG_CONTENT, ArrayData.class,"value");
-		xStream.aliasField(XStreamWriter.TAG_FIELDS, ObjectData.class,"value");
-		xStream.alias(XStreamWriter.TAG_SIMPLE_DATA, SimpleData.class);
-		xStream.alias(XStreamWriter.TAG_OBJECT, ObjectData.class);
-		xStream.alias(XStreamWriter.TAG_IGNORED, IgnoredData.class);
-		xStream.alias(XStreamWriter.TAG_ARRAY, ArrayData.class);
-		xStream.alias(XStreamWriter.TAG_STRING,StringData.class);
-		xStream.alias(XStreamWriter.TAG_NULL,NullData.class);
+		xStream.alias(JavaTraceWriter.TAG_METHOD_ENTRY_EVENT,MethodEntryInfo.class);
+		xStream.alias(JavaTraceWriter.TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		xStream.aliasField(JavaTraceWriter.TAG_THIS, MethodEntryInfo.class,"this_data");
+		xStream.aliasField(JavaTraceWriter.TAG_THIS, MethodExitInfo.class,"this_data");
+		xStream.aliasField(JavaTraceWriter.TAG_RETURN, MethodExitInfo.class,"return_data");
+		xStream.aliasField(JavaTraceWriter.TAG_CONTENT, ArrayData.class,"value");
+		xStream.aliasField(JavaTraceWriter.TAG_FIELDS, ObjectData.class,"value");
+		xStream.alias(JavaTraceWriter.TAG_SIMPLE_DATA, SimpleData.class);
+		xStream.alias(JavaTraceWriter.TAG_OBJECT, ObjectData.class);
+		xStream.alias(JavaTraceWriter.TAG_IGNORED, IgnoredData.class);
+		xStream.alias(JavaTraceWriter.TAG_ARRAY, ArrayData.class);
+		xStream.alias(JavaTraceWriter.TAG_STRING,StringData.class);
+		xStream.alias(JavaTraceWriter.TAG_NULL,NullData.class);
 }
 
 public NodeList getChilds(Node node) {
@@ -183,7 +182,7 @@ public NodeList getChilds(Node node) {
 		
 		Data return_data = null;
 		
-		String expression = "./info/" + XStreamWriter.TAG_RETURN;  
+		String expression = "./info/" + JavaTraceWriter.TAG_RETURN;  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    Node return_node = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);
@@ -198,7 +197,7 @@ public NodeList getChilds(Node node) {
 
 		Data this_data = null;
 		
-		String expression = "./info/" + XStreamWriter.TAG_THIS;  
+		String expression = "./info/" + JavaTraceWriter.TAG_THIS;  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    Node return_node = (Node) xPathExpression.evaluate(node,XPathConstants.NODE);

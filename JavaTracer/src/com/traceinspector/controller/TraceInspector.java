@@ -1,7 +1,7 @@
 package com.traceinspector.controller;
 
 
-public class LaunchTraceInspector {
+public class TraceInspector {
 
 	public static void main(String[] args){
 		new TraceInspectorController();

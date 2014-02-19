@@ -2,7 +2,7 @@ package com.javatracer.model.methods.data;
 
 import java.util.List;
 
-import com.javatracer.model.variables.data.Data;
+import com.general.model.variables.data.Data;
 
 public class MethodEntryInfo {
 

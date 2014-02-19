@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.javatracer.controller.TracerController;
-import com.javatracer.model.configuration.Configuration;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.connect.Connector;
@@ -58,7 +58,7 @@ public class Tracer {
 	  */
     public void trace(String[] args, String nameXlm) {
 
-    	Configuration configuration = new Configuration();
+    	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
     	excludes=configuration.getExcludes();
     		
         PrintWriter writer = new PrintWriter(System.out);

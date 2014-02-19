@@ -3,14 +3,14 @@ package com.javatracer.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 import com.javatracer.model.methods.data.ChangeInfo;
-import com.javatracer.model.variables.data.ArrayData;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.variables.data.IgnoredData;
-import com.javatracer.model.variables.data.NullData;
-import com.javatracer.model.variables.data.ObjectData;
-import com.javatracer.model.variables.data.SimpleData;
-import com.javatracer.model.variables.data.StringData;
 
 /**
  * Class used to detect changes between Data objects. The changes are return in

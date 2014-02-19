@@ -10,7 +10,8 @@ import com.javatracer.model.managers.ExceptionManager;
 import com.javatracer.model.managers.MethodEntryManager;
 import com.javatracer.model.managers.MethodExitManager;
 import com.javatracer.model.managers.ThreadDeathManager;
-import com.javatracer.model.writers.XStreamWriter;
+import com.javatracer.model.methods.data.ThreadInfo;
+import com.javatracer.model.writers.JavaTraceWriter;
 import com.javatracer.profiler.Profiler;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
@@ -46,8 +47,7 @@ public class EventThread extends Thread {
 	private boolean vmDied = false; // VMDeath occurred
     
     // Maps ThreadReference to ThreadTrace instances
-    private Map<ThreadReference, ThreadTrace> traceMap =
-       new HashMap<>();
+    private Map<ThreadReference, ThreadTrace> traceMap = new HashMap<>();
        
     //Managers
     private DeathManager death;
@@ -60,15 +60,17 @@ public class EventThread extends Thread {
     private MethodExitManager methodexit;
     //private StepManager step;
     //private PrepareManager prepare;
-    private XStreamWriter writer;
+    private JavaTraceWriter writer;
 
     EventThread(VirtualMachine vm, String[] excludes, String nameXlm, boolean enableProfiling){
         super("event-handler");
         this.vm = vm;
         this.enableProfiling = enableProfiling;
         this.excludes = excludes;
-        writer = new XStreamWriter(nameXlm);
-               
+        
+        writer = new JavaTraceWriter(nameXlm);
+        //writer.writeThreadInfo(new ThreadInfo());
+        
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
         
@@ -78,11 +80,11 @@ public class EventThread extends Thread {
         //fieldwatch=new FieldWatchManager(traceMap,vm);
         
         ClassUtils utils = new ClassUtils(excludes);
-        methodentry=new MethodEntryManager(writer,utils);
-        methodexit=new MethodExitManager(writer,utils);
+        methodentry = new MethodEntryManager(writer,utils);
+        methodexit = new MethodExitManager(writer,utils);
         //step=new StepManager(traceMap,vm);
         //prepare=new PrepareManager(excludes,vm);
-		exception=new ExceptionManager(traceMap,vm);
+		exception = new ExceptionManager(traceMap,vm);
 		
 		if (enableProfiling){
 			profiler = new Profiler();			
@@ -95,17 +97,19 @@ public class EventThread extends Thread {
 	* As long as we are connected, get event sets off
 	* the queue and dispatch the events within them.
 	*/
-    @Override
+
     public void run() {
         EventQueue queue = vm.eventQueue();
                 
         while (connected) {
             try {
+            	
                  EventSet eventSet = queue.remove();
-         EventIterator it = eventSet.eventIterator();
-                         while (it.hasNext())
-                         handleEvent(it.nextEvent());
-                         eventSet.resume();
+                 EventIterator it = eventSet.eventIterator();
+                 while (it.hasNext())
+                	 handleEvent(it.nextEvent());
+                 eventSet.resume();
+                 
             } catch (InterruptedException exc) {
                exc.printStackTrace();
             } catch (VMDisconnectedException discExc) {
@@ -122,13 +126,13 @@ public class EventThread extends Thread {
 	* @param excludes Class patterns for which we don't want events
 	* @param watchFields Do we want to watch assignments to fields
 	*/
+    
     void setEventRequests(boolean watchFields) {
             
     	EventRequestManager mgr = vm.eventRequestManager();
-
+    	
         // want all exceptions
-        ExceptionRequest excReq = mgr.createExceptionRequest(null,
-                                                             true, true);
+        ExceptionRequest excReq = mgr.createExceptionRequest(null,true, true);
         // suspend so we can step
         excReq.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         excReq.enable();

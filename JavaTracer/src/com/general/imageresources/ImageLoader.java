@@ -1,4 +1,4 @@
-package com.imageresources;
+package com.general.imageresources;
 
 import javax.swing.ImageIcon;
 

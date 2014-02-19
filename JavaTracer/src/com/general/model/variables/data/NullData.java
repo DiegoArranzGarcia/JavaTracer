@@ -1,4 +1,4 @@
-package com.javatracer.model.variables.data;
+package com.general.model.variables.data;
 
 public class NullData extends Data {
 

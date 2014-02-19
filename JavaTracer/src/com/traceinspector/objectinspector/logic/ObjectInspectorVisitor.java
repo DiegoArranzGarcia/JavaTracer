@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.javatracer.model.variables.data.ArrayData;
-import com.javatracer.model.variables.data.Data;
-import com.javatracer.model.variables.data.IgnoredData;
-import com.javatracer.model.variables.data.InfoVisitor;
-import com.javatracer.model.variables.data.NullData;
-import com.javatracer.model.variables.data.ObjectData;
-import com.javatracer.model.variables.data.SimpleData;
-import com.javatracer.model.variables.data.StringData;
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.InfoVisitor;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 import com.traceinspector.objectinspector.view.ObjectInspectorView;
 
 public class ObjectInspectorVisitor implements InfoVisitor{

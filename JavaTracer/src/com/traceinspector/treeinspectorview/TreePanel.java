@@ -43,7 +43,7 @@ import javax.swing.JPanel;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.TreeLayout;
 
-import com.imageresources.ImageLoader;
+import com.general.imageresources.ImageLoader;
 import com.traceinspector.treeinspector.data.MethodBox;
 
 @SuppressWarnings("serial")

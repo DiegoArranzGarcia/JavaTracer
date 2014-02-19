@@ -6,8 +6,8 @@ import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.javatracer.model.variables.data.Data;
-import com.traceinspector.model.configuration.Configuration;
+import com.general.model.configuration.TraceInspectorConfiguration;
+import com.general.model.variables.data.Data;
 import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspectorview.DefaultTreeLayout;
 
@@ -24,7 +24,7 @@ public class TreeManager {
 	
 	public DefaultTreeLayout<MethodBox> loadTree() {
 		
-		Configuration configuration = new Configuration();
+		TraceInspectorConfiguration configuration = new TraceInspectorConfiguration();
 		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
 		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
 		

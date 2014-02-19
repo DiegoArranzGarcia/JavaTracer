@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
+@SuppressWarnings("serial")
 public class LoadingMain extends JWindow {
 
 	  BorderLayout borderLayout1 = new BorderLayout();
