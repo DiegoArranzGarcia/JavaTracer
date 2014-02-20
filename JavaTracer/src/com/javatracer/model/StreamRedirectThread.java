@@ -19,6 +19,7 @@ class StreamRedirectThread extends Thread {
 	 * @param name Name of the thread
 	 * @param in Stream to copy from
 	 * @param out Stream to copy to
+     * @param nameXlm 
      * @param wp 
 	 */
     
@@ -29,14 +30,14 @@ class StreamRedirectThread extends Thread {
         setPriority(Thread.MAX_PRIORITY-1);
     }*/
     
-    StreamRedirectThread(String name, InputStream in, OutputStream out) {
+    StreamRedirectThread(String name, InputStream in, OutputStream out, String nameXml) {
         super(name);
         this.in = new InputStreamReader(in);
         this.out = new OutputStreamWriter(out);
       
 		PrintStream g = null;
         try {
-	        g = new PrintStream(new File(FILE_OUTPUT_NAME));
+	        g = new PrintStream(new File(nameXml+"_"+FILE_OUTPUT_NAME));
         }
         catch (FileNotFoundException ex) {
 	        ex.printStackTrace();

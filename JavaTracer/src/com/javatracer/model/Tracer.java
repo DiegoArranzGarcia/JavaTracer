@@ -45,6 +45,8 @@ public class Tracer {
    
     private static final int BUFFER_SIZE = 2048;
     
+    
+    
     public Tracer(TracerController tracerController) {
 		this.tracerController = tracerController;
   	}
@@ -56,7 +58,7 @@ public class Tracer {
  	  * Generate the trace.
      * @param nameXlm 
 	  */
-    public void trace(String[] args, String nameXlm) {
+    public void trace(String[] args, String nameXml) {
 
     	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
     	excludes=configuration.getExcludes();
@@ -105,7 +107,7 @@ public class Tracer {
         }
 
         vm = launchTarget(args);
-        generateTrace(writer,nameXlm);
+        generateTrace(writer,nameXml);
     }
 
 	/**
@@ -122,7 +124,7 @@ public class Tracer {
         EventThread eventThread = new EventThread(vm, excludes,nameXlm,false);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
-        redirectOutput();
+        redirectOutput(nameXlm);
  
         // Shutdown begins when event thread terminates
         try {
@@ -154,12 +156,12 @@ public class Tracer {
         }
     }
 
-    void redirectOutput() {
+    void redirectOutput(String nameXlm) {
     	
     	Process process = vm.process();
         // Copy target's output and error to our output and error.
-        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err);
-        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out);
+        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm);
+        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm);
        
         catchError(process);
        
