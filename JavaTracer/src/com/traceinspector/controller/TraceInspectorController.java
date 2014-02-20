@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.javatracer.model.methods.data.MethodInfo;
+import com.general.model.data.MethodInfo;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.logic.ObjectInspector;
 import com.traceinspector.treeinspector.data.Box;

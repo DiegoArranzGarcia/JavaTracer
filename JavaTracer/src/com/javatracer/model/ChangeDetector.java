@@ -3,6 +3,7 @@ package com.javatracer.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.data.ChangeInfo;
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.IgnoredData;
@@ -10,7 +11,6 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.javatracer.model.methods.data.ChangeInfo;
 
 /**
  * Class used to detect changes between Data objects. The changes are return in

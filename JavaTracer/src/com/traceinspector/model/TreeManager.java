@@ -6,8 +6,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.general.model.configuration.TraceInspectorConfiguration;
-import com.javatracer.model.methods.data.MethodInfo;
-import com.javatracer.model.methods.data.ThreadInfo;
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
 import com.traceinspector.treeinspector.data.Box;
 import com.traceinspector.treeinspector.data.MethodBox;
 import com.traceinspector.treeinspector.data.ThreadBox;

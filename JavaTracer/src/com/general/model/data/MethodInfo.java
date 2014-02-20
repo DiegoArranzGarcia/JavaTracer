@@ -1,4 +1,4 @@
-package com.javatracer.model.methods.data;
+package com.general.model.data;
 
 import java.util.List;
 
@@ -12,13 +12,16 @@ public class MethodInfo {
 	private List<Data> arguments;
 	private Data return_data;
 	private Data this_data;
+	private List<ChangeInfo> changes;
 
-	public MethodInfo(String methodName, String calledFromClass, List<Data> arguments,Data this_data,Data return_data) {
+	public MethodInfo(String methodName, String calledFromClass, List<Data> arguments,Data this_data,Data return_data,
+			List<ChangeInfo> changes) {
 		this.methodName = methodName;
 		this.calledFromClass = calledFromClass;
 		this.arguments = arguments;
 		this.this_data = this_data;
 		this.return_data = return_data;
+		this.changes = changes;
 	}
 
 	public String getMethodName() {
@@ -59,6 +62,14 @@ public class MethodInfo {
 
 	public void setThis_data(Data this_data) {
 		this.this_data = this_data;
+	}
+
+	public List<ChangeInfo> getChanges() {
+		return changes;
+	}
+
+	public void setChanges(List<ChangeInfo> changes) {
+		this.changes = changes;
 	}
 	
 }

@@ -4,13 +4,13 @@ package com.javatracer.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.general.model.data.ThreadInfo;
 import com.javatracer.model.managers.DeathManager;
 import com.javatracer.model.managers.DisconnectManager;
 import com.javatracer.model.managers.ExceptionManager;
 import com.javatracer.model.managers.MethodEntryManager;
 import com.javatracer.model.managers.MethodExitManager;
 import com.javatracer.model.managers.ThreadDeathManager;
-import com.javatracer.model.methods.data.ThreadInfo;
 import com.javatracer.model.writers.JavaTraceWriter;
 import com.javatracer.profiler.Profiler;
 import com.sun.jdi.ThreadReference;

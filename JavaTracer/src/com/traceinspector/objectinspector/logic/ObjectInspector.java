@@ -3,9 +3,9 @@ package com.traceinspector.objectinspector.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.data.MethodInfo;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
-import com.javatracer.model.methods.data.MethodInfo;
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;
 import com.traceinspector.objectinspector.view.ObjectInspectorView;

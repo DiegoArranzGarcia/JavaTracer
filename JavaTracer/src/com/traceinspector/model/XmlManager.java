@@ -14,9 +14,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
-import com.javatracer.model.methods.data.MethodInfo;
-import com.javatracer.model.methods.data.ThreadInfo;
 import com.javatracer.model.writers.XStreamUtil;
 
 public class XmlManager extends XStreamUtil{

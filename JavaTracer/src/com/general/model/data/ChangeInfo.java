@@ -1,4 +1,4 @@
-package com.javatracer.model.methods.data;
+package com.general.model.data;
 
 public class ChangeInfo {
 	

@@ -17,11 +17,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.general.model.data.ChangeInfo;
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
 import com.javatracer.model.ChangeDetector;
-import com.javatracer.model.methods.data.ChangeInfo;
-import com.javatracer.model.methods.data.MethodInfo;
-import com.javatracer.model.methods.data.ThreadInfo;
 
 public class TraceInspectorWriter extends XStreamUtil{
 	
@@ -97,7 +97,6 @@ public class TraceInspectorWriter extends XStreamUtil{
 		idNode++;
 		
 		writeNodeInfo(node);	
-		writeChanges(node);
 		writeCalledMethods(node);
 		
 		write(endTag(TAG_METHOD));
@@ -111,11 +110,10 @@ public class TraceInspectorWriter extends XStreamUtil{
 		List<Data> arguments = getEntryArguments(node);
 		Data this_data = getEntryThis(node);
 		Data return_data = getReturn(node);
+		List<ChangeInfo> changes = getChanges(node);
 				
-		MethodInfo info = new MethodInfo(name,className,arguments,this_data,return_data);
-		writeXStream(info);
-		write("");
-		
+		MethodInfo info = new MethodInfo(name,className,arguments,this_data,return_data,changes);
+		writeXStream(info);		
 	}
 
 	private void writeCalledMethods(Node node) throws Exception{
@@ -132,20 +130,12 @@ public class TraceInspectorWriter extends XStreamUtil{
 		
 	}
 
-	private void writeChanges(Node node) throws Exception{
-		
-		write(startTag(TAG_CHANGES));
-		
+	private List<ChangeInfo> getChanges(Node node) throws Exception{
+			
 		List<ChangeInfo> changes = getChangesArguments(node);
 		changes.addAll(getChangesThis(node));
 		
-		for (int i=0;i<changes.size();i++){
-			writeXStream(changes.get(i));
-			write("");
-		}
-		
-		write(endTag(TAG_CHANGES));
-		
+		return changes;
 	}
 
 	private List<ChangeInfo> getChangesThis(Node node) throws Exception{

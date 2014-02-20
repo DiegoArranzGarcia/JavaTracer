@@ -2,10 +2,10 @@ package com.javatracer.model.writers;
 
 import java.io.FileWriter;
 
+import com.general.model.data.ThreadInfo;
 import com.javatracer.model.methods.data.ExceptionInfo;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.methods.data.ThreadInfo;
 
 public class JavaTraceWriter extends XStreamUtil{
 

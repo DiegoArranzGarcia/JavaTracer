@@ -11,17 +11,17 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Node;
 
+import com.general.model.data.ChangeInfo;
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.IgnoredData;
 import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.javatracer.model.methods.data.ChangeInfo;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.methods.data.MethodInfo;
-import com.javatracer.model.methods.data.ThreadInfo;
 import com.thoughtworks.xstream.XStream;
 
 public abstract class XStreamUtil {
