@@ -91,7 +91,6 @@ public abstract class XStreamUtil {
 		
 		//Data alias
 		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
-		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
 		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
 		xStream.alias(TAG_OBJECT, ObjectData.class);
 		xStream.alias(TAG_IGNORED, IgnoredData.class);

@@ -79,20 +79,35 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 		parents.add(node);
 		currentLevel++;
 				
-		List<Data> object_fields = object.getValue();
+		List<Data> object_fields = object.getFields();
+		List<Data> object_inherit = object.getInheritData();
+		List<Data> object_constant = object.getConstantData();
 		
-		if (object_fields!=null){
-			for (int i=0;i<object_fields.size();i++){
-				Data data = object_fields.get(i);
-				data.accept(this);
-			}
-		} else {
-			view.addVariableToNode(EMPTY,EMPTY,false,getLastParent());
-		}
-		
+		if (object_fields != null && !object_fields.isEmpty())
+			addListToNode("fields",object_fields);
+		if (object_inherit != null && !object_inherit.isEmpty())
+			addListToNode("inherit",object_inherit);
+		if (object_constant != null && !object_constant.isEmpty())
+			addListToNode("constants",object_constant);
+						
 		removeLastParent();
 		currentLevel--;
 		
+	}
+
+	private void addListToNode(String string, List<Data> list_data) {
+		boolean expandable = !list_data.isEmpty();
+		DefaultMutableTreeNode node = view.addVariableToNode(string,EMPTY,expandable,getLastParent());
+		parents.add(node);
+		currentLevel++;
+		
+		for (int i=0;i<list_data.size();i++){
+			Data data = list_data.get(i);
+			data.accept(this);
+		} 
+			
+		removeLastParent();
+		currentLevel--;
 	}
 
 	public void visit(SimpleData simple_data) {
@@ -153,7 +168,7 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 	}
 
 	public String getMainInfo(IgnoredData ignoredClass){
-		return "ignored_value";
+		return "ignored";
 	}
 	
 	public String getSimpleClassName(String completeClass){

@@ -129,7 +129,7 @@ public class ClassUtils {
 		
 			if (objectsProcessed.contains(arrayID)){
 				
-				object = new ObjectData(name,value.uniqueID(),null,getClass(value.referenceType())+ "[]");
+				object = new ObjectData(name,value.uniqueID(),null,null,null,getClass(value.referenceType())+ "[]");
 				
 			} else {
 			
@@ -168,15 +168,19 @@ public class ClassUtils {
 		if (!isExcludedClass(value)){
 						
 			if (objectsProcessed.contains(objectId)){
-				result = new ObjectData(name,objectId,null,getClass(value.referenceType()));
+				result = new ObjectData(name,objectId,null,null,null,getClass(value.referenceType()));
 			} else {
 				
 				objectsProcessed.add(objectId);
-				List<Field> fields = value.referenceType().allFields();
-				List<Data> values = new ArrayList<>();
+				List<Field> allFields = value.referenceType().allFields();
+				List<Field> fields = value.referenceType().fields();
 				
-				for (int i=0;i<fields.size();i++){
-					Field f = fields.get(i);
+				List<Data> constantData = new ArrayList<>();
+				List<Data> inheritData = new ArrayList<>();
+				List<Data> fieldsData = new ArrayList<>();
+				
+				for (int i=0;i<allFields.size();i++){
+					Field f = allFields.get(i);
 					Value v = value.getValue(f);
 					Data object = null;
 					
@@ -192,10 +196,17 @@ public class ClassUtils {
 						object = getObj(f.name(),v,objectsProcessed);
 					}
 					
-					values.add(object);
+					if (fields.contains(f))
+						if (f.isStatic() || f.isFinal())
+							constantData.add(object);
+						else
+							fieldsData.add(object);
+					else
+						inheritData.add(object);
+					
 				}
 				
-				result = new ObjectData(name,objectId,values,getClass(value.referenceType()));
+				result = new ObjectData(name,objectId,constantData,inheritData,fieldsData,getClass(value.referenceType()));
 			}		
 		} else {
 			result = new IgnoredData(getClass(value.referenceType()),name);

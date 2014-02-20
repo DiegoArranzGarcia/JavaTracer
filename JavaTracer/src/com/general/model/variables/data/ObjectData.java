@@ -1,18 +1,23 @@
 package com.general.model.variables.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ObjectData extends Data{
 
 	private String name;
-	private List<Data> value;
+	private List<Data> constantData;
+	private List<Data> inheritData;
+	private List<Data> fields;
 	private long id;
 	private String className;
 	
-	public ObjectData(String name,long id,List<Data> value,String className){
+	public ObjectData(String name,long id,List<Data> constantData,List<Data> inheritData,List<Data> fields,String className){
 		this.name = name;
-		this.value = value;
+		this.constantData = constantData;
+		this.inheritData = inheritData;
+		this.fields = fields;
 		this.id = id;
 		this.className = className;
 	}
@@ -39,14 +44,14 @@ public class ObjectData extends Data{
 	 * @return the value
 	 */
 	public List<Data> getValue() {
+		List<Data> value = new ArrayList<Data>();
+		if (constantData != null)
+			value.addAll(constantData);
+		if (inheritData != null)
+			value.addAll(inheritData);
+		if (fields != null)
+			value.addAll(fields);
 		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(List<Data> value) {
-		this.value = value;
 	}
 	
 	/**
@@ -75,6 +80,30 @@ public class ObjectData extends Data{
 	 */
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public List<Data> getConstantData() {
+		return constantData;
+	}
+
+	public List<Data> getInheritData() {
+		return inheritData;
+	}
+
+	public List<Data> getFields() {
+		return fields;
+	}
+
+	public void setConstantData(List<Data> constantData) {
+		this.constantData = constantData;
+	}
+
+	public void setInheritData(List<Data> inheritData) {
+		this.inheritData = inheritData;
+	}
+
+	public void setFields(List<Data> fields) {
+		this.fields = fields;
 	}
 
 	
