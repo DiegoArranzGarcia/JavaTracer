@@ -37,7 +37,7 @@ public class MethodBox extends Box {
 		 
 		 Data returnValue = method.getReturn_data();
 		 if(returnValue != null)
-			name += " return " + returnString(returnValue);
+			name += " -> " + returnString(returnValue);
 		 
 		 return name;
 	} 
