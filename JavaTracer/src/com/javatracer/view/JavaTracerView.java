@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.imageresources.ImageLoader;
 import com.javatracer.controller.TracerController;
 
 @SuppressWarnings("serial")
-public class WindowPath extends JFrame {
+public class JavaTracerView extends JFrame {
 
 	private JButton tracer,examine,cancel,helpPath,helpNameClass,helpXmlFile,addArgument;
 	private TextField path,nameXml;
@@ -34,7 +35,7 @@ public class WindowPath extends JFrame {
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
 	
-	public WindowPath(TracerController controller) {
+	public JavaTracerView(TracerController controller) {
 		this.controller = controller;
 		initialice();	
 	} 
@@ -138,7 +139,7 @@ public class WindowPath extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-					controller.startTrace();
+					controller.clickedOnTrace();
 					contentPane=getContentPane();
 					InitLoading();
 					
@@ -161,18 +162,18 @@ public class WindowPath extends JFrame {
 				//Title window
 				chooser.setDialogTitle("Java Tracer");
 				chooser.setCurrentDirectory(new java.io.File("."));
-				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				FileNameExtensionFilter filtroXml = new FileNameExtensionFilter("Jar Files","jar");
+				chooser.setFileFilter(filtroXml);
 				//return directory file
-				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {		
-					 
- 					String sf=chooser.getSelectedFile().toString();
- 					nameClass.setEnabled(true);
- 					nameXml.setEnabled(true); 
-					path.setText(sf);
-					controller.loadClassFromPath(sf);		
-				} else 
-					chooser.cancelSelection();
 				
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {		
+ 					String file_selected= chooser.getSelectedFile().toString();
+ 					path.setText(file_selected);
+					controller.selectedPath(file_selected);
+				} else {
+					chooser.cancelSelection();
+				}
 			}
 		});
 		
@@ -236,7 +237,11 @@ public class WindowPath extends JFrame {
 		for (int i=0;i<classes.size();i++){
 			nameClass.addItem(classes.get(i));
 		}
-		tracer.setEnabled(true);
+		
+		if (nameClass.getItemCount()>0){
+			tracer.setEnabled(true);
+			nameXml.setEnabled(true);
+		}
 	}
 
 	public String getPath() {
@@ -249,6 +254,10 @@ public class WindowPath extends JFrame {
 
 	public String getNameXml() {
 		return nameXml.getText();
+	}
+
+	public void enableMainClassCombo() {
+		nameClass.setEnabled(true);		
 	}
 	
 	

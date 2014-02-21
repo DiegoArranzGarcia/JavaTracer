@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.general.model.data.ThreadInfo;
+import com.javatracer.controller.RunConfiguration;
 import com.javatracer.model.managers.*;
 import com.javatracer.model.writers.JavaTraceWriter;
 import com.javatracer.profiler.Profiler;
@@ -37,13 +38,13 @@ public class EventThread extends Thread {
     //private PrepareManager prepare;
     private JavaTraceWriter writer;
 
-    EventThread(VirtualMachine vm, String[] excludes, String nameXlm, boolean enableProfiling){
+    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, boolean enableProfiling){
         super("event-handler");
         this.vm = vm;
         this.enableProfiling = enableProfiling;
         this.excludes = excludes;
         
-        writer = new JavaTraceWriter(nameXlm);
+        writer = new JavaTraceWriter(config.getNameXml());
         writer.writeThreadInfo(new ThreadInfo());
                 
         //news Managers with virtual Machine  

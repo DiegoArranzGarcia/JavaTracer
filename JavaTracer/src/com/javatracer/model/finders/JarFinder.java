@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JarFinder {
+public class JarFinder extends Finder{
 
-	public String getJarDirectories(String path) {
+	public String[] getJarDirectories(String path) {
 		
 		List<String> jarDirectories = new ArrayList<String>();
 		
@@ -17,12 +17,8 @@ public class JarFinder {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		String directories = "";
-		for (int i=0;i<jarDirectories.size();i++)
-			directories += jarDirectories.get(i) + "\\*;"; 
-				
-		return directories;
+						
+		return jarDirectories.toArray(new String[jarDirectories.size()]);
 	}
 
 	public void getJarDirectoriesRec(File file,List<String> jars) {
@@ -40,17 +36,6 @@ public class JarFinder {
 				jars.add(file.getParent());
 		}
 		
-	}
-	
-	private String getExtension(File file) {
-		String extension = "";
-
-		int i = file.getPath().lastIndexOf('.');
-		if (i > 0) {
-		    extension = file.getPath().substring(i+1);
-		}
-		
-		return extension;
 	}
 	
 }

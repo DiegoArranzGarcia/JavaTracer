@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.general.model.configuration.JavaTracerConfiguration;
+import com.javatracer.controller.RunConfiguration;
 import com.javatracer.controller.TracerController;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
@@ -55,56 +56,13 @@ public class Tracer {
  	  * Generate the trace.
      * @param nameXlm 
 	  */
-    public void trace(String[] args, String nameXml) {
+    public void trace(RunConfiguration config) {
 
     	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
-    	excludes=configuration.getExcludes();
-    		
+    	excludes=configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
-        
-        int inx;
-        for (inx = 0; inx < args.length; ++inx) {
-            String arg = args[inx];
-            if (arg.charAt(0) != '-') {
-                break;
-            }
-            if (arg.equals("-output")) {
-                try {
-                    writer = new PrintWriter(new FileWriter(args[++inx]));
-                } catch (IOException exc) {
-                    System.err.println("Cannot open output file: " + args[inx]
-                                       + " - " + exc);
-                    System.exit(1);
-                }
-            } else if (arg.equals("-all")) {
-                excludes = new String[0];
-            } else if (arg.equals("-fields")) {
-                watchFields = true;
-            } else if (arg.equals("-dbgtrace")) {
-                debugTraceMode = Integer.parseInt(args[++inx]);
-            } else if (arg.equals("-help")) {
-                usage();
-                System.exit(0);
-            } else {
-                System.err.println("No option: " + arg);
-                usage();
-                System.exit(1);
-            }
-        }
-        if (inx >= args.length) {
-            System.err.println("<class> missing");
-            usage();
-            System.exit(1);
-        }
-        StringBuffer sb = new StringBuffer();
-        sb.append(args[inx]);
-        for (++inx; inx < args.length; ++inx) {
-            sb.append(' ');
-            sb.append(args[inx]);
-        }
-
-        vm = launchTarget(args);
-        generateTrace(writer,nameXml);
+        vm = launchTarget(config);
+        generateTrace(writer,config);
     }
 
 	/**
@@ -112,16 +70,16 @@ public class Tracer {
 	* Enable events, start thread to display events,
 	* start threads to forward remote error and output streams,
 	* resume the remote VM, wait for the final event, and shutdown.
-	 * @param nameXlm 
+	 * @param config 
 	*/
     
-    void generateTrace(PrintWriter writer, String nameXlm) {
+    void generateTrace(PrintWriter writer, RunConfiguration config) {
         
     	vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm, excludes,nameXlm,false);
+        EventThread eventThread = new EventThread(vm, excludes,config,false);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
-        redirectOutput(nameXlm);
+        redirectOutput(config.getNameXml());
  
         // Shutdown begins when event thread terminates
         try {
@@ -132,16 +90,16 @@ public class Tracer {
             // we don't interrupt
         }
         writer.close();
-        tracerController.finishedTrace(nameXlm);
+        tracerController.finishedTrace(config.getNameXml());
     }
 
     /**
 	* Launch target VM.
 	* Forward target's output and error.
 	*/
-    VirtualMachine launchTarget(String[] mainArgs) {
+    VirtualMachine launchTarget(RunConfiguration config) {
         LaunchingConnector connector = findLaunchingConnector();
-        Map<String, Connector.Argument> arguments = connectorArguments(connector, mainArgs);
+        Map<String, Connector.Argument> arguments = connectorArguments(connector, config);
         try {
             return connector.launch(arguments);
         } catch (IOException exc) {
@@ -185,26 +143,37 @@ public class Tracer {
     /**
 	* Return the launching connector's arguments.
 	*/
-    Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, String[] mainArgs) { 
+    Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, RunConfiguration config) { 
         Map<String, Connector.Argument> arguments = connector.defaultArguments();
+        
         Connector.Argument mainArg = (Connector.Argument)arguments.get("main");
+        Connector.Argument optionArg = (Connector.Argument)arguments.get("options");
+        String options = "";
+        String main = "";
+        
         if (mainArg == null) {
             throw new Error("Bad launching connector");
+        } else if (optionArg == null) {
+            throw new Error("Bad launching connector");
         }
-        mainArg.setValue(mainArgs[1]);
-
-        if (true) {
-            // We need a VM that supports watchpoints
-            Connector.Argument optionArg =
-                (Connector.Argument)arguments.get("options");
-            if (optionArg == null) {
-                throw new Error("Bad launching connector");
-            }
-            String optionValue = "-cp " + '"' + mainArgs[0] + ";" + mainArgs[2] + "\"";
-            //String optionValue = "-cp " + '"' + mainArgs[0] + ";C:\\Users\\Diego\\Documents\\GitHub\\JavaTracer\\ProyectoConJar\\lib\\*\"";
-            optionArg.setValue(optionValue);
-            //optionArg.setValue("-classic");
+     
+        if (config.isJar()){
+        	main = "\"" + config.getMain() + "\"";
+        	options = "-jar";
+        } else {
+            main = config.getMain();
+            String[] jars = config.getExternal_jars();
+            String external_jars = "";
+            
+        	for (int i=0;i<jars.length;i++)
+        		external_jars += jars[i] + "\\*;"; 
+            
+        	options = "-cp " + '"' + config.getMainClassPath() + ";" + external_jars + "\"";
         }
+        
+        mainArg.setValue(main);
+        optionArg.setValue(options);
+        
         return arguments;
     }
 

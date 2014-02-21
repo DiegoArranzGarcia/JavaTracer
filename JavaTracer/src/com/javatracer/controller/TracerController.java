@@ -1,6 +1,7 @@
 package com.javatracer.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -10,11 +11,11 @@ import com.javatracer.model.finders.ClassFinder;
 import com.javatracer.model.finders.JarFinder;
 import com.javatracer.model.writers.TraceInspectorWriter;
 import com.javatracer.view.Message;
-import com.javatracer.view.WindowPath;
+import com.javatracer.view.JavaTracerView;
 
 public class TracerController {
 	
-	private WindowPath view;
+	private JavaTracerView view;
 	
 	private Tracer tracer;
 	private TraceInspectorWriter traceInspectorWriter;
@@ -22,22 +23,52 @@ public class TracerController {
 	private JarFinder jarFinder;
 	
 	public TracerController(){
-		 this.view = new WindowPath(this);
+		 this.view = new JavaTracerView(this);
 		 this.classFinder = new ClassFinder();
 		 this.jarFinder = new JarFinder();
     }
 	
-	public void startTrace(){
+	public void clickedOnTrace(){
 				
-		String[] args = getArguments();
-		String nameXml = getNameXml();
-		
-		boolean error = checkErrors(args,nameXml);
+		RunConfiguration config = getAllConfig();		
+		boolean error = config.check();
 		
 		if (!error){
 			tracer = new Tracer(this);
-			tracer.trace(args,nameXml);
+			tracer.trace(config);
 		}
+		
+	}
+	
+	private RunConfiguration getAllConfig() {
+		 
+		String mainClassPath = view.getPath();
+		
+		boolean jar = checkIfJar();
+		String main;
+		if (jar)
+			main = view.getPath();
+		else
+			main = view.getMainClass();
+		String classPath = "";
+		if (!jar) 
+			classPath = processPath(mainClassPath,main);
+		String nameXml = getNameXml();
+		String[] args = new String[0];
+		String[] external_jars = new String[0];
+		if (!jar) 
+			external_jars = jarFinder.getJarDirectories(mainClassPath);
+		 
+		RunConfiguration config = new RunConfiguration(jar, main, classPath, nameXml, args, external_jars);
+		
+		return config;
+		
+	}
+
+	private boolean checkIfJar() {
+		String path = view.getPath();
+		File file = new File(path);
+		return (file.isFile() && classFinder.getExtension(file).equals("jar"));
 	}
 
 	private String getNameXml() {
@@ -107,18 +138,6 @@ public class TracerController {
 		return file;
 	}
 	
-	private String[] getArguments() {
-		String path = view.getPath();
-		String mainClass = view.getMainClass();
-		String jarDirectories = jarFinder.getJarDirectories(path);
-		
-		String[] args = new String[3];
-		args[0] = processPath(path,mainClass);
-		args[1] = mainClass;
-		args[2] = jarDirectories;
-		return args;
-	}
-
 	public void showErrorMain() {
 		view.showErrorMain();		
 	}
@@ -130,15 +149,25 @@ public class TracerController {
 	public void finishedTrace(String nameXlm) {
 		
 		if(!tracer.getWasError()){
-			view.finishedTrace();
 			this.traceInspectorWriter = new TraceInspectorWriter(nameXlm);
 			traceInspectorWriter.generateFinalTrace();
+			view.finishedTrace();
 		}
 		
 	}
 	
-	public void loadClassFromPath(String path){
-		List<String> classes = classFinder.getAllClasesFromPath(path);
+	public void selectedPath(String path){
+		File file = new File(path);
+		
+		List<String> classes;
+		if (classFinder.getExtension(file).equals("jar")){
+			classes = new ArrayList<>();
+			classes.add(file.getName());
+		} else {
+			classes = classFinder.getAllClasesFromFile(file);
+			view.enableMainClassCombo();
+		}
+	
 		view.loadClasses(classes);
 	}
 	
