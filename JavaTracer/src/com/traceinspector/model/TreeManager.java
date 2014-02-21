@@ -112,16 +112,17 @@ public class TreeManager {
 	}
 
 	public void expandNode(DefaultTreeLayout<Box> tree,Box treeNode) {
-				
-		/////////////////////////7AQQQQQQUUUUUUUUUIIIIIIIIIIIIIIII/////////////////////
-		long id=0;
 		
-		if(treeNode.getId()==0)id=1;
-		else id=treeNode.getId();
+		Node node=null;
 		
-		Node node = xml.getNode(id);
+		if (treeNode.getId()==0)
+			node=xml.getRootNode();
+		else
+			node = xml.getNode(treeNode.getId());
+		
 		NodeList nodeChilds = xml.getChildsOfNode(node);
 		treeNode.setExpanded(true);
+		
 		
 		for (int i=0;i<nodeChilds.getLength();i++){
 			Node childNode = nodeChilds.item(i);
@@ -129,6 +130,7 @@ public class TreeManager {
 			tree.addChild(treeNode, child);
 		}
 				
+		
 	}
 
 	public void foldNode(DefaultTreeLayout<Box> tree,Box treeNode) {
