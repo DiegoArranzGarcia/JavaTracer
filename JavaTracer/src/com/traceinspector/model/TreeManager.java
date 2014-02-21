@@ -113,7 +113,13 @@ public class TreeManager {
 
 	public void expandNode(DefaultTreeLayout<Box> tree,Box treeNode) {
 				
-		Node node = xml.getNode(treeNode.getId());
+		/////////////////////////7AQQQQQQUUUUUUUUUIIIIIIIIIIIIIIII/////////////////////
+		long id=0;
+		
+		if(treeNode.getId()==0)id=1;
+		else id=treeNode.getId();
+		
+		Node node = xml.getNode(id);
 		NodeList nodeChilds = xml.getChildsOfNode(node);
 		treeNode.setExpanded(true);
 		
