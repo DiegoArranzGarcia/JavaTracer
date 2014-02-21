@@ -115,7 +115,7 @@ public class WindowPath extends JFrame {
 		helpXmlFile.setIcon(imageLoader.getHelpIcon());
 		helpXmlFile.setToolTipText(new Message(6).getMessage());
 		
-		cancel =new JButton("Cancel");
+		cancel =new JButton("Exit");
 		cancel.setBounds(new Rectangle(100,40));
 		cancel.setLocation(CANCEL_COL, CANCEL_TRACER_ROW); 
 		cancel.setBackground(Color.white); 

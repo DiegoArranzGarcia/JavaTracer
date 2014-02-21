@@ -116,6 +116,8 @@ public class TreePanel extends JPanel {
 	private void paintBox(Graphics g,Box textInBox) {
 		
 		g.setColor(BOX_COLOR);
+		Font font = new Font("Verdana", Font.BOLD, 12);
+		g.setFont(font);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
 		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
