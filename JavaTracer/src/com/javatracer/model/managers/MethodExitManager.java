@@ -7,14 +7,7 @@ import com.general.model.variables.data.Data;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.javatracer.model.writers.JavaTraceWriter;
-import com.sun.jdi.IncompatibleThreadStateException;
-import com.sun.jdi.LocalVariable;
-import com.sun.jdi.Method;
-import com.sun.jdi.ReferenceType;
-import com.sun.jdi.StackFrame;
-import com.sun.jdi.ThreadReference;
-import com.sun.jdi.Value;
-import com.sun.jdi.VoidValue;
+import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
 
 public class MethodExitManager{

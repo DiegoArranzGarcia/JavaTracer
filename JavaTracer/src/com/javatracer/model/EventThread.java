@@ -5,38 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.general.model.data.ThreadInfo;
-import com.javatracer.model.managers.DeathManager;
-import com.javatracer.model.managers.DisconnectManager;
-import com.javatracer.model.managers.ExceptionManager;
-import com.javatracer.model.managers.MethodEntryManager;
-import com.javatracer.model.managers.MethodExitManager;
-import com.javatracer.model.managers.ThreadDeathManager;
+import com.javatracer.model.managers.*;
 import com.javatracer.model.writers.JavaTraceWriter;
 import com.javatracer.profiler.Profiler;
-import com.sun.jdi.ThreadReference;
-import com.sun.jdi.VMDisconnectedException;
-import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.event.ClassPrepareEvent;
-import com.sun.jdi.event.Event;
-import com.sun.jdi.event.EventIterator;
-import com.sun.jdi.event.EventQueue;
-import com.sun.jdi.event.EventSet;
-import com.sun.jdi.event.ExceptionEvent;
-import com.sun.jdi.event.MethodEntryEvent;
-import com.sun.jdi.event.MethodExitEvent;
-import com.sun.jdi.event.ModificationWatchpointEvent;
-import com.sun.jdi.event.StepEvent;
-import com.sun.jdi.event.ThreadDeathEvent;
-import com.sun.jdi.event.ThreadStartEvent;
-import com.sun.jdi.event.VMDeathEvent;
-import com.sun.jdi.event.VMDisconnectEvent;
-import com.sun.jdi.request.ClassPrepareRequest;
-import com.sun.jdi.request.EventRequest;
-import com.sun.jdi.request.EventRequestManager;
-import com.sun.jdi.request.ExceptionRequest;
-import com.sun.jdi.request.MethodEntryRequest;
-import com.sun.jdi.request.MethodExitRequest;
-import com.sun.jdi.request.ThreadDeathRequest;
+import com.sun.jdi.*;
+import com.sun.jdi.event.*;
+import com.sun.jdi.request.*;
 
 
 public class EventThread extends Thread {

@@ -1,31 +1,9 @@
 package com.javatracer.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.Data;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
-import com.sun.jdi.ArrayReference;
-import com.sun.jdi.BooleanValue;
-import com.sun.jdi.ByteValue;
-import com.sun.jdi.CharValue;
-import com.sun.jdi.DoubleValue;
-import com.sun.jdi.Field;
-import com.sun.jdi.FloatValue;
-import com.sun.jdi.IntegerValue;
-import com.sun.jdi.LongValue;
-import com.sun.jdi.ObjectReference;
-import com.sun.jdi.PrimitiveValue;
-import com.sun.jdi.ReferenceType;
-import com.sun.jdi.ShortValue;
-import com.sun.jdi.StringReference;
-import com.sun.jdi.Value;
+import com.general.model.variables.data.*;
+import com.sun.jdi.*;
 
 public class ClassUtils {
 	

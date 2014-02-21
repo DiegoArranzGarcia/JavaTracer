@@ -2,24 +2,14 @@ package com.javatracer.model.writers;
 
 import java.io.StringWriter;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Node;
 
-import com.general.model.data.ChangeInfo;
-import com.general.model.data.MethodInfo;
-import com.general.model.data.ThreadInfo;
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
+import com.general.model.data.*;
+import com.general.model.variables.data.*;
 import com.javatracer.model.methods.data.MethodEntryInfo;
 import com.javatracer.model.methods.data.MethodExitInfo;
 import com.thoughtworks.xstream.XStream;

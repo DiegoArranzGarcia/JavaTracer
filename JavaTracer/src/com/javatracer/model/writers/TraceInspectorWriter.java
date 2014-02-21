@@ -1,25 +1,15 @@
 package com.javatracer.model.writers;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.*;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
-import com.general.model.data.ChangeInfo;
-import com.general.model.data.MethodInfo;
-import com.general.model.data.ThreadInfo;
+import com.general.model.data.*;
 import com.general.model.variables.data.Data;
 import com.javatracer.model.ChangeDetector;
 

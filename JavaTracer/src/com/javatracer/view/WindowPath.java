@@ -1,23 +1,12 @@
 package com.javatracer.view;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.TextField;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import com.general.imageresources.ImageLoader;
 import com.javatracer.controller.TracerController;
@@ -25,7 +14,7 @@ import com.javatracer.controller.TracerController;
 @SuppressWarnings("serial")
 public class WindowPath extends JFrame {
 
-	private JButton tracer,examine,cancel,helpPath,helpNameClass,helpXmlFile;
+	private JButton tracer,examine,cancel,helpPath,helpNameClass,helpXmlFile,addArgument;
 	private TextField path,nameXml;
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
@@ -55,7 +44,7 @@ public class WindowPath extends JFrame {
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		setTitle("Java Tracer");
-		setSize(850, 300);  
+		setSize(1050, 300);  
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +67,18 @@ public class WindowPath extends JFrame {
 		helpPath.setBounds(new Rectangle(25,25));
 		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
 		helpPath.setIcon(imageLoader.getHelpIcon());
-		helpPath.setToolTipText(new Message(2).getMessage()); 
+		helpPath.setToolTipText(new Message(2).getMessage());
+		
+		addArgument = new JButton("Add arguments");
+		addArgument.setBounds(new Rectangle(140,25));
+		addArgument.setLocation(850, SECOND_ROW+2); 
+		addArgument.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				JListWindow jListWindow = new JListWindow();
+				jListWindow.setVisible(true); 
+			}
+		});
 		
 		labelNameClass = new JLabel(new Message(3).getMessage());
 		labelNameClass.setBounds(new Rectangle(540,30));
@@ -190,6 +190,7 @@ public class WindowPath extends JFrame {
 		add(labelXml);
 		add(nameXml);
 		add(helpXmlFile);
+		add(addArgument);
 	
 		setVisible(true); 	;
 	}

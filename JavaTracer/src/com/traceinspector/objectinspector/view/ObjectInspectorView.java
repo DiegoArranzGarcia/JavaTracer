@@ -1,12 +1,7 @@
 package com.traceinspector.objectinspector.view;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.JScrollPane;
 import javax.swing.table.TableCellRenderer;

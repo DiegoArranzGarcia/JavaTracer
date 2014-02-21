@@ -6,9 +6,7 @@ import com.javatracer.model.ThreadTrace;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.event.StepEvent;
-import com.sun.jdi.request.EventRequest;
-import com.sun.jdi.request.EventRequestManager;
-import com.sun.jdi.request.StepRequest;
+import com.sun.jdi.request.*;
 
 public class StepManager {
 	

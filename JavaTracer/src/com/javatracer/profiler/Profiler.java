@@ -1,9 +1,7 @@
 package com.javatracer.profiler;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.javatracer.model.ClassUtils;
 import com.sun.jdi.Method;

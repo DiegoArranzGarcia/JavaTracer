@@ -2,9 +2,7 @@ package com.javatracer.model;
 
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.request.EventRequest;
-import com.sun.jdi.request.EventRequestManager;
-import com.sun.jdi.request.StepRequest;
+import com.sun.jdi.request.*;
 
 /**
 * This class keeps context on events in one thread.

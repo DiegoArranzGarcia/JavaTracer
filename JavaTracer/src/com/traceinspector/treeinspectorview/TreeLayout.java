@@ -35,11 +35,7 @@ import static org.abego.treelayout.internal.util.Contract.checkArg;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.abego.treelayout.NodeExtentProvider;

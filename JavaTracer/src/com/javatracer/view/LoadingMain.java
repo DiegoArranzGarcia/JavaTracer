@@ -2,9 +2,7 @@ package com.javatracer.view;
 
 import java.awt.BorderLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JWindow;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class LoadingMain extends JWindow {

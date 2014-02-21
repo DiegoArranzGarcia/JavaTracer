@@ -8,10 +8,7 @@ import com.general.model.configuration.JavaTracerConfiguration;
 import com.javatracer.controller.TracerController;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.connect.Connector;
-import com.sun.jdi.connect.IllegalConnectorArgumentsException;
-import com.sun.jdi.connect.LaunchingConnector;
-import com.sun.jdi.connect.VMStartException;
+import com.sun.jdi.connect.*;
 
 /**
 * This program traces the execution of another program.

@@ -1,14 +1,11 @@
 package com.traceinspector.treeinspector.logic;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D.Double;
-import java.util.Iterator;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.traceinspector.controller.TraceInspectorController;
 import com.traceinspector.model.TreeManager;

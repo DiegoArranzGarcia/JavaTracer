@@ -3,13 +3,7 @@ package com.traceinspector.treeinspector.data;
 import java.util.List;
 
 import com.general.model.data.MethodInfo;
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.Data;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
+import com.general.model.variables.data.*;
 
 
 public class MethodBox extends Box {

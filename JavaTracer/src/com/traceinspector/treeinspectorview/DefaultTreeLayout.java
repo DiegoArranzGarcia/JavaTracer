@@ -31,10 +31,7 @@ package com.traceinspector.treeinspectorview;
 
 import static org.abego.treelayout.internal.util.Contract.checkArg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.util.AbstractTreeForTreeLayout;
