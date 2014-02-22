@@ -27,20 +27,24 @@ public class TreeInspector implements MouseListener {
 		this.treeManager = treeManager;
 		this.tree = treeManager.loadTree();
 		this.view = new TreeInspectorView(tree, this);
-		
-		///////center scroll ////////////////
-		Rectangle bounds = view.getViewport().getViewRect();
-	    Dimension size = view.getViewport().getViewSize();
-	    
-	    int x = (size.width - bounds.width) / 3;
-	    int y = (size.height - bounds.height) / 3;
-        
-	    view.getViewport().setViewPosition(new Point(x, y));
-		///////////////////////////////////////
+		this.centerScroll();
         
         this.lastSelected = null;
 	   
 	 
+	}
+	
+	public void centerScroll(){
+		
+		
+			Rectangle bounds = view.getViewport().getViewRect();
+		    Dimension size = view.getViewport().getViewSize();
+		    
+		    int x = (size.width - bounds.width) / 3;
+		    int y = (size.height - bounds.height) / 3;
+	        
+		    view.getViewport().setViewPosition(new Point(x, y));
+			
 	}
 	
 	
@@ -52,7 +56,7 @@ public class TreeInspector implements MouseListener {
 				fold(box);
 			else
 				expand(box);
-			
+			    
 		}	
 	}
 

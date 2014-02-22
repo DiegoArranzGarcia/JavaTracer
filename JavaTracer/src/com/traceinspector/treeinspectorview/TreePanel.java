@@ -43,9 +43,9 @@ import com.traceinspector.treeinspector.data.Box;
 @SuppressWarnings("serial")
 public class TreePanel extends JPanel {
 	
-	static final double DEFAULT_WIDTH_BOX = 80;
-	static final double DEFAULT_HEIGHT_BOX = 60;
-	static final double WIDTH_BY_LETTER = 8;
+	static final double DEFAULT_WIDTH_BOX = 30;
+	static final double DEFAULT_HEIGHT_BOX = 30;
+	static final double WIDTH_BY_LETTER = 7.5;
 	static final int DEFAULT_STROKE = 2;
 	static final int SELECTED_STROKE = 5;
 
@@ -145,7 +145,7 @@ public class TreePanel extends JPanel {
 		String[] lines = textInBox.getBoxText().split("\n");
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
-		int y = (int) box.y + (int)DEFAULT_HEIGHT_BOX/2 + m.getAscent()/2;
+		int y = (int) ((int) box.y + (int)DEFAULT_HEIGHT_BOX/2.5 + m.getAscent()/2.5);
 		for (int i = 0; i < lines.length; i++) {
 			g.drawString(lines[i], x, y);
 			y += m.getHeight();
