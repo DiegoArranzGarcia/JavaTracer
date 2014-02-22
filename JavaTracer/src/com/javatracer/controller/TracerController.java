@@ -31,7 +31,7 @@ public class TracerController {
 	public void clickedOnTrace(){
 				
 		RunConfiguration config = getAllConfig();		
-		boolean error = config.check();
+		boolean error = config.check(view);
 		
 		if (!error){
 			tracer = new Tracer(this);
@@ -78,43 +78,7 @@ public class TracerController {
 		return nameXml;
 	}
 
-	private boolean checkErrors(String[] args, String nameXml) { 
-		
-		boolean error = false;
-		
-		if (nameXml.contains(".xml") || nameXml.contains(".XML")){
-			view.errorNameXml();
-		} else {
-			if(existFileXml(nameXml+".xml")){
-					
-				int seleccion = JOptionPane.showOptionDialog(null,nameXml+new Message(7).getMessage(),new Message(8).getMessage(), 
-						    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-				
-				error = (seleccion!=0);				    															   	
-			}
-		}
-								
-		return error;
-	}
-
-	private boolean existFileXml(String name){
-		
-		int i=0;
-		boolean found=false;
-		File files = new File("./");
-		String[] classes=files.list();
-		
-		while(i<classes.length && !found){
-			
-			if(classes[i].equals(name)) found=true;
-			i++;
-			
-		}
-		
-		return found;
-		
-	}
-
+	
 	private String processPath(String file, String name) {
 		
 		boolean equals=false;

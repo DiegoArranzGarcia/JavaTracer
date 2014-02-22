@@ -1,5 +1,12 @@
 package com.javatracer.controller;
 
+import java.io.File;
+
+import javax.swing.JOptionPane;
+
+import com.javatracer.view.JavaTracerView;
+import com.javatracer.view.Message;
+
 public class RunConfiguration {
 	
 	private boolean jar;
@@ -18,7 +25,12 @@ public class RunConfiguration {
 		this.external_jars = external_jars;
 	}
 	
-	public boolean check() {
+	public boolean check(JavaTracerView view) {
+		
+		if (checkNameXml(nameXml,view)) return true;
+		
+		
+		
 		return false;
 	}
 	
@@ -64,5 +76,46 @@ public class RunConfiguration {
 	public void setMainClassPath(String mainClassPath) {
 		this.mainClassPath = mainClassPath;
 	}
+
+
+private boolean checkNameXml(String nameXml,JavaTracerView view) { 
+		
+		boolean error = false;
+		
+		if (nameXml.contains(".xml") || nameXml.contains(".XML")){
+			view.errorNameXml();
+			return true;
+		} else {
+			if(existFileXml(nameXml+".xml")){
+					
+				int seleccion = JOptionPane.showOptionDialog(null,nameXml+new Message(7).getMessage(),new Message(8).getMessage(), 
+						    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				
+				error = (seleccion!=0);				    															   	
+			}
+		}
+								
+		return error;
+	}
+
+	private boolean existFileXml(String name){
+		
+		int i=0;
+		boolean found=false;
+		File files = new File("./");
+		String[] classes=files.list();
+		
+		while(i<classes.length && !found){
+			
+			if(classes[i].equals(name)) found=true;
+			i++;
+			
+		}
+		
+		return found;
+		
+	}
+
+
 
 }
