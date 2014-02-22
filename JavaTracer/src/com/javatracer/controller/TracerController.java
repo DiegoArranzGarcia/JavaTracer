@@ -102,21 +102,14 @@ public class TracerController {
 		return file;
 	}
 	
-	public void showErrorMain() {
-		view.showErrorMain();		
-	}
-
-	public void showErrorLoadClass() {
-		view.showErrorLoadClass();
-	}
-
+	
 	public void finishedTrace(String nameXlm) {
 		
-		if(!tracer.getWasError()){
+		
 			this.traceInspectorWriter = new TraceInspectorWriter(nameXlm);
 			traceInspectorWriter.generateFinalTrace();
 			view.finishedTrace();
-		}
+		
 		
 	}
 	

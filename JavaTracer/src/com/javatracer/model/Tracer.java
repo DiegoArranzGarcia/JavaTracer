@@ -33,7 +33,7 @@ public class Tracer {
     private int debugTraceMode = VirtualMachine.TRACE_NONE;
 
     // Do we want to watch assignments to fields
-    private boolean watchFields,wasError = false;
+    private boolean watchFields;
 
     // Class patterns for which we don't want events
     
@@ -118,12 +118,9 @@ public class Tracer {
         errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm);
         outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm);
        
-        catchError(process);
-       
         errThread.start();
         outThread.start();
         
-        catchError(process);
         
     }
 
@@ -191,57 +188,7 @@ public class Tracer {
         System.err.println("<args> are the arguments to <class>");
     }
 	
-    private void ShowError(String error) {
-		
-		
-		String errorMain="no se ha encontrado el método principal";
-        String errorLoadClass="no se ha encontrado o cargado la clase principal";
-		
-		if(error.contains(errorMain)){
-			tracerController.showErrorMain();
-			wasError=true;}
-		
-		if(error.contains(errorLoadClass)){
-			tracerController.showErrorLoadClass();
-		    wasError=true;	
-		 }
-    }
     
-   private void catchError(Process process)
-   {
-	   
-	   Reader in = new InputStreamReader( process.getErrorStream());
-       Writer out = new OutputStreamWriter(System.err);
-         
-       try {
-           char[] cbuf = new char[BUFFER_SIZE];
-           int count;
-           String error="";
-           int i=0;
-           while ((count = in.read(cbuf, 0, BUFFER_SIZE)) >= 0) {
-               out.write(cbuf, 0, count);
-           }
-           
-           while(i<BUFFER_SIZE)
-           {
-            error=error+cbuf[i];
-            i++;
-           }
- 
-           ShowError(error);
-           out.flush();
-         
-       } catch(IOException exc) {
-           System.err.println("Child I/O Transfer - " + exc);
-       }
-	   
-   }
-   
-   
-   public boolean getWasError()
-   {
-	   return wasError;
-	   
-   }
-   
+    
+      
 }

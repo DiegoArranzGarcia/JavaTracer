@@ -196,15 +196,6 @@ public class JavaTracerView extends JFrame {
 		setVisible(true); 	;
 	}
 	
-
-	public void showErrorMain() {
-		JOptionPane.showMessageDialog(new JFrame(),new Message(10).getMessage());
-	}
-
-	public void showErrorLoadClass() {
-		JOptionPane.showMessageDialog(new JFrame(),new Message(11).getMessage());
-	}
-
 	public void finishedTrace() {
 		JOptionPane.setDefaultLocale(new Locale("en"));
 		JOptionPane.showMessageDialog(new JFrame(), new Message(12).getMessage());
