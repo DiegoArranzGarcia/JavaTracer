@@ -27,11 +27,7 @@ public class RunConfiguration {
 	
 	public boolean check(JavaTracerView view) {
 		
-		if (checkNameXml(nameXml,view)) return true;
-		
-		
-		
-		return false;
+		return checkNameXml(nameXml,view);
 	}
 	
 	//Getters and setters

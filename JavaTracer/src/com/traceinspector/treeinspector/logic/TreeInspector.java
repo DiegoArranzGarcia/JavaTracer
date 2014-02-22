@@ -40,8 +40,8 @@ public class TreeInspector implements MouseListener {
 			Rectangle bounds = view.getViewport().getViewRect();
 		    Dimension size = view.getViewport().getViewSize();
 		    
-		    int x = (size.width - bounds.width) / 3;
-		    int y = (size.height - bounds.height) / 3;
+		    int x = (int) ((size.width - bounds.width) / 2.5);
+		    int y = (int) ((size.height - bounds.height) / 2.d);
 	        
 		    view.getViewport().setViewPosition(new Point(x, y));
 			
