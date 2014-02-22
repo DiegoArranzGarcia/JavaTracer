@@ -16,12 +16,13 @@ import javax.swing.*;
 public class JListWindow  extends JFrame implements ActionListener{
 
 	private Container content;
-	private JButton add, deleteAll, deleteElement;
+	private JButton add, deleteAll, deleteElement,saveArguments;
 	private JLabel  mensaje;
 	private JTextField argument;
 	private JList argumentsList;
 	private DefaultListModel model;
 	private JScrollPane scrollLista;
+
 	
 	public JListWindow(){
 		/*initializes the properties of the components*/
@@ -32,7 +33,7 @@ public class JListWindow  extends JFrame implements ActionListener{
 		setSize(660,330);
 		/*put the window in the center of the screen*/
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	
@@ -52,16 +53,20 @@ public class JListWindow  extends JFrame implements ActionListener{
 		add.setBounds(510, 30, 100, 23);
 		add.addActionListener(this);
 		
-		deleteAll= new JButton();
-		deleteAll.setText("Delete all");
-		deleteAll.setBounds(270, 210, 120, 23);
-		deleteAll.addActionListener(this);
-		
 		deleteElement= new JButton();
 		deleteElement.setText("Delete");
-		deleteElement.setBounds(100, 210, 120, 23);
+		deleteElement.setBounds(80, 210, 120, 23);
 		deleteElement.addActionListener(this);
 		
+		deleteAll= new JButton();
+		deleteAll.setText("Delete all");
+		deleteAll.setBounds(250, 210, 120, 23);
+		deleteAll.addActionListener(this);
+		
+		saveArguments=new JButton();
+		saveArguments.setText("Save");
+		saveArguments.setBounds(420, 210, 120, 23);;
+		saveArguments.addActionListener(this); 
 		
 		mensaje= new JLabel();
 		mensaje.setBounds(20, 250, 280, 23);
@@ -82,31 +87,33 @@ public class JListWindow  extends JFrame implements ActionListener{
 		content.add(deleteElement);
 		content.add(mensaje);
 		content.add(scrollLista);
+		content.add(saveArguments);
 	    
     }
 
 
-    public void actionPerformed(ActionEvent evento) {
-		if (evento.getSource()==add)
-		{
+    public void actionPerformed(ActionEvent event) {
+		if (event.getSource()==add){
 			if (!argument.getText().equals("")) {
 				agregarNombre();
 				mensaje.setText("Argument added");
 			}else {
-				JOptionPane.showMessageDialog(null, "You must add an argument","Error", JOptionPane.ERROR_MESSAGE);
-				
+				JOptionPane.showMessageDialog(null, "You must add an argument","Error", JOptionPane.ERROR_MESSAGE);	
 				mensaje.setText("No argument added");
-			}
-			
+			}			
 		}
-		if (evento.getSource()==deleteElement)
-		{
+		
+		if (event.getSource()==deleteElement)	{
 			eliminarNombre(argumentsList.getSelectedIndex() );
 		}
-		if (evento.getSource()==deleteAll)
-		{
+		
+		if (event.getSource()==deleteAll)	{
 			borrarLista();
 			mensaje.setText("All list deleted");
+		}
+		
+		if(event.getSource()==saveArguments) {
+			int size= model.getSize();
 		}
 	}
 
@@ -133,4 +140,13 @@ public class JListWindow  extends JFrame implements ActionListener{
 		model.clear();
 	}
 
+	public DefaultListModel getModel() {
+		return model;
+	}
+
+
+
+	public void setModel(DefaultListModel model) {
+		this.model = model;
+	}
 }
