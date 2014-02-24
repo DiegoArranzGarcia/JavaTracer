@@ -62,17 +62,6 @@ public class JavaTraceWriter extends XStreamUtil{
 		}
 	}
 	
-	public void writeExceptionInfo(ExceptionInfo threadInfo){
-		try{
-			String xmlString = xStream.toXML(threadInfo);
-			write(startTag(TAG_EXCEPTION));
-			write(xmlString);
-			write(endTag(TAG_EXCEPTION));
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
 	public void close(){
 		
 		try {
