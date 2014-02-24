@@ -115,7 +115,13 @@ public class TreePanel extends JPanel {
 
 	private void paintBox(Graphics g,Box textInBox) {
 		
-		g.setColor(BOX_COLOR);
+		String[] lines = textInBox.getBoxText().split("\n");
+		
+		if(lines[0].contains("Exception"))
+			g.setColor(Color.red);
+		else
+			g.setColor(BOX_COLOR);
+		
 		Font font = new Font("Verdana", Font.BOLD, 12);
 		g.setFont(font);
 		Rectangle2D.Double box = getBoundsOfNode(textInBox);
@@ -141,8 +147,11 @@ public class TreePanel extends JPanel {
 		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g2D.setStroke(new BasicStroke());
+		
+		
+		
 		g.setColor(TEXT_COLOR);
-		String[] lines = textInBox.getBoxText().split("\n");
+		
 		FontMetrics m = getFontMetrics(getFont());
 		int x = (int) box.x + ARC_SIZE / 2;
 		int y = (int) ((int) box.y + (int)DEFAULT_HEIGHT_BOX/2.5 + m.getAscent()/2.5);
