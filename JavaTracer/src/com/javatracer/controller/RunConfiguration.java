@@ -1,23 +1,18 @@
 package com.javatracer.controller;
 
-import java.io.File;
-
-import javax.swing.JOptionPane;
-
-import com.javatracer.view.JavaTracerView;
-import com.javatracer.view.Message;
-
 public class RunConfiguration {
 	
 	private boolean jar;
+	private boolean profiling_mode;
 	private String main;
 	private String mainClassPath;
 	private String nameXml;
 	private String[] args;
 	private String[] external_jars;
 	
-	public RunConfiguration(boolean jar,String main,String mainClassPath,String nameXml,String[] args,String[] external_jars){
+	public RunConfiguration(boolean profiling_mode,boolean jar,String main,String mainClassPath,String nameXml,String[] args,String[] external_jars){
 		this.jar = jar;
+		this.profiling_mode = profiling_mode;
 		this.main = main;
 		this.mainClassPath = mainClassPath;
 		this.nameXml = nameXml;
@@ -25,9 +20,8 @@ public class RunConfiguration {
 		this.external_jars = external_jars;
 	}
 	
-	public boolean check(JavaTracerView view) {
-		
-		return checkNameXml(nameXml,view);
+	public boolean check() {
+		return false;
 	}
 	
 	//Getters and setters
@@ -73,8 +67,16 @@ public class RunConfiguration {
 		this.mainClassPath = mainClassPath;
 	}
 
+	public boolean isProfiling_mode() {
+		return profiling_mode;
+	}
 
-private boolean checkNameXml(String nameXml,JavaTracerView view) { 
+	public void setProfiling_mode(boolean profiling_mode) {
+		this.profiling_mode = profiling_mode;
+	}
+
+	/*
+	private boolean checkNameXml(String nameXml,JavaTracerView view) { 
 		
 		boolean error = false;
 		
@@ -110,7 +112,7 @@ private boolean checkNameXml(String nameXml,JavaTracerView view) {
 		
 		return found;
 		
-	}
+	}*/
 
 
 

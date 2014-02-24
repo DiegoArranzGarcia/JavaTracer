@@ -1,0 +1,42 @@
+<map>
+  <entry>
+    <string>Person.&lt;init&gt;(int, java.lang.String, java.lang.String)</string>
+    <com.profiler.model.MethodDataProfiler>
+      <className>Person</className>
+      <method>Person.&lt;init&gt;(int, java.lang.String, java.lang.String)</method>
+      <numCalls>1</numCalls>
+    </com.profiler.model.MethodDataProfiler>
+  </entry>
+  <entry>
+    <string>Person.&lt;init&gt;(int, java.lang.String, java.lang.String, Person)</string>
+    <com.profiler.model.MethodDataProfiler>
+      <className>Person</className>
+      <method>Person.&lt;init&gt;(int, java.lang.String, java.lang.String, Person)</method>
+      <numCalls>1</numCalls>
+    </com.profiler.model.MethodDataProfiler>
+  </entry>
+  <entry>
+    <string>Main.main(java.lang.String[])</string>
+    <com.profiler.model.MethodDataProfiler>
+      <className>Main</className>
+      <method>Main.main(java.lang.String[])</method>
+      <numCalls>1</numCalls>
+    </com.profiler.model.MethodDataProfiler>
+  </entry>
+  <entry>
+    <string>Person.imprime()</string>
+    <com.profiler.model.MethodDataProfiler>
+      <className>Person</className>
+      <method>Person.imprime()</method>
+      <numCalls>1</numCalls>
+    </com.profiler.model.MethodDataProfiler>
+  </entry>
+  <entry>
+    <string>Main.prueba(int, Person, Person)</string>
+    <com.profiler.model.MethodDataProfiler>
+      <className>Main</className>
+      <method>Main.prueba(int, Person, Person)</method>
+      <numCalls>1</numCalls>
+    </com.profiler.model.MethodDataProfiler>
+  </entry>
+</map>

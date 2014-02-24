@@ -1,16 +1,28 @@
 package com.javatracer.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.imageresources.ImageLoader;
-import com.javatracer.controller.TracerController;
+import com.javatracer.controller.JavaTracerController;
 
 @SuppressWarnings("serial")
 public class JavaTracerView extends JFrame {
@@ -20,8 +32,9 @@ public class JavaTracerView extends JFrame {
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass,labelXml;
-	private TracerController controller;
+	private JavaTracerController controller;
 	private LoadingMain loading;
+	private JCheckBox profilingCheckBox;
 	private Container contentPane;
 	private static int FIRST_ROW = 60;
 	private static int SECOND_ROW = 120;
@@ -35,7 +48,7 @@ public class JavaTracerView extends JFrame {
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
 	
-	public JavaTracerView(TracerController controller) {
+	public JavaTracerView(JavaTracerController controller) {
 		this.controller = controller;
 		initialice();	
 	} 
@@ -128,6 +141,12 @@ public class JavaTracerView extends JFrame {
 			}
 		});
 		
+		profilingCheckBox = new JCheckBox("Enable profiling");
+		profilingCheckBox.setLayout(new GridLayout(1,1));
+		profilingCheckBox.setBounds(new Rectangle(180,30));
+		profilingCheckBox.setLocation(0, CANCEL_TRACER_ROW);
+		profilingCheckBox.setFont(new Font("Comic Sans MS",Font.BOLD, 15));
+		
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
 		tracer.setBounds(new Rectangle(100,40));
@@ -180,6 +199,7 @@ public class JavaTracerView extends JFrame {
 		
 		setLayout(null); 
 		add(path);
+		add(profilingCheckBox);
 		add(tracer);
 		add(examine);
 		add(cancel);
@@ -249,6 +269,10 @@ public class JavaTracerView extends JFrame {
 
 	public void enableMainClassCombo() {
 		nameClass.setEnabled(true);		
+	}
+
+	public boolean profileMode() {
+		return profilingCheckBox.isSelected();
 	}
 	
 	

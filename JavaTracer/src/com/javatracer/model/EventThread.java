@@ -8,7 +8,7 @@ import com.general.model.data.ThreadInfo;
 import com.javatracer.controller.RunConfiguration;
 import com.javatracer.model.managers.*;
 import com.javatracer.model.writers.JavaTraceWriter;
-import com.javatracer.profiler.Profiler;
+import com.profiler.model.Profiler;
 import com.sun.jdi.*;
 import com.sun.jdi.event.*;
 import com.sun.jdi.request.*;
@@ -38,11 +38,13 @@ public class EventThread extends Thread {
     //private PrepareManager prepare;
     private JavaTraceWriter writer;
 
-    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, boolean enableProfiling){
+    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, Profiler profiler){
         super("event-handler");
         this.vm = vm;
-        this.enableProfiling = enableProfiling;
         this.excludes = excludes;
+        
+        this.enableProfiling = config.isProfiling_mode();
+        this.profiler = profiler;			
         
         writer = new JavaTraceWriter(config.getNameXml());
         writer.writeThreadInfo(new ThreadInfo());
@@ -61,10 +63,6 @@ public class EventThread extends Thread {
         //step=new StepManager(traceMap,vm);
         //prepare=new PrepareManager(excludes,vm);
 		exception = new ExceptionManager(traceMap,vm);
-		
-		if (enableProfiling){
-			profiler = new Profiler();			
-		}
 		
     }
 

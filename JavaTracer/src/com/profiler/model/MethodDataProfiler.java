@@ -1,4 +1,4 @@
-package com.javatracer.profiler;
+package com.profiler.model;
 
 public class MethodDataProfiler {
 	

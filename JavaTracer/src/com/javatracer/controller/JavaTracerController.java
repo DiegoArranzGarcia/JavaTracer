@@ -4,52 +4,58 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import com.javatracer.model.Tracer;
 import com.javatracer.model.finders.ClassFinder;
 import com.javatracer.model.finders.JarFinder;
 import com.javatracer.model.writers.TraceInspectorWriter;
-import com.javatracer.view.Message;
 import com.javatracer.view.JavaTracerView;
+import com.profiler.controller.ProfilerController;
 
-public class TracerController {
+public class JavaTracerController {
 	
-	private JavaTracerView view;
+	private JavaTracerView javaTracerView;
+	private ProfilerController profilerController;
 	
 	private Tracer tracer;
 	private TraceInspectorWriter traceInspectorWriter;
+	
+	private RunConfiguration lastConfig;
+	
 	private ClassFinder classFinder;
 	private JarFinder jarFinder;
 	
-	public TracerController(){
-		 this.view = new JavaTracerView(this);
+	public JavaTracerController(){
+		 this.javaTracerView = new JavaTracerView(this);
 		 this.classFinder = new ClassFinder();
 		 this.jarFinder = new JarFinder();
+		 this.tracer = new Tracer();
+		 this.profilerController = new ProfilerController();
+		 tracer.setController(this);
     }
 	
 	public void clickedOnTrace(){
 				
-		RunConfiguration config = getAllConfig();		
-		boolean error = config.check(view);
+		this.lastConfig = getAllConfig();		
+		//boolean error = lastConfig.check();
 		
-		if (!error){
-			tracer = new Tracer(this);
-			tracer.trace(config);
-		}
-		
+		if (lastConfig.isProfiling_mode())
+			tracer.profile(lastConfig,profilerController.getProfiler());
+		else
+			tracer.trace(lastConfig);				
 	}
+	
 	
 	private RunConfiguration getAllConfig() {
 		 
-		String mainClassPath = view.getPath();
+		String mainClassPath = javaTracerView.getPath();
 		
 		boolean jar = checkIfJar();
+		boolean profile_mode = javaTracerView.profileMode();
 		String main;
 		if (jar)
-			main = view.getPath();
+			main = javaTracerView.getPath();
 		else
-			main = view.getMainClass();
+			main = javaTracerView.getMainClass();
 		String classPath = "";
 		if (!jar) 
 			classPath = processPath(mainClassPath,main);
@@ -59,20 +65,20 @@ public class TracerController {
 		if (!jar) 
 			external_jars = jarFinder.getJarDirectories(mainClassPath);
 		 
-		RunConfiguration config = new RunConfiguration(jar, main, classPath, nameXml, args, external_jars);
+		RunConfiguration config = new RunConfiguration(profile_mode,jar,main, classPath, nameXml, args, external_jars);
 		
 		return config;
 		
 	}
 
 	private boolean checkIfJar() {
-		String path = view.getPath();
+		String path = javaTracerView.getPath();
 		File file = new File(path);
 		return (file.isFile() && classFinder.getExtension(file).equals("jar"));
 	}
 
 	private String getNameXml() {
-		String nameXml = view.getNameXml();
+		String nameXml = javaTracerView.getNameXml();
 		if (nameXml.equals(""))
 			nameXml = "default";
 		return nameXml;
@@ -103,14 +109,16 @@ public class TracerController {
 	}
 	
 	
-	public void finishedTrace(String nameXlm) {
+	public void finishedTrace() {
 		
-		
-			this.traceInspectorWriter = new TraceInspectorWriter(nameXlm);
+		if (lastConfig.isProfiling_mode()){
+			profilerController.showProfile();			
+		} else {
+			traceInspectorWriter = new TraceInspectorWriter(lastConfig.getNameXml());
 			traceInspectorWriter.generateFinalTrace();
-			view.finishedTrace();
-		
-		
+			javaTracerView.finishedTrace();
+		}
+
 	}
 	
 	public void selectedPath(String path){
@@ -122,10 +130,10 @@ public class TracerController {
 			classes.add(file.getName());
 		} else {
 			classes = classFinder.getAllClasesFromFile(file);
-			view.enableMainClassCombo();
+			javaTracerView.enableMainClassCombo();
 		}
 	
-		view.loadClasses(classes);
+		javaTracerView.loadClasses(classes);
 	}
 	
 	

@@ -1,15 +1,20 @@
 package com.javatracer.model;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import com.general.model.configuration.JavaTracerConfiguration;
+import com.javatracer.controller.JavaTracerController;
 import com.javatracer.controller.RunConfiguration;
-import com.javatracer.controller.TracerController;
+import com.profiler.model.Profiler;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.connect.*;
+import com.sun.jdi.connect.Connector;
+import com.sun.jdi.connect.IllegalConnectorArgumentsException;
+import com.sun.jdi.connect.LaunchingConnector;
+import com.sun.jdi.connect.VMStartException;
 
 /**
 * This program traces the execution of another program.
@@ -38,18 +43,8 @@ public class Tracer {
     // Class patterns for which we don't want events
     
    private String[] excludes;
-    
-	private TracerController tracerController;
+   private JavaTracerController tracerController;
    
-    private static final int BUFFER_SIZE = 2048;
-    
-    
-    
-    public Tracer(TracerController tracerController) {
-		this.tracerController = tracerController;
-  	}
-
-
     /**
 	  * Parse the command line arguments.
       * Launch target VM.
@@ -59,11 +54,24 @@ public class Tracer {
     public void trace(RunConfiguration config) {
 
     	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
-    	excludes=configuration.getExcludes();	
+    	excludes = configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
         vm = launchTarget(config);
-        generateTrace(writer,config);
+        generateTrace(writer,config,null);
+        
     }
+    
+    public void profile(RunConfiguration config,Profiler profile){
+    	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
+    	excludes = configuration.getExcludes();	
+        PrintWriter writer = new PrintWriter(System.out);
+        vm = launchTarget(config);
+        generateTrace(writer,config,profile);
+    }
+    
+	public void setController(JavaTracerController javaTracerController) {
+		this.tracerController = javaTracerController;	
+	}
 
 	/**
 	* Generate the trace.
@@ -73,10 +81,10 @@ public class Tracer {
 	 * @param config 
 	*/
     
-    void generateTrace(PrintWriter writer, RunConfiguration config) {
+    void generateTrace(PrintWriter writer, RunConfiguration config,Profiler profiler) {
         
     	vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm, excludes,config,false);
+        EventThread eventThread = new EventThread(vm,excludes,config,profiler);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         redirectOutput(config.getNameXml());
@@ -90,7 +98,9 @@ public class Tracer {
             // we don't interrupt
         }
         writer.close();
-        tracerController.finishedTrace(config.getNameXml());
+        
+        if (tracerController != null)
+        	tracerController.finishedTrace();
     }
 
     /**
@@ -172,23 +182,6 @@ public class Tracer {
         optionArg.setValue(options);
         
         return arguments;
-    }
-
-    /**
-	* Print command line usage help
-	*/
-    
-    void usage() {
-        System.err.println("Usage: java Trace <options> <class> <args>");
-        System.err.println("<options> are:");
-        System.err.println(" -output <filename> Output trace to <filename>");
-        System.err.println(" -all Include system classes in output");
-        System.err.println(" -help Print this help message");
-        System.err.println("<class> is the program to trace");
-        System.err.println("<args> are the arguments to <class>");
-    }
-	
-    
-    
+    }    
       
 }
