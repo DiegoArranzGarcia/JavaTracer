@@ -95,7 +95,7 @@ public class XmlManager extends XStreamUtil{
 		Node node = null;
 		
 		try{
-			String expression = ".//" + TAG_METHOD +"[@id=" + id + "]";  
+			String expression = ".//" + TAG_METHOD_CALL +"[@id=" + id + "]";  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
@@ -110,7 +110,7 @@ public class XmlManager extends XStreamUtil{
 	public boolean haveChildrenOfNode(Node node) {
 		boolean childs = false;
 		try{
-			String expression = "./" + TAG_CALLED_METHODS +"/" + TAG_METHOD;  
+			String expression = "./" + TAG_CALLED_METHODS +"/" + TAG_METHOD_CALL;  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    childs = (boolean) xPathExpression.evaluate(node,XPathConstants.BOOLEAN);

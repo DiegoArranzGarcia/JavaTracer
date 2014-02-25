@@ -10,10 +10,12 @@ public class JavaTraceWriter extends XStreamUtil{
 	public static String FILE_EXT = "_temp.xml";
 		
 	private FileWriter fileWriter;
+	private int depth;
 	
 	public JavaTraceWriter(String nameXlm){
 		try {
-			fileWriter = new FileWriter(nameXlm + FILE_EXT);
+			this.fileWriter = new FileWriter(nameXlm + FILE_EXT);
+			this.depth = 1;
 			
 			write(TAG_XML);
 			write(startTag(TAG_TRACE));
@@ -28,13 +30,14 @@ public class JavaTraceWriter extends XStreamUtil{
 		
 		try {
 			String xmlString = xStream.toXML(info);
-			write(startTag(TAG_METHOD));
+			write(startTag(TAG_METHOD_CALL));
 			write(xmlString);
 			write(startTag(TAG_CALLED_METHODS));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		depth++;
 	}
 	
 	public void writeMethodExitInfo(MethodExitInfo info){
@@ -43,11 +46,12 @@ public class JavaTraceWriter extends XStreamUtil{
 			String xmlString = xStream.toXML(info);
 			write(endTag(TAG_CALLED_METHODS));
 			write(xmlString);
-			write(endTag(TAG_METHOD));
+			write(endTag(TAG_METHOD_CALL));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		depth--;
 	}
 	
 	public void writeThreadInfo(ThreadInfo threadInfo){
@@ -65,9 +69,24 @@ public class JavaTraceWriter extends XStreamUtil{
 	public void close(){
 		
 		try {
-			write(endTag(TAG_CALLED_METHODS));
-			write(endTag(TAG_TRACE));
+						
+			while (depth>=1){
+				
+				if (depth == 1){
+					write(endTag(TAG_CALLED_METHODS));
+					write(endTag(TAG_TRACE));
+				} else {
+					write(endTag(TAG_CALLED_METHODS));
+					write(endTag(TAG_METHOD_CALL));
+				}
+				
+				depth--;
+				
+			}			
+
 			fileWriter.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

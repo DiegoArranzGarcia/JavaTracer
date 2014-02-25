@@ -83,13 +83,13 @@ public class TraceInspectorWriter extends XStreamUtil{
 	
 	private void generateXml(Node node) throws Exception{
 				
-		write(startTag(TAG_METHOD + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
+		write(startTag(TAG_METHOD_CALL + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
 		idNode++;
 		
 		writeNodeInfo(node);	
 		writeCalledMethods(node);
 		
-		write(endTag(TAG_METHOD));
+		write(endTag(TAG_METHOD_CALL));
 				
 	}
 
@@ -100,8 +100,13 @@ public class TraceInspectorWriter extends XStreamUtil{
 		List<Data> arguments = getEntryArguments(node);
 		Data this_data = getEntryThis(node);
 		Data return_data = getReturn(node);
-		List<ChangeInfo> changes = getChanges(node);
-				
+		List<ChangeInfo> changes;
+		try{
+			 changes = getChanges(node);
+		} 
+		catch (Exception e){
+			changes = new ArrayList<>();
+		}
 		MethodInfo info = new MethodInfo(name,className,arguments,this_data,return_data,changes);
 		writeXStream(info);		
 	}
