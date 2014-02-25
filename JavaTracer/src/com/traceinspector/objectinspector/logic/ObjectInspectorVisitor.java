@@ -118,11 +118,14 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 	private DefaultMutableTreeNode addVariable(String name,String value,boolean expandable){
 		
 		DefaultMutableTreeNode node;
-		
-		if (currentLevel == 0)
+	
+		if (currentLevel == 0) {
 			node = view.addVariable(name,value,expandable);
-		else 
+		}
+		else {
 			node = view.addVariableToNode(name,value,expandable,getLastParent());
+		}
+			
 		
 		return node;
 	}

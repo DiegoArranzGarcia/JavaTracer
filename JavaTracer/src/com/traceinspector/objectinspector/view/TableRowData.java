@@ -6,6 +6,7 @@ public class TableRowData
 	private String value;
 	private boolean expanded;
 	private boolean isExpandable;
+	private boolean changed;
 
 	public TableRowData(String name, String value,boolean isExpandable)
 	{
@@ -13,6 +14,7 @@ public class TableRowData
 		this.value = value;
 		this.isExpandable = isExpandable;
 		this.expanded = false;
+		this.changed = false;
 	}
 
 	public boolean isExpanded() {
@@ -46,4 +48,12 @@ public class TableRowData
 	public void setExpandable(boolean isExpandable) {
 		this.isExpandable = isExpandable;
 	}
+
+	public boolean isChanged() {
+	    return changed;
+    }
+
+	public void setChanged(boolean changed) {
+	   this. changed = changed;
+    }
 }

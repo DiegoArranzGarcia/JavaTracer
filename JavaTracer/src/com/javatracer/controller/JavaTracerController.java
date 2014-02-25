@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.FileUtilities;
 import com.javatracer.model.Tracer;
 import com.javatracer.model.finders.ClassFinder;
 import com.javatracer.model.finders.JarFinder;
@@ -74,7 +75,7 @@ public class JavaTracerController {
 	private boolean checkIfJar() {
 		String path = javaTracerView.getPath();
 		File file = new File(path);
-		return (file.isFile() && classFinder.getExtension(file).equals("jar"));
+		return (file.isFile() && FileUtilities.getExtension(file).equals("jar"));
 	}
 
 	private String getNameXml() {
@@ -125,7 +126,7 @@ public class JavaTracerController {
 		File file = new File(path);
 		
 		List<String> classes;
-		if (classFinder.getExtension(file).equals("jar")){
+		if (FileUtilities.getExtension(file).equals("jar")){
 			classes = new ArrayList<>();
 			classes.add(file.getName());
 		} else {

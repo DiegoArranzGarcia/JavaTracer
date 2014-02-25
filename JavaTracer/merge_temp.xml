@@ -1,0 +1,5022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<thread>
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+</thread>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>main</methodame>
+  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments/>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>randomizeArray</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>array</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">0</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>randomizeArray</methodName>
+  <className>com.prueba.MergeSort</className>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>array</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>com.prueba.MergeSort</className>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments/>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>5</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>5</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">780</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>mergesort</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>5</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>5</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>merge</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>4</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>4</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>5</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>4</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>4</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>4</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>3</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>4</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>2</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>3</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>1</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>2</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>delete</methodame>
+  <calledFromClass>com.prueba.MergeSort</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>delete</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>0</length>
+    <content/>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>l</name>
+      <className>int</className>
+      <id>0</id>
+      <length>1</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>10</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[5]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[6]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[7]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[8]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[9]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L1</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+    <array-variable>
+      <name>L2</name>
+      <className>int</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>mergesort</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>10</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[5]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[6]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[7]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[8]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[9]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>L</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>merge</methodName>
+  <className>com.prueba.MergeSort</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>int</className>
+    <id>0</id>
+    <length>10</length>
+    <content>
+      <simple-variable>
+        <name>[0]</name>
+        <value class="int">85</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[1]</name>
+        <value class="int">780</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[2]</name>
+        <value class="int">1772</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[3]</name>
+        <value class="int">5150</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[4]</name>
+        <value class="int">5277</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[5]</name>
+        <value class="int">6581</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[6]</name>
+        <value class="int">6629</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[7]</name>
+        <value class="int">6836</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[8]</name>
+        <value class="int">9207</value>
+      </simple-variable>
+      <simple-variable>
+        <name>[9]</name>
+        <value class="int">9938</value>
+      </simple-variable>
+    </content>
+  </return>
+  <object-this class="ignored">
+    <name>this</name>
+    <className>com.prueba.MergeSort</className>
+    <value class="string">ignored</value>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>printArray</methodame>
+  <calledFromClass>com.prueba.MergeSortLauncher</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>array</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>printArray</methodName>
+  <className>com.prueba.MergeSortLauncher</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>array</name>
+      <className>int</className>
+      <id>0</id>
+      <length>10</length>
+      <content>
+        <simple-variable>
+          <name>[0]</name>
+          <value class="int">85</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[1]</name>
+          <value class="int">780</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[2]</name>
+          <value class="int">1772</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[3]</name>
+          <value class="int">5150</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[4]</name>
+          <value class="int">5277</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[5]</name>
+          <value class="int">6581</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[6]</name>
+          <value class="int">6629</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[7]</name>
+          <value class="int">6836</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[8]</name>
+          <value class="int">9207</value>
+        </simple-variable>
+        <simple-variable>
+          <name>[9]</name>
+          <value class="int">9938</value>
+        </simple-variable>
+      </content>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>com.prueba.MergeSortLauncher</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>0</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+</trace>

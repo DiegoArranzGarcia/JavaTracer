@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import com.general.model.FileUtilities;
 import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import com.sun.org.apache.bcel.internal.classfile.Method;
 import com.sun.org.apache.bcel.internal.generic.Type;
 
-public class ClassFinder extends Finder{
+public class ClassFinder {
 	
 	public static String TEMP = "temp_";
 	public static String FILES = "_files";
@@ -30,7 +31,7 @@ public class ClassFinder extends Finder{
 		
 		try {
 			
-			if (getExtension(file).equals("jar")){
+			if (FileUtilities.getExtension(file).equals("jar")){
 				classes = getClassFromJar(file);
 			} else {
 				classes = getClassesFromFile(file);
@@ -46,8 +47,7 @@ public class ClassFinder extends Finder{
 	}
 
 	private List<String> getClassFromJar(File file) {
-		
-		String temp_jar_directory = TEMP + getFileNameWithoutExtension(file.getName()) + FILES;
+		String temp_jar_directory = TEMP + FileUtilities.getFileNameWithoutExtension(file.getName()) + FILES;
 		extractJarOnDirectory(file,temp_jar_directory);
 		List<String> classes = getAllClasesFromFile(new File(temp_jar_directory));
 		
@@ -128,8 +128,7 @@ public class ClassFinder extends Finder{
 		}
 		
 		else if (file.isFile()) {
-
-			String extension = getExtension(file);
+			String extension = FileUtilities.getExtension(file);
 			
 			if (extension.equals("class")){
 				

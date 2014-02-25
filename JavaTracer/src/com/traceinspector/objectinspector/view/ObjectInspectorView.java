@@ -2,6 +2,7 @@ package com.traceinspector.objectinspector.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.table.TableCellRenderer;
@@ -10,8 +11,8 @@ import javax.swing.tree.TreePath;
 
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.JXTreeTable;
-import org.jdesktop.swingx.decorator.Highlighter;
-import org.jdesktop.swingx.decorator.HighlighterFactory;
+import org.jdesktop.swingx.decorator.*;
+import org.jdesktop.swingx.decorator.ComponentAdapter;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.StringValue;
 
@@ -35,8 +36,23 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 		model = new MyTreeModel(rootNode);
 		binTree = new JXTreeTable(model);
     	
-    	Highlighter highligher = HighlighterFactory.createSimpleStriping(HighlighterFactory.BEIGE);
-    	binTree.setHighlighters(highligher);
+		HighlightPredicate predicate = new HighlightPredicate() {
+		   
+		   public boolean isHighlighted(Component arg0, ComponentAdapter arg1) {
+		    try {
+		    	JXTreeTable table = (JXTreeTable)arg1.getComponent();
+		        TreePath path = table.getPathForRow(arg1.row);
+		        TableRowData data = (TableRowData) ((DefaultMutableTreeNode)path.getLastPathComponent()).getUserObject();
+		     return data.isChanged();
+		    } catch (Exception e){
+		     return false;
+		    }
+		   }
+		  };
+		  
+		Highlighter highligher = new ColorHighlighter(predicate,Color.GREEN,Color.BLUE);
+	     binTree.setHighlighters(highligher);
+	     
         binTree.setShowsRootHandles(false);
         configureCommonTableProperties(binTree);
         binTree.setTreeCellRenderer(new TreeTableCellRenderer());        	
@@ -44,6 +60,8 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
         return binTree;
     }
     
+	
+	
     private static void  configureCommonTableProperties(JXTable table) {
         table.setColumnControlVisible(true);
         StringValue toString = new StringValue() {
@@ -70,12 +88,24 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 	}
 
 	public DefaultMutableTreeNode addVariable(String name, String value,boolean isExpandable) {
-		
-		DefaultMutableTreeNode node = model.addNodeToRoot(name,value,isExpandable);		
+	
+		DefaultMutableTreeNode node = model.addNodeToRoot(name,value,isExpandable);
+	
 		binTree.updateUI();
 		return node;
 	}
 
+	public List<DefaultMutableTreeNode> getChildrenRoot() {
+		List<DefaultMutableTreeNode>children = 	 model.getRootChild();
+		
+		return children;
+	}
+	
+	public List<DefaultMutableTreeNode> getChildrenaAt(DefaultMutableTreeNode node) {
+		List<DefaultMutableTreeNode>children = 	 model.getChildrenAt(node);
+		
+		return children;
+	}
 	
 	public DefaultMutableTreeNode addVariableToNode(String name, String value,boolean isExpandable,DefaultMutableTreeNode node) {
 		
@@ -83,6 +113,8 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 		binTree.updateUI();
 		return addedNode;
 	}
+	
+
 
 	public void clear() {
 				

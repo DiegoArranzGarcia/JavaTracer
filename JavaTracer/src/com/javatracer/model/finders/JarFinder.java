@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JarFinder extends Finder{
+import com.general.model.FileUtilities;
+
+public class JarFinder {
 
 	public String[] getJarDirectories(String path) {
 		
@@ -31,7 +33,7 @@ public class JarFinder extends Finder{
 			
 		}
 		
-		else if (file.isFile() && getExtension(file).equals("jar")){
+		else if (file.isFile() && FileUtilities.getExtension(file).equals("jar")){
 			if (!jars.contains(file.getParent()))
 				jars.add(file.getParent());
 		}

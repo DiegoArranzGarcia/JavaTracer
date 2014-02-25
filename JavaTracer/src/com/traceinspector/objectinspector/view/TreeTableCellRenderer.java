@@ -22,12 +22,16 @@ public class TreeTableCellRenderer extends DefaultTreeCellRenderer {
 	public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,
 			int row,boolean hasFocus) {
 
-        super.getTreeCellRendererComponent(tree, value, sel,expanded,leaf,row,hasFocus);
+		super.getTreeCellRendererComponent(tree, value, sel,expanded,leaf,row,hasFocus);
+
+    
+      
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)value;
         
         if(node != null && node.getUserObject() != null && (node.getUserObject() instanceof TableRowData))
         {
-        	TableRowData item = (TableRowData)(node.getUserObject());
+        	TableRowData item = (TableRowData)(node.getUserObject()); 
+     
         	setText(item.getName());
         	if (item.isExpandable())
         	{

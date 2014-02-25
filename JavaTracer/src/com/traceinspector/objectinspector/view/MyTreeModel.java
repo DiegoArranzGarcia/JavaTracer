@@ -1,5 +1,8 @@
 package com.traceinspector.objectinspector.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
@@ -67,15 +70,51 @@ public class MyTreeModel extends AbstractTreeTableModel
 		return null;
 	}
 	
+	
+	//Get children children
+	public List<DefaultMutableTreeNode> getRootChild() {
+		List<DefaultMutableTreeNode>children = new ArrayList<>();
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
+		
+		int numChildren = getChildCount(root);
+		int i = 0;
+		while (i<numChildren) {
+			children.add((DefaultMutableTreeNode) getChild(root, i));
+			i++;
+		}
+		
+		return children;
+		
+	}
+	
+	//Get children from node
+	public List<DefaultMutableTreeNode> getChildrenAt(DefaultMutableTreeNode node) {
+		List<DefaultMutableTreeNode>children = new ArrayList<>();
+		
+		int numChildren = getChildCount(node);
+		int i = 0;
+		while (i<numChildren) {
+			children.add((DefaultMutableTreeNode) getChild(node, i));
+			i++;
+		}
+		
+		return children;
+		
+	}
+	
+	
 	public Object getChild(Object arg0, int arg1)
 	{
-		
 		if(arg0 instanceof DefaultMutableTreeNode)
-		{
-			DefaultMutableTreeNode nodes = (DefaultMutableTreeNode)arg0;
-			return nodes.getChildAt(arg1);
-		}
-		return null;
+		  {
+		   DefaultMutableTreeNode nodes = (DefaultMutableTreeNode)arg0;
+		   try{
+		    return nodes.getChildAt(arg1);
+		   } catch (Exception e){
+		    return null;
+		   }
+		  }
+		  return null;
 	}
 
 	public int getChildCount(Object arg0)
@@ -106,6 +145,7 @@ public class MyTreeModel extends AbstractTreeTableModel
 			
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
 		root.removeAllChildren();
+		
 			
 	}
 	 
