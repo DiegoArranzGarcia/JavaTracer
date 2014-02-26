@@ -24,7 +24,7 @@ import org.jdesktop.swingx.decorator.Highlighter;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.StringValue;
 
-import com.inspector.objectinspector.model.ObjectInspector;
+import com.inspector.objectinspector.controller.ObjectInspectorController;
 
 @SuppressWarnings("serial")
 public class ObjectInspectorView extends JScrollPane implements KeyListener,MouseListener{
@@ -32,13 +32,13 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 	static MyTreeModel model;
 	static JXTreeTable binTree;
 	
-	public ObjectInspectorView(ObjectInspector controller) {
+	public ObjectInspectorView(ObjectInspectorController controller) {
    	    super(createTable(controller));   	    
    	    binTree.addMouseListener(this);
    	    binTree.addKeyListener(this);
 	}
 
-	private static Component createTable(ObjectInspector controller){
+	private static Component createTable(ObjectInspectorController controller){
 		
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(new TableRowData("Name","Value",true));
 		model = new MyTreeModel(rootNode);
@@ -103,15 +103,17 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 		return node;
 	}
 
-	public List<DefaultMutableTreeNode> getChildrenRoot() {
-		List<DefaultMutableTreeNode>children = 	 model.getRootChild();
-		
+	public List<DefaultMutableTreeNode> getChildrenOfRoot() {
+		List<DefaultMutableTreeNode>children = model.getRootChild();
 		return children;
 	}
 	
-	public List<DefaultMutableTreeNode> getChildrenaAt(DefaultMutableTreeNode node) {
-		List<DefaultMutableTreeNode>children = 	 model.getChildrenAt(node);
-		
+	public DefaultMutableTreeNode getRoot(){
+		return (DefaultMutableTreeNode) model.getRoot();
+	}
+	
+	public List<DefaultMutableTreeNode> getChildrenOf(DefaultMutableTreeNode node) {
+		List<DefaultMutableTreeNode>children = model.getChildrenOf(node);
 		return children;
 	}
 	

@@ -9,7 +9,7 @@ import com.general.model.variables.data.Data;
 import com.general.model.variables.data.StringData;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.writers.JavaTraceWriter;
+import com.javatracer.model.writers.TraceWriter;
 import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.ClassNotLoadedException;
 import com.sun.jdi.Field;
@@ -29,9 +29,9 @@ import com.sun.jdi.event.MethodExitEvent;
 public class ExceptionManager {
 	
 	private ClassUtils utils;
-	private JavaTraceWriter writer;
+	private TraceWriter writer;
 	
-	public ExceptionManager(JavaTraceWriter writer, ClassUtils utils){
+	public ExceptionManager(TraceWriter writer, ClassUtils utils){
 		this.utils=utils;
 	    this.writer=writer;
 	}

@@ -1,4 +1,4 @@
-package com.inspector.objectinspector.model;
+package com.inspector.objectinspector.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,12 @@ import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
+import com.inspector.objectinspector.model.ChangeInfoVisitor;
+import com.inspector.objectinspector.model.VariablesVisitor;
 import com.inspector.objectinspector.view.ObjectInspectorView;
 import com.inspector.objectinspector.view.TableRowData;
 
-public class ObjectInspector {
+public class ObjectInspectorController {
 	
 	private InspectorController controller;
 	private TreeManager treeManager;
@@ -23,7 +25,7 @@ public class ObjectInspector {
 	private List<Data> variables;
 	private ObjectInspectorView view;
 	
-	public ObjectInspector(InspectorController controller, TreeManager treeManager){
+	public ObjectInspectorController(InspectorController controller,TreeManager treeManager){
 		
 		this.controller = controller;
 		this.treeManager = treeManager;
@@ -42,7 +44,7 @@ public class ObjectInspector {
 
 	public void addNodeInfo(MethodInfo method) {
 		
-		InfoVisitor visitor = new ObjectInspectorVisitor(view);
+		InfoVisitor visitor = new VariablesVisitor(view.getRoot());
 		List<Data> arguments = method.getArguments();
 		Data thisValue = method.getThis_data();
 		Data returnValue = method.getReturn_data();
@@ -54,9 +56,7 @@ public class ObjectInspector {
 		if (returnValue != null){
 			returnValue.accept(visitor);
 			variables.add(returnValue);
-		}
-		
-		
+		}	
 		
 		for (int i=0;i<arguments.size();i++){
 			Data data = arguments.get(i);
@@ -65,11 +65,8 @@ public class ObjectInspector {
 		}
 		
 	
-		List <DefaultMutableTreeNode>rootChildren =view.getChildrenRoot(); 
-		
+		List <DefaultMutableTreeNode> rootChildren =view.getChildrenOfRoot(); 
 		proccesChange(method);
-		
-	
 		view.showVariables();
 	}
 	
@@ -80,24 +77,33 @@ public class ObjectInspector {
     private void proccesChange(MethodInfo method) {
     	
     	List<ChangeInfo> changesList = method.getChanges();
+    	
     	int i = 0;
     	while (i<changesList.size()) {
-    		String change = changesList.get(i).getVariable();
+    		ChangeInfo changeInfo = changesList.get(i);
+    		String change = changeInfo.getVariable();
     		List<String> parseChange= parseMethod(change);
     		DefaultMutableTreeNode node = foundNode(parseChange);
     		TableRowData nodeInfo = (TableRowData)node.getUserObject();
     		nodeInfo.setChanged(true); 
+    		modifyTable(node,changeInfo.getValue());
     		i++;
     	}
 	    
     }
     
-	    /**
+    private void modifyTable(DefaultMutableTreeNode node, Data value) {
+    	ChangeInfoVisitor changeVisitor = new ChangeInfoVisitor();
+    	changeVisitor.setRootNode(node);
+    	value.accept(changeVisitor);
+    }
+
+		/**
 	 * @param parseChange
 	 * @return
 	 */
 	private DefaultMutableTreeNode foundNode(List<String> parseChange) {
-		List<DefaultMutableTreeNode> children = view.getChildrenRoot();
+		List<DefaultMutableTreeNode> children = view.getChildrenOfRoot();
 		DefaultMutableTreeNode node = null ;
 		int i = 0;
 		int j = 0;
@@ -110,9 +116,9 @@ public class ObjectInspector {
 				found = parseChange.get(i).equals(nodeInfo.getName());
 				if (found) {
 					node = children.get(j);
-					children = view.getChildrenaAt(node);
-					
-				} else j++;
+					children = view.getChildrenOf(node);
+				} else 
+					j++;
 			}
 			i++;
 		}
@@ -139,7 +145,6 @@ public class ObjectInspector {
 			if (element.contains("]")) {
 				array.set(i, "["+element);
 			}
-			
 		} 
     	
 		return array;

@@ -4,11 +4,12 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.general.model.data.MethodInfo;
 import com.general.presenter.JavaTracerPresenter;
 import com.inspector.model.TreeManager;
-import com.inspector.objectinspector.model.ObjectInspector;
+import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.model.TreeInspector;
@@ -20,7 +21,7 @@ public class InspectorController {
 	private InpectorView view;
 	
 	private TreeInspector treeInspector;
-	private ObjectInspector objectInspector;
+	private ObjectInspectorController objectInspector;
 	
 	private	TreeManager treeManager;
 
@@ -49,7 +50,7 @@ public class InspectorController {
 				treeInspector =  new TreeInspector(this,treeManager);				
 				view.loadTreeInspector(treeInspector.getView());
 				
-				objectInspector = new ObjectInspector(this,treeManager);
+				objectInspector = new ObjectInspectorController(this,treeManager);
 				view.loadObjectInspector(objectInspector.getView());
 				
 			} catch (IOException e) {
@@ -79,4 +80,5 @@ public class InspectorController {
 		view.setVisible(false);
 		controller.back();		
 	}
+
 }

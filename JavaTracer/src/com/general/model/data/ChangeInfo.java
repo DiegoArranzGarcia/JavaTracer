@@ -1,11 +1,13 @@
 package com.general.model.data;
 
+import com.general.model.variables.data.Data;
+
 public class ChangeInfo {
 	
 	String variable;
-	Object value;
+	Data value;
 
-	public ChangeInfo(String variable,Object value){
+	public ChangeInfo(String variable,Data value){
 		this.variable = variable;
 		this.value = value;
 	}
@@ -17,11 +19,11 @@ public class ChangeInfo {
 	    this.variable = variable;
     }
 
-	public Object getValue() {
+	public Data getValue() {
 	    return value;
     }
 
-	public void setValue(Object value) {
+	public void setValue(Data value) {
 	    this.value = value;
     }
 }

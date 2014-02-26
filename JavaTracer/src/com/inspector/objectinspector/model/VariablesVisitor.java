@@ -13,34 +13,34 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.view.ObjectInspectorView;
+import com.inspector.objectinspector.view.TableRowData;
+import com.javatracer.model.ChangeDetector;
 
-public class ObjectInspectorVisitor implements InfoVisitor{
+public class VariablesVisitor implements InfoVisitor{
 	
-	private static String LENGTH = "length";
+	private static String LENGTH = ChangeDetector.LENGTH;
 	private static String VALUE = "value";
 	private static String DOUBLE_QUOTES = "\"";
 	private static String EMPTY = "";
 	
-	private ObjectInspectorView view;
-	private int currentLevel;
 	private List<DefaultMutableTreeNode> parents;
+	private MainInfoVisitor mainInfoVisitor;
 	
-	public ObjectInspectorVisitor(ObjectInspectorView view){
-		this.view = view;
-		this.currentLevel = 0;
+	public VariablesVisitor(DefaultMutableTreeNode rootNode){
 		this.parents = new ArrayList<>();
+		this.parents.add(rootNode);
+		this.mainInfoVisitor = new MainInfoVisitor();
 	}
 
 	public void visit(ArrayData array) {
 		
-		DefaultMutableTreeNode node = addVariable(array.getName(),getMainInfo(array),true);
+		mainInfoVisitor.visit(array);
+		DefaultMutableTreeNode node = addVariable(array.getName(),mainInfoVisitor.getInfo(),true);
 				
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
-		currentLevel++;
 	
-		view.addVariableToNode(LENGTH,Integer.toString(array.getLength()),false,getLastParent());
+		addVariable(LENGTH,Integer.toString(array.getLength()),false);
 			
 		List<Data> array_values = array.getValue();
 		
@@ -50,34 +50,37 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 				data.accept(this);
 			}
 		} else {
-			view.addVariableToNode(EMPTY,EMPTY,false,getLastParent());
+			addVariable(EMPTY,EMPTY,false);
 		}
 		
 		removeLastParent();
-		currentLevel--;
-	
+
 	}
 
 	public void visit(StringData string) {
 		
-		DefaultMutableTreeNode node = addVariable(string.getName(),getMainInfo(string),true);
-		view.addVariableToNode(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES,false,node);
+		mainInfoVisitor.visit(string);
+		DefaultMutableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo(),true);
+		parents.add(node);
+		addVariable(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES,false);
+		removeLastParent();
 		
 	}
 
 	public void visit(NullData null_data) {
 		
-		addVariable(null_data.getName(),getMainInfo(null_data),false);
+		mainInfoVisitor.visit(null_data);
+		addVariable(null_data.getName(),mainInfoVisitor.getInfo(),false);
 	
 	}
 
 	public void visit(ObjectData object) {
 		
-		DefaultMutableTreeNode node = addVariable(object.getName(),getMainInfo(object),true);
+		mainInfoVisitor.visit(object);
+		DefaultMutableTreeNode node = addVariable(object.getName(),mainInfoVisitor.getInfo(),true);
 		
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
-		currentLevel++;
 				
 		List<Data> object_fields = object.getFields();
 		List<Data> object_inherit = object.getInheritData();
@@ -91,33 +94,31 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 			addListToNode("constants",object_constant);
 						
 		removeLastParent();
-		currentLevel--;
 		
 	}
 
 	private void addListToNode(String string, List<Data> list_data) {
 		boolean expandable = !list_data.isEmpty();
-		DefaultMutableTreeNode node = view.addVariableToNode(string,EMPTY,expandable,getLastParent());
+		DefaultMutableTreeNode node = addVariable(string,EMPTY,expandable);
 		parents.add(node);
-		currentLevel++;
-		
+
 		for (int i=0;i<list_data.size();i++){
 			Data data = list_data.get(i);
 			data.accept(this);
 		} 
 			
 		removeLastParent();
-		currentLevel--;
+
 	}
 
 	public void visit(SimpleData simple_data) {
-	
-		addVariable(simple_data.getName(),getMainInfo(simple_data),false);
-		
+		mainInfoVisitor.visit(simple_data);
+		addVariable(simple_data.getName(),mainInfoVisitor.getInfo(),false);
 	}
 
 	public void visit(IgnoredData ignored_data) {
-		addVariable(ignored_data.getName(),getMainInfo(ignored_data),false);
+		mainInfoVisitor.visit(ignored_data);
+		addVariable(ignored_data.getName(),mainInfoVisitor.getInfo(),false);
 	}
 	
 	// Add row to the tabe
@@ -125,15 +126,12 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 	private DefaultMutableTreeNode addVariable(String name,String value,boolean expandable){
 		
 		DefaultMutableTreeNode node;
-	
-		if (currentLevel == 0) {
-			node = view.addVariable(name,value,expandable);
-		}
-		else {
-			node = view.addVariableToNode(name,value,expandable,getLastParent());
-		}
-			
+		DefaultMutableTreeNode parent = getLastParent();
+		TableRowData data = new TableRowData(name, value, expandable);
 		
+		node = new DefaultMutableTreeNode(data);
+		parent.add(node);
+					
 		return node;
 	}
 	
@@ -147,41 +145,4 @@ public class ObjectInspectorVisitor implements InfoVisitor{
 		return parents.get(parents.size()-1);
 	}
 	
-	
-	// GetMainInfo methods
-	
-	public String getMainInfo(SimpleData info){
-		return info.getValue().toString();
-	}
-	
-	public String getMainInfo(ArrayData info) {
-		return getSimpleClassName(info.getClassName()) + "[] (id="+ info.getId() +")";
-	}
-
-	public String getMainInfo(StringData info) {
-		return "String (id=" + info.getId() + ")";
-	}
-
-	public String getMainInfo(NullData info) {
-		return "null";
-	}
-
-	public String getMainInfo(ObjectData info) {
-		return getSimpleClassName(info.getClassName()) + " (id=" + info.getId() + ")";
-	}
-
-	public String getMainInfo(IgnoredData ignoredClass){
-		return "ignored";
-	}
-	
-	public String getSimpleClassName(String completeClass){
-		String result = "";
-		if (completeClass.contains("."))
-			result = completeClass.substring(completeClass.lastIndexOf('.')+1,completeClass.length());
-		else 
-			result = completeClass;
-		
-		return result;
-	}
-
 }

@@ -5,14 +5,14 @@ import java.io.FileWriter;
 import com.general.model.data.ThreadInfo;
 import com.javatracer.model.methods.data.*;
 
-public class JavaTraceWriter extends XStreamUtil{
+public class TraceWriter extends XStreamUtil{
 
 	public static String FILE_EXT = "_temp.xml";
 		
 	private FileWriter fileWriter;
 	private int depth;
 	
-	public JavaTraceWriter(String nameXlm){
+	public TraceWriter(String nameXlm){
 		try {
 			this.fileWriter = new FileWriter(nameXlm + FILE_EXT);
 			this.depth = 1;

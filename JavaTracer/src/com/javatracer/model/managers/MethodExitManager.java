@@ -6,16 +6,16 @@ import java.util.List;
 import com.general.model.variables.data.Data;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodExitInfo;
-import com.javatracer.model.writers.JavaTraceWriter;
+import com.javatracer.model.writers.TraceWriter;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
 
 public class MethodExitManager{
 		
 	private ClassUtils utils; 
-	private JavaTraceWriter writer;
+	private TraceWriter writer;
 	
-	public MethodExitManager(JavaTraceWriter writer, ClassUtils utils)
+	public MethodExitManager(TraceWriter writer, ClassUtils utils)
 	{
 		this.writer = writer;
 		this.utils = utils;

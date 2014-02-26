@@ -12,7 +12,7 @@ import com.javatracer.model.managers.ExceptionManager;
 import com.javatracer.model.managers.MethodEntryManager;
 import com.javatracer.model.managers.MethodExitManager;
 import com.javatracer.model.managers.ThreadDeathManager;
-import com.javatracer.model.writers.JavaTraceWriter;
+import com.javatracer.model.writers.TraceWriter;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.ThreadReference;
@@ -63,7 +63,7 @@ public class EventThread extends Thread {
     private MethodExitManager methodexit;
     //private StepManager step;
     //private PrepareManager prepare;
-    private JavaTraceWriter writer;
+    private TraceWriter writer;
 
     EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
@@ -73,7 +73,7 @@ public class EventThread extends Thread {
         this.enableProfiling = config.isProfiling_mode();
         this.profiler = profiler;			
         
-        writer = new JavaTraceWriter(config.getNameXml());
+        writer = new TraceWriter(config.getNameXml());
         writer.writeThreadInfo(new ThreadInfo());
                 
         //news Managers with virtual Machine  

@@ -28,7 +28,7 @@ public class InspectorWriter extends XStreamUtil{
 			FileWriter fileWriter = new FileWriter(nameXlm + FILE_EXT);
 			this.bufferedWriter = new BufferedWriter(fileWriter);
 			
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(nameXlm + JavaTraceWriter.FILE_EXT);
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(nameXlm + TraceWriter.FILE_EXT);
 			xPath = XPathFactory.newInstance().newXPath();
 			this.idNode = 1;
 			

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.general.model.data.ChangeInfo;
 import com.general.model.variables.data.*;
-
+	
 /**
  * Class used to detect changes between Data objects. The changes are return in
  * ChangeInfo objects.
@@ -13,6 +13,7 @@ import com.general.model.variables.data.*;
 
 public class ChangeDetector {
 
+	public static String LENGTH = "length";
 	/**
 	 * This method returns the changes between the two variables. The changes are made by comparing 
 	 * the second variable in respect of the first variable. Depending on the type of the variables,
@@ -101,6 +102,7 @@ public class ChangeDetector {
 			ChangeInfo change = new ChangeInfo(name,variable2);
 			changes.add(change);
 		}
+		
 		return changes;
 	}
 
@@ -174,9 +176,9 @@ public class ChangeDetector {
 					List<ChangeInfo> fieldChanges;
 					
 					if (field1 instanceof SimpleData && field2 instanceof SimpleData)
-						fieldChanges = getChangesSimpleData(name + "." + field1.getName(),(SimpleData)field1,(SimpleData)field2);
+						fieldChanges = getChangesSimpleData(getFieldName(name,variable1,field1),(SimpleData)field1,(SimpleData)field2);
 					else 
-						fieldChanges = getChangesBetweenRec(name + "." + field1.getName() , field1, field2);
+						fieldChanges = getChangesBetweenRec(getFieldName(name,variable1,field1), field1, field2);
 					
 					changes.addAll(fieldChanges);
 									
@@ -187,6 +189,17 @@ public class ChangeDetector {
 		}
 			
 		return changes;
+	}
+
+	private String getFieldName(String name, ObjectData object,Data field1) {
+		String fieldName = "";
+		if (object.getInheritData().contains(field1))
+			fieldName = name + "." + "inherit" + "."  + field1.getName();
+		else if (object.getConstantData().contains(field1))
+			fieldName = name + "." + "constants" + "."  + field1.getName();
+		else if (object.getFields().contains(field1))
+			fieldName = name + "." + "fields" + "."  + field1.getName();
+		return fieldName;
 	}
 
 	/**
@@ -208,65 +221,32 @@ public class ChangeDetector {
 		List<Data> values1 = variable1.getValue();
 		List<Data> values2 = variable2.getValue();
 		
-		if (variable1.getLength()<variable2.getLength()){
+		//The array hasn't been recreated.
+		if (variable1.getId() == variable2.getId()){
 			
-			changes = compareTo(name, values1, values2,variable1.getLength());
+			for (int i=0;i<variable1.getLength();i++){
+				
+				Data value1 = values1.get(i);
+				Data value2 = values2.get(i);
 			
-			for (int i=variable1.getLength();i<variable2.getLength();i++){
-				ChangeInfo change = new ChangeInfo(name + "[" + i + "]" ,values2.get(i));
-				changes.add(change);
+				List<ChangeInfo> fieldChanges;
+					
+				if (value1 instanceof SimpleData || value2 instanceof SimpleData)
+					fieldChanges = getChangesSimpleData(name + "[" + i + "]", (SimpleData)value1, (SimpleData)value2);
+				else
+					fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);				
+					
+				changes.addAll(fieldChanges);
+							
 			}
-			
-			ChangeInfo changeSize = new ChangeInfo(name + ".lenght",variable2.getLength());
-			changes.add(changeSize);
-						
-		} else if (variable2.getLength()<variable1.getLength()) {
-			
-			changes = compareTo(name, values1, values2,variable2.getLength());
-			
-			ChangeInfo changeSize = new ChangeInfo(name + ".lenght",variable2.getLength());
-			changes.add(changeSize);
 			
 		} else {
 			
-			changes = compareTo(name,values1,values2,variable1.getLength());
+			ChangeInfo change = new ChangeInfo(name,variable2);
+			changes.add(change);
 			
 		}
 
-		return changes;
-	}
-
-	/**
-	 * Private method to compare arrays. It compares the arrays from the position 0 to the position given in the last argument
-	 * and returns the changes from the 0 position to the position given.
-	 * 
-	 * @param name - The name of the value.
-	 * @param values1 - The list of values of the first array.
-	 * @param values2 - The list of values of the second array.
-	 * @param to - The position limit of the array.
-	 * @return A list with the changes in the positions (0-to)
-	 */
-	
-	private List<ChangeInfo> compareTo(String name,List<Data> values1,List<Data> values2, int to) {
-		
-		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
-		
-		for (int i=0;i<to;i++){
-			
-			Data value1 = values1.get(i);
-			Data value2 = values2.get(i);
-		
-			List<ChangeInfo> fieldChanges;
-				
-			if (value1 instanceof SimpleData || value2 instanceof SimpleData)
-				fieldChanges = getChangesSimpleData(name + "[" + i + "]", (SimpleData)value1, (SimpleData)value2);
-			else
-				fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);				
-				
-			changes.addAll(fieldChanges);
-						
-		}
-		
 		return changes;
 	}
 	

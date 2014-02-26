@@ -88,7 +88,7 @@ public class MyTreeModel extends AbstractTreeTableModel
 	}
 	
 	//Get children from node
-	public List<DefaultMutableTreeNode> getChildrenAt(DefaultMutableTreeNode node) {
+	public List<DefaultMutableTreeNode> getChildrenOf(DefaultMutableTreeNode node) {
 		List<DefaultMutableTreeNode>children = new ArrayList<>();
 		
 		int numChildren = getChildCount(node);

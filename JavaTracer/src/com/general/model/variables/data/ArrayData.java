@@ -12,6 +12,7 @@ public class ArrayData extends Data{
 
 	public ArrayData(String name, long id,List<Data> value,int lenght,String className) {
 		this.name = name;
+		this.id = id;
 		this.value = value;
 		this.length = lenght;
 		this.className = className;

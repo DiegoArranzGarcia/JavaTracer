@@ -6,7 +6,7 @@ import java.util.List;
 import com.general.model.variables.data.Data;
 import com.javatracer.model.ClassUtils;
 import com.javatracer.model.methods.data.MethodEntryInfo;
-import com.javatracer.model.writers.JavaTraceWriter;
+import com.javatracer.model.writers.TraceWriter;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodEntryEvent;
 
@@ -17,7 +17,7 @@ import com.sun.jdi.event.MethodEntryEvent;
 public class MethodEntryManager{
 	
 	private ClassUtils utils;
-	private JavaTraceWriter writer;
+	private TraceWriter writer;
 			
 	/**
 	 * Constructor that need a DataBaseWriter to register the method information. Excludes classes are not
@@ -25,7 +25,7 @@ public class MethodEntryManager{
 	 * @param dbw
 	 * @param utils 
 	 */
-	public MethodEntryManager(JavaTraceWriter writer, ClassUtils utils)
+	public MethodEntryManager(TraceWriter writer, ClassUtils utils)
 	{
 		this.writer = writer;
 		this.utils = utils;
