@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.imageresources.ImageLoader;
+import com.javatracer.arguments.view.ArgumentsView;
 import com.javatracer.controller.TracerController;
 
 @SuppressWarnings("serial")
@@ -51,7 +52,6 @@ public class TracerView extends JFrame {
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass,labelXml;
 	private TracerController controller;
-	private LoadingMain loading;
 	private JCheckBox profilingCheckBox;
 	private Container contentPane;
 		
@@ -91,8 +91,7 @@ public class TracerView extends JFrame {
 		addArgument.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				MainArgumentesView mainArgumentsView = new MainArgumentesView();
-				mainArgumentsView.setVisible(true); 
+				controller.clickedEditArguments();
 			}
 		});
 		

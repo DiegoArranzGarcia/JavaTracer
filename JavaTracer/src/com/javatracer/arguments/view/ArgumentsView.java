@@ -1,4 +1,4 @@
-package com.javatracer.view;
+package com.javatracer.arguments.view;
 import java.awt.Container;
 import java.awt.event.*;
 
@@ -6,10 +6,23 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.javatracer.arguments.presenter.ArgumentsPresenterInterface;
+
 
 @SuppressWarnings("serial")
-public class MainArgumentesView  extends JFrame implements ActionListener, MouseListener, DocumentListener{
+public class ArgumentsView  extends JFrame implements ActionListener, MouseListener, DocumentListener, ArgumentsViewInterface{
 
+	private static String WINDOWS_TITLE = "Add main arguments";
+	
+	private static String ADD = "Add";
+	private static String DELETE = "Delete";
+	private static String DELETE_ALL = "Delete All";
+	private static String SAVE = "Save";
+	
+	private static String ERROR = "Error";
+	private static String ERROR_EMPTY_DELETE = "You must select an argument";
+	private static String ERROR_EMPTY_ADD = "You must write an argument";
+	
 	private static int FIRST_COLUM = 20;
 	private static int SECOND_COLUM = 510; 
 	private static int WEIGHT_TEXT = 435;
@@ -17,38 +30,29 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 	private static int HIGH_COMPONENTS= 24;
 	private static int FIRST_ROW =  30;
 	private static int BETWEEN_DISTANCE = 40;
+	
 	private Container content;
 	private JButton add, deleteAll, deleteElement,saveArguments,edit;
 	private JLabel  message;
 	private JTextField argument;
-	@SuppressWarnings("rawtypes")
-    private JList argumentsList;
-	@SuppressWarnings("rawtypes")
-    private DefaultListModel model;
+    private JList<String> argumentsList;
+    private DefaultListModel<String> model;
 	private JScrollPane scrollLista;
-	private String[] mainArguments;
-/*	private String actualDate;
-	private int actIndex;*/
-	
 
+	private ArgumentsPresenterInterface presenter;
 	
-	public MainArgumentesView(){
+	public ArgumentsView(){
 		/*initializes the properties of the components*/
 		initComponents();
    		/*Add a title*/
-		setTitle("Add main arguments"); 
+		setTitle(WINDOWS_TITLE); 
 		/*Window size*/
 		setSize(660,330);
 		/*put the window in the center of the screen*/
 		setLocationRelativeTo(null);
-		
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
-	
-	
-    @SuppressWarnings("rawtypes")
     private void initComponents() {
     	
     	
@@ -58,12 +62,11 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 		
 		argument= new JTextField();
 		argument.setBounds(FIRST_COLUM, FIRST_ROW, WEIGHT_TEXT, HIGH_COMPONENTS);
-		//argument.addKeyListener(this);
 		argument.getDocument().addDocumentListener(this);
 		
 		/*Buttons properties*/
 		add= new JButton();
-		add.setText("Add ");
+		add.setText(ADD);
 		add.setBounds(SECOND_COLUM, FIRST_ROW, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		add.addActionListener(this);
 		
@@ -73,28 +76,28 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 		edit.addActionListener(this);
 		
 		deleteElement= new JButton();
-		deleteElement.setText("Delete");
+		deleteElement.setText(DELETE);
 		deleteElement.setBounds(SECOND_COLUM, FIRST_ROW+BETWEEN_DISTANCE*2, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		deleteElement.addActionListener(this);
 		
 		deleteAll= new JButton();
-		deleteAll.setText("Delete all");
+		deleteAll.setText(DELETE_ALL);
 		deleteAll.setBounds(SECOND_COLUM, FIRST_ROW +BETWEEN_DISTANCE*3, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		deleteAll.addActionListener(this);
 		
 		saveArguments=new JButton();
-		saveArguments.setText("Save");
+		saveArguments.setText(SAVE);
 		saveArguments.setBounds(220, 210, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		saveArguments.addActionListener(this); 
 		
 		message= new JLabel();
 		message.setBounds(20, 250, 280, HIGH_COMPONENTS);
 		
-		argumentsList = new JList();
+		argumentsList = new JList<String>();
 		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		argumentsList.addMouseListener(this);
 		
-		model = new DefaultListModel();
+		model = new DefaultListModel<String>();
 	   	
 	    scrollLista = new JScrollPane();
 		scrollLista.setBounds(FIRST_COLUM, 90,WEIGHT_TEXT, 80);
@@ -114,41 +117,37 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 
 
     public void actionPerformed(ActionEvent event) {
-		if (event.getSource()==add){
+    	Object source = event.getSource();
+		if (source == add){
 			if (!argument.getText().equals("")) {
-				addArgument();
+				addArgument(argument.getText());
 				message.setText("Argument added");
 			}else {
-				JOptionPane.showMessageDialog(null, "You must add an argument","Error", JOptionPane.ERROR_MESSAGE);	
+				JOptionPane.showMessageDialog(null,ERROR_EMPTY_ADD,ERROR, JOptionPane.ERROR_MESSAGE);	
 				message.setText("No argument added");
 			}			
+		}		
+		
+		if (source == deleteElement)	{
+			deleteArgument(argumentsList.getSelectedIndex());
 		}
 		
-		if (event.getSource() == edit) {
-			System.out.println("Value: "+argumentsList.getSelectedValue());
-			argument.setText(argumentsList.getSelectedValue().toString());
-		}
-		
-		
-		
-		if (event.getSource()==deleteElement)	{
-			deleteArgument(argumentsList.getSelectedIndex() );
-		}
-		
-		if (event.getSource()==deleteAll)	{
-			deleteList();
+		if (source == deleteAll)	{
+			deleteAll();
 			message.setText("All list deleted");
 		}
 		
-		if(event.getSource()==saveArguments) {
-			
+		if(source == saveArguments) {
+			clickedOnSave();
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-    private void addArgument() {
-		String arg=argument.getText();
-		model.addElement(arg);
+    private void clickedOnSave() {
+    	presenter.clickedOnSave();
+	}
+
+	private void addArgument(String argument_text) {
+		model.addElement(argument_text);
 		argumentsList.setModel(model);
 		argument.setText("");
 	}
@@ -159,59 +158,33 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 			argument.setText(""); 
 			message.setText("An item was removed at the position "+index);
 		}else{
-			JOptionPane.showMessageDialog(null, "You must select an index","Error", JOptionPane.ERROR_MESSAGE);
-			
-				message.setText("No item is selected");
+			JOptionPane.showMessageDialog(null,ERROR_EMPTY_DELETE,ERROR, JOptionPane.ERROR_MESSAGE);
+			message.setText("No item is selected");
 		}
 		
 	}
 	
-	private void deleteList() {
+	private void deleteAll() {
 		model.clear();
 		argument.setText(""); 
 	}
 
-	@SuppressWarnings("rawtypes")
-    public DefaultListModel getModel() {
+    public DefaultListModel<String> getModel() {
 		return model;
 	}
 
-
-
-	@SuppressWarnings("rawtypes")
-    public void setModel(DefaultListModel model) {
+    public void setModel(DefaultListModel<String> model) {
 		this.model = model;
 	}
 
-
-
-    public void mouseClicked(MouseEvent e) {
-    
-	    
-    }
-
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-
-
-    public void mouseExited(MouseEvent e) {
-    	
-    	
-    	
-    	/*if (e.getSource().equals(argument)&& !actualDate.equals("")) {
-    		model.set(actIndex, actualDate);
-    	}*/
-    	
-    }
-
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 
     public void mousePressed(MouseEvent e) {
     	
     	if (e.getSource().equals(argumentsList)) {
     		argument.setText(argumentsList.getSelectedValue().toString());
-    		
     	}
     }
 
@@ -220,26 +193,6 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 	    
     }
 
-	public String[] getMainArguments() {
-		int size=argumentsList.getModel().getSize();
-		mainArguments = new  String[size];
-    	for (int i=0;i<size;i++) {
-    		mainArguments[i]=argumentsList.getModel().getElementAt(i).toString();
-    		System.out.println("ARGS"+mainArguments[i]);
-    		
-    	}
-	    return mainArguments;
-    }
-
-
-
-	public void setMainArguments(String[] mainArguments) {
-	    this.mainArguments = mainArguments;
-    }
-
-
-
-	@Override
 	public void changedUpdate(DocumentEvent arg0) {
 		
 	}
@@ -266,5 +219,27 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 		if (found)
 			model.set(i, argument.getText());
 		
+	}
+	
+	// ArgumentsViewInterface methods	
+
+	public String[] getArguments() {
+		int size=argumentsList.getModel().getSize();
+		String[] mainArguments = new  String[size];
+    	for (int i=0;i<size;i++) {
+    		mainArguments[i] = argumentsList.getModel().getElementAt(i).toString();
+    	}
+	    return mainArguments;
+	}
+
+	public void setPresenter(ArgumentsPresenterInterface presenter) {
+		this.presenter = presenter;
+	}
+	
+	public void loadArguments(String[] args) {
+		deleteAll();
+		for (int i=0;i<args.length;i++){
+			addArgument(args[i]);
+		}
 	}
 }

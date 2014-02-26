@@ -35,7 +35,7 @@ public class JavaTracerPresenter {
 	 */
 	
 	private void addController() {
-		tracerController.setController(this);
+		tracerController.setPresenter(this);
 		profilerController.setController(this);
 		inspectorController.setController(this);
 		view.setController(this);

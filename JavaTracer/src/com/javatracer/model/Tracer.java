@@ -173,6 +173,7 @@ public class Tracer {
             throw new Error("Bad launching connector");
         }
      
+        
         if (config.isJar()){
         	main = "\"" + config.getMain() + "\"";
         	options = "-jar";
@@ -185,6 +186,11 @@ public class Tracer {
         		external_jars += jars[i] + "\\*;"; 
             
         	options = "-cp " + '"' + config.getMainClassPath() + ";" + external_jars + "\"";
+        }
+        String[] args = config.getArgs();
+        
+        for (int i=0;i<args.length;i++){
+        	main += " \"" + args[i] + "\"";
         }
         
         mainArg.setValue(main);

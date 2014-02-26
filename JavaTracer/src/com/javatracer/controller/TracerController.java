@@ -8,6 +8,8 @@ import com.general.model.ClassFinder;
 import com.general.model.FileUtilities;
 import com.general.model.JarFinder;
 import com.general.presenter.JavaTracerPresenter;
+import com.javatracer.arguments.presenter.ArgumentsPresenter;
+import com.javatracer.arguments.view.ArgumentsView;
 import com.javatracer.model.Tracer;
 import com.javatracer.model.writers.InspectorWriter;
 import com.javatracer.view.TracerView;
@@ -15,8 +17,8 @@ import com.javatracer.view.TracerView;
 public class TracerController {
 	
 	private TracerView tracerView;
-	private JavaTracerPresenter controller;
-	
+	private JavaTracerPresenter presenter;
+	private ArgumentsPresenter argumentsPresenter;
 	
 	private Tracer tracer;
 	private RunConfiguration lastConfig;
@@ -28,11 +30,17 @@ public class TracerController {
 		tracer = new Tracer();
 		jarFinder = new JarFinder();
 		classFinder = new ClassFinder();
-		tracer.setController(this);
+		argumentsPresenter = new ArgumentsPresenter();
+		setControllers();
     }
 	
-	public void setController(JavaTracerPresenter javaTracerController) {
-		this.controller = javaTracerController; 
+	private void setControllers() {
+		tracer.setController(this);
+		argumentsPresenter.setPresenter(this);
+	}
+
+	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
+		this.presenter = javaTracerPresenter; 
 	}
 	
 	public void open() {
@@ -49,7 +57,7 @@ public class TracerController {
 		//boolean error = lastConfig.check();
 		
 		if (lastConfig.isProfiling_mode())
-			tracer.profile(lastConfig,controller.getProfiler());
+			tracer.profile(lastConfig,presenter.getProfiler());
 		else
 			tracer.trace(lastConfig);				
 	}
@@ -70,7 +78,7 @@ public class TracerController {
 		if (!jar) 
 			classPath = processPath(mainClassPath,main);
 		String nameXml = getNameXml();
-		String[] args = new String[0];
+		String[] args = argumentsPresenter.getArguments();
 		String[] external_jars = new String[0];
 		if (!jar)
 			external_jars = jarFinder.getJarDirectories(mainClassPath);
@@ -120,7 +128,7 @@ public class TracerController {
 	public void finishedTrace() {
 		
 		if (lastConfig.isProfiling_mode()){
-			controller.showProfile();			
+			presenter.showProfile();			
 		} else {
 			InspectorWriter traceInspectorWriter = new InspectorWriter(lastConfig.getNameXml());
 			traceInspectorWriter.generateFinalTrace();
@@ -153,7 +161,11 @@ public class TracerController {
 
 	public void clickedBack() {
 		tracerView.setVisible(false);	
-		controller.back();		
+		presenter.back();		
 	}
 
+	public void clickedEditArguments() {
+		argumentsPresenter.show();
+	}
+	
 }
