@@ -11,6 +11,8 @@ public class ImageLoader {
 	private static String FOLDED_ICON = "folded.gif";
 	private static String PLUS_ICON = "plus.png";
 	private static String MINUS_ICON = "minus.png";
+	private static String ARROW_UP = "arrow-up.png";
+	private static String ARROW_DOWN = "arrow-down.png";
 	
 	private ImageIcon applicationIcon;
 	private ImageIcon helpIcon;
@@ -18,6 +20,16 @@ public class ImageLoader {
 	private ImageIcon foldedIcon;
 	private ImageIcon plusIcon;
 	private ImageIcon minusIcon;
+	private ImageIcon arrowUpIcon;
+	private ImageIcon arrowDownIcon;
+
+	public void setPlusIcon(ImageIcon plusIcon) {
+		this.plusIcon = plusIcon;
+	}
+
+	public void setMinusIcon(ImageIcon minusIcon) {
+		this.minusIcon = minusIcon;
+	}
 
 	private ImageLoader(){
 		instance = this;
@@ -27,6 +39,8 @@ public class ImageLoader {
 		foldedIcon = new ImageIcon(getClass().getResource(FOLDED_ICON));
 		plusIcon = new ImageIcon(getClass().getResource(PLUS_ICON));
 		minusIcon = new ImageIcon(getClass().getResource(MINUS_ICON));
+		arrowUpIcon = new ImageIcon(getClass().getResource(ARROW_UP));
+		arrowDownIcon = new ImageIcon(getClass().getResource(ARROW_DOWN));
 	}
 	
 	public static ImageLoader getInstance(){
@@ -57,8 +71,13 @@ public class ImageLoader {
 	public ImageIcon getMinusIcon() {
 		return minusIcon;
 	}
-	
-	
-	
+
+	public ImageIcon getArrowDownIcon() {
+		return arrowDownIcon;
+	}
+
+	public ImageIcon getArrowUpIcon() {
+		return arrowUpIcon;
+	}	
 
 }

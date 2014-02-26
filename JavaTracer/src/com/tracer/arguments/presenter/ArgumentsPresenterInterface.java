@@ -2,6 +2,7 @@ package com.tracer.arguments.presenter;
 
 public interface ArgumentsPresenterInterface {
 
-	public void clickedOnSave();
+	public void saveAction();
+	public void cancelAction();
 	
 }

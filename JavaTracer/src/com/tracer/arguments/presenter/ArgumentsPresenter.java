@@ -30,9 +30,13 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 		this.tracerPresenter = tracerController;
 	}
 
-	public void clickedOnSave() {
+	public void saveAction() {
 		arguments = view.getArguments();
 		view.setVisible(false);
+	}
+	
+	public void cancelAction() {
+		view.setVisible(false);		
 	}
 	
 	public String[] getArguments(){

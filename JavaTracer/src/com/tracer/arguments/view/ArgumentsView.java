@@ -1,16 +1,33 @@
 package com.tracer.arguments.view;
-import java.awt.Container;
-import java.awt.event.*;
 
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SpringLayout;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.general.imageresources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
 
-
 @SuppressWarnings("serial")
-public class ArgumentsView  extends JFrame implements ActionListener, MouseListener, DocumentListener, ArgumentsViewInterface{
+public class ArgumentsView extends JFrame implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface{
 
 	private static String WINDOWS_TITLE = "Add main arguments";
 	
@@ -18,223 +35,152 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 	private static String DELETE = "Delete";
 	private static String DELETE_ALL = "Delete All";
 	private static String SAVE = "Save";
+	private static String CANCEL = "Cancel";
 	
 	private static String ERROR = "Error";
 	private static String ERROR_EMPTY_DELETE = "You must select an argument";
 	private static String ERROR_EMPTY_ADD = "You must write an argument";
 	
-	private static int FIRST_COLUM = 20;
-	private static int SECOND_COLUM = 510; 
-	private static int WEIGHT_TEXT = 435;
-	private static int WEIGHT_BUTTONS  = 120;
-	private static int HIGH_COMPONENTS= 24;
-	private static int FIRST_ROW =  30;
-	private static int BETWEEN_DISTANCE = 40;
-	
-	private Container content;
-	private JButton add, deleteAll, deleteElement,saveArguments;
-	private JLabel  message;
+	private JPanel contentPane;
 	private JTextField argument;
-    private JList<String> argumentsList;
-    private DefaultListModel<String> model;
-	private JScrollPane scrollLista;
-
+	private DefaultListModel<String> model;
+	private JButton addButton,deleteButton,deleteAllButton,saveButton,cancelButton,upButton,downButton;
+	
 	private ArgumentsPresenterInterface presenter;
-	
-	public ArgumentsView(){
-		/*initializes the properties of the components*/
-		initComponents();
-   		/*Add a title*/
-		setTitle(WINDOWS_TITLE); 
-		/*Window size*/
-		setSize(660,330);
-		/*put the window in the center of the screen*/
+	private JList<String> argumentsList;
+
+	/**
+	 * Create the frame.
+	 */
+	public ArgumentsView() {
+		setTitle(WINDOWS_TITLE);
+		setMinimumSize(new Dimension(660, 330));
+		setSize(new Dimension(660, 330));
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	}
-	
-    private void initComponents() {
-    	
-    	
-    	content=getContentPane();
-		/*	Define components  position*/
-		content.setLayout(null);
-		
-		argument= new JTextField();
-		argument.setBounds(FIRST_COLUM, FIRST_ROW, WEIGHT_TEXT, HIGH_COMPONENTS);
-		argument.getDocument().addDocumentListener(this);
-		
-		/*Buttons properties*/
-		add= new JButton();
-		add.setText(ADD);
-		add.setBounds(SECOND_COLUM, FIRST_ROW, WEIGHT_BUTTONS, HIGH_COMPONENTS);
-		add.addActionListener(this);
-		
-		deleteElement= new JButton();
-		deleteElement.setText(DELETE);
-		deleteElement.setBounds(SECOND_COLUM, FIRST_ROW+BETWEEN_DISTANCE, WEIGHT_BUTTONS, HIGH_COMPONENTS);
-		deleteElement.addActionListener(this);
-		
-		deleteAll= new JButton();
-		deleteAll.setText(DELETE_ALL);
-		deleteAll.setBounds(SECOND_COLUM, FIRST_ROW +BETWEEN_DISTANCE*2, WEIGHT_BUTTONS, HIGH_COMPONENTS);
-		deleteAll.addActionListener(this);
-		
-		saveArguments=new JButton();
-		saveArguments.setText(SAVE);
-		saveArguments.setBounds(220, 210, WEIGHT_BUTTONS, HIGH_COMPONENTS);
-		saveArguments.addActionListener(this); 
-		
-		message= new JLabel();
-		message.setBounds(20, 250, 280, HIGH_COMPONENTS);
-		
-		argumentsList = new JList<String>();
-		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
-		argumentsList.addMouseListener(this);
-		//argumentsList.setSelectionModel(new ToggleSelectionModel());
 		
 		model = new DefaultListModel<String>();
-	   	
-	    scrollLista = new JScrollPane();
-		scrollLista.setBounds(FIRST_COLUM, 90,WEIGHT_TEXT, 80);
-	    scrollLista.setViewportView(argumentsList);
 		
-		/*Add the components  at content*/
-		content.add(argument);
-		content.add(add);
-		content.add(deleteAll);
-		content.add(deleteElement);
-		content.add(message);
-		content.add(scrollLista);
-		content.add(saveArguments);
-		content.addMouseListener(this);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		ImageLoader imageLoader = ImageLoader.getInstance();
 		
-	    
-    }
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		SpringLayout sl_contentPane = new SpringLayout();
+		contentPane.setLayout(sl_contentPane);
+		contentPane.addMouseListener(this);
 
-
-    public void actionPerformed(ActionEvent event) {
-    	Object source = event.getSource();
-		if (source == add){
-			if (!argument.getText().equals("")) {
-				addArgument(argument.getText());
-				message.setText("Argument added");
-			}else {
-				JOptionPane.showMessageDialog(null,ERROR_EMPTY_ADD,ERROR, JOptionPane.ERROR_MESSAGE);	
-				message.setText("No argument added");
-			}			
-		}		
+		argument = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.WEST, argument, 39, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, argument, -244, SpringLayout.EAST, contentPane);
+		contentPane.add(argument);
+		argument.setColumns(10);
+		argument.getDocument().addDocumentListener(this);
 		
-		if (source == deleteElement)	{
-			deleteArgument(argumentsList.getSelectedIndex());
-		}
+		JLabel argumentLabel = new JLabel("Argument");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, argument, 20, SpringLayout.SOUTH, argumentLabel);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, argumentLabel, 20, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, argumentLabel, 39, SpringLayout.WEST, contentPane);
+		contentPane.add(argumentLabel);
 		
-		if (source == deleteAll)	{
-			deleteAll();
-			message.setText("All list deleted");
-		}
+		addButton = new JButton(ADD);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, addButton, 107, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, addButton, -31, SpringLayout.EAST, contentPane);
+		contentPane.add(addButton);
+		addButton.addActionListener(this);
 		
-		if(source == saveArguments) {
-			clickedOnSave();
-		}
-	}
-
-    private void clickedOnSave() {
-    	presenter.clickedOnSave();
-	}
-
-	private void addArgument(String argument_text) {
-		model.addElement(argument_text);
+		deleteButton = new JButton(DELETE);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteButton, 17, SpringLayout.SOUTH, addButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, addButton);
+		sl_contentPane.putConstraint(SpringLayout.EAST, deleteButton, -31, SpringLayout.EAST, contentPane);
+		contentPane.add(deleteButton);
+		deleteButton.addActionListener(this);
+		
+		deleteAllButton = new JButton(DELETE_ALL);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteAllButton, 189, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, deleteButton, -15, SpringLayout.NORTH, deleteAllButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, deleteAllButton, 0, SpringLayout.WEST, addButton);
+		sl_contentPane.putConstraint(SpringLayout.EAST, deleteAllButton, -31, SpringLayout.EAST, contentPane);
+		contentPane.add(deleteAllButton);
+		deleteAllButton.addActionListener(this);
+		
+		cancelButton = new JButton(CANCEL);
+		contentPane.add(cancelButton);
+		cancelButton.addActionListener(this);
+		
+		saveButton = new JButton(SAVE);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, cancelButton, 0, SpringLayout.NORTH, saveButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, cancelButton, 92, SpringLayout.EAST, saveButton);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, saveButton, -10, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, saveButton, 97, SpringLayout.WEST, contentPane);
+		contentPane.add(saveButton);
+		saveButton.addActionListener(this);
+		
+		downButton = new JButton("");
+		sl_contentPane.putConstraint(SpringLayout.WEST, downButton, 367, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, downButton, -59, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, downButton, -94, SpringLayout.WEST, deleteAllButton);
+		downButton.setIcon(imageLoader.getArrowDownIcon());
+		downButton.setEnabled(false);
+		contentPane.add(downButton);
+		downButton.addActionListener(this);
+		
+		upButton = new JButton("");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, upButton, 31, SpringLayout.SOUTH, argument);
+		sl_contentPane.putConstraint(SpringLayout.WEST, upButton, 367, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, upButton, -141, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, upButton, -240, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, downButton, 57, SpringLayout.SOUTH, upButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, addButton, 94, SpringLayout.EAST, upButton);
+		upButton.setIcon(imageLoader.getArrowUpIcon());
+		upButton.setEnabled(false);
+		upButton.addActionListener(this);
+		contentPane.add(upButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.NORTH, addButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, argument);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, deleteAllButton);
+		sl_contentPane.putConstraint(SpringLayout.EAST, scrollPane, -6, SpringLayout.WEST, downButton);
+		scrollPane.setBackground(Color.WHITE);
+		contentPane.add(scrollPane);
+		
+		argumentsList = new JList<String>();
+		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		argumentsList.setBorder(new LineBorder(new Color(0, 0, 0)));
+		scrollPane.setViewportView(argumentsList);
 		argumentsList.setModel(model);
-		argument.setText("");
-	}
-	
-	private void deleteArgument(int index) {
-		if (index>=0) {
-			model.removeElementAt(index);	
-			argument.setText(""); 
-			message.setText("An item was removed at the position "+index);
-		}else{
-			JOptionPane.showMessageDialog(null,ERROR_EMPTY_DELETE,ERROR, JOptionPane.ERROR_MESSAGE);
-			message.setText("No item is selected");
-		}
+		argumentsList.addMouseListener(this);
 		
 	}
 	
-	private void deleteAll() {
-		model.clear();
-		argument.setText(""); 
-	}
-
-    public DefaultListModel<String> getModel() {
-		return model;
-	}
-
-    public void setModel(DefaultListModel<String> model) {
-		this.model = model;
-	}
-
-    public void mouseClicked(MouseEvent e) {
-    	if (e.getSource().equals(content)) {
-    		boolean found = false;
-    		int size=argumentsList.getModel().getSize();
-    		int i = 0;
-    		
-    		while (i<size && !found){
-        		found = argumentsList.isSelectedIndex(i);
-        		if (found) {
-        			argumentsList.removeSelectionInterval(i, i); 
-        			argument.setText(""); 
-        		}
-        		i++;
-    		}
-    		
-    	}
-    }
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-
-    public void mousePressed(MouseEvent e) {
-    	
-    	if (e.getSource().equals(argumentsList)) {
-    		argument.setText(argumentsList.getSelectedValue().toString());
-    	}
-    }
-
-
-    public void mouseReleased(MouseEvent e) {
-	    
-    }
-
-	public void changedUpdate(DocumentEvent arg0) {
-		
-	}
-
-	public void insertUpdate(DocumentEvent arg0) {
-		updateText();
-	}
-
-	public void removeUpdate(DocumentEvent arg0) {
-		updateText();
-	}
-
-	private void updateText() {
-		int size=argumentsList.getModel().getSize();
-    	boolean found = false;
-    	int i = 0;
-    	
-    	while (i<size && !found){
-    		found = argumentsList.isSelectedIndex(i);
-    		if (!found)
-    			i++;
-		}
-	
-		if (found)
-			model.set(i, argument.getText());
-		
+	private void clickedOnSave() {
+		presenter.saveAction();
 	}
 	
-	// ArgumentsViewInterface methods	
+	private void clickedOnCancel() {
+		presenter.cancelAction();
+	}
+	
+	private void clickedOnDownButton() {
+		int index = argumentsList.getSelectedIndex();
+		String argument1 = model.get(index);
+		String argument2 = model.get(index+1);
+		model.set(index,argument2);
+		model.set(index+1,argument1);
+		argumentsList.setSelectedIndex(index+1);
+		refreshButtons(index+1);
+	}
+
+	private void clickedOnUpButton() {
+		int index = argumentsList.getSelectedIndex();
+		String argument1 = model.get(index);
+		String argument2 = model.get(index-1);
+		model.set(index,argument2);
+		model.set(index-1,argument1);		
+		argumentsList.setSelectedIndex(index-1);
+		refreshButtons(index-1);
+	}
 
 	public String[] getArguments() {
 		int size=argumentsList.getModel().getSize();
@@ -253,6 +199,117 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 		deleteAll();
 		for (int i=0;i<args.length;i++){
 			addArgument(args[i]);
+		}
+	}
+	
+	private void updateText() {
+    	int index = argumentsList.getSelectedIndex();
+		if (index != -1)
+			model.set(index, argument.getText());
+	}
+
+	private void addArgument(String argument_text) {
+		model.addElement(argument_text);
+		argumentsList.setModel(model);
+		argument.setText("");
+	}
+	
+	private void deleteArgument(int index) {
+		if (index>=0) {
+			model.removeElementAt(index);	
+			argument.setText(""); 
+		}else{
+			JOptionPane.showMessageDialog(null,ERROR_EMPTY_DELETE,ERROR, JOptionPane.ERROR_MESSAGE);
+		}
+		refreshButtons(-1);
+	}
+	
+	private void deleteAll() {
+		model.clear();
+		argument.setText(""); 
+		refreshButtons(-1);
+	}
+	
+	// Listener methods
+	
+	public void changedUpdate(DocumentEvent e) {}
+	
+	public void insertUpdate(DocumentEvent e) {
+		updateText();
+	}
+	
+	public void removeUpdate(DocumentEvent e) {
+		updateText();
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource().equals(argumentsList)) {
+    		int index = argumentsList.getSelectedIndex();
+    		if (index != -1)
+    			argument.setText(model.getElementAt(index));
+    		refreshButtons(index);
+		} else if (e.getSource().equals(contentPane)){
+			argumentsList.clearSelection();
+			argument.setText("");
+			refreshButtons(-1);
+		}
+	}
+	
+	private void refreshButtons(int index) {
+		if (index != -1){
+			if (index == 0)
+				upButton.setEnabled(false);
+			else 
+				upButton.setEnabled(true);
+			
+			if (index == model.getSize()-1)
+				downButton.setEnabled(false);
+			else 
+				downButton.setEnabled(true);
+		} else {
+			downButton.setEnabled(false);
+			upButton.setEnabled(false);
+		}
+	}
+
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+
+	public void actionPerformed(ActionEvent event) {
+		Object source = event.getSource();
+		if (source == addButton){
+			if (!argument.getText().equals("")) {
+				String text = argument.getText();
+				addArgument(text);
+			}else {
+				JOptionPane.showMessageDialog(null,ERROR_EMPTY_ADD,ERROR, JOptionPane.ERROR_MESSAGE);	
+			}			
+		}		
+		
+		if (source == deleteButton)	{
+			deleteArgument(argumentsList.getSelectedIndex());
+		}
+		
+		if (source == deleteAllButton)	{
+			deleteAll();
+		}
+		
+		if(source == saveButton) {
+			clickedOnSave();
+		}
+		
+		if (source == cancelButton){
+			clickedOnCancel();
+		}
+		
+		if (source == upButton){
+			clickedOnUpButton();
+		}
+		
+		if (source == downButton){
+			clickedOnDownButton();
 		}
 	}
 }
