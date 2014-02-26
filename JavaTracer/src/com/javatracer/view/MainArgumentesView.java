@@ -3,10 +3,12 @@ import java.awt.Container;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 
 @SuppressWarnings("serial")
-public class MainArgumentesView  extends JFrame implements ActionListener, MouseListener,KeyListener{
+public class MainArgumentesView  extends JFrame implements ActionListener, MouseListener, DocumentListener{
 
 	private static int FIRST_COLUM = 20;
 	private static int SECOND_COLUM = 510; 
@@ -56,8 +58,8 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 		
 		argument= new JTextField();
 		argument.setBounds(FIRST_COLUM, FIRST_ROW, WEIGHT_TEXT, HIGH_COMPONENTS);
-		argument.addKeyListener(this); 
-		argument.addMouseListener(this);
+		//argument.addKeyListener(this);
+		argument.getDocument().addDocumentListener(this);
 		
 		/*Buttons properties*/
 		add= new JButton();
@@ -218,34 +220,6 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 	    
     }
 
-
-    @SuppressWarnings("unchecked")
-    public void keyPressed(KeyEvent e) {
-    	int size=argumentsList.getModel().getSize();
-    	for (int i=0;i<size;i++) {
-    		if (argumentsList.isSelectedIndex(i)) {
-    			char c = e.getKeyChar(); 
-    			String actualDate = argumentsList.getSelectedValue().toString();
-    			String newData=actualDate +c;
-    			
-    			model.set(i, newData);
-    		}
-    	}
-    	//if (argumentsList.isSelectedIndex(index))
-	    
-    }
-
-
-
-    public void keyReleased(KeyEvent e) {
-	    
-    }
-
-    public void keyTyped(KeyEvent e) {
-    }
-
-
-
 	public String[] getMainArguments() {
 		int size=argumentsList.getModel().getSize();
 		mainArguments = new  String[size];
@@ -262,4 +236,35 @@ public class MainArgumentesView  extends JFrame implements ActionListener, Mouse
 	public void setMainArguments(String[] mainArguments) {
 	    this.mainArguments = mainArguments;
     }
+
+
+
+	@Override
+	public void changedUpdate(DocumentEvent arg0) {
+		
+	}
+
+	public void insertUpdate(DocumentEvent arg0) {
+		updateText();
+	}
+
+	public void removeUpdate(DocumentEvent arg0) {
+		updateText();
+	}
+
+	private void updateText() {
+		int size=argumentsList.getModel().getSize();
+    	boolean found = false;
+    	int i = 0;
+    	
+    	while (i<size && !found){
+    		found = argumentsList.isSelectedIndex(i);
+    		if (!found)
+    			i++;
+		}
+	
+		if (found)
+			model.set(i, argument.getText());
+		
+	}
 }
