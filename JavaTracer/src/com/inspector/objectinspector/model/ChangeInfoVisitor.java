@@ -12,7 +12,6 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.view.TableRowData;
 
 public class ChangeInfoVisitor implements InfoVisitor {
 	

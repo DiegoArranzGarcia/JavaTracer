@@ -1,5 +1,6 @@
 package com.inspector.view;
 
+import java.awt.Dimension;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -12,7 +13,10 @@ import com.inspector.treeinspectorview.TreeInspectorView;
 @SuppressWarnings("serial")
 public class InpectorView extends JFrame implements ComponentListener,ActionListener{
 	
+	private static String WINDOW_TITLE = "Inspector";
+	
 	private static double DIVIDER_SPLIT = 0.75;
+	private static double PERCENTAGE = 0.75;
 	
 	private InspectorController controller;
 	
@@ -21,9 +25,11 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 	
 	public InpectorView() {
 		
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setTitle("TraceInspector");
+		setTitle(WINDOW_TITLE);
+		Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		setSize((int)(d.width*PERCENTAGE),(int)(d.height*PERCENTAGE));
+		setLocationRelativeTo(null);
 		addComponentListener(this);
 				
 		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -85,7 +91,7 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 		if (e.getSource() == items[0]){
 			controller.clickedOpen();
 		}else if(e.getSource() == items[1])
-			System.exit(0);
+			controller.back();
 	}
 
 	public void setController(InspectorController controller){

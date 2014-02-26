@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.general.model.data.MethodInfo;
 import com.general.presenter.JavaTracerPresenter;

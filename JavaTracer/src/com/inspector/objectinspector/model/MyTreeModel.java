@@ -1,4 +1,4 @@
-package com.inspector.objectinspector.view;
+package com.inspector.objectinspector.model;
 
 import java.util.ArrayList;
 import java.util.List;

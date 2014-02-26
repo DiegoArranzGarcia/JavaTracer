@@ -25,6 +25,8 @@ import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.StringValue;
 
 import com.inspector.objectinspector.controller.ObjectInspectorController;
+import com.inspector.objectinspector.model.MyTreeModel;
+import com.inspector.objectinspector.model.TableRowData;
 
 @SuppressWarnings("serial")
 public class ObjectInspectorView extends JScrollPane implements KeyListener,MouseListener{

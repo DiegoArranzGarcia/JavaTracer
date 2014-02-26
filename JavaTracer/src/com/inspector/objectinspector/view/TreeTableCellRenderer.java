@@ -7,6 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import com.general.imageresources.ImageLoader;
+import com.inspector.objectinspector.model.TableRowData;
 
 @SuppressWarnings("serial")
 public class TreeTableCellRenderer extends DefaultTreeCellRenderer {

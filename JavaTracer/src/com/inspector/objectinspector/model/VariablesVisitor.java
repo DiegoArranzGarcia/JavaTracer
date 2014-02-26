@@ -13,7 +13,6 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.view.TableRowData;
 import com.javatracer.model.ChangeDetector;
 
 public class VariablesVisitor implements InfoVisitor{

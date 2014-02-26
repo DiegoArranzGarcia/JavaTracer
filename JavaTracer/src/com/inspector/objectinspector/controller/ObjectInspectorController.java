@@ -13,9 +13,9 @@ import com.general.model.variables.data.InfoVisitor;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.model.ChangeInfoVisitor;
+import com.inspector.objectinspector.model.TableRowData;
 import com.inspector.objectinspector.model.VariablesVisitor;
 import com.inspector.objectinspector.view.ObjectInspectorView;
-import com.inspector.objectinspector.view.TableRowData;
 
 public class ObjectInspectorController {
 	
