@@ -19,15 +19,15 @@ public class ChangeDetector {
 	 * the changes are evaluated in different ways. If the two variables are primitive values, no changes
 	 * are notified. 
 	 * 
-	 * @see {@link #compareArrays(String, ArrayData, ArrayData)} </br>
-	 * @see {@link #compareObjects(String, ObjectData, ObjectData)} </br>
-	 * @see {@link #getChangesCreatedObject(String, ObjectData)} </br> 
-	 * @see {@link #getChangesDeletedObject(String)}
-	 * 
 	 * @param variable1 - The variable with is compared the second one.
 	 * @param variable2 - The second variable.
 	 * 
 	 * @return A list of the changes between the two variables.
+	 * 
+	 * @see {@link #compareArrays(String, ArrayData, ArrayData)} </br>
+	 * @see {@link #compareObjects(String, ObjectData, ObjectData)} </br>
+	 * @see {@link #getChangesCreatedObject(String, ObjectData)} </br> 
+	 * @see {@link #getChangesDeletedObject(String)}
 	 */
 	
 	public List<ChangeInfo> getChangesBetween(Data variable1,Data variable2){

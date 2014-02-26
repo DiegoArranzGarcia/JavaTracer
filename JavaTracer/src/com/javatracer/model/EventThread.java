@@ -6,12 +6,39 @@ import java.util.Map;
 
 import com.general.model.data.ThreadInfo;
 import com.javatracer.controller.RunConfiguration;
-import com.javatracer.model.managers.*;
+import com.javatracer.model.managers.DeathManager;
+import com.javatracer.model.managers.DisconnectManager;
+import com.javatracer.model.managers.ExceptionManager;
+import com.javatracer.model.managers.MethodEntryManager;
+import com.javatracer.model.managers.MethodExitManager;
+import com.javatracer.model.managers.ThreadDeathManager;
 import com.javatracer.model.writers.JavaTraceWriter;
 import com.profiler.model.Profiler;
-import com.sun.jdi.*;
-import com.sun.jdi.event.*;
-import com.sun.jdi.request.*;
+import com.profiler.model.ProfilerModelInterface;
+import com.sun.jdi.ThreadReference;
+import com.sun.jdi.VMDisconnectedException;
+import com.sun.jdi.VirtualMachine;
+import com.sun.jdi.event.ClassPrepareEvent;
+import com.sun.jdi.event.Event;
+import com.sun.jdi.event.EventIterator;
+import com.sun.jdi.event.EventQueue;
+import com.sun.jdi.event.EventSet;
+import com.sun.jdi.event.ExceptionEvent;
+import com.sun.jdi.event.MethodEntryEvent;
+import com.sun.jdi.event.MethodExitEvent;
+import com.sun.jdi.event.ModificationWatchpointEvent;
+import com.sun.jdi.event.StepEvent;
+import com.sun.jdi.event.ThreadDeathEvent;
+import com.sun.jdi.event.ThreadStartEvent;
+import com.sun.jdi.event.VMDeathEvent;
+import com.sun.jdi.event.VMDisconnectEvent;
+import com.sun.jdi.request.ClassPrepareRequest;
+import com.sun.jdi.request.EventRequest;
+import com.sun.jdi.request.EventRequestManager;
+import com.sun.jdi.request.ExceptionRequest;
+import com.sun.jdi.request.MethodEntryRequest;
+import com.sun.jdi.request.MethodExitRequest;
+import com.sun.jdi.request.ThreadDeathRequest;
 
 
 public class EventThread extends Thread {
@@ -21,13 +48,13 @@ public class EventThread extends Thread {
     private boolean connected = true; // Connected to VM
     private boolean enableProfiling;
 	private boolean vmDied = false; // VMDeath occurred
-    
+	private ProfilerModelInterface profiler;
+	
     // Maps ThreadReference to ThreadTrace instances
     private Map<ThreadReference, ThreadTrace> traceMap = new HashMap<>();
        
     //Managers
     private DeathManager death;
-    private Profiler profiler;
     private DisconnectManager disconnect;
     private ExceptionManager exception;
     private ThreadDeathManager threadeath;
@@ -38,7 +65,7 @@ public class EventThread extends Thread {
     //private PrepareManager prepare;
     private JavaTraceWriter writer;
 
-    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, Profiler profiler){
+    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
         this.excludes = excludes;

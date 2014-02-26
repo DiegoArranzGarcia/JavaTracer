@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.general.model.configuration.JavaTracerConfiguration;
-import com.javatracer.controller.JavaTracerController;
+import com.javatracer.controller.TracerController;
 import com.javatracer.controller.RunConfiguration;
 import com.profiler.model.Profiler;
+import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.connect.Connector;
@@ -43,7 +44,7 @@ public class Tracer {
     // Class patterns for which we don't want events
     
    private String[] excludes;
-   private JavaTracerController tracerController;
+   private TracerController tracerController;
    
     /**
 	  * Parse the command line arguments.
@@ -56,12 +57,20 @@ public class Tracer {
     	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
     	excludes = configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
+        
+        if (tracerController != null)
+        	tracerController.starting();
+        
         vm = launchTarget(config);
+        
+        if (tracerController != null)
+        	tracerController.generatingTrace();
+        
         generateTrace(writer,config,null);
         
     }
     
-    public void profile(RunConfiguration config,Profiler profile){
+    public void profile(RunConfiguration config,ProfilerModelInterface profile){
     	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
     	excludes = configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
@@ -69,7 +78,7 @@ public class Tracer {
         generateTrace(writer,config,profile);
     }
     
-	public void setController(JavaTracerController javaTracerController) {
+	public void setController(TracerController javaTracerController) {
 		this.tracerController = javaTracerController;	
 	}
 
@@ -81,7 +90,7 @@ public class Tracer {
 	 * @param config 
 	*/
     
-    void generateTrace(PrintWriter writer, RunConfiguration config,Profiler profiler) {
+    void generateTrace(PrintWriter writer, RunConfiguration config,ProfilerModelInterface profiler) {
         
     	vm.setDebugTraceMode(debugTraceMode);
         EventThread eventThread = new EventThread(vm,excludes,config,profiler);
@@ -182,6 +191,6 @@ public class Tracer {
         optionArg.setValue(options);
         
         return arguments;
-    }    
+    }  
       
 }

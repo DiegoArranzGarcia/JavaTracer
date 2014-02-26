@@ -34,7 +34,7 @@ class StreamRedirectThread extends Thread {
         super(name);
         this.in = new InputStreamReader(in);
         this.out = new OutputStreamWriter(out);
-      
+
 		PrintStream g = null;
         try {
 	        g = new PrintStream(new File(nameXml+"_"+FILE_OUTPUT_NAME));

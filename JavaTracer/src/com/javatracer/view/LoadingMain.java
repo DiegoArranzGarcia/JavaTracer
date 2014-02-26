@@ -26,7 +26,7 @@ public class LoadingMain extends JWindow {
     
    
   }
-
+/*
   public void draWindow() {
 	   
 	  	imageLabel.setIcon(imageIcon);
@@ -43,7 +43,7 @@ public class LoadingMain extends JWindow {
 	  repaint();
 	  validate();
 	  setVisible(false);
-  }
+  }*/
   
 }
 

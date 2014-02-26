@@ -10,7 +10,7 @@ import com.sun.jdi.Method;
 import com.sun.jdi.event.MethodEntryEvent;
 import com.thoughtworks.xstream.XStream;
 
-public class Profiler {
+public class Profiler implements ProfilerModelInterface{
 
 	private static String FILE_NAME = "temp_profiling"; 
 	

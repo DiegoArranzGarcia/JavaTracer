@@ -3,10 +3,11 @@
 <thread>
 <thread-info>
   <nameThread>main-thread</nameThread>
-</thread-info><called-methods>
+</thread-info>
+<called-methods>
 <method-call id="1">
 <info>
-  <name>main</name>
+  <methodName>main</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
     <array-variable>
@@ -20,13 +21,12 @@
   <object-this class="null">
     <name>this</name>
   </object-this>
+  <changes/>
 </info>
-<changes>
-</changes>
 <called-methods>
 <method-call id="2">
 <info>
-  <name>&lt;init&gt;</name>
+  <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
     <simple-variable>
@@ -46,6 +46,8 @@
   </arguments>
   <object-this class="object-variable">
     <name>this</name>
+    <constantData/>
+    <inheritData/>
     <fields>
       <simple-variable>
         <name>age</name>
@@ -64,38 +66,38 @@
     <id>60</id>
     <className>Person</className>
   </object-this>
+  <changes>
+    <change>
+      <variable>this.age</variable>
+      <value class="simple-variable">
+        <name>age</name>
+        <value class="int">1</value>
+      </value>
+    </change>
+    <change>
+      <variable>this.name</variable>
+      <value class="string-variable">
+        <name>name</name>
+        <value></value>
+        <id>58</id>
+      </value>
+    </change>
+    <change>
+      <variable>this.lastName</variable>
+      <value class="string-variable">
+        <name>lastName</name>
+        <value>b</value>
+        <id>59</id>
+      </value>
+    </change>
+  </changes>
 </info>
-<changes>
-<change>
-  <variable>this.age</variable>
-  <value class="simple-variable">
-    <name>age</name>
-    <value class="int">1</value>
-  </value>
-</change>
-<change>
-  <variable>this.name</variable>
-  <value class="string-variable">
-    <name>name</name>
-    <value></value>
-    <id>58</id>
-  </value>
-</change>
-<change>
-  <variable>this.lastName</variable>
-  <value class="string-variable">
-    <name>lastName</name>
-    <value>b</value>
-    <id>59</id>
-  </value>
-</change>
-</changes>
 <called-methods>
 </called-methods>
 </method-call>
 <method-call id="3">
 <info>
-  <name>&lt;init&gt;</name>
+  <methodName>&lt;init&gt;</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments>
     <simple-variable>
@@ -114,6 +116,8 @@
     </string-variable>
     <object-variable>
       <name>bestFriend</name>
+      <constantData/>
+      <inheritData/>
       <fields>
         <simple-variable>
           <name>age</name>
@@ -139,6 +143,8 @@
   </arguments>
   <object-this class="object-variable">
     <name>this</name>
+    <constantData/>
+    <inheritData/>
     <fields>
       <simple-variable>
         <name>age</name>
@@ -157,65 +163,67 @@
     <id>62</id>
     <className>Person</className>
   </object-this>
-</info>
-<changes>
-<change>
-  <variable>this.age</variable>
-  <value class="simple-variable">
-    <name>age</name>
-    <value class="int">1</value>
-  </value>
-</change>
-<change>
-  <variable>this.name</variable>
-  <value class="string-variable">
-    <name>name</name>
-    <value></value>
-    <id>58</id>
-  </value>
-</change>
-<change>
-  <variable>this.lastName</variable>
-  <value class="string-variable">
-    <name>lastName</name>
-    <value>b</value>
-    <id>59</id>
-  </value>
-</change>
-<change>
-  <variable>this.bestFriend</variable>
-  <value class="object-variable">
-    <name>bestFriend</name>
-    <fields>
-      <simple-variable>
+  <changes>
+    <change>
+      <variable>this.age</variable>
+      <value class="simple-variable">
         <name>age</name>
         <value class="int">1</value>
-      </simple-variable>
-      <string-variable>
+      </value>
+    </change>
+    <change>
+      <variable>this.name</variable>
+      <value class="string-variable">
         <name>name</name>
         <value></value>
         <id>58</id>
-      </string-variable>
-      <string-variable>
+      </value>
+    </change>
+    <change>
+      <variable>this.lastName</variable>
+      <value class="string-variable">
         <name>lastName</name>
         <value>b</value>
         <id>59</id>
-      </string-variable>
-      <null>
+      </value>
+    </change>
+    <change>
+      <variable>this.bestFriend</variable>
+      <value class="object-variable">
         <name>bestFriend</name>
-      </null>
-    </fields>
-    <id>60</id>
-    <className>Person</className>
-  </value>
-</change>
-</changes>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>58</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>59</id>
+          </string-variable>
+          <null>
+            <name>bestFriend</name>
+          </null>
+        </fields>
+        <id>60</id>
+        <className>Person</className>
+      </value>
+    </change>
+  </changes>
+</info>
 <called-methods>
 </called-methods>
 </method-call>
 <method-call id="4">
 <info>
-  <name>prueba</name>
+  <methodName>prueba</methodName>
   <calledFromClass>Main</calledFromClass>
   <arguments>
     <simple-variable>
@@ -224,6 +232,8 @@
     </simple-variable>
     <object-variable>
       <name>p1</name>
+      <constantData/>
+      <inheritData/>
       <fields>
         <simple-variable>
           <name>age</name>
@@ -241,6 +251,8 @@
         </string-variable>
         <object-variable>
           <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
           <fields>
             <simple-variable>
               <name>age</name>
@@ -271,6 +283,8 @@
     </object-variable>
     <object-variable>
       <name>p2</name>
+      <constantData/>
+      <inheritData/>
       <fields>
         <simple-variable>
           <name>age</name>
@@ -288,6 +302,8 @@
         </string-variable>
         <object-variable>
           <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
           <fields>
             <simple-variable>
               <name>age</name>
@@ -319,6 +335,8 @@
   </arguments>
   <return class="object-variable">
     <name>return</name>
+    <constantData/>
+    <inheritData/>
     <fields>
       <simple-variable>
         <name>age</name>
@@ -336,6 +354,8 @@
       </string-variable>
       <object-variable>
         <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
         <fields>
           <simple-variable>
             <name>age</name>
@@ -367,45 +387,45 @@
   <object-this class="null">
     <name>this</name>
   </object-this>
+  <changes>
+    <change>
+      <variable>p1.name</variable>
+      <value class="string-variable">
+        <name>name</name>
+        <value>pepito</value>
+        <id>63</id>
+      </value>
+    </change>
+    <change>
+      <variable>p1.bestFriend.age</variable>
+      <value class="simple-variable">
+        <name>age</name>
+        <value class="int">0</value>
+      </value>
+    </change>
+    <change>
+      <variable>p2.age</variable>
+      <value class="simple-variable">
+        <name>age</name>
+        <value class="int">0</value>
+      </value>
+    </change>
+    <change>
+      <variable>p2.bestFriend.name</variable>
+      <value class="string-variable">
+        <name>name</name>
+        <value>pepito</value>
+        <id>63</id>
+      </value>
+    </change>
+  </changes>
 </info>
-<changes>
-<change>
-  <variable>p1.name</variable>
-  <value class="string-variable">
-    <name>name</name>
-    <value>pepito</value>
-    <id>63</id>
-  </value>
-</change>
-<change>
-  <variable>p1.bestFriend.age</variable>
-  <value class="simple-variable">
-    <name>age</name>
-    <value class="int">0</value>
-  </value>
-</change>
-<change>
-  <variable>p2.age</variable>
-  <value class="simple-variable">
-    <name>age</name>
-    <value class="int">0</value>
-  </value>
-</change>
-<change>
-  <variable>p2.bestFriend.name</variable>
-  <value class="string-variable">
-    <name>name</name>
-    <value>pepito</value>
-    <id>63</id>
-  </value>
-</change>
-</changes>
 <called-methods>
 </called-methods>
 </method-call>
 <method-call id="5">
 <info>
-  <name>imprime</name>
+  <methodName>imprime</methodName>
   <calledFromClass>Person</calledFromClass>
   <arguments/>
   <return class="string-variable">
@@ -415,6 +435,8 @@
   </return>
   <object-this class="object-variable">
     <name>this</name>
+    <constantData/>
+    <inheritData/>
     <fields>
       <simple-variable>
         <name>age</name>
@@ -432,6 +454,8 @@
       </string-variable>
       <object-variable>
         <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
         <fields>
           <simple-variable>
             <name>age</name>
@@ -460,21 +484,21 @@
     <id>62</id>
     <className>Person</className>
   </object-this>
+  <changes>
+    <change>
+      <variable>this.age</variable>
+      <value class="simple-variable">
+        <name>age</name>
+        <value class="int">1</value>
+      </value>
+    </change>
+  </changes>
 </info>
-<changes>
-<change>
-  <variable>this.age</variable>
-  <value class="simple-variable">
-    <name>age</name>
-    <value class="int">1</value>
-  </value>
-</change>
-</changes>
 <called-methods>
 </called-methods>
 </method-call>
 </called-methods>
 </method-call>
 </called-methods>
-</trace>
 </thread>
+</trace>

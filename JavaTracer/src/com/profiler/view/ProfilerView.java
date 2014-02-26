@@ -21,7 +21,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
 
-public class ProfilerView extends JDialog {
+public class ProfilerView extends JDialog implements ProfilerViewInterface{
 
 		private static String TITLE = "Profiling stats: ";
 	
