@@ -5,10 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.javatracer.model.ClassUtils;
 import com.sun.jdi.Method;
 import com.sun.jdi.event.MethodEntryEvent;
 import com.thoughtworks.xstream.XStream;
+import com.tracer.model.ClassUtils;
 
 public class Profiler implements ProfilerModelInterface{
 

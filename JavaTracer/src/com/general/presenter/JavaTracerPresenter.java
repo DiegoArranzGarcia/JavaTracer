@@ -2,9 +2,9 @@ package com.general.presenter;
 
 import com.general.view.JavaTracerView;
 import com.inspector.controller.InspectorController;
-import com.javatracer.controller.TracerController;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
+import com.tracer.controller.TracerController;
 
 public class JavaTracerPresenter {
 
