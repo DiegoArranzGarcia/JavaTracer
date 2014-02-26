@@ -91,8 +91,8 @@ public class TracerView extends JFrame {
 		addArgument.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				JListWindow jListWindow = new JListWindow();
-				jListWindow.setVisible(true); 
+				MainArgumentesView mainArgumentsView = new MainArgumentesView();
+				mainArgumentsView.setVisible(true); 
 			}
 		});
 		

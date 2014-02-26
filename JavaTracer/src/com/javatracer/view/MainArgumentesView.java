@@ -6,7 +6,7 @@ import javax.swing.*;
 
 
 @SuppressWarnings("serial")
-public class JListWindow  extends JFrame implements ActionListener, MouseListener,KeyListener{
+public class MainArgumentesView  extends JFrame implements ActionListener, MouseListener,KeyListener{
 
 	private static int FIRST_COLUM = 20;
 	private static int SECOND_COLUM = 510; 
@@ -30,7 +30,7 @@ public class JListWindow  extends JFrame implements ActionListener, MouseListene
 	
 
 	
-	public JListWindow(){
+	public MainArgumentesView(){
 		/*initializes the properties of the components*/
 		initComponents();
    		/*Add a title*/
