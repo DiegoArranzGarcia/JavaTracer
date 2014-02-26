@@ -32,7 +32,7 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 	private static int BETWEEN_DISTANCE = 40;
 	
 	private Container content;
-	private JButton add, deleteAll, deleteElement,saveArguments,edit;
+	private JButton add, deleteAll, deleteElement,saveArguments;
 	private JLabel  message;
 	private JTextField argument;
     private JList<String> argumentsList;
@@ -70,19 +70,14 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 		add.setBounds(SECOND_COLUM, FIRST_ROW, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		add.addActionListener(this);
 		
-		edit= new JButton();
-		edit.setText("Edit ");
-		edit.setBounds(SECOND_COLUM, FIRST_ROW + BETWEEN_DISTANCE, WEIGHT_BUTTONS, HIGH_COMPONENTS);
-		edit.addActionListener(this);
-		
 		deleteElement= new JButton();
 		deleteElement.setText(DELETE);
-		deleteElement.setBounds(SECOND_COLUM, FIRST_ROW+BETWEEN_DISTANCE*2, WEIGHT_BUTTONS, HIGH_COMPONENTS);
+		deleteElement.setBounds(SECOND_COLUM, FIRST_ROW+BETWEEN_DISTANCE, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		deleteElement.addActionListener(this);
 		
 		deleteAll= new JButton();
 		deleteAll.setText(DELETE_ALL);
-		deleteAll.setBounds(SECOND_COLUM, FIRST_ROW +BETWEEN_DISTANCE*3, WEIGHT_BUTTONS, HIGH_COMPONENTS);
+		deleteAll.setBounds(SECOND_COLUM, FIRST_ROW +BETWEEN_DISTANCE*2, WEIGHT_BUTTONS, HIGH_COMPONENTS);
 		deleteAll.addActionListener(this);
 		
 		saveArguments=new JButton();
@@ -96,6 +91,7 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 		argumentsList = new JList<String>();
 		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		argumentsList.addMouseListener(this);
+		//argumentsList.setSelectionModel(new ToggleSelectionModel());
 		
 		model = new DefaultListModel<String>();
 	   	
@@ -106,12 +102,13 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 		/*Add the components  at content*/
 		content.add(argument);
 		content.add(add);
-		content.add(edit);
 		content.add(deleteAll);
 		content.add(deleteElement);
 		content.add(message);
 		content.add(scrollLista);
 		content.add(saveArguments);
+		content.addMouseListener(this);
+		
 	    
     }
 
@@ -177,7 +174,23 @@ public class ArgumentsView  extends JFrame implements ActionListener, MouseListe
 		this.model = model;
 	}
 
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+    	if (e.getSource().equals(content)) {
+    		boolean found = false;
+    		int size=argumentsList.getModel().getSize();
+    		int i = 0;
+    		
+    		while (i<size && !found){
+        		found = argumentsList.isSelectedIndex(i);
+        		if (found) {
+        			argumentsList.removeSelectionInterval(i, i); 
+        			argument.setText(""); 
+        		}
+        		i++;
+    		}
+    		
+    	}
+    }
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 
