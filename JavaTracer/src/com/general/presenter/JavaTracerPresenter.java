@@ -1,5 +1,9 @@
 package com.general.presenter;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import com.alee.laf.WebLookAndFeel;
 import com.general.view.JavaTracerView;
 import com.inspector.controller.InspectorController;
 import com.profiler.model.ProfilerModelInterface;
@@ -16,13 +20,18 @@ public class JavaTracerPresenter {
 	
 	/**
 	 *  Creates the controllers of aplication (Tracer, Profiler and Inspector controller). 
+	 * @throws UnsupportedLookAndFeelException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
 		new JavaTracerPresenter();
 	}
 	
-	public JavaTracerPresenter(){
+	public JavaTracerPresenter() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+		//UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName () );
 		this.tracerController = new TracerController();
 		this.profilerController = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
