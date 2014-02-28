@@ -142,11 +142,12 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 
 	public void mouseClicked(MouseEvent e) {
 		
-		if (e.getX() < 20){
+		//if (e.getX() < 20){
 			TreePath path = binTree.getPathForLocation(e.getX(),e.getY());
 			if (path != null)
 				expandOrCollapse(path);
-		}
+			
+		//}
 				
 	}
 
@@ -154,7 +155,9 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 		if (binTree.isExpanded(path))
 			binTree.collapsePath(path);
 		else
-			binTree.expandAll();
+			//binTree.expandAll();
+			binTree.expandPath(path);
+	
 	}
 
 	public void mouseEntered(MouseEvent e) {}
