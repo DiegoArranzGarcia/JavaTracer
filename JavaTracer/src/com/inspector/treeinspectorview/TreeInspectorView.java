@@ -16,7 +16,6 @@ import com.inspector.treeinspector.model.TreeInspector;
 @SuppressWarnings("serial")
 public class TreeInspectorView extends JScrollPane {
 
-	TreeInspector controller;
 	static double GAP_BETWEEN_LEVELS = 50;
 	static double GAP_BETWEEN_NODES= 10;
 	
@@ -30,7 +29,6 @@ public class TreeInspectorView extends JScrollPane {
 	public TreeInspectorView(DefaultTreeLayout<Box> root,TreeInspector controller) {
 		super(createTreePanel(root,controller));
 		
-		this.controller = controller;
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	

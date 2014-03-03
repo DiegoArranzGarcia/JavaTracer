@@ -143,7 +143,7 @@ public class TracerView extends JFrame {
 		
 		profilingCheckBox = new JCheckBox("Enable profiling");
 		profilingCheckBox.setLayout(new GridLayout(1,1));
-		profilingCheckBox.setBounds(new Rectangle(180,30));
+		profilingCheckBox.setBounds(new Rectangle(30, 225, 180, 30));
 		profilingCheckBox.setLocation(0, CANCEL_TRACER_ROW);
 		profilingCheckBox.setFont(new Font("Comic Sans MS",Font.BOLD, 15));
 		
@@ -195,21 +195,21 @@ public class TracerView extends JFrame {
 		});
 		
 		
-		setLayout(null); 
-		add(path);
-		add(profilingCheckBox);
-		add(tracer);
-		add(examine);
-		add(back);
-		add(labelPath);
-		add(nameClass);
-		add(labelNameClass);
-		add(helpPath);
-		add(helpNameClass);
-		add(labelXml);
-		add(nameXml);
-		add(helpXmlFile);
-		add(addArgument);
+		getContentPane().setLayout(null); 
+		getContentPane().add(path);
+		getContentPane().add(profilingCheckBox);
+		getContentPane().add(tracer);
+		getContentPane().add(examine);
+		getContentPane().add(back);
+		getContentPane().add(labelPath);
+		getContentPane().add(nameClass);
+		getContentPane().add(labelNameClass);
+		getContentPane().add(helpPath);
+		getContentPane().add(helpNameClass);
+		getContentPane().add(labelXml);
+		getContentPane().add(nameXml);
+		getContentPane().add(helpXmlFile);
+		getContentPane().add(addArgument);
 	
 	}
 	
@@ -274,6 +274,4 @@ public class TracerView extends JFrame {
 	public void setController(TracerController controller){
 		this.controller = controller;
 	}
-	
-	
 }

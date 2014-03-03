@@ -62,11 +62,10 @@ public class InspectorController {
 	public void clickedOnNode(Box box) {
 		
 		treeInspector.selectNode(box);
-		
 		objectInspector.clear();
 		
 		if (box!=null && box instanceof MethodBox){
-			MethodInfo method = ((MethodBox)box).getMethodInfo(); 
+			MethodInfo method = ((MethodBox)box).getMethodInfo();
 			objectInspector.addNodeInfo(method);
 		}
 	}

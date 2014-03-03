@@ -31,7 +31,7 @@ public class JavaTracerPresenter {
 	}
 	
 	public JavaTracerPresenter() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
-		//UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName () );
+		UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName () );
 		this.tracerController = new TracerController();
 		this.profilerController = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();

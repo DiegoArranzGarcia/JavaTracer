@@ -3,8 +3,6 @@ package com.inspector.objectinspector.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.IgnoredData;
@@ -13,6 +11,8 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
+import com.inspector.objectinspector.view.TableRowData;
+import com.inspector.objectinspector.view.TableTreeNode;
 import com.tracer.model.ChangeDetector;
 
 public class VariablesVisitor implements InfoVisitor{
@@ -22,19 +22,19 @@ public class VariablesVisitor implements InfoVisitor{
 	private static String DOUBLE_QUOTES = "\"";
 	private static String EMPTY = "";
 	
-	private List<DefaultMutableTreeNode> parents;
+	private List<TableTreeNode> parents;
 	private MainInfoVisitor mainInfoVisitor;
 	
-	public VariablesVisitor(DefaultMutableTreeNode rootNode){
+	public VariablesVisitor(TableTreeNode tableTreeNode){
 		this.parents = new ArrayList<>();
-		this.parents.add(rootNode);
+		this.parents.add(tableTreeNode);
 		this.mainInfoVisitor = new MainInfoVisitor();
 	}
 
 	public void visit(ArrayData array) {
 		
 		mainInfoVisitor.visit(array);
-		DefaultMutableTreeNode node = addVariable(array.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(array.getName(),mainInfoVisitor.getInfo(),true);
 				
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
@@ -59,7 +59,7 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(StringData string) {
 		
 		mainInfoVisitor.visit(string);
-		DefaultMutableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo(),true);
 		parents.add(node);
 		addVariable(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES,false);
 		removeLastParent();
@@ -76,7 +76,7 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(ObjectData object) {
 		
 		mainInfoVisitor.visit(object);
-		DefaultMutableTreeNode node = addVariable(object.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(object.getName(),mainInfoVisitor.getInfo(),true);
 		
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
@@ -98,7 +98,7 @@ public class VariablesVisitor implements InfoVisitor{
 
 	private void addListToNode(String string, List<Data> list_data) {
 		boolean expandable = !list_data.isEmpty();
-		DefaultMutableTreeNode node = addVariable(string,EMPTY,expandable);
+		TableTreeNode node = addVariable(string,EMPTY,expandable);
 		parents.add(node);
 
 		for (int i=0;i<list_data.size();i++){
@@ -122,13 +122,13 @@ public class VariablesVisitor implements InfoVisitor{
 	
 	// Add row to the tabe
 	
-	private DefaultMutableTreeNode addVariable(String name,String value,boolean expandable){
+	private TableTreeNode addVariable(String name,String value,boolean expandable){
 		
-		DefaultMutableTreeNode node;
-		DefaultMutableTreeNode parent = getLastParent();
+		TableTreeNode node;
+		TableTreeNode parent = getLastParent();
 		TableRowData data = new TableRowData(name, value, expandable);
 		
-		node = new DefaultMutableTreeNode(data);
+		node = new TableTreeNode(data);
 		parent.add(node);
 					
 		return node;
@@ -140,7 +140,7 @@ public class VariablesVisitor implements InfoVisitor{
 		parents.remove(parents.size()-1);		
 	}
 	
-	private DefaultMutableTreeNode getLastParent() {
+	private TableTreeNode getLastParent() {
 		return parents.get(parents.size()-1);
 	}
 	

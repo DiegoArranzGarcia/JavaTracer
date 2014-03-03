@@ -1,10 +1,8 @@
-package com.inspector.objectinspector.controller;
 
+package com.inspector.objectinspector.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
@@ -12,10 +10,11 @@ import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
-import com.inspector.objectinspector.model.ChangeInfoVisitor;
-import com.inspector.objectinspector.model.TableRowData;
 import com.inspector.objectinspector.model.VariablesVisitor;
+import com.inspector.objectinspector.view.ChangeInfoVisitor;
 import com.inspector.objectinspector.view.ObjectInspectorView;
+import com.inspector.objectinspector.view.TableRowData;
+import com.inspector.objectinspector.view.TableTreeNode;
 
 public class ObjectInspectorController {
 	
@@ -47,8 +46,7 @@ public class ObjectInspectorController {
 		InfoVisitor visitor = new VariablesVisitor(view.getRoot());
 		List<Data> arguments = method.getArguments();
 		Data thisValue = method.getThis_data();
-		Data returnValue = method.getReturn_data();
-		
+		Data returnValue = method.getReturn_data();		
 		
 		variables.add(thisValue);
 		thisValue.accept(visitor);
@@ -63,17 +61,17 @@ public class ObjectInspectorController {
 			data.accept(visitor);
 			variables.add(data);
 		}
-		
-	
-		List <DefaultMutableTreeNode> rootChildren =view.getChildrenOfRoot(); 
+		 
 		proccesChange(method);
-		view.showVariables();
+		view.refreshTable();
+		
 	}
 	
 
- /**
+	/**
 	 * @param method
 	 */
+	
     private void proccesChange(MethodInfo method) {
     	
     	List<ChangeInfo> changesList = method.getChanges();
@@ -83,7 +81,7 @@ public class ObjectInspectorController {
     		ChangeInfo changeInfo = changesList.get(i);
     		String change = changeInfo.getVariable();
     		List<String> parseChange= parseMethod(change);
-    		DefaultMutableTreeNode node = foundNode(parseChange);
+    		TableTreeNode node = foundNode(parseChange);
     		TableRowData nodeInfo = (TableRowData)node.getUserObject();
     		nodeInfo.setChanged(true); 
     		modifyTable(node,changeInfo.getValue());
@@ -92,19 +90,20 @@ public class ObjectInspectorController {
 	    
     }
     
-    private void modifyTable(DefaultMutableTreeNode node, Data value) {
+    private void modifyTable(TableTreeNode node, Data value) {
     	ChangeInfoVisitor changeVisitor = new ChangeInfoVisitor();
     	changeVisitor.setRootNode(node);
     	value.accept(changeVisitor);
     }
 
-		/**
+	/**
 	 * @param parseChange
 	 * @return
 	 */
-	private DefaultMutableTreeNode foundNode(List<String> parseChange) {
-		List<DefaultMutableTreeNode> children = view.getChildrenOfRoot();
-		DefaultMutableTreeNode node = null ;
+    
+	private TableTreeNode foundNode(List<String> parseChange) {
+		List<TableTreeNode> children = view.getRoot().getChildren();
+		TableTreeNode node = null ;
 		int i = 0;
 		int j = 0;
 		boolean found = false;
@@ -116,7 +115,7 @@ public class ObjectInspectorController {
 				found = parseChange.get(i).equals(nodeInfo.getName());
 				if (found) {
 					node = children.get(j);
-					children = view.getChildrenOf(node);
+					children = node.getChildren();
 				} else 
 					j++;
 			}
