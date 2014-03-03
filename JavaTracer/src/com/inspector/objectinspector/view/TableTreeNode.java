@@ -7,6 +7,7 @@ public class TableTreeNode {
 
 	private Object userObject;
 	private boolean expanded;
+	private boolean isExpandable;
 	private long depth;
 	private List<TableTreeNode> children;
 	private TableTreeNode parent;
@@ -103,6 +104,14 @@ public class TableTreeNode {
 
 	public int getChildCount() {
 		return children.size();
+	}
+
+	public boolean isExpandable() {
+		return !children.isEmpty();
+	}
+
+	public void setExpandable(boolean isExpandable) {
+		this.isExpandable = isExpandable;
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.inspector.objectinspector.view;
 import java.util.List;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -13,8 +14,19 @@ public class JTreeTable extends JTable {
 	
 	public JTreeTable(TableRowData rootNode){
 		treeModel = new TreeModel(new TableTreeNode(rootNode));
-		tableModel = new DefaultTableModel(new String[]{rootNode.getName(),rootNode.getValue()},0);
+
+		// Cell's are not editable
+		tableModel = new DefaultTableModel(new String[]{rootNode.getName(),rootNode.getValue()},0) {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
 		setModel(tableModel);
+		
+		CellRenderer renderer = new CellRenderer(treeModel);
+		setDefaultRenderer(Object.class,renderer);
+		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 	
 	public void collapseRow(int selectedRow) {
