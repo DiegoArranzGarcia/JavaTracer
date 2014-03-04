@@ -41,7 +41,6 @@ public class CellRenderer extends DefaultTableCellRenderer{
 		
 		
 		if (expandable && column == 0){
-			System.out.println("row :" + row + "expanded: "+expanded);
 			if (expanded){
 				setIcon(imageLoader.getFoldedIcon());
 			} else {
