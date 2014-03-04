@@ -53,22 +53,30 @@ public class TracerController {
 	
 	public void clickedOnTrace(){
 				
-		this.lastConfig = getAllConfig();		
+		this.lastConfig = getAllConfig(false);		
 		//boolean error = lastConfig.check();
 		
-		if (lastConfig.isProfiling_mode())
+		/*if (lastConfig.isProfiling_mode())
 			tracer.profile(lastConfig,presenter.getProfiler());
-		else
+		else*/
 			tracer.trace(lastConfig);				
 	}
 	
+	public void clickedOnProfiling(){
+		
+		this.lastConfig = getAllConfig(true);		
+		tracer.profile(lastConfig,presenter.getProfiler());
+			
+	}
 	
-	private RunConfiguration getAllConfig() {
+	
+	private RunConfiguration getAllConfig(boolean profileMode) {
 		 
 		String mainClassPath = tracerView.getPath();
 		
 		boolean jar = checkIfJar();
-		boolean profile_mode = tracerView.profileMode();
+		//boolean profile_mode = tracerView.profileMode();
+		boolean profile_mode = profileMode;
 		String main;
 		if (jar)
 			main = tracerView.getPath();

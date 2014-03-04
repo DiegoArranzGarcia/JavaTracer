@@ -39,6 +39,7 @@ public class TracerView extends JFrame {
 	private static int CANCEL_COL = 480;
 	private static int TRACER_COL = 300;
 	private static int LABELS_SIZE = 14;
+	private static int DISTANCE_BUTTONS = 150;
 	
 	private static String LABEL_PATH = "Select a directory";
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
@@ -46,13 +47,12 @@ public class TracerView extends JFrame {
 	private static String LABEL_XML = "Name of the trace file";
 	private static String XML_FILE_TOOLTIP = "Write the name of the file without any extensions";
 	
-	private JButton tracer,examine,back,helpPath,helpNameClass,helpXmlFile,addArgument;
+	private JButton tracer,examine,back,helpPath,helpNameClass,helpXmlFile,addArgument,profiling;
 	private TextField path,nameXml;
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass,labelXml;
 	private TracerController controller;
-	private JCheckBox profilingCheckBox;
 	private Container contentPane;
 		
 	public TracerView() {
@@ -131,8 +131,8 @@ public class TracerView extends JFrame {
 		helpXmlFile.setToolTipText(XML_FILE_TOOLTIP);
 		
 		back =new JButton("Back");
-		back.setBounds(new Rectangle(100,40));
-		back.setLocation(CANCEL_COL, CANCEL_TRACER_ROW); 
+		back.setBounds(new Rectangle(690, 206, 100, 40));
+		back.setLocation(TRACER_COL+2*DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
 		back.setBackground(Color.white); 
 		back.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
 		back.addActionListener(new ActionListener() {
@@ -140,12 +140,7 @@ public class TracerView extends JFrame {
 				controller.clickedBack();			
 			}
 		});
-		
-		profilingCheckBox = new JCheckBox("Enable profiling");
-		profilingCheckBox.setLayout(new GridLayout(1,1));
-		profilingCheckBox.setBounds(new Rectangle(30, 225, 180, 30));
-		profilingCheckBox.setLocation(0, CANCEL_TRACER_ROW);
-		profilingCheckBox.setFont(new Font("Comic Sans MS",Font.BOLD, 15));
+	
 		
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
@@ -157,13 +152,27 @@ public class TracerView extends JFrame {
 		tracer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
 					controller.clickedOnTrace();
 					contentPane=getContentPane();
 					//InitLoading();
 					//FinishedLoading();
 			}
 			
+		});
+		
+		profiling = new JButton("Profile");
+		profiling.setLayout(new GridLayout(1,1)); 
+		profiling.setBounds(new Rectangle(100,40));
+		profiling.setLocation(TRACER_COL+DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
+		profiling.setBackground(Color.white);  
+		profiling.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
+		profiling.setEnabled(false); 
+		profiling.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.clickedOnProfiling();
+				contentPane=getContentPane();
+				
+			}
 		});
 		
 		examine = new JButton("Examine"); 
@@ -197,7 +206,7 @@ public class TracerView extends JFrame {
 		
 		getContentPane().setLayout(null); 
 		getContentPane().add(path);
-		getContentPane().add(profilingCheckBox);
+		//getContentPane().add(profilingCheckBox);
 		getContentPane().add(tracer);
 		getContentPane().add(examine);
 		getContentPane().add(back);
@@ -210,6 +219,7 @@ public class TracerView extends JFrame {
 		getContentPane().add(nameXml);
 		getContentPane().add(helpXmlFile);
 		getContentPane().add(addArgument);
+		getContentPane().add(profiling);
 	
 	}
 	
@@ -247,6 +257,7 @@ public class TracerView extends JFrame {
 		
 		if (nameClass.getItemCount()>0){
 			tracer.setEnabled(true);
+			profiling.setEnabled(true); 
 			nameXml.setEnabled(true);
 		}
 	}
@@ -267,10 +278,6 @@ public class TracerView extends JFrame {
 		nameClass.setEnabled(true);		
 	}
 
-	public boolean profileMode() {
-		return profilingCheckBox.isSelected();
-	}
-	
 	public void setController(TracerController controller){
 		this.controller = controller;
 	}
