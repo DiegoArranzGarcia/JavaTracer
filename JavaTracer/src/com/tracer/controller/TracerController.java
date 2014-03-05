@@ -54,12 +54,7 @@ public class TracerController {
 	public void clickedOnTrace(){
 				
 		this.lastConfig = getAllConfig(false);		
-		//boolean error = lastConfig.check();
-		
-		/*if (lastConfig.isProfiling_mode())
-			tracer.profile(lastConfig,presenter.getProfiler());
-		else*/
-			tracer.trace(lastConfig);				
+		tracer.trace(lastConfig);				
 	}
 	
 	public void clickedOnProfiling(){
@@ -75,7 +70,6 @@ public class TracerController {
 		String mainClassPath = tracerView.getPath();
 		
 		boolean jar = checkIfJar();
-		//boolean profile_mode = tracerView.profileMode();
 		boolean profile_mode = profileMode;
 		String main;
 		if (jar)
@@ -160,11 +154,11 @@ public class TracerController {
 	}
 
 	public void starting() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	public void generatingTrace() {
-		// TODO Auto-generated method stub		
+				
 	}
 
 	public void clickedBack() {

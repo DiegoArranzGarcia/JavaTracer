@@ -10,8 +10,8 @@ import java.util.Map.Entry;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.treeinspector.data.Box;
-import com.inspector.treeinspectorview.DefaultTreeLayout;
-import com.inspector.treeinspectorview.TreeInspectorView;
+import com.inspector.treeinspector.view.DefaultTreeLayout;
+import com.inspector.treeinspector.view.TreeInspectorView;
 
 public class TreeInspector implements MouseListener {
 		

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.general.model.data.ThreadInfo;
-import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
@@ -197,9 +196,6 @@ public class EventThread extends Thread {
 
     private void finishTrace() {
     	writer.close();
-		
-		if (enableProfiling)
-			profiler.showProfile();
 	}
 
 	/***

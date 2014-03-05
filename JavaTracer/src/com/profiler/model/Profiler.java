@@ -11,19 +11,16 @@ import com.thoughtworks.xstream.XStream;
 import com.tracer.model.ClassUtils;
 
 public class Profiler implements ProfilerModelInterface{
-
-	private static String FILE_NAME = "temp_profiling"; 
 	
 	private HashMap<String,MethodDataProfiler> registredMethods;
-	private HashMap<String,Integer> registredClasses;
 	private int totalTimeCalledMethods;
-	private XStream xStream;
+	
+	private HashMap<String,Integer> registredClasses;
 	
 	public Profiler(){
 		registredMethods = new HashMap<>();
 		registredClasses = new HashMap<>();
 		totalTimeCalledMethods = 0;
-		xStream = new XStream();
 	}
 	
 	public void profileEvent(MethodEntryEvent event) {
@@ -38,7 +35,7 @@ public class Profiler implements ProfilerModelInterface{
 		totalTimeCalledMethods++;
 		
 	}
-
+	
 	private void registerMethod(String className, String methodName) {
 		
 		String methodKey = methodName;
@@ -63,7 +60,7 @@ public class Profiler implements ProfilerModelInterface{
 		if (numCalls == null){
 			
 			registredClasses.put(className,new Integer(1));
-			
+
 		} else {
 			
 			registredClasses.remove(className);
@@ -73,18 +70,25 @@ public class Profiler implements ProfilerModelInterface{
 		}
 		
 	}
-
-	public void showProfile() {
-		
+	
+	public void saveProfile(ProfileData data,File file) {
 		try {
-			FileWriter writer= new FileWriter(new File(FILE_NAME));
-			xStream.toXML(registredMethods,writer);
-		} catch (IOException e) {
-			e.printStackTrace();
+			XStream xStream = new XStream();
+			FileWriter fileWriter = new FileWriter(file);
+			xStream.toXML(data,fileWriter);
+		} catch (IOException exc) {
+			
 		}
-		
 	}
 
+	public ProfileData openProfile(File file){
+		XStream xStream = new XStream();
+		return (ProfileData) xStream.fromXML(file);
+	}
+
+
+	//Getters and setters
+	
 	public int getTotalTimeCalledMethods() {
 		return totalTimeCalledMethods;
 	}
@@ -109,5 +113,5 @@ public class Profiler implements ProfilerModelInterface{
 	public void setRegistredClasses(HashMap<String, Integer> registredClasses) {
 		this.registredClasses = registredClasses;
 	}
-
+	
 }

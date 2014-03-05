@@ -49,10 +49,34 @@ public class JavaTracerPresenter {
 		inspectorController.setController(this);
 		view.setController(this);
 	}
-
+	
 	public void showProfile() {
+		profilerController.loadTempProfile();
 		profilerController.showProfile();
 	}	
+	
+	public void clickedOnExit() {
+		System.exit(0);
+	}
+
+	public void clickedOnInspectTrace() {
+		view.setVisible(false);
+		inspectorController.open();
+	}
+
+	public void clickedOnTraceProfile() {
+		view.setVisible(false);
+		tracerController.open();		
+	}
+	
+	public void clickedOnViewProfile() {
+		view.setVisible(false);
+		profilerController.showProfile();
+	}
+
+	public void back() {
+		view.setVisible(true);
+	}
 	
 	// Getters and setters
 	
@@ -90,24 +114,6 @@ public class JavaTracerPresenter {
 
 	public void setView(JavaTracerView view) {
 		this.view = view;
-	}
-
-	public void clickedOnExit() {
-		System.exit(0);
-	}
-
-	public void clickedOnInspectTrace() {
-		view.setVisible(false);
-		inspectorController.open();
-	}
-
-	public void clickedOnTraceProfile() {
-		view.setVisible(false);
-		tracerController.open();		
-	}
-
-	public void back() {
-		view.setVisible(true);
 	}
 
 }

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import com.inspector.controller.InspectorController;
 import com.inspector.objectinspector.view.ObjectInspectorView;
-import com.inspector.treeinspectorview.TreeInspectorView;
+import com.inspector.treeinspector.view.TreeInspectorView;
 
 
 @SuppressWarnings("serial")

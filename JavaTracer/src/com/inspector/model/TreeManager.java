@@ -9,7 +9,7 @@ import com.general.model.configuration.TraceInspectorConfiguration;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.inspector.treeinspector.data.*;
-import com.inspector.treeinspectorview.DefaultTreeLayout;
+import com.inspector.treeinspector.view.DefaultTreeLayout;
 
 public class TreeManager {
 

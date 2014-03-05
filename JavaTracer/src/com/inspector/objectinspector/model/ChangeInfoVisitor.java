@@ -1,4 +1,4 @@
-package com.inspector.objectinspector.view;
+package com.inspector.objectinspector.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.model.MainInfoVisitor;
-import com.inspector.objectinspector.model.VariablesVisitor;
+import com.inspector.objectinspector.view.TableRowData;
+import com.inspector.objectinspector.view.TableTreeNode;
 
 public class ChangeInfoVisitor implements InfoVisitor {
 	
@@ -61,7 +61,6 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		rootNode.removeAllChildren();
 		rootNode.add(in);
 		for (int i=0;i<children.size();i++){
-			//children.get(i).setParent(in);
 			in.add(children.get(i));
 		}
 		
@@ -72,9 +71,8 @@ public class ChangeInfoVisitor implements InfoVisitor {
 	}
 	
 	public void visit(IgnoredData ignoredClass) {
-		
+		//Not used
 	}
-
 
 	public void visit(ObjectData objectInfo) {
 		MainInfoVisitor mainInfoVisitor = new MainInfoVisitor();
@@ -89,7 +87,6 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		rootNode.removeAllChildren();
 		rootNode.add(in);
 		for (int i=0;i<children.size();i++){
-			//children.get(i).setParent(in);
 			in.add(children.get(i));
 		}
 		

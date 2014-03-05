@@ -1,4 +1,4 @@
-package com.inspector.treeinspectorview;
+package com.inspector.treeinspector.view;
 
 import java.awt.Component;
 import java.awt.geom.Rectangle2D.Double;
