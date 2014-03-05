@@ -26,7 +26,7 @@ public class JavaTracerPresenter {
 	 * @throws ClassNotFoundException 
 	 */
 	
-	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+	public static void main(String[] args) throws Exception{
 		new JavaTracerPresenter();
 	}
 	

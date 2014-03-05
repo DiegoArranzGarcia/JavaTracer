@@ -73,10 +73,10 @@ public class EventThread extends Thread {
         this.profiler = profiler;
         if (profiler != null)
         	profiler.clean();
-        
-        writer = new TraceWriter(config.getNameXml());
-        writer.writeThreadInfo(new ThreadInfo());
-                
+        else {
+        	writer = new TraceWriter(config.getNameXml());
+        	writer.writeThreadInfo(new ThreadInfo());
+        }  
         //news Managers with virtual Machine  
         //or array excludes created in Trace class  
         
@@ -172,15 +172,18 @@ public class EventThread extends Thread {
 	*/
     private void handleEvent(Event event) {
         if (event instanceof ExceptionEvent) {
-            exception.exceptionEvent((ExceptionEvent)event);
+        	if (!enableProfiling)
+        		exception.exceptionEvent((ExceptionEvent)event);
         } else if (event instanceof ModificationWatchpointEvent) {
         	//fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
         } else if (event instanceof MethodEntryEvent) {	
-            methodentry.methodEntryEvent((MethodEntryEvent)event);
             if (enableProfiling)
             	profiler .profileEvent((MethodEntryEvent)event);
+            else 
+            	methodentry.methodEntryEvent((MethodEntryEvent)event);
         } else if (event instanceof MethodExitEvent) {
-        	methodexit.methodExitEvent((MethodExitEvent)event);
+        	if (!enableProfiling)
+        		methodexit.methodExitEvent((MethodExitEvent)event);
         } else if (event instanceof StepEvent) {
             //step.stepEvent((StepEvent)event);
         } else if (event instanceof ThreadDeathEvent) {
@@ -188,11 +191,12 @@ public class EventThread extends Thread {
         } else if (event instanceof ClassPrepareEvent) {
             //prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
-        	finishTrace();
+        	if (!enableProfiling)
+        		finishTrace();
         } else if (event instanceof VMDisconnectEvent) {
             connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
         } else if (event instanceof ThreadStartEvent){
-        	System.out.println(((ThreadStartEvent)event).thread().name());
+        	
         }
     }
 

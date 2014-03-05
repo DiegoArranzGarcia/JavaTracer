@@ -53,7 +53,9 @@ public class JavaTracerConfiguration {
                 /*
                  * The file is uploaded to a File to use the Load method
                  */
-            	
+    			
+    			
+    			fileWriter = new FileOutputStream(CONFIG_FILE_NAME);
                 fileInput = new FileInputStream(CONFIG_FILE_NAME);
                 
                 /*
@@ -67,6 +69,10 @@ public class JavaTracerConfiguration {
                 */
                
                 properties.putAll(defaultConfig());
+                
+                properties.store(fileWriter,FILE_TITLE);
+    			fileWriter.close();
+    			fileInput.close();
                 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -110,6 +116,7 @@ public class JavaTracerConfiguration {
      	try {
 			fileWriter = new FileOutputStream(CONFIG_FILE_NAME);
 			properties.store(fileWriter,FILE_TITLE);
+			fileWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
