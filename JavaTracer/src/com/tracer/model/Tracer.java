@@ -54,7 +54,7 @@ public class Tracer {
 	  */
     public void trace(RunConfiguration config) {
 
-    	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
+    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
     	excludes = configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
         
@@ -71,7 +71,7 @@ public class Tracer {
     }
     
     public void profile(RunConfiguration config,ProfilerModelInterface profile){
-    	JavaTracerConfiguration configuration = new JavaTracerConfiguration();
+    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
     	excludes = configuration.getExcludes();	
         PrintWriter writer = new PrintWriter(System.out);
         vm = launchTarget(config);

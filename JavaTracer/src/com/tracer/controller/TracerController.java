@@ -9,7 +9,6 @@ import com.general.model.FileUtilities;
 import com.general.model.JarFinder;
 import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
-import com.tracer.arguments.view.ArgumentsView;
 import com.tracer.model.Tracer;
 import com.tracer.model.writers.InspectorWriter;
 import com.tracer.view.TracerView;

@@ -1,9 +1,13 @@
 package com.profiler.presenter;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.ProfileData;
 import com.profiler.model.Profiler;
@@ -46,7 +50,19 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void save() {
-	
+		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		HashMap<String, Boolean> classes = view.getClassesState();
+		Iterator<Entry<String,Boolean>> iterator = view.getClassesState().entrySet().iterator();
+		List<String> excludesClasses = new ArrayList<>();
+		
+		while (iterator.hasNext()){
+			Entry<String,Boolean> entry = iterator.next();
+			if (!entry.getValue())
+				excludesClasses.add(entry.getKey());
+		}
+		
+		String [] excludes = excludesClasses.toArray(new String[excludesClasses.size()]);
+		configuration.addExcludes(excludes);
 	}
 
 	public void cancel() {
