@@ -12,7 +12,8 @@ public class JTreeTable extends JTable {
 	private TreeModel treeModel;
 	private DefaultTableModel tableModel;
 	
-	public JTreeTable(TableRowData rootNode){
+	public JTreeTable(){
+		TableRowData rootNode = new TableRowData("Name", "Value", false);
 		treeModel = new TreeModel(new TableTreeNode(rootNode));
 
 		// Cell's are not editable

@@ -1,4 +1,4 @@
-package com.inspector.treeinspector.model;
+package com.inspector.treeinspector.controller;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,40 +13,34 @@ import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
-public class TreeInspector implements MouseListener {
+public class TreeInspectorController implements MouseListener {
 		
 	private InspectorController controller;
 	private TreeInspectorView view;
 	private TreeManager treeManager;
 	
-	private DefaultTreeLayout<Box> tree;
 	private Box lastSelected;
 	
-	public TreeInspector(InspectorController controller, TreeManager treeManager){
-		this.controller = controller;
+	public TreeInspectorController(TreeManager treeManager){
+		
 		this.treeManager = treeManager;
-		this.tree = treeManager.loadTree();
-		this.view = new TreeInspectorView(tree, this);
-		this.centerScroll();
-        
-        this.lastSelected = null;
-	   
-	 
+		this.lastSelected = null;
+		
+		//centerScroll();
 	}
 	
 	public void centerScroll(){
 		
-		
-			Rectangle bounds = view.getViewport().getViewRect();
-		    Dimension size = view.getViewport().getViewSize();
+		/*
+		Rectangle bounds = view.getViewport().getViewRect();
+		Dimension size = view.getViewport().getViewSize();
 		    
-		    int x = (int) ((size.width - bounds.width) / 2.5);
-		    int y = (int) ((size.height - bounds.height) / 2.5);
+		int x = (int) ((size.width - bounds.width) / 2.5);
+		int y = (int) ((size.height - bounds.height) / 2.5);
 	        
-		    view.getViewport().setViewPosition(new Point(x, y));
-			
+		view.getViewport().setViewPosition(new Point(x, y));
+		*/
 	}
-	
 	
 	public void doubleClickedOnNode(Box box) {
 			
@@ -62,18 +56,22 @@ public class TreeInspector implements MouseListener {
 
 	private void expand(Box box) {
 		
-		treeManager.expandNode(tree,box);
-		view.repaintTree(tree);
+		treeManager.expandNode(treeManager.getTree(),box);
+		view.repaintTree(treeManager.getTree());
 		
 	}
 
 	private void fold(Box box) {	
-		treeManager.foldNode(tree,box);
-		view.repaintTree(tree);
+		treeManager.foldNode(treeManager.getTree(),box);
+		view.repaintTree(treeManager.getTree());
 	}
 
 
 	public TreeInspectorView getView() {
+		if (view == null){
+			view = new TreeInspectorView();
+			view.setController(this);
+		}
 		return view;
 	}
 
@@ -138,9 +136,20 @@ public class TreeInspector implements MouseListener {
 		lastSelected = box;
 		
 		if (needRepaint) 
-			view.repaintTree(tree);
+			view.repaintTree(treeManager.getTree());
 		
 	}
 
+	public void setController(InspectorController inspectorController) {
+		this.controller = inspectorController;
+	}
+
+	public void showTree(){
+		if (view == null){
+			view = new TreeInspectorView();
+			view.setController(this);
+		}
+		view.repaintTree(treeManager.getTree());
+	}
 	
 }

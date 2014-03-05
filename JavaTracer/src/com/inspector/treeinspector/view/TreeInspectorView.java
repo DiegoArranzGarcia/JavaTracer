@@ -1,65 +1,34 @@
 package com.inspector.treeinspector.view;
 
-import java.awt.Component;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.Map;
 
-import javax.swing.JScrollPane;
-
 import org.abego.treelayout.NodeExtentProvider;
-import org.abego.treelayout.TreeLayout;
 import org.abego.treelayout.util.DefaultConfiguration;
 
+import com.inspector.treeinspector.view.TreeLayout;
+import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
-import com.inspector.treeinspector.model.TreeInspector;
 
 @SuppressWarnings("serial")
-public class TreeInspectorView extends JScrollPane {
+public class TreeInspectorView extends TreePanel {
 
-	static double GAP_BETWEEN_LEVELS = 50;
-	static double GAP_BETWEEN_NODES= 10;
-	
-	private static TreeLayout<Box> treeLayout;
-	
-	static NodeExtentProvider<Box> nodeExtentProvider;
-	static DefaultConfiguration<Box> configuration;
-	
-	static TreePanel panel;
-	
-	public TreeInspectorView(DefaultTreeLayout<Box> root,TreeInspector controller) {
-		super(createTreePanel(root,controller));
+	public static double GAP_BETWEEN_LEVELS = 50;
+	public static double GAP_BETWEEN_NODES= 10;
 		
-		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	private NodeExtentProvider<Box> nodeExtentProvider;
+	private DefaultConfiguration<Box> configuration;
 	
-	}
-	 
-	public static Component createTreePanel(DefaultTreeLayout<Box> root,TreeInspector controller) {
-		
-		//setup the tree layout configuration
-
+	public TreeInspectorView(){
 		configuration = new DefaultConfiguration<Box>(GAP_BETWEEN_LEVELS,GAP_BETWEEN_NODES);
-
-		// create the NodeExtentProvider for TextInBox nodes
 		nodeExtentProvider = new TextInBoxNodeExtentProvider();	
-			
-		//create the layout
-		setTreeLayout(new TreeLayout<Box>(root,nodeExtentProvider,configuration));
-
-		// Create a panel that draws the nodes and edges and show the panel
-		panel = new TreePanel(getTreeLayout());
-		panel.addMouseListener(controller);
-		
-		return panel;
-
 	}
-	
+			 	
 	public void repaintTree(DefaultTreeLayout<Box> tree) {
 		
-		setTreeLayout(new TreeLayout<Box>(tree,nodeExtentProvider,configuration));
-		
-		panel.setTree(getTreeLayout());
-		panel.repaint();
+		treeLayout = new TreeLayout<Box>(tree,nodeExtentProvider,configuration);
+		setTree(treeLayout);
+		repaint();
 		
 		this.updateUI();
 	}
@@ -68,12 +37,16 @@ public class TreeInspectorView extends JScrollPane {
 		return getTreeLayout().getNodeBounds();
 	}
 
-	public static TreeLayout<Box> getTreeLayout() {
+	public TreeLayout<Box> getTreeLayout() {
 		return treeLayout;
 	}
 
-	public static void setTreeLayout(TreeLayout<Box> treeLayout) {
-		TreeInspectorView.treeLayout = treeLayout;
+	public void setTreeLayout(TreeLayout<Box> treeLayout) {
+		this.treeLayout = treeLayout;
+	}
+
+	public void setController(TreeInspectorController treeInspector) {
+		addMouseListener(treeInspector);
 	}
 	
 }

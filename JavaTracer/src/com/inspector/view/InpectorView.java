@@ -1,12 +1,23 @@
 package com.inspector.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 
 import com.inspector.controller.InspectorController;
+import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.objectinspector.view.ObjectInspectorView;
+import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
 
@@ -23,7 +34,7 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 	private JSplitPane split;
 	private JMenuItem[] items;
 	
-	public InpectorView() {
+	public InpectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle(WINDOW_TITLE);
@@ -32,28 +43,24 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 		setLocationRelativeTo(null);
 		addComponentListener(this);
 				
-		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		split.setLeftComponent(new JPanel());
-		split.setRightComponent(new JPanel());
-		split.setDividerLocation(DIVIDER_SPLIT);
-		split.setEnabled(false);
-		setContentPane(split);
+		JSplitPane splitPane = new JSplitPane();
+		getContentPane().add(splitPane, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		splitPane.setRightComponent(scrollPane);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		splitPane.setLeftComponent(scrollPane_1);
+		
+		TreeInspectorView treeView = treeInspector.getView();
+		scrollPane_1.setViewportView(treeView);
+		splitPane.setDividerLocation((int)(getWidth()*DIVIDER_SPLIT));
+		
+		ObjectInspectorView objectview = objectInspector.getView();
+		scrollPane.setViewportView(objectview);
 		
 		createMenu();
 	}	
-	
-	public void loadTreeInspector(TreeInspectorView treeInspectorView){
-		
-		split.setLeftComponent(treeInspectorView);
-		split.setDividerLocation(DIVIDER_SPLIT);
-	}
-	
-	public void loadObjectInspector(ObjectInspectorView objectInspectorView){
-
-		split.setRightComponent(objectInspectorView);
-		split.setDividerLocation(DIVIDER_SPLIT);
-		
-	}
 	
 	private void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
@@ -82,7 +89,7 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 	public void componentMoved(ComponentEvent e) {}
 
 	public void componentResized(ComponentEvent e) {
-		split.setDividerLocation(DIVIDER_SPLIT);
+		//split.setDividerLocation(DIVIDER_SPLIT);
 	}
 
 	public void componentShown(ComponentEvent e) {}

@@ -35,8 +35,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 import org.abego.treelayout.TreeForTreeLayout;
-import org.abego.treelayout.TreeLayout;
 
+import com.inspector.treeinspector.view.TreeLayout;
 import com.general.imageresources.ImageLoader;
 import com.inspector.treeinspector.data.Box;
 
@@ -54,16 +54,14 @@ public class TreePanel extends JPanel {
 	private final static Color BORDER_COLOR = Color.darkGray;
 	private final static Color TEXT_COLOR = Color.white;
 		
-	private TreeLayout<Box> treeLayout;
+	protected TreeLayout<Box> treeLayout;
 	private double verticalGap;
 	private ImageLoader imageLoader;
 	
-	public TreePanel(TreeLayout<Box> treeLayout) {
+	public TreePanel() {
 		this.verticalGap = TreeInspectorView.GAP_BETWEEN_LEVELS;
-		this.treeLayout = treeLayout;
 		this.imageLoader = ImageLoader.getInstance();
 		setFont(new Font("Trebuchet MS",Font.PLAIN,20));
-		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
 		setBackground(Color.WHITE);
 	}
 

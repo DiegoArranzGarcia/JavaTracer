@@ -35,15 +35,19 @@ import static org.abego.treelayout.internal.util.Contract.checkArg;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import org.abego.treelayout.Configuration;
+import org.abego.treelayout.Configuration.AlignmentInLevel;
+import org.abego.treelayout.Configuration.Location;
 import org.abego.treelayout.NodeExtentProvider;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
-
-import com.inspector.treeinspector.view.Configuration.AlignmentInLevel;
-import com.inspector.treeinspector.view.Configuration.Location;
 
 /**
  * Implements the actual tree layout algorithm.
@@ -160,7 +164,7 @@ public class TreeLayout<TreeNode> {
 	}
 
 	private boolean isLevelChangeInYAxis() {
-		Location rootLocation = configuration.getRootLocation();
+		org.abego.treelayout.Configuration.Location rootLocation = configuration.getRootLocation();
 		return rootLocation == Location.Top || rootLocation == Location.Bottom;
 	}
 

@@ -9,9 +9,9 @@ import com.general.model.data.MethodInfo;
 import com.general.presenter.JavaTracerPresenter;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.controller.ObjectInspectorController;
+import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
-import com.inspector.treeinspector.model.TreeInspector;
 import com.inspector.view.InpectorView;
 
 public class InspectorController {
@@ -19,13 +19,22 @@ public class InspectorController {
 	private JavaTracerPresenter controller;
 	private InpectorView view;
 	
-	private TreeInspector treeInspector;
+	private TreeInspectorController treeInspector;
 	private ObjectInspectorController objectInspector;
 	
 	private	TreeManager treeManager;
 
+	public InspectorController(){
+		treeManager = new TreeManager();
+		treeInspector = new TreeInspectorController(treeManager);
+		objectInspector = new ObjectInspectorController(treeManager);
+		treeInspector.setController(this);
+		objectInspector.setController(this);
+		objectInspector.showTable();
+	}
+	
 	public void open() {
-		this.view = new InpectorView();
+		view = new InpectorView(treeInspector,objectInspector);
 		view.setController(this);
 		view.setVisible(true);
 	}
@@ -44,13 +53,8 @@ public class InspectorController {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
 				
-				treeManager = new TreeManager(chooser.getSelectedFile().getCanonicalPath());
-				
-				treeInspector =  new TreeInspector(this,treeManager);				
-				view.loadTreeInspector(treeInspector.getView());
-				
-				objectInspector = new ObjectInspectorController(this,treeManager);
-				view.loadObjectInspector(objectInspector.getView());
+				treeManager.loadTree(chooser.getSelectedFile().getCanonicalPath());
+				treeInspector.showTree();
 				
 			} catch (IOException e) {
 				e.printStackTrace();

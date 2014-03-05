@@ -15,15 +15,14 @@ public class TreeManager {
 
 	private int DEFAULT_NUM_LEVELS_DEPTH;
 	private int DEFAULT_NUM_NODES;
+	private DefaultTreeLayout<Box> lastTree;
 	
 	private XmlManager xml;
 	
-	public TreeManager(String xmlDocument){
-		xml = new XmlManager(xmlDocument);
-	}
 	
-	public DefaultTreeLayout<Box> loadTree() {
+	public void loadTree(String xmlName) {
 		
+		xml = new XmlManager(xmlName);
 		TraceInspectorConfiguration configuration = new TraceInspectorConfiguration();
 		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
 		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
@@ -37,7 +36,7 @@ public class TreeManager {
 				
 		generateTree(tree,threadBox,rootNode,currentLevel, numNodes);
 		
-		return tree;
+		this.lastTree = tree;
 	}
 
 	private ThreadBox getThreadBoxFromNode(Node rootNode) {
@@ -138,6 +137,10 @@ public class TreeManager {
 		tree.removeChilds(treeNode);
 		treeNode.setExpanded(false);
 		
+	}
+
+	public DefaultTreeLayout<Box> getTree() {
+		return lastTree;
 	}
 
 }

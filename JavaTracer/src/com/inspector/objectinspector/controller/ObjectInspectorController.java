@@ -24,21 +24,21 @@ public class ObjectInspectorController {
 	private List<Data> variables;
 	private ObjectInspectorView view;
 	
-	public ObjectInspectorController(InspectorController controller,TreeManager treeManager){
-		
-		this.controller = controller;
+	public ObjectInspectorController(TreeManager treeManager){
 		this.treeManager = treeManager;
-		
 		this.variables =  new ArrayList<>();
-		this.view = new ObjectInspectorView(this);
 	}
 	
 	public ObjectInspectorView getView(){
+		if (view == null) {
+			view = new ObjectInspectorView();
+			view.setController(this);
+		}
 		return view;
 	}
 	
 	public void clear() {
-		view.clear();
+		view.clearTable();
 	}
 
 	public void addNodeInfo(MethodInfo method) {
@@ -149,5 +149,15 @@ public class ObjectInspectorController {
 		return array;
     }
 
+	public void setController(InspectorController inspectorController) {
+		this.controller = inspectorController;
+	}
+
+	public void showTable() {
+		if (view == null) {
+			view = new ObjectInspectorView();
+			view.setController(this);
+		}
+	}
 
 }
