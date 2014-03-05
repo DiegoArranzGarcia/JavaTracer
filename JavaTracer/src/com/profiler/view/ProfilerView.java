@@ -47,6 +47,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
+import org.jfree.util.SortOrder;
 
 import com.profiler.presenter.ProfilerPresenterInterface;
 
@@ -56,6 +57,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static String TITLE = "Profiling stats";
 	private static double SPLIT_PERCENTAGE = 0.7;
 	private static double PERCENTAGE = 0.75;
+	private static final int CLASSCHART=5;
 	
 	private ProfilerPresenterInterface presenter;
 	
@@ -271,8 +273,37 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	dataset.setValue(entry.getKey(),percentage);
         }
         
-        return dataset;
+        DefaultPieDataset Definitivedataset=ChoosenClass(dataset); 
+        
+        return Definitivedataset;
+
+        
     }
+	
+	
+private DefaultPieDataset ChoosenClass(DefaultPieDataset dataset) {
+		
+		
+		dataset.sortByValues(SortOrder.DESCENDING);
+		List<String> keys=dataset.getKeys();
+		DefaultPieDataset Definitivedataset = new DefaultPieDataset();
+		
+		int i=0;
+		double percentage=0;
+		
+		while(i<keys.size() && i<CLASSCHART){
+			Definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
+			percentage=percentage + dataset.getValue(keys.get(i)).doubleValue();
+			i++;	
+		}
+	
+    	if(i<keys.size())
+    		Definitivedataset.setValue("Others Classes ", 100-percentage);
+    	
+    	
+    	return Definitivedataset;
+	}
+
 
     
     private JPanel createPiePanel(PieDataset data) {
