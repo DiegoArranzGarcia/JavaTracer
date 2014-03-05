@@ -70,7 +70,9 @@ public class EventThread extends Thread {
         this.excludes = excludes;
         
         this.enableProfiling = config.isProfiling_mode();
-        this.profiler = profiler;			
+        this.profiler = profiler;
+        if (profiler != null)
+        	profiler.clean();
         
         writer = new TraceWriter(config.getNameXml());
         writer.writeThreadInfo(new ThreadInfo());

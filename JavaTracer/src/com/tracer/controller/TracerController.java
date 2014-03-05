@@ -35,7 +35,6 @@ public class TracerController {
 	
 	private void setControllers() {
 		tracer.setController(this);
-		argumentsPresenter.setPresenter(this);
 	}
 
 	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {

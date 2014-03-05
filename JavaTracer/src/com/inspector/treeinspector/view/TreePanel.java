@@ -80,6 +80,7 @@ public class TreePanel extends JPanel {
 	public void setTree(TreeLayout<Box> treeLayout){
 		this.treeLayout = treeLayout;
 		setPreferredSize(new Dimension((int)treeLayout.getBounds().getWidth()+1,(int)treeLayout.getBounds().getHeight()+1));
+		setBackground(Color.WHITE);
 	}
 
 	private void paintEdges(Graphics g, Box parent) {

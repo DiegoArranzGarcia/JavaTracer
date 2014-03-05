@@ -63,6 +63,9 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		
 		String [] excludes = excludesClasses.toArray(new String[excludesClasses.size()]);
 		configuration.addExcludes(excludes);
+		
+		view.setVisible(false);
+		controller.back();
 	}
 
 	public void cancel() {

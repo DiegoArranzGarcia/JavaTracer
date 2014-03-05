@@ -12,5 +12,6 @@ public interface ProfilerModelInterface {
 	public void profileEvent(MethodEntryEvent event);
 	public void saveProfile(ProfileData data,File file);
 	public ProfileData openProfile(File file);
+	public void clean();
 
 }

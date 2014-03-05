@@ -113,5 +113,11 @@ public class Profiler implements ProfilerModelInterface{
 	public void setRegistredClasses(HashMap<String, Integer> registredClasses) {
 		this.registredClasses = registredClasses;
 	}
+
+	public void clean() {
+		this.registredClasses = new HashMap<>();
+		this.registredMethods = new HashMap<>();
+		this.totalTimeCalledMethods = 0;
+	}
 	
 }

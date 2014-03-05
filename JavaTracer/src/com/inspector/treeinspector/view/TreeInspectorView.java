@@ -1,5 +1,6 @@
 package com.inspector.treeinspector.view;
 
+import java.awt.Color;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.Map;
 
@@ -28,9 +29,8 @@ public class TreeInspectorView extends TreePanel {
 		
 		treeLayout = new TreeLayout<Box>(tree,nodeExtentProvider,configuration);
 		setTree(treeLayout);
-		repaint();
+		updateUI();
 		
-		this.updateUI();
 	}
 
 	public Map<Box, Double> getNodeBounds() {

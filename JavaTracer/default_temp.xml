@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<thread>
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+</thread>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>main</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>144</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>prueba</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <ignored>
+      <name>p1</name>
+      <className>Person</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>p2</name>
+      <className>Person</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>prueba</methodName>
+  <className>Main</className>
+  <return class="ignored">
+    <name>return</name>
+    <className>Person</className>
+    <value class="string">ignored</value>
+  </return>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <ignored>
+      <name>p1</name>
+      <className>Person</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>p2</name>
+      <className>Person</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>Main</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>144</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+</trace>
