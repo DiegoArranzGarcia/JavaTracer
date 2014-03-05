@@ -58,6 +58,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static double SPLIT_PERCENTAGE = 0.7;
 	private static double PERCENTAGE = 0.75;
 	private static final int CLASSCHART=5;
+	private static final String OTHERS_CLASSES = "Others Classes ";
 	
 	private ProfilerPresenterInterface presenter;
 	
@@ -254,7 +255,12 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     	List<Color> colors = new ArrayList<>();
     	while (iterator.hasNext()){
     		Entry<String,Integer> entry = iterator.next();
-    		colors.add((Color) plot.getSectionPaint(entry.getKey()));
+    		
+    		Color color = (Color) plot.getSectionPaint(entry.getKey());
+    		if (color == null)
+    			color = (Color)plot.getSectionPaint(OTHERS_CLASSES);
+    		
+    		colors.add(color);
     		model.addRow(new Object[]{true,"",entry.getKey(),entry.getValue()});
     	}
     	
@@ -273,35 +279,31 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	dataset.setValue(entry.getKey(),percentage);
         }
         
-        DefaultPieDataset Definitivedataset=ChoosenClass(dataset); 
+        DefaultPieDataset definitivedataset= chosenClasses(dataset); 
         
-        return Definitivedataset;
-
-        
+        return definitivedataset;
     }
 	
-	
-private DefaultPieDataset ChoosenClass(DefaultPieDataset dataset) {
-		
-		
+	private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
+			
 		dataset.sortByValues(SortOrder.DESCENDING);
 		List<String> keys=dataset.getKeys();
-		DefaultPieDataset Definitivedataset = new DefaultPieDataset();
+		DefaultPieDataset definitivedataset = new DefaultPieDataset();
 		
 		int i=0;
 		double percentage=0;
 		
 		while(i<keys.size() && i<CLASSCHART){
-			Definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
+			definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
 			percentage=percentage + dataset.getValue(keys.get(i)).doubleValue();
 			i++;	
 		}
 	
     	if(i<keys.size())
-    		Definitivedataset.setValue("Others Classes ", 100-percentage);
+    		definitivedataset.setValue(OTHERS_CLASSES, 100-percentage);
     	
     	
-    	return Definitivedataset;
+    	return definitivedataset;
 	}
 
 
@@ -364,7 +366,6 @@ private DefaultPieDataset ChoosenClass(DefaultPieDataset dataset) {
 			loadTable();
 	}
 
-	
 	// Action Listener
 	
 	public void actionPerformed(ActionEvent event) {
