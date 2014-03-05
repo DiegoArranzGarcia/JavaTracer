@@ -21,37 +21,39 @@ public class CellRenderer extends DefaultTableCellRenderer{
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-	    // You'll need some way to supply the filter value, may via a centralised 
-	    // manager of some kind.
-		TableTreeNode node = treeModel.getNodeFromRow(row+1);
-		TableRowData data = ((TableRowData) node.getUserObject());
+
+		try{
+			TableTreeNode node = treeModel.getNodeFromRow(row+1);
+			TableRowData data = ((TableRowData) node.getUserObject());
 		
-		boolean changed = data.isChanged();
-		boolean expandable = node.isExpandable();
-		boolean expanded = node.isExpanded();
+			boolean changed = data.isChanged();
+			boolean expandable = node.isExpandable();
+			boolean expanded = node.isExpanded();
 		
-		if (!isSelected){
-		    if (changed) {
-		    	//setOpaque(true);
-		        setBackground(Color.RED);
-		    } else {
-		    	setBackground(Color.WHITE);
-		    }
-		}
-		
-		
-		if (expandable && column == 0){
-			if (expanded){
-				setIcon(imageLoader.getFoldedIcon());
-			} else {
-				setIcon(imageLoader.getExpandedIcon());
+			if (!isSelected){
+			    if (changed) {
+			        setBackground(Color.RED);
+			    } else {
+			    	setBackground(Color.WHITE);
+			    }
 			}
-		}
-		else {
-			setIcon(null);
+		
+		
+			if (expandable && column == 0){
+				if (expanded){
+					setIcon(imageLoader.getFoldedIcon());
+				} else {
+					setIcon(imageLoader.getExpandedIcon());
+				}
+			}
+			else {
+				setIcon(null);
+			}
+		} catch (Exception e){
+			
 		}
 		
-	    return this;
+		return this;
 	}
 	
 }

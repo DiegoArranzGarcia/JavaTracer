@@ -37,21 +37,15 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 
 	public void mouseClicked(MouseEvent e) {
 		
-		if (e.getX() < 20){
-			int row = treeTable.getSelectedRow();
-			if (row != -1)
-				expandOrCollapse(row);
+		int selectedRow = treeTable.getSelectedRow()+1;
+		if (!treeTable.isExpanded(selectedRow)){
+			treeTable.expandRow(selectedRow);
+		}else if (treeTable.isExpanded(selectedRow)) {
+			treeTable.collapseRow(selectedRow);
 		}
 				
 	}
-
-	private void expandOrCollapse(int row) {
-		if (treeTable.isExpanded(row))
-			treeTable.collapseRow(row);
-		else
-			treeTable.expandRow(row);
-	}
-
+	
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
@@ -79,7 +73,7 @@ public class ObjectInspectorView extends JScrollPane implements KeyListener,Mous
 	public void keyTyped(KeyEvent e) {}
 
 	public void refreshTable() {
-		treeTable.refreshTable();
+		treeTable.refreshTable(-1);
 	}
 
 }

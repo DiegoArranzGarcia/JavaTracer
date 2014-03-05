@@ -31,23 +31,25 @@ public class JTreeTable extends JTable {
 	
 	public void collapseRow(int selectedRow) {
 		treeModel.collapseRow(selectedRow);
-		List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
+		refreshTable(selectedRow);
+		/*List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
 		for (int i=0;i<children.size();i++){
 			tableModel.removeRow(selectedRow);
-		}
-		
+		}*/
 	}
 
 	public void expandRow(int selectedRow) {
+			
 		treeModel.expandRow(selectedRow);
-		List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
+		refreshTable(selectedRow);
+		/*List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
 		
 		for (int i=0;i<children.size();i++){
 			TableTreeNode node = children.get(i);
 			TableRowData data = (TableRowData) node.getUserObject();
 			String tab = getTab(node.getDepth());
 			tableModel.insertRow(selectedRow+i,new String[]{tab + data.getName(),data.getValue()});
-		}
+		}*/
 	}	
 
 	private String getTab(long depth) {
@@ -73,13 +75,23 @@ public class JTreeTable extends JTable {
 		return treeModel.isExpanded(i);
 	}
 
-	public void refreshTable() {
-		List<TableTreeNode> children = treeModel.getRoot().getChildren();
+	public void refreshTable(int selectedRow) {
+		
+		int numRows = tableModel.getRowCount();
+		for (int i=0;i<numRows;i++){
+			tableModel.removeRow(0);
+		}	
+		
+		List<TableTreeNode> children = treeModel.getRoot().getVisibleNodes();
+		children.remove(0);
 		
 		for (int i=0;i<children.size();i++){
 			TableRowData data = (TableRowData) children.get(i).getUserObject();
 			tableModel.addRow(new String[]{data.getName(),data.getValue()});
 		}
+		
+		if (selectedRow != -1)
+			setRowSelectionInterval(selectedRow-1, selectedRow-1);
 		
 	}
 
