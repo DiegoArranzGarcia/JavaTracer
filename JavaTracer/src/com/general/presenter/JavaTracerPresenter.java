@@ -62,6 +62,7 @@ public class JavaTracerPresenter {
 	public void clickedOnInspectTrace() {
 		view.setVisible(false);
 		inspectorController.open();
+		inspectorController.clickedOpen();
 	}
 
 	public void clickedOnTraceProfile() {
