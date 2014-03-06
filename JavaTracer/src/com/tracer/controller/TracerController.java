@@ -96,8 +96,7 @@ public class TracerController {
 
 	private String getNameXml() {
 		String nameXml = tracerView.getNameXml();
-		if (nameXml.equals(""))
-			nameXml = "default";
+		
 		return nameXml;
 	}
 

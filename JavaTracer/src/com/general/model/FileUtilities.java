@@ -8,6 +8,7 @@ public class FileUtilities {
 	
 	private static String EXTENSIONS ="[.][^.]+$";
 	public static String SEPARATOR = java.io.File.separator ;
+	public static String EXTENSION_XML = ".xml";
 	
 	
 	public static String getExtension(File file) {

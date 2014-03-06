@@ -22,7 +22,7 @@ import com.inspector.treeinspector.view.TreeInspectorView;
 
 
 @SuppressWarnings("serial")
-public class InpectorView extends JFrame implements ComponentListener,ActionListener{
+public class InspectorView extends JFrame implements ComponentListener,ActionListener{
 	
 	private static String WINDOW_TITLE = "Inspector";
 	
@@ -34,7 +34,7 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 	private JSplitPane split;
 	private JMenuItem[] items;
 	
-	public InpectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
+	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle(WINDOW_TITLE);
@@ -83,7 +83,9 @@ public class InpectorView extends JFrame implements ComponentListener,ActionList
 	}
 
 	public void componentHidden(ComponentEvent e) {
-		controller.back();
+		boolean fromTrace = controller.getFromTracer();
+		if (!fromTrace )
+			controller.back();
 	}
 
 	public void componentMoved(ComponentEvent e) {}

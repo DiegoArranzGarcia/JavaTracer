@@ -75,7 +75,7 @@ public class JavaTracerPresenter {
 	}
 
 	public void back() {
-		view.setVisible(true);
+	view.setVisible(true);
 	}
 	
 	// Getters and setters

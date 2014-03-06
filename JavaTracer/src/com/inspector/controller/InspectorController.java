@@ -12,19 +12,22 @@ import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
-import com.inspector.view.InpectorView;
+import com.inspector.view.InspectorView;
 
 public class InspectorController {
 
 	private JavaTracerPresenter controller;
-	private InpectorView view;
+	private InspectorView view;
 	
 	private TreeInspectorController treeInspector;
 	private ObjectInspectorController objectInspector;
 	
 	private	TreeManager treeManager;
+	
+	private boolean fromTracer;
 
 	public InspectorController(){
+		fromTracer = false;
 		treeManager = new TreeManager();
 		treeInspector = new TreeInspectorController(treeManager);
 		objectInspector = new ObjectInspectorController(treeManager);
@@ -34,7 +37,7 @@ public class InspectorController {
 	}
 	
 	public void open() {
-		view = new InpectorView(treeInspector,objectInspector);
+		view = new InspectorView(treeInspector,objectInspector);
 		view.setController(this);
 		view.setVisible(true);
 	}
@@ -52,9 +55,10 @@ public class InspectorController {
 		
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
+				String xmlName = chooser.getSelectedFile().getCanonicalPath();
+				System.out.println(xmlName);
+				showTree(xmlName);
 				
-				treeManager.loadTree(chooser.getSelectedFile().getCanonicalPath());
-				treeInspector.showTree();
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -62,6 +66,12 @@ public class InspectorController {
 			
 		} else chooser.cancelSelection();	
 	}
+
+    public void showTree(String xmlName) {
+    	treeManager.loadTree(xmlName);
+		treeInspector.showTree();
+	    
+    }
 
 	public void clickedOnNode(Box box) {
 		
@@ -82,5 +92,13 @@ public class InspectorController {
 		view.setVisible(false);
 		controller.back();		
 	}
+
+	public boolean getFromTracer() {
+	    return fromTracer;
+    }
+
+	public void setFromTracer(boolean p_fromTracer) {
+	    fromTracer = p_fromTracer;
+    }
 
 }

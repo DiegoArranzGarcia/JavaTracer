@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,6 +23,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.imageresources.ImageLoader;
+import com.general.model.FileUtilities;
+import com.inspector.controller.InspectorController;
 import com.tracer.arguments.view.ArgumentsView;
 import com.tracer.controller.TracerController;
 
@@ -53,9 +56,12 @@ public class TracerView extends JFrame {
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass,labelXml;
 	private TracerController controller;
+	private InspectorController inspectorController;
 	private Container contentPane;
 		
 	public TracerView() {
+		
+		inspectorController = new InspectorController();
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
@@ -224,8 +230,20 @@ public class TracerView extends JFrame {
 	}
 	
 	public void finishedTrace() {
+		System.out.println("Hola");
 		JOptionPane.setDefaultLocale(new Locale("en"));
-		JOptionPane.showMessageDialog(new JFrame(),Message.FINISHED);
+		//JOptionPane.showMessageDialog(new JFrame(),Message.FINISHED);
+		String curDir = System.getProperty("user.dir");
+		String s= File.separator;
+		String xmlPath = curDir+s+getNameXml()+FileUtilities.EXTENSION_XML;
+		System.out.println("Prueba:"+xmlPath);
+		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, 
+									"", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
+		if(selected==0) {
+			inspectorController.open();
+			inspectorController.setFromTracer(true);
+			inspectorController.showTree(xmlPath);
+		}
 	}
 	
 	
@@ -271,7 +289,10 @@ public class TracerView extends JFrame {
 	}
 
 	public String getNameXml() {
-		return nameXml.getText();
+		String nameXml = this. nameXml.getText();
+		if (this.nameXml.equals(""))
+			nameXml = "default";
+		return nameXml;
 	}
 
 	public void enableMainClassCombo() {
