@@ -29,7 +29,10 @@ public class TreeInspectorView extends TreePanel {
 		
 		treeLayout = new TreeLayout<Box>(tree,nodeExtentProvider,configuration);
 		setTree(treeLayout);
+		
 		updateUI();
+		
+		setBackground(Color.WHITE); 
 		
 	}
 

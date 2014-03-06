@@ -145,7 +145,7 @@ public class TracerView extends JFrame {
 		tracer = new JButton("Trace");
 		tracer.setLayout(new GridLayout(1,1)); 
 		tracer.setBounds(new Rectangle(100,40));
-		tracer.setLocation(TRACER_COL, CANCEL_TRACER_ROW); 
+		tracer.setLocation(TRACER_COL+DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
 		tracer.setBackground(Color.white);  
 		tracer.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
 		tracer.setEnabled(false); 
@@ -159,11 +159,11 @@ public class TracerView extends JFrame {
 			}
 			
 		});
-		
+	
 		profiling = new JButton("Profile");
 		profiling.setLayout(new GridLayout(1,1)); 
 		profiling.setBounds(new Rectangle(100,40));
-		profiling.setLocation(TRACER_COL+DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
+		profiling.setLocation(TRACER_COL, CANCEL_TRACER_ROW); 
 		profiling.setBackground(Color.white);  
 		profiling.setFont(new Font("Comic Sans MS",Font.BOLD, 15)); 
 		profiling.setEnabled(false); 
