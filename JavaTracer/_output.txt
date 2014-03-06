@@ -1,0 +1,4 @@
+Hola
+Prueba:C:\Users\Diego\Documents\GitHub\JavaTracer\JavaTracer\.xml
+
+*******************************************

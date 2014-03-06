@@ -8,13 +8,13 @@ import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
+import com.general.view.jtreetable.TableTreeNode;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.model.ChangeInfoVisitor;
 import com.inspector.objectinspector.model.VariablesVisitor;
 import com.inspector.objectinspector.view.ObjectInspectorView;
-import com.inspector.objectinspector.view.TableRowData;
-import com.inspector.objectinspector.view.TableTreeNode;
+import com.inspector.objectinspector.view.VariableRowData;
 
 public class ObjectInspectorController {
 	
@@ -82,7 +82,7 @@ public class ObjectInspectorController {
     		String change = changeInfo.getVariable();
     		List<String> parseChange= parseMethod(change);
     		TableTreeNode node = foundNode(parseChange);
-    		TableRowData nodeInfo = (TableRowData)node.getUserObject();
+    		VariableRowData nodeInfo = (VariableRowData)node.getUserObject();
     		nodeInfo.setChanged(true); 
     		modifyTable(node,changeInfo.getValue());
     		i++;
@@ -111,7 +111,7 @@ public class ObjectInspectorController {
 			j = 0;
 			found = false;
 			while (j<children.size() && !found) {
-				TableRowData nodeInfo = (TableRowData)children.get(j).getUserObject();
+				VariableRowData nodeInfo = (VariableRowData)children.get(j).getUserObject();
 				found = parseChange.get(i).equals(nodeInfo.getName());
 				if (found) {
 					node = children.get(j);

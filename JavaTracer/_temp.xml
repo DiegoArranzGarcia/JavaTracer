@@ -1,0 +1,3244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace>
+<thread>
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+</thread>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>main</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>92</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>getManifestInfo</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</calledFromClass>
+  <arguments/>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>rsrcMainClass</name>
+      </null>
+      <null>
+        <name>rsrcClassPath</name>
+      </null>
+    </fields>
+    <id>118</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>rsrcMainClass</name>
+      </null>
+      <null>
+        <name>rsrcClassPath</name>
+      </null>
+    </fields>
+    <id>118</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>rsrcMainClass</name>
+      </null>
+      <null>
+        <name>rsrcClassPath</name>
+      </null>
+    </fields>
+    <id>118</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>rsrcMainClass</name>
+      </null>
+      <null>
+        <name>rsrcClassPath</name>
+      </null>
+    </fields>
+    <id>118</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>splitSpaces</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</calledFromClass>
+  <arguments>
+    <string-variable>
+      <name>line</name>
+      <value>./</value>
+      <id>120</id>
+    </string-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>splitSpaces</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</className>
+  <return class="array-variable">
+    <name>return</name>
+    <className>java.lang.String</className>
+    <id>121</id>
+    <length>1</length>
+    <content>
+      <string-variable>
+        <name>[0]</name>
+        <value>./</value>
+        <id>120</id>
+      </string-variable>
+    </content>
+  </return>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <string-variable>
+      <name>line</name>
+      <value>./</value>
+      <id>120</id>
+    </string-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>getManifestInfo</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <string-variable>
+        <name>rsrcMainClass</name>
+        <value>Main</value>
+        <id>122</id>
+      </string-variable>
+      <array-variable>
+        <name>rsrcClassPath</name>
+        <className>java.lang.String</className>
+        <id>121</id>
+        <length>1</length>
+        <content>
+          <string-variable>
+            <name>[0]</name>
+            <value>./</value>
+            <id>120</id>
+          </string-variable>
+        </content>
+      </array-variable>
+    </fields>
+    <id>118</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader$ManifestInfo</className>
+  </return>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>cl</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>classLoader</name>
+      </null>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>cl</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>createURLStreamHandler</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</calledFromClass>
+  <arguments>
+    <string-variable>
+      <name>protocol</name>
+      <value>rsrc</value>
+      <id>128</id>
+    </string-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <null>
+        <name>classLoader</name>
+      </null>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>createURLStreamHandler</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+  <arguments>
+    <string-variable>
+      <name>protocol</name>
+      <value>rsrc</value>
+      <id>128</id>
+    </string-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>parseURL</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>rsrc:./</value>
+      <id>135</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">5</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">7</value>
+    </simple-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>parseURL</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>rsrc:./</value>
+      <id>135</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">5</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">7</value>
+    </simple-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>parseURL</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>Main.class</value>
+      <id>137</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">10</value>
+    </simple-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>parseURL</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>Main.class</value>
+      <id>137</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">10</value>
+    </simple-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>openConnection</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <null>
+        <name>url</name>
+      </null>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <null>
+        <name>classLoader</name>
+      </null>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>openConnection</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>getInputStream</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>createURLStreamHandler</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</calledFromClass>
+  <arguments>
+    <string-variable>
+      <name>protocol</name>
+      <value>file</value>
+      <id>147</id>
+    </string-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>createURLStreamHandler</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  <return class="null">
+    <name>return</name>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <null>
+        <name>chainFac</name>
+      </null>
+    </fields>
+    <id>126</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandlerFactory</className>
+  </object-this>
+  <arguments>
+    <string-variable>
+      <name>protocol</name>
+      <value>file</value>
+      <id>147</id>
+    </string-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>getInputStream</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <return class="ignored">
+    <name>return</name>
+    <className>sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream</className>
+    <value class="string">ignored</value>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>getInputStream</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>getInputStream</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <return class="ignored">
+    <name>return</name>
+    <className>sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream</className>
+    <value class="string">ignored</value>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>139</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>openConnection</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <null>
+        <name>url</name>
+      </null>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <null>
+        <name>classLoader</name>
+      </null>
+    </fields>
+    <id>154</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>154</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>openConnection</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>154</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>parseURL</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>Person.class</value>
+      <id>168</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">12</value>
+    </simple-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>parseURL</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <string-variable>
+      <name>spec</name>
+      <value>Person.class</value>
+      <id>168</id>
+    </string-variable>
+    <simple-variable>
+      <name>start</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <simple-variable>
+      <name>limit</name>
+      <value class="int">12</value>
+    </simple-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>openConnection</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <null>
+        <name>url</name>
+      </null>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <null>
+        <name>classLoader</name>
+      </null>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>url</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+    <ignored>
+      <name>classLoader</name>
+      <className>sun.misc.Launcher$AppClassLoader</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>openConnection</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>131</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLStreamHandler</className>
+  </object-this>
+  <arguments>
+    <ignored>
+      <name>u</name>
+      <className>java.net.URL</className>
+      <value class="string">ignored</value>
+    </ignored>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>getInputStream</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>getInputStream</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <return class="ignored">
+    <name>return</name>
+    <className>sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream</className>
+    <value class="string">ignored</value>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>getInputStream</methodame>
+  <calledFromClass>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>getInputStream</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  <return class="ignored">
+    <name>return</name>
+    <className>sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream</className>
+    <value class="string">ignored</value>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData>
+      <ignored>
+        <name>url</name>
+        <className>java.net.URL</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <simple-variable>
+        <name>doInput</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>doOutput</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultAllowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>allowUserInteraction</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>defaultUseCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>useCaches</name>
+        <value class="boolean">true</value>
+      </simple-variable>
+      <simple-variable>
+        <name>ifModifiedSince</name>
+        <value class="long">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connected</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <simple-variable>
+        <name>connectTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <simple-variable>
+        <name>readTimeout</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>requests</name>
+      </null>
+      <null>
+        <name>fileNameMap</name>
+      </null>
+      <simple-variable>
+        <name>fileNameMapLoaded</name>
+        <value class="boolean">false</value>
+      </simple-variable>
+      <null>
+        <name>factory</name>
+      </null>
+      <ignored>
+        <name>handlers</name>
+        <className>java.util.Hashtable</className>
+        <value class="string">ignored</value>
+      </ignored>
+      <string-variable>
+        <name>contentClassPrefix</name>
+        <value>sun.net.www.content</value>
+        <id>142</id>
+      </string-variable>
+      <string-variable>
+        <name>contentPathProp</name>
+        <value>java.content.handler.pkgs</value>
+        <id>143</id>
+      </string-variable>
+    </inheritData>
+    <fields>
+      <ignored>
+        <name>classLoader</name>
+        <className>sun.misc.Launcher$AppClassLoader</className>
+        <value class="string">ignored</value>
+      </ignored>
+    </fields>
+    <id>169</id>
+    <className>org.eclipse.jdt.internal.jarinjarloader.RsrcURLConnection</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>main</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>92</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>179</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>180</id>
+    </string-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>181</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>179</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>180</id>
+      </string-variable>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>181</id>
+    <className>Person</className>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>179</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>180</id>
+    </string-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>179</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>180</id>
+    </string-variable>
+    <object-variable>
+      <name>bestFriend</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>179</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <null>
+          <name>bestFriend</name>
+        </null>
+      </fields>
+      <id>181</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>182</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>179</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>180</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>179</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>180</id>
+          </string-variable>
+          <null>
+            <name>bestFriend</name>
+          </null>
+        </fields>
+        <id>181</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>182</id>
+    <className>Person</className>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>179</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>180</id>
+    </string-variable>
+    <object-variable>
+      <name>bestFriend</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>179</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <null>
+          <name>bestFriend</name>
+        </null>
+      </fields>
+      <id>181</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>prueba</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <object-variable>
+      <name>p1</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>179</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>179</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>180</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>181</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>182</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>181</id>
+      <className>Person</className>
+    </object-variable>
+    <object-variable>
+      <name>p2</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>179</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>179</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>180</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>182</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>181</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>182</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>prueba</methodName>
+  <className>Main</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value>pepito</value>
+        <id>183</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>180</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">0</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>179</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>180</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>181</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>182</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>181</id>
+    <className>Person</className>
+  </return>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <object-variable>
+      <name>p1</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value>pepito</value>
+          <id>183</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">0</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>179</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>180</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>181</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>182</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>181</id>
+      <className>Person</className>
+    </object-variable>
+    <object-variable>
+      <name>p2</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>179</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>180</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value>pepito</value>
+              <id>183</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>180</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>182</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>181</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>182</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call>
+<method-entry-event>
+  <methodame>imprime</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>179</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>180</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value>pepito</value>
+            <id>183</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>180</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>182</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>181</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>182</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>imprime</methodName>
+  <className>Person</className>
+  <return class="string-variable">
+    <name>return</name>
+    <value>hecho</value>
+    <id>184</id>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>179</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>180</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value>pepito</value>
+            <id>183</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>180</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>182</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>181</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>182</id>
+    <className>Person</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>Main</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>92</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>92</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+</trace>

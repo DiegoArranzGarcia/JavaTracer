@@ -30,7 +30,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +48,8 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
 
+import com.general.view.jtreetable.JTreeTable;
+import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
@@ -61,10 +62,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static final String OTHERS_CLASSES = "Others Classes ";
 	
 	private ProfilerPresenterInterface presenter;
-	
 	private ProfileTableRenderer renderer;
 	
-	private JTable table;
+	private JTreeTable table;
 	private JPanel pieChartPanel;
 	private JFreeChart chart;
 	private JSplitPane splitPane;
@@ -113,15 +113,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         JScrollPane scrollPane = new JScrollPane();
         panelRight.add(scrollPane, BorderLayout.CENTER);
         
-        table = new JTable();
+        table = new JTreeTable();
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setModel(new DefaultTableModel(
-        	new Object[][] {
-        	},
-        	new String[] {
-        		"Used classes", "", "Class name", "Count"
-        	}
-        ) {
+        ProfilerHeaderData headerData = new ProfilerHeaderData();
+        table.setRoot(headerData);
+        table.setModel(new DefaultTableModel(headerData.getValues(),0) {
         	Class<?>[] columnTypes = new Class[] {
         		Boolean.class, Object.class, Object.class, Object.class
         	};
@@ -135,6 +131,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         		return columnEditables[column];
         	}
         });
+        
+        table.setCellRenderer(renderer);
         table.getColumnModel().getColumn(0).setResizable(false);
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
         table.getColumnModel().getColumn(0).setMinWidth(100);
@@ -146,7 +144,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.getColumnModel().getColumn(3).setResizable(false);
         table.getColumnModel().getColumn(3).setPreferredWidth(80);
         table.getColumnModel().getColumn(3).setMinWidth(80);
-        table.setDefaultRenderer(Object.class,renderer);
+        //table.setDefaultRenderer(Object.class,renderer);
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
         
@@ -245,14 +243,14 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     }
    
     public void loadTable() {
-    	DefaultTableModel model = (DefaultTableModel) table.getModel();
     	
-    	while (model.getRowCount()!=0)
-    		model.removeRow(0);
+    	table.clearTable();
     	
     	Iterator<Entry<String,Integer>> iterator = presenter.getClassesInfo();
     	PiePlot plot = (PiePlot)chart.getPlot();
     	List<Color> colors = new ArrayList<>();
+    	TableTreeNode rootNode = table.getRoot();
+    	
     	while (iterator.hasNext()){
     		Entry<String,Integer> entry = iterator.next();
     		
@@ -261,10 +259,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     			color = (Color)plot.getSectionPaint(OTHERS_CLASSES);
     		
     		colors.add(color);
-    		model.addRow(new Object[]{true,"",entry.getKey(),entry.getValue()});
+    		rootNode.add(new TableTreeNode(new ProfilerRowData(true,"",entry.getKey(),entry.getValue())));	
     	}
     	
     	renderer.setColors(colors);
+    	table.refreshTable(-1);
     	
 	}
     

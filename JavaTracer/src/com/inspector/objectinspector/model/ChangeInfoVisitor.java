@@ -10,8 +10,8 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.view.TableRowData;
-import com.inspector.objectinspector.view.TableTreeNode;
+import com.general.view.jtreetable.TableTreeNode;
+import com.inspector.objectinspector.view.VariableRowData;
 
 public class ChangeInfoVisitor implements InfoVisitor {
 	
@@ -25,11 +25,11 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		MainInfoVisitor mainInfoVisitor = new MainInfoVisitor();
 		mainInfoVisitor.visit(arrayData);
 		
-		String rootValue = ((TableRowData)rootNode.getUserObject()).getValue();		
-		((TableRowData)rootNode.getUserObject()).setValue("");
+		String rootValue = ((VariableRowData)rootNode.getUserObject()).getValue();		
+		((VariableRowData)rootNode.getUserObject()).setValue("");
 
 		//Configure in node
-		TableTreeNode in = new TableTreeNode(new TableRowData(IN,rootValue,true));
+		TableTreeNode in = new TableTreeNode(new VariableRowData(IN,rootValue));
 		List<TableTreeNode> children = getChildrenOf(rootNode);
 		rootNode.removeAllChildren();
 		rootNode.add(in);
@@ -40,7 +40,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		//Configure out node
 		VariablesVisitor variableVisitor = new VariablesVisitor(rootNode);
 		variableVisitor.visit(arrayData);
-		((TableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
+		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
 		
 	}
 
@@ -52,11 +52,11 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		MainInfoVisitor mainInfoVisitor = new MainInfoVisitor();
 		mainInfoVisitor.visit(nullData);
 		
-		String rootValue = ((TableRowData)rootNode.getUserObject()).getValue();		
-		((TableRowData)rootNode.getUserObject()).setValue("");
+		String rootValue = ((VariableRowData)rootNode.getUserObject()).getValue();		
+		((VariableRowData)rootNode.getUserObject()).setValue("");
 
 		//Configure in node
-		TableTreeNode in = new TableTreeNode(new TableRowData(IN,rootValue,true));
+		TableTreeNode in = new TableTreeNode(new VariableRowData(IN,rootValue));
 		List<TableTreeNode> children = getChildrenOf(rootNode);
 		rootNode.removeAllChildren();
 		rootNode.add(in);
@@ -67,7 +67,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		//Configure out node
 		VariablesVisitor variableVisitor = new VariablesVisitor(rootNode);
 		variableVisitor.visit(nullData);
-		((TableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
+		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
 	}
 	
 	public void visit(IgnoredData ignoredClass) {
@@ -78,11 +78,11 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		MainInfoVisitor mainInfoVisitor = new MainInfoVisitor();
 		mainInfoVisitor.visit(objectInfo);
 		
-		String rootValue = ((TableRowData)rootNode.getUserObject()).getValue();		
-		((TableRowData)rootNode.getUserObject()).setValue("");
+		String rootValue = ((VariableRowData)rootNode.getUserObject()).getValue();		
+		((VariableRowData)rootNode.getUserObject()).setValue("");
 
 		//Configure in node
-		TableTreeNode in = new TableTreeNode(new TableRowData(IN,rootValue,true));
+		TableTreeNode in = new TableTreeNode(new VariableRowData(IN,rootValue));
 		List<TableTreeNode> children = getChildrenOf(rootNode);
 		rootNode.removeAllChildren();
 		rootNode.add(in);
@@ -93,11 +93,11 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		//Configure out node
 		VariablesVisitor variableVisitor = new VariablesVisitor(rootNode);
 		variableVisitor.visit(objectInfo);
-		((TableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
+		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
 	}
 
 	public void visit(SimpleData simpleData) {
-		TableRowData rowData = (TableRowData) rootNode.getUserObject();
+		VariableRowData rowData = (VariableRowData) rootNode.getUserObject();
 		String oldValue = rowData.getValue();
 		String newValue = oldValue + " -> " + simpleData.getValue();
 		rowData.setValue(newValue);

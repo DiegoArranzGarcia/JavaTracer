@@ -1,4 +1,4 @@
-package com.inspector.objectinspector.view;
+package com.general.view.jtreetable;
 
 import java.util.List;
 

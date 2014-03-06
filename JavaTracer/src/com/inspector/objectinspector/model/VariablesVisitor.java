@@ -11,8 +11,9 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
-import com.inspector.objectinspector.view.TableRowData;
-import com.inspector.objectinspector.view.TableTreeNode;
+import com.general.view.jtreetable.TableRowData;
+import com.general.view.jtreetable.TableTreeNode;
+import com.inspector.objectinspector.view.VariableRowData;
 import com.tracer.model.ChangeDetector;
 
 public class VariablesVisitor implements InfoVisitor{
@@ -34,12 +35,12 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(ArrayData array) {
 		
 		mainInfoVisitor.visit(array);
-		TableTreeNode node = addVariable(array.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(array.getName(),mainInfoVisitor.getInfo());
 				
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
 	
-		addVariable(LENGTH,Integer.toString(array.getLength()),false);
+		addVariable(LENGTH,Integer.toString(array.getLength()));
 			
 		List<Data> array_values = array.getValue();
 		
@@ -49,7 +50,7 @@ public class VariablesVisitor implements InfoVisitor{
 				data.accept(this);
 			}
 		} else {
-			addVariable(EMPTY,EMPTY,false);
+			addVariable(EMPTY,EMPTY);
 		}
 		
 		removeLastParent();
@@ -59,9 +60,9 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(StringData string) {
 		
 		mainInfoVisitor.visit(string);
-		TableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo());
 		parents.add(node);
-		addVariable(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES,false);
+		addVariable(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES);
 		removeLastParent();
 		
 	}
@@ -69,14 +70,14 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(NullData null_data) {
 		
 		mainInfoVisitor.visit(null_data);
-		addVariable(null_data.getName(),mainInfoVisitor.getInfo(),false);
+		addVariable(null_data.getName(),mainInfoVisitor.getInfo());
 	
 	}
 
 	public void visit(ObjectData object) {
 		
 		mainInfoVisitor.visit(object);
-		TableTreeNode node = addVariable(object.getName(),mainInfoVisitor.getInfo(),true);
+		TableTreeNode node = addVariable(object.getName(),mainInfoVisitor.getInfo());
 		
 		//We add the node to parents because ArrayData is a recursive DataStructure
 		parents.add(node);
@@ -97,8 +98,7 @@ public class VariablesVisitor implements InfoVisitor{
 	}
 
 	private void addListToNode(String string, List<Data> list_data) {
-		boolean expandable = !list_data.isEmpty();
-		TableTreeNode node = addVariable(string,EMPTY,expandable);
+		TableTreeNode node = addVariable(string,EMPTY);
 		parents.add(node);
 
 		for (int i=0;i<list_data.size();i++){
@@ -112,21 +112,21 @@ public class VariablesVisitor implements InfoVisitor{
 
 	public void visit(SimpleData simple_data) {
 		mainInfoVisitor.visit(simple_data);
-		addVariable(simple_data.getName(),mainInfoVisitor.getInfo(),false);
+		addVariable(simple_data.getName(),mainInfoVisitor.getInfo());
 	}
 
 	public void visit(IgnoredData ignored_data) {
 		mainInfoVisitor.visit(ignored_data);
-		addVariable(ignored_data.getName(),mainInfoVisitor.getInfo(),false);
+		addVariable(ignored_data.getName(),mainInfoVisitor.getInfo());
 	}
 	
 	// Add row to the tabe
 	
-	private TableTreeNode addVariable(String name,String value,boolean expandable){
+	private TableTreeNode addVariable(String name,String value){
 		
 		TableTreeNode node;
 		TableTreeNode parent = getLastParent();
-		TableRowData data = new TableRowData(name, value, expandable);
+		TableRowData data = new VariableRowData(name, value);
 		
 		node = new TableTreeNode(data);
 		parent.add(node);

@@ -16,7 +16,6 @@ public class ProfileTableRenderer extends DefaultTableCellRenderer{
 		
 	private List<Color> colors;
 	private Border paddingBorder;
-
 	
 	public ProfileTableRenderer(){
 		this.colors = new ArrayList<>();
@@ -29,7 +28,14 @@ public class ProfileTableRenderer extends DefaultTableCellRenderer{
 	
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		JLabel d = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-				
+		
+		/*if (column == 0){
+			JCheckBox checkBox = new JCheckBox();
+			checkBox.setSelected((boolean) value);
+			checkBox.setHorizontalAlignment(JCheckBox.CENTER);
+			return checkBox;
+		}*/
+		
 		if (column == 1)
 			d.setBackground(colors.get(row));
 		else if (!isSelected)

@@ -1,12 +1,15 @@
 package com.inspector.objectinspector.view;
 
-public class TableRowData
-{
+import com.general.view.jtreetable.TableRowData;
+
+
+public class VariableRowData implements TableRowData{
+	
 	private String name;
 	private String value;
 	private boolean changed;
 
-	public TableRowData(String name, String value, boolean isExpandable)
+	public VariableRowData(String name, String value)
 	{
 		this.name = name;
 		this.value = value;
@@ -36,4 +39,8 @@ public class TableRowData
 	public void setChanged(boolean changed) {
 	   this. changed = changed;
     }
+
+	public Object[] getValues() {
+		return new Object[]{name,value};
+	}
 }

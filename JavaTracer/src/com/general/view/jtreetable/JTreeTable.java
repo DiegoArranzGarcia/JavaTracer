@@ -1,64 +1,52 @@
-package com.inspector.objectinspector.view;
+package com.general.view.jtreetable;
 
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class JTreeTable extends JTable {
 
-	private TreeModel treeModel;
+	protected TreeModel treeModel;
 	private DefaultTableModel tableModel;
 	
 	public JTreeTable(){
-		TableRowData rootNode = new TableRowData("Name", "Value", false);
+		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+	
+	public void setRoot(TableRowData rootNode){
 		treeModel = new TreeModel(new TableTreeNode(rootNode));
 
-		// Cell's are not editable
-		tableModel = new DefaultTableModel(new String[]{rootNode.getName(),rootNode.getValue()},0) {
-		    @Override
+		tableModel = new DefaultTableModel(rootNode.getValues(),0) {
 		    public boolean isCellEditable(int row, int column) {
 		        return false;
 		    }
 		};
-		setModel(tableModel);
 		
-		CellRenderer renderer = new CellRenderer(treeModel);
+		setModel(tableModel);
+	}
+	
+	public void setModel(DefaultTableModel model){
+		this.tableModel = model;
+		super.setModel(model);
+	}
+	
+	public void setCellRenderer(DefaultTableCellRenderer renderer){
 		setDefaultRenderer(Object.class,renderer);
-		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 	
 	public void collapseRow(int selectedRow) {
 		treeModel.collapseRow(selectedRow);
 		refreshTable(selectedRow);
-		/*List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
-		for (int i=0;i<children.size();i++){
-			tableModel.removeRow(selectedRow);
-		}*/
 	}
 
 	public void expandRow(int selectedRow) {
-			
 		treeModel.expandRow(selectedRow);
 		refreshTable(selectedRow);
-		/*List<TableTreeNode> children = treeModel.getNodeFromRow(selectedRow).getChildren();
-		
-		for (int i=0;i<children.size();i++){
-			TableTreeNode node = children.get(i);
-			TableRowData data = (TableRowData) node.getUserObject();
-			String tab = getTab(node.getDepth());
-			tableModel.insertRow(selectedRow+i,new String[]{tab + data.getName(),data.getValue()});
-		}*/
 	}	
-
-	private String getTab(long depth) {
-		String tab = "";
-		for (int i=1;i<depth;i++)
-			tab += "  ";
-		return tab;
-	}
 
 	public void clearTable() {
 		treeModel.removeAllUnlessRoot();
@@ -87,8 +75,9 @@ public class JTreeTable extends JTable {
 		children.remove(0);
 		
 		for (int i=0;i<children.size();i++){
-			TableRowData data = (TableRowData) children.get(i).getUserObject();
-			tableModel.addRow(new String[]{data.getName(),data.getValue()});
+			TableTreeNode node = children.get(i);
+			TableRowData data = (TableRowData) node.getUserObject();
+			tableModel.addRow(data.getValues());
 		}
 		
 		if (selectedRow != -1)

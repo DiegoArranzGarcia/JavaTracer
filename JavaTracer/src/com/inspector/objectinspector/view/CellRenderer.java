@@ -7,6 +7,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import com.general.imageresources.ImageLoader;
+import com.general.view.jtreetable.TableTreeNode;
+import com.general.view.jtreetable.TreeModel;
 
 @SuppressWarnings("serial")
 public class CellRenderer extends DefaultTableCellRenderer{
@@ -24,7 +26,7 @@ public class CellRenderer extends DefaultTableCellRenderer{
 
 		try{
 			TableTreeNode node = treeModel.getNodeFromRow(row+1);
-			TableRowData data = ((TableRowData) node.getUserObject());
+			VariableRowData data = ((VariableRowData) node.getUserObject());
 			
 			boolean changed = data.isChanged();
 			boolean expandable = node.isExpandable();

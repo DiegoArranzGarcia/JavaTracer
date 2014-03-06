@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.general.view.jtreetable.JTreeTable;
 import com.inspector.objectinspector.controller.ObjectInspectorController;
 
 @SuppressWarnings("serial")
@@ -15,16 +16,19 @@ public class ObjectInspectorView extends JTreeTable implements KeyListener,Mouse
 	public ObjectInspectorView() {	    
 		addMouseListener(this);
    	    addKeyListener(this);
+		VariableRowData rootNode = new VariableRowData("Name", "Value");
+		setRoot(rootNode);
+		setCellRenderer(new CellRenderer(treeModel));
 	}
 	
 	public void mouseClicked(MouseEvent e) {
 		
 		int selectedRow = getSelectedRow()+1;
-		if (!isExpanded(selectedRow)){
+		
+		if (!isExpanded(selectedRow))
 			expandRow(selectedRow);
-		}else if (isExpanded(selectedRow)) {
+		else if (isExpanded(selectedRow))
 			collapseRow(selectedRow);
-		}
 				
 	}
 	
