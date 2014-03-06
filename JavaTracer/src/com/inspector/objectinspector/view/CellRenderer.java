@@ -25,7 +25,7 @@ public class CellRenderer extends DefaultTableCellRenderer{
 		try{
 			TableTreeNode node = treeModel.getNodeFromRow(row+1);
 			TableRowData data = ((TableRowData) node.getUserObject());
-		
+			
 			boolean changed = data.isChanged();
 			boolean expandable = node.isExpandable();
 			boolean expanded = node.isExpanded();
@@ -48,6 +48,12 @@ public class CellRenderer extends DefaultTableCellRenderer{
 			}
 			else {
 				setIcon(null);
+			}
+			
+			if (column == 1){
+				setToolTipText(value.toString());
+			} else {
+				setToolTipText(null);
 			}
 		} catch (Exception e){
 			
