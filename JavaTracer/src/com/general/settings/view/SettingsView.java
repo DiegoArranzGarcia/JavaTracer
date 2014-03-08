@@ -49,12 +49,14 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private JList<String> excludesList;
 	
 	
+	
 	/*
 	 * Inspector view
 	 */
 	private JTextField levelsField,nodesField;
 	private JLabel levelsLabel, nodesLabel;
 	private JButton saveButtonInspector,cancelButtonInspector,deleteAllButtonInspector;
+	
 	
 	public SettingsView() {
 		
@@ -170,16 +172,18 @@ private void initTracerSettings() {
 		scrollPane.setBackground(Color.WHITE);
 		tracerSettings.add(scrollPane);
 		
-		excludesList = new JList<String>();
+		excludesList = new JList<String>();		
 		excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		excludesList.setBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setViewportView(excludesList);
 		excludesList.setModel(model);
 		excludesList.addMouseListener(this);
-	    
+		
     }
-	
-	 private void initInspectorView() {
+
+
+
+	private void initInspectorView() {
 		    inspectorSettings= new Panel();
 			tabbedPane.addTab("Inspector", null, inspectorSettings, null);
 			inspectorSettings.addMouseListener(this);
@@ -218,6 +222,7 @@ private void initTracerSettings() {
 			deleteAllButtonInspector.setBounds(415, 50, 115, 23);
 			deleteAllButtonInspector.addActionListener(this); 
 			inspectorSettings.add(deleteAllButtonInspector);
+			
 		    
 	    }
 	 /*

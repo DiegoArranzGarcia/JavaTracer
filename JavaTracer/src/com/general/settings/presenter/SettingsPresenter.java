@@ -3,6 +3,10 @@
  */
 package com.general.settings.presenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.presenter.JavaTracerPresenter;
 import com.general.settings.view.SettingsView;
 import com.general.settings.view.SettingsViewInterface;
@@ -16,10 +20,12 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	private int numLevels;
 	private int numNodes;
 	
+	private List<String> excludesFromConfiguration;
+	
 	public SettingsPresenter(){
-		excludes = new String[0];
-		numLevels = 0;
-		numNodes = 0;
+		addExludesFromConfiguration();
+		addNumLevelsFromConfiguration();
+		addNumNodesFromConfiguration();
 	}
 	
 	public void show() {
@@ -81,4 +87,36 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     public void setController(JavaTracerPresenter javaTracerController) {
 		this.controller = javaTracerController;
 	}
+    
+    private void addExludesFromConfiguration() {
+    	try {
+	        excludesFromConfiguration = JavaTracerConfigurationXml.getInstance().getExludes();
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }
+    	
+    	excludes = new String[excludesFromConfiguration.size()];
+		for (int i=0;i<excludesFromConfiguration.size();i++){
+				excludes[i] = excludesFromConfiguration.get(i);
+		} 
+	}
+    
+    private void addNumLevelsFromConfiguration() {
+    	try {
+    		numLevels =JavaTracerConfigurationXml.getInstance().getNumLevels();
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }
+    }
+    
+    private void addNumNodesFromConfiguration() {
+    	try {
+    		numNodes =JavaTracerConfigurationXml.getInstance().getNumNodes();
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }
+    }
 }
