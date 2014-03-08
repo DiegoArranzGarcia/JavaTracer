@@ -140,15 +140,13 @@ public class Tracer {
     void redirectOutput(String nameXlm) {
     	
     	Process process = vm.process();
-    	//console c=new console();
+    	console c=new console();
     	
     	// Copy target's output and error to our output and error.
-        //errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,c);
-        //outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,c);
+        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,c);
+        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,c);
         
-    	errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm);
-        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm);
-        
+    	
     	
     	errThread.start();
         outThread.start();
