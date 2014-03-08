@@ -4,32 +4,41 @@
 package com.general.model.configuration;
 
 import java.io.*;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.*;
+import org.w3c.dom.*;
 import com.general.model.XStreamUtil;
 import com.thoughtworks.xstream.XStream;
 
 
 public class JavaTracerConfigurationXml extends XStreamUtil{
 	private final static String CONFIG_FILE_NAME = "java-tracer-properties";
-	private final static String EXCLUDES = "excludes";
-	private final static String FILE_TITLE = "Config JavaTracer";
-	
+	/*
+	 * General
+	 */
 	private String FILE_EXT = ".xml";
 	private XStream xStream;
-	
+	private Document xmlDocument;
+	private XPath xPath;	
 	private static JavaTracerConfigurationXml instance;
-	
-	private Properties properties;
-	private FileInputStream fileInput;
-	private FileOutputStream fileWriter;
 	private File fileXml;
 	private FileWriter writer;
+	/*
+	 * Tracer
+	 */
 	private List<String>excludesList;
+	/*
+	 * Inspector
+	 */
 	private int numlevels;
 	private int numNodes;
 	
 	public static JavaTracerConfigurationXml getInstance(){
+		/*
+		 * Instance class
+		 */
 		if (instance==null) 
 			return instance = new JavaTracerConfigurationXml();
 		else 
@@ -37,8 +46,17 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	}
 	
 	 private JavaTracerConfigurationXml() {
+		/*
+		 * Create default file xml
+		 */
+		try {
+	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+	        xPath = XPathFactory.newInstance().newXPath();
+        }
+		catch (Exception e){
+			e.printStackTrace();
+		}
 		
-		        //xStream.toXML(TAG_INIT_CONFIGURATION,writer);
 		this. excludesList = new ArrayList<>();
 		initExcludes();
 		
@@ -46,7 +64,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		this.numNodes = 30;
 		
 		 generateFile();
-		 
+	 
 	 }
 	 
     private void initExcludes() {
@@ -129,4 +147,47 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		String string = xStream.toXML(object);
 		write(string);
 	}
+	
+
+	public List<String> getExludes() throws Exception{
+		String expression = "./" + TAG_EXCLUDES+"/*"; 
+		XPathExpression xPathExpression = xPath.compile(expression);
+		NodeList excludes = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
+		for (int i=0;i<excludes.getLength();i++) {
+			String nodeString = nodeToString(excludes.item(i));
+			String exclude = (String) xStream.fromXML(nodeString);
+			excludesList.add(exclude);
+		};
+		return excludesList;
+	}
+	
+	public int getNumLevels() throws Exception {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
+		
+		XPathExpression xPathExpression = xPath.compile(expression);
+		Node node_levels = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+		
+		String nLevels =  (String) xPathExpression.evaluate(node_levels,XPathConstants.STRING);
+		
+		String s = nLevels.replaceAll("\n", "");
+		numlevels = Integer.parseInt(s); 
+		
+		return numlevels;
+	}
+	
+	public int getNumNodes() throws Exception {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
+		
+		XPathExpression xPathExpression = xPath.compile(expression);
+		Node node_nodes = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+		
+		String nNodes =  (String) xPathExpression.evaluate(node_nodes,XPathConstants.STRING);
+		
+		String s = nNodes.replaceAll("\n", "");
+		numNodes = Integer.parseInt(s); 
+		
+		return numNodes;
+	}
+	
+	
 }
