@@ -1,10 +1,15 @@
 package com.tracer.model;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
+import com.console.view.console;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
@@ -45,6 +50,8 @@ public class Tracer {
     
    private String[] excludes;
    private TracerController tracerController;
+   
+   private static final int BUFFER_SIZE = 2048;
    
     /**
 	  * Parse the command line arguments.
@@ -133,17 +140,25 @@ public class Tracer {
     void redirectOutput(String nameXlm) {
     	
     	Process process = vm.process();
-        // Copy target's output and error to our output and error.
-        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm);
-        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm);
-       
-        errThread.start();
-        outThread.start();
+    	//console c=new console();
+    	
+    	// Copy target's output and error to our output and error.
+        //errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,c);
+        //outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,c);
         
+    	errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm);
+        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm);
+        
+    	
+    	errThread.start();
+        outThread.start();
         
     }
 
-    /**
+
+	
+
+	/**
 	* Find a com.sun.jdi.CommandLineLaunch connector
 	*/
     LaunchingConnector findLaunchingConnector() {
