@@ -58,10 +58,12 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		setSize(new Dimension(660, 330));
 		setLocationRelativeTo(null);
 		
-		model = new DefaultListModel<String>();
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		ImageLoader imageLoader = ImageLoader.getInstance();
+		
+		model = new DefaultListModel<String>();
+		
+		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -140,7 +142,7 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		JScrollPane scrollPane = new JScrollPane();
 		sl_contentPane.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.NORTH, addButton);
 		sl_contentPane.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, argument);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, deleteAllButton);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, downButton);
 		sl_contentPane.putConstraint(SpringLayout.EAST, scrollPane, -6, SpringLayout.WEST, downButton);
 		scrollPane.setBackground(Color.WHITE);
 		contentPane.add(scrollPane);

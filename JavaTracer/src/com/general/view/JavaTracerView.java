@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 
 import com.general.presenter.JavaTracerPresenter;
+import com.general.settings.view.SettingsView;
+
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -20,6 +22,7 @@ public class JavaTracerView extends JFrame implements ActionListener{
 	private JButton inspectButton;
 	private JButton exitButton;
 	private JButton viewProfile;
+	private JButton settingsButton;
 	
 	/**
 	 * Create the frame.
@@ -39,40 +42,50 @@ public class JavaTracerView extends JFrame implements ActionListener{
 		panel.setLayout(sl_panel);
 		
 		traceProfileButton = new JButton("Trace / Profile");
-		sl_panel.putConstraint(SpringLayout.NORTH, traceProfileButton, 91, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.NORTH, traceProfileButton, 53, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, traceProfileButton, 143, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, traceProfileButton, -406, SpringLayout.SOUTH, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, traceProfileButton, 338, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, traceProfileButton, -444, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, traceProfileButton, -146, SpringLayout.EAST, panel);
 		panel.add(traceProfileButton);
 		traceProfileButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		traceProfileButton.addActionListener(this);
 		
 		inspectButton = new JButton("Inspect trace");
-		sl_panel.putConstraint(SpringLayout.NORTH, inspectButton, 163, SpringLayout.SOUTH, traceProfileButton);
-		sl_panel.putConstraint(SpringLayout.WEST, inspectButton, 0, SpringLayout.WEST, traceProfileButton);
-		sl_panel.putConstraint(SpringLayout.EAST, inspectButton, 0, SpringLayout.EAST, traceProfileButton);
+		sl_panel.putConstraint(SpringLayout.WEST, inspectButton, 143, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, inspectButton, -246, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, inspectButton, -146, SpringLayout.EAST, panel);
 		panel.add(inspectButton);
 		inspectButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		inspectButton.addActionListener(this);
 		
 		exitButton = new JButton("Exit");
-		sl_panel.putConstraint(SpringLayout.NORTH, exitButton, 428, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, exitButton, -69, SpringLayout.SOUTH, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, inspectButton, -62, SpringLayout.NORTH, exitButton);
-		sl_panel.putConstraint(SpringLayout.WEST, exitButton, 0, SpringLayout.WEST, traceProfileButton);
-		sl_panel.putConstraint(SpringLayout.EAST, exitButton, 0, SpringLayout.EAST, traceProfileButton);
+		sl_panel.putConstraint(SpringLayout.NORTH, exitButton, 468, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.WEST, exitButton, 143, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, exitButton, -29, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, exitButton, -146, SpringLayout.EAST, panel);
 		panel.add(exitButton);
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		exitButton.addActionListener(this);
 		
 		viewProfile = new JButton("View Profile");
-		viewProfile.addActionListener(this);
-		sl_panel.putConstraint(SpringLayout.NORTH, viewProfile, 56, SpringLayout.SOUTH, traceProfileButton);
+		sl_panel.putConstraint(SpringLayout.NORTH, inspectButton, 38, SpringLayout.SOUTH, viewProfile);
+		sl_panel.putConstraint(SpringLayout.NORTH, viewProfile, 48, SpringLayout.SOUTH, traceProfileButton);
 		sl_panel.putConstraint(SpringLayout.WEST, viewProfile, 0, SpringLayout.WEST, traceProfileButton);
-		sl_panel.putConstraint(SpringLayout.SOUTH, viewProfile, -51, SpringLayout.NORTH, inspectButton);
-		sl_panel.putConstraint(SpringLayout.EAST, viewProfile, 0, SpringLayout.EAST, traceProfileButton);
+		sl_panel.putConstraint(SpringLayout.SOUTH, viewProfile, -340, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, viewProfile, -146, SpringLayout.EAST, panel);
+		viewProfile.addActionListener(this);
 		viewProfile.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		panel.add(viewProfile);
-		exitButton.addActionListener(this);
+		
+		settingsButton = new JButton("Settings");
+		sl_panel.putConstraint(SpringLayout.NORTH, settingsButton, 42, SpringLayout.SOUTH, inspectButton);
+		sl_panel.putConstraint(SpringLayout.WEST, settingsButton, 0, SpringLayout.WEST, traceProfileButton);
+		sl_panel.putConstraint(SpringLayout.SOUTH, settingsButton, -54, SpringLayout.NORTH, exitButton);
+		sl_panel.putConstraint(SpringLayout.EAST, settingsButton, -146, SpringLayout.EAST, panel);
+		settingsButton.addActionListener(this);
+		settingsButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		panel.add(settingsButton);
+		
 		
 	}
 
@@ -86,6 +99,8 @@ public class JavaTracerView extends JFrame implements ActionListener{
 			presenter.clickedOnExit();
 		else if (source.equals(viewProfile)){
 			presenter.clickedOnViewProfile();
+		}else if (source.equals(settingsButton)) {
+			presenter.clickedOnSettings();
 		}
 	}
 	
