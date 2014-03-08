@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.alee.laf.WebLookAndFeel;
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.settings.presenter.SettingsPresenter;
 import com.general.view.JavaTracerView;
 import com.inspector.controller.InspectorController;
@@ -19,6 +20,7 @@ public class JavaTracerPresenter {
 	private ProfilerPresenter profilerController;
 	private InspectorController inspectorController;
 	private SettingsPresenter settingsPresenter;
+	private JavaTracerConfigurationXml tracerConfiguration;
 	
 	/**
 	 *  Creates the controllers of aplication (Tracer, Profiler and Inspector controller). 
@@ -39,6 +41,7 @@ public class JavaTracerPresenter {
 		this.inspectorController = new InspectorController();
 		this.view = new JavaTracerView();
 		this.settingsPresenter = new SettingsPresenter();
+		this.tracerConfiguration  = JavaTracerConfigurationXml.getInstance();
 		addController();
 	}
 	

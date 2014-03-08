@@ -290,7 +290,7 @@ public class TracerView extends JFrame {
 
 	public String getNameXml() {
 		String nameXml = this. nameXml.getText();
-		if (this.nameXml.equals(""))
+		if (nameXml.equals(""))
 			nameXml = "default";
 		return nameXml;
 	}

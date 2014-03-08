@@ -2,6 +2,7 @@ package com.tracer.model.writers;
 
 import java.io.FileWriter;
 
+import com.general.model.XStreamUtil;
 import com.general.model.data.ThreadInfo;
 import com.tracer.model.methods.data.*;
 
