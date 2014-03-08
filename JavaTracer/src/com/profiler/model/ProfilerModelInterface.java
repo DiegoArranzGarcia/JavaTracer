@@ -1,17 +1,18 @@
 package com.profiler.model;
 
 import java.io.File;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import com.sun.jdi.event.MethodEntryEvent;
 
 public interface ProfilerModelInterface {
 
-	public int getTotalTimeCalledMethods();
-	public HashMap<String, Integer> getRegistredClasses();
+	public ProfilerTree getProfileTree();
 	public void profileEvent(MethodEntryEvent event);
-	public void saveProfile(ProfileData data,File file);
-	public ProfileData openProfile(File file);
+	public void saveProfile(ProfilerTree data,File file);
+	public ProfilerTree openProfile(File file);
 	public void clean();
+	public Iterator<Entry<String, Integer>> getClassesInfo();
 
 }

@@ -8,7 +8,7 @@ public class TableTreeNode {
 	private Object userObject;
 	private boolean expanded;
 	private boolean isExpandable;
-	private long depth;
+	private int depth;
 	private List<TableTreeNode> children;
 	private TableTreeNode parent;
 	
@@ -52,11 +52,11 @@ public class TableTreeNode {
 		this.parent = parent;
 	}
 
-	public long getDepth() {
+	public int getDepth() {
 		return depth;
 	}
 
-	public void setDepth(long depth) {
+	public void setDepth(int depth) {
 		this.depth = depth;
 	}
 	

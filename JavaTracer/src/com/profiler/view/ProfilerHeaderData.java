@@ -4,13 +4,14 @@ import com.general.view.jtreetable.TableRowData;
 
 public class ProfilerHeaderData implements TableRowData{
 
-	String USED_TITLE = "Used Classes";
-	String COLOR_TITLE = "";
-	String CLASS_TITLE = "Class name";
-	String COUNT_TITLE = "Count";
+	public static String COLOR_TITLE = "";
+	public static String SIMPLE_NAME_TITLE = "Name";
+	public static String COMPLETE_NAME_TITLE = "Complete name";
+	public static String COUNT_TITLE = "Count";
+	public static String USED_TITLE = "Used";
 	
-	public Object[] getValues() {
-		return new Object[]{USED_TITLE,COLOR_TITLE,CLASS_TITLE,COUNT_TITLE};
+	public String[] getValues() {
+		return new String[]{COLOR_TITLE,SIMPLE_NAME_TITLE,COMPLETE_NAME_TITLE,COUNT_TITLE,USED_TITLE};
 	}
-	
+
 }

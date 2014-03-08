@@ -1,5 +1,9 @@
 package com.general.view.jtreetable;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -8,7 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
-public class JTreeTable extends JTable {
+public class JTreeTable extends JTable implements KeyListener,MouseListener{
 
 	protected TreeModel treeModel;
 	private DefaultTableModel tableModel;
@@ -27,6 +31,9 @@ public class JTreeTable extends JTable {
 		};
 		
 		setModel(tableModel);
+		
+		addMouseListener(this);
+   	    addKeyListener(this);
 	}
 	
 	public void setModel(DefaultTableModel model){
@@ -84,5 +91,46 @@ public class JTreeTable extends JTable {
 			setRowSelectionInterval(selectedRow-1, selectedRow-1);
 		
 	}
+
+	public TreeModel getTreeModel() {
+		return treeModel;
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		int selectedRow = getSelectedRow()+1;
+		
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+			
+			if (!isExpanded(selectedRow)){
+				expandRow(selectedRow);
+			}
+			
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+			
+			if (isExpanded(selectedRow)){
+				collapseRow(selectedRow);
+			}
+			
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {}
+	
+	public void mouseClicked(MouseEvent e) {
+		
+		int selectedRow = getSelectedRow()+1;
+		
+		if (!isExpanded(selectedRow))
+			expandRow(selectedRow);
+		else if (isExpanded(selectedRow))
+			collapseRow(selectedRow);
+				
+	}
+	
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 
 }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.profiler.model.ProfilerTree;
+
 public interface ProfilerPresenterInterface {
 	
 	public void save();
@@ -11,6 +13,6 @@ public interface ProfilerPresenterInterface {
 	public Iterator<Entry<String,Integer>> getClassesInfo();
 	public void openProfile(File file);
 	public void saveProfile(File file);
-	public void closeWindow();
+	public ProfilerTree getTree();
 
 }

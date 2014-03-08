@@ -9,9 +9,9 @@ import java.util.Map.Entry;
 
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
-import com.profiler.model.ProfileData;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
+import com.profiler.model.ProfilerTree;
 import com.profiler.view.ProfilerView;
 import com.profiler.view.ProfilerViewInterface;
 
@@ -22,11 +22,11 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	private ProfilerModelInterface profiler;
 	private ProfilerViewInterface view;
 	
-	private ProfileData currentProfileData;
+	private ProfilerTree currentProfileTree;
 	
 	public ProfilerPresenter(){
 		this.profiler = new Profiler();
-		this.currentProfileData = new ProfileData();
+		this.currentProfileTree = new ProfilerTree();
 	}
 	
 	public void setController(JavaTracerPresenter javaTracerController) {
@@ -40,13 +40,12 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			view.setPresenter(this);
 		}
 		
-		view.load(currentProfileData.getClassesInfo(),currentProfileData.getTotalTimeCalledMethods());
+		view.load(currentProfileTree);
 		view.setVisible(true);
 	}
 	
 	public void loadTempProfile(){
-		currentProfileData.setClassesInfo(profiler.getRegistredClasses());
-		currentProfileData.setTotalTimeCalledMethods(profiler.getTotalTimeCalledMethods());	 
+		currentProfileTree = profiler.getProfileTree();
 	}
 
 	public void save() {
@@ -73,18 +72,14 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		controller.back();
 	}
 
-	public Iterator<Entry<String, Integer>> getClassesInfo() {
-		return currentProfileData.getClassesInfo().entrySet().iterator();
-	}
-
 	public void openProfile(File file) {
-		currentProfileData = profiler.openProfile(file);
+		currentProfileTree = profiler.openProfile(file);
 		showProfile();
 	}
 	
 	public void saveProfile(File file) {
-		currentProfileData.setCheckedClasses(view.getClassesState());
-		profiler.saveProfile(currentProfileData, file);
+		currentProfileTree.setCheckedClasses(view.getClassesState());
+		profiler.saveProfile(currentProfileTree, file);
 	}
 	
 	public ProfilerViewInterface getView() {
@@ -103,9 +98,12 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		this.profiler = profiler;
 	}
 
-    public void closeWindow() {
-	   controller.back();
-	    
-    }
+	public Iterator<Entry<String, Integer>> getClassesInfo() {		
+		return profiler.getClassesInfo();
+	}
+
+	public ProfilerTree getTree() {
+		return profiler.getProfileTree();
+	}
 
 }
