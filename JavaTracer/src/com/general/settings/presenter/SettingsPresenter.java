@@ -37,6 +37,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     public void saveActionTracer() {
     	excludes = view.getExcludes();
 		view.setVisible(false);
+		controller.back();
     }
 
     public void cancelActionTracer() {

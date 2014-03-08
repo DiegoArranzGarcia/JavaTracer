@@ -1,5 +1,6 @@
 package com.general.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ public class JavaTracerView extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
+		
 		
 		JPanel panel = new JPanel();
 		setContentPane(panel);
@@ -85,7 +87,7 @@ public class JavaTracerView extends JFrame implements ActionListener{
 		settingsButton.addActionListener(this);
 		settingsButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		panel.add(settingsButton);
-		
+		getContentPane().setBackground(Color.WHITE); 
 		
 	}
 
