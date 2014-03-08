@@ -10,5 +10,6 @@ public interface SettingsPresenterInterface {
 	public void cancelActionTracer();
 	public void saveActionInspector();
 	public void cancelActionInspector();
+	public void closeWindow();
 
 }

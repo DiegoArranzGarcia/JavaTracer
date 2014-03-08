@@ -103,4 +103,9 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		this.profiler = profiler;
 	}
 
+    public void closeWindow() {
+	   controller.back();
+	    
+    }
+
 }

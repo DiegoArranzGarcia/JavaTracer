@@ -55,6 +55,10 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	    
     }
     
+    public void closeWindow() {
+    	controller.back();
+    }
+    
     public void setController(JavaTracerPresenter javaTracerController) {
 		this.controller = javaTracerController;
 	}

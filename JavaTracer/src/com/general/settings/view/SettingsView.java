@@ -72,7 +72,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    
+	    addWindowListener(new WindowAdapter() {
+	    	public void windowClosing(WindowEvent e) {
+	    	    // System.exit(0);
+	    		presenter.closeWindow();
+	    	   }
+		});
     }
 	
 private void initTracerSettings() {
