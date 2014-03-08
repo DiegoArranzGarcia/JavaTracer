@@ -29,7 +29,9 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private static String ERROR = "Error";
 	private static String ERROR_EMPTY_DELETE = "Should select at least one";
 	private static String ERROR_EMPTY_ADD = "Should write at least one";
-	
+	private static String ERROR_NUMBER = "Should be a number the entered value";
+	private static String ERROR_EMPTY_NUM_LEVELS = "You should enter the number of levels";
+	private static String ERROR_EMPTY_NUM_NODES = "You should enter the number of nodes";
 	/*
 	 * General view
 	 */
@@ -384,7 +386,10 @@ private void initTracerSettings() {
 			upButton.setEnabled(false);
 		}
 	}
-
+	
+	/*
+	 * Tracer methods
+	 */
     public void loadExcludes(String[] args) {
     	deleteAllExcludes();
 		for (int i=0;i<args.length;i++){
@@ -416,6 +421,59 @@ private void initTracerSettings() {
     private void clickedOnDeleteAllInspector() {
 	    nodesField.setText("");
 	    levelsField.setText(""); 
+	    
+    }
+    
+    /*
+     * Inspector methods
+     */
+    private static boolean isNumeric(String cadena){
+    	try {
+    		Integer.parseInt(cadena);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
+    }
+    public int getNumLevels() {
+    	String numLevels = levelsField.getText();
+    	boolean isNumber = isNumeric(numLevels);
+    	int nLevels = -1;
+    	if (numLevels.equals(""))
+    		JOptionPane.showMessageDialog(null,ERROR_EMPTY_NUM_LEVELS,ERROR, JOptionPane.ERROR_MESSAGE);
+    	else if (isNumber)
+    		nLevels =  Integer.parseInt(numLevels);
+    	else JOptionPane.showMessageDialog(null,ERROR_NUMBER,ERROR, JOptionPane.ERROR_MESSAGE);
+    	
+    	return nLevels;
+    }
+    
+    public int getNumNodes() {
+    	String numNodes = nodesField.getText();
+    	boolean isNumber = isNumeric(numNodes);
+    	int nNodes = -1;
+    		
+    	if (numNodes.equals(""))
+    		JOptionPane.showMessageDialog(null,ERROR_EMPTY_NUM_NODES,ERROR, JOptionPane.ERROR_MESSAGE);
+    	else if (isNumber)
+    		nNodes =  Integer.parseInt(numNodes);
+    	else JOptionPane.showMessageDialog(null,ERROR_NUMBER,ERROR, JOptionPane.ERROR_MESSAGE);
+    	
+    	return nNodes;
+    }
+
+
+    public void loadNumLevels(int numLevels) {
+    	levelsField.setText("");
+    	String nLevels = Integer.toString(numLevels);
+    	levelsField.setText(nLevels);    
+    }
+
+
+    public void loadNumNodes(int numNodes) {
+	  nodesField.setText("");
+	  String nNodes = Integer.toString(numNodes);
+	  nodesField.setText(nNodes);
 	    
     }
 }

@@ -13,9 +13,13 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	private String[] excludes;
 	private JavaTracerPresenter controller;
+	private int numLevels;
+	private int numNodes;
 	
 	public SettingsPresenter(){
 		excludes = new String[0];
+		numLevels = 0;
+		numNodes = 0;
 	}
 	
 	public void show() {
@@ -27,7 +31,9 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		
 		view.setVisible(true); 
 		view.loadExcludes(excludes);
-	}
+		view.loadNumLevels(numLevels);
+		view.loadNumNodes(numNodes);
+ 	}
 
 	
 	public String[] getExcludes(){
@@ -46,8 +52,20 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     }
 
     public void saveActionInspector() {
-	    // TODO Auto-generated method stub
-	    
+    	int nLevels =  view.getNumLevels();
+	
+	  if (nLevels != -1) {
+		  numLevels =nLevels;
+		  int nNodes = view.getNumNodes(); 
+		  if (numNodes != -1) {
+			  numNodes = nNodes;
+			  System.out.println("Levels: " +numLevels);
+			  System.out.println("Nodes" +numNodes);
+			  view.setVisible(false);	
+			  controller.back();
+		  }
+		 
+	  }
     }
 
     public void cancelActionInspector() {
