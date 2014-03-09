@@ -2,14 +2,24 @@ package com.general.model;
 
 import java.io.StringWriter;
 
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Node;
 
-import com.general.model.data.*;
-import com.general.model.variables.data.*;
+import com.general.model.data.ChangeInfo;
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 import com.thoughtworks.xstream.XStream;
 import com.tracer.model.methods.data.MethodEntryInfo;
 import com.tracer.model.methods.data.MethodExitInfo;
@@ -17,7 +27,7 @@ import com.tracer.model.methods.data.MethodExitInfo;
 public abstract class XStreamUtil {
 	
 	public static String TAG_TRACE = "trace";
-	public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+	public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
 	public static String TAG_METHOD_CALL = "method-call";
 	public static String TAG_CALLED_METHODS = "called-methods";
 	public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";
@@ -37,22 +47,19 @@ public abstract class XStreamUtil {
 	public static String TAG_ARGUMENTS = "arguments";
 	public static String TAG_METHOD_INFO = "info";
 	public static String TAG_CALLED_FROM_CLASS = "calledFromClass";
-	public static String TAG_METHOD_NAME = "methodName";
+	public static String TAG_METHOD_NAME = "methodame";
 	public static String TAG_THREAD = "thread";
 	public static String TAG_THREAD_INFO = "thread-info";
 	public static String TAG_EXCEPTION = "exception";
 	
-	public static String ATTR_ID = "id=\"";
-	
-	public static String DOUBLE_QUOTES = "\"";
-	
-	/*
-	 * Configuration
-	 */
 	public static String TAG_CONFIGURATION ="configuration";
 	public static String TAG_EXCLUDES="excludes";
 	public static String TAG_NUM_LEVELS ="num-levels";
 	public static String TAG_NUM_NODES = "num-nodes";
+	
+	public static String ATTR_ID = "id";
+	
+	public static String DOUBLE_QUOTES = "\"";
 	
 	protected XStream xStream;
 	
@@ -77,6 +84,7 @@ public abstract class XStreamUtil {
 		
 		//MethodExitInfo alias
 		xStream.alias(TAG_METHOD_EXIT_EVENT,MethodExitInfo.class);
+		
 		xStream.aliasField(TAG_THIS, MethodExitInfo.class,"this_data");
 		xStream.aliasField(TAG_ARGUMENTS, MethodExitInfo.class, "arguments");
 		xStream.aliasField(TAG_RETURN, MethodExitInfo.class,"return_data");
@@ -88,7 +96,6 @@ public abstract class XStreamUtil {
 		
 		//Data alias
 		xStream.aliasField(TAG_CONTENT, ArrayData.class,"value");
-		xStream.aliasField(TAG_FIELDS, ObjectData.class,"value");
 		xStream.alias(TAG_SIMPLE_DATA, SimpleData.class);
 		xStream.alias(TAG_OBJECT, ObjectData.class);
 		xStream.alias(TAG_IGNORED, IgnoredData.class);
