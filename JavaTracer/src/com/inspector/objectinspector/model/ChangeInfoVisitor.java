@@ -44,8 +44,11 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		
 	}
 
-	public void visit(StringData info) {
-		
+	public void visit(StringData stringData) {
+		VariableRowData rowData = (VariableRowData) rootNode.getUserObject();
+		String oldValue = rowData.getValue();
+		String newValue = oldValue + " -> " + "\"" + stringData.getValue() + "\"";
+		rowData.setValue(newValue);
 	}
 
 	public void visit(NullData nullData) {

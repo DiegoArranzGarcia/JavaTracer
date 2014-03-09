@@ -25,7 +25,7 @@ public class MainInfoVisitor implements InfoVisitor{
 	}
 
 	public void visit(StringData stringData) {
-		info = "String (id=" + stringData.getId() + ")";
+		info = "\"" + stringData.getValue() + "\"";
 	}
 
 	public void visit(NullData nullData) {

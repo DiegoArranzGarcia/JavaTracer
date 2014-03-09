@@ -17,8 +17,8 @@ public class ChangeDetector {
 	/**
 	 * This method returns the changes between the two variables. The changes are made by comparing 
 	 * the second variable in respect of the first variable. Depending on the type of the variables,
-	 * the changes are evaluated in different ways. If the two variables are primitive values, no changes
-	 * are notified. 
+	 * the changes are evaluated in different ways. If the two variables are primitive values or
+	 * strings, no changes are notified. 
 	 * 
 	 * @param variable1 - The variable with is compared the second one.
 	 * @param variable2 - The second variable.
@@ -50,12 +50,6 @@ public class ChangeDetector {
 		
 		if (variable1 instanceof ArrayData && variable2 instanceof ArrayData){
 			changes = compareArrays(name,(ArrayData)variable1,(ArrayData)variable2);
-		} else if (variable1 instanceof StringData && variable2 instanceof StringData){
-			changes = compareStrings(name,(StringData)variable1,(StringData)variable2);
-		} else if (variable1 instanceof StringData && variable2 instanceof NullData){
-			changes = getChangesDeletedString(name);
-		} else if (variable1 instanceof NullData && variable2 instanceof StringData){
-			changes = getChangesCreatedString(name,(StringData)variable2);
 		} else if (variable1 instanceof ObjectData && variable2 instanceof ObjectData){
 			changes = compareObjects(name,(ObjectData)variable1,(ObjectData)variable2);
 		} else if (variable1 instanceof ObjectData && variable2 instanceof NullData){
@@ -77,6 +71,19 @@ public class ChangeDetector {
 			ChangeInfo changeInfo = new ChangeInfo(name,variable2);
 			changes.add(changeInfo);
 		}
+		
+		return changes;
+	}
+	
+	private List<ChangeInfo> getChangesStringData(String name,Data variable1,Data variable2) {
+		List<ChangeInfo> changes;
+		
+		if (variable1 instanceof StringData && variable2 instanceof StringData)
+			changes = compareStrings(name,(StringData)variable1,(StringData)variable2);
+		else if (variable1 instanceof NullData)
+			changes = getChangesCreatedString(name,(StringData)variable2);
+		else
+			changes = getChangesDeletedString(name);
 		
 		return changes;
 	}
@@ -177,6 +184,8 @@ public class ChangeDetector {
 					
 					if (field1 instanceof SimpleData && field2 instanceof SimpleData)
 						fieldChanges = getChangesSimpleData(getFieldName(name,variable1,field1),(SimpleData)field1,(SimpleData)field2);
+					else if (field1 instanceof StringData || field2 instanceof StringData)
+						fieldChanges = getChangesStringData(getFieldName(name,variable1,field1),field1,field2);
 					else 
 						fieldChanges = getChangesBetweenRec(getFieldName(name,variable1,field1), field1, field2);
 					
@@ -233,6 +242,8 @@ public class ChangeDetector {
 					
 				if (value1 instanceof SimpleData || value2 instanceof SimpleData)
 					fieldChanges = getChangesSimpleData(name + "[" + i + "]", (SimpleData)value1, (SimpleData)value2);
+				else if (value1 instanceof StringData || value2 instanceof StringData)
+					fieldChanges = getChangesStringData(name + "[" + i + "]",value1,value2);
 				else
 					fieldChanges = getChangesBetweenRec(name + "[" + i + "]" , value1 , value2);				
 					

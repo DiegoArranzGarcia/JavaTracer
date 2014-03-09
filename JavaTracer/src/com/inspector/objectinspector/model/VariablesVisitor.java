@@ -60,10 +60,7 @@ public class VariablesVisitor implements InfoVisitor{
 	public void visit(StringData string) {
 		
 		mainInfoVisitor.visit(string);
-		TableTreeNode node = addVariable(string.getName(),mainInfoVisitor.getInfo());
-		parents.add(node);
-		addVariable(VALUE,DOUBLE_QUOTES + string.getValue() + DOUBLE_QUOTES);
-		removeLastParent();
+		addVariable(string.getName(),mainInfoVisitor.getInfo());
 		
 	}
 
