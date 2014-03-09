@@ -2,8 +2,10 @@ package com.tracer.model.writers;
 
 import java.io.FileWriter;
 
+import com.general.model.XStreamUtil;
 import com.general.model.data.ThreadInfo;
-import com.tracer.model.methods.data.*;
+import com.tracer.model.methods.data.MethodEntryInfo;
+import com.tracer.model.methods.data.MethodExitInfo;
 
 public class TraceWriter extends XStreamUtil{
 
@@ -30,7 +32,7 @@ public class TraceWriter extends XStreamUtil{
 		
 		try {
 			String xmlString = xStream.toXML(info);
-			write(startTag(TAG_METHOD_CALL));
+			write(startTag(TAG_METHOD));
 			write(xmlString);
 			write(startTag(TAG_CALLED_METHODS));
 		} catch (Exception e) {
@@ -46,7 +48,7 @@ public class TraceWriter extends XStreamUtil{
 			String xmlString = xStream.toXML(info);
 			write(endTag(TAG_CALLED_METHODS));
 			write(xmlString);
-			write(endTag(TAG_METHOD_CALL));
+			write(endTag(TAG_METHOD));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,7 +79,7 @@ public class TraceWriter extends XStreamUtil{
 					write(endTag(TAG_TRACE));
 				} else {
 					write(endTag(TAG_CALLED_METHODS));
-					write(endTag(TAG_METHOD_CALL));
+					write(endTag(TAG_METHOD));
 				}
 				
 				depth--;

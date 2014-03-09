@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import com.general.model.XStreamUtil;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
-import com.tracer.model.writers.XStreamUtil;
 
 
 public class XmlManager extends XStreamUtil{
@@ -96,7 +102,7 @@ public class XmlManager extends XStreamUtil{
 		Node node = null;
 		
 		try{
-			String expression = ".//" + TAG_METHOD_CALL +"[@id=" + id + "]";  
+			String expression = ".//" + TAG_METHOD +"[@id=" + id + "]";  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
@@ -111,7 +117,7 @@ public class XmlManager extends XStreamUtil{
 	public boolean haveChildrenOfNode(Node node) {
 		boolean childs = false;
 		try{
-			String expression = "./" + TAG_CALLED_METHODS +"/" + TAG_METHOD_CALL;  
+			String expression = "count(./ " + TAG_CALLED_METHODS + "/" + TAG_METHOD + ")>0";  
 		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    XPathExpression xPathExpression = xPath.compile(expression);
 		    childs = (boolean) xPathExpression.evaluate(node,XPathConstants.BOOLEAN);

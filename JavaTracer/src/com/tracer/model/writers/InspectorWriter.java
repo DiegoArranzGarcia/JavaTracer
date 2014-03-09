@@ -1,15 +1,26 @@
 package com.tracer.model.writers;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import com.general.model.data.*;
+import com.general.model.XStreamUtil;
+import com.general.model.data.ChangeInfo;
+import com.general.model.data.MethodInfo;
+import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
 import com.tracer.model.ChangeDetector;
 
@@ -84,14 +95,14 @@ public class InspectorWriter extends XStreamUtil{
 	private void generateXml(Node node) throws Exception{
 				
 		
-		write(startTag(TAG_METHOD_CALL + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
+		write(startTag(TAG_METHOD + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
 
 		idNode++;
 		
 		writeNodeInfo(node);	
 		writeCalledMethods(node);
 		
-		write(endTag(TAG_METHOD_CALL));
+		write(endTag(TAG_METHOD));
 				
 	}
 
