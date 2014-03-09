@@ -3,6 +3,7 @@
  */
 package com.general.settings.presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.configuration.JavaTracerConfigurationXml;
@@ -46,7 +47,15 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	}
 
     public void saveActionTracer() {
+    	
     	excludes = view.getExcludes();
+    	System.out.println("Excludes: "+excludes.length);
+    	List<String >excludesAux =new ArrayList<>();
+    	for(int i=0;i<excludes.length;i++) {
+    		excludesAux.add(excludes[i]);
+    	}
+    	JavaTracerConfigurationXml.getInstance().setExcludes(excludesAux); 
+		  JavaTracerConfigurationXml.getInstance().saveNewConfiguration();
 		view.setVisible(false);
 		controller.back();
     }
@@ -62,13 +71,13 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	  if (nLevels != -1) {
 		  numLevels =nLevels;
 		  JavaTracerConfigurationXml.getInstance().setNumlevels(numLevels);
-		  JavaTracerConfigurationXml.getInstance().saveNewConfiguration();
+		 
       
 		  int nNodes = view.getNumNodes(); 
 		  if (numNodes != -1) {
 			  numNodes = nNodes;
-			  System.out.println("Levels: " +numLevels);
-			  System.out.println("Nodes" +numNodes);
+			  JavaTracerConfigurationXml.getInstance().setNumNodes(numNodes);
+			  JavaTracerConfigurationXml.getInstance().saveNewConfiguration();
 			  view.setVisible(false);	
 			  controller.back();
 		  }

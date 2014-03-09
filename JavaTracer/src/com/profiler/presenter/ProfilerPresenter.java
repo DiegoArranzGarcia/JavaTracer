@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.general.model.configuration.JavaTracerConfiguration;
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
@@ -49,7 +48,8 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void save() {
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
 		HashMap<String, Boolean> classes = view.getClassesState();
 		Iterator<Entry<String,Boolean>> iterator = view.getClassesState().entrySet().iterator();
 		List<String> excludesClasses = new ArrayList<>();
@@ -60,8 +60,8 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 				excludesClasses.add(entry.getKey());
 		}
 		
-		String [] excludes = excludesClasses.toArray(new String[excludesClasses.size()]);
-		configuration.addExcludes(excludes);
+		//String [] excludes = excludesClasses.toArray(new String[excludesClasses.size()]);
+		configuration.addExcludes(excludesClasses);
 		
 		view.setVisible(false);
 		controller.back();
