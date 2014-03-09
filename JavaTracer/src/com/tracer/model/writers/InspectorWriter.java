@@ -9,7 +9,6 @@ import javax.xml.xpath.*;
 
 import org.w3c.dom.*;
 
-import com.general.model.XStreamUtil;
 import com.general.model.data.*;
 import com.general.model.variables.data.Data;
 import com.tracer.model.ChangeDetector;
@@ -84,13 +83,15 @@ public class InspectorWriter extends XStreamUtil{
 	
 	private void generateXml(Node node) throws Exception{
 				
-		write(startTag(TAG_CALLED_METHODS + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
+		
+		write(startTag(TAG_METHOD_CALL + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES)); 
+
 		idNode++;
 		
 		writeNodeInfo(node);	
 		writeCalledMethods(node);
 		
-		write(endTag(TAG_CALLED_METHODS));
+		write(endTag(TAG_METHOD_CALL));
 				
 	}
 

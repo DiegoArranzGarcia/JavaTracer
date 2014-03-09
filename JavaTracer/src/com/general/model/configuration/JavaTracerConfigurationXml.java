@@ -6,9 +6,12 @@ package com.general.model.configuration;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.*;
+
 import org.w3c.dom.*;
+
 import com.general.model.XStreamUtil;
 import com.thoughtworks.xstream.XStream;
 
@@ -49,22 +52,44 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		/*
 		 * Create default file xml
 		 */
-		try {
-	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
-	        xPath = XPathFactory.newInstance().newXPath();
-        }
-		catch (Exception e){
-			e.printStackTrace();
-		}
 		
 		this. excludesList = new ArrayList<>();
-		initExcludes();
+		this.fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);		
 		
-		this.numlevels = 4;
-		this.numNodes = 30;
+		this.xStream = new XStream();
+		if (!fileXml.exists()) {
+			/*
+			 *If the file does not exist, create a new one with the default settings
+			 */
+			initExcludes();
+			this.numlevels = 4;
+			this.numNodes = 30;
+			generateFile();
+			try {
+		        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+		        xPath = XPathFactory.newInstance().newXPath();
+	        }
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				try {
+			        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+			        xPath = XPathFactory.newInstance().newXPath();
+		        }
+				catch (Exception e){
+					e.printStackTrace();
+				}
+				excludesList = getExludesFromFile();
+				numlevels =  getNumLevelsFromFile();
+				numNodes = getNumNodesFromFile();
+            }
+            catch (Exception ex) {
+	            ex.printStackTrace();
+            }
+		}
 		
-		 generateFile();
-	 
 	 }
 	 
     private void initExcludes() {
@@ -75,12 +100,11 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
     }
 
 	private void generateFile() {
-    	 this.xStream = new XStream();
-		 fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
-    	try {
-    		  writer = new FileWriter(fileXml);
-    		  write(startTag(TAG_CONFIGURATION));	
-    		  
+    	
+		try {
+	    		  writer = new FileWriter(fileXml);
+	    		  write(startTag(TAG_CONFIGURATION));	
+	    		  
 	    		  write(startTag(TAG_EXCLUDES));	
 	    		  writeExcludes();
 	    		  write(endTag(TAG_EXCLUDES));
@@ -92,15 +116,16 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	    		  write(startTag(TAG_NUM_NODES));	
 	    		  writeNumNodes();
 	    		  write(endTag(TAG_NUM_NODES));
+		    		  
+	    		  write(endTag(TAG_CONFIGURATION)); 
+	    		  writer.close();
 	    		  
-    		  write(endTag(TAG_CONFIGURATION)); 
-    		  writer.close();
-        }
-        catch (IOException ex) {
-	        ex.printStackTrace();
-        } 
-	    
-    }
+	        }
+	        catch (IOException ex) {
+		        ex.printStackTrace();
+	        } 
+		 
+   }
 
     private void writeNumNodes() {
     	 try {
@@ -149,19 +174,20 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	}
 	
 
-	public List<String> getExludes() throws Exception{
-		String expression = "./" + TAG_EXCLUDES+"/*"; 
+	@SuppressWarnings("unchecked")
+    public List<String> getExludesFromFile() throws Exception{
+		String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_EXCLUDES + "/*";  
 		XPathExpression xPathExpression = xPath.compile(expression);
 		NodeList excludes = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
 		for (int i=0;i<excludes.getLength();i++) {
 			String nodeString = nodeToString(excludes.item(i));
-			String exclude = (String) xStream.fromXML(nodeString);
-			excludesList.add(exclude);
-		};
+			excludesList = (List<String>) xStream.fromXML(nodeString);
+		}
+		
 		return excludesList;
 	}
 	
-	public int getNumLevels() throws Exception {
+	public int getNumLevelsFromFile() throws Exception {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
@@ -175,7 +201,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		return numlevels;
 	}
 	
-	public int getNumNodes() throws Exception {
+	public int getNumNodesFromFile() throws Exception {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
 		
 		XPathExpression xPathExpression = xPath.compile(expression);
@@ -185,9 +211,31 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		
 		String s = nNodes.replaceAll("\n", "");
 		numNodes = Integer.parseInt(s); 
-		
 		return numNodes;
 	}
 	
+	public void saveNewConfiguration() {
+		this.xStream = new XStream();
+		 fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
+		generateFile();
+		try {
+	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+	        xPath = XPathFactory.newInstance().newXPath();
+        }catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public int getNumlevels() {
+		return numlevels;
+	}
+
+	public void setNumlevels(int numlevels) {
+		this.numlevels = numlevels;
+	}
+
+	public void setNumNodes(int numNodes) {
+		this.numNodes = numNodes;
+	}
 	
 }
