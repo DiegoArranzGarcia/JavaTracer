@@ -8,20 +8,20 @@ import com.sun.jdi.*;
 public class ClassUtils {
 	
 	private HashMap<String,Boolean> excludedClasses;
-	private String[] excludes;
+	private List<String> excludes;
 	
-	public ClassUtils(String[] excludes){
+	public ClassUtils(List<String> excludes){
 		this.excludedClasses = new HashMap<>();
 		this.excludes = simplifyExclude(excludes);
 	}
 	
-	private String[] simplifyExclude(String[] excludes) {
+	private List<String>simplifyExclude(List<String> p_excludes) {
 		
-		for (int i=0;i<excludes.length;i++){
-			if (excludes[i].contains(".*"))
-				excludes[i].replace(".*","");
+		for (int i=0;i<p_excludes.size();i++){
+			if (p_excludes.get(i).contains(".*"))
+				p_excludes.get(i).replace(".*","");
 		}
-		return excludes;
+		return p_excludes;
 	}
 
 	private boolean isExcludedClass(Value value) {
@@ -47,8 +47,8 @@ public class ClassUtils {
 		String[] packages = getPackages(type);
 		boolean excluded = false;
 		int i = 0;
-		while (!excluded && i<excludes.length){
-			String exclude = excludes[i];
+		while (!excluded && i<excludes.size()){
+			String exclude = excludes.get(i); 
 			int j = 0;
 			while (!excluded && j<packages.length){
 				excluded = exclude.contains(packages[j]);

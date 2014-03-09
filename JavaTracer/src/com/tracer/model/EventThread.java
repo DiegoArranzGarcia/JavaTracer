@@ -1,8 +1,7 @@
 package com.tracer.model;
 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.general.model.data.ThreadInfo;
 import com.profiler.model.ProfilerModelInterface;
@@ -43,7 +42,7 @@ import com.tracer.model.writers.TraceWriter;
 public class EventThread extends Thread {
 
     private final VirtualMachine vm; // Running VM
-    private final String[] excludes; // Packages to exclude
+    private final List<String>  excludes; // Packages to exclude
     private boolean connected = true; // Connected to VM
     private boolean enableProfiling;
 	private boolean vmDied = false; // VMDeath occurred
@@ -64,7 +63,7 @@ public class EventThread extends Thread {
     //private PrepareManager prepare;
     private TraceWriter writer;
 
-    EventThread(VirtualMachine vm, String[] excludes, RunConfiguration config, ProfilerModelInterface profiler){
+    EventThread(VirtualMachine vm, List<String> excludes, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
         this.excludes = excludes;
@@ -139,15 +138,15 @@ public class EventThread extends Thread {
         excReq.enable();
 
         MethodEntryRequest menr = mgr.createMethodEntryRequest();
-        for (int i=0; i<excludes.length; ++i) {
-            menr.addClassExclusionFilter(excludes[i]);
+        for (int i=0; i<excludes.size(); ++i) {
+            menr.addClassExclusionFilter(excludes.get(i));
         }
         menr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         menr.enable();
 
         MethodExitRequest mexr = mgr.createMethodExitRequest();
-        for (int i=0; i<excludes.length; ++i) {
-            mexr.addClassExclusionFilter(excludes[i]);
+        for (int i=0; i<excludes.size(); ++i) {
+            mexr.addClassExclusionFilter(excludes.get(i));
         }
         mexr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         mexr.enable();
@@ -158,8 +157,8 @@ public class EventThread extends Thread {
         tdr.enable();
 
         ClassPrepareRequest cpr = mgr.createClassPrepareRequest();
-        for (int i=0; i<excludes.length; ++i) {
-            cpr.addClassExclusionFilter(excludes[i]);
+        for (int i=0; i<excludes.size(); ++i) {
+            cpr.addClassExclusionFilter(excludes.get(i));
         }
         cpr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         cpr.enable();

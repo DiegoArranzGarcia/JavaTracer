@@ -1,24 +1,16 @@
 package com.tracer.model;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
 import com.console.view.console;
-import com.general.model.configuration.JavaTracerConfiguration;
-import com.profiler.model.Profiler;
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.connect.Connector;
-import com.sun.jdi.connect.IllegalConnectorArgumentsException;
-import com.sun.jdi.connect.LaunchingConnector;
-import com.sun.jdi.connect.VMStartException;
+import com.sun.jdi.connect.*;
 import com.tracer.controller.RunConfiguration;
 import com.tracer.controller.TracerController;
 
@@ -48,7 +40,8 @@ public class Tracer {
 
     // Class patterns for which we don't want events
     
-   private String[] excludes;
+  // private String[] excludes;
+    private List<String> excludes ;
    private TracerController tracerController;
    
    private static final int BUFFER_SIZE = 2048;
@@ -61,8 +54,14 @@ public class Tracer {
 	  */
     public void trace(RunConfiguration config) {
 
-    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-    	excludes = configuration.getExcludes();	
+    	//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+    	JavaTracerConfigurationXml configuration =JavaTracerConfigurationXml.getInstance();
+    	try {
+	        excludes = configuration.getExludesFromFile();
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }	
         PrintWriter writer = new PrintWriter(System.out);
         
         if (tracerController != null)
@@ -78,8 +77,13 @@ public class Tracer {
     }
     
     public void profile(RunConfiguration config,ProfilerModelInterface profile){
-    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-    	excludes = configuration.getExcludes();	
+    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
+    	try {
+	        excludes = configuration.getExludesFromFile();
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }	
         PrintWriter writer = new PrintWriter(System.out);
         vm = launchTarget(config);
         generateTrace(writer,config,profile);

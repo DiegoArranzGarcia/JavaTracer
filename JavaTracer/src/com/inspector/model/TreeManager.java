@@ -5,7 +5,7 @@ import java.util.Iterator;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.general.model.configuration.TraceInspectorConfiguration;
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.inspector.treeinspector.data.*;
@@ -23,9 +23,19 @@ public class TreeManager {
 	public void loadTree(String xmlName) {
 		
 		xml = new XmlManager(xmlName);
-		TraceInspectorConfiguration configuration = new TraceInspectorConfiguration();
-		DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
-		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();
+		//TraceInspectorConfiguration configuration = new TraceInspectorConfiguration();
+		JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
+		/*DEFAULT_NUM_LEVELS_DEPTH = configuration.getDefaultNumLevelsDepth();
+		DEFAULT_NUM_NODES = configuration.getDefaultNumNodes();*/
+		try {
+	        DEFAULT_NUM_LEVELS_DEPTH = configuration.getNumLevelsFromFile();
+	        DEFAULT_NUM_NODES = configuration.getNumNodesFromFile();
+        }
+        catch (Exception ex) {
+	        // TODO Auto-generated catch block
+	        ex.printStackTrace();
+        }
+		
 		
 		int currentLevel = 0;
 		int numNodes = 0;

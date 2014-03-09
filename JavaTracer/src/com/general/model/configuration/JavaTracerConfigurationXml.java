@@ -238,4 +238,53 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		this.numNodes = numNodes;
 	}
 	
+	public void setExcludes(List<String>newEcludes) {
+		this.excludesList = newEcludes;
+		
+	}
+	
+	 public void addExcludes(List<String> newExcludes){
+	    	
+	    	List<String> currentExcludes = new ArrayList<>();
+            try {
+	            currentExcludes = getExludesFromFile();
+            }
+            catch (Exception ex) {
+	            ex.printStackTrace();
+            }
+	    	
+	    	for (int i=0;i<newExcludes.size();i++){
+	    		if (!currentExcludes.contains(newExcludes.get(i))){
+	    			currentExcludes.add(newExcludes.get(i)); 
+	    		}
+	    	}
+	    	
+	    	try {
+				try {
+			        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+			        xPath = XPathFactory.newInstance().newXPath();
+		        }
+				catch (Exception e){
+					e.printStackTrace();
+				}
+				excludesList =currentExcludes;
+				numlevels =  getNumLevelsFromFile();
+				numNodes = getNumNodesFromFile();
+            }
+            catch (Exception ex) {
+	            ex.printStackTrace();
+            }
+	    	/*String value = "";
+	    	for (int i=0;i<currentExcludes.size();i++){
+	    		value += currentExcludes.get(i);
+	    		if (i<(currentExcludes.size()-1))
+	    			value += ",";    		
+	    	}
+	    	
+	    	System.out.println(value);
+	    	properties.setProperty(EXCLUDES,value);
+	    	storePropierties();*/
+	    	
+	    		
+	    }
 }
