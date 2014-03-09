@@ -165,6 +165,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.getColumnModel().getColumn(4).setResizable(false);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setMinWidth(100);
+        table.setExpandbleColumn(1);        
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);

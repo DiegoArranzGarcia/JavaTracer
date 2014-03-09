@@ -43,15 +43,8 @@ public class Profiler implements ProfilerModelInterface{
 	private List<String> getPackages(String fullClassName) {
 		List<String> packages = new ArrayList<String>();
 		String[] split = fullClassName.split("\\.");
-		String completePackageName = "";
-        for (int i=0;i<split.length-1;i++){
-        	
-        	if (i>0)
-        		completePackageName+= ".";
-        	
-        	completePackageName += split[i];
-        	packages.add(completePackageName);
-        }
+		for (int i = 1;i<split.length;i++)
+			packages.add(split[i]);
 		return packages;
 	}
 

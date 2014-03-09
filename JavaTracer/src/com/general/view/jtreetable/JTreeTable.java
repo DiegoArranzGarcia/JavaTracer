@@ -15,10 +15,12 @@ import javax.swing.table.DefaultTableModel;
 public class JTreeTable extends JTable implements KeyListener,MouseListener{
 
 	protected TreeModel treeModel;
+	private int expandbleColumn;
 	private DefaultTableModel tableModel;
 	
 	public JTreeTable(){
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		setExpandbleColumn(0);
 	}
 	
 	public void setRoot(TableRowData rootNode){
@@ -120,17 +122,27 @@ public class JTreeTable extends JTable implements KeyListener,MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		int selectedRow = getSelectedRow()+1;
+		int selectedColumn = getSelectedColumn();
 		
-		if (!isExpanded(selectedRow))
-			expandRow(selectedRow);
-		else if (isExpanded(selectedRow))
-			collapseRow(selectedRow);
-				
+		if (selectedColumn == expandbleColumn){
+			if (!isExpanded(selectedRow))
+				expandRow(selectedRow);
+			else if (isExpanded(selectedRow))
+				collapseRow(selectedRow);
+		}
 	}
 	
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
+
+	public int getExpandbleColumn() {
+		return expandbleColumn;
+	}
+
+	public void setExpandbleColumn(int expandbleColumn) {
+		this.expandbleColumn = expandbleColumn;
+	}
 
 }

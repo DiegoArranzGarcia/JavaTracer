@@ -40,13 +40,11 @@ public class ProfileCellRenderer extends DefaultTableCellRenderer{
 			boolean expandable = node.isExpandable();
 			boolean expanded = node.isExpanded();
 			
-			if (!isSelected){
-				if (column == 0)
-					d.setBackground(data.getColor());	
-				else
-					d.setBackground(Color.WHITE);
-			}
-			
+			if (column == 0)
+				d.setBackground(data.getColor());	
+			else if (!isSelected)
+				d.setBackground(Color.WHITE);
+						
 			if (expandable && column == 1){
 				if (expanded){
 					setIcon(imageLoader.getFoldedIcon());
@@ -69,7 +67,13 @@ public class ProfileCellRenderer extends DefaultTableCellRenderer{
 				d.setHorizontalAlignment(JLabel.CENTER);
 			else 
 				d.setHorizontalAlignment(JLabel.LEFT);
-		} catch (Exception e){}
+			
+			if (column == 1 || column == 2)
+				setToolTipText((String) value);
+			
+		} catch (Exception e){
+			
+		}
 	    return this;
 	}
 	
