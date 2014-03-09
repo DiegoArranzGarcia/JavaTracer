@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ProfileMethod extends ProfileData{
 	
 	private String methodName;
+	private String completeMethodName;
 
 	public ProfileMethod(String methodName){
 		this.methodName = methodName;

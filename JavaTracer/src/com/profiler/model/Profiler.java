@@ -8,9 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.profiler.model.data.ProfileData;
 import com.sun.jdi.Method;
 import com.sun.jdi.event.MethodEntryEvent;
-import com.sun.source.tree.Tree;
 import com.thoughtworks.xstream.XStream;
 import com.tracer.model.ClassUtils;
 
@@ -27,7 +27,7 @@ public class Profiler implements ProfilerModelInterface{
 		Method method = event.method();
 		
 		String fullClassName = ClassUtils.getClass(method.declaringType());
-		List<String> packageName = getPackages(fullClassName);
+		List<String> packageName = getPackage(fullClassName);
 		String className = getClassName(fullClassName);
 		String methodName = method.toString();
 		
@@ -40,10 +40,19 @@ public class Profiler implements ProfilerModelInterface{
 		return split[split.length-1];
 	}
 
-	private List<String> getPackages(String fullClassName) {
+	private List<String> getPackage(String fullClassName) {
 		List<String> packages = new ArrayList<String>();
 		String[] split = fullClassName.split("\\.");
-		for (int i = 1;i<split.length;i++)
+		for (int i = 0;i<split.length;i++)
+			packages.add(split[i]);
+		packages.remove(packages.size()-1);
+		return packages;
+	}
+	
+	private List<String> splitByDot(String fullClassName) {
+		List<String> packages = new ArrayList<String>();
+		String[] split = fullClassName.split("\\.");
+		for (int i = 0;i<split.length;i++)
 			packages.add(split[i]);
 		return packages;
 	}
@@ -80,6 +89,10 @@ public class Profiler implements ProfilerModelInterface{
 
 	public Iterator<Entry<String, Integer>> getClassesInfo() {
 		return profilerTree.getClasses().entrySet().iterator();
+	}
+
+	public ProfileData getData(String key) {
+		return profilerTree.getData(splitByDot(key));
 	}
 	
 }

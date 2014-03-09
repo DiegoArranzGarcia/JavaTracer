@@ -10,7 +10,7 @@ public interface ProfilerViewInterface {
 	public void load(ProfilerTree currentProfileTree);
 	
 	public void setPresenter(ProfilerPresenterInterface presenter);
-	public HashMap<String,Boolean> getClassesState();
+	public HashMap<String,Boolean> getDataState();
 	public void setVisible(boolean b);
 
 

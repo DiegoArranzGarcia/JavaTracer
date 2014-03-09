@@ -163,4 +163,34 @@ public class ProfilerTree {
 		return rootNode;
 	}
 
+	public ProfileData getData(List<String> list) {
+		return getDataRec(rootNode,list);
+	}
+	
+	private ProfileData getDataRec(ProfileData node,List<String> keys){
+		ProfileData data = null;
+		
+		if (keys.isEmpty())
+			data = node;
+		else {
+			List<ProfileData> children = node.getChildren();
+			boolean found = false;
+			String key = keys.get(0);
+			int i = 0;
+			while (!found && i<children.size()){
+				found = children.get(i).getName().equals(key);
+				if (!found)
+					i++;
+			}
+			
+			if (found){
+				keys.remove(0);
+				data = getDataRec(children.get(i),keys);
+			}
+				
+		} 
+			
+		return data;
+	}
+
 }

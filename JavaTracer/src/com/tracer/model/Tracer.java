@@ -55,7 +55,7 @@ public class Tracer {
     public void trace(RunConfiguration config) {
 
     	//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-    	JavaTracerConfigurationXml configuration =JavaTracerConfigurationXml.getInstance();
+    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
     	try {
 	        excludes = configuration.getExludesFromFile();
         }

@@ -6,11 +6,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+
 import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.model.ProfilerTree;
+import com.profiler.model.data.ProfileClass;
+import com.profiler.model.data.ProfileData;
+import com.profiler.model.data.ProfileMethod;
+import com.profiler.model.data.ProfilePackage;
 import com.profiler.view.ProfilerView;
 import com.profiler.view.ProfilerViewInterface;
 
@@ -50,18 +55,26 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	public void save() {
 		//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
-		HashMap<String, Boolean> classes = view.getClassesState();
-		Iterator<Entry<String,Boolean>> iterator = view.getClassesState().entrySet().iterator();
-		List<String> excludesClasses = new ArrayList<>();
+		HashMap<String, Boolean> classes = view.getDataState();
+		Iterator<Entry<String,Boolean>> iterator = classes.entrySet().iterator();
+		List<String> excludesData = new ArrayList<>();
 		
 		while (iterator.hasNext()){
 			Entry<String,Boolean> entry = iterator.next();
-			if (!entry.getValue())
-				excludesClasses.add(entry.getKey());
+			if (!entry.getValue()){
+				ProfileData data = profiler.getData(entry.getKey());
+				if (data instanceof ProfilePackage){
+					String excludePackage = entry.getKey() + ".*";
+					excludesData.add(excludePackage);
+				} else if (data instanceof ProfileClass){
+					excludesData.add(entry.getKey());
+				} else if (data instanceof ProfileMethod){
+					//TODO: ProfileMethods
+				}
+			}
 		}
 		
-		//String [] excludes = excludesClasses.toArray(new String[excludesClasses.size()]);
-		configuration.addExcludes(excludesClasses);
+		configuration.addExcludes(excludesData);
 		
 		view.setVisible(false);
 		controller.back();
@@ -78,7 +91,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 	
 	public void saveProfile(File file) {
-		currentProfileTree.setCheckedClasses(view.getClassesState());
+		currentProfileTree.setCheckedClasses(view.getDataState());
 		profiler.saveProfile(currentProfileTree, file);
 	}
 	

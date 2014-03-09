@@ -373,7 +373,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		this.presenter = presenter;
 	}
 	
-	public HashMap<String, Boolean> getClassesState() {
+	public HashMap<String, Boolean> getDataState() {
 		HashMap<String,Boolean> classesState = new HashMap<>();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){

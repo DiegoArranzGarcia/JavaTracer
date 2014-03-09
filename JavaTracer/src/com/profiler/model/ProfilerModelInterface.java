@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.profiler.model.data.ProfileData;
 import com.sun.jdi.event.MethodEntryEvent;
 
 public interface ProfilerModelInterface {
@@ -14,5 +15,6 @@ public interface ProfilerModelInterface {
 	public ProfilerTree openProfile(File file);
 	public void clean();
 	public Iterator<Entry<String, Integer>> getClassesInfo();
+	public ProfileData getData(String key);
 
 }
