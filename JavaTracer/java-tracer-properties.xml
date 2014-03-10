@@ -1,0 +1,16 @@
+<configuration>
+<excludes>
+<list>
+  <string>java.*</string>
+  <string>javax.*</string>
+  <string>sun.*</string>
+  <string>com.sun.*</string>
+</list>
+</excludes>
+<num-levels>
+<int>4</int>
+</num-levels>
+<num-nodes>
+<int>30</int>
+</num-nodes>
+</configuration>

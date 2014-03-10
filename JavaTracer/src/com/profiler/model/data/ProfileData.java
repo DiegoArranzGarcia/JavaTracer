@@ -11,6 +11,8 @@ public abstract class ProfileData {
 	protected boolean checked;
 	
 	public abstract String getName();
+	public abstract String getCompleteName();
+	public abstract void setCompleteName(String completeName);
 	public abstract void accept(ProfileDataVisitor visitor);
 	
 	public List<ProfileData> getChildren(){

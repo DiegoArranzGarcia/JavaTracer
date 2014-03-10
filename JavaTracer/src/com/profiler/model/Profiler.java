@@ -29,7 +29,8 @@ public class Profiler implements ProfilerModelInterface{
 		String fullClassName = ClassUtils.getClass(method.declaringType());
 		List<String> packageName = getPackage(fullClassName);
 		String className = getClassName(fullClassName);
-		String methodName = method.toString();
+		String completeMethodName = method.toString();
+		String methodName = completeMethodName.substring(fullClassName.length()+1,completeMethodName.length());
 		
 		profilerTree.add(packageName,className,methodName);
 		

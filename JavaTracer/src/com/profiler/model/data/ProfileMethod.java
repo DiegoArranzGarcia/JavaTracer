@@ -20,6 +20,18 @@ public class ProfileMethod extends ProfileData{
 	public void accept(ProfileDataVisitor visitor) {
 		visitor.visit(this);
 	}
+
+	public void setCompleteMethodName(String completeMethodName) {
+		this.completeMethodName = completeMethodName;
+	}
+
+	public String getCompleteName() {
+		return completeMethodName;
+	}
+
+	public void setCompleteName(String completeName) {
+		completeMethodName = completeName;
+	}
 	
 	
 

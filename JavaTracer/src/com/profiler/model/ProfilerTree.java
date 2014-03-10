@@ -14,7 +14,7 @@ public class ProfilerTree {
 	
 	public ProfilerTree(){
 		rootNode = new ProfilePackage("All packages");
-		((ProfilePackage)rootNode).setCompletePackageName("");
+		((ProfilePackage)rootNode).setCompleteName("");
 	}
 	
 	public void add(List<String> packageName, String className,String methodName){
@@ -152,7 +152,7 @@ public class ProfilerTree {
 			
 		} else if (node instanceof ProfileClass){
 			
-			classes.put(((ProfileClass) node).getCompleteClassName(), node.getNumCalls());
+			classes.put(((ProfileClass) node).getCompleteName(), node.getNumCalls());
 						
 		}
 		

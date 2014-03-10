@@ -19,22 +19,21 @@ public class ProfileClass extends ProfileData{
 	
 	public void add(ProfileData data){
 		super.add(data);
-		if (parent != null){
-			if (parent.isRoot())
-				completeClassName = className;
-			else 
-				completeClassName = ((ProfilePackage)parent).getCompletePackageName() + "." + className;
-		} else {
-			completeClassName = "";
-		}
+		String prefix = "";
+		prefix = completeClassName + ".";
+		data.setCompleteName(prefix + data.getName());
 	}
 	
-	public String getCompleteClassName(){
+	public String getCompleteName(){
 		return completeClassName;
 	}
+	
+	public void setCompleteName(String completeName) {
+		this.completeClassName = completeName;
+	}
+
 
 	public void accept(ProfileDataVisitor visitor){
 		visitor.visit(this);
 	}
-
 }

@@ -19,26 +19,22 @@ public class ProfilePackage extends ProfileData{
 	
 	public void add(ProfileData data){
 		super.add(data);
-		if (parent != null){
-			if (parent.isRoot())
-				completePackageName = packageName;
-			else 
-				completePackageName = ((ProfilePackage)parent).getCompletePackageName() + "." + packageName;
-		} else {
-			completePackageName = "";
-		}
-		
+		String prefix = "";
+		if (!isRoot())
+			prefix = completePackageName + ".";
+		data.setCompleteName(prefix + data.getName());
 	}
 
-	public String getCompletePackageName() {
+	public String getCompleteName() {
 		return completePackageName;
-	}
-
-	public void setCompletePackageName(String completePackageName){
-		this.completePackageName = completePackageName;
 	}
 
 	public void accept(ProfileDataVisitor visitor) {
 		visitor.visit(this);
 	}
+
+	public void setCompleteName(String completeName) {
+		this.completePackageName = completeName;
+	}
+
 }
