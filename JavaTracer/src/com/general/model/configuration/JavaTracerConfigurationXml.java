@@ -218,6 +218,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		this.xStream = new XStream();
 		 fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
 		generateFile();
+		
 		try {
 	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
 	        xPath = XPathFactory.newInstance().newXPath();
@@ -270,6 +271,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 				excludesList =currentExcludes;
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
+				saveNewConfiguration();
             }
             catch (Exception ex) {
 	            ex.printStackTrace();
