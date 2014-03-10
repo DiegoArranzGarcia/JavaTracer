@@ -17,7 +17,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,14 +53,32 @@ import org.jfree.util.SortOrder;
 import com.general.view.jtreetable.JTreeTable;
 import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
-import com.profiler.model.data.ProfileClass;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
 public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener{
-
+	
+	private static final String FILE = "File";
+	private static final String OPEN_PROFILE = "Open profile";
+	private static final String SAVE_PROFILE = "Save profile";
+	private static final String EXPORT_AS = "Export as ...";
+	private static final String CLOSE = "Close";
+	
+	private static final String CHECK_ALL_CLASSES = "Check all classes";
+	private static final String UNCHECK_ALL_CLASSES = "Uncheck all classes";
+	private static final String INVERT_CLASSES = "Invert check of all classes";
+	
+	private static final String JPEG_FILTER_FILES = "JPEG Files (*.jpeg)";
+	private static final String PNG_FILTER_FILES = "PNG Files (*.png)";
+	private static final String XML_FILTER_FILES = "XML Files (*.xml)";
+	
+	private static final String JPEG_EXT = "jpeg";
+	private static final String XML_EXT = "xml";
+	private static final String PNG = "png";
+	
 	public static final String OTHERS_CLASSES = "Others Classes";
+	private static final String PIE_FONT = "Courier New";
 	
 	private static String TITLE = "Profiling stats";
 	private static double SPLIT_PERCENTAGE = 0.7;
@@ -77,7 +94,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JSplitPane splitPane;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
-	private JMenuBar menuBar_1;
 	private JMenuItem mntmOpenProfile;
 	private JMenuItem mntmSaveProfile;
 	private JMenuItem mntmExportAs;
@@ -180,37 +196,37 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         
-        mnFile = new JMenu("File");
+        mnFile = new JMenu(FILE);
         menuBar.add(mnFile);
         
-        mntmOpenProfile = new JMenuItem("Open profile");
+        mntmOpenProfile = new JMenuItem(OPEN_PROFILE);
         mntmOpenProfile.addActionListener(this);
         mnFile.add(mntmOpenProfile);
         
-        mntmSaveProfile = new JMenuItem("Save profile");
+        mntmSaveProfile = new JMenuItem(SAVE_PROFILE);
         mntmSaveProfile.addActionListener(this);
         mnFile.add(mntmSaveProfile);
         
-        mntmExportAs = new JMenuItem("Export as ...");
+        mntmExportAs = new JMenuItem(EXPORT_AS);
         mntmExportAs.addActionListener(this);
         mnFile.add(mntmExportAs);
         
-        mntmExit = new JMenuItem("Exit");
+        mntmExit = new JMenuItem(CLOSE);
         mntmExit.addActionListener(this);
         mnFile.add(mntmExit);
         
         mnEdit = new JMenu("Edit");
         menuBar.add(mnEdit);
         
-        mntmCheckAllClasses = new JMenuItem("Check all classes");
+        mntmCheckAllClasses = new JMenuItem(CHECK_ALL_CLASSES);
         mntmCheckAllClasses.addActionListener(this);
         mnEdit.add(mntmCheckAllClasses);
         
-        mntmUncheckAllClasses = new JMenuItem("Uncheck all classes");
+        mntmUncheckAllClasses = new JMenuItem(UNCHECK_ALL_CLASSES);
         mntmUncheckAllClasses.addActionListener(this);
         mnEdit.add(mntmUncheckAllClasses);
         
-        mntmInvertClasses = new JMenuItem("Invert classes");
+        mntmInvertClasses = new JMenuItem(INVERT_CLASSES);
         mntmInvertClasses.addActionListener(this);
         mnEdit.add(mntmInvertClasses);
         
@@ -261,7 +277,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         plot.setBaseSectionOutlineStroke(new BasicStroke(2.0f));
 
         // customise the section label appearance
-        plot.setLabelFont(new Font("Courier New", Font.BOLD, 20));
+        plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 20));
         plot.setLabelLinkPaint(Color.WHITE);
         plot.setLabelLinkStroke(new BasicStroke(2.0f));
         plot.setLabelOutlineStroke(null);
@@ -316,7 +332,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
 			
 		dataset.sortByValues(SortOrder.DESCENDING);
-		List<String> keys=dataset.getKeys();
+		List<String> keys = dataset.getKeys();
 		DefaultPieDataset definitivedataset = new DefaultPieDataset();
 		
 		int i=0;
@@ -436,11 +452,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void clickedExportAs() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG Files (*.png)", "png"));
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("JPEG Files (*.jpeg)", "jpeg"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(PNG_FILTER_FILES, PNG));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(JPEG_FILTER_FILES, JPEG_EXT));
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
-		chooser.setDialogTitle("Save as");
+		chooser.setDialogTitle(EXPORT_AS);
 		chooser.setCurrentDirectory(new java.io.File("."));
 		chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
 		//return directory file
@@ -450,7 +466,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 				
 				String file_path = chooser.getSelectedFile().getCanonicalPath();
 				File file = new File(file_path);
-				if (com.general.model.FileUtilities.isExtension(file,"png")){
+				if (com.general.model.FileUtilities.isExtension(file,PNG)){
 					ChartUtilities.saveChartAsPNG(file, chart,pieChartPanel.getWidth(),pieChartPanel.getHeight());
 				} else {
 					ChartUtilities.saveChartAsJPEG(file, chart,pieChartPanel.getWidth(),pieChartPanel.getHeight());
@@ -465,10 +481,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void clickedOpenProfile() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files (*.xml)", "xml"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
-		chooser.setDialogTitle("Save as");
+		chooser.setDialogTitle(OPEN_PROFILE);
 		chooser.setCurrentDirectory(new java.io.File("."));
 		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
 		//return directory file
@@ -487,10 +503,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void clickedSaveProfile() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files (*.xml)", "xml"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
-		chooser.setDialogTitle("Save as");
+		chooser.setDialogTitle(SAVE_PROFILE);
 		chooser.setCurrentDirectory(new java.io.File("."));
 		chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
 		//return directory file
@@ -510,21 +526,21 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private void clickedCheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(true,i,0);
+			model.setValueAt(true,i,4);
 		}
 	}
 	
 	private void clickedUncheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(false,i,0);
+			model.setValueAt(false,i,4);
 		}
 	}
 
 	private void clickedInvertClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(!(boolean)model.getValueAt(i,0),i,0);
+			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
 		}
 	}
 	
