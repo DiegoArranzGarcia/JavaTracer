@@ -76,6 +76,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		
 		configuration.addExcludes(excludesData);
 		
+		
 		view.setVisible(false);
 		controller.back();
 	}

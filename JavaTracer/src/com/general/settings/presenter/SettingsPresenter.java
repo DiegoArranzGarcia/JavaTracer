@@ -34,6 +34,20 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 			view = new SettingsView();
 			view.setPresenter(this);
 		}
+		List<String> listExcludes = new ArrayList<>();
+        try {
+	        listExcludes = JavaTracerConfigurationXml.getInstance().getExludesFromFile();
+	        excludes = new String[listExcludes.size()];
+	        for (int i=0;i<listExcludes.size();i++)
+				excludes[i] =listExcludes.get(i);
+	        
+	        numLevels = JavaTracerConfigurationXml.getInstance().getNumLevelsFromFile();
+	        numNodes = JavaTracerConfigurationXml.getInstance().getNumNodesFromFile();
+	        
+        }
+        catch (Exception ex) {
+	        ex.printStackTrace();
+        }
 		
 		view.setVisible(true); 
 		view.loadExcludes(excludes);
