@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -32,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -58,7 +60,7 @@ import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
 public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener{
-	
+
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
 	private static final String SAVE_PROFILE = "Save profile";
@@ -79,6 +81,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	public static final String OTHERS_CLASSES = "Others Classes";
 	private static final String PIE_FONT = "Courier New";
+	private static final String FONT_TITLE = "Arial";
 	
 	private static String TITLE = "Profiling stats";
 	private static double SPLIT_PERCENTAGE = 0.7;
@@ -158,12 +161,12 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	Class<?>[] columnTypes = new Class[] {
         		Object.class, Object.class, Object.class, Object.class,Boolean.class
         	};
-        	public Class<?> getColumnClass(int columnIndex) {
-        		return columnTypes[columnIndex];
-        	}
         	boolean[] columnEditables = new boolean[] {
         		false, false, false, false, true
         	};
+        	public Class<?> getColumnClass(int columnIndex) {
+        		return columnTypes[columnIndex];
+        	}
         	public boolean isCellEditable(int row, int column) {
         		return columnEditables[column];
         	}
@@ -202,10 +205,12 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         mntmOpenProfile = new JMenuItem(OPEN_PROFILE);
         mntmOpenProfile.addActionListener(this);
         mnFile.add(mntmOpenProfile);
+        mntmOpenProfile.setAccelerator(KeyStroke.getKeyStroke('O', KeyEvent.CTRL_DOWN_MASK));
         
         mntmSaveProfile = new JMenuItem(SAVE_PROFILE);
         mntmSaveProfile.addActionListener(this);
         mnFile.add(mntmSaveProfile);
+        mntmSaveProfile.setAccelerator(KeyStroke.getKeyStroke('S', KeyEvent.CTRL_DOWN_MASK));
         
         mntmExportAs = new JMenuItem(EXPORT_AS);
         mntmExportAs.addActionListener(this);
@@ -214,6 +219,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         mntmExit = new JMenuItem(CLOSE);
         mntmExit.addActionListener(this);
         mnFile.add(mntmExit);
+        mntmExit.setAccelerator(KeyStroke.getKeyStroke('E', KeyEvent.CTRL_DOWN_MASK));
         
         mnEdit = new JMenu("Edit");
         menuBar.add(mnEdit);
@@ -232,197 +238,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         
     }
 
-    /**
-     * This panel is created when there is no data to show.
-     * @return
-     */
-	private JPanel createNoLoadPanel() {
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.DARK_GRAY);
-		return panel;
-	}
-    
-	/**
-	 * A JFreeChart is created with the input data.
-	 * @param dataset - data to show in the chart.
-	 * @return - JFreeChart
-	 */
-    private JFreeChart createChart(PieDataset dataset) {
-    	
-        JFreeChart chart = ChartFactory.createPieChart(
-            "",  // chart title
-            dataset,            // data
-            false,              // no legend
-            false,               // tooltips
-            false               // no URL generation
-        );
-        
-        // set a custom background for the chart
-        chart.setBackgroundPaint(new GradientPaint(new Point(0, 0), 
-                new Color(20, 20, 20), new Point(400, 200), Color.DARK_GRAY));
-
-        // customise the title position and font
-        TextTitle t = chart.getTitle();
-        t.setPaint(new Color(240, 240, 240));
-        t.setFont(new Font("Arial", Font.BOLD, 26));
-
-        PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setBackgroundPaint(null);
-        plot.setInteriorGap(0.04);
-        plot.setOutlineVisible(false);
-
-        // use gradients and white borders for the section colours
-        plot.setBaseSectionOutlinePaint(Color.WHITE);
-        plot.setSectionOutlinesVisible(true);
-        plot.setBaseSectionOutlineStroke(new BasicStroke(2.0f));
-
-        // customise the section label appearance
-        plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 20));
-        plot.setLabelLinkPaint(Color.WHITE);
-        plot.setLabelLinkStroke(new BasicStroke(2.0f));
-        plot.setLabelOutlineStroke(null);
-        plot.setLabelPaint(Color.WHITE);
-        plot.setLabelBackgroundPaint(null);
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} - {2}"));
-
-        return chart;
-
-    }
-   
-    public void loadTable() {
-    	
-    	table.clearTable();
-    	
-    	ProfilerTree tree = presenter.getTree();
-    	PiePlot plot = (PiePlot)chart.getPlot();
-    	
-    	TableTreeNode rootNode = table.getRoot();
-    	ProfileData rootData = tree.getRoot();
-    	
-    	ProfileTreeVisitor visitor = new ProfileTreeVisitor(rootNode,plot);
-    	createTreeVisitor(visitor,rootData);
-        	
-    	table.refreshTable(-1);
-    	
-    }
-
-	private void createTreeVisitor(ProfileTreeVisitor visitor, ProfileData data) {
-		List<ProfileData> children = data.getChildren();
-		for (int i=0;i<children.size();i++){
-			children.get(i).accept(visitor);
-		}
-	}
-
-	public PieDataset createDataset(HashMap<String, Integer> classes, int numCalledMethods) {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        Iterator<Entry<String,Integer>> iterator = classes.entrySet().iterator();        
-       
-        while (iterator.hasNext()){
-        	Entry<String,Integer> entry = iterator.next();
-        	double times = entry.getValue().doubleValue();
-        	double percentage = (times/numCalledMethods)*100;
-        	dataset.setValue(entry.getKey(),percentage);
-        }
-        
-        DefaultPieDataset definitivedataset= chosenClasses(dataset); 
-        
-        return definitivedataset;
-    }
-	
-	private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
-			
-		dataset.sortByValues(SortOrder.DESCENDING);
-		List<String> keys = dataset.getKeys();
-		DefaultPieDataset definitivedataset = new DefaultPieDataset();
-		
-		int i=0;
-		double percentage=0;
-		
-		while(i<keys.size() && i<CLASSCHART){
-			definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
-			percentage=percentage + dataset.getValue(keys.get(i)).doubleValue();
-			i++;	
-		}
-	
-    	if(i<keys.size())
-    		definitivedataset.setValue(OTHERS_CLASSES, 100-percentage);
-    	
-    	return definitivedataset;
-	}
-
-
-    
-    private JPanel createPiePanel(PieDataset data) {
-        chart = createChart(data);
-        chart.setPadding(new RectangleInsets(4, 8, 2, 2));
-        ChartPanel panel_1 = new ChartPanel(chart);
-        panel_1.setMouseWheelEnabled(true);
-        panel_1.setLayout(new GridLayout(1, 0, 0, 0));
-        chart.addProgressListener(this);
-        return panel_1;
-    }
-
-	// ProfilerViewInterface methods
-    
-    public void load(ProfilerTree currentProfileTree) {
-    	if (currentProfileTree.getNumCalls() > 0 )
-			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()));
-		else 
-			pieChartPanel = createNoLoadPanel();
-		
-    	splitPane.setLeftComponent(pieChartPanel);
-    	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-
-	public void load(HashMap<String, Integer> classes, int numCalledMethods) {
-		
-		if (numCalledMethods > 0 )
-			pieChartPanel = createPiePanel(createDataset(classes, numCalledMethods));
-		else 
-			pieChartPanel = createNoLoadPanel();
-		
-    	splitPane.setLeftComponent(pieChartPanel);
-    	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-
-	public void setPresenter(ProfilerPresenterInterface presenter) {
-		this.presenter = presenter;
-	}
-	
-	public HashMap<String, Boolean> getDataState() {
-		HashMap<String,Boolean> classesState = new HashMap<>();
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			String nameClass = (String) model.getValueAt(i,2);
-			boolean checked = (boolean) model.getValueAt(i,4);
-			classesState.put(nameClass, checked);
-		}
-		return classesState;
-	}
-    
-    // Component Listeners
-    
-	public void componentHidden(ComponentEvent e) {}
-	public void componentMoved(ComponentEvent e) {}
-	
-	public void componentResized(ComponentEvent e) {
-        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-
-	public void componentShown(ComponentEvent e) {
-        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-	
-	// Chart progress listener
-
-	public void chartProgress(ChartProgressEvent event) {
-		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED)
-			loadTable();
-	}
-
-	// Action Listener
-	
-	public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
 		
 		if (source.equals(mntmExportAs)){
@@ -445,9 +261,38 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			clickedOnCancel();
 		}
 	}
+    
+	public void chartProgress(ChartProgressEvent event) {
+		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED)
+			loadTable();
+	}
+   
+    private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
+			
+		dataset.sortByValues(SortOrder.DESCENDING);
+		List<String> keys = dataset.getKeys();
+		DefaultPieDataset definitivedataset = new DefaultPieDataset();
+		
+		int i=0;
+		double percentage=0;
+		
+		while(i<keys.size() && i<CLASSCHART){
+			definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
+			percentage=percentage + dataset.getValue(keys.get(i)).doubleValue();
+			i++;	
+		}
+	
+    	if(i<keys.size())
+    		definitivedataset.setValue(OTHERS_CLASSES, 100-percentage);
+    	
+    	return definitivedataset;
+	}
 
-	private void clickedOnExit() {
-		presenter.cancel();
+	private void clickedCheckAllClasses() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0;i<model.getRowCount();i++){
+			model.setValueAt(true,i,4);
+		}
 	}
 
 	private void clickedExportAs() {
@@ -478,6 +323,29 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			chooser.cancelSelection();
 		}
 	}
+	
+	private void clickedInvertClasses() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0;i<model.getRowCount();i++){
+			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
+		}
+	}
+
+
+    
+    private void clickedOnCancel() {
+		presenter.cancel();
+	}
+
+	// ProfilerViewInterface methods
+    
+    private void clickedOnExit() {
+		presenter.cancel();
+	}
+
+	private void clickedOnSave() {
+		presenter.save();
+	}
 
 	private void clickedOpenProfile() {
 		JFileChooser chooser = new JFileChooser();
@@ -500,7 +368,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			chooser.cancelSelection();
 		}
 	}
-
+	
 	private void clickedSaveProfile() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
@@ -522,34 +390,172 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			chooser.cancelSelection();
 		}
 	}
-
-	private void clickedCheckAllClasses() {
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(true,i,4);
-		}
-	}
-	
+    
+    // Component Listeners
+    
 	private void clickedUncheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
 			model.setValueAt(false,i,4);
 		}
 	}
+	public void componentHidden(ComponentEvent e) {}
+	
+	public void componentMoved(ComponentEvent e) {}
 
-	private void clickedInvertClasses() {
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
-		}
+	public void componentResized(ComponentEvent e) {
+        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
 	}
 	
-	private void clickedOnCancel() {
-		presenter.cancel();
+	// Chart progress listener
+
+	public void componentShown(ComponentEvent e) {
+        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
 	}
 
-	private void clickedOnSave() {
-		presenter.save();
+	// Action Listener
+	
+	/**
+	 * A JFreeChart is created with the input data.
+	 * @param dataset - data to show in the chart.
+	 * @return - JFreeChart
+	 */
+    private JFreeChart createChart(PieDataset dataset) {
+    	
+        JFreeChart chart = ChartFactory.createPieChart(
+            "",  // chart title
+            dataset,            // data
+            false,              // no legend
+            false,               // tooltips
+            false               // no URL generation
+        );
+        
+        // set a custom background for the chart
+        chart.setBackgroundPaint(new GradientPaint(new Point(0, 0), 
+                new Color(20, 20, 20), new Point(400, 200), Color.DARK_GRAY));
+        
+        // customise the title position and font
+        TextTitle t = chart.getTitle();
+        t.setPaint(new Color(240, 240, 240));
+        t.setFont(new Font(FONT_TITLE, Font.BOLD, 26));
+
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setBackgroundPaint(null);
+        plot.setInteriorGap(0.04);
+        plot.setOutlineVisible(false);
+
+        // use gradients and white borders for the section colours
+        plot.setBaseSectionOutlinePaint(Color.WHITE);
+        plot.setSectionOutlinesVisible(true);
+        plot.setBaseSectionOutlineStroke(new BasicStroke(2.0f));
+
+        // customise the section label appearance
+        plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 20));
+        plot.setLabelLinkPaint(Color.WHITE);
+        plot.setLabelLinkStroke(new BasicStroke(2.0f));
+        plot.setLabelOutlineStroke(null);
+        plot.setLabelPaint(Color.WHITE);
+        plot.setLabelBackgroundPaint(null);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} - {2}"));
+
+        return chart;
+
+    }
+
+	public PieDataset createDataset(HashMap<String, Integer> classes, int numCalledMethods) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        Iterator<Entry<String,Integer>> iterator = classes.entrySet().iterator();        
+       
+        while (iterator.hasNext()){
+        	Entry<String,Integer> entry = iterator.next();
+        	double times = entry.getValue().doubleValue();
+        	double percentage = (times/numCalledMethods)*100;
+        	dataset.setValue(entry.getKey(),percentage);
+        }
+        
+        DefaultPieDataset definitivedataset= chosenClasses(dataset); 
+        
+        return definitivedataset;
+    }
+
+	/**
+     * This panel is created when there is no data to show.
+     * @return
+     */
+	private JPanel createNoLoadPanel() {
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		return panel;
+	}
+
+	private JPanel createPiePanel(PieDataset data) {
+        chart = createChart(data);
+        chart.setPadding(new RectangleInsets(4, 8, 2, 2));
+        ChartPanel panel_1 = new ChartPanel(chart);
+        panel_1.setMouseWheelEnabled(true);
+        panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+        chart.addProgressListener(this);
+        return panel_1;
+    }
+
+	private void createTreeVisitor(ProfileTreeVisitor visitor, ProfileData data) {
+		List<ProfileData> children = data.getChildren();
+		for (int i=0;i<children.size();i++){
+			children.get(i).accept(visitor);
+		}
+	}
+
+	public HashMap<String, Boolean> getDataState() {
+		HashMap<String,Boolean> classesState = new HashMap<>();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0;i<model.getRowCount();i++){
+			String nameClass = (String) model.getValueAt(i,2);
+			boolean checked = (boolean) model.getValueAt(i,4);
+			classesState.put(nameClass, checked);
+		}
+		return classesState;
+	}
+	
+	public void load(HashMap<String, Integer> classes, int numCalledMethods) {
+		
+		if (numCalledMethods > 0 )
+			pieChartPanel = createPiePanel(createDataset(classes, numCalledMethods));
+		else 
+			pieChartPanel = createNoLoadPanel();
+		
+    	splitPane.setLeftComponent(pieChartPanel);
+    	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
+	}
+
+	public void load(ProfilerTree currentProfileTree) {
+    	if (currentProfileTree.getNumCalls() > 0 )
+			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()));
+		else 
+			pieChartPanel = createNoLoadPanel();
+		
+    	splitPane.setLeftComponent(pieChartPanel);
+    	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
+	}
+	
+	public void loadTable() {
+    	
+    	table.clearTable();
+    	
+    	ProfilerTree tree = presenter.getTree();
+    	PiePlot plot = (PiePlot)chart.getPlot();
+    	
+    	TableTreeNode rootNode = table.getRoot();
+    	ProfileData rootData = tree.getRoot();
+    	
+    	ProfileTreeVisitor visitor = new ProfileTreeVisitor(rootNode,plot);
+    	createTreeVisitor(visitor,rootData);
+        	
+    	table.refreshTable(-1);
+    	
+    }
+
+	public void setPresenter(ProfilerPresenterInterface presenter) {
+		this.presenter = presenter;
 	}
 
 }
