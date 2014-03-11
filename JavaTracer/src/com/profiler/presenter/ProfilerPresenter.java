@@ -12,6 +12,7 @@ import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.model.ProfilerTree;
+import com.profiler.model.data.ExcludesClassMethods;
 import com.profiler.model.data.ProfileClass;
 import com.profiler.model.data.ProfileData;
 import com.profiler.model.data.ProfileMethod;
@@ -55,28 +56,30 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	public void save() {
 		//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
-		HashMap<String, Boolean> classes = view.getDataState();
-		Iterator<Entry<String,Boolean>> iterator = classes.entrySet().iterator();
+		HashMap<List<String>, Boolean> classes = view.getDataState();
+		Iterator<Entry<List<String>,Boolean>> iterator = classes.entrySet().iterator();
 		List<String> excludesData = new ArrayList<>();
+		ExcludesClassMethods excludedMethods = new ExcludesClassMethods();
 		
 		while (iterator.hasNext()){
-			Entry<String,Boolean> entry = iterator.next();
+			Entry<List<String>,Boolean> entry = iterator.next();
 			if (!entry.getValue()){
-				ProfileData data = profiler.getData(entry.getKey());
+				List<String> keys = new ArrayList<String>(entry.getKey());
+				ProfileData data = profiler.getData(keys);
 				if (data instanceof ProfilePackage){
-					String excludePackage = entry.getKey() + ".*";
+					String excludePackage = data.getCompleteName() + ".*";
 					excludesData.add(excludePackage);
 				} else if (data instanceof ProfileClass){
-					excludesData.add(entry.getKey());
+					excludesData.add(data.getCompleteName());
 				} else if (data instanceof ProfileMethod){
-					//TODO: ProfileMethods
+					ProfileMethod method = (ProfileMethod)data;
+					excludedMethods.addMethod(method.getParentCompleteName(),method.getCompleteName());
 				}
 			}
 		}
 		
 		configuration.addExcludes(excludesData);
-		
-		
+		configuration.addExcludesMethods(excludedMethods);
 		view.setVisible(false);
 		controller.back();
 	}

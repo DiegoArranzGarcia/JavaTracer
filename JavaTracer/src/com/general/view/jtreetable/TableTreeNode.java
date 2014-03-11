@@ -114,5 +114,8 @@ public class TableTreeNode {
 		this.isExpandable = isExpandable;
 	}
 	
+	public boolean isRoot(){
+		return parent == null;
+	}
 	
 }

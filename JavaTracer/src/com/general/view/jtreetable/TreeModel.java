@@ -47,5 +47,5 @@ public class TreeModel {
 	public void removeAllUnlessRoot() {
 		rootNode.removeAllChildren();
 	}
-
+	
 }

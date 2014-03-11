@@ -133,10 +133,6 @@ public class ProfilerTree {
 		return rootNode.getNumCalls();
 	}
 
-	public void setCheckedClasses(HashMap<String, Boolean> classesState) {
-		
-	}
-
 	public HashMap<String, Integer> getClasses() {
 		HashMap<String,Integer> classes = new HashMap<String, Integer>();
 		getallClassesRec(rootNode,classes);
@@ -191,6 +187,10 @@ public class ProfilerTree {
 		} 
 			
 		return data;
+	}
+
+	public void setCheckedClasses(HashMap<List<String>, Boolean> dataState) {
+		
 	}
 
 }

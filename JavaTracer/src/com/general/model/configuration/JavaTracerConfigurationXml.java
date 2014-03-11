@@ -13,6 +13,7 @@ import javax.xml.xpath.*;
 import org.w3c.dom.*;
 
 import com.general.model.XStreamUtil;
+import com.profiler.model.data.ExcludesClassMethods;
 import com.thoughtworks.xstream.XStream;
 
 
@@ -32,6 +33,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	 * Tracer
 	 */
 	private List<String>excludesList;
+	private ExcludesClassMethods excludesClassMethods;
 	/*
 	 * Inspector
 	 */
@@ -268,7 +270,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 				catch (Exception e){
 					e.printStackTrace();
 				}
-				excludesList =currentExcludes;
+				excludesList = currentExcludes;
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
 				saveNewConfiguration();
@@ -289,4 +291,8 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	    	
 	    		
 	    }
+	 
+		public void addExcludesMethods(ExcludesClassMethods excludedMethods) {
+			//TODO: Excludes class methods
+		}
 }

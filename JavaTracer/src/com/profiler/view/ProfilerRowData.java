@@ -6,30 +6,30 @@ import com.general.view.jtreetable.TableRowData;
 
 public class ProfilerRowData implements TableRowData{
 
-	private String nameClass;
+	private String name;
 	private Color color;
-	private String completeNameClass;
+	private String completeName;
 	private Integer count;
 	private boolean used;
 	
-	public ProfilerRowData(String nameClass, Color color,String completeNameClass,Integer count,boolean used) {
-		this.nameClass = nameClass;
+	public ProfilerRowData(String name, Color color,String completeName,Integer count,boolean used) {
+		this.name = name;
 		this.color = color;
-		this.completeNameClass = completeNameClass;
+		this.completeName = completeName;
 		this.count = count;
 		this.used = used;
 	}
 
 	public Object[] getValues() {	
-		return new Object[]{"",nameClass,completeNameClass,count,used};
+		return new Object[]{"",name,completeName,count,used};
 	}
 	
-	public String getNameClass() {
-		return nameClass;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameClass(String nameClass) {
-		this.nameClass = nameClass;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Color getColor() {
@@ -41,11 +41,11 @@ public class ProfilerRowData implements TableRowData{
 	}
 
 	public String getCompleteNameClass() {
-		return completeNameClass;
+		return completeName;
 	}
 
 	public void setCompleteNameClass(String completeNameClass) {
-		this.completeNameClass = completeNameClass;
+		this.completeName = completeNameClass;
 	}
 
 	public Integer getCount() {

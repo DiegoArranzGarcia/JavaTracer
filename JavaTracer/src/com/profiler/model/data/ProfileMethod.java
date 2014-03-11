@@ -32,6 +32,13 @@ public class ProfileMethod extends ProfileData{
 	public void setCompleteName(String completeName) {
 		completeMethodName = completeName;
 	}
+
+	public String getParentCompleteName() {
+		if (parent == null)
+			return "";
+		else 
+			return parent.getCompleteName();
+	}
 	
 	
 

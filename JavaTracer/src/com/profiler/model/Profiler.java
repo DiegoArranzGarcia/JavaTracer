@@ -92,8 +92,9 @@ public class Profiler implements ProfilerModelInterface{
 		return profilerTree.getClasses().entrySet().iterator();
 	}
 
-	public ProfileData getData(String key) {
-		return profilerTree.getData(splitByDot(key));
+	
+	public ProfileData getData(List<String> list) {
+		return profilerTree.getData(list);
 	}
 	
 }
