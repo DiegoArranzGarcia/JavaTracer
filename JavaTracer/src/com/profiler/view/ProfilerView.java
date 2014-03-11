@@ -491,11 +491,12 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JPanel createPiePanel(PieDataset data) {
         chart = createChart(data);
         chart.setPadding(new RectangleInsets(4, 8, 2, 2));
-        ChartPanel panel_1 = new ChartPanel(chart);
-        panel_1.setMouseWheelEnabled(true);
-        panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setPopupMenu(null);
+        chartPanel.setLayout(new GridLayout(1, 0, 0, 0));
         chart.addProgressListener(this);
-        return panel_1;
+        return chartPanel;
     }
 
 	private void createTreeVisitor(ProfileTreeVisitor visitor, ProfileData data) {
