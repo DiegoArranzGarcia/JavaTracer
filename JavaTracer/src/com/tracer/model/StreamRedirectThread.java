@@ -33,7 +33,7 @@ class StreamRedirectThread extends Thread {
         setPriority(Thread.MAX_PRIORITY-1);
     }*/
     
-    StreamRedirectThread(String name, InputStream in, OutputStream out, String nameXml, console c) {
+    StreamRedirectThread(String name, InputStream in, OutputStream out, String nameXml,console c) {
         super(name);
         this.in = new InputStreamReader(in);
         this.out = new OutputStreamWriter(out);
@@ -61,7 +61,8 @@ class StreamRedirectThread extends Thread {
     
     public void run() {
         try {
-            char[] cbuf = new char[BUFFER_SIZE];
+        	
+        	char[] cbuf = new char[BUFFER_SIZE];
             int count;
             int j=0;
             

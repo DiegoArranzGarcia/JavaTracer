@@ -44,7 +44,7 @@ public class Tracer {
     private List<String> excludes ;
    private TracerController tracerController;
    
-   private static final int BUFFER_SIZE = 2048;
+  private console console; 
    
     /**
 	  * Parse the command line arguments.
@@ -144,11 +144,18 @@ public class Tracer {
     void redirectOutput(String nameXlm) {
     	
     	Process process = vm.process();
-    	console c=new console();
+    	
+    	if(console==null)
+    		console=new console();
+    	else {
+    		console.dispose();
+    	    console=new console();
+    	    
+    	}
     	
     	// Copy target's output and error to our output and error.
-        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,c);
-        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,c);
+        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,console);
+        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,console);
         
     	
     	
