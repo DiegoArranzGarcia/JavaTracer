@@ -1,7 +1,6 @@
 package com.general.presenter;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import com.alee.laf.WebLookAndFeel;
 import com.general.model.configuration.JavaTracerConfigurationXml;
@@ -17,27 +16,26 @@ public class JavaTracerPresenter {
 	private JavaTracerView view;
 	
 	private TracerController tracerController;
-	private ProfilerPresenter profilerController;
+	private ProfilerPresenter profilerPresenter;
 	private InspectorController inspectorController;
 	private SettingsPresenter settingsPresenter;
 	private JavaTracerConfigurationXml tracerConfiguration;
 	
 	/**
-	 *  Creates the controllers of aplication (Tracer, Profiler and Inspector controller). 
-	 * @throws UnsupportedLookAndFeelException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ClassNotFoundException 
+	 * Launch the application, no arguments needed.
 	 */
-	
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 		new JavaTracerPresenter();
 	}
 	
-	public JavaTracerPresenter() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
-		UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName () );
+	/**
+	 * Creates all conections with the presenters. 
+	 */
+	
+	public JavaTracerPresenter(){
+		setLookAndFeel();
 		this.tracerController = new TracerController();
-		this.profilerController = new ProfilerPresenter();
+		this.profilerPresenter = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
 		this.view = new JavaTracerView();
 		this.settingsPresenter = new SettingsPresenter();
@@ -46,20 +44,30 @@ public class JavaTracerPresenter {
 	}
 	
 	/**
+	 * Sets Weblaf look and feel.
+	 */
+	private void setLookAndFeel(){
+		
+		try{
+			UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+		}catch (Exception e){}
+	}
+
+	/**
 	 * Set this object such as main controllers
 	 */
 	
 	private void addController() {
 		tracerController.setPresenter(this);
-		profilerController.setController(this);
+		profilerPresenter.setController(this);
 		inspectorController.setController(this);
 		settingsPresenter.setController(this); 
 		view.setController(this);
 	}
 	
 	public void showProfile() {
-		profilerController.loadTempProfile();
-		profilerController.showProfile();
+		profilerPresenter.loadTempProfile();
+		profilerPresenter.showProfile();
 	}	
 	
 	public void clickedOnExit() {
@@ -79,7 +87,7 @@ public class JavaTracerPresenter {
 	
 	public void clickedOnViewProfile() {
 		view.setVisible(false);
-		profilerController.showProfile();
+		profilerPresenter.showProfile();
 	}
 
 	public void clickedOnSettings() {
@@ -98,7 +106,7 @@ public class JavaTracerPresenter {
 	}
 
 	public ProfilerPresenter getProfilerController() {
-		return profilerController;
+		return profilerPresenter;
 	}
 
 	public InspectorController getInspectorController() {
@@ -110,7 +118,7 @@ public class JavaTracerPresenter {
 	}
 
 	public void setProfilerController(ProfilerPresenter profilerController) {
-		this.profilerController = profilerController;
+		this.profilerPresenter = profilerController;
 	}
 
 	public void setInspectorController(InspectorController inspectorController) {
@@ -118,7 +126,7 @@ public class JavaTracerPresenter {
 	}
 
 	public ProfilerModelInterface getProfiler() {
-		return profilerController.getProfiler();
+		return profilerPresenter.getProfiler();
 	}
 
 	public JavaTracerView getView() {

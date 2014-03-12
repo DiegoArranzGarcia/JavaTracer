@@ -1,16 +1,19 @@
 package com.tracer.model;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import com.console.view.console;
 import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.connect.*;
+import com.sun.jdi.connect.Connector;
+import com.sun.jdi.connect.IllegalConnectorArgumentsException;
+import com.sun.jdi.connect.LaunchingConnector;
+import com.sun.jdi.connect.VMStartException;
+import com.tracer.console.presenter.ConsolePresenter;
+import com.tracer.console.presenter.ConsolePresenterInterface;
 import com.tracer.controller.RunConfiguration;
 import com.tracer.controller.TracerController;
 
@@ -25,13 +28,7 @@ public class Tracer {
 
     // Running remote VM
     private VirtualMachine vm;
-
-    // Thread transferring remote error stream to our error stream
-    private Thread errThread = null;
-
-    // Thread transferring remote output stream to our output stream
-    private Thread outThread = null;
-
+    
     // Mode for tracing the Trace program (default= 0 off)
     private int debugTraceMode = VirtualMachine.TRACE_NONE;
 
@@ -40,12 +37,8 @@ public class Tracer {
 
     // Class patterns for which we don't want events
     
-  // private String[] excludes;
-    private List<String> excludes ;
    private TracerController tracerController;
-   
-  private console console; 
-   
+      
     /**
 	  * Parse the command line arguments.
       * Launch target VM.
@@ -54,39 +47,16 @@ public class Tracer {
 	  */
     public void trace(RunConfiguration config) {
 
-    	//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
-    	try {
-	        excludes = configuration.getExludesFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }	
-        PrintWriter writer = new PrintWriter(System.out);
-        
-        if (tracerController != null)
-        	tracerController.starting();
-        
+    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();     
         vm = launchTarget(config);
-        
-        if (tracerController != null)
-        	tracerController.generatingTrace();
-        
-        generateTrace(writer,config,null);
+        generateTrace(config,null);
         
     }
     
     public void profile(RunConfiguration config,ProfilerModelInterface profile){
     	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
-    	try {
-	        excludes = configuration.getExludesFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }	
-        PrintWriter writer = new PrintWriter(System.out);
         vm = launchTarget(config);
-        generateTrace(writer,config,profile);
+        generateTrace(config,profile);
     }
     
 	public void setController(TracerController javaTracerController) {
@@ -101,26 +71,26 @@ public class Tracer {
 	 * @param config 
 	*/
     
-    void generateTrace(PrintWriter writer, RunConfiguration config,ProfilerModelInterface profiler) {
+    void generateTrace(RunConfiguration config,ProfilerModelInterface profiler) {
         
     	vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm,excludes,config,profiler);
+        EventThread eventThread = new EventThread(vm,this,config,profiler);
         eventThread.setEventRequests(watchFields);
         eventThread.start();
-        redirectOutput(config.getNameXml());
+        tracerController.redirectStreams(vm.process());
  
+        /*
         // Shutdown begins when event thread terminates
         try {
-        	eventThread.join();
-            errThread.join(); // Make sure output is forwarded
-            outThread.join(); // before we exit
+        	
         } catch (InterruptedException exc) {
             // we don't interrupt
-        }
-        writer.close();
-        
+        }*/
+        /*
+        tracerController.closeStreams();
+
         if (tracerController != null)
-        	tracerController.finishedTrace();
+        	tracerController.finishedTrace();*/
     }
 
     /**
@@ -140,32 +110,6 @@ public class Tracer {
             throw new Error("Target VM failed to initialize: " + exc.getMessage());
         }
     }
-
-    void redirectOutput(String nameXlm) {
-    	
-    	Process process = vm.process();
-    	
-    	if(console==null)
-    		console=new console();
-    	else {
-    		console.dispose();
-    	    console=new console();
-    	    
-    	}
-    	
-    	// Copy target's output and error to our output and error.
-        errThread = new StreamRedirectThread("error reader", process.getErrorStream(), System.err,nameXlm,console);
-        outThread = new StreamRedirectThread("output reader", process.getInputStream(), System.out,nameXlm,console);
-        
-    	
-    	
-    	errThread.start();
-        outThread.start();
-        
-    }
-
-
-	
 
 	/**
 	* Find a com.sun.jdi.CommandLineLaunch connector
@@ -221,6 +165,10 @@ public class Tracer {
         optionArg.setValue(options);
         
         return arguments;
-    }  
+    }
+
+	public void finishedTrace() {
+		tracerController.finishedTrace();
+	}  
       
 }

@@ -9,6 +9,7 @@ import com.general.model.FileUtilities;
 import com.general.model.JarFinder;
 import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
+import com.tracer.console.presenter.ConsolePresenter;
 import com.tracer.model.Tracer;
 import com.tracer.model.writers.InspectorWriter;
 import com.tracer.view.TracerView;
@@ -18,6 +19,7 @@ public class TracerController {
 	private TracerView tracerView;
 	private JavaTracerPresenter presenter;
 	private ArgumentsPresenter argumentsPresenter;
+	private ConsolePresenter consolePresenter;
 	
 	private Tracer tracer;
 	private RunConfiguration lastConfig;
@@ -30,6 +32,7 @@ public class TracerController {
 		jarFinder = new JarFinder();
 		classFinder = new ClassFinder();
 		argumentsPresenter = new ArgumentsPresenter();
+		consolePresenter = new ConsolePresenter();
 		setControllers();
     }
 	
@@ -50,18 +53,16 @@ public class TracerController {
 	}
 	
 	public void clickedOnTrace(){
-				
-		this.lastConfig = getAllConfig(false);		
-		tracer.trace(lastConfig);				
+		this.lastConfig = getAllConfig(false);
+		consolePresenter.showConsole();
+		tracer.trace(lastConfig);			
 	}
 	
 	public void clickedOnProfiling(){
-		
 		this.lastConfig = getAllConfig(true);		
-		tracer.profile(lastConfig,presenter.getProfiler());
-			
+		consolePresenter.showConsole();
+		tracer.profile(lastConfig,presenter.getProfiler());	
 	}
-	
 	
 	private RunConfiguration getAllConfig(boolean profileMode) {
 		 
@@ -96,7 +97,6 @@ public class TracerController {
 
 	private String getNameXml() {
 		String nameXml = tracerView.getNameXml();
-		
 		return nameXml;
 	}
 
@@ -165,6 +165,14 @@ public class TracerController {
 
 	public void clickedEditArguments() {
 		argumentsPresenter.show();
+	}
+
+	public void redirectStreams(Process process){
+		consolePresenter.redirectStreams(process);
+	}
+
+	public void closeStreams() {
+		consolePresenter.closeStreams();
 	}
 	
 }

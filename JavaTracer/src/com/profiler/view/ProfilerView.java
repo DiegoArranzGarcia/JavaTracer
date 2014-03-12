@@ -155,6 +155,20 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         panelRight.add(scrollPane, BorderLayout.CENTER);
         
         table = new JTreeTable();
+        table.setModel(new DefaultTableModel(
+        	new Object[][] {
+        	},
+        	new String[] {
+        		"", "Name", "Complete name", "Count", "Used"
+        	}
+        ) {
+        	boolean[] columnEditables = new boolean[] {
+        		false, false, false, false, false
+        	};
+        	public boolean isCellEditable(int row, int column) {
+        		return columnEditables[column];
+        	}
+        });
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         ProfilerHeaderData headerData = new ProfilerHeaderData();
@@ -176,17 +190,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         
         renderer = new ProfileCellRenderer(table.getTreeModel());
         table.setCellRenderer(renderer);
-        table.getColumnModel().getColumn(0).setResizable(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setExpandbleColumn(1);       
         table.getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getColumnModel().getColumn(0).setMinWidth(25);
         table.getColumnModel().getColumn(0).setMaxWidth(25);
-        table.getColumnModel().getColumn(3).setResizable(false);
-        table.getColumnModel().getColumn(3).setPreferredWidth(80);
-        table.getColumnModel().getColumn(3).setMinWidth(80);
-        table.getColumnModel().getColumn(4).setResizable(false);
-        table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        table.getColumnModel().getColumn(4).setMinWidth(100);
-        table.setExpandbleColumn(1);        
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(150);
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
@@ -332,8 +342,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
 		}
 	}
-
-
     
     private void clickedOnCancel() {
 		presenter.cancel();

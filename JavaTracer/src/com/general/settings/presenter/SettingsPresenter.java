@@ -16,7 +16,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	private SettingsViewInterface view;
 
 	private String[] excludes;
-	private JavaTracerPresenter controller;
+	private JavaTracerPresenter presenter;
 	private int numLevels;
 	private int numNodes;
 	
@@ -71,12 +71,12 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     	JavaTracerConfigurationXml.getInstance().setExcludes(excludesAux); 
 		  JavaTracerConfigurationXml.getInstance().saveNewConfiguration();
 		view.setVisible(false);
-		controller.back();
+		presenter.back();
     }
 
     public void cancelActionTracer() {
     	view.setVisible(false);	    
-    	controller.back();
+    	presenter.back();
     }
 
     public void saveActionInspector() {
@@ -93,7 +93,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 			  JavaTracerConfigurationXml.getInstance().setNumNodes(numNodes);
 			  JavaTracerConfigurationXml.getInstance().saveNewConfiguration();
 			  view.setVisible(false);	
-			  controller.back();
+			  presenter.back();
 		  }
 		 
 	  }
@@ -101,16 +101,16 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
     public void cancelActionInspector() {
     	view.setVisible(false);	
-    	controller.back();
+    	presenter.back();
 	    
     }
     
     public void closeWindow() {
-    	controller.back();
+    	presenter.back();
     }
     
     public void setController(JavaTracerPresenter javaTracerController) {
-		this.controller = javaTracerController;
+		this.presenter = javaTracerController;
 	}
     
     private void addExludesFromConfiguration() {

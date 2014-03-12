@@ -1,8 +1,11 @@
 package com.tracer.model;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.general.model.configuration.JavaTracerConfigurationXml;
 import com.general.model.data.ThreadInfo;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.ThreadReference;
@@ -42,11 +45,9 @@ import com.tracer.model.writers.TraceWriter;
 public class EventThread extends Thread {
 
     private final VirtualMachine vm; // Running VM
-    private final List<String>  excludes; // Packages to exclude
     private boolean connected = true; // Connected to VM
     private boolean enableProfiling;
 	private boolean vmDied = false; // VMDeath occurred
-	private ProfilerModelInterface profiler;
 	
     // Maps ThreadReference to ThreadTrace instances
     private Map<ThreadReference, ThreadTrace> traceMap = new HashMap<>();
@@ -62,11 +63,21 @@ public class EventThread extends Thread {
     //private StepManager step;
     //private PrepareManager prepare;
     private TraceWriter writer;
+    private ProfilerModelInterface profiler;
+    private Tracer tracer;
+    
+    private List<String>  excludes; // Packages to exclude
 
-    EventThread(VirtualMachine vm, List<String> excludes, RunConfiguration config, ProfilerModelInterface profiler){
+    public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
-        this.excludes = excludes;
+        this.tracer = tracer;
+        this.excludes = null;
+        try {
+        	this.excludes = JavaTracerConfigurationXml.getInstance().getExludesFromFile();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         
         this.enableProfiling = config.isProfiling_mode();
         this.profiler = profiler;
@@ -192,6 +203,7 @@ public class EventThread extends Thread {
         } else if (event instanceof VMDeathEvent) {
         	if (!enableProfiling)
         		finishTrace();
+        	tracer.finishedTrace();
         } else if (event instanceof VMDisconnectEvent) {
             connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
         } else if (event instanceof ThreadStartEvent){
