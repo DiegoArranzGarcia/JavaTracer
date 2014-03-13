@@ -12,8 +12,6 @@ import com.sun.jdi.connect.Connector;
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 import com.sun.jdi.connect.LaunchingConnector;
 import com.sun.jdi.connect.VMStartException;
-import com.tracer.console.presenter.ConsolePresenter;
-import com.tracer.console.presenter.ConsolePresenterInterface;
 import com.tracer.controller.RunConfiguration;
 import com.tracer.controller.TracerController;
 
@@ -78,19 +76,6 @@ public class Tracer {
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         tracerController.redirectStreams(vm.process());
- 
-        /*
-        // Shutdown begins when event thread terminates
-        try {
-        	
-        } catch (InterruptedException exc) {
-            // we don't interrupt
-        }*/
-        /*
-        tracerController.closeStreams();
-
-        if (tracerController != null)
-        	tracerController.finishedTrace();*/
     }
 
     /**

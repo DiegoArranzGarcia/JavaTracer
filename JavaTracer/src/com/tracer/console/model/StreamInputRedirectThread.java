@@ -1,9 +1,7 @@
 package com.tracer.console.model;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 /**
 * StreamRedirectThread is a thread which copies it's input to

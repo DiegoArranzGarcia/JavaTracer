@@ -58,7 +58,7 @@ public class TracerController {
 		tracer.trace(lastConfig);			
 	}
 	
-	public void clickedOnProfiling(){
+	public void clickedOnProfile(){
 		this.lastConfig = getAllConfig(true);		
 		consolePresenter.showConsole();
 		tracer.profile(lastConfig,presenter.getProfiler());	
@@ -96,8 +96,7 @@ public class TracerController {
 	}
 
 	private String getNameXml() {
-		String nameXml = tracerView.getNameXml();
-		return nameXml;
+		return tracerView.getNameXml();
 	}
 
 	
@@ -150,20 +149,11 @@ public class TracerController {
 		tracerView.loadClasses(classes);
 	}
 
-	public void starting() {
-		
+	public void clickedExit() {
+		System.exit(0);	
 	}
 
-	public void generatingTrace() {
-				
-	}
-
-	public void clickedBack() {
-		tracerView.setVisible(false);	
-		presenter.back();		
-	}
-
-	public void clickedEditArguments() {
+	public void editArguments() {
 		argumentsPresenter.show();
 	}
 
@@ -175,4 +165,11 @@ public class TracerController {
 		consolePresenter.closeStreams();
 	}
 	
+	public void enableProfileAndTrace(){
+		tracerView.setEnableProfileAndTracer(true);
+	}
+	
+	public void disableProfileAndTracer(){
+		tracerView.setEnableProfileAndTracer(false);
+	}
 }
