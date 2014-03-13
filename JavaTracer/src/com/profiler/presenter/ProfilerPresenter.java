@@ -36,6 +36,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	
 	public void setController(JavaTracerPresenter javaTracerController) {
 		this.controller = javaTracerController;
+	
 	}
 		
 	public void showProfile(){
@@ -83,6 +84,14 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		view.setVisible(false);
 		controller.back();
 	}
+	
+	
+	
+	public void refresh() {
+		// TODO 
+		
+	}
+
 
 	public void cancel() {
 		view.setVisible(false);
@@ -122,5 +131,6 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	public ProfilerTree getTree() {
 		return profiler.getProfileTree();
 	}
+
 
 }

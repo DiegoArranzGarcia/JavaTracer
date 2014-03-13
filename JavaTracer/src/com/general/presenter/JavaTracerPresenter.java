@@ -1,5 +1,7 @@
 package com.general.presenter;
 
+import java.io.File;
+
 import javax.swing.UIManager;
 
 import com.alee.laf.WebLookAndFeel;
@@ -21,6 +23,7 @@ public class JavaTracerPresenter {
 	 */
 	public static void main(String[] args) {
 		new JavaTracerPresenter();
+		
 	}
 	
 	/**
@@ -28,7 +31,7 @@ public class JavaTracerPresenter {
 	 */
 	
 	public JavaTracerPresenter(){
-		setLookAndFeel();
+	    setLookAndFeel();
 		this.tracerController = new TracerController();
 		this.profilerPresenter = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
@@ -61,6 +64,8 @@ public class JavaTracerPresenter {
 	public void showProfile() {
 		profilerPresenter.loadTempProfile();
 		profilerPresenter.showProfile();
+		String nameFile=tracerController.getNameXml()+"Profiler.xml";
+		profilerPresenter.saveProfile(new File(nameFile));
 	}	
 	
 	public void clickedOnExit() {

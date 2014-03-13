@@ -95,7 +95,7 @@ public class TracerController {
 		return (file.isFile() && FileUtilities.isExtension(file,"jar"));
 	}
 
-	private String getNameXml() {
+	public String getNameXml() {
 		return tracerView.getNameXml();
 	}
 

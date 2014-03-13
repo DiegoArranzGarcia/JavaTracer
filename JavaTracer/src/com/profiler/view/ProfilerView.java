@@ -108,9 +108,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JMenuItem mntmUncheckAllClasses;
 	private JButton btnSave;
 	private JButton btnCancel;
+	private JButton btnRefresh;
 	private JPanel panelRight;
 	private JPanel panel;
 	private JMenuItem mntmExit;
+	
     		    
 	/**
 	 * Creates the profile view. This view is not visible until the presenter (which must be set), make the
@@ -147,6 +149,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         btnSave = new JButton("Save");
         panel.add(btnSave);
         btnSave.addActionListener(this);
+        
+        btnRefresh = new JButton("Refresh");
+        panel.add(btnRefresh);
+        btnRefresh.addActionListener(this);
+        
         
         btnCancel = new JButton("Cancel");
         panel.add(btnCancel);
@@ -271,9 +278,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			clickedOnSave();
 		} else if (source.equals(btnCancel)){
 			clickedOnCancel();
+		} else if (source.equals(btnRefresh)){
+			clickedOnRefresh();
 		}
 	}
     
+	
+
 	public void chartProgress(ChartProgressEvent event) {
 		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED)
 			loadTable();
@@ -355,6 +366,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void clickedOnSave() {
 		presenter.save();
+	}
+	
+	private void clickedOnRefresh() {
+	
+		presenter.refresh();
 	}
 
 	private void clickedOpenProfile() {
