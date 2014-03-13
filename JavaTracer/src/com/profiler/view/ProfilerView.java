@@ -86,8 +86,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static final String FONT_TITLE = "Arial";
 	
 	private static String TITLE = "Profiling stats";
-	private static double SPLIT_PERCENTAGE = 0.7;
-	private static double PERCENTAGE = 0.75;
+	private static double SPLIT_PERCENTAGE = 0.54;
+	private static double PERCENTAGE_WIDTH = 1.0;
+	private static double PERCENTAGE_HEIGHT = 0.75;
 	private static final int CLASSCHART=5;
 	
 	private ProfilerPresenterInterface presenter;
@@ -131,7 +132,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		});
 
         Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setSize((int)(d.width*PERCENTAGE),(int)(d.height*PERCENTAGE));
+        setSize((int)(d.width*PERCENTAGE_WIDTH),(int)(d.height*PERCENTAGE_HEIGHT));
         setLocationRelativeTo(null);
         getContentPane().setLayout(new BorderLayout(0, 0));
         
