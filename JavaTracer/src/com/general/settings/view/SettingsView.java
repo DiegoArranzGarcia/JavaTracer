@@ -3,28 +3,10 @@
  */
 package com.general.settings.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.SpringLayout;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -33,7 +15,7 @@ import com.general.resources.ImageLoader;
 import com.general.settings.presenter.SettingsPresenterInterface;
 
 @SuppressWarnings("serial")
-public class SettingsView extends JFrame implements ActionListener,MouseListener,DocumentListener, SettingsViewInterface{
+public class SettingsView extends JFrame implements ActionListener,MouseListener,DocumentListener, SettingsViewInterface,KeyListener{
 	
 
 	private static String WINDOWS_TITLE = "Settings";
@@ -135,6 +117,7 @@ private void initTracerSettings() {
 		addButton.addActionListener(this);
 		
 		deleteButton = new JButton(DELETE);
+		deleteButton.setSize(115, 23);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteButton, 17, SpringLayout.SOUTH, addButton);
 		sl_contentPane.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, addButton);
 		sl_contentPane.putConstraint(SpringLayout.EAST, deleteButton, -31, SpringLayout.EAST, tracerSettings);
@@ -142,8 +125,8 @@ private void initTracerSettings() {
 		deleteButton.addActionListener(this);
 		
 		deleteAllButton = new JButton(DELETE_ALL);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, deleteButton, -19, SpringLayout.NORTH, deleteAllButton);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteAllButton, 189, SpringLayout.NORTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, deleteButton, -15, SpringLayout.NORTH, deleteAllButton);
 		sl_contentPane.putConstraint(SpringLayout.WEST, deleteAllButton, 0, SpringLayout.WEST, addButton);
 		sl_contentPane.putConstraint(SpringLayout.EAST, deleteAllButton, -31, SpringLayout.EAST, tracerSettings);
 		tracerSettings.add(deleteAllButton);
@@ -171,12 +154,12 @@ private void initTracerSettings() {
 		downButton.addActionListener(this);
 		
 		upButton = new JButton("");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, downButton, 114, SpringLayout.SOUTH, upButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, addButton, 98, SpringLayout.EAST, upButton);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, downButton, 106, SpringLayout.SOUTH, upButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, addButton, 93, SpringLayout.EAST, upButton);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, upButton, -190, SpringLayout.SOUTH, tracerSettings);
+		sl_contentPane.putConstraint(SpringLayout.EAST, upButton, 5, SpringLayout.EAST, excludes);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, upButton, 31, SpringLayout.SOUTH, excludes);
 		sl_contentPane.putConstraint(SpringLayout.WEST, upButton, 367, SpringLayout.WEST, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, upButton, -198, SpringLayout.SOUTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.EAST, upButton, 0, SpringLayout.EAST, excludes);
 		upButton.setIcon(imageLoader.getArrowUpIcon());
 		upButton.setEnabled(false);
 		upButton.addActionListener(this);
@@ -196,6 +179,7 @@ private void initTracerSettings() {
 		scrollPane.setViewportView(excludesList);
 		excludesList.setModel(model);
 		excludesList.addMouseListener(this);
+		excludesList.addKeyListener(this); 
 		
     }
 
@@ -497,6 +481,32 @@ private void initTracerSettings() {
 	  nodesField.setText("");
 	  String nNodes = Integer.toString(numNodes);
 	  nodesField.setText(nNodes);
+	    
+    }
+
+
+    public void keyPressed(KeyEvent e) {
+    	if (e.getSource().equals(excludesList)) {
+    		int index = -1;
+    		 if (e.getKeyCode() == KeyEvent.VK_UP) {
+    			  index = excludesList.getSelectedIndex()-1;
+    		 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+    			  index = excludesList.getSelectedIndex()+1;
+    		 }
+    		refreshButtons(index);  
+    		
+    	}
+	    
+    }
+
+    public void keyReleased(KeyEvent e) {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+
+    public void keyTyped(KeyEvent e) {
+	    // TODO Auto-generated method stub
 	    
     }
 }

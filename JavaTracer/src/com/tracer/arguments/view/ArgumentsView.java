@@ -2,10 +2,7 @@ package com.tracer.arguments.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -27,7 +24,7 @@ import com.general.resources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
 
 @SuppressWarnings("serial")
-public class ArgumentsView extends JFrame implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface{
+public class ArgumentsView extends JFrame implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface,KeyListener{
 
 	private static String WINDOWS_TITLE = "Add main arguments";
 	
@@ -153,6 +150,7 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		scrollPane.setViewportView(argumentsList);
 		argumentsList.setModel(model);
 		argumentsList.addMouseListener(this);
+		argumentsList.addKeyListener(this); 
 		
 	}
 	
@@ -247,7 +245,7 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(argumentsList)) {
     		int index = argumentsList.getSelectedIndex();
-    		if (index != -1)
+     		if (index != -1)
     			argument.setText(model.getElementAt(index));
     		refreshButtons(index);
 		} else if (e.getSource().equals(contentPane)){
@@ -314,4 +312,32 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 			clickedOnDownButton();
 		}
 	}
+
+	
+    public void keyPressed(KeyEvent e) {
+    	if (e.getSource().equals(argumentsList)) {
+    		int index = -1;
+    		 if (e.getKeyCode() == KeyEvent.VK_UP) {
+    			  index = argumentsList.getSelectedIndex()-1;
+    			 System.out.println("Index up : "+index);
+    		 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+    			  index = argumentsList.getSelectedIndex()+1;
+    			 System.out.println("Index down : "+index);
+    		 }
+    		refreshButtons(index);  
+    		
+    	}
+    }
+
+	
+    public void keyReleased(KeyEvent e) {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+	
+    public void keyTyped(KeyEvent e) {
+	    // TODO Auto-generated method stub
+	    
+    }
 }
