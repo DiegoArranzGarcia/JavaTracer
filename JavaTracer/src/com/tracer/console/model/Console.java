@@ -36,12 +36,16 @@ public class Console {
 		this.presenter = presenter;
 	}
 
-	public void write(String string) {
-		presenter.write(string);
-	}
-
 	public void input(String string){
 		in.write(string);
+	}
+
+	public void write(StreamOutputRedirectThread thread,String string) {
+		if (thread.equals(out)){
+			presenter.writeOutput(string);
+		} else if (thread.equals(err)){
+			presenter.writeError(string);
+		}
 	}
 
 }

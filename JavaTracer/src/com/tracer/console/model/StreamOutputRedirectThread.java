@@ -33,7 +33,7 @@ class StreamOutputRedirectThread extends Thread {
             int count;            
             while ((count = in.read(cbuf, 0, BUFFER_SIZE)) >= 0) {
             	String string = new String(cbuf,0,count);
-                console.write(string);           
+                console.write(this,string);           
             }             
         } catch(IOException exc) {
             System.err.println("Child I/O Transfer - " + exc);

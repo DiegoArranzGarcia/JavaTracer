@@ -1,0 +1,27 @@
+<com.profiler.model.ProfilerTree>
+  <rootNode class="com.profiler.model.data.ProfilePackage">
+    <children>
+      <com.profiler.model.data.ProfileClass>
+        <children>
+          <com.profiler.model.data.ProfileMethod>
+            <children/>
+            <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+            <numCalls>1</numCalls>
+            <checked>false</checked>
+            <methodName>main(java.lang.String[])</methodName>
+            <completeMethodName>Main.main(java.lang.String[])</completeMethodName>
+          </com.profiler.model.data.ProfileMethod>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>1</numCalls>
+        <checked>false</checked>
+        <className>Main</className>
+        <completeClassName>Main</completeClassName>
+      </com.profiler.model.data.ProfileClass>
+    </children>
+    <numCalls>1</numCalls>
+    <checked>false</checked>
+    <packageName>All packages</packageName>
+    <completePackageName></completePackageName>
+  </rootNode>
+</com.profiler.model.ProfilerTree>

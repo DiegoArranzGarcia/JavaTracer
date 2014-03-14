@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<trace>
+<thread>
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+<called-methods>
+<method-call id="1">
+<info>
+  <methodName>main</methodName>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>52</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <changes/>
+</info>
+<called-methods>
+</called-methods>
+</method-call>
+</called-methods>
+</thread>
+</trace>

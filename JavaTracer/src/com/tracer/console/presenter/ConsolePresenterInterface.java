@@ -2,6 +2,7 @@ package com.tracer.console.presenter;
 
 public interface ConsolePresenterInterface {
 	
-	public void write(String string);
+	public void writeOutput(String string);
+	public void writeError(String string);
 
 }

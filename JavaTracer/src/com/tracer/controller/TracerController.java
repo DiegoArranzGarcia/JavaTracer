@@ -36,17 +36,9 @@ public class TracerController {
 		setControllers();
     }
 	
-	private void setControllers() {
-		tracer.setController(this);
-	}
-
-	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
-		this.presenter = javaTracerPresenter; 
-	}
-	
 	public void open() {
 		if (tracerView == null){
-			tracerView = new TracerView();
+			tracerView = new TracerView(consolePresenter.getConsole());
 			tracerView.setController(this);
 		}
 		tracerView.setVisible(true);
@@ -54,13 +46,13 @@ public class TracerController {
 	
 	public void clickedOnTrace(){
 		this.lastConfig = getAllConfig(false);
-		consolePresenter.showConsole();
-		tracer.trace(lastConfig);			
+		tracerView.showConsole();
+		tracer.trace(lastConfig);		
 	}
 	
 	public void clickedOnProfile(){
 		this.lastConfig = getAllConfig(true);		
-		consolePresenter.showConsole();
+		tracerView.showConsole();
 		tracer.profile(lastConfig,presenter.getProfiler());	
 	}
 	
@@ -125,6 +117,7 @@ public class TracerController {
 	
 	public void finishedTrace() {
 		
+		consolePresenter.closeStreams();
 		if (lastConfig.isProfiling_mode()){
 			presenter.showProfile();			
 		} else {
@@ -175,5 +168,14 @@ public class TracerController {
 
 	public void clickOnSettings() {
 		presenter.clickedOnSettings();
+	}
+	
+	
+	private void setControllers() {
+		tracer.setController(this);
+	}
+
+	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
+		this.presenter = javaTracerPresenter; 
 	}
 }

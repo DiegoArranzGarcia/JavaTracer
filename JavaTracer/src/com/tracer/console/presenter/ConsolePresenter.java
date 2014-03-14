@@ -1,5 +1,7 @@
 package com.tracer.console.presenter;
 
+import javax.swing.JComponent;
+
 import com.tracer.console.model.Console;
 import com.tracer.console.view.ConsoleView;
 
@@ -19,21 +21,25 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 		console.redirectProcessStrems(process);
 	}
 	
-	public void write(String string){
-		view.write(string);
-		view.repaint();
+	public void writeOutput(String string){
+		view.writeOutput(string);
+	}
+	
+	public void writeError(String string){
+		view.writeError(string);
 	}
 
 	public void closeStreams(){
 		console.closeStreams();
-	}
-
-	public void showConsole(){
-		view.setVisible(true);
+		view.setEditable(false);
 	}
 
 	public void input(String string) {
 		console.input(string);
+	}
+
+	public JComponent getConsole() {
+		return view;
 	}	
 
 }
