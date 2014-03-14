@@ -32,6 +32,14 @@ public abstract class ProfileData {
 		this.parent = profileData;
 	}
 
+	
+	public void remove(){
+		
+		List<ProfileData> children=parent.getChildren();
+		if(children.remove(this))
+			parent.setChildren(children);
+		}
+
 	public ProfileData getChild(int packageIndex) {
 		return children.get(packageIndex);
 	}
@@ -55,4 +63,21 @@ public abstract class ProfileData {
 		return numCalls;
 	}
 
+	
+	public ProfileData getParent(){
+		return parent;
+		
+		
+	}
+	
+	private void setChildren(List<ProfileData> children){
+		this.children=children;
+		
+	}
+
+	
+	
 }
+
+
+

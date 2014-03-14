@@ -1,7 +1,9 @@
 package com.profiler.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.profiler.model.data.ProfileClass;
 import com.profiler.model.data.ProfileData;
@@ -193,4 +195,51 @@ public class ProfilerTree {
 		
 	}
 
+	
+	public void changeExcludeNodes(HashMap<List<String>, Boolean> states) {
+		
+		Set<List<String>> keys = states.keySet();
+		Iterator<List<String>> it = keys.iterator();
+		
+		while(it.hasNext()){
+			
+			List<String> node = it.next();
+			if(!states.get(node)){
+				
+				ProfileData trueNode = getData(node);
+				if(trueNode!=null){
+					
+					int classes=foundClass(trueNode.getParent(), trueNode.getName());
+					int packagee=foundPackage(trueNode.getParent(), trueNode.getName());
+					int method=foundMethod(trueNode.getParent(), trueNode.getName());
+					
+					if(classes!=-1||method!=-1)
+						trueNode.remove();
+					else
+						if(packagee!=-1){
+							
+							ProfileData parent=trueNode.getParent(); 
+							ProfileData son=trueNode; 
+							while(parent.getName()!="All packages"){
+							      parent.removeAllChildren();
+							      son=parent;
+							      parent=parent.getParent();
+							     }
+							son.remove();
+							}
+				
+					}
+				
+			}
+			
+			
+		}
+		
+		
+	}
+	
+
+
+
+	
 }

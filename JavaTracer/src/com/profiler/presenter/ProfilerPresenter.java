@@ -80,8 +80,8 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		
 		configuration.addExcludes(excludesData);
 		configuration.addExcludesMethods(excludedMethods);
-		view.setVisible(false);
-		controller.back();
+		//view.setVisible(false);
+		//controller.back();
 	}
 
 	public void cancel() {
@@ -124,7 +124,14 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void refresh() {
-		//TODO
+		HashMap<List<String>, Boolean> states = view.getDataState();
+		currentProfileTree.changeExcludeNodes(states);
+		((ProfilerView)view).loadTable();
+		showProfile(); 
+	
+	
+	
+	
 	}
 
 }
