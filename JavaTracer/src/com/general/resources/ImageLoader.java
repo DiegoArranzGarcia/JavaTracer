@@ -14,6 +14,8 @@ public class ImageLoader {
 	private static String MINUS_ICON = "minus.png";
 	private static String ARROW_UP = "arrow-up.png";
 	private static String ARROW_DOWN = "arrow-down.png";
+	private static String DELETE = "delete.png";
+	private static String MINIMIZE = "minimize.png";
 	
 	private ImageIcon applicationIcon;
 	private ImageIcon helpIcon;
@@ -23,6 +25,8 @@ public class ImageLoader {
 	private ImageIcon minusIcon;
 	private ImageIcon arrowUpIcon;
 	private ImageIcon arrowDownIcon;
+	private ImageIcon deleteIcon;
+	private ImageIcon minimizeIcon;
 
 	public void setPlusIcon(ImageIcon plusIcon) {
 		this.plusIcon = plusIcon;
@@ -42,6 +46,8 @@ public class ImageLoader {
 		minusIcon = new ImageIcon(getClass().getResource(MINUS_ICON));
 		arrowUpIcon = new ImageIcon(getClass().getResource(ARROW_UP));
 		arrowDownIcon = new ImageIcon(getClass().getResource(ARROW_DOWN));
+		deleteIcon = new ImageIcon(getClass().getResource(DELETE));
+		minimizeIcon = new ImageIcon(getClass().getResource(MINIMIZE));
 	}
 	
 	public static ImageLoader getInstance(){
@@ -80,5 +86,13 @@ public class ImageLoader {
 	public ImageIcon getArrowUpIcon() {
 		return arrowUpIcon;
 	}	
+	
+	public ImageIcon getDeleteIcon(){
+		return deleteIcon;
+	}
+
+	public ImageIcon getMinimizeIcon() {
+		return minimizeIcon;
+	}
 
 }

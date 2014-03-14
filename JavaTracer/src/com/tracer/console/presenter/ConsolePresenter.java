@@ -31,7 +31,7 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 
 	public void closeStreams(){
 		console.closeStreams();
-		view.setEditable(false);
+		//view.setEditable(false);
 	}
 
 	public void input(String string) {
