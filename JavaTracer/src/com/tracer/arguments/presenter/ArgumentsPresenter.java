@@ -15,8 +15,7 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 		arguments = new String[0];
 	}
 	
-	public void show(JavaTracerPresenter presenter) {
-		this.presenter = presenter;
+	public void show() {
 		if (view == null){
 			view = new ArgumentsView();
 			view.setPresenter(this);
@@ -36,6 +35,10 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 		view.setVisible(false);	
 		presenter.back();
 	}
+	
+	 public void setController(JavaTracerPresenter javaTracerController) {
+			this.presenter = javaTracerController;
+		}
 	
 	public String[] getArguments(){
 		return arguments;

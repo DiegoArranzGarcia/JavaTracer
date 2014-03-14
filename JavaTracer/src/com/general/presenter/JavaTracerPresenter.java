@@ -10,6 +10,7 @@ import com.general.settings.presenter.SettingsPresenter;
 import com.inspector.controller.InspectorController;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
+import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.controller.TracerController;
 
 public class JavaTracerPresenter {
@@ -18,6 +19,7 @@ public class JavaTracerPresenter {
 	private ProfilerPresenter profilerPresenter;
 	private InspectorController inspectorController;
 	private SettingsPresenter settingsPresenter;
+	private ArgumentsPresenter argumentsPresenter;
 	
 	/**
 	 * Launch the application, no arguments needed.
@@ -37,6 +39,7 @@ public class JavaTracerPresenter {
 		this.profilerPresenter = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
 		this.settingsPresenter = new SettingsPresenter();
+		this.argumentsPresenter = new ArgumentsPresenter();
 		setPresenter();
 		tracerController.open();
 	}
@@ -65,6 +68,7 @@ public class JavaTracerPresenter {
 		profilerPresenter.setController(this);
 		inspectorController.setController(this);
 		settingsPresenter.setController(this); 
+		argumentsPresenter.setController(this); 
 	}
 	
 	public void showProfile() {
@@ -93,6 +97,10 @@ public class JavaTracerPresenter {
 
 	public void clickedOnSettings() {
 		settingsPresenter.show();
+	}
+	
+	public void clicekOnEditArguments() {
+		argumentsPresenter.show();
 	}
 	
 	public void back() {
