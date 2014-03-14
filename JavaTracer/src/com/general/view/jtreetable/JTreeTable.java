@@ -99,21 +99,17 @@ public class JTreeTable extends JTable implements KeyListener,MouseListener{
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		int selectedRow = getSelectedRow()+1;
 		
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+		if (getSelectedRow()!=-1){
+			int selectedRow = getSelectedRow()+1;
 			
-			if (!isExpanded(selectedRow)){
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT && !isExpanded(selectedRow)){
 				expandRow(selectedRow);
-			}
-			
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			
-			if (isExpanded(selectedRow)){
+			} else if (e.getKeyCode() == KeyEvent.VK_LEFT && isExpanded(selectedRow)){
 				collapseRow(selectedRow);
 			}
-			
 		}
+		
 	}
 
 	public void keyReleased(KeyEvent e) {}

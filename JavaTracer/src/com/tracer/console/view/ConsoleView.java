@@ -20,6 +20,11 @@ import javax.swing.text.StyleConstants;
 import com.alee.laf.button.WebToggleButton;
 import com.general.resources.ImageLoader;
 import com.tracer.console.presenter.ConsolePresenter;
+import javax.swing.JLabel;
+import java.awt.Component;
+import javax.swing.border.EmptyBorder;
+import java.awt.Rectangle;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class ConsoleView extends JPanel implements KeyListener{
@@ -37,8 +42,11 @@ public class ConsoleView extends JPanel implements KeyListener{
 	private SimpleAttributeSet error;
 	private SimpleAttributeSet output;
 	private SimpleAttributeSet input;
+	private JLabel lblNewLabel;
+	private JPanel panel_1;
 	
 	public ConsoleView(){
+		setRequestFocusEnabled(false);
 		imageLoader = ImageLoader.getInstance();
 		setLayout(new BorderLayout(0, 0));
 		
@@ -52,24 +60,41 @@ public class ConsoleView extends JPanel implements KeyListener{
 		document = consoleText.getDocument();
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(UIManager.getBorder("MenuBar.border"));
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(new Rectangle(1, 1, 1, 1));
 		scrollPane.setColumnHeaderView(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.TRAILING, 5, 5));
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		lblNewLabel = new JLabel("Console");
+		lblNewLabel.setBorder(new EmptyBorder(0, 5, 0, 0));
+		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNewLabel, BorderLayout.WEST);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setVgap(0);
+		flowLayout.setHgap(0);
+		panel.add(panel_1, BorderLayout.EAST);
 		
 		btnMinimizeConsole = new WebToggleButton();
+		panel_1.add(btnMinimizeConsole);
 		btnMinimizeConsole.setRolloverDecoratedOnly(true);
 		btnMinimizeConsole.setToolTipText("Clear console");
 		btnMinimizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMinimizeConsole.setIcon(new ImageIcon(imageLoader.getMinimizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMinimizeConsole.setDrawFocus(false);
-		panel.add(btnMinimizeConsole);
 		
 		btnClearConsole = new WebToggleButton();
+		panel_1.add(btnClearConsole);
 		btnClearConsole.setRolloverDecoratedOnly(true);
 		btnClearConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnClearConsole.setToolTipText(CLEAR_CONSOLE);
 		btnClearConsole.setIcon(new ImageIcon(imageLoader.getDeleteIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnClearConsole.setDrawFocus(false);
-		panel.add(btnClearConsole);
 		
 	}
 

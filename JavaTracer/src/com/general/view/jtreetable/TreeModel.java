@@ -13,7 +13,6 @@ public class TreeModel {
 	}
 	
 	public TableTreeNode getNodeFromRow(int numRow){
-		
 		List<TableTreeNode> nodes = rootNode.getVisibleNodes();
 		return nodes.get(numRow);
 	}
@@ -32,7 +31,7 @@ public class TreeModel {
 		return rootNode;
 	}
 
-	public void collapseRow(int numRow) {
+	public void collapseRow(int numRow){
 		TableTreeNode node = getNodeFromRow(numRow);
 		node.setExpanded(false);
 		List<TableTreeNode> preorder = node.getPreorder();

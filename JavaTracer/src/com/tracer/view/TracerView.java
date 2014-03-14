@@ -50,7 +50,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
 	
-	private static final int WINDOW_WIDTH = 975;
+	private static final int WINDOW_WIDTH = 1000;
 	private static final int WINDOW_HEIGHT_NO_CONSOLE = 285;
 	private static final int WINDOW_HEIGHT_CONSOLE = 600;
 	
@@ -78,14 +78,13 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmSettings;
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
-	private JPanel panel;
-		
+	
 	public TracerView(JComponent console) {
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		setTitle("Java Tracer");
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT_NO_CONSOLE);  
+		setSize(WINDOW_WIDTH,WINDOW_HEIGHT_NO_CONSOLE);  
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -144,7 +143,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		profile.addActionListener(this);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("5px"),
-				ColumnSpec.decode("13dlu"),
+				ColumnSpec.decode("5dlu"),
 				ColumnSpec.decode("default:grow"),
 				ColumnSpec.decode("10dlu"),
 				ColumnSpec.decode("120px"),
@@ -156,7 +155,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 				ColumnSpec.decode("25px"),
 				ColumnSpec.decode("35px"),
 				ColumnSpec.decode("120px"),
-				ColumnSpec.decode("7px"),},
+				ColumnSpec.decode("10px"),},
 			new RowSpec[] {
 				RowSpec.decode("26px"),
 				RowSpec.decode("34px"),
@@ -165,14 +164,12 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 				RowSpec.decode("30px"),
 				FormFactory.PARAGRAPH_GAP_ROWSPEC,
 				RowSpec.decode("30px"),
-				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+				RowSpec.decode("6dlu"),
+				RowSpec.decode("20dlu"),
 				RowSpec.decode("40px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20dlu:grow"),
 				RowSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				RowSpec.decode("10px"),}));
 		
 		labelPath = new WebLabel(LABEL_PATH);
 		labelPath.setBackground(Color.white);
@@ -194,7 +191,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		getContentPane().add(helpXmlFile, "11, 7, center, center");
 		getContentPane().add(addArgument, "13, 5, center, center");
 		getContentPane().add(profile, "5, 9, fill, fill");
-		getContentPane().add(console, "1, 11, 14, 5, fill, fill");
+		getContentPane().add(console, "3, 11, 11, 2, fill, fill");
 		
 		JMenuBar menuBar = new JMenuBar();
 		getContentPane().add(menuBar, "1, 1, 14, 1, fill, top");
@@ -232,7 +229,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		mntmHelp.addActionListener(this);
 		
 		mntmAbout = new WebMenuItem(ABOUT);
-		menuBar.add(mntmAbout);
+		menuBar.add(mntmAbout);	
 		
 		mntmAbout.addActionListener(this);
 		
