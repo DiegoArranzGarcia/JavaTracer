@@ -220,7 +220,7 @@ public class ProfilerTree {
 							
 							ProfileData parent=trueNode.getParent(); 
 							ProfileData son=trueNode; 
-							while(parent.getName()!="All packages"){
+							while(!parent.getName().equals("All packages")){
 							      parent.removeAllChildren();
 							      son=parent;
 							      parent=parent.getParent();
