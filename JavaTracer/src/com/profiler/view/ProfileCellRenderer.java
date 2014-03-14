@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import org.jfree.chart.plot.PiePlot;
 
-import com.general.imageresources.ImageLoader;
+import com.general.resources.ImageLoader;
 import com.general.view.jtreetable.TableTreeNode;
 import com.general.view.jtreetable.TreeModel;
 

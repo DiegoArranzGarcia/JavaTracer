@@ -23,7 +23,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.general.imageresources.ImageLoader;
+import com.general.resources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
 
 @SuppressWarnings("serial")

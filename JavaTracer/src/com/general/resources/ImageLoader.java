@@ -1,11 +1,12 @@
-package com.general.imageresources;
+package com.general.resources;
 
 import javax.swing.ImageIcon;
 
 public class ImageLoader {
 	
 	private static ImageLoader instance;
-	private static String HELP_IMAGE = "imageHelp.jpe";
+	
+	private static String INFO_IMAGE = "info.png";
 	private static String APPLICATION_IMAGE = "app.jpe";
 	private static String EXPANDED_ICON = "expanded.gif";
 	private static String FOLDED_ICON = "folded.gif";
@@ -34,7 +35,7 @@ public class ImageLoader {
 	private ImageLoader(){
 		instance = this;
 		applicationIcon = new ImageIcon(getClass().getResource(APPLICATION_IMAGE));
-		helpIcon = new ImageIcon(getClass().getResource(HELP_IMAGE));
+		helpIcon = new ImageIcon(getClass().getResource(INFO_IMAGE));
 		expandedIcon = new ImageIcon(getClass().getResource(EXPANDED_ICON));
 		foldedIcon = new ImageIcon(getClass().getResource(FOLDED_ICON));
 		plusIcon = new ImageIcon(getClass().getResource(PLUS_ICON));

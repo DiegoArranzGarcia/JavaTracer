@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.UIManager;
 
 import com.alee.laf.WebLookAndFeel;
+import com.general.resources.FontLoader;
 import com.general.settings.presenter.SettingsPresenter;
 import com.inspector.controller.InspectorController;
 import com.profiler.model.ProfilerModelInterface;
@@ -23,7 +24,6 @@ public class JavaTracerPresenter {
 	 */
 	public static void main(String[] args) {
 		new JavaTracerPresenter();
-		
 	}
 	
 	/**
@@ -31,7 +31,8 @@ public class JavaTracerPresenter {
 	 */
 	
 	public JavaTracerPresenter(){
-	    setLookAndFeel();
+		setLookAndFeel();
+		setUIFont();
 		this.tracerController = new TracerController();
 		this.profilerPresenter = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
@@ -40,6 +41,11 @@ public class JavaTracerPresenter {
 		tracerController.open();
 	}
 	
+	private void setUIFont() {
+		FontLoader fontLoader = FontLoader.getInstance();
+		fontLoader.initAppFont();
+	}
+
 	/**
 	 * Sets Weblaf look and feel.
 	 */

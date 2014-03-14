@@ -6,7 +6,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import com.general.imageresources.ImageLoader;
+import com.general.resources.ImageLoader;
 import com.general.view.jtreetable.TableTreeNode;
 import com.general.view.jtreetable.TreeModel;
 

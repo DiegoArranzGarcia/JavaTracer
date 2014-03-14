@@ -1,7 +1,6 @@
 package com.tracer.view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -12,6 +11,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -24,14 +24,16 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.general.imageresources.ImageLoader;
 import com.general.model.FileUtilities;
+import com.general.resources.ImageLoader;
 import com.inspector.controller.InspectorController;
 import com.tracer.controller.TracerController;
 
 @SuppressWarnings("serial")
 public class TracerView extends JFrame implements ActionListener{
 	
+	private static final String ADD_ARGUMENTS = "Add arguments";
+	private static final String NAME_OF_THE_TRACE_PROFILE_FILE = "Name of the trace/profile file";
 	private static final String ABOUT = "About";
 	private static final String HELP = "Help";
 	private static final String SETTINGS = "Settings";
@@ -41,6 +43,7 @@ public class TracerView extends JFrame implements ActionListener{
 	private static final String PROFILE = "Profile";
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
+	
 	private static int FIRST_ROW = 60;
 	private static int SECOND_ROW = 120;
 	private static int THIRD_ROW = 170;
@@ -49,23 +52,20 @@ public class TracerView extends JFrame implements ActionListener{
 	private static int THIRD_COL = 790;
 	private static int EXAMINE_COL = 220;
 	private static int CANCEL_TRACER_ROW = 220;
-	private static int CANCEL_COL = 480;
 	private static int TRACER_COL = 300;
-	private static int LABELS_SIZE = 14;
 	private static int DISTANCE_BUTTONS = 150;
 	
-	private static final String COMIC_SANS_MS = "Comic Sans MS";
 	private static String LABEL_PATH = "Select a directory";
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
 	private static String LABEL_NAME_CLASS = "Select a class";
-	private static String LABEL_XML = "Name of the trace file";
 	private static String XML_FILE_TOOLTIP = "Write the name of the file without any extensions";
 	
-	private JButton trace,examine,exit,helpPath,helpNameClass,helpXmlFile,addArgument,profile;
+	private JButton trace,examine,exit,addArgument,profile;
 	private TextField path,nameXml;
 	private JComboBox<String> nameClass;
 	private JFileChooser chooser;
 	private JLabel labelPath,labelNameClass,labelXml;
+	private JLabel helpXmlFile,helpNameClass,helpPath;
 	private TracerController presenter;
 	private InspectorController inspectorController;
 	private JMenuItem mntmLoadProfile;
@@ -73,10 +73,11 @@ public class TracerView extends JFrame implements ActionListener{
 	private JMenuItem mntmExit;
 	private JMenuItem mntmTrace;
 	private JMenuItem mntmProfile;
+	private JMenuItem mntmSettings;
+	private JMenuItem mntmHelp;
+	private JMenuItem mntmAbout;
 		
 	public TracerView() {
-		
-		inspectorController = new InspectorController();
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
@@ -85,14 +86,12 @@ public class TracerView extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image icon = imageLoader.getApplicationIcon().getImage();
-		setIconImage(icon);
+		setIconImage(imageLoader.getApplicationIcon().getImage());
 		
 		labelPath = new JLabel(LABEL_PATH);
 		labelPath.setBounds(new Rectangle(540,30));
 		labelPath.setLocation(FIRST_COL, FIRST_ROW); 
-		labelPath.setBackground(Color.white); 
-		labelPath.setFont(new Font(COMIC_SANS_MS,Font.ROMAN_BASELINE, LABELS_SIZE)); 
+		labelPath.setBackground(Color.white);
 		
 		path = new TextField();
 		path.setBounds(new Rectangle(450,30));
@@ -100,13 +99,13 @@ public class TracerView extends JFrame implements ActionListener{
 		path.setEditable(false);
 		path.setBackground(Color.white);	
 		
-		helpPath = new JButton();
+		helpPath = new JLabel();
 		helpPath.setBounds(new Rectangle(25,25));
 		helpPath.setLocation(THIRD_COL, FIRST_ROW+2); 
-		helpPath.setIcon(imageLoader.getHelpIcon());
+		helpPath.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpPath.setToolTipText(HELP_PATH_TOOLTIP);
 		
-		addArgument = new JButton("Add arguments");
+		addArgument = new JButton(ADD_ARGUMENTS);
 		addArgument.setBounds(new Rectangle(140,25));
 		addArgument.setLocation(850, SECOND_ROW+2); 
 		addArgument.addActionListener(this);
@@ -115,7 +114,6 @@ public class TracerView extends JFrame implements ActionListener{
 		labelNameClass.setBounds(new Rectangle(540,30));
 		labelNameClass.setLocation(FIRST_COL, SECOND_ROW); 
 		labelNameClass.setBackground(Color.white); 
-		labelNameClass.setFont(new Font(COMIC_SANS_MS,Font.ROMAN_BASELINE, LABELS_SIZE));
 				
 		nameClass = new JComboBox<String>();
 		nameClass.setBounds(new Rectangle(450,30));
@@ -125,33 +123,31 @@ public class TracerView extends JFrame implements ActionListener{
 		nameClass.setEnabled(false); 
 		nameClass.addActionListener(this);
 		
-		helpNameClass = new JButton();
+		helpNameClass = new JLabel();
 		helpNameClass.setBounds(new Rectangle(25,25));
 		helpNameClass.setLocation(THIRD_COL, SECOND_ROW); 
-		helpNameClass.setIcon(imageLoader.getHelpIcon());
+		helpNameClass.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpNameClass.setToolTipText(LABEL_NAME_CLASS);
 			
-		labelXml = new JLabel("Name of the trace/profile file");
+		labelXml = new JLabel(NAME_OF_THE_TRACE_PROFILE_FILE);
 		labelXml.setBounds(new Rectangle(200,30)); 
 		labelXml.setLocation(FIRST_COL, THIRD_ROW); 
-		labelXml.setFont(new Font(COMIC_SANS_MS,Font.ROMAN_BASELINE, LABELS_SIZE));
 		
 		nameXml = new TextField();
 		nameXml.setBounds(new Rectangle(450,30));
 		nameXml.setLocation(SECOND_COL,THIRD_ROW);
 		nameXml.setEnabled(false); 
 			 
-		helpXmlFile = new JButton();
+		helpXmlFile = new JLabel();
 		helpXmlFile.setBounds(new Rectangle(25,25));
 		helpXmlFile.setLocation(THIRD_COL, THIRD_ROW); 
-		helpXmlFile.setIcon(imageLoader.getHelpIcon());
+		helpXmlFile.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpXmlFile.setToolTipText(XML_FILE_TOOLTIP);
 		
 		exit =new JButton(EXIT);
 		exit.setBounds(new Rectangle(690, 206, 100, 40));
 		exit.setLocation(TRACER_COL+2*DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
 		exit.setBackground(Color.white); 
-		exit.setFont(new Font(COMIC_SANS_MS,Font.BOLD, 15)); 
 		exit.addActionListener(this);
 		
 		trace = new JButton(TRACE);
@@ -159,7 +155,6 @@ public class TracerView extends JFrame implements ActionListener{
 		trace.setBounds(new Rectangle(100,40));
 		trace.setLocation(TRACER_COL+DISTANCE_BUTTONS, CANCEL_TRACER_ROW); 
 		trace.setBackground(Color.white);  
-		trace.setFont(new Font(COMIC_SANS_MS,Font.BOLD, 15)); 
 		trace.setEnabled(false); 
 		trace.addActionListener(this);
 	
@@ -168,7 +163,6 @@ public class TracerView extends JFrame implements ActionListener{
 		profile.setBounds(new Rectangle(100,40));
 		profile.setLocation(TRACER_COL, CANCEL_TRACER_ROW); 
 		profile.setBackground(Color.white);  
-		profile.setFont(new Font(COMIC_SANS_MS,Font.BOLD, 15)); 
 		profile.setEnabled(false); 
 		profile.addActionListener(this);
 		
@@ -177,9 +171,7 @@ public class TracerView extends JFrame implements ActionListener{
 		examine.setBounds(new Rectangle(90,30));
 		examine.setLocation(EXAMINE_COL, FIRST_ROW); 
 		examine.setBackground(Color.LIGHT_GRAY); 
-		examine.setFont(new Font(COMIC_SANS_MS,Font.BOLD, 12)); 
 		examine.addActionListener(this);
-		
 		
 		getContentPane().setLayout(null); 
 		getContentPane().add(path);
@@ -225,15 +217,19 @@ public class TracerView extends JFrame implements ActionListener{
 		mnFile.add(mntmExit);
 		mntmExit.addActionListener(this);
 		
-		JMenuItem mntmSettings = new JMenuItem(SETTINGS);
+		mntmSettings = new JMenuItem(SETTINGS);
 		menuBar.add(mntmSettings);
+		mntmSettings.addActionListener(this);
 		
-		JMenuItem mntmHelp = new JMenuItem(HELP);
+		mntmHelp = new JMenuItem(HELP);
 		menuBar.add(mntmHelp);
+		mntmHelp.addActionListener(this);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem(ABOUT);
-		menuBar.add(mntmNewMenuItem);
+		mntmAbout = new JMenuItem(ABOUT);
+		menuBar.add(mntmAbout);
+		mntmAbout.addActionListener(this);
 		
+		inspectorController = new InspectorController();
 		setEnableProfileAndTracer(false);
 	}
 	
@@ -242,13 +238,16 @@ public class TracerView extends JFrame implements ActionListener{
 		String curDir = System.getProperty("user.dir");
 		String s= File.separator;
 		String xmlPath = curDir+s+getNameXml()+FileUtilities.EXTENSION_XML;
-		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, 
-									"", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
+		
+		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, "", JOptionPane.YES_NO_CANCEL_OPTION, 
+				JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
+		
 		if(selected==0) {
 			inspectorController.open();
 			inspectorController.setFromTracer(true);
 			inspectorController.showTree(xmlPath);
 		}
+		
 	}
 	
 	
@@ -321,7 +320,26 @@ public class TracerView extends JFrame implements ActionListener{
 			clickedOnTrace();
 		} else if (source.equals(nameClass)){
 			dataChangedComboBox();
+		} else if (source.equals(mntmSettings)){
+			clickedOnSettings();
+		} else if (source.equals(mntmHelp)){
+			clickedOnHelp();
+		} else if (source.equals(mntmAbout)){
+			clickedOnAbout();
 		}
+	}
+
+	private void clickedOnAbout() {
+		AboutDialog aboutDialog = new AboutDialog();
+		aboutDialog.setVisible(true);
+	}
+
+	private void clickedOnHelp() {
+		//TODO : SHOW HELP
+	}
+
+	private void clickedOnSettings() {
+		presenter.clickOnSettings();
 	}
 
 	private void dataChangedComboBox() {
@@ -360,8 +378,9 @@ public class TracerView extends JFrame implements ActionListener{
 		chooser = new JFileChooser();
 		
 		//Title window
-		chooser.setDialogTitle("Java Tracer");
-		chooser.setCurrentDirectory(new java.io.File("."));
+		chooser.setDialogTitle("Select directoty or a jar file");
+		String currentDirectory = System.getProperty("user.dir");
+		chooser.setCurrentDirectory(new File(currentDirectory));
 		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		FileNameExtensionFilter filtroXml = new FileNameExtensionFilter("Jar Files","jar");
 		chooser.setFileFilter(filtroXml);
@@ -377,8 +396,8 @@ public class TracerView extends JFrame implements ActionListener{
 	}
 
 	public void setEnableProfileAndTracer(boolean enable) {
-		mntmLoadProfile.setEnabled(enable);
-		mntmLoadTrace.setEnabled(enable);
+		mntmProfile.setEnabled(enable);
+		mntmTrace.setEnabled(enable);
 		trace.setEnabled(enable);
 		profile.setEnabled(enable);
 	}

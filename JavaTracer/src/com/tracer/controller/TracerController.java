@@ -172,4 +172,8 @@ public class TracerController {
 	public void disableProfileAndTracer(){
 		tracerView.setEnableProfileAndTracer(false);
 	}
+
+	public void clickOnSettings() {
+		presenter.clickedOnSettings();
+	}
 }
