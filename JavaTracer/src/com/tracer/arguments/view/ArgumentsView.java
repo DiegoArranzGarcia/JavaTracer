@@ -56,6 +56,13 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		setLocationRelativeTo(null);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    
+	    addWindowListener(new WindowAdapter() {
+	    	public void windowClosing(WindowEvent e) {
+	    		presenter.closeWindow();
+	    	   }
+		});
+
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		model = new DefaultListModel<String>();
@@ -330,14 +337,7 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
     }
 
 	
-    public void keyReleased(KeyEvent e) {
-	    // TODO Auto-generated method stub
-	    
-    }
-
+    public void keyReleased(KeyEvent e) {}
 	
-    public void keyTyped(KeyEvent e) {
-	    // TODO Auto-generated method stub
-	    
-    }
+    public void keyTyped(KeyEvent e) {}
 }

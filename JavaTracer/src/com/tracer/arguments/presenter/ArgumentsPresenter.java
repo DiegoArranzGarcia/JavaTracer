@@ -1,11 +1,13 @@
 package com.tracer.arguments.presenter;
 
+import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.view.ArgumentsView;
 import com.tracer.arguments.view.ArgumentsViewInterface;
 
 public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 	
 	private ArgumentsViewInterface view;
+	private JavaTracerPresenter presenter;
 
 	private String[] arguments;
 	
@@ -13,8 +15,8 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 		arguments = new String[0];
 	}
 	
-	public void show() {
-		
+	public void show(JavaTracerPresenter presenter) {
+		this.presenter = presenter;
 		if (view == null){
 			view = new ArgumentsView();
 			view.setPresenter(this);
@@ -27,14 +29,23 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 	public void saveAction() {
 		arguments = view.getArguments();
 		view.setVisible(false);
+		presenter.back();
 	}
 	
 	public void cancelAction() {
-		view.setVisible(false);		
+		view.setVisible(false);	
+		presenter.back();
 	}
 	
 	public String[] getArguments(){
 		return arguments;
 	}
+
+	
+    public void closeWindow() {
+    	view.setVisible(false);	
+		presenter.back();
+	    
+    }
 
 }

@@ -1,38 +1,20 @@
 package com.tracer.view;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.TextField;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.inspector.controller.InspectorController;
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.*;
 import com.tracer.controller.TracerController;
 
 @SuppressWarnings("serial")

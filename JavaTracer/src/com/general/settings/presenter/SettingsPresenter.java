@@ -14,9 +14,9 @@ import com.general.settings.view.SettingsViewInterface;
 public class SettingsPresenter implements SettingsPresenterInterface {
 
 	private SettingsViewInterface view;
+	private JavaTracerPresenter presenter;
 
 	private String[] excludes;
-	private JavaTracerPresenter presenter;
 	private int numLevels;
 	private int numNodes;
 	
