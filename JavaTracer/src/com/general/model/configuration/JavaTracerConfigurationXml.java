@@ -33,7 +33,9 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	 * Tracer
 	 */
 	private List<String>excludesList;
-	private ExcludesClassMethods excludesClassMethods;
+	private ExcludesClassMethods excludesClassMethods,newExcludesMethods;
+	private List<ExcludesClassMethods>listExcludesClassMethods;
+	
 	/*
 	 * Inspector
 	 */
@@ -56,6 +58,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		 */
 		
 		this. excludesList = new ArrayList<>();
+		this.listExcludesClassMethods = new ArrayList<>();
 		this.fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);		
 		
 		this.xStream = new XStream();
@@ -66,7 +69,10 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 			initExcludes();
 			this.numlevels = 4;
 			this.numNodes = 30;
-			generateFile();
+			
+			initExcludesMethod();
+			
+			generateFile(false);
 			try {
 		        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
 		        xPath = XPathFactory.newInstance().newXPath();
@@ -86,22 +92,28 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 				excludesList = getExludesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
+				listExcludesClassMethods = getExcludesClassMethodFromFile();
             }
             catch (Exception ex) {
 	            ex.printStackTrace();
             }
 		}
+	
 		
 	 }
 	 
-    private void initExcludes() {
+
+	private void initExcludes() {
     	excludesList.add("java.*");
     	excludesList.add("javax.*");
     	excludesList.add("sun.*");
     	excludesList.add("com.sun.*");    
     }
-
-	private void generateFile() {
+	
+	/*
+	 * Write in xml file the configuration
+	 */
+	private void generateFile(boolean newExcludesMethods) { 
     	
 		try {
 	    		  writer = new FileWriter(fileXml);
@@ -118,6 +130,12 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	    		  write(startTag(TAG_NUM_NODES));	
 	    		  writeNumNodes();
 	    		  write(endTag(TAG_NUM_NODES));
+	    		  
+	    		  write(startTag(TAG_METHODS_EXCLUDES));
+	    		  if (newExcludesMethods)
+	    			  writeNewMethodsExcludes();
+	    		  else writeMethodsExcludes();
+	    		  write(endTag(TAG_METHODS_EXCLUDES));
 		    		  
 	    		  write(endTag(TAG_CONFIGURATION)); 
 	    		  writer.close();
@@ -129,7 +147,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		 
    }
 
-    private void writeNumNodes() {
+	private void writeNumNodes() {
     	 try {
  	        writeXStream(numNodes);
          }
@@ -158,6 +176,32 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	    
     }
 
+	private void writeNewMethodsExcludes() {
+   	 try {
+   		 for (int i =0;i<listExcludesClassMethods.size();i++){
+   			 writeXStream(listExcludesClassMethods.get(i)); 
+   		 }
+  	        writeXStream(newExcludesMethods);
+          }
+          catch (Exception ex) {
+  	        ex.printStackTrace();
+          } 
+	    
+   }
+
+	private void writeMethodsExcludes() {
+   	 try {
+   		 for (int i =0;i<listExcludesClassMethods.size();i++){
+   			 writeXStream(listExcludesClassMethods.get(i)); 
+   		 }
+ 	        
+         }
+         catch (Exception ex) {
+ 	        ex.printStackTrace();
+         } 
+	    
+   }
+	
 	private void write(String string) throws IOException {
 			writer.write(string + "\n");
 		}
@@ -175,51 +219,100 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		write(string);
 	}
 	
-
-	@SuppressWarnings("unchecked")
-    public List<String> getExludesFromFile() throws Exception{
+	/*
+	 * Get Information from file xml
+	 */
+    @SuppressWarnings("unchecked")
+    public List<String> getExludesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_EXCLUDES + "/*";  
-		XPathExpression xPathExpression = xPath.compile(expression);
-		NodeList excludes = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
-		for (int i=0;i<excludes.getLength();i++) {
-			String nodeString = nodeToString(excludes.item(i));
-			excludesList = (List<String>) xStream.fromXML(nodeString);
-		}
+		
+        try {
+        	XPathExpression xPathExpression = xPath.compile(expression);
+	        NodeList excludes  = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
+	         for (int i=0;i<excludes.getLength();i++) {
+	 			String nodeString = nodeToString(excludes.item(i));
+	 			excludesList = (List<String>) xStream.fromXML(nodeString);
+	 		}
+        }
+        catch (Exception ex) {
+        	initExcludes();
+        	return excludesList;
+        }	
 		
 		return excludesList;
 	}
 	
-	public int getNumLevelsFromFile() throws Exception {
+	public int getNumLevelsFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
 		
-		XPathExpression xPathExpression = xPath.compile(expression);
-		Node node_levels = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-		
-		String nLevels =  (String) xPathExpression.evaluate(node_levels,XPathConstants.STRING);
-		
-		String s = nLevels.replaceAll("\n", "");
-		numlevels = Integer.parseInt(s); 
+		String nLevels ="4";
+		int numLevels = 4;
+        try {
+	        	XPathExpression xPathExpression = xPath.compile(expression);
+		        Node node_levels = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+		        nLevels =  (String) xPathExpression.evaluate(node_levels,XPathConstants.STRING);
+		        String s = nLevels.replaceAll("\n", "");
+				numlevels = Integer.parseInt(s); 
+        }
+        catch (Exception ex) {
+	        	return numLevels;
+        }	
 		
 		return numlevels;
 	}
 	
-	public int getNumNodesFromFile() throws Exception {
+	public int getNumNodesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
-		
-		XPathExpression xPathExpression = xPath.compile(expression);
-		Node node_nodes = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-		
-		String nNodes =  (String) xPathExpression.evaluate(node_nodes,XPathConstants.STRING);
-		
-		String s = nNodes.replaceAll("\n", "");
-		numNodes = Integer.parseInt(s); 
+		int numNodes = 30;
+	
+		Node node_nodes;
+        try {
+        	XPathExpression xPathExpression = xPath.compile(expression);
+	        node_nodes = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+	    	String nNodes =  (String) xPathExpression.evaluate(node_nodes,XPathConstants.STRING);
+			
+			String s = nNodes.replaceAll("\n", "");
+			numNodes = Integer.parseInt(s); 
+        }
+        catch (Exception ex) {
+        	return numNodes;
+        }		
+	
 		return numNodes;
 	}
 	
-	public void saveNewConfiguration() {
+	   private List<ExcludesClassMethods> getExcludesClassMethodFromFile() {
+		   String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_METHODS_EXCLUDES + "/*"; 
+		   List<ExcludesClassMethods> listExcludesClassMethods = new ArrayList<>();
+		   
+		   try {
+	        	XPathExpression xPathExpression = xPath.compile(expression);
+	        	NodeList  methodsExcludes  = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
+	        	
+	        	for (int i=0;i<methodsExcludes.getLength();i++) {
+			 			String nodeString = nodeToString(methodsExcludes.item(i));
+			 			excludesClassMethods = (ExcludesClassMethods) xStream.fromXML(nodeString); 		
+			 			listExcludesClassMethods.add(excludesClassMethods);
+		 		}
+	        }
+	        catch (Exception ex) {
+	        	initExcludesMethod();
+	        	return listExcludesClassMethods;
+	        }	
+			
+			return listExcludesClassMethods;
+	    }
+	
+	
+    private void initExcludesMethod() {
+	   excludesClassMethods = new ExcludesClassMethods();
+	    
+    }
+
+	public void saveNewConfiguration(boolean newExcludesMethods) { 
 		this.xStream = new XStream();
 		 fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
-		generateFile();
+		generateFile(newExcludesMethods);
 		
 		try {
 	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
@@ -273,26 +366,32 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 				excludesList = currentExcludes;
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-				saveNewConfiguration();
+				listExcludesClassMethods = getExcludesClassMethodFromFile();
+				saveNewConfiguration(false);
             }
             catch (Exception ex) {
 	            ex.printStackTrace();
             }
-	    	/*String value = "";
-	    	for (int i=0;i<currentExcludes.size();i++){
-	    		value += currentExcludes.get(i);
-	    		if (i<(currentExcludes.size()-1))
-	    			value += ",";    		
-	    	}
-	    	
-	    	System.out.println(value);
-	    	properties.setProperty(EXCLUDES,value);
-	    	storePropierties();*/
 	    	
 	    		
 	    }
 	 
-		public void addExcludesMethods(ExcludesClassMethods excludedMethods) {
-			//TODO: Excludes class methods
+		public void addExcludesMethods(ExcludesClassMethods newExcludesMethods) {
+			excludesList = getExludesFromFile();
+			numlevels =  getNumLevelsFromFile();
+			numNodes = getNumNodesFromFile();
+			listExcludesClassMethods = getExcludesClassMethodFromFile();
+			this.newExcludesMethods = newExcludesMethods;
+			
+			saveNewConfiguration(true);
+			
 		}
+
+		public List<ExcludesClassMethods> getListExcludesClassMethods() {
+	        return listExcludesClassMethods;
+        }
+
+		public void setListExcludesClassMethods(List<ExcludesClassMethods> listExcludesClassMethods) {
+	        this.listExcludesClassMethods = listExcludesClassMethods;
+        }
 }

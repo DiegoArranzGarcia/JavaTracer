@@ -56,6 +56,7 @@ public abstract class XStreamUtil {
 	public static String TAG_EXCLUDES="excludes";
 	public static String TAG_NUM_LEVELS ="num-levels";
 	public static String TAG_NUM_NODES = "num-nodes";
+	public static String TAG_METHODS_EXCLUDES = "methods-excludes";
 	
 	public static String ATTR_ID = "id";
 	

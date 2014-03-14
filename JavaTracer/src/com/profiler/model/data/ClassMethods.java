@@ -24,6 +24,10 @@ public class ClassMethods {
 	public String getClassName(){
 		return className;
 	}
+	
+	public List<String>getExcludesMethods(){
+		return excludesMethods;
+	}
 
 	public void addMethod(String methodName) {
 		excludesMethods.add(methodName);
