@@ -35,7 +35,7 @@ public class AboutDialog extends JDialog {
 		
 		setTitle("About");
 		setModal(true);
-		setBounds(100, 100, 335, 344);
+		setBounds(100, 100, 335, 299);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		JPanel contentPanel = new JPanel();

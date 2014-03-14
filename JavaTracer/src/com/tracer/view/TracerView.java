@@ -52,7 +52,7 @@ public class TracerView extends JFrame implements ActionListener{
 	private static int THIRD_COL = 790;
 	private static int EXAMINE_COL = 220;
 	private static int CANCEL_TRACER_ROW = 220;
-	private static int TRACER_COL = 300;
+	private static int TRACER_COL = 340;
 	private static int DISTANCE_BUTTONS = 150;
 	
 	private static String LABEL_PATH = "Select a directory";
