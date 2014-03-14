@@ -8,7 +8,7 @@ public class ProfilerHeaderData implements TableRowData{
 	public static String SIMPLE_NAME_TITLE = "Name";
 	public static String COMPLETE_NAME_TITLE = "Complete name";
 	public static String COUNT_TITLE = "Count";
-	public static String USED_TITLE = "Used";
+	public static String USED_TITLE = "Excluded";
 	
 	public String[] getValues() {
 		return new String[]{COLOR_TITLE,SIMPLE_NAME_TITLE,COMPLETE_NAME_TITLE,COUNT_TITLE,USED_TITLE};

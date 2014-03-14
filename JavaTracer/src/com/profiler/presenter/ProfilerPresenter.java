@@ -63,7 +63,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		
 		while (iterator.hasNext()){
 			Entry<List<String>,Boolean> entry = iterator.next();
-			if (!entry.getValue()){
+			if (entry.getValue()){
 				List<String> keys = new ArrayList<String>(entry.getKey());
 				ProfileData data = profiler.getData(keys);
 				if (data instanceof ProfilePackage){

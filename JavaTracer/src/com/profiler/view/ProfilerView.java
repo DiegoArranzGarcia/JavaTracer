@@ -166,7 +166,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	new Object[][] {
         	},
         	new String[] {
-        		"", "Name", "Complete name", "Count", "Used"
+        		"", "Name", "Complete name", "Count", "Excluded"
         	}
         ) {
         	boolean[] columnEditables = new boolean[] {
@@ -204,6 +204,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.getColumnModel().getColumn(0).setMaxWidth(25);
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
@@ -293,7 +294,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
 			
 		dataset.sortByValues(SortOrder.DESCENDING);
-		List<String> keys = dataset.getKeys();
+		@SuppressWarnings("unchecked") 
+        List<String> keys = dataset.getKeys();
 		DefaultPieDataset definitivedataset = new DefaultPieDataset();
 		
 		int i=0;
