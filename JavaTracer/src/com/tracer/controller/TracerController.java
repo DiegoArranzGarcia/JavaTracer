@@ -119,13 +119,13 @@ public class TracerController {
 		
 		consolePresenter.closeStreams();
 		if (lastConfig.isProfiling_mode()){
-			presenter.showProfile();			
+			presenter.showProfile();	
 		} else {
 			InspectorWriter traceInspectorWriter = new InspectorWriter(lastConfig.getNameXml());
 			traceInspectorWriter.generateFinalTrace();
 			tracerView.finishedTrace();
 		}
-
+		tracerView.setEnableProfileAndTracer(true);
 	}
 	
 	public void selectedPath(String path){

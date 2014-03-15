@@ -22,11 +22,23 @@ public class FileUtilities {
 		return extension;
 	}
 	
+	public static String getOnlyName(String nameWithExtension) {
+		String onlyName = nameWithExtension;
+		int i = onlyName.lastIndexOf('.');
+		onlyName = onlyName.substring(0, i);
+		return onlyName;
+	}
+	
 	public static String getFileNameWithoutExtension(String filename){
 		return filename.replaceFirst(EXTENSIONS, "");
 	}
 
 	public static boolean isExtension(File file,String extension) {
+		return getExtension(file).equals(extension);
+	}
+	
+	public static boolean isExtension(String nameXml,String extension) {
+		File file = new File(nameXml);
 		return getExtension(file).equals(extension);
 	}
 	

@@ -1,21 +1,13 @@
 package com.tracer.view;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.alee.extended.filechooser.FilesSelectionListener;
@@ -29,11 +21,8 @@ import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
 import com.inspector.controller.InspectorController;
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.*;
 import com.tracer.controller.TracerController;
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class TracerView extends JFrame implements ActionListener, FilesSelectionListener{
@@ -49,6 +38,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String PROFILE = "Profile";
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
+	private static final String XML = "xml";
 	
 	private static final int WINDOW_WIDTH = 1000;
 	private static final int WINDOW_HEIGHT_NO_CONSOLE = 285;
@@ -79,6 +69,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
 	
+	private String  onlyXmlName;
+	private boolean haveExtension;
 	public TracerView(JComponent console) {
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -241,7 +233,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		JOptionPane.setDefaultLocale(new Locale("en"));
 		String curDir = System.getProperty("user.dir");
 		String s= File.separator;
-		String xmlPath = curDir+s+getNameXml()+FileUtilities.EXTENSION_XML;
+		String xmlName = getNameXml();
+		
+		String xmlPath = curDir+s+xmlName+FileUtilities.EXTENSION_XML;	
 		
 		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, "", JOptionPane.YES_NO_CANCEL_OPTION, 
 				JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
@@ -271,7 +265,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		JOptionPane.showMessageDialog(new JFrame(),Message.ERROR_EXTENSION);
 	}
 
-	public void loadClasses(List<String> classes) {
+	@SuppressWarnings("unchecked")
+    public void loadClasses(List<String> classes) {
 	
 		nameClass.removeAllItems();
 		
@@ -300,9 +295,13 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public String getNameXml() {
-		String nameXml = this. nameXml.getText();
-		if (nameXml.equals(""))
-			nameXml = "default";
+		String nameXml = "";
+		if (!haveExtension) {
+			nameXml = this. nameXml.getText();
+			if (nameXml.equals(""))
+				nameXml = "default";
+		} else nameXml = onlyXmlName;
+		
 		return nameXml;
 	}
 
@@ -322,18 +321,41 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		} else if (source.equals(exit)){
 			clickedOnExit();
 		} else if (source.equals(trace)){
-			clickedOnTrace();
+			String xmlName = nameXml.getText();
+			boolean isXmlExtension = FileUtilities.isExtension(xmlName, XML);
+			if (isXmlExtension) {
+				haveExtension = true;
+				onlyXmlName = FileUtilities.getOnlyName(xmlName);
+			}else haveExtension=false;
+			
+			if(existFileXml(getNameXml()+FileUtilities.EXTENSION_XML)){									
+				 int seleccion = JOptionPane.showOptionDialog( null,getNameXml() +" already exists,"+" are you sure you want to overwrite the current file?",
+						 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
+				 if(seleccion==0) {
+					 setEnableProfileAndTracer(false);
+					 clickedOnTrace();
+				 }				 											    
+			}else {
+				 setEnableProfileAndTracer(false);
+				 clickedOnTrace();
+			}
+			
 		} else if (source.equals(profile)){
+			setEnableProfileAndTracer(false);
+			profile.setEnabled(false); 
 			clickedOnProfile();
 		} else if (source.equals(mntmExit)){
 			clickedOnExit();
 		} else if (source.equals(mntmLoadProfile)){
+			setEnableProfileAndTracer(false);
 			clickedOnLoadProfile();
 		} else if (source.equals(mntmLoadTrace)){
 			clickedOnLoadTracer();
 		} else if (source.equals(mntmProfile)){
+			setEnableProfileAndTracer(false);
 			clickedOnProfile();
 		} else if (source.equals(mntmTrace)){
+			setEnableProfileAndTracer(false);
 			clickedOnTrace();
 		} else if (source.equals(nameClass)){
 			dataChangedComboBox();
@@ -407,6 +429,31 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		mntmTrace.setEnabled(enable);
 		trace.setEnabled(enable);
 		profile.setEnabled(enable);
+	}
+
+	public void setEnableTracer(boolean enable) {
+		mntmTrace.setEnabled(enable);
+		trace.setEnabled(enable);
+	}
+
+	public void setEnableProfile(boolean enable) {
+		mntmProfile.setEnabled(enable);
+		profile.setEnabled(enable);
+	}
+	
+	private boolean existFileXml(String name){
+		int i=0;
+	 	boolean found=false;
+	 	File files = new File("./");
+	 	String[] classes=files.list();
+		
+	 	while(i<classes.length && !found){
+	 			
+	 	if(classes[i].equals(name)) found=true;
+	 		i++;
+	 		
+	 	} 		
+	 	return found;	 		
 	}
 
 }
