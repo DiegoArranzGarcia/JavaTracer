@@ -31,7 +31,7 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 
 	public void closeStreams(){
 		console.closeStreams();
-		//view.setEditable(false);
+		view.setEditable(false);
 	}
 
 	public void input(String string) {
@@ -40,6 +40,11 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 
 	public JComponent getConsole() {
 		return view;
+	}
+
+	public void resetConsole() {
+		view.clear();
+		view.setEditable(true);
 	}	
 
 }

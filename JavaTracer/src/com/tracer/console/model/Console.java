@@ -27,6 +27,7 @@ public class Console {
 		try {
 			out.join();
 			err.join();
+			in = null;
 		} catch (InterruptedException e) {
 			
 		}
@@ -37,7 +38,8 @@ public class Console {
 	}
 
 	public void input(String string){
-		in.write(string);
+		if (in != null)
+			in.write(string);
 	}
 
 	public void write(StreamOutputRedirectThread thread,String string) {

@@ -105,7 +105,7 @@ public class ConsoleView extends JPanel implements ActionListener{
 		
 	}
 
-	private void clear() {
+	public void clear() {
 		console.clear();
 	}
 
@@ -119,6 +119,10 @@ public class ConsoleView extends JPanel implements ActionListener{
 
 	public void input(String text) {
 		presenter.input(text);
+	}
+
+	public void setEditable(boolean editable) {
+		console.setEditable(editable);
 	}
 	
 	

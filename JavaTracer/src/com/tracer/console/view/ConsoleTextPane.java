@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -15,7 +17,7 @@ import javax.swing.text.StyledDocument;
 
 
 @SuppressWarnings("serial")
-public class ConsoleTextPane extends JTextPane implements KeyListener{
+public class ConsoleTextPane extends JTextPane implements KeyListener,DocumentListener{
 	
 	private SimpleAttributeSet error;
 	private SimpleAttributeSet output;
@@ -26,13 +28,15 @@ public class ConsoleTextPane extends JTextPane implements KeyListener{
 	private List<Integer> caretPositions;
 	
 	public ConsoleTextPane(ConsoleView view){
+		this.view = view;
+		
 		setBorder(new EmptyBorder(0, 5, 0, 0));
-		addKeyListener(this);
 		createSytles();
 		document = getStyledDocument();
 		caretPositions = new ArrayList<Integer>();
 		caretPositions.add(0);
-		this.view = view;
+		
+		addKeyListener(this);
 	}
 		
 	private void createSytles() {
@@ -76,14 +80,16 @@ public class ConsoleTextPane extends JTextPane implements KeyListener{
 			caretPositions.add(document.getLength());
 			String getText = getTextFromConsole();
 			caretPositions.clear();
-			caretPositions.add(document.getLength());
+			caretPositions.add(document.getLength()+1);
 			view.input(getText);
 		} else if (keyCode == KeyEvent.VK_BACK_SPACE){ //Key <-
 			delete();
 		} else if (keyCode == KeyEvent.VK_DELETE){ //Key "Supr"
 			supr();
 		} else if (!specialKey(keyCode)){ 
-			insertInput(e.getKeyChar());
+			//insertInput(e.getKeyChar());
+			setCaretPosition(document.getLength());
+			document.setParagraphAttributes(document.getLength(),1,input,false);
 		}
 		
 	}
@@ -133,11 +139,6 @@ public class ConsoleTextPane extends JTextPane implements KeyListener{
 		}
 	}
 
-	private void insertInput(char keyChar) {
-		setCaretPosition(document.getLength());
-		document.setParagraphAttributes(document.getLength(),1,input,false);
-	}
-
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
 
@@ -145,6 +146,15 @@ public class ConsoleTextPane extends JTextPane implements KeyListener{
 		setText("");
 		caretPositions.clear();
 		caretPositions.add(0);
+	}
+
+	public void changedUpdate(DocumentEvent arg0) {
+	}
+
+	public void insertUpdate(DocumentEvent arg0) {
+	}
+
+	public void removeUpdate(DocumentEvent arg0) {
 	}
 
 
