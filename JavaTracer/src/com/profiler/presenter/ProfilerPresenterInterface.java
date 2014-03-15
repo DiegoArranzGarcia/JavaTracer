@@ -15,5 +15,6 @@ public interface ProfilerPresenterInterface {
 	public void saveProfile(File file);
 	public ProfilerTree getTree();
 	public void refresh();
+	public void doubleClick(String completeName);
 
 }
