@@ -204,7 +204,7 @@ public class ProfilerTree {
 		while(it.hasNext()){
 			
 			List<String> node = it.next();
-			if(!states.get(node)){
+			if(states.get(node)){
 				
 				ProfileData trueNode = getData(node);
 				if(trueNode!=null){
