@@ -149,26 +149,28 @@ ArrayList<String>  futureNode=new ArrayList<String>();
 		
 		
 		ProfileData node=profiler.getProfileTree().getData(futureNode);
-		int isClass=profiler.getProfileTree().foundClass(node.getParent(),completeName);
-		if(isClass!=-1){
-			HashMap<String,Integer> methodsInfo=new HashMap<String,Integer>();
-			List<ProfileData> methods=node.getChildren();
-			int i=0;
-			int numCalledMethods=0;
-				while(i<methods.size()){
-					numCalledMethods=numCalledMethods+methods.get(i).getNumCalls();
-					methodsInfo.put(methods.get(i).getName(), methods.get(i).getNumCalls());	
-					i++;	
-					}
+	
+		if(node!=null){	
+		
+				int isClass=profiler.getProfileTree().foundClass(node.getParent(),completeName);
+				if(isClass!=-1){
+					HashMap<String,Integer> methodsInfo=new HashMap<String,Integer>();
+					List<ProfileData> methods=node.getChildren();
+					int i=0;
+					int numCalledMethods=0;
+					while(i<methods.size()){
+						numCalledMethods=numCalledMethods+methods.get(i).getNumCalls();
+						methodsInfo.put(methods.get(i).getName(), methods.get(i).getNumCalls());	
+						i++;	
+						}
 			
-			ProfilerViewWithoutSplit methodProfiler=new ProfilerViewWithoutSplit();
-			methodProfiler.load(methodsInfo, numCalledMethods);
-			methodProfiler.setVisible(true);
+					ProfilerViewWithoutSplit methodProfiler=new ProfilerViewWithoutSplit();
+					methodProfiler.load(methodsInfo, numCalledMethods);
+					methodProfiler.setVisible(true);
 			
-		}
+				}
 		
-		
-		
+			}
 	}
 
 }
