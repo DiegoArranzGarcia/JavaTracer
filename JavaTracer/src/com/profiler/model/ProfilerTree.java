@@ -67,7 +67,7 @@ public class ProfilerTree {
 		
 	}
 
-	public int foundMethod(ProfileData node,String methodName) {
+	private int foundMethod(ProfileData node,String methodName) {
 		int index = -1;
 		boolean found = false;
 		int i = 0;
@@ -87,7 +87,7 @@ public class ProfilerTree {
 		return index;
 	}
 
-	public int foundClass(ProfileData node, String className) {
+	private int foundClass(ProfileData node, String className) {
 		int index = -1;
 		boolean found = false;
 		int i = 0;
@@ -107,7 +107,7 @@ public class ProfilerTree {
 		return index;
 	}
 
-	public int foundPackage(ProfileData node, String packageName) {
+	private int foundPackage(ProfileData node, String packageName) {
 		int index = -1;
 		boolean found = false;
 		int i = 0;

@@ -19,7 +19,6 @@ import com.profiler.model.data.ProfileMethod;
 import com.profiler.model.data.ProfilePackage;
 import com.profiler.view.ProfilerView;
 import com.profiler.view.ProfilerViewInterface;
-import com.profiler.view.ProfilerViewWithoutSplit;
 
 public class ProfilerPresenter implements ProfilerPresenterInterface {
 	
@@ -133,42 +132,6 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	
 	
 	
-	}
-
-	
-	public void doubleClick(String completeName) {
-		
-		ArrayList<String>  futureNode=new ArrayList<String>();
-		
-		while(completeName.contains(".")){
-			
-			futureNode.add(completeName.substring(0, completeName.indexOf(".")));
-			completeName=completeName.substring(completeName.indexOf(".")+1, completeName.length());
-			
-		}
-		futureNode.add(completeName);
-		
-		
-		ProfileData node=profiler.getProfileTree().getData(futureNode);
-		int isClass=profiler.getProfileTree().foundClass(node.getParent(),completeName);
-		if(isClass!=-1){
-			HashMap<String,Integer> methodsInfo=new HashMap<String,Integer>();
-			List<ProfileData> methods=node.getChildren();
-			int i=0;
-			int numCalledMethods=0;
-				while(i<methods.size()){
-					numCalledMethods=numCalledMethods+methods.get(i).getNumCalls();
-					methodsInfo.put(methods.get(i).getName(), methods.get(i).getNumCalls());	
-					i++;	
-					}
-			
-			ProfilerViewWithoutSplit methodProfiler=new ProfilerViewWithoutSplit();
-			methodProfiler.load(methodsInfo, numCalledMethods);
-			methodProfiler.setVisible(true);
-			
-		}
-		
-		
 	}
 
 }

@@ -14,8 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -62,7 +60,7 @@ import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
-public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener{
+public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener{
 
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
@@ -215,7 +213,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         splitPane.setLeftComponent(pieChartPanel);
         
         addComponentListener(this);
-        table.addMouseListener(this);
         
         splitPane.setDividerLocation(560);
         
@@ -600,28 +597,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	public void setPresenter(ProfilerPresenterInterface presenter) {
 		this.presenter = presenter;
-	}
-
-	public void mouseClicked(MouseEvent e) {
-
-		if (e.getClickCount() == 2){ 
-			int column=table.getSelectedColumn();
-			int row=table.getSelectedRow();
-			String completeName=(String)table.getValueAt(row, 2);
-			presenter.doubleClick(completeName);
-		}
-	
-	
-	
-	}
-
-	public void mouseEntered(MouseEvent arg0) {
-	}
-	public void mouseExited(MouseEvent arg0) {
-	}
-	public void mousePressed(MouseEvent arg0) {
-	}
-	public void mouseReleased(MouseEvent arg0){ 
 	}
 
 }
