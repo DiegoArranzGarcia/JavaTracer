@@ -11,7 +11,6 @@ import java.io.OutputStream;
 class StreamInputRedirect {
 
     private OutputStream out;
-    private static final int BUFFER_SIZE = 2048;
     private Console console;
     
     /**
@@ -33,6 +32,14 @@ class StreamInputRedirect {
         } catch(IOException exc) {
             System.err.println("Child I/O Transfer - " + exc);
         }
+    }
+
+	public Console getConsole() {
+	    return console;
+    }
+
+	public void setConsole(Console console) {
+	    this.console = console;
     }
 
 	
