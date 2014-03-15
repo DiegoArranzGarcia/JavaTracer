@@ -2,32 +2,27 @@ package com.tracer.console.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import com.alee.laf.button.WebToggleButton;
 import com.general.resources.ImageLoader;
 import com.tracer.console.presenter.ConsolePresenter;
-import javax.swing.JLabel;
-import java.awt.Component;
-import javax.swing.border.EmptyBorder;
-import java.awt.Rectangle;
-import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
-public class ConsoleView extends JPanel implements KeyListener{
+public class ConsoleView extends JPanel implements ActionListener{
 	
 	private static final String CLEAR_CONSOLE = "Clear console";
 	
@@ -36,12 +31,8 @@ public class ConsoleView extends JPanel implements KeyListener{
 	
 	private WebToggleButton btnClearConsole;
 	private WebToggleButton btnMinimizeConsole;
-	private JEditorPane consoleText;
-	private Document document;
-	
-	private SimpleAttributeSet error;
-	private SimpleAttributeSet output;
-	private SimpleAttributeSet input;
+		
+	private ConsoleTextPane console;
 	private JLabel lblNewLabel;
 	private JPanel panel_1;
 	
@@ -53,11 +44,8 @@ public class ConsoleView extends JPanel implements KeyListener{
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);
 
-		consoleText = new JEditorPane();
-		scrollPane.setViewportView(consoleText);
-		createSytles();
-		consoleText.addKeyListener(this);
-		document = consoleText.getDocument();
+		console = new ConsoleTextPane(this);
+		scrollPane.setViewportView(console);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("MenuBar.border"));
@@ -87,6 +75,7 @@ public class ConsoleView extends JPanel implements KeyListener{
 		btnMinimizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMinimizeConsole.setIcon(new ImageIcon(imageLoader.getMinimizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMinimizeConsole.setDrawFocus(false);
+		btnMinimizeConsole.addActionListener(this);
 		
 		btnClearConsole = new WebToggleButton();
 		panel_1.add(btnClearConsole);
@@ -95,50 +84,42 @@ public class ConsoleView extends JPanel implements KeyListener{
 		btnClearConsole.setToolTipText(CLEAR_CONSOLE);
 		btnClearConsole.setIcon(new ImageIcon(imageLoader.getDeleteIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnClearConsole.setDrawFocus(false);
-		
+		btnClearConsole.addActionListener(this);
 	}
-
-	private void createSytles() {
-		error = new SimpleAttributeSet();
-		StyleConstants.setForeground(error, Color.RED);
-		output = new SimpleAttributeSet();
-		input = new SimpleAttributeSet();
-	}
-
-	public void writeOutput(String string) {
-		try {
-			document.insertString(document.getLength(),string,output);
-		} catch (BadLocationException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void writeError(String string) {
-		try {
-			document.insertString(document.getLength(),string,error);
-		} catch (BadLocationException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_ENTER){
-			String[] lines = consoleText.getText().split("\\n");
-			presenter.input(lines[lines.length-1]);
-		} else if (!(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT)){
-			//TODO : AvPag/RePag
-			setForeground(Color.ORANGE);
-			consoleText.setCaretPosition(document.getLength());
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {}
-
-	public void keyTyped(KeyEvent e) {}
 	
 	public void setPresenter(ConsolePresenter presenter){
 		this.presenter = presenter;
 	}
+
+	public void actionPerformed(ActionEvent event) {
+		Object source = event.getSource();
+		if (source.equals(btnClearConsole)){
+			clear();
+		} else {
+			minimize();
+		}
+		
+	}
+
+	private void minimize() {
+		
+	}
+
+	private void clear() {
+		console.clear();
+	}
+
+	public void writeError(String string) {
+		console.writeError(string);
+	}
+
+	public void writeOutput(String string) {
+		console.writeOutput(string);
+	}
+
+	public void input(String text) {
+		presenter.input(text);
+	}
+	
 	
 }
