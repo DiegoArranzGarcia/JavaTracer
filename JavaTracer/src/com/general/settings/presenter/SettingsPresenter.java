@@ -70,8 +70,6 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     	}
     	JavaTracerConfigurationXml.getInstance().setExcludes(excludesAux); 
 		  JavaTracerConfigurationXml.getInstance().saveNewConfiguration(false);
-		view.setVisible(false);
-		presenter.back();
     }
 
     public void cancelActionTracer() {
@@ -92,8 +90,6 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 			  numNodes = nNodes;
 			  JavaTracerConfigurationXml.getInstance().setNumNodes(numNodes);
 			  JavaTracerConfigurationXml.getInstance().saveNewConfiguration(false);
-			  view.setVisible(false);	
-			  presenter.back();
 		  }
 		 
 	  }

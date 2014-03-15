@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -60,7 +62,7 @@ import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
-public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener{
+public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener{
 
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
@@ -85,7 +87,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static final String FONT_TITLE = "Arial";
 	
 	private static String TITLE = "Profiling stats";
-	private static double SPLIT_PERCENTAGE = 0.54;
+	private static double SPLIT_PERCENTAGE = 0.52;
 	private static double PERCENTAGE_WIDTH = 1.0;
 	private static double PERCENTAGE_HEIGHT = 0.75;
 	private static final int CLASSCHART=5;
@@ -166,7 +168,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	new Object[][] {
         	},
         	new String[] {
-        		"", "Name", "Complete name", "Count", "Used"
+        		"", "Name", "Complete name", "Count", "Excluded"
         	}
         ) {
         	boolean[] columnEditables = new boolean[] {
@@ -204,6 +206,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.getColumnModel().getColumn(0).setMaxWidth(25);
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
@@ -212,6 +215,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         splitPane.setLeftComponent(pieChartPanel);
         
         addComponentListener(this);
+        table.addMouseListener(this);
         
         splitPane.setDividerLocation(560);
         
@@ -293,7 +297,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
 			
 		dataset.sortByValues(SortOrder.DESCENDING);
-		List<String> keys = dataset.getKeys();
+		@SuppressWarnings("unchecked") 
+        List<String> keys = dataset.getKeys();
 		DefaultPieDataset definitivedataset = new DefaultPieDataset();
 		
 		int i=0;
@@ -595,6 +600,40 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	public void setPresenter(ProfilerPresenterInterface presenter) {
 		this.presenter = presenter;
+	}
+
+	public void mouseClicked(MouseEvent e) {
+	
+	
+		if (e.getClickCount() == 2){ 
+			int column=table.getSelectedColumn();
+			int row=table.getSelectedRow();
+			String completeName=(String)table.getValueAt(row, 2);
+			presenter.doubleClick(completeName);
+		}
+	
+	
+	}
+
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	
+	public void mouseExited(MouseEvent e) {
+			
+	}
+
+	
+	public void mousePressed(MouseEvent e) {
+		
+		
+	}
+
+	
+	public void mouseReleased(MouseEvent e) {
+		
+		
 	}
 
 }

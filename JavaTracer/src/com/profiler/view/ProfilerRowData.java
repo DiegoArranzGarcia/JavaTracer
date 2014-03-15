@@ -10,18 +10,18 @@ public class ProfilerRowData implements TableRowData{
 	private Color color;
 	private String completeName;
 	private Integer count;
-	private boolean used;
+	private boolean excluded;
 	
-	public ProfilerRowData(String name, Color color,String completeName,Integer count,boolean used) {
+	public ProfilerRowData(String name, Color color,String completeName,Integer count,boolean excluded) {
 		this.name = name;
 		this.color = color;
 		this.completeName = completeName;
 		this.count = count;
-		this.used = used;
+		this.excluded = excluded;
 	}
 
 	public Object[] getValues() {	
-		return new Object[]{"",name,completeName,count,used};
+		return new Object[]{"",name,completeName,count,excluded};
 	}
 	
 	public String getName() {
@@ -57,11 +57,11 @@ public class ProfilerRowData implements TableRowData{
 	}
 
 	public boolean isUsed() {
-		return used;
+		return excluded;
 	}
 
-	public void setUsed(boolean used) {
-		this.used = used;
+	public void setUsed(boolean excluded) {
+		this.excluded = excluded;
 	}
 	
 }

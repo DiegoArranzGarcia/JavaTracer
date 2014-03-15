@@ -27,8 +27,8 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 
 	public void saveAction() {
 		arguments = view.getArguments();
-		view.setVisible(false);
-		presenter.back();
+		//view.setVisible(false);
+		//presenter.back();
 	}
 	
 	public void cancelAction() {
