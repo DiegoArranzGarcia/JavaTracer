@@ -87,7 +87,7 @@ public class ProfilerTree {
 		return index;
 	}
 
-	private int foundClass(ProfileData node, String className) {
+	public int foundClass(ProfileData node, String className) {
 		int index = -1;
 		boolean found = false;
 		int i = 0;
