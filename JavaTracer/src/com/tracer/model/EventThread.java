@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.general.model.configuration.JavaTracerConfigurationXml;
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.ThreadInfo;
 import com.profiler.model.ProfilerModelInterface;
+import com.profiler.model.data.ExcludedClassesMethods;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
@@ -63,43 +64,38 @@ public class EventThread extends Thread {
     //private StepManager step;
     //private PrepareManager prepare;
     private TraceWriter writer;
+    
     private ProfilerModelInterface profiler;
     private Tracer tracer;
     
     private List<String>  excludes; // Packages to exclude
+    private ExcludedClassesMethods excludesClassMethods;
 
     public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
+        this.profiler = profiler;
         this.tracer = tracer;
-        this.excludes = null;
-        try {
-        	this.excludes = JavaTracerConfigurationXml.getInstance().getExludesFromFile();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        
+        this.excludes = JavaTracerConfiguration.getInstance().getExludesFromFile();
+        this.excludesClassMethods = JavaTracerConfiguration.getInstance().getExcludeClassMethods();
         
         this.enableProfiling = config.isProfiling_mode();
-        this.profiler = profiler;
-        if (profiler != null)
+        
+        if (profiler != null) {
         	profiler.clean();
-        else {
+        } else {
         	writer = new TraceWriter(config.getNameXml());
         	writer.writeThreadInfo(new ThreadInfo());
         }  
-        //news Managers with virtual Machine  
-        //or array excludes created in Trace class  
+        
+        ClassUtils utils = new ClassUtils(excludes);
         
         death = new DeathManager();
         disconnect = new DisconnectManager();
         threadeath = new ThreadDeathManager(traceMap);
-        //fieldwatch=new FieldWatchManager(traceMap,vm);
-        
-        ClassUtils utils = new ClassUtils(excludes);
         methodentry = new MethodEntryManager(writer,utils);
         methodexit = new MethodExitManager(writer,utils);
-        //step=new StepManager(traceMap,vm);
-        //prepare=new PrepareManager(excludes,vm);
 		exception = new ExceptionManager(writer,utils);
 		
     }
@@ -186,14 +182,10 @@ public class EventThread extends Thread {
         		exception.exceptionEvent((ExceptionEvent)event);
         } else if (event instanceof ModificationWatchpointEvent) {
         	//fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
-        } else if (event instanceof MethodEntryEvent) {	
-            if (enableProfiling)
-            	profiler .profileEvent((MethodEntryEvent)event);
-            else 
-            	methodentry.methodEntryEvent((MethodEntryEvent)event);
+        } else if (event instanceof MethodEntryEvent) {
+        	methodEntryEvent((MethodEntryEvent)event);
         } else if (event instanceof MethodExitEvent) {
-        	if (!enableProfiling)
-        		methodexit.methodExitEvent((MethodExitEvent)event);
+        	methodExitEvent((MethodExitEvent)event);
         } else if (event instanceof StepEvent) {
             //step.stepEvent((StepEvent)event);
         } else if (event instanceof ThreadDeathEvent) {
@@ -211,7 +203,23 @@ public class EventThread extends Thread {
         }
     }
 
-    private void finishTrace() {
+    private void methodExitEvent(MethodExitEvent event) {
+    	if (!enableProfiling)
+    		methodexit.methodExitEvent((MethodExitEvent)event);
+	}
+
+	private void methodEntryEvent(MethodEntryEvent event) {
+		String methodName = event.method().toString();
+		String className = ClassUtils.getClass(event.method().declaringType());
+		if (!excludesClassMethods.isExcluded(className,methodName)){
+	    	if (enableProfiling)
+	        	profiler.profileEvent(event);
+	        else 
+	        	methodentry.methodEntryEvent(event);
+		}
+	}
+
+	private void finishTrace() {
     	writer.close();
 	}
 

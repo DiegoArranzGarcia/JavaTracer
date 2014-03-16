@@ -7,12 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.general.model.configuration.JavaTracerConfigurationXml;
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.model.ProfilerTree;
-import com.profiler.model.data.ExcludesClassMethods;
+import com.profiler.model.data.ExcludedClassesMethods;
 import com.profiler.model.data.ProfileClass;
 import com.profiler.model.data.ProfileData;
 import com.profiler.model.data.ProfileMethod;
@@ -56,17 +56,18 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 
 	public void save() {
 		//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-		JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
+		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		HashMap<List<String>, Boolean> classes = view.getDataState();
 		Iterator<Entry<List<String>,Boolean>> iterator = classes.entrySet().iterator();
-		List<String> excludesData = new ArrayList<>();
-		ExcludesClassMethods excludedMethods = new ExcludesClassMethods();
+		
+		ExcludedClassesMethods excludedMethods = configuration.getExcludeClassMethods();
+		List<String> excludesData = configuration.getExludesFromFile();
 		
 		while (iterator.hasNext()){
 			Entry<List<String>,Boolean> entry = iterator.next();
+			List<String> keys = new ArrayList<String>(entry.getKey());
+			ProfileData data = profiler.getData(keys);
 			if (entry.getValue()){
-				List<String> keys = new ArrayList<String>(entry.getKey());
-				ProfileData data = profiler.getData(keys);
 				if (data instanceof ProfilePackage){
 					String excludePackage = data.getCompleteName() + ".*";
 					excludesData.add(excludePackage);
@@ -76,13 +77,20 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 					ProfileMethod method = (ProfileMethod)data;
 					excludedMethods.addMethod(method.getParentCompleteName(),method.getCompleteName());
 				}
+			} else {
+				if (data instanceof ProfilePackage){
+					String excludePackage = data.getCompleteName() + ".*";
+					excludesData.remove(excludePackage);
+				} else if (data instanceof ProfileClass){
+					excludesData.remove(data.getCompleteName());
+				} else if (data instanceof ProfileMethod){
+					ProfileMethod method = (ProfileMethod)data;
+					excludedMethods.removeMethod(method.getParentCompleteName(),method.getCompleteName());
+				}
 			}
 		}
 		
-		configuration.addExcludes(excludesData);
-		configuration.addExcludesMethods(excludedMethods);
-		//view.setVisible(false);
-		//controller.back();
+		configuration.saveConfiguration();
 	}
 
 	public void cancel() {

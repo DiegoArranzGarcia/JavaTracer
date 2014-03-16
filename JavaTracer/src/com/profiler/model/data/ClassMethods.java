@@ -13,14 +13,6 @@ public class ClassMethods {
 		this.excludesMethods = new ArrayList<String>();
 	}
 	
-	public boolean equals(Object obj) {
-		
-		if (obj instanceof ClassMethods)
-			return className.equals(((ClassMethods)obj).getClassName());
-		else 
-			return super.equals(obj); 
-	}
-	
 	public String getClassName(){
 		return className;
 	}
@@ -30,7 +22,20 @@ public class ClassMethods {
 	}
 
 	public void addMethod(String methodName) {
-		excludesMethods.add(methodName);
+		if (!excludesMethods.contains(methodName))
+			excludesMethods.add(methodName);
+	}
+
+	public boolean isExcluded(String methodName) {
+		return excludesMethods.contains(methodName);
+	}
+
+	public void removeMethod(String methodName) {
+		excludesMethods.remove(methodName);
+	}
+
+	public boolean hasMethods() {
+		return !excludesMethods.isEmpty();
 	}
 
 }

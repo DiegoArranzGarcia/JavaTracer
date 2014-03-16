@@ -39,17 +39,6 @@ public class StepManager {
                             }*/
                             
      // Adjust call depth
-     int cnt = 0;
-      thread.SetIndent(new StringBuffer(thread.getBaseIndent())); 
-    
-    
-     cnt = thread.getThreadReference().frameCount();
-    
-     while (cnt-- > 0) {
-    	 thread.SetIndent(thread.getIndent().append("| "));
-    	 
-     }
-
      EventRequestManager mgr = vm.eventRequestManager();
      mgr.deleteEventRequest(event.request());
     

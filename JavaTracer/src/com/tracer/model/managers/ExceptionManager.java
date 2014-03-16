@@ -1,27 +1,19 @@
 package com.tracer.model.managers;
 
 
-import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.StringData;
-import com.sun.jdi.AbsentInformationException;
-import com.sun.jdi.ClassNotLoadedException;
-import com.sun.jdi.Field;
 import com.sun.jdi.IncompatibleThreadStateException;
-import com.sun.jdi.InvalidTypeException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Location;
 import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
-import com.sun.jdi.Type;
-import com.sun.jdi.Value;
 import com.sun.jdi.event.ExceptionEvent;
-import com.sun.jdi.event.MethodExitEvent;
 import com.tracer.model.ClassUtils;
 import com.tracer.model.methods.data.MethodExitInfo;
 import com.tracer.model.writers.TraceWriter;
@@ -82,7 +74,7 @@ public class ExceptionManager {
 					}
 			    
     			} catch (IncompatibleThreadStateException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 		
 				}

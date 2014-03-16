@@ -3,38 +3,44 @@
  */
 package com.general.model.configuration;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.general.model.XStreamUtil;
-import com.profiler.model.data.ExcludesClassMethods;
+import com.profiler.model.data.ExcludedClassesMethods;
 import com.thoughtworks.xstream.XStream;
 
 
-public class JavaTracerConfigurationXml extends XStreamUtil{
+public class JavaTracerConfiguration extends XStreamUtil{
 	private final static String CONFIG_FILE_NAME = "java-tracer-properties";
 	/*
 	 * General
 	 */
 	private String FILE_EXT = ".xml";
-	private XStream xStream;
 	private Document xmlDocument;
 	private XPath xPath;	
-	private static JavaTracerConfigurationXml instance;
+	private static JavaTracerConfiguration instance;
 	private File fileXml;
-	private FileWriter writer;
+	private BufferedWriter writer;
 	/*
 	 * Tracer
 	 */
 	private List<String>excludesList;
-	private ExcludesClassMethods excludesClassMethods,newExcludesMethods;
-	private List<ExcludesClassMethods>listExcludesClassMethods;
+	private ExcludedClassesMethods excludedClassesMethods;
 	
 	/*
 	 * Inspector
@@ -42,26 +48,22 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	private int numlevels;
 	private int numNodes;
 	
-	public static JavaTracerConfigurationXml getInstance(){
+	public static JavaTracerConfiguration getInstance(){
 		/*
 		 * Instance class
 		 */
 		if (instance==null) 
-			return instance = new JavaTracerConfigurationXml();
+			return instance = new JavaTracerConfiguration();
 		else 
 			return instance;
 	}
 	
-	 private JavaTracerConfigurationXml() {
+	 private JavaTracerConfiguration() {
 		/*
 		 * Create default file xml
 		 */
-		
-		this. excludesList = new ArrayList<>();
-		this.listExcludesClassMethods = new ArrayList<>();
 		this.fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);		
 		
-		this.xStream = new XStream();
 		if (!fileXml.exists()) {
 			/*
 			 *If the file does not exist, create a new one with the default settings
@@ -69,10 +71,9 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 			initExcludes();
 			this.numlevels = 4;
 			this.numNodes = 30;
+			this.excludedClassesMethods = new ExcludedClassesMethods();
 			
-			initExcludesMethod();
-			
-			generateFile(false);
+			generateFile();
 			try {
 		        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
 		        xPath = XPathFactory.newInstance().newXPath();
@@ -92,7 +93,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 				excludesList = getExludesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-				listExcludesClassMethods = getExcludesClassMethodFromFile();
+				excludedClassesMethods = getExcludesClassesMethodFromFile();
             }
             catch (Exception ex) {
 	            ex.printStackTrace();
@@ -104,19 +105,21 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	 
 
 	private void initExcludes() {
+		excludesList = new ArrayList<>();
     	excludesList.add("java.*");
     	excludesList.add("javax.*");
     	excludesList.add("sun.*");
     	excludesList.add("com.sun.*");    
     }
 	
-	/*
+	/**
 	 * Write in xml file the configuration
 	 */
-	private void generateFile(boolean newExcludesMethods) { 
+	private void generateFile() { 
     	
 		try {
-	    		  writer = new FileWriter(fileXml);
+				  FileWriter fw = new FileWriter(fileXml);
+	    		  writer = new BufferedWriter(fw);
 	    		  write(startTag(TAG_CONFIGURATION));	
 	    		  
 	    		  write(startTag(TAG_EXCLUDES));	
@@ -132,13 +135,12 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 	    		  write(endTag(TAG_NUM_NODES));
 	    		  
 	    		  write(startTag(TAG_METHODS_EXCLUDES));
-	    		  if (newExcludesMethods)
-	    			  writeNewMethodsExcludes();
-	    		  else writeMethodsExcludes();
+	    		  writeExcludesClassesMethods();
 	    		  write(endTag(TAG_METHODS_EXCLUDES));
 		    		  
 	    		  write(endTag(TAG_CONFIGURATION)); 
 	    		  writer.close();
+	    		  fw.close();
 	    		  
 	        }
 	        catch (IOException ex) {
@@ -147,9 +149,18 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		 
    }
 
+	private void writeExcludesClassesMethods() {
+		 try {
+	 	        writeXStream(numNodes);
+	         }
+	         catch (Exception ex) {
+	 	        ex.printStackTrace();
+	         } 
+	}
+
 	private void writeNumNodes() {
     	 try {
- 	        writeXStream(numNodes);
+ 	        writeXStream(excludedClassesMethods);
          }
          catch (Exception ex) {
  	        ex.printStackTrace();
@@ -175,44 +186,10 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
         }
 	    
     }
-
-	private void writeNewMethodsExcludes() {
-   	 try {
-   		 for (int i =0;i<listExcludesClassMethods.size();i++){
-   			 writeXStream(listExcludesClassMethods.get(i)); 
-   		 }
-  	        writeXStream(newExcludesMethods);
-          }
-          catch (Exception ex) {
-  	        ex.printStackTrace();
-          } 
-	    
-   }
-
-	private void writeMethodsExcludes() {
-   	 try {
-   		 for (int i =0;i<listExcludesClassMethods.size();i++){
-   			 writeXStream(listExcludesClassMethods.get(i)); 
-   		 }
- 	        
-         }
-         catch (Exception ex) {
- 	        ex.printStackTrace();
-         } 
-	    
-   }
 	
 	private void write(String string) throws IOException {
 			writer.write(string + "\n");
 		}
-	
-	protected String startTag(String tag){
-		return "<" + tag + ">";
-	}
-
-	protected String endTag(String tag) {
-		return "</" + tag + ">";
-	}
 	
 	private void writeXStream(Object object) throws Exception{
 		String string = xStream.toXML(object);
@@ -281,38 +258,25 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		return numNodes;
 	}
 	
-	   private List<ExcludesClassMethods> getExcludesClassMethodFromFile() {
-		   String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_METHODS_EXCLUDES + "/*"; 
-		   List<ExcludesClassMethods> listExcludesClassMethods = new ArrayList<>();
-		   
-		   try {
-	        	XPathExpression xPathExpression = xPath.compile(expression);
-	        	NodeList  methodsExcludes  = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
-	        	
-	        	for (int i=0;i<methodsExcludes.getLength();i++) {
-			 			String nodeString = nodeToString(methodsExcludes.item(i));
-			 			excludesClassMethods = (ExcludesClassMethods) xStream.fromXML(nodeString); 		
-			 			listExcludesClassMethods.add(excludesClassMethods);
-		 		}
-	        }
-	        catch (Exception ex) {
-	        	initExcludesMethod();
-	        	return listExcludesClassMethods;
-	        }	
-			
-			return listExcludesClassMethods;
-	    }
-	
-	
-    private void initExcludesMethod() {
-	   excludesClassMethods = new ExcludesClassMethods();
-	    
+   private ExcludedClassesMethods getExcludesClassesMethodFromFile() {
+	   
+	   ExcludedClassesMethods excludedClassMethods = null;
+	   try { 
+		   String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_METHODS_EXCLUDES; 
+		   XPathExpression xPathExpression = xPath.compile(expression);
+	   	   Node methodsExcludes  = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+	   	   excludedClassMethods = (ExcludedClassesMethods) xStream.fromXML(nodeToString(methodsExcludes));
+	   } catch (Exception e){
+			excludedClassMethods = new ExcludedClassesMethods();
+	   }
+	   
+   	   return excludedClassMethods;
     }
-
-	public void saveNewConfiguration(boolean newExcludesMethods) { 
+	
+	public void saveConfiguration() { 
 		this.xStream = new XStream();
-		 fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
-		generateFile(newExcludesMethods);
+		fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
+		generateFile();
 		
 		try {
 	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
@@ -339,59 +303,7 @@ public class JavaTracerConfigurationXml extends XStreamUtil{
 		
 	}
 	
-	 public void addExcludes(List<String> newExcludes){
-	    	
-	    	List<String> currentExcludes = new ArrayList<>();
-            try {
-	            currentExcludes = getExludesFromFile();
-            }
-            catch (Exception ex) {
-	            ex.printStackTrace();
-            }
-	    	
-	    	for (int i=0;i<newExcludes.size();i++){
-	    		if (!currentExcludes.contains(newExcludes.get(i))){
-	    			currentExcludes.add(newExcludes.get(i)); 
-	    		}
-	    	}
-	    	
-	    	try {
-				try {
-			        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
-			        xPath = XPathFactory.newInstance().newXPath();
-		        }
-				catch (Exception e){
-					e.printStackTrace();
-				}
-				excludesList = currentExcludes;
-				numlevels =  getNumLevelsFromFile();
-				numNodes = getNumNodesFromFile();
-				listExcludesClassMethods = getExcludesClassMethodFromFile();
-				saveNewConfiguration(false);
-            }
-            catch (Exception ex) {
-	            ex.printStackTrace();
-            }
-	    	
-	    		
-	    }
-	 
-		public void addExcludesMethods(ExcludesClassMethods newExcludesMethods) {
-			excludesList = getExludesFromFile();
-			numlevels =  getNumLevelsFromFile();
-			numNodes = getNumNodesFromFile();
-			listExcludesClassMethods = getExcludesClassMethodFromFile();
-			this.newExcludesMethods = newExcludesMethods;
-			
-			saveNewConfiguration(true);
-			
-		}
-
-		public List<ExcludesClassMethods> getListExcludesClassMethods() {
-	        return listExcludesClassMethods;
-        }
-
-		public void setListExcludesClassMethods(List<ExcludesClassMethods> listExcludesClassMethods) {
-	        this.listExcludesClassMethods = listExcludesClassMethods;
-        }
+	public ExcludedClassesMethods getExcludeClassMethods() {
+		return this.excludedClassesMethods;
+	}
 }

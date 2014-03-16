@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.general.model.configuration.JavaTracerConfigurationXml;
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
@@ -45,14 +45,14 @@ public class Tracer {
 	  */
     public void trace(RunConfiguration config) {
 
-    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();     
+    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();     
         vm = launchTarget(config);
         generateTrace(config,null);
         
     }
     
     public void profile(RunConfiguration config,ProfilerModelInterface profile){
-    	JavaTracerConfigurationXml configuration = JavaTracerConfigurationXml.getInstance();
+    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
         vm = launchTarget(config);
         generateTrace(config,profile);
     }
