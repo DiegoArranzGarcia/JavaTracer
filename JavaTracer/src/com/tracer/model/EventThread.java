@@ -204,8 +204,12 @@ public class EventThread extends Thread {
     }
 
     private void methodExitEvent(MethodExitEvent event) {
-    	if (!enableProfiling)
-    		methodexit.methodExitEvent((MethodExitEvent)event);
+    	String methodName = event.method().toString();
+		String className = ClassUtils.getClass(event.method().declaringType());
+		if (!excludesClassMethods.isExcluded(className,methodName)){
+			if (!enableProfiling)
+				methodexit.methodExitEvent((MethodExitEvent)event);
+		}
 	}
 
 	private void methodEntryEvent(MethodEntryEvent event) {
