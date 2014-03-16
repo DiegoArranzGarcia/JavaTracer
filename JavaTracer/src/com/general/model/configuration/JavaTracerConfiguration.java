@@ -3,7 +3,6 @@
  */
 package com.general.model.configuration;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private XPath xPath;	
 	private static JavaTracerConfiguration instance;
 	private File fileXml;
-	private BufferedWriter writer;
+	private FileWriter writer;
 	/*
 	 * Tracer
 	 */
@@ -118,8 +117,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private void generateFile() { 
     	
 		try {
-				  FileWriter fw = new FileWriter(fileXml);
-	    		  writer = new BufferedWriter(fw);
+	    		  writer = new FileWriter(fileXml);
 	    		  write(startTag(TAG_CONFIGURATION));	
 	    		  
 	    		  write(startTag(TAG_EXCLUDES));	
@@ -140,7 +138,6 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		    		  
 	    		  write(endTag(TAG_CONFIGURATION)); 
 	    		  writer.close();
-	    		  fw.close();
 	    		  
 	        }
 	        catch (IOException ex) {
