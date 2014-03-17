@@ -20,9 +20,6 @@ public class RunConfiguration {
 		this.external_jars = external_jars;
 	}
 	
-	public boolean check() {
-		return false;
-	}
 	
 	//Getters and setters
 	

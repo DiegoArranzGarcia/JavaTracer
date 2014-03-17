@@ -341,9 +341,29 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			}
 			
 		} else if (source.equals(profile)){
-			setEnableProfileAndTracer(false);
-			profile.setEnabled(false); 
-			clickedOnProfile();
+			
+		
+			String xmlName = nameXml.getText()+"Profiler";
+			boolean isXmlExtension = FileUtilities.isExtension(xmlName, XML);
+			if (isXmlExtension) {
+				haveExtension = true;
+				onlyXmlName = FileUtilities.getOnlyName(xmlName);
+			}else haveExtension=false;
+			
+			if(existFileXml(nameXml+FileUtilities.EXTENSION_XML)){									
+				 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
+						 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
+				 if(seleccion==0) {
+					 setEnableProfileAndTracer(false);
+					 clickedOnProfile();
+				 }				 											    
+			}else {
+				 
+				setEnableProfileAndTracer(false);
+				profile.setEnabled(false); 
+				clickedOnProfile();
+					}
+		
 		} else if (source.equals(mntmExit)){
 			clickedOnExit();
 		} else if (source.equals(mntmLoadProfile)){
