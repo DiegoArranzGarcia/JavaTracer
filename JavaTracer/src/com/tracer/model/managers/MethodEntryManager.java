@@ -38,7 +38,7 @@ public class MethodEntryManager{
 	 * 		<li>Method's name</li>
 	 * 		<li>Method's Class (Class where the method is called)</li>
 	 * 		<li>Method's arguments</li>
-	 * 		<li>Method's Class information (State of the "this" object where the mehotd is called)</li>
+	 * 		<li>Method's Class information (State of the "this" object when the method is called)</li>
 	 * </ul>
 	 * @param event - The event that is going to be processed.
 	 */
@@ -53,7 +53,11 @@ public class MethodEntryManager{
         String className = ClassUtils.getClass(method.declaringType());
         Data argument_this = processThis(event,ref,thread);
         MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
-        writer.writeMethodEntryInfo(info);
+        
+        synchronized (writer) {
+        	writer.writeMethodEntryInfo(info);
+		}
+        
     }
 
 	private List<Data> processArguments(Method method, ThreadReference thread) {

@@ -23,26 +23,27 @@ public class MethodExitManager{
 	
 	// Forward event for thread specific processing
     public void methodExitEvent(MethodExitEvent event) {
+    	
     	ThreadReference thread = event.thread();
-    	 Method method = event.method();
-         String methodName = method.name();
-         List<Data> arguments = processArguments(method,thread);
+    	Method method = event.method();
+        String methodName = method.name();
+        List<Data> arguments = processArguments(method,thread);
          
-         String className = ClassUtils.getClass(method.declaringType());
-         Value returnValue = event.returnValue();
-         Data returnObject = null; 
+        String className = ClassUtils.getClass(method.declaringType());
+        Value returnValue = event.returnValue();
+        Data returnObject = null; 
          
-         if (!(returnValue instanceof VoidValue)) 
+        if (!(returnValue instanceof VoidValue)) 
         	 returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());         
+                  
+        ReferenceType ref = method.declaringType(); // "class" where is declaring the method
+        Data object_this = processThis(event,ref, thread);
+        MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
          
-         /*if (className.equals("program.Program") && (methodName.equals("toString"))){
-        	 returnObject = new StringData("return",1,"a");
-         }*/
+    	synchronized (writer) { 
+    		writer.writeMethodExitInfo(info);	
+		}
          
-         ReferenceType ref=method.declaringType(); // "class" where is declaring the method
-         Data object_this = processThis(event,ref, thread);
-         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
-         writer.writeMethodExitInfo(info);
     }
    
 

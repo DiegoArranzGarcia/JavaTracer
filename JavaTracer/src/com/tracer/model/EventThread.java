@@ -34,7 +34,7 @@ import com.sun.jdi.request.MethodEntryRequest;
 import com.sun.jdi.request.MethodExitRequest;
 import com.sun.jdi.request.ThreadDeathRequest;
 import com.tracer.controller.RunConfiguration;
-import com.tracer.model.managers.DeathManager;
+import com.tracer.model.managers.VMDeathManager;
 import com.tracer.model.managers.DisconnectManager;
 import com.tracer.model.managers.ExceptionManager;
 import com.tracer.model.managers.MethodEntryManager;
@@ -54,13 +54,13 @@ public class EventThread extends Thread {
     private Map<ThreadReference, ThreadTrace> traceMap = new HashMap<>();
        
     //Managers
-    private DeathManager death;
+    private VMDeathManager vmDeathManager;
     private DisconnectManager disconnect;
-    private ExceptionManager exception;
+    private ExceptionManager exceptionManager;
     private ThreadDeathManager threadeath;
     //private FieldWatchManager fieldwatch;
-    private MethodEntryManager methodentry;
-    private MethodExitManager methodexit;
+    private MethodEntryManager methodEntryManager;
+    private MethodExitManager methodExitManager;
     //private StepManager step;
     //private PrepareManager prepare;
     private TraceWriter writer;
@@ -91,12 +91,12 @@ public class EventThread extends Thread {
         
         ClassUtils utils = new ClassUtils(excludes);
         
-        death = new DeathManager();
         disconnect = new DisconnectManager();
         threadeath = new ThreadDeathManager(traceMap);
-        methodentry = new MethodEntryManager(writer,utils);
-        methodexit = new MethodExitManager(writer,utils);
-		exception = new ExceptionManager(writer,utils);
+        vmDeathManager = new VMDeathManager(writer);
+        methodEntryManager = new MethodEntryManager(writer,utils);
+        methodExitManager = new MethodExitManager(writer,utils);
+		exceptionManager = new ExceptionManager(writer,utils);
 		
     }
 
@@ -179,7 +179,7 @@ public class EventThread extends Thread {
     private void handleEvent(Event event) {
         if (event instanceof ExceptionEvent) {
         	if (!enableProfiling)
-        		exception.exceptionEvent((ExceptionEvent)event);
+        		exceptionManager.exceptionEvent((ExceptionEvent)event);
         } else if (event instanceof ModificationWatchpointEvent) {
         	//fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
         } else if (event instanceof MethodEntryEvent) {
@@ -193,22 +193,25 @@ public class EventThread extends Thread {
         } else if (event instanceof ClassPrepareEvent) {
             //prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
-        	if (!enableProfiling)
-        		finishTrace();
-        	tracer.finishedTrace();
+        	vmDeathEvent((VMDeathEvent)event);
         } else if (event instanceof VMDisconnectEvent) {
-            connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
+            connected = disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
         } else if (event instanceof ThreadStartEvent){
         	
         }
     }
 
-    private void methodExitEvent(MethodExitEvent event) {
+    private void vmDeathEvent(VMDeathEvent event) {
+    	vmDeathManager.vmDeathEvent(event,enableProfiling);
+    	tracer.finishedTrace();
+	}
+
+	private void methodExitEvent(MethodExitEvent event) {
     	String methodName = event.method().toString();
 		String className = ClassUtils.getClass(event.method().declaringType());
 		if (!excludesClassMethods.isExcluded(className,methodName)){
 			if (!enableProfiling)
-				methodexit.methodExitEvent((MethodExitEvent)event);
+				methodExitManager.methodExitEvent((MethodExitEvent)event);
 		}
 	}
 
@@ -219,12 +222,8 @@ public class EventThread extends Thread {
 	    	if (enableProfiling)
 	        	profiler.profileEvent(event);
 	        else 
-	        	methodentry.methodEntryEvent(event);
+	        	methodEntryManager.methodEntryEvent(event);
 		}
-	}
-
-	private void finishTrace() {
-    	writer.close();
 	}
 
 	/***
@@ -242,7 +241,7 @@ public class EventThread extends Thread {
                 while (iter.hasNext()) {
                     Event event = iter.nextEvent();
                     if (event instanceof VMDeathEvent) {
-                        vmDied=death.vmDeathEvent((VMDeathEvent)event);
+                        vmDeathManager.vmDeathEvent((VMDeathEvent)event,enableProfiling);
                     } else if (event instanceof VMDisconnectEvent) {
                         connected=disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
                     }
