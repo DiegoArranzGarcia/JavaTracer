@@ -47,14 +47,16 @@ public class TracerController {
 		this.lastConfig = getAllConfig(false);
 		tracerView.showConsole();
 		consolePresenter.resetConsole();
-		tracer.trace(lastConfig);		
+		tracer.trace(lastConfig);	
+		tracerView.setEnableProfileAndTracer(false);
 	}
 	
 	public void clickedOnProfile(){
 		this.lastConfig = getAllConfig(true);		
 		tracerView.showConsole();
 		consolePresenter.resetConsole();
-		tracer.profile(lastConfig,presenter.getProfiler());	
+		tracer.profile(lastConfig,presenter.getProfiler());
+		tracerView.setEnableProfileAndTracer(false);
 	}
 	
 	private RunConfiguration getAllConfig(boolean profileMode) {

@@ -13,6 +13,10 @@ import javax.swing.event.DocumentListener;
 
 import com.general.resources.ImageLoader;
 import com.general.settings.presenter.SettingsPresenterInterface;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.RowSpec;
 
 @SuppressWarnings("serial")
 public class SettingsView extends JFrame implements ActionListener,MouseListener,DocumentListener, SettingsViewInterface,KeyListener{
@@ -59,6 +63,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	
 	
 	public SettingsView() {
+		setResizable(false);
 		
 		initGeneralView(); 
 		initTracerSettings();
@@ -88,105 +93,80 @@ private void initTracerSettings() {
     	
     	model = new DefaultListModel<String>();
 		
-		tracerSettings = new Panel();
-		tabbedPane.addTab("Tracer", null, tracerSettings, null);
-		tracerSettings.addMouseListener(this);
-		tracerSettings.setLayout(null);
-		tracerSettings.setSize(690, 330); 
-		
-		SpringLayout sl_contentPane = new SpringLayout();
-		tracerSettings.setLayout(sl_contentPane);
-		
-		excludes = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.WEST, excludes, 39, SpringLayout.WEST, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.EAST, excludes, -244, SpringLayout.EAST, tracerSettings);
-		tracerSettings.add(excludes);
-		excludes.setColumns(10);
-		excludes.getDocument().addDocumentListener(this);
-		
-		JLabel argumentLabel = new JLabel("Excludes");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, excludes, 20, SpringLayout.SOUTH, argumentLabel);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, argumentLabel, 20, SpringLayout.NORTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.WEST, argumentLabel, 39, SpringLayout.WEST, tracerSettings);
-		tracerSettings.add(argumentLabel);
-		
-		addButton = new JButton(ADD);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, addButton, 107, SpringLayout.NORTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.EAST, addButton, -31, SpringLayout.EAST, tracerSettings);
-		tracerSettings.add(addButton);
-		addButton.addActionListener(this);
-		
-		deleteButton = new JButton(DELETE);
-		deleteButton.setSize(115, 23);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteButton, 17, SpringLayout.SOUTH, addButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, addButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, deleteButton, -31, SpringLayout.EAST, tracerSettings);
-		tracerSettings.add(deleteButton);
-		deleteButton.addActionListener(this);
-		
-		deleteAllButton = new JButton(DELETE_ALL);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, deleteButton, -19, SpringLayout.NORTH, deleteAllButton);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteAllButton, 189, SpringLayout.NORTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.WEST, deleteAllButton, 0, SpringLayout.WEST, addButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, deleteAllButton, -31, SpringLayout.EAST, tracerSettings);
-		tracerSettings.add(deleteAllButton);
-		deleteAllButton.addActionListener(this);
-		
-		cancelButtonTracer = new JButton(CANCEL);
-		tracerSettings.add(cancelButtonTracer);
-		cancelButtonTracer.addActionListener(this);
-		
-		saveButtonTracer = new JButton(SAVE);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, cancelButtonTracer, 0, SpringLayout.NORTH, saveButtonTracer);
-		sl_contentPane.putConstraint(SpringLayout.WEST, cancelButtonTracer, 92, SpringLayout.EAST, saveButtonTracer);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, saveButtonTracer, -10, SpringLayout.SOUTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.WEST, saveButtonTracer, 97, SpringLayout.WEST, tracerSettings);
-		tracerSettings.add(saveButtonTracer);
-		saveButtonTracer.addActionListener(this);
-		
-		downButton = new JButton("");
-		sl_contentPane.putConstraint(SpringLayout.WEST, downButton, 367, SpringLayout.WEST, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, downButton, -59, SpringLayout.SOUTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.EAST, downButton, -94, SpringLayout.WEST, deleteAllButton);
-		downButton.setIcon(imageLoader.getArrowDownIcon());
-		downButton.setEnabled(false);
-		tracerSettings.add(downButton);
-		downButton.addActionListener(this);
-		
-		upButton = new JButton("");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, downButton, 106, SpringLayout.SOUTH, upButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, addButton, 93, SpringLayout.EAST, upButton);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, upButton, -190, SpringLayout.SOUTH, tracerSettings);
-		sl_contentPane.putConstraint(SpringLayout.EAST, upButton, 5, SpringLayout.EAST, excludes);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, upButton, 31, SpringLayout.SOUTH, excludes);
-		sl_contentPane.putConstraint(SpringLayout.WEST, upButton, 367, SpringLayout.WEST, tracerSettings);
-		upButton.setIcon(imageLoader.getArrowUpIcon());
-		upButton.setEnabled(false);
-		upButton.addActionListener(this);
-		tracerSettings.add(upButton);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.NORTH, addButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, excludes);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, downButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, scrollPane, -6, SpringLayout.WEST, downButton);
-		scrollPane.setBackground(Color.WHITE);
-		tracerSettings.add(scrollPane);
-		
-		excludesList = new JList<String>();		
-		excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		excludesList.setBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setViewportView(excludesList);
-		excludesList.setModel(model);
-		excludesList.addMouseListener(this);
-		excludesList.addKeyListener(this); 
-		
     }
 
 
 
 	private void initInspectorView() {
-		    inspectorSettings= new Panel();
+			
+			tracerSettings = new Panel();
+			tabbedPane.addTab("Tracer", null, tracerSettings, null);
+			tracerSettings.addMouseListener(this);
+			tracerSettings.setLayout(null);
+			tracerSettings.setSize(690, 330);
+			tracerSettings.setLayout(null);
+			
+			excludes = new JTextField();
+			excludes.setBounds(39, 46, 390, 22);
+			tracerSettings.add(excludes);
+			excludes.setColumns(10);
+			excludes.getDocument().addDocumentListener(this);
+			
+			JLabel argumentLabel = new JLabel("Excludes");
+			argumentLabel.setBounds(39, 15, 49, 16);
+			tracerSettings.add(argumentLabel);
+			
+			addButton = new JButton(ADD);
+			addButton.setBounds(522, 101, 115, 25);
+			tracerSettings.add(addButton);
+			addButton.addActionListener(this);
+			
+			deleteButton = new JButton(DELETE);
+			deleteButton.setLocation(522, 141);
+			deleteButton.setSize(115, 25);
+			tracerSettings.add(deleteButton);
+			deleteButton.addActionListener(this);
+			
+			deleteAllButton = new JButton(DELETE_ALL);
+			deleteAllButton.setBounds(522, 185, 115, 25);
+			tracerSettings.add(deleteAllButton);
+			deleteAllButton.addActionListener(this);
+			
+			cancelButtonTracer = new JButton(CANCEL);
+			cancelButtonTracer.setBounds(243, 291, 71, 25);
+			tracerSettings.add(cancelButtonTracer);
+			cancelButtonTracer.addActionListener(this);
+			
+			saveButtonTracer = new JButton(SAVE);
+			saveButtonTracer.setBounds(110, 291, 61, 25);
+			tracerSettings.add(saveButtonTracer);
+			saveButtonTracer.addActionListener(this);
+			
+			downButton = new JButton("");
+			downButton.setBounds(366, 242, 63, 25);
+			downButton.setIcon(imageLoader.getArrowDownIcon());
+			downButton.setEnabled(false);
+			tracerSettings.add(downButton);
+			downButton.addActionListener(this);
+			
+			upButton = new JButton("");
+			upButton.setBounds(366, 97, 63, 33);
+			upButton.setIcon(imageLoader.getArrowUpIcon());
+			upButton.setEnabled(false);
+			upButton.addActionListener(this);
+			tracerSettings.add(upButton);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(39, 97, 321, 170);
+			scrollPane.setBackground(Color.WHITE);
+			tracerSettings.add(scrollPane);
+			
+			excludesList = new JList<String>();		
+			excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			excludesList.setBorder(new LineBorder(new Color(0, 0, 0)));
+			scrollPane.setViewportView(excludesList);
+			excludesList.setModel(model);
+			inspectorSettings= new Panel();
 			tabbedPane.addTab("Inspector", null, inspectorSettings, null);
 			inspectorSettings.addMouseListener(this);
 			inspectorSettings.setLayout(null);
@@ -211,7 +191,7 @@ private void initTracerSettings() {
 			inspectorSettings.add(nodesField);
 			
 			saveButtonInspector = new JButton("Save");
-			saveButtonInspector.setBounds(61, 230, 57, 23);
+			saveButtonInspector.setBounds(61, 230, 87, 23);
 			saveButtonInspector.addActionListener(this); 
 			inspectorSettings.add(saveButtonInspector);
 			
@@ -224,6 +204,8 @@ private void initTracerSettings() {
 			deleteAllButtonInspector.setBounds(415, 50, 115, 23);
 			deleteAllButtonInspector.addActionListener(this); 
 			inspectorSettings.add(deleteAllButtonInspector);
+			excludesList.addMouseListener(this);
+			excludesList.addKeyListener(this); 
 			
 		    
 	    }

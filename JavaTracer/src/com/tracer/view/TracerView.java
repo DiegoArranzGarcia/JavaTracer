@@ -1,13 +1,21 @@
 package com.tracer.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.alee.extended.filechooser.FilesSelectionListener;
@@ -21,12 +29,15 @@ import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
 import com.inspector.controller.InspectorController;
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 import com.tracer.controller.TracerController;
 
 @SuppressWarnings("serial")
 public class TracerView extends JFrame implements ActionListener, FilesSelectionListener{
 	
+	private static final String PROFILER_EXT = "-profile";
 	private static final String ADD_ARGUMENTS = "Add arguments";
 	private static final String NAME_OF_THE_TRACE_PROFILE_FILE = "Name of the trace/profile file";
 	private static final String ABOUT = "About";
@@ -69,8 +80,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
 	
-	private String  onlyXmlName;
-	private boolean haveExtension;
 	public TracerView(JComponent console) {
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -295,14 +304,15 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public String getNameXml() {
-		String nameXml = "";
-		if (!haveExtension) {
-			nameXml = this. nameXml.getText();
-			if (nameXml.equals(""))
-				nameXml = "default";
-		} else nameXml = onlyXmlName;
+		String nameFile = "";
+		nameFile = this.nameXml.getText();
 		
-		return nameXml;
+		if (nameFile.equals("") || nameFile.equals(".xml"))
+			nameFile = "default";
+		else if (FileUtilities.isExtension(nameFile,"xml"))
+			nameFile = FileUtilities.getFileNameWithoutExtension(nameFile);
+		
+		return nameFile;
 	}
 
 	public void enableMainClassCombo() {
@@ -321,49 +331,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		} else if (source.equals(exit)){
 			clickedOnExit();
 		} else if (source.equals(trace)){
-			String xmlName = nameXml.getText();
-			boolean isXmlExtension = FileUtilities.isExtension(xmlName, XML);
-			if (isXmlExtension) {
-				haveExtension = true;
-				onlyXmlName = FileUtilities.getOnlyName(xmlName);
-			}else haveExtension=false;
-			
-			if(existFileXml(getNameXml()+FileUtilities.EXTENSION_XML)){									
-				 int seleccion = JOptionPane.showOptionDialog( null,getNameXml() +" already exists,"+" are you sure you want to overwrite the current file?",
-						 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
-				 if(seleccion==0) {
-					 setEnableProfileAndTracer(false);
-					 clickedOnTrace();
-				 }				 											    
-			}else {
-				 setEnableProfileAndTracer(false);
-				 clickedOnTrace();
-			}
-			
+			clickedOnTrace();			
 		} else if (source.equals(profile)){
-			
-		
-			String xmlName = nameXml.getText()+"Profiler";
-			boolean isXmlExtension = FileUtilities.isExtension(xmlName, XML);
-			if (isXmlExtension) {
-				haveExtension = true;
-				onlyXmlName = FileUtilities.getOnlyName(xmlName);
-			}else haveExtension=false;
-			
-			if(existFileXml(nameXml+FileUtilities.EXTENSION_XML)){									
-				 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
-						 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
-				 if(seleccion==0) {
-					 setEnableProfileAndTracer(false);
-					 clickedOnProfile();
-				 }				 											    
-			}else {
-				 
-				setEnableProfileAndTracer(false);
-				profile.setEnabled(false); 
-				clickedOnProfile();
-					}
-		
+			clickedOnProfile();
 		} else if (source.equals(mntmExit)){
 			clickedOnExit();
 		} else if (source.equals(mntmLoadProfile)){
@@ -418,11 +388,36 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	private void clickedOnProfile() {
-		presenter.clickedOnProfile();
+		
+		String xmlName = getNameXml();
+		
+		if(existFileXml(xmlName + PROFILER_EXT + FileUtilities.EXTENSION_XML)){									
+			 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
+					 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);
+			 
+			 if (seleccion == 0){
+				 presenter.clickedOnProfile();
+			 }
+			 
+		} else {
+			presenter.clickedOnProfile();
+		}
+
 	}
 
 	private void clickedOnTrace(){
-		presenter.clickedOnTrace();
+		String xmlName = getNameXml();
+		
+		if(existFileXml(xmlName+FileUtilities.EXTENSION_XML)){									
+			 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
+					 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
+			 if(seleccion!=0) {
+				 presenter.clickedOnTrace();
+			 }				 											    
+		} else {
+			 presenter.clickedOnTrace();
+		}
+		
 	}
 
 	private void clickedOnExit(){
