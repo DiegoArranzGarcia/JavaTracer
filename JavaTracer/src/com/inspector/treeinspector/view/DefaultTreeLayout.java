@@ -137,5 +137,29 @@ public class DefaultTreeLayout<E> extends
 		}
 		
 	}
+	
+	public List<E> getNodesAtLevel(int level){
+		E rootNode = getRoot();
+		List<E> nodes = getNodesAtLevelRec(rootNode,level);
+		return nodes;
+	}
+
+	private List<E> getNodesAtLevelRec(E node, int level) {
+		
+		List<E> list = new ArrayList<E>();
+		if (level == 0){
+			list.add(node);
+		} else {
+			
+			Iterator<E> children = getChildren(node).iterator();
+			
+			while (children.hasNext()){
+				List<E> childrenList = getNodesAtLevelRec(children.next(),level-1);
+				list.addAll(childrenList);
+			}
+			
+		}
+		return list;
+	}
 
 }

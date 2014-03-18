@@ -370,7 +370,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			setEnableProfileAndTracer(false);
 			clickedOnLoadProfile();
 		} else if (source.equals(mntmLoadTrace)){
-			clickedOnLoadTracer();
+			clickedOnLoadTrace();
 		} else if (source.equals(mntmProfile)){
 			setEnableProfileAndTracer(false);
 			clickedOnProfile();
@@ -410,11 +410,11 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	private void clickedOnLoadProfile() {
-		presenter.clickedOnProfile();
+		presenter.clickedOnLoadProfile();
 	}
 
-	private void clickedOnLoadTracer() {
-		presenter.clickedOnTrace();
+	private void clickedOnLoadTrace() {
+		presenter.clickedOnLoadTrace();
 	}
 
 	private void clickedOnProfile() {

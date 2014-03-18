@@ -3,6 +3,7 @@ package com.inspector.treeinspector.data;
 public abstract class Box {
 
 	protected long id;
+	protected String path;
 	protected boolean expanded;
 	protected boolean selected;
 	protected boolean haveChildren;
@@ -14,14 +15,15 @@ public abstract class Box {
 		this.selected = false;
 		this.haveChildren = false;
 	}
-	
-	public Box(long id,boolean haveChildren){
+		
+	public Box(String path, long id, boolean haveChildren) {
+		this.path = path;
 		this.id = id;
 		this.expanded = false;
 		this.selected = false;
 		this.haveChildren = haveChildren;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -52,5 +54,9 @@ public abstract class Box {
 
 	public void setHaveChildren(boolean haveChildren) {
 		this.haveChildren = haveChildren;
+	}
+
+	public String getPath() {
+		return this.path;
 	}
 }

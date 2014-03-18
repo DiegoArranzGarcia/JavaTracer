@@ -56,7 +56,6 @@ public class InspectorController {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String xmlName = chooser.getSelectedFile().getCanonicalPath();
-				System.out.println(xmlName);
 				showTree(xmlName);
 				
 				

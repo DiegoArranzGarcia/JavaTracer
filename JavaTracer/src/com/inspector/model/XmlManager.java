@@ -15,15 +15,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.general.model.XStreamUtil;
+import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
+import com.inspector.treeinspector.data.Box;
+import com.tracer.model.methods.data.MethodEntryInfo;
 
 
 public class XmlManager extends XStreamUtil{
       
    private Document xmlDocument;
-	   
+   
    public XmlManager(String fileName) {
 	   
 	   try {	
@@ -53,11 +56,6 @@ public class XmlManager extends XStreamUtil{
 		}
 		return node;
 	}
-	
-	public long getIdFromNode(Node infoNode) throws Exception {
-		String id = infoNode.getAttributes().getNamedItem(ATTR_ID).getNodeValue();
-		return Long.parseLong(id);
-	}
 
 	public String getName(Node infoNode) throws Exception{
 		String expression = "./" + TAG_METHOD_INFO +"/" + TAG_METHOD_NAME;  
@@ -83,19 +81,6 @@ public class XmlManager extends XStreamUtil{
 		Data info = (Data) xStream.fromXML(nodeToString(node));
 		return info;
 	}
-
-	public NodeList getChildsOfNode(Node node) {
-		NodeList childs = null;
-		try{
-			String expression = "./" + TAG_CALLED_METHODS +"/*";  
-		    XPath xPath = XPathFactory.newInstance().newXPath();
-		    XPathExpression xPathExpression = xPath.compile(expression);
-		    childs = (NodeList) xPathExpression.evaluate(node,XPathConstants.NODESET);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		return childs;
-	}
 	
 	public Node getNode(long id) {
 		
@@ -112,19 +97,6 @@ public class XmlManager extends XStreamUtil{
 		}
 		
 		return node;
-	}
-	
-	public boolean haveChildrenOfNode(Node node) {
-		boolean childs = false;
-		try{
-			String expression = "count(./ " + TAG_CALLED_METHODS + "/" + TAG_METHOD + ")>0";  
-		    XPath xPath = XPathFactory.newInstance().newXPath();
-		    XPathExpression xPathExpression = xPath.compile(expression);
-		    childs = (boolean) xPathExpression.evaluate(node,XPathConstants.BOOLEAN);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		return childs;
 	}
 
 	public Data loadReturnValue(Node node) throws XPathExpressionException {
@@ -166,12 +138,89 @@ public class XmlManager extends XStreamUtil{
 	}
 
 	public MethodInfo getInfoMethod(Node infoNode) throws XPathExpressionException {
-		String expression = "./" + TAG_METHOD_INFO;  
+		String expression = "./" + TAG_METHOD_ENTRY_EVENT;  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    Node node = (Node) xPathExpression.evaluate(infoNode,XPathConstants.NODE);
-	    MethodInfo thread = (MethodInfo) xStream.fromXML(nodeToString(node)); 
-		return thread;
+	    MethodEntryInfo entry = (MethodEntryInfo) xStream.fromXML(nodeToString(node)); 
+	    
+	    MethodInfo info = new MethodInfo(entry.getMethodName(),entry.getCalledFromClass(),entry.getArguments(),entry.getThis_data(), 
+	    		null, new ArrayList<ChangeInfo>());
+		return info;
+	}
+
+	public int getNumChildrenOfNode(Box box) {
+		int children = 0;
+		try{
+			String expression = "count(" + box.getPath() + "/" + TAG_CALLED_METHODS+"/*)";
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			XPathExpression xPathExpression = xPath.compile(expression);
+			children = ((Double) xPathExpression.evaluate(xmlDocument,XPathConstants.NUMBER)).intValue();
+			
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return children;
+	}
+
+	public MethodInfo getBoxFromNode(String path) {
+		MethodInfo info = null;
+		try {
+			String expression = path + "/" + TAG_METHOD_ENTRY_EVENT; 
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			XPathExpression xPathExpression;
+			xPathExpression = xPath.compile(expression);
+			Node node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			MethodEntryInfo entry = (MethodEntryInfo) xStream.fromXML(nodeToString(node)); 
+			
+			info = new MethodInfo(entry.getMethodName(),entry.getCalledFromClass(),entry.getArguments(),entry.getThis_data(), 
+	    		null, new ArrayList<ChangeInfo>());
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return info;
+	}
+	
+	public long getIdFromNode(String path) {
+		long nodeID = -1;
+		try {
+			String expression = path + "/@" + ATTR_ID ; 
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			XPathExpression xPathExpression;
+			xPathExpression = xPath.compile(expression);
+			nodeID = ((Double) xPathExpression.evaluate(xmlDocument,XPathConstants.NUMBER)).intValue();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return nodeID;
+	}
+
+	public boolean hasChildrenNode(String path) {
+		boolean exist = false;
+		try {
+			String expression = path + "/" + TAG_CALLED_METHODS + "/" + TAG_METHOD + "[1]";
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			exist= (boolean) xPath.evaluate(expression,xmlDocument,XPathConstants.BOOLEAN);
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+		return exist;
+	}
+
+	public String getPath(Box box, int i) {
+		return box.getPath() + "/" + TAG_CALLED_METHODS+"/"+TAG_METHOD+"["+i+"]";
+	}
+
+	public boolean exist(String path){
+		boolean exist = false;
+		try {
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			exist= (boolean) xPath.evaluate(path,xmlDocument,XPathConstants.BOOLEAN);
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+		return exist;
 	}
 
 }

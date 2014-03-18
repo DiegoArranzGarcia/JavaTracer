@@ -11,7 +11,6 @@ import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.console.presenter.ConsolePresenter;
 import com.tracer.model.Tracer;
-import com.tracer.model.writers.InspectorWriter;
 import com.tracer.view.TracerView;
 
 public class TracerController {
@@ -123,8 +122,6 @@ public class TracerController {
 		if (lastConfig.isProfiling_mode()){
 			presenter.showProfile();	
 		} else {
-			InspectorWriter traceInspectorWriter = new InspectorWriter(lastConfig.getNameXml());
-			traceInspectorWriter.generateFinalTrace();
 			tracerView.finishedTrace();
 		}
 		tracerView.setEnableProfileAndTracer(true);
@@ -181,5 +178,13 @@ public class TracerController {
 
 	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
 		this.presenter = javaTracerPresenter; 
+	}
+
+	public void clickedOnLoadProfile() {
+		presenter.clickedOnViewProfile();
+	}
+
+	public void clickedOnLoadTrace() {
+		presenter.clickedOnInspectTrace();
 	}
 }

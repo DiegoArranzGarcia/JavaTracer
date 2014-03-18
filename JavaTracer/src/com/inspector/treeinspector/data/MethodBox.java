@@ -9,13 +9,9 @@ import com.general.model.variables.data.*;
 public class MethodBox extends Box {
 
 	private MethodInfo method;
-	
-	public MethodBox(long id,String name,List<Data> arguments,	Data returnValue,Data thisValue,boolean haveChildren){
-		super(id,haveChildren);
-	}
-	
-	public MethodBox(long id, MethodInfo method, boolean haveChildren) {
-		super(id,haveChildren);
+		
+	public MethodBox(String pathOfNode, long id, MethodInfo method, boolean haveChildren) {
+		super(pathOfNode,id,haveChildren);
 		this.method = method;
 	}
 
@@ -95,6 +91,10 @@ public class MethodBox extends Box {
 	
 	public MethodInfo getMethodInfo(){
 		return this.method;
+	}
+	
+	public void setMethodInfo(MethodInfo method){
+		this.method = method;
 	}
 
 }

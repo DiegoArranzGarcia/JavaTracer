@@ -9,9 +9,10 @@ import com.tracer.model.methods.data.MethodExitInfo;
 
 public class TraceWriter extends XStreamUtil{
 
-	public static String FILE_EXT = "_temp.xml";
+	public static String FILE_EXT = ".xml";
 		
 	private FileWriter fileWriter;
+	private int idNode = 0;
 	private int depth;
 	
 	public TraceWriter(String nameXlm){
@@ -32,13 +33,14 @@ public class TraceWriter extends XStreamUtil{
 		
 		try {
 			String xmlString = xStream.toXML(info);
-			write(startTag(TAG_METHOD));
+			write(startTag(TAG_METHOD + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES));
 			write(xmlString);
 			write(startTag(TAG_CALLED_METHODS));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		idNode++;
 		depth++;
 	}
 	
@@ -59,9 +61,8 @@ public class TraceWriter extends XStreamUtil{
 	public void writeThreadInfo(ThreadInfo threadInfo){
 		try{
 			String xmlString = xStream.toXML(threadInfo);
-			write(startTag(TAG_THREAD));
+			write(startTag(TAG_THREAD + " " + ATTR_ID + "=" + DOUBLE_QUOTES + idNode + DOUBLE_QUOTES));
 			write(xmlString);
-			write(endTag(TAG_THREAD));
 			write(startTag(TAG_CALLED_METHODS));
 		} catch (Exception e){
 			e.printStackTrace();
@@ -76,6 +77,7 @@ public class TraceWriter extends XStreamUtil{
 				
 				if (depth == 1){
 					write(endTag(TAG_CALLED_METHODS));
+					write(endTag(TAG_THREAD));
 					write(endTag(TAG_TRACE));
 				} else {
 					write(endTag(TAG_CALLED_METHODS));

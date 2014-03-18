@@ -4,8 +4,8 @@ public class ThreadBox extends Box{
 	
 	String threadName;
 	
-	public ThreadBox(long id, String threadName) {
-		super(id,true);
+	public ThreadBox(String path,long id, String threadName) {
+		super(path,id,true);
 	}
 
 	public String getBoxText() {
