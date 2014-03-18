@@ -15,26 +15,21 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.general.model.XStreamUtil;
-import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
 import com.inspector.treeinspector.data.Box;
-import com.tracer.model.ChangeDetector;
 import com.tracer.model.methods.data.MethodEntryInfo;
 import com.tracer.model.methods.data.MethodExitInfo;
-
 
 public class XmlManager extends XStreamUtil{
       
    private Document xmlDocument;
-   private ChangeDetector detector;
    
    public XmlManager(String fileName) {
 	   
 	   try {	
 		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(fileName);
-		   detector = new ChangeDetector();
 	   } catch (Exception e){
 		   e.printStackTrace();
 	   }

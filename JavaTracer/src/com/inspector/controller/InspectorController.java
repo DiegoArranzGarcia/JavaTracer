@@ -13,11 +13,13 @@ import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.view.InspectorView;
+import com.inspector.view.InspectorLoadingView;
 
 public class InspectorController {
 
 	private JavaTracerPresenter controller;
 	private InspectorView view;
+	private InspectorLoadingView loadingView;
 	
 	private TreeInspectorController treeInspector;
 	private ObjectInspectorController objectInspector;
@@ -33,6 +35,7 @@ public class InspectorController {
 		objectInspector = new ObjectInspectorController(treeManager);
 		treeInspector.setController(this);
 		objectInspector.setController(this);
+		treeManager.setController(this);
 		objectInspector.showTable();
 	}
 	
@@ -56,9 +59,7 @@ public class InspectorController {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String xmlName = chooser.getSelectedFile().getCanonicalPath();
-				showTree(xmlName);
-				
-				
+				showTree(xmlName);				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -67,10 +68,30 @@ public class InspectorController {
 	}
 
     public void showTree(String xmlName) {
-    	treeManager.loadTree(xmlName);
-		treeInspector.showTree();
+    	
+    	createLoadingView();    		
+    	
+    	treeManager.setNameXml(xmlName);
+    	treeManager.start();
 	    
     }
+    
+    public void finishLoading(){
+    	treeInspector.showTree();
+    	loadingView.setVisible(false);
+    }
+    
+    public void updateInfo(int numNodes, int total,int percentage) {
+    	loadingView.updateInfo(numNodes,total,percentage);
+	}
+
+	private void createLoadingView() {
+		if (loadingView == null){
+			loadingView = new InspectorLoadingView();
+		}
+		loadingView.setPercentage(0);
+		loadingView.setVisible(true);
+	}
 
 	public void clickedOnNode(Box box) {
 		

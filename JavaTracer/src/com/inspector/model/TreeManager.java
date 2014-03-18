@@ -8,19 +8,22 @@ import org.w3c.dom.Node;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
+import com.inspector.controller.InspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.data.ThreadBox;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
 
-public class TreeManager {
+public class TreeManager extends Thread{
 
 	private int DEFAULT_DEPTH;
 	private int DEFAULT_NUM_NODES;
 	private DefaultTreeLayout<Box> lastTree;
+	private String nameXml;
 	
 	private XmlManager xml;
 	private int numNodes;
+	private InspectorController inspector;
 	
 	public void loadTree(String xmlName) {
 		
@@ -41,6 +44,7 @@ public class TreeManager {
 		DefaultTreeLayout<Box> tree = new DefaultTreeLayout<Box>(threadBox); 
 		generateTree(tree);
 		this.lastTree = tree;
+		inspector.finishLoading();
 	}
 
 	private void generateTree(DefaultTreeLayout<Box> tree) {
@@ -74,6 +78,10 @@ public class TreeManager {
 		}
 		
 	}
+	
+	public void run() {
+		loadTree(this.nameXml);
+	}
 
 	private void loadNode(DefaultTreeLayout<Box> tree, Box box) {
 		
@@ -84,8 +92,7 @@ public class TreeManager {
 		while (!stop && numNodes<DEFAULT_NUM_NODES){
 			
 			String path = xml.getPath(box,i);
-			
-			System.out.println("Procesando: " + path);
+	
 			stop = !xml.exist(path);
 			
 			if (!stop){
@@ -97,16 +104,21 @@ public class TreeManager {
 				tree.addChild(box,node);
 			
 				numNodes++;
+				inspector.updateInfo(numNodes,DEFAULT_NUM_NODES,(int)calculatePercentage());
 				i++;
 			}
 			
-			System.out.println("Procesado: " + path);
 		}
 		
 		
 		box.setExpanded(true);
 	}
 	
+	private double calculatePercentage() {
+		double percentage = ((double)numNodes/DEFAULT_NUM_NODES)*100;
+		return percentage;
+	}
+
 	public MethodBox getTextInBoxFromId(DefaultTreeLayout<MethodBox> tree, long id){
 		
 		MethodBox textInBoxExt = null;
@@ -157,6 +169,14 @@ public class TreeManager {
 
 	public DefaultTreeLayout<Box> getTree() {
 		return lastTree;
+	}
+
+	public void setController(InspectorController inspectorController) {
+		this.inspector = inspectorController;
+	}
+	
+	public void setNameXml(String nameXml){
+		this.nameXml = nameXml;
 	}
 
 }
