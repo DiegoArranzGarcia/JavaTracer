@@ -230,5 +230,14 @@ public class ClassUtils {
 			className = className.replace("[]", "");
 		return className;
 	}
+
+	public static List<String> getPackageList(String fullClassName) {
+		List<String> packages = new ArrayList<String>();
+		String[] split = fullClassName.split("\\.");
+		for (int i = 0;i<split.length;i++)
+			packages.add(split[i]);
+		packages.remove(packages.size()-1);
+		return packages;
+	}
 	
 }

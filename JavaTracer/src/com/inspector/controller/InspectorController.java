@@ -12,8 +12,8 @@ import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
-import com.inspector.view.InspectorView;
 import com.inspector.view.InspectorLoadingView;
+import com.inspector.view.InspectorView;
 
 public class InspectorController {
 
@@ -59,26 +59,22 @@ public class InspectorController {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String xmlName = chooser.getSelectedFile().getCanonicalPath();
-				showTree(xmlName);				
+				showTree(xmlName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
 		} else chooser.cancelSelection();	
 	}
-
-    public void showTree(String xmlName) {
-    	
-    	createLoadingView();    		
-    	
-    	treeManager.setNameXml(xmlName);
-    	treeManager.start();
-	    
-    }
+	
+	public void showTree(String xmlPath) {
+		treeManager.showTree(xmlPath);
+    	createLoadingView();			
+	}
     
     public void finishLoading(){
     	treeInspector.showTree();
-    	loadingView.setVisible(false);
+    	loadingView.dispose();
     }
     
     public void updateInfo(int numNodes, int total,int percentage) {
@@ -87,7 +83,7 @@ public class InspectorController {
 
 	private void createLoadingView() {
 		if (loadingView == null){
-			loadingView = new InspectorLoadingView();
+			loadingView = new InspectorLoadingView(view);
 		}
 		loadingView.setPercentage(0);
 		loadingView.setVisible(true);

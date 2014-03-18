@@ -45,6 +45,22 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 	public void resetConsole() {
 		view.clear();
 		view.setEditable(true);
-	}	
+	}
+
+	public void launching() {
+		view.launching();
+	}
+
+	public void tracing() {
+		view.tracing();
+	}
+	
+	public void profiling() {
+		view.profiling();
+	}
+	
+	public void finished(){
+		view.finished();
+	}
 
 }

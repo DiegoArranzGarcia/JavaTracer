@@ -24,6 +24,7 @@ import com.tracer.console.presenter.ConsolePresenter;
 @SuppressWarnings("serial")
 public class ConsoleView extends JPanel implements ActionListener{
 	
+	private static final String CONSOLE_TEXT = "Console";
 	private static final String CLEAR_CONSOLE = "Clear console";
 	
 	private ConsolePresenter presenter; 
@@ -33,7 +34,7 @@ public class ConsoleView extends JPanel implements ActionListener{
 	private WebToggleButton btnMinimizeConsole;
 		
 	private ConsoleTextPane console;
-	private JLabel lblNewLabel;
+	private JLabel lblConsoleStatus;
 	private JPanel panel_1;
 	
 	public ConsoleView(){
@@ -54,12 +55,12 @@ public class ConsoleView extends JPanel implements ActionListener{
 		scrollPane.setColumnHeaderView(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		lblNewLabel = new JLabel("Console");
-		lblNewLabel.setBorder(new EmptyBorder(0, 5, 0, 0));
-		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel, BorderLayout.WEST);
+		lblConsoleStatus = new JLabel(CONSOLE_TEXT);
+		lblConsoleStatus.setBorder(new EmptyBorder(0, 5, 0, 0));
+		lblConsoleStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblConsoleStatus.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblConsoleStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblConsoleStatus, BorderLayout.WEST);
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -123,6 +124,22 @@ public class ConsoleView extends JPanel implements ActionListener{
 
 	public void setEditable(boolean editable) {
 		console.setEditable(editable);
+	}
+
+	public void launching() {
+		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Launching ) ");
+	}
+
+	public void finished() {
+		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Finished ) ");
+	}
+
+	public void tracing() {
+		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Tracing ) ");
+	}
+
+	public void profiling() {
+		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Profiling ) ");
 	}
 	
 	

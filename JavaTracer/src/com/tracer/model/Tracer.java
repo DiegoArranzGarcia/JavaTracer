@@ -45,14 +45,14 @@ public class Tracer {
 	  */
     public void trace(RunConfiguration config) {
 
-    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();     
+    	tracerController.launching();
         vm = launchTarget(config);
         generateTrace(config,null);
         
     }
     
     public void profile(RunConfiguration config,ProfilerModelInterface profile){
-    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+    	tracerController.launching();
         vm = launchTarget(config);
         generateTrace(config,profile);
     }
@@ -76,6 +76,7 @@ public class Tracer {
         eventThread.setEventRequests(watchFields);
         eventThread.start();
         tracerController.redirectStreams(vm.process());
+        tracerController.started();
     }
 
     /**

@@ -1,122 +1,26 @@
 package com.inspector.model;
 
 import java.util.Iterator;
-import java.util.List;
 
-import org.w3c.dom.Node;
-
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.MethodInfo;
-import com.general.model.data.ThreadInfo;
 import com.inspector.controller.InspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
-import com.inspector.treeinspector.data.ThreadBox;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
 
-public class TreeManager extends Thread{
+public class TreeManager implements UpdateNotifier{
 
-	private int DEFAULT_DEPTH;
-	private int DEFAULT_NUM_NODES;
-	private DefaultTreeLayout<Box> lastTree;
-	private String nameXml;
+	private DefaultTreeLayout<Box> tree;
 	
 	private XmlManager xml;
-	private int numNodes;
-	private InspectorController inspector;
-	
-	public void loadTree(String xmlName) {
+	private InspectorController controller;
+		
+	public void showTree(String xmlName) {
 		
 		xml = new XmlManager(xmlName);
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-		try {
-	        DEFAULT_DEPTH = configuration.getNumLevelsFromFile();
-	        DEFAULT_NUM_NODES = configuration.getNumNodesFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }
+		LoadTreeThread loadTreeThread = new LoadTreeThread(xml,this);
+		loadTreeThread.start();
 		
-		numNodes = 0;
-			
-		Node rootNode = xml.getRootNode();
-		ThreadBox threadBox = getThreadBoxFromNode(rootNode);
-		DefaultTreeLayout<Box> tree = new DefaultTreeLayout<Box>(threadBox); 
-		generateTree(tree);
-		this.lastTree = tree;
-		inspector.finishLoading();
-	}
-
-	private void generateTree(DefaultTreeLayout<Box> tree) {
-		
-		int depth = 0;
-		while (depth<DEFAULT_DEPTH && numNodes<DEFAULT_NUM_NODES){
-			loadLevel(tree,depth);
-			depth++;
-		}
-		
-	}
-
-	private ThreadBox getThreadBoxFromNode(Node rootNode) {
-		ThreadBox threadBox = null;
-		try{
-			ThreadInfo threadInfo = xml.getThreadName(rootNode);
-			threadBox = new ThreadBox("/trace/thread",0,threadInfo.getNameThread());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		return threadBox;
-	}
-
-	private void loadLevel(DefaultTreeLayout<Box> tree,int level){
-		
-		int i = 0;
-		List<Box> nodes = tree.getNodesAtLevel(level);
-		while (i<nodes.size() && numNodes<DEFAULT_NUM_NODES){
-			loadNode(tree,nodes.get(i));
-			i++;
-		}
-		
-	}
-	
-	public void run() {
-		loadTree(this.nameXml);
-	}
-
-	private void loadNode(DefaultTreeLayout<Box> tree, Box box) {
-		
-		int i = 1;
-		boolean stop = false;
-		//int childs = xml.getNumChildrenOfNode(box);
-		
-		while (!stop && numNodes<DEFAULT_NUM_NODES){
-			
-			String path = xml.getPath(box,i);
-	
-			stop = !xml.exist(path);
-			
-			if (!stop){
-				MethodInfo nodeInfo = xml.getBoxFromNode(path);
-				long id = xml.getIdFromNode(path);
-				boolean haveChildren = xml.hasChildrenNode(path);
-				MethodBox node = new MethodBox(path,id,nodeInfo,haveChildren);
-			
-				tree.addChild(box,node);
-			
-				numNodes++;
-				inspector.updateInfo(numNodes,DEFAULT_NUM_NODES,(int)calculatePercentage());
-				i++;
-			}
-			
-		}
-		
-		
-		box.setExpanded(true);
-	}
-	
-	private double calculatePercentage() {
-		double percentage = ((double)numNodes/DEFAULT_NUM_NODES)*100;
-		return percentage;
 	}
 
 	public MethodBox getTextInBoxFromId(DefaultTreeLayout<MethodBox> tree, long id){
@@ -168,15 +72,20 @@ public class TreeManager extends Thread{
 	}
 
 	public DefaultTreeLayout<Box> getTree() {
-		return lastTree;
-	}
-
-	public void setController(InspectorController inspectorController) {
-		this.inspector = inspectorController;
+		return tree;
 	}
 	
-	public void setNameXml(String nameXml){
-		this.nameXml = nameXml;
+	public void setController(InspectorController controller){
+		this.controller = controller;
+	}
+
+	public void updateInfo(int current, int total, int percentage) {
+		controller.updateInfo(current, total, percentage);
+	}
+
+	public void finishLoading(DefaultTreeLayout<Box> loadedTree) {
+		this.tree = loadedTree;
+		controller.finishLoading();
 	}
 
 }

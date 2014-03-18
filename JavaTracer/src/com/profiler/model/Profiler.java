@@ -3,7 +3,6 @@ package com.profiler.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -27,7 +26,7 @@ public class Profiler implements ProfilerModelInterface{
 		Method method = event.method();
 		
 		String fullClassName = ClassUtils.getClass(method.declaringType());
-		List<String> packageName = getPackage(fullClassName);
+		List<String> packageName = ClassUtils.getPackageList(fullClassName);
 		String className = getClassName(fullClassName);
 		String completeMethodName = method.toString();
 		String methodName = completeMethodName.substring(fullClassName.length()+1,completeMethodName.length());
@@ -39,23 +38,6 @@ public class Profiler implements ProfilerModelInterface{
 	private String getClassName(String fullClassName) {
 		String[] split = fullClassName.split("\\.");
 		return split[split.length-1];
-	}
-
-	private List<String> getPackage(String fullClassName) {
-		List<String> packages = new ArrayList<String>();
-		String[] split = fullClassName.split("\\.");
-		for (int i = 0;i<split.length;i++)
-			packages.add(split[i]);
-		packages.remove(packages.size()-1);
-		return packages;
-	}
-	
-	private List<String> splitByDot(String fullClassName) {
-		List<String> packages = new ArrayList<String>();
-		String[] split = fullClassName.split("\\.");
-		for (int i = 0;i<split.length;i++)
-			packages.add(split[i]);
-		return packages;
 	}
 
 	public void saveProfile(ProfilerTree data,File file) {

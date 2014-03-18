@@ -115,18 +115,6 @@ public class TracerController {
 		return file;
 	}
 	
-	
-	public void finishedTrace() {
-		
-		consolePresenter.closeStreams();
-		if (lastConfig.isProfiling_mode()){
-			presenter.showProfile();	
-		} else {
-			tracerView.finishedTrace();
-		}
-		tracerView.setEnableProfileAndTracer(true);
-	}
-	
 	public void selectedPath(String path){
 		File file = new File(path);
 		List<String> classes;
@@ -186,5 +174,27 @@ public class TracerController {
 
 	public void clickedOnLoadTrace() {
 		presenter.clickedOnInspectTrace();
+	}
+
+	public void launching() {
+		consolePresenter.launching();
+	}
+
+	public void started() {
+		if (lastConfig.isProfiling_mode())
+			consolePresenter.profiling();
+		else
+			consolePresenter.tracing();
+	}
+	public void finishedTrace() {
+		
+		consolePresenter.closeStreams();
+		consolePresenter.finished();
+		if (lastConfig.isProfiling_mode()){
+			presenter.showProfile();	
+		} else {
+			tracerView.finishedTrace();
+		}
+		tracerView.setEnableProfileAndTracer(true);
 	}
 }

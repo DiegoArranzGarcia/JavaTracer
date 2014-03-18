@@ -88,9 +88,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	private static String TITLE = "Profiling stats";
 	private static double SPLIT_PERCENTAGE = 0.52;
-	private static double PERCENTAGE_WIDTH = 1.0;
+	private static double PERCENTAGE_WIDTH = 0.75;
 	private static double PERCENTAGE_HEIGHT = 0.75;
-	private static final int CLASSCHART=5;
+	private static final int CLASSCHART=10;
 	
 	private ProfilerPresenterInterface presenter;
 	private ProfileCellRenderer renderer;
