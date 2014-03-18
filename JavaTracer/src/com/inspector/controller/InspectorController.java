@@ -25,11 +25,8 @@ public class InspectorController {
 	private ObjectInspectorController objectInspector;
 	
 	private	TreeManager treeManager;
-	
-	private boolean fromTracer;
 
 	public InspectorController(){
-		fromTracer = false;
 		treeManager = new TreeManager();
 		treeInspector = new TreeInspectorController(treeManager);
 		objectInspector = new ObjectInspectorController(treeManager);
@@ -38,13 +35,7 @@ public class InspectorController {
 		treeManager.setController(this);
 		objectInspector.showTable();
 	}
-	
-	public void open() {
-		view = new InspectorView(treeInspector,objectInspector);
-		view.setController(this);
-		view.setVisible(true);
-	}
-	
+
 	public void clickedOpen(){
 		
 		JFileChooser chooser = new JFileChooser();
@@ -59,17 +50,28 @@ public class InspectorController {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String xmlName = chooser.getSelectedFile().getCanonicalPath();
-				showTree(xmlName);
+				open(xmlName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-		} else chooser.cancelSelection();	
+		} else {
+			chooser.cancelSelection();	
+		}
+		
 	}
 	
-	public void showTree(String xmlPath) {
+	public void open(String xmlPath) {
+		
+		if (view == null){
+			view = new InspectorView(treeInspector,objectInspector);
+			view.setController(this);
+		}
+		view.setVisible(true);
+		controller.setVisible(false);
+		
 		treeManager.showTree(xmlPath);
-    	createLoadingView();			
+    	createLoadingView();	
 	}
     
     public void finishLoading(){
@@ -108,13 +110,5 @@ public class InspectorController {
 		view.setVisible(false);
 		controller.back();		
 	}
-
-	public boolean getFromTracer() {
-	    return fromTracer;
-    }
-
-	public void setFromTracer(boolean p_fromTracer) {
-	    fromTracer = p_fromTracer;
-    }
 
 }

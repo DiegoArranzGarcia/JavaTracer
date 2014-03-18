@@ -83,7 +83,6 @@ public class JavaTracerPresenter {
 	}
 
 	public void clickedOnInspectTrace() {
-		inspectorController.open();
 		inspectorController.clickedOpen();
 	}
 
@@ -135,6 +134,14 @@ public class JavaTracerPresenter {
 
 	public ProfilerModelInterface getProfiler() {
 		return profilerPresenter.getProfiler();
+	}
+
+	public void openTrace(String xmlPath) {
+		inspectorController.open(xmlPath);
+	}
+
+	public void setVisible(boolean b) {
+		tracerController.setVisible(false);
 	}
 
 }

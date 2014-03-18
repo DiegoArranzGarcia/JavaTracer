@@ -83,9 +83,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	}
 
 	public void componentHidden(ComponentEvent e) {
-		boolean fromTrace = controller.getFromTracer();
-		if (!fromTrace )
-			controller.back();
+		controller.back();
 	}
 
 	public void componentMoved(ComponentEvent e) {}

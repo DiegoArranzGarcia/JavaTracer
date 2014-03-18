@@ -27,7 +27,6 @@ import com.alee.laf.text.WebTextField;
 import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
-import com.inspector.controller.InspectorController;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -61,7 +60,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static String XML_FILE_TOOLTIP = "Write the name of the file without any extensions";
 	
 	private TracerController presenter;
-	private InspectorController inspectorController;
 	
 	private WebButton trace,exit,addArgument,profile;
 	private WebTextField nameXml;
@@ -233,8 +231,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		menuBar.add(mntmAbout);	
 		
 		mntmAbout.addActionListener(this);
-		
-		inspectorController = new InspectorController();
+
 		setEnableProfileAndTracer(false);
 	}
 		
@@ -250,9 +247,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 				JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
 		
 		if(selected==0) {
-			inspectorController.open();
-			inspectorController.setFromTracer(true);
-			inspectorController.showTree(xmlPath);
+			presenter.open(xmlPath);
 		}
 		
 	}
@@ -411,7 +406,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		if(existFileXml(xmlName+FileUtilities.EXTENSION_XML)){									
 			 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
 					 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
-			 if(seleccion!=0) {
+			 if(seleccion==0) {
 				 presenter.clickedOnTrace();
 			 }				 											    
 		} else {
