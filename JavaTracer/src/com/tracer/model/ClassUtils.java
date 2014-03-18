@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.general.model.variables.data.*;
 import com.sun.jdi.*;
+import com.sun.org.apache.xml.internal.utils.SuballocatedByteVector;
 
 public class ClassUtils {
 	
@@ -12,16 +13,7 @@ public class ClassUtils {
 	
 	public ClassUtils(List<String> excludes){
 		this.excludedClasses = new HashMap<>();
-		this.excludes = simplifyExclude(excludes);
-	}
-	
-	private List<String>simplifyExclude(List<String> p_excludes) {
-		
-		for (int i=0;i<p_excludes.size();i++){
-			if (p_excludes.get(i).contains(".*"))
-				p_excludes.get(i).replace(".*","");
-		}
-		return p_excludes;
+		this.excludes = excludes;
 	}
 
 	private boolean isExcludedClass(Value value) {
@@ -48,11 +40,12 @@ public class ClassUtils {
 		boolean excluded = false;
 		int i = 0;
 		while (!excluded && i<excludes.size()){
-			String exclude = excludes.get(i); 
-			int j = 0;
-			while (!excluded && j<packages.length){
-				excluded = exclude.contains(packages[j]);
-				j++;
+			String exclude = excludes.get(i);
+			//It's a package
+			if (exclude.contains("\\.*")){
+				excluded = type.startsWith(exclude.substring(0,exclude.length()-2));
+			} else {
+				excluded = type.equals(exclude);
 			}
 			i++;
 		}		

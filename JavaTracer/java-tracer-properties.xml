@@ -4,18 +4,18 @@
   <string>java.*</string>
   <string>javax.*</string>
   <string>sun.*</string>
-  <string>com.sun.*</string>
+  <string>org.eclipse.jdt.internal.jarinjarloader.*</string>
 </list>
 </excludes>
 <num-levels>
 <int>4</int>
 </num-levels>
 <num-nodes>
-<int>30</int>
-</num-nodes>
-<methods-excludes>
 <com.profiler.model.data.ExcludedClassesMethods>
   <classList/>
 </com.profiler.model.data.ExcludedClassesMethods>
+</num-nodes>
+<methods-excludes>
+<int>30</int>
 </methods-excludes>
 </configuration>

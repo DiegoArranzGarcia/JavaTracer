@@ -76,7 +76,8 @@ public class InspectorController {
     
     public void finishLoading(){
     	treeInspector.showTree();
-    	loadingView.dispose();
+    	if (loadingView != null)
+    		loadingView.dispose();
     }
     
     public void updateInfo(int numNodes, int total,int percentage) {
