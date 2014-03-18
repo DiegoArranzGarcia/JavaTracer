@@ -20,17 +20,21 @@ import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
 import com.general.model.variables.data.Data;
 import com.inspector.treeinspector.data.Box;
+import com.tracer.model.ChangeDetector;
 import com.tracer.model.methods.data.MethodEntryInfo;
+import com.tracer.model.methods.data.MethodExitInfo;
 
 
 public class XmlManager extends XStreamUtil{
       
    private Document xmlDocument;
+   private ChangeDetector detector;
    
    public XmlManager(String fileName) {
 	   
 	   try {	
 		   xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(fileName);
+		   detector = new ChangeDetector();
 	   } catch (Exception e){
 		   e.printStackTrace();
 	   }
@@ -137,18 +141,6 @@ public class XmlManager extends XStreamUtil{
 	    return thread;
 	}
 
-	public MethodInfo getInfoMethod(Node infoNode) throws XPathExpressionException {
-		String expression = "./" + TAG_METHOD_ENTRY_EVENT;  
-	    XPath xPath = XPathFactory.newInstance().newXPath();
-	    XPathExpression xPathExpression = xPath.compile(expression);
-	    Node node = (Node) xPathExpression.evaluate(infoNode,XPathConstants.NODE);
-	    MethodEntryInfo entry = (MethodEntryInfo) xStream.fromXML(nodeToString(node)); 
-	    
-	    MethodInfo info = new MethodInfo(entry.getMethodName(),entry.getCalledFromClass(),entry.getArguments(),entry.getThis_data(), 
-	    		null, new ArrayList<ChangeInfo>());
-		return info;
-	}
-
 	public int getNumChildrenOfNode(Box box) {
 		int children = 0;
 		try{
@@ -172,10 +164,16 @@ public class XmlManager extends XStreamUtil{
 			XPathExpression xPathExpression;
 			xPathExpression = xPath.compile(expression);
 			Node node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			
 			MethodEntryInfo entry = (MethodEntryInfo) xStream.fromXML(nodeToString(node)); 
 			
-			info = new MethodInfo(entry.getMethodName(),entry.getCalledFromClass(),entry.getArguments(),entry.getThis_data(), 
-	    		null, new ArrayList<ChangeInfo>());
+			expression = path + "/" + TAG_METHOD_EXIT_EVENT;  
+		    xPathExpression = xPath.compile(expression);
+		    node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			MethodExitInfo exit = (MethodExitInfo) xStream.fromXML(nodeToString(node));
+			
+			info = new MethodInfo(entry,exit);
+			
 		} catch (Exception e){
 			e.printStackTrace();
 		}

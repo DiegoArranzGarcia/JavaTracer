@@ -1,75 +1,52 @@
 package com.general.model.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.variables.data.Data;
+import com.tracer.model.ChangeDetector;
+import com.tracer.model.methods.data.MethodEntryInfo;
+import com.tracer.model.methods.data.MethodExitInfo;
 
 	
 public class MethodInfo {
 	
-	private String methodName;
-	private String calledFromClass;
-	private List<Data> arguments;
-	private Data return_data;
-	private Data this_data;
-	private List<ChangeInfo> changes;
+	private MethodEntryInfo entry;
+	private MethodExitInfo exit;
 
-	public MethodInfo(String methodName, String calledFromClass, List<Data> arguments,Data this_data,Data return_data,
-			List<ChangeInfo> changes) {
-		this.methodName = methodName;
-		this.calledFromClass = calledFromClass;
-		this.arguments = arguments;
-		this.this_data = this_data;
-		this.return_data = return_data;
-		this.changes = changes;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getCalledFromClass() {
-		return calledFromClass;
+	public MethodInfo(MethodEntryInfo entry,MethodExitInfo exit){
+		this.entry = entry;
+		this.exit = exit;
 	}
 
 	public List<Data> getArguments() {
-		return arguments;
-	}
-
-	public Data getReturn_data() {
-		return return_data;
+		return entry.getArguments();
 	}
 
 	public Data getThis_data() {
-		return this_data;
+		return entry.getThis_data();
 	}
 
-	public void setCalledFromClass(String calledFromClass) {
-		this.calledFromClass = calledFromClass;
-	}
-
-	public void setArguments(List<Data> arguments) {
-		this.arguments = arguments;
-	}
-
-	public void setReturn_data(Data return_data) {
-		this.return_data = return_data;
-	}
-
-	public void setThis_data(Data this_data) {
-		this.this_data = this_data;
+	public Data getReturn_data() {
+		return exit.getReturnData();
 	}
 
 	public List<ChangeInfo> getChanges() {
+		ChangeDetector detector = new ChangeDetector();
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		List<Data> entryArguments = entry.getArguments();
+		List<Data> exitArguments = exit.getArguments();
+		for (int i=0;i<entryArguments.size();i++){
+			changes.addAll(detector.getChangesBetween(entryArguments.get(i),exitArguments.get(i)));
+		}
+		
+		changes.addAll(detector.getChangesBetween(entry.getThis_data(), exit.getThis_data()));
+		
 		return changes;
 	}
 
-	public void setChanges(List<ChangeInfo> changes) {
-		this.changes = changes;
+	public String getMethodName() {
+		return entry.getMethodName();
 	}
 	
 }
