@@ -1,11 +1,15 @@
 package com.profiler.presenter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
@@ -22,6 +26,10 @@ import com.profiler.view.ProfilerViewInterface;
 import com.profiler.view.ProfilerViewWithoutSplit;
 
 public class ProfilerPresenter implements ProfilerPresenterInterface {
+	
+	private static final String XML_FILTER_FILES = "XML Files (*.xml)";
+	private static final String XML_EXT = "xml";
+	private static final String OPEN_PROFILE = "Open profile";
 	
 	private JavaTracerPresenter controller;
 	
@@ -179,6 +187,29 @@ ArrayList<String>  futureNode=new ArrayList<String>();
 				}
 		
 			}
+	}
+
+	public void clickedOnOpenProfile() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
+		chooser.setAcceptAllFileFilterUsed(false);
+		//Title window
+		chooser.setDialogTitle(OPEN_PROFILE);
+		chooser.setCurrentDirectory(new java.io.File("."));
+		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
+		//return directory file
+		
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			try {
+				String path = chooser.getSelectedFile().getCanonicalPath();
+				openProfile(new File(path));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else { 
+			chooser.cancelSelection();
+		}
+		
 	}
 
 }

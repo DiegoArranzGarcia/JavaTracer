@@ -135,7 +135,7 @@ public class TracerController {
 
 	public void editArguments() {
 		tracerView.setVisible(false); 
-		presenter.clicekOnEditArguments();
+		presenter.clickedOnEditArguments();
 	}
 
 	public void redirectStreams(Process process){
@@ -169,7 +169,7 @@ public class TracerController {
 	}
 
 	public void clickedOnLoadProfile() {
-		presenter.clickedOnViewProfile();
+		presenter.clickedOnLoadProfile();
 	}
 
 	public void clickedOnLoadTrace() {

@@ -74,7 +74,7 @@ public class JavaTracerPresenter {
 	public void showProfile() {
 		profilerPresenter.loadTempProfile();
 		profilerPresenter.showProfile();
-		String nameFile=tracerController.getNameXml()+"Profiler.xml";
+		String nameFile = tracerController.getNameXml() + "Profiler.xml";
 		profilerPresenter.saveProfile(new File(nameFile));
 	}	
 	
@@ -89,16 +89,12 @@ public class JavaTracerPresenter {
 	public void clickedOnTraceProfile() {
 		tracerController.open();		
 	}
-	
-	public void clickedOnViewProfile() {
-		profilerPresenter.showProfile();
-	}
 
 	public void clickedOnSettings() {
 		settingsPresenter.show();
 	}
 	
-	public void clicekOnEditArguments() {
+	public void clickedOnEditArguments() {
 		argumentsPresenter.show();
 	}
 	
@@ -142,6 +138,10 @@ public class JavaTracerPresenter {
 
 	public void setVisible(boolean b) {
 		tracerController.setVisible(false);
+	}
+
+	public void clickedOnLoadProfile() {
+		profilerPresenter.clickedOnOpenProfile();
 	}
 
 }

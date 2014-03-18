@@ -287,8 +287,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		}
 	}
     
-	
-
 	public void chartProgress(ChartProgressEvent event) {
 		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED)
 			loadTable();
@@ -378,26 +376,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		presenter.refresh();
 	}
 
-	private void clickedOpenProfile() {
-		JFileChooser chooser = new JFileChooser();
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
-		chooser.setAcceptAllFileFilterUsed(false);
-		//Title window
-		chooser.setDialogTitle(OPEN_PROFILE);
-		chooser.setCurrentDirectory(new java.io.File("."));
-		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
-		//return directory file
-		
-		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			try {
-				String path = chooser.getSelectedFile().getCanonicalPath();
-				presenter.openProfile(new File(path));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else { 
-			chooser.cancelSelection();
-		}
+	public void clickedOpenProfile() {
+		presenter.clickedOnOpenProfile();
 	}
 	
 	private void clickedSaveProfile() {
@@ -431,7 +411,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		}
 	}
 	public void componentHidden(ComponentEvent e) {}
-	
 	public void componentMoved(ComponentEvent e) {}
 
 	public void componentResized(ComponentEvent e) {
@@ -604,10 +583,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	public void mouseClicked(MouseEvent e) {
 	
-	
 		if (e.getClickCount() == 2){ 
-			int column=table.getSelectedColumn();
-			int row=table.getSelectedRow();
+			int column = table.getSelectedColumn();
+			int row = table.getSelectedRow();
 			String completeName=(String)table.getValueAt(row, 2);
 			presenter.doubleClick(completeName);
 		}
@@ -615,26 +593,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	}
 
-	public void mouseEntered(MouseEvent e) {
-		
-	}
-
-	
-	public void mouseExited(MouseEvent e) {
-			
-	}
-
-	
-	public void mousePressed(MouseEvent e) {
-		
-		
-	}
-
-	
-	public void mouseReleased(MouseEvent e) {
-		
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}	
+	public void mouseReleased(MouseEvent e) {}
 
 }
 
