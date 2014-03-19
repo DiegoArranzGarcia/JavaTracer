@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -142,28 +141,14 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void refresh() {
-		HashMap<String,Integer> classesInfo=new HashMap<String,Integer>();
-		int numCalledClasses=0;
-		
 		HashMap<List<String>, Boolean> states = view.getDataState();
-		Set<List<String>> keys = states.keySet();
-		Iterator<List<String>> it = keys.iterator();
-		
-		while(it.hasNext()){
-			List<String> futureNode = it.next();
-		//	((ProfilerView)view).CheckClass(row);
-			if(!states.get(futureNode)){
-				ProfileData node=profiler.getProfileTree().getData(futureNode);
-				
-				numCalledClasses=numCalledClasses+recursiveRefresh(classesInfo,node);
-				
-			}
-			
-		}
-		
-		((ProfilerView)view).load(classesInfo, numCalledClasses);
-		
-		
+		currentProfileTree.changeExcludeNodes(states);
+		((ProfilerView)view).loadTable();
+		showProfile(); 
+	
+	
+	
+	
 	}
 
 	public void doubleClick(String completeName) {
@@ -226,36 +211,5 @@ ArrayList<String>  futureNode=new ArrayList<String>();
 		}
 		
 	}
-
-
-public int recursiveRefresh (HashMap<String, Integer> classesInfo, ProfileData node){
-	int numCalledClasses=0;
-	
-	int isClass=profiler.getProfileTree().foundClass(node.getParent(),node.getName());
-	if(isClass!=-1){
-		numCalledClasses=node.getNumCalls();
-		classesInfo.put(node.getName(), node.getNumCalls());
-	}else{
-			int isPackage=profiler.getProfileTree().foundPackage(node.getParent(),node.getName());
-			if(isPackage!=-1){
-				List<ProfileData> futureClasses=node.getChildren();
-				int i=0;
-				while(i<futureClasses.size()){
-					numCalledClasses=numCalledClasses+recursiveRefresh(classesInfo,futureClasses.get(i));
-					i++;	
-					}
-		
-			
-			
-			}
-		
-		}
-	
-	return numCalledClasses;
-
-	
-	
-}
-
 
 }
