@@ -107,7 +107,7 @@ public class ProfilerTree {
 		return index;
 	}
 
-	private int foundPackage(ProfileData node, String packageName) {
+	public int foundPackage(ProfileData node, String packageName) {
 		int index = -1;
 		boolean found = false;
 		int i = 0;
@@ -195,51 +195,4 @@ public class ProfilerTree {
 		
 	}
 
-	
-	public void changeExcludeNodes(HashMap<List<String>, Boolean> states) {
-		
-		Set<List<String>> keys = states.keySet();
-		Iterator<List<String>> it = keys.iterator();
-		
-		while(it.hasNext()){
-			
-			List<String> node = it.next();
-			if(states.get(node)){
-				
-				ProfileData trueNode = getData(node);
-				if(trueNode!=null){
-					
-					int classes=foundClass(trueNode.getParent(), trueNode.getName());
-					int packagee=foundPackage(trueNode.getParent(), trueNode.getName());
-					int method=foundMethod(trueNode.getParent(), trueNode.getName());
-					
-					if(classes!=-1||method!=-1)
-						trueNode.remove();
-					else
-						if(packagee!=-1){
-							
-							ProfileData parent=trueNode.getParent(); 
-							ProfileData son=trueNode; 
-							while(!parent.getName().equals("All packages")){
-							      parent.removeAllChildren();
-							      son=parent;
-							      parent=parent.getParent();
-							     }
-							son.remove();
-							}
-				
-					}
-				
-			}
-			
-			
-		}
-		
-		
-	}
-	
-
-
-
-	
 }

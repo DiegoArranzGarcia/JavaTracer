@@ -539,6 +539,15 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		return path;
 	}
 
+	
+	
+	/*public void CheckClass(int row) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setValueAt(true,row,4);
+		
+	}*/
+	
+	
 	public void load(HashMap<String, Integer> classes, int numCalledMethods) {
 		
 		if (numCalledMethods > 0 )
@@ -562,7 +571,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	public void loadTable() {
     	
-    	table.clearTable();
+		table.clearTable();
     	
     	ProfilerTree tree = presenter.getTree();
     	PiePlot plot = (PiePlot)chart.getPlot();
