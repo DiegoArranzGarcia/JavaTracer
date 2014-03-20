@@ -5,14 +5,13 @@ import java.util.List;
 
 public class TableTreeNode {
 
-	private Object userObject;
+	private TableRowData userObject;
 	private boolean expanded;
-	private boolean isExpandable;
 	private int depth;
 	private List<TableTreeNode> children;
 	private TableTreeNode parent;
 	
-	public TableTreeNode(Object data){
+	public TableTreeNode(TableRowData data){
 		this.userObject = data;
 		this.expanded = false;
 		this.children = new ArrayList<>();
@@ -20,11 +19,11 @@ public class TableTreeNode {
 		this.depth = 0;
 	}
 		
-	public Object getUserObject() {
+	public TableRowData getUserObject() {
 		return userObject;
 	}
 	
-	public void setUserObject(Object userObject) {
+	public void setUserObject(TableRowData userObject) {
 		this.userObject = userObject;
 	}
 	
@@ -110,10 +109,6 @@ public class TableTreeNode {
 		return !children.isEmpty();
 	}
 
-	public void setExpandable(boolean isExpandable) {
-		this.isExpandable = isExpandable;
-	}
-	
 	public boolean isRoot(){
 		return parent == null;
 	}
