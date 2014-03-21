@@ -38,7 +38,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	
 	private static final String PROFILER_EXT = "-profile";
 	private static final String ADD_ARGUMENTS = "Add arguments";
-	private static final String NAME_OF_THE_TRACE_PROFILE_FILE = "Name of the trace/profile file";
 	private static final String ABOUT = "About";
 	private static final String HELP = "Help";
 	private static final String SETTINGS = "Settings";
@@ -62,11 +61,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private TracerController presenter;
 	
 	private WebButton trace,exit,addArgument,profile;
-	private WebTextField nameXml;
 	private WebComboBox nameClass;
 	private WebFileChooserField chooser;
-	private WebLabel labelPath,labelNameClass,labelXml;
-	private WebLabel helpXmlFile,helpNameClass,helpPath;
+	private WebLabel labelPath,labelNameClass;
+	private WebLabel helpNameClass,helpPath;
 	private JComponent console;
 	
 	private WebMenuItem mntmLoadProfile;
@@ -77,6 +75,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmSettings;
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
+	
+	private String nameXml;
 	
 	public TracerView(JComponent console) {
 		
@@ -117,14 +117,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		helpNameClass = new WebLabel();
 		helpNameClass.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpNameClass.setToolTipText(LABEL_NAME_CLASS);
-		
-		nameXml = new WebTextField();
-		nameXml.setEnabled(false); 
 			 
-		helpXmlFile = new WebLabel();
-		helpXmlFile.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
-		helpXmlFile.setToolTipText(XML_FILE_TOOLTIP);
-		
 		exit =new WebButton(EXIT);
 		exit.setBackground(Color.white); 
 		exit.addActionListener(this);
@@ -179,17 +172,14 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		labelNameClass.setBackground(Color.white); 
 		getContentPane().add(labelNameClass, "3, 5, left, fill");
 		
-		labelXml = new WebLabel(NAME_OF_THE_TRACE_PROFILE_FILE);
-		getContentPane().add(labelXml, "3, 7, left, fill");
-		getContentPane().add(trace, "7, 9, fill, fill");
-		getContentPane().add(exit, "9, 9, fill, fill");
+		
+		getContentPane().add(trace, "7, 7, fill, fill");
+		getContentPane().add(exit, "9, 7, fill, fill");
 		getContentPane().add(nameClass, "5, 5, 5, 1, fill, fill");
 		getContentPane().add(helpPath, "11, 3, center, center");
 		getContentPane().add(helpNameClass, "11, 5, center, center");
-		getContentPane().add(nameXml, "5, 7, 5, 1, fill, fill");
-		getContentPane().add(helpXmlFile, "11, 7, center, center");
 		getContentPane().add(addArgument, "13, 5, center, center");
-		getContentPane().add(profile, "5, 9, fill, fill");
+		getContentPane().add(profile, "5, 7, fill, fill");
 		getContentPane().add(console, "3, 11, 11, 2, fill, fill");
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -239,7 +229,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		JOptionPane.setDefaultLocale(new Locale("en"));
 		String curDir = System.getProperty("user.dir");
 		String s= File.separator;
-		String xmlName = getNameXml();
+		String xmlName = nameXml;
 		
 		String xmlPath = curDir+s+xmlName+FileUtilities.EXTENSION_XML;	
 		
@@ -281,7 +271,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		if (nameClass.getItemCount()>0){
 			trace.setEnabled(true);
 			profile.setEnabled(true); 
-			nameXml.setEnabled(true);
+			
 		}
 		
 	}
@@ -298,16 +288,24 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		return (String)nameClass.getSelectedItem();
 	}
 
-	public String getNameXml() {
-		String nameFile = "";
-		nameFile = this.nameXml.getText();
+	public String getNameXml(boolean trace) {
+		nameXml= (String) nameClass.getSelectedItem();
 		
-		if (nameFile.equals("") || nameFile.equals(".xml"))
-			nameFile = "default";
-		else if (FileUtilities.isExtension(nameFile,"xml"))
-			nameFile = FileUtilities.getFileNameWithoutExtension(nameFile);
+		if(nameXml.contains("."))
+			nameXml=nameXml.substring(0, nameXml.indexOf("."));
 		
-		return nameFile;
+		if(trace)
+			nameXml=nameXml+"Trace";
+		else
+			nameXml=nameXml+"Profile";
+		
+		int i=0;
+		
+		while(existFileXml(nameXml+FileUtilities.EXTENSION_XML))
+		{nameXml=nameXml+ Integer.toString(i);
+		 i=i+1;
+		}
+	return nameXml;
 	}
 
 	public void enableMainClassCombo() {
@@ -383,36 +381,11 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	private void clickedOnProfile() {
-		
-		String xmlName = getNameXml();
-		
-		if(existFileXml(xmlName + PROFILER_EXT + FileUtilities.EXTENSION_XML)){									
-			 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
-					 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);
-			 
-			 if (seleccion == 0){
-				 presenter.clickedOnProfile();
-			 }
-			 
-		} else {
 			presenter.clickedOnProfile();
-		}
-
 	}
 
 	private void clickedOnTrace(){
-		String xmlName = getNameXml();
-		
-		if(existFileXml(xmlName+FileUtilities.EXTENSION_XML)){									
-			 int seleccion = JOptionPane.showOptionDialog( null,xmlName +" already exists,"+" are you sure you want to overwrite the current file?",
-					 					"Overwrite current file",	JOptionPane.YES_NO_CANCEL_OPTION,    JOptionPane.QUESTION_MESSAGE, null, null, null);				
-			 if(seleccion==0) {
-				 presenter.clickedOnTrace();
-			 }				 											    
-		} else {
-			 presenter.clickedOnTrace();
-		}
-		
+		presenter.clickedOnTrace();
 	}
 
 	private void clickedOnExit(){

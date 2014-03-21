@@ -28,7 +28,7 @@ public class JarFinder {
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++)
 				getJarDirectoriesRec(folderFiles[i],jars);
-			
+		
 		}
 		
 		else if (file.isFile() && FileUtilities.getExtension(file).equals("jar")){

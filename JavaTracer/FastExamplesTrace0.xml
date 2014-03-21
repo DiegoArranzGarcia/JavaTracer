@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<trace>
+<thread id="0">
+<thread-info>
+  <nameThread>main-thread</nameThread>
+</thread-info>
+<called-methods>
+<method-call id="0">
+<method-entry-event>
+  <methodame>main</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>145</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+<method-call id="1">
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>148</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>149</id>
+    </string-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>150</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>148</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>149</id>
+      </string-variable>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>150</id>
+    <className>Person</className>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>148</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>149</id>
+    </string-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call id="2">
+<method-entry-event>
+  <methodame>&lt;init&gt;</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>148</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>149</id>
+    </string-variable>
+    <object-variable>
+      <name>bestFriend</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>148</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <null>
+          <name>bestFriend</name>
+        </null>
+      </fields>
+      <id>150</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <null>
+        <name>name</name>
+      </null>
+      <null>
+        <name>lastName</name>
+      </null>
+      <null>
+        <name>bestFriend</name>
+      </null>
+    </fields>
+    <id>152</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>&lt;init&gt;</methodName>
+  <className>Person</className>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>148</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>149</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>148</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>149</id>
+          </string-variable>
+          <null>
+            <name>bestFriend</name>
+          </null>
+        </fields>
+        <id>150</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>152</id>
+    <className>Person</className>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>age</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <string-variable>
+      <name>name</name>
+      <value></value>
+      <id>148</id>
+    </string-variable>
+    <string-variable>
+      <name>lastName</name>
+      <value>b</value>
+      <id>149</id>
+    </string-variable>
+    <object-variable>
+      <name>bestFriend</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>148</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <null>
+          <name>bestFriend</name>
+        </null>
+      </fields>
+      <id>150</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call id="3">
+<method-entry-event>
+  <methodame>prueba</methodame>
+  <calledFromClass>Main</calledFromClass>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">1</value>
+    </simple-variable>
+    <object-variable>
+      <name>p1</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>148</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>148</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>149</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>150</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>152</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>150</id>
+      <className>Person</className>
+    </object-variable>
+    <object-variable>
+      <name>p2</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>148</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>148</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>149</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>152</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>150</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>152</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>prueba</methodName>
+  <className>Main</className>
+  <return class="object-variable">
+    <name>return</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value>pepito</value>
+        <id>153</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>149</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">0</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value></value>
+            <id>148</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>149</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>150</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>152</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>150</id>
+    <className>Person</className>
+  </return>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <simple-variable>
+      <name>i</name>
+      <value class="int">0</value>
+    </simple-variable>
+    <object-variable>
+      <name>p1</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">1</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value>pepito</value>
+          <id>153</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">0</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value></value>
+              <id>148</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>149</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>150</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>152</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>150</id>
+      <className>Person</className>
+    </object-variable>
+    <object-variable>
+      <name>p2</name>
+      <constantData/>
+      <inheritData/>
+      <fields>
+        <simple-variable>
+          <name>age</name>
+          <value class="int">0</value>
+        </simple-variable>
+        <string-variable>
+          <name>name</name>
+          <value></value>
+          <id>148</id>
+        </string-variable>
+        <string-variable>
+          <name>lastName</name>
+          <value>b</value>
+          <id>149</id>
+        </string-variable>
+        <object-variable>
+          <name>bestFriend</name>
+          <constantData/>
+          <inheritData/>
+          <fields>
+            <simple-variable>
+              <name>age</name>
+              <value class="int">1</value>
+            </simple-variable>
+            <string-variable>
+              <name>name</name>
+              <value>pepito</value>
+              <id>153</id>
+            </string-variable>
+            <string-variable>
+              <name>lastName</name>
+              <value>b</value>
+              <id>149</id>
+            </string-variable>
+            <object-variable>
+              <name>bestFriend</name>
+              <id>152</id>
+              <className>Person</className>
+            </object-variable>
+          </fields>
+          <id>150</id>
+          <className>Person</className>
+        </object-variable>
+      </fields>
+      <id>152</id>
+      <className>Person</className>
+    </object-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+<method-call id="4">
+<method-entry-event>
+  <methodame>imprime</methodame>
+  <calledFromClass>Person</calledFromClass>
+  <arguments/>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">0</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>148</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>149</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value>pepito</value>
+            <id>153</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>149</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>152</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>150</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>152</id>
+    <className>Person</className>
+  </object-this>
+</method-entry-event>
+<called-methods>
+</called-methods>
+<method-exit-event>
+  <methodName>imprime</methodName>
+  <className>Person</className>
+  <return class="string-variable">
+    <name>return</name>
+    <value>hecho</value>
+    <id>154</id>
+  </return>
+  <object-this class="object-variable">
+    <name>this</name>
+    <constantData/>
+    <inheritData/>
+    <fields>
+      <simple-variable>
+        <name>age</name>
+        <value class="int">1</value>
+      </simple-variable>
+      <string-variable>
+        <name>name</name>
+        <value></value>
+        <id>148</id>
+      </string-variable>
+      <string-variable>
+        <name>lastName</name>
+        <value>b</value>
+        <id>149</id>
+      </string-variable>
+      <object-variable>
+        <name>bestFriend</name>
+        <constantData/>
+        <inheritData/>
+        <fields>
+          <simple-variable>
+            <name>age</name>
+            <value class="int">1</value>
+          </simple-variable>
+          <string-variable>
+            <name>name</name>
+            <value>pepito</value>
+            <id>153</id>
+          </string-variable>
+          <string-variable>
+            <name>lastName</name>
+            <value>b</value>
+            <id>149</id>
+          </string-variable>
+          <object-variable>
+            <name>bestFriend</name>
+            <id>152</id>
+            <className>Person</className>
+          </object-variable>
+        </fields>
+        <id>150</id>
+        <className>Person</className>
+      </object-variable>
+    </fields>
+    <id>152</id>
+    <className>Person</className>
+  </object-this>
+  <arguments/>
+</method-exit-event>
+</method-call>
+</called-methods>
+<method-exit-event>
+  <methodName>main</methodName>
+  <className>Main</className>
+  <object-this class="null">
+    <name>this</name>
+  </object-this>
+  <arguments>
+    <array-variable>
+      <name>args</name>
+      <className>java.lang.String</className>
+      <id>145</id>
+      <length>0</length>
+      <content/>
+    </array-variable>
+  </arguments>
+</method-exit-event>
+</method-call>
+</called-methods>
+</thread>
+</trace>

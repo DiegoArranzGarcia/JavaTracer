@@ -71,7 +71,7 @@ public class TracerController {
 		String classPath = "";
 		if (!jar) 
 			classPath = processPath(mainClassPath,main);
-		String nameXml = getNameXml();
+		String nameXml = getNameXml(true);
 		String[] args = argumentsPresenter.getArguments();
 		String[] external_jars = new String[0];
 		if (!jar)
@@ -88,8 +88,8 @@ public class TracerController {
 		return (file.isFile() && FileUtilities.isExtension(file,"jar"));
 	}
 
-	public String getNameXml() {
-		return tracerView.getNameXml();
+	public String getNameXml(boolean trace) {
+		return tracerView.getNameXml(trace);
 	}
 
 	
