@@ -8,7 +8,6 @@ public abstract class ProfileData {
 	protected List<ProfileData> children;
 	protected ProfileData parent;
 	protected int numCalls;
-	protected boolean checked;
 	
 	public abstract String getName();
 	public abstract String getCompleteName();

@@ -11,6 +11,7 @@ import com.profiler.model.data.ProfileClass;
 import com.profiler.model.data.ProfileDataVisitor;
 import com.profiler.model.data.ProfileMethod;
 import com.profiler.model.data.ProfilePackage;
+import com.profiler.view.ProfilerRowData.TypeData;
 
 public class ProfileTreeVisitor implements ProfileDataVisitor {
 
@@ -25,7 +26,8 @@ public class ProfileTreeVisitor implements ProfileDataVisitor {
 
 	public void visit(ProfilePackage data) {
 				
-		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(data.getName(),Color.WHITE,data.getCompleteName(),data.getNumCalls(),false));
+		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(TypeData.PACKAGE,Color.WHITE,data.getName(),data.getCompleteName(),
+				data.getNumCalls(),false));
 		
 		TableTreeNode parentNode = getLastParent();
 		parentNode.add(tableTreeNode);
@@ -42,7 +44,8 @@ public class ProfileTreeVisitor implements ProfileDataVisitor {
 	
 	public void visit(ProfileMethod data) {
 		
-		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(data.getName(),Color.WHITE,data.getCompleteName(),data.getNumCalls(),false));
+		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(TypeData.METHOD,Color.WHITE,data.getName(),data.getCompleteName(),
+				data.getNumCalls(),false));
 		
 		TableTreeNode parentNode = getLastParent();
 		parentNode.add(tableTreeNode);
@@ -56,7 +59,7 @@ public class ProfileTreeVisitor implements ProfileDataVisitor {
 			color = (Color) plot.getSectionPaint(ProfilerView.OTHERS_CLASSES);
 		
 		
-		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(data.getName(),color,data.getCompleteName(),data.getNumCalls(),false));
+		TableTreeNode tableTreeNode = new TableTreeNode(new ProfilerRowData(TypeData.CLASS,color,data.getName(),data.getCompleteName(),data.getNumCalls(),false));
 		
 		TableTreeNode parentNode = getLastParent();
 		parentNode.add(tableTreeNode);

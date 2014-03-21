@@ -5,14 +5,18 @@ import java.awt.Color;
 import com.general.view.jtreetable.TableRowData;
 
 public class ProfilerRowData implements TableRowData{
+	
+	public enum TypeData{PACKAGE,CLASS,METHOD};
 
-	private String name;
 	private Color color;
+	private TypeData type;
+	private String name;
 	private String completeName;
 	private Integer count;
 	private boolean excluded;
 	
-	public ProfilerRowData(String name, Color color,String completeName,Integer count,boolean excluded) {
+	public ProfilerRowData(TypeData type,Color color,String name,String completeName,Integer count,boolean excluded) {
+		this.type = type;
 		this.name = name;
 		this.color = color;
 		this.completeName = completeName;
@@ -56,12 +60,20 @@ public class ProfilerRowData implements TableRowData{
 		this.count = count;
 	}
 
-	public boolean isUsed() {
+	public boolean isExcluded() {
 		return excluded;
 	}
 
-	public void setUsed(boolean excluded) {
+	public void setExcluded(boolean excluded) {
 		this.excluded = excluded;
+	}
+
+	public TypeData getType() {
+		return type;
+	}
+
+	public void setType(TypeData type) {
+		this.type = type;
 	}
 	
 }

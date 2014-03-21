@@ -38,6 +38,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -60,9 +62,10 @@ import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
+import com.profiler.view.ProfilerRowData.TypeData;
 
 @SuppressWarnings("serial")
-public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener{
+public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener, TableModelListener{
 
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
@@ -90,7 +93,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static double SPLIT_PERCENTAGE = 0.52;
 	private static double PERCENTAGE_WIDTH = 0.75;
 	private static double PERCENTAGE_HEIGHT = 0.75;
-	private static final int CLASSCHART=10;
+	private static final int NUM_CLASSES=10;
 	
 	private ProfilerPresenterInterface presenter;
 	private ProfileCellRenderer renderer;
@@ -110,10 +113,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JMenuItem mntmUncheckAllClasses;
 	private JButton btnSave;
 	private JButton btnCancel;
-	private JButton btnRefresh;
 	private JPanel panelRight;
 	private JPanel panel;
 	private JMenuItem mntmExit;
+	private boolean tableLoaded;
 	
     		    
 	/**
@@ -150,12 +153,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         
         btnSave = new JButton("Save");
         panel.add(btnSave);
-        btnSave.addActionListener(this);
-        
-        btnRefresh = new JButton("Refresh");
-        panel.add(btnRefresh);
-        btnRefresh.addActionListener(this);
-        
+        btnSave.addActionListener(this);        
         
         btnCancel = new JButton("Cancel");
         panel.add(btnCancel);
@@ -207,6 +205,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(150);
         table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getModel().addTableModelListener(this);
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
@@ -282,38 +281,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			clickedOnSave();
 		} else if (source.equals(btnCancel)){
 			clickedOnCancel();
-		} else if (source.equals(btnRefresh)){
-			clickedOnRefresh();
 		}
 	}
     
-	public void chartProgress(ChartProgressEvent event) {
-		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED)
-			loadTable();
-	}
-   
-    private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
-			
-		dataset.sortByValues(SortOrder.DESCENDING);
-		@SuppressWarnings("unchecked") 
-        List<String> keys = dataset.getKeys();
-		DefaultPieDataset definitivedataset = new DefaultPieDataset();
-		
-		int i=0;
-		double percentage=0;
-		
-		while(i<keys.size() && i<CLASSCHART){
-			definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
-			percentage=percentage + dataset.getValue(keys.get(i)).doubleValue();
-			i++;	
-		}
-	
-    	if(i<keys.size())
-    		definitivedataset.setValue(OTHERS_CLASSES, 100-percentage);
-    	
-    	return definitivedataset;
-	}
-
 	private void clickedCheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
@@ -369,11 +339,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void clickedOnSave() {
 		presenter.save();
-	}
-	
-	private void clickedOnRefresh() {
-	
-		presenter.refresh();
 	}
 
 	public void clickedOpenProfile() {
@@ -483,14 +448,120 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	dataset.setValue(entry.getKey(),percentage);
         }
         
-        DefaultPieDataset definitivedataset= chosenClasses(dataset); 
+        DefaultPieDataset definitiveDataSet= chosenClasses(dataset); 
         
-        return definitivedataset;
+        return definitiveDataSet;
     }
+	
+	private void refreshChart() {
+		
+		HashMap<String,Integer> classes = new HashMap<>();
+		TableTreeNode node = table.getRoot();
+		
+		for (int i=0;i<node.getChildCount();i++){
+			getClasses(classes,node.getChildAt(i));
+		}
+		
+		int calls = calculateTotalCalls(classes);
+		
+		((PiePlot)chart.getPlot()).setDataset(createDataset(classes,calls));
+		
+	}
 
+	
+	private int calculateTotalCalls(HashMap<String, Integer> classes) {
+		
+		Iterator<Entry<String,Integer>> iterator = classes.entrySet().iterator();
+		int numCalls = 0;
+		
+		while (iterator.hasNext()){
+			Entry<String, Integer> next = iterator.next();
+			
+			System.out.println("Clase: " + next.getKey());
+			System.out.println("veces: " + next.getValue());
+			numCalls += next.getValue();
+		}
+		
+		return numCalls;
+	}
+
+	private void getClasses(HashMap<String, Integer> classes,TableTreeNode node) {
+		
+		ProfilerRowData data = (ProfilerRowData) node.getUserObject();
+		
+		switch (data.getType()) {
+			case CLASS:
+				countClass(classes,node);
+				break;
+			case PACKAGE:
+				countPackagesClasses(classes,node);
+				break;
+			default:
+				break;
+		}
+		
+		
+	}
+
+	private void countPackagesClasses(HashMap<String, Integer> classes,TableTreeNode node) {
+		
+		ProfilerRowData data = (ProfilerRowData) node.getUserObject();
+		
+		if (!data.isExcluded()){
+			for (int i=0;i<node.getChildCount();i++)
+				getClasses(classes,node.getChildAt(i));
+		}
+		
+	}
+
+	private void countClass(HashMap<String, Integer> classes, TableTreeNode node) {
+		
+		ProfilerRowData data = (ProfilerRowData) node.getUserObject();
+		
+		if (!data.isExcluded()){
+			int numCalls = 0;
+			for (int i=0;i<node.getChildCount();i++){
+				ProfilerRowData childData = ((ProfilerRowData)node.getChildAt(i).getUserObject());
+				if (!childData.isExcluded())
+					numCalls += childData.getCount(); 
+			}
+			
+			if (numCalls>0)
+				classes.put(data.getCompleteNameClass(),numCalls);
+		
+		}
+	}
+
+	public void chartProgress(ChartProgressEvent event) {
+		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED && !tableLoaded)
+			loadTable();
+	}
+   
+    private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
+			
+		dataset.sortByValues(SortOrder.DESCENDING);
+        List<String> keys = dataset.getKeys();
+		DefaultPieDataset definitivedataset = new DefaultPieDataset();
+		
+		int i=0;
+		double percentage=0;
+		
+		while(i<keys.size() && i<NUM_CLASSES){
+			definitivedataset.setValue(keys.get(i), dataset.getValue(keys.get(i)));	
+			percentage = percentage + dataset.getValue(keys.get(i)).doubleValue();
+			i++;	
+		}
+	
+    	if(i<keys.size())
+    		definitivedataset.setValue(OTHERS_CLASSES, 100-percentage);
+    	
+    	return definitivedataset;
+	}
+
+    
 	/**
      * This panel is created when there is no data to show.
-     * @return
+     * @return returns and empty panel.
      */
 	private JPanel createNoLoadPanel() {
 		JPanel panel = new JPanel();
@@ -509,7 +580,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         return chartPanel;
     }
 
-	private void createTreeVisitor(ProfileTreeVisitor visitor, ProfileData data) {
+	private void createTreeVisitor(ProfileTreeVisitor visitor,ProfileData data) {
 		List<ProfileData> children = data.getChildren();
 		for (int i=0;i<children.size();i++){
 			children.get(i).accept(visitor);
@@ -546,11 +617,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		else 
 			pieChartPanel = createNoLoadPanel();
 		
+		tableLoaded = false;
     	splitPane.setLeftComponent(pieChartPanel);
     	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
 	}
 
 	public void load(ProfilerTree currentProfileTree) {
+		table.clearTable();
     	if (currentProfileTree.getNumCalls() > 0 )
 			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()));
 		else 
@@ -561,9 +634,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	}
 	
 	public void loadTable() {
-    	
-    	table.clearTable();
-    	
+    	    	
     	ProfilerTree tree = presenter.getTree();
     	PiePlot plot = (PiePlot)chart.getPlot();
     	
@@ -572,8 +643,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
     	
     	ProfileTreeVisitor visitor = new ProfileTreeVisitor(rootNode,plot);
     	createTreeVisitor(visitor,rootData);
-        	
+    	
     	table.refreshTable(-1);
+    	tableLoaded = true;
     	
     }
 
@@ -584,12 +656,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	public void mouseClicked(MouseEvent e) {
 	
 		if (e.getClickCount() == 2){ 
-			int column = table.getSelectedColumn();
 			int row = table.getSelectedRow();
 			String completeName=(String)table.getValueAt(row, 2);
 			presenter.doubleClick(completeName);
 		}
-	
 	
 	}
 
@@ -597,6 +667,20 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}	
 	public void mouseReleased(MouseEvent e) {}
+
+	public void tableChanged(TableModelEvent arg0) {
+		
+		if (arg0.getType() == TableModelEvent.UPDATE){
+			updateProfileRowData(arg0.getFirstRow());
+			refreshChart();
+		}
+			
+	}
+
+	private void updateProfileRowData(int row) {
+		TableTreeNode node = table.getTreeModel().getNodeFromRow(row+1);
+		((ProfilerRowData)node.getUserObject()).setExcluded((boolean) table.getModel().getValueAt(row, 4));
+	}
 
 }
 

@@ -1,0 +1,871 @@
+<com.profiler.model.ProfilerTree>
+  <rootNode class="com.profiler.model.data.ProfilePackage">
+    <children>
+      <com.profiler.model.data.ProfileClass>
+        <children>
+          <com.profiler.model.data.ProfileMethod>
+            <children/>
+            <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+            <numCalls>1</numCalls>
+            <methodName>main(java.lang.String[])</methodName>
+            <completeMethodName>MiniZincU.main(java.lang.String[])</completeMethodName>
+          </com.profiler.model.data.ProfileMethod>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>1</numCalls>
+        <className>MiniZincU</className>
+        <completeClassName>MiniZincU</completeClassName>
+      </com.profiler.model.data.ProfileClass>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>examples.ExampleStack.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>1</numCalls>
+            <className>ExampleStack</className>
+            <completeClassName>examples.ExampleStack</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>1</numCalls>
+        <packageName>examples</packageName>
+        <completePackageName>examples</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>program.ProgramU.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>3</numCalls>
+                <methodName>getData()</methodName>
+                <completeMethodName>program.ProgramU.getData()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>60</numCalls>
+                <methodName>getDataByName(java.lang.String)</methodName>
+                <completeMethodName>program.ProgramU.getDataByName(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>64</numCalls>
+            <className>ProgramU</className>
+            <completeClassName>program.ProgramU</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>2</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>program.Program.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>2</numCalls>
+                <methodName>getVar()</methodName>
+                <completeMethodName>program.Program.getVar()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>3</numCalls>
+                <methodName>getShow()</methodName>
+                <completeMethodName>program.Program.getShow()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>48</numCalls>
+                <methodName>addVar(terms.Var)</methodName>
+                <completeMethodName>program.Program.addVar(terms.Var)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>setCtr(constraints.Constraint)</methodName>
+                <completeMethodName>program.Program.setCtr(constraints.Constraint)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>program.Program.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>57</numCalls>
+            <className>Program</className>
+            <completeClassName>program.Program</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;init&gt;(program.ProgramU)</methodName>
+                <completeMethodName>program.TransformedProgram.&lt;init&gt;(program.ProgramU)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>1</numCalls>
+            <className>TransformedProgram</className>
+            <completeClassName>program.TransformedProgram</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>122</numCalls>
+        <packageName>program</packageName>
+        <completePackageName>program</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>6</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>datatypes.Tunion.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>63</numCalls>
+                <methodName>basic()</methodName>
+                <completeMethodName>datatypes.Tunion.basic()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>60</numCalls>
+                <methodName>rhsString()</methodName>
+                <completeMethodName>datatypes.Tunion.rhsString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>180</numCalls>
+                <methodName>getName()</methodName>
+                <completeMethodName>datatypes.Tunion.getName()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>309</numCalls>
+            <className>Tunion</className>
+            <completeClassName>datatypes.Tunion</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;clinit&gt;()</methodName>
+                <completeMethodName>datatypes.TType.&lt;clinit&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>3</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String, int)</methodName>
+                <completeMethodName>datatypes.TType.&lt;init&gt;(java.lang.String, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>4</numCalls>
+            <className>TType</className>
+            <completeClassName>datatypes.TType</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>38</numCalls>
+                <methodName>&lt;init&gt;(datatypes.TType)</methodName>
+                <completeMethodName>datatypes.Type.&lt;init&gt;(datatypes.TType)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>38</numCalls>
+            <className>Type</className>
+            <completeClassName>datatypes.Type</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>3</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>datatypes.DataDef.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>3</numCalls>
+                <methodName>setDataName(datatypes.Tunion)</methodName>
+                <completeMethodName>datatypes.DataDef.setDataName(datatypes.Tunion)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>4</numCalls>
+                <methodName>addCons(java.lang.String)</methodName>
+                <completeMethodName>datatypes.DataDef.addCons(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>2</numCalls>
+                <methodName>addCons(datatypes.Tcons)</methodName>
+                <completeMethodName>datatypes.DataDef.addCons(datatypes.Tcons)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>180</numCalls>
+                <methodName>getDataName()</methodName>
+                <completeMethodName>datatypes.DataDef.getDataName()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>225</numCalls>
+                <methodName>getCons()</methodName>
+                <completeMethodName>datatypes.DataDef.getCons()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>417</numCalls>
+            <className>DataDef</className>
+            <completeClassName>datatypes.DataDef</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>6</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>datatypes.Tcons.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>5</numCalls>
+                <methodName>add(datatypes.Type)</methodName>
+                <completeMethodName>datatypes.Tcons.add(datatypes.Type)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>217</numCalls>
+                <methodName>getSubtypes()</methodName>
+                <completeMethodName>datatypes.Tcons.getSubtypes()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>getCons()</methodName>
+                <completeMethodName>datatypes.Tcons.getCons()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>287</numCalls>
+            <className>Tcons</className>
+            <completeClassName>datatypes.Tcons</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>32</numCalls>
+                <methodName>&lt;init&gt;(int, int)</methodName>
+                <completeMethodName>datatypes.Trange.&lt;init&gt;(int, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>38</numCalls>
+                <methodName>basic()</methodName>
+                <completeMethodName>datatypes.Trange.basic()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>272</numCalls>
+                <methodName>zero()</methodName>
+                <completeMethodName>datatypes.Trange.zero()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>342</numCalls>
+            <className>Trange</className>
+            <completeClassName>datatypes.Trange</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>1397</numCalls>
+        <packageName>datatypes</packageName>
+        <completePackageName>datatypes</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>130</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String, datatypes.Type, int)</methodName>
+                <completeMethodName>terms.Var.&lt;init&gt;(java.lang.String, datatypes.Type, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>380</numCalls>
+                <methodName>getT()</methodName>
+                <completeMethodName>terms.Var.getT()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>509</numCalls>
+                <methodName>getName()</methodName>
+                <completeMethodName>terms.Var.getName()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>90</numCalls>
+                <methodName>getLevel()</methodName>
+                <completeMethodName>terms.Var.getLevel()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>53</numCalls>
+                <methodName>standard()</methodName>
+                <completeMethodName>terms.Var.standard()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>33</numCalls>
+                <methodName>variable()</methodName>
+                <completeMethodName>terms.Var.variable()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>127</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.Var.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>1322</numCalls>
+            <className>Var</className>
+            <completeClassName>terms.Var</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>458</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>terms.Term.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>458</numCalls>
+            <className>Term</className>
+            <completeClassName>terms.Term</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>92</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>terms.StringC.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>92</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.StringC.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>184</numCalls>
+            <className>StringC</className>
+            <completeClassName>terms.StringC</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>terms.SPredicate.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>59</numCalls>
+            <className>SPredicate</className>
+            <completeClassName>terms.SPredicate</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String)</methodName>
+                <completeMethodName>terms.PredicateCall.&lt;init&gt;(java.lang.String)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>add(terms.Term)</methodName>
+                <completeMethodName>terms.PredicateCall.add(terms.Term)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.PredicateCall.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>177</numCalls>
+            <className>PredicateCall</className>
+            <completeClassName>terms.PredicateCall</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>&lt;init&gt;(int)</methodName>
+                <completeMethodName>terms.IntC.&lt;init&gt;(int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.IntC.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>118</numCalls>
+            <className>IntC</className>
+            <completeClassName>terms.IntC</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String, terms.Term, terms.Term)</methodName>
+                <completeMethodName>terms.BinExp.&lt;init&gt;(java.lang.String, terms.Term, terms.Term)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.BinExp.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>118</numCalls>
+            <className>BinExp</className>
+            <completeClassName>terms.BinExp</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>&lt;init&gt;(terms.Term, terms.Term, terms.Term)</methodName>
+                <completeMethodName>terms.IfS.&lt;init&gt;(terms.Term, terms.Term, terms.Term)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>terms.IfS.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>118</numCalls>
+            <className>IfS</className>
+            <completeClassName>terms.IfS</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>2554</numCalls>
+        <packageName>terms</packageName>
+        <completePackageName>terms</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>2</numCalls>
+                <methodName>&lt;init&gt;(terms.Term)</methodName>
+                <completeMethodName>show.Show.&lt;init&gt;(terms.Term)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>getT()</methodName>
+                <completeMethodName>show.Show.getT()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>show.Show.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>4</numCalls>
+            <className>Show</className>
+            <completeClassName>show.Show</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>4</numCalls>
+        <packageName>show</packageName>
+        <completePackageName>show</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;init&gt;(program.ProgramU)</methodName>
+                <completeMethodName>transformation.Transform.&lt;init&gt;(program.ProgramU)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>48</numCalls>
+                <methodName>transvar(terms.Var)</methodName>
+                <completeMethodName>transformation.Transform.transvar(terms.Var)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>30</numCalls>
+                <methodName>transvarAux(terms.Var, datatypes.DataDef)</methodName>
+                <completeMethodName>transformation.Transform.transvarAux(terms.Var, datatypes.DataDef)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>27</numCalls>
+                <methodName>recursiveCalls(terms.Var, datatypes.DataDef, int)</methodName>
+                <completeMethodName>transformation.Transform.recursiveCalls(terms.Var, datatypes.DataDef, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>99</numCalls>
+                <methodName>newVarName(java.lang.String, int, int)</methodName>
+                <completeMethodName>transformation.Transform.newVarName(java.lang.String, int, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>53</numCalls>
+                <methodName>transShow(terms.Term)</methodName>
+                <completeMethodName>transformation.Transform.transShow(terms.Term)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>33</numCalls>
+                <methodName>sVar(terms.Var, int)</methodName>
+                <completeMethodName>transformation.Transform.sVar(terms.Var, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>59</numCalls>
+                <methodName>sVari(datatypes.DataDef, terms.Var, int, int, int)</methodName>
+                <completeMethodName>transformation.Transform.sVari(datatypes.DataDef, terms.Var, int, int, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>350</numCalls>
+            <className>Transform</className>
+            <completeClassName>transformation.Transform</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>108</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>transformation.TransVar.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>190</numCalls>
+                <methodName>getVar()</methodName>
+                <completeMethodName>transformation.TransVar.getVar()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>30</numCalls>
+                <methodName>setCtr(constraints.Constraint)</methodName>
+                <completeMethodName>transformation.TransVar.setCtr(constraints.Constraint)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>48</numCalls>
+                <methodName>getCtr()</methodName>
+                <completeMethodName>transformation.TransVar.getCtr()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>376</numCalls>
+            <className>TransVar</className>
+            <completeClassName>transformation.TransVar</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>726</numCalls>
+        <packageName>transformation</packageName>
+        <completePackageName>transformation</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>108</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>constraints.CTrue.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>18</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>constraints.CTrue.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>126</numCalls>
+            <className>CTrue</className>
+            <completeClassName>constraints.CTrue</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>1</numCalls>
+                <methodName>&lt;clinit&gt;()</methodName>
+                <completeMethodName>constraints.TConstraint.&lt;clinit&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>5</numCalls>
+                <methodName>&lt;init&gt;(java.lang.String, int)</methodName>
+                <completeMethodName>constraints.TConstraint.&lt;init&gt;(java.lang.String, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>6</numCalls>
+            <className>TConstraint</className>
+            <completeClassName>constraints.TConstraint</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>830</numCalls>
+                <methodName>&lt;init&gt;(constraints.TConstraint)</methodName>
+                <completeMethodName>constraints.Constraint.&lt;init&gt;(constraints.TConstraint)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>830</numCalls>
+            <className>Constraint</className>
+            <completeClassName>constraints.Constraint</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>236</numCalls>
+                <methodName>&lt;init&gt;()</methodName>
+                <completeMethodName>constraints.And.&lt;init&gt;()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>478</numCalls>
+                <methodName>add(constraints.Constraint)</methodName>
+                <completeMethodName>constraints.And.add(constraints.Constraint)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>49</numCalls>
+                <methodName>getC()</methodName>
+                <completeMethodName>constraints.And.getC()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>236</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>constraints.And.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>999</numCalls>
+            <className>And</className>
+            <completeClassName>constraints.And</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>55</numCalls>
+                <methodName>&lt;init&gt;(terms.Var, int)</methodName>
+                <completeMethodName>constraints.Notequal.&lt;init&gt;(terms.Var, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>55</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>constraints.Notequal.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>110</numCalls>
+            <className>Notequal</className>
+            <completeClassName>constraints.Notequal</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>325</numCalls>
+                <methodName>&lt;init&gt;(terms.Var, int)</methodName>
+                <completeMethodName>constraints.Equal.&lt;init&gt;(terms.Var, int)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>325</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>constraints.Equal.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>650</numCalls>
+            <className>Equal</className>
+            <completeClassName>constraints.Equal</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+          <com.profiler.model.data.ProfileClass>
+            <children>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>106</numCalls>
+                <methodName>&lt;init&gt;(constraints.Constraint, constraints.Constraint)</methodName>
+                <completeMethodName>constraints.Imply.&lt;init&gt;(constraints.Constraint, constraints.Constraint)</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+              <com.profiler.model.data.ProfileMethod>
+                <children/>
+                <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                <numCalls>106</numCalls>
+                <methodName>toString()</methodName>
+                <completeMethodName>constraints.Imply.toString()</completeMethodName>
+              </com.profiler.model.data.ProfileMethod>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>212</numCalls>
+            <className>Imply</className>
+            <completeClassName>constraints.Imply</completeClassName>
+          </com.profiler.model.data.ProfileClass>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>2933</numCalls>
+        <packageName>constraints</packageName>
+        <completePackageName>constraints</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+    </children>
+    <numCalls>7738</numCalls>
+    <packageName>All packages</packageName>
+    <completePackageName></completePackageName>
+  </rootNode>
+</com.profiler.model.ProfilerTree>

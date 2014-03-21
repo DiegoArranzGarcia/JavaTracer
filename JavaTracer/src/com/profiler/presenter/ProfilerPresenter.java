@@ -63,7 +63,6 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void save() {
-		//JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		HashMap<List<String>, Boolean> classes = view.getDataState();
 		Iterator<Entry<List<String>,Boolean>> iterator = classes.entrySet().iterator();
@@ -78,9 +77,11 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			if (entry.getValue()){
 				if (data instanceof ProfilePackage){
 					String excludePackage = data.getCompleteName() + ".*";
-					excludesData.add(excludePackage);
+					if (!excludesData.contains(excludePackage))
+						excludesData.add(excludePackage);
 				} else if (data instanceof ProfileClass){
-					excludesData.add(data.getCompleteName());
+					if (!excludesData.contains(data.getCompleteName()))
+						excludesData.add(data.getCompleteName());
 				} else if (data instanceof ProfileMethod){
 					ProfileMethod method = (ProfileMethod)data;
 					excludedMethods.addMethod(method.getParentCompleteName(),method.getCompleteName());
@@ -140,20 +141,9 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		return profiler.getProfileTree();
 	}
 
-	public void refresh() {
-		HashMap<List<String>, Boolean> states = view.getDataState();
-		currentProfileTree.changeExcludeNodes(states);
-		((ProfilerView)view).loadTable();
-		showProfile(); 
-	
-	
-	
-	
-	}
-
 	public void doubleClick(String completeName) {
 		
-ArrayList<String>  futureNode=new ArrayList<String>();
+		ArrayList<String>  futureNode=new ArrayList<String>();
 		
 		while(completeName.contains(".")){
 			
