@@ -3,16 +3,10 @@ package com.inspector.view;
 import java.awt.Color;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.alee.laf.progressbar.WebProgressBar;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class InspectorLoadingView extends JDialog{

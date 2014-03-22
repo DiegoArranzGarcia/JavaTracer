@@ -27,21 +27,21 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
 
+@SuppressWarnings("serial")
 public class ProfilerViewWithoutSplit extends JFrame {
 
 	public static final String OTHERS_CLASSES = "Others Classes";
 	private static final String PIE_FONT = "Courier New";
 	private static final String FONT_TITLE = "Arial";
 
-	private static String TITLE = "Profiling stats";
-	private static double PERCENTAGE= 0.75;
+	private static double PERCENTAGE= 0.35;
 	private static final int CLASSCHART=5;
 	private JPanel pieChartPanel;
 	private JFreeChart chart;
 
-	public ProfilerViewWithoutSplit() {
+	public ProfilerViewWithoutSplit(String title) {
 
-		setTitle(TITLE);
+		setTitle(title);
 
 		Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setSize((int)(d.width*PERCENTAGE),(int)(d.height*PERCENTAGE));
@@ -53,6 +53,7 @@ public class ProfilerViewWithoutSplit extends JFrame {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
 
 		dataset.sortByValues(SortOrder.DESCENDING);

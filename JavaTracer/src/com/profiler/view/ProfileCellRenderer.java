@@ -9,8 +9,6 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import org.jfree.chart.plot.PiePlot;
-
 import com.general.resources.ImageLoader;
 import com.general.view.jtreetable.TableTreeNode;
 import com.general.view.jtreetable.TreeModel;
@@ -21,7 +19,6 @@ public class ProfileCellRenderer extends DefaultTableCellRenderer{
 	private Border paddingBorder;
 	private TreeModel treeModel;
 	private ImageLoader imageLoader;
-	private PiePlot plot;
 	
 	public ProfileCellRenderer(TreeModel treeModel){
 		this.paddingBorder = BorderFactory.createEmptyBorder(0,6,0,0);

@@ -30,8 +30,6 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	private static double PERCENTAGE = 0.75;
 	
 	private InspectorController controller;
-	
-	private JSplitPane split;
 	private JMenuItem[] items;
 	
 	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {

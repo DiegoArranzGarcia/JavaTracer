@@ -62,11 +62,11 @@ import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
-import com.profiler.view.ProfilerRowData.TypeData;
 
 @SuppressWarnings("serial")
 public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener, TableModelListener{
 
+	private static final String NUM_CALLS = "Total calls: ";
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
 	private static final String SAVE_PROFILE = "Save profile";
@@ -395,10 +395,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	 * @param dataset - data to show in the chart.
 	 * @return - JFreeChart
 	 */
-    private JFreeChart createChart(PieDataset dataset) {
+    private JFreeChart createChart(PieDataset dataset,int numCalls) {
     	
         JFreeChart chart = ChartFactory.createPieChart(
-            "",  // chart title
+        	NUM_CALLS + numCalls,  // chart 
             dataset,            // data
             false,              // no legend
             false,               // tooltips
@@ -465,6 +465,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		int calls = calculateTotalCalls(classes);
 		
 		((PiePlot)chart.getPlot()).setDataset(createDataset(classes,calls));
+		chart.setTitle(NUM_CALLS + calls);
 		
 	}
 
@@ -476,9 +477,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		
 		while (iterator.hasNext()){
 			Entry<String, Integer> next = iterator.next();
-			
-			System.out.println("Clase: " + next.getKey());
-			System.out.println("veces: " + next.getValue());
 			numCalls += next.getValue();
 		}
 		
@@ -537,7 +535,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			loadTable();
 	}
    
-    private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
+    @SuppressWarnings("unchecked")
+	private DefaultPieDataset chosenClasses(DefaultPieDataset dataset) {
 			
 		dataset.sortByValues(SortOrder.DESCENDING);
         List<String> keys = dataset.getKeys();
@@ -569,8 +568,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		return panel;
 	}
 
-	private JPanel createPiePanel(PieDataset data) {
-        chart = createChart(data);
+	private JPanel createPiePanel(PieDataset data,int numCalls) {
+        chart = createChart(data,numCalls);
         chart.setPadding(new RectangleInsets(4, 8, 2, 2));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setMouseWheelEnabled(true);
@@ -613,7 +612,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	public void load(HashMap<String, Integer> classes, int numCalledMethods) {
 		
 		if (numCalledMethods > 0 )
-			pieChartPanel = createPiePanel(createDataset(classes, numCalledMethods));
+			pieChartPanel = createPiePanel(createDataset(classes,numCalledMethods),numCalledMethods);
 		else 
 			pieChartPanel = createNoLoadPanel();
 		
@@ -625,7 +624,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	public void load(ProfilerTree currentProfileTree) {
 		table.clearTable();
     	if (currentProfileTree.getNumCalls() > 0 )
-			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()));
+			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()),currentProfileTree.getNumCalls());
 		else 
 			pieChartPanel = createNoLoadPanel();
 		

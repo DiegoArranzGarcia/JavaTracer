@@ -1,21 +1,53 @@
 package com.tracer.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import com.general.model.variables.data.*;
-import com.sun.jdi.*;
-import com.sun.org.apache.xml.internal.utils.SuballocatedByteVector;
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
+import com.sun.jdi.ArrayReference;
+import com.sun.jdi.BooleanValue;
+import com.sun.jdi.ByteValue;
+import com.sun.jdi.CharValue;
+import com.sun.jdi.DoubleValue;
+import com.sun.jdi.Field;
+import com.sun.jdi.FloatValue;
+import com.sun.jdi.IntegerValue;
+import com.sun.jdi.LongValue;
+import com.sun.jdi.ObjectReference;
+import com.sun.jdi.PrimitiveValue;
+import com.sun.jdi.ReferenceType;
+import com.sun.jdi.ShortValue;
+import com.sun.jdi.StringReference;
+import com.sun.jdi.Value;
 
 public class ClassUtils {
 	
 	private HashMap<String,Boolean> excludedClasses;
 	private List<String> excludes;
 	
+	/**
+	 * Initialise the ClassUtils class. 
+	 * @param excludes - The excluded list of packages/class it's required to use this class.
+	 */
+	
 	public ClassUtils(List<String> excludes){
 		this.excludedClasses = new HashMap<>();
 		this.excludes = excludes;
 	}
 
+	/**
+	 * Returns if the value is excluded in the current configuration.
+	 * @param value - The value object to ask if it's excluded.
+	 * @return True if excluded, else false.
+	 */
+	
 	private boolean isExcludedClass(Value value) {
 		boolean excluded = false;
 		String type = "";
@@ -27,7 +59,7 @@ public class ClassUtils {
 		
 		if (!basicType(type) && (value instanceof ObjectReference || value instanceof ArrayReference)){
 			if (!excludedClasses.containsKey(type)){
-				excluded = isExcludedType(type);
+				excluded = isExcluded(type);
 				excludedClasses.put(type,excluded);
 			} else 
 				excluded = excludedClasses.get(type);
@@ -35,47 +67,44 @@ public class ClassUtils {
 		return excluded;
 	}
 	
-	private boolean isExcludedType(String type) {
-		String[] packages = getPackages(type);
+	/**
+	 * Returns if the class/package it's excluded in the current configuration.
+	 * @param name - name of the class.
+	 * @return True if excluded else false.
+	 */
+	
+	private boolean isExcluded(String name) {
 		boolean excluded = false;
 		int i = 0;
 		while (!excluded && i<excludes.size()){
 			String exclude = excludes.get(i);
 			//It's a package
 			if (exclude.contains("\\.*")){
-				excluded = type.startsWith(exclude.substring(0,exclude.length()-2));
+				excluded = name.startsWith(exclude.substring(0,exclude.length()-2));
 			} else {
-				excluded = type.equals(exclude);
+				excluded = name.equals(exclude);
 			}
 			i++;
 		}		
 		return excluded;
 	}
 
-	private String[] getPackages(String type) {
-		String[] split = type.split("\\.");
-		if (split.length != 0){
-			String completePackage = split[0];
-			for (int i=1;i<split.length;i++){
-				String aux = split[i];
-				split[i] = completePackage + "." + aux;
-				completePackage = split[i];
-			}
-		} else {
-			split = new String[]{type};
-		}
-		return split;
-	}
-
-	private boolean basicType(String type) {
-		return (type.equals("java.lang.String") || type.equals("java.lang.Integer") || type.equals("java.lang.Float") || 
-				type.equals("java.lang.Double")	|| type.equals("java.lang.Char") || type.equals("java.lang.Byte") || 
-				type.equals("java.lang.Short") || type.equals("java.lang.Long") || type.equals("java.lang.Boolean"));
+	/**
+	 * Returns true if the class passed as String it's a primitive class of java. 
+	 * <p>
+	 * All basic types are : String, Short, Integer, Long, Float, Double, Char, Byte and Boolean.
+	 * @param className - The class name
+	 * @return True if it's a java primitive class of java else false.
+	 */
+	
+	private boolean basicType(String className) {
+		return (className.equals("java.lang.String") || className.equals("java.lang.Integer") || className.equals("java.lang.Float") || 
+				className.equals("java.lang.Double")	|| className.equals("java.lang.Char") || className.equals("java.lang.Byte") || 
+				className.equals("java.lang.Short") || className.equals("java.lang.Long") || className.equals("java.lang.Boolean"));
 	}
 
 	public Data getObj(String name,Value value,List<Long> objectProcessed){
 		
-
 		Data object = null;
 		if (value instanceof ArrayReference){
 			object = getArrayFromArrayReference(name,(ArrayReference)value,objectProcessed);
@@ -207,6 +236,12 @@ public class ClassUtils {
 		return object;
 	}
 
+	/**
+	 * Gets the class name of the ReferenceType passed as an argument.
+	 * @param reference 
+	 * @return Name of class of the argument reference
+	 */
+	
 	public static String getClass(ReferenceType reference) {
 		String className = "";
 		String[] aux = reference.toString().split(" ");
@@ -224,6 +259,12 @@ public class ClassUtils {
 		return className;
 	}
 
+	/**
+	 * Gets the all packages which class belongs to.
+	 * @param fullClassName - The name of the class to parse.
+	 * @return A list of the all packages which the class belongs to.
+	 */
+	
 	public static List<String> getPackageList(String fullClassName) {
 		List<String> packages = new ArrayList<String>();
 		String[] split = fullClassName.split("\\.");

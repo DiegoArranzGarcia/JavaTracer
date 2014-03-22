@@ -170,7 +170,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 						i++;	
 						}
 			
-					ProfilerViewWithoutSplit methodProfiler=new ProfilerViewWithoutSplit();
+					ProfilerViewWithoutSplit methodProfiler=new ProfilerViewWithoutSplit(node.getCompleteName());
 					methodProfiler.load(methodsInfo, numCalledMethods);
 					methodProfiler.setVisible(true);
 			
