@@ -45,6 +45,7 @@ public class Profiler implements ProfilerModelInterface{
 			XStream xStream = new XStream();
 			FileWriter fileWriter = new FileWriter(file);
 			xStream.toXML(data,fileWriter);
+			fileWriter.close();
 		} catch (IOException exc) {
 			
 		}

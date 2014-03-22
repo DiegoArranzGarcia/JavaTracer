@@ -59,6 +59,7 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
 
+import com.general.model.FileUtilities;
 import com.general.view.jtreetable.JTreeTable;
 import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
@@ -86,8 +87,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static final String PNG_FILTER_FILES = "PNG Files (*.png)";
 	private static final String XML_FILTER_FILES = "XML Files (*.xml)";
 	
-	private static final String JPEG_EXT = "jpeg";
-	private static final String XML_EXT = "xml";
+	private static final String JPEG = "jpeg";
+	private static final String XML = "xml";
 	private static final String PNG = "png";
 	
 	public static final String OTHERS_CLASSES = "Others Classes";
@@ -387,7 +388,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private void clickedExportAs() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.addChoosableFileFilter(new FileNameExtensionFilter(PNG_FILTER_FILES, PNG));
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter(JPEG_FILTER_FILES, JPEG_EXT));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(JPEG_FILTER_FILES, JPEG));
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
 		chooser.setDialogTitle(EXPORT_AS);
@@ -400,7 +401,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 				
 				String file_path = chooser.getSelectedFile().getCanonicalPath();
 				File file = new File(file_path);
-				if (com.general.model.FileUtilities.isExtension(file,PNG)){
+				if (FileUtilities.isExtension(file,PNG)){
 					ChartUtilities.saveChartAsPNG(file, chart,pieChartPanel.getWidth(),pieChartPanel.getHeight());
 				} else {
 					ChartUtilities.saveChartAsJPEG(file, chart,pieChartPanel.getWidth(),pieChartPanel.getHeight());
@@ -451,7 +452,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	private void clickedSaveProfile() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES,XML));
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
 		chooser.setDialogTitle(SAVE_PROFILE);
@@ -460,11 +461,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		//return directory file
 		
 		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			try {
-				String path = chooser.getSelectedFile().getCanonicalPath();
-				presenter.saveProfile(new File(path+".xml"));
-			} catch (IOException e) {
-				e.printStackTrace();
+			File file = chooser.getSelectedFile();
+			if (FileUtilities.isExtension(file,XML)){
+				presenter.saveProfile(file);
+			} else {
+				try {
+					presenter.saveProfile(new File(file.getCanonicalPath()+"."+XML));
+				} catch (IOException e) {}
 			}
 		} else { 
 			chooser.cancelSelection();
