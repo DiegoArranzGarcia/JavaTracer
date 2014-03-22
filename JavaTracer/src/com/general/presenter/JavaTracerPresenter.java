@@ -103,6 +103,23 @@ public class JavaTracerPresenter {
 		tracerController.open();
 	}
 	
+	public void clickedOnLoadProfile() {
+		profilerPresenter.clickedOnOpenProfile();
+	}
+
+	public void clickedOnAbout() {
+		AboutDialog aboutDialog = new AboutDialog();
+		aboutDialog.setVisible(true);
+	}
+	
+	public void clickedOnHelp(){
+		
+	}
+	
+	public void openTrace(String xmlPath) {
+		inspectorController.open(xmlPath);
+	}
+	
 	// Getters and setters
 	
 	public TracerController getTracerController() {
@@ -133,21 +150,8 @@ public class JavaTracerPresenter {
 		return profilerPresenter.getProfiler();
 	}
 
-	public void openTrace(String xmlPath) {
-		inspectorController.open(xmlPath);
-	}
-
 	public void setVisible(boolean b) {
 		tracerController.setVisible(false);
-	}
-
-	public void clickedOnLoadProfile() {
-		profilerPresenter.clickedOnOpenProfile();
-	}
-
-	public void clickedOnAbout() {
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
 	}
 
 }

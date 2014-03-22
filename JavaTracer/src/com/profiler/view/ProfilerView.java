@@ -43,6 +43,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -63,7 +64,6 @@ import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
-import com.tracer.view.AboutDialog;
 
 @SuppressWarnings("serial")
 public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener, TableModelListener{
@@ -207,13 +207,12 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         table.setCellRenderer(renderer);
         table.getTableHeader().setReorderingAllowed(false);
         table.setExpandbleColumn(1);       
+        table.getModel().addTableModelListener(this);
+        
         table.getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getColumnModel().getColumn(0).setMinWidth(25);
         table.getColumnModel().getColumn(0).setMaxWidth(25);
-        table.getColumnModel().getColumn(1).setPreferredWidth(150);
-        table.getColumnModel().getColumn(2).setPreferredWidth(150);
         table.getColumnModel().getColumn(4).setPreferredWidth(80);
-        table.getModel().addTableModelListener(this);
         
         scrollPane.setViewportView(table);
         btnCancel.addActionListener(this);
@@ -279,6 +278,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         menuBar.add(mntmAbout);
     }
 
+    /**
+     *  ProfilerView implements action listener for all components that need it.
+     */
+    
     public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
 		
@@ -309,25 +312,78 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		}
 	}
     
+    /**
+     * Action performed when clicked on About. 
+     * The final result it's to show a AboutDialog. 
+     * @see {@link com.general.presenter.JavaTracerPresenter#clickedOnAbout()}
+     */
+    
 	private void clickedOnAbout() {
 		presenter.clickedOnAbout();
 	}
-
+	
+	 /**
+     * Action performed when clicked on Help. 
+     * The final result it's to show a HelpDialog. 
+     * @see {@link com.general.presenter.JavaTracerPresenter#clickedOnHelp()}
+     */
+	
 	private void clickedOnHelp() {
 		
 	}
 
+	 /**
+     * Action performed when clicked on Settings. 
+     * The final result it's to show the settings of application. 
+     * @see {@link com.general.presenter.JavaTracerPresenter#clickedOnSettings()()}
+     */
+	
 	private void clickedOnSettings() {
 		presenter.clickedOnSettings();
 	}
 
+	 /**
+     * Action performed when clicked on CheckAllClasses. 
+     * This action checks all the excluded column values of the table.
+     */
+	
 	private void clickedCheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
 			model.setValueAt(true,i,4);
 		}
 	}
+	
+	 /**
+     * Action performed when clicked on UncheckAllClasses. 
+     * This action unchecks all the excluded column values of the table.
+     */
+	
+	private void clickedUncheckAllClasses() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0;i<model.getRowCount();i++){
+			model.setValueAt(false,i,4);
+		}
+	}
+	
+	 /**
+     * Action performed when clicked on InvertCheckClasses. 
+     * This action inverts all the excluded column values of the table.
+     */
+	
+	private void clickedInvertClasses() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0;i<model.getRowCount();i++){
+			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
+		}
+	}
 
+	 /**
+     * Action performed when clicked on ExportAs. 
+     * This action open a dialog for exporting the current pieplot 
+     * to a jpeg or png image.
+     */
+	
 	private void clickedExportAs() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.addChoosableFileFilter(new FileNameExtensionFilter(PNG_FILTER_FILES, PNG));
@@ -356,28 +412,39 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			chooser.cancelSelection();
 		}
 	}
-	
-	private void clickedInvertClasses() {
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(!(boolean)model.getValueAt(i,4),i,4);
-		}
-	}
     
+	/**
+	 * Action performed when clicked on Cancel.
+	 * The behaviour is to hide the ProfilerView. 
+	 */
+	
     private void clickedOnCancel() {
 		presenter.cancel();
 	}
-
-	// ProfilerViewInterface methods
+    
+    /**
+     * Action performed when clicked on Exit.
+     * The behaviour is to hide the ProfilerView. 
+     */
     
     private void clickedOnExit() {
 		presenter.cancel();
 	}
 
+    /**
+     * Action performed when clicked on Save.
+     * All the information of the excluded classes are saved
+     * in the settings for the next trace.
+     */
+    
 	private void clickedOnSave() {
 		presenter.save();
 	}
-
+	
+	/**
+	 * Action performed when clicked on open profile.
+	 */
+	
 	public void clickedOpenProfile() {
 		presenter.clickedOnOpenProfile();
 	}
@@ -403,29 +470,40 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			chooser.cancelSelection();
 		}
 	}
-    
+
     // Component Listeners
     
-	private void clickedUncheckAllClasses() {
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			model.setValueAt(false,i,4);
-		}
-	}
 	public void componentHidden(ComponentEvent e) {}
 	public void componentMoved(ComponentEvent e) {}
 
+	/**
+	 *  When the component it's resized, the columns widths are recalculated for a better look.
+	 */
+	
 	public void componentResized(ComponentEvent e) {
-        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
+		if (table.getWidth() < splitPane.getRightComponent().getWidth()){
+	        TableColumnModel columns = table.getColumnModel();
+	        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() 
+	        		- columns.getColumn(3).getWidth() - columns.getColumn(4).getWidth())/2;
+	        columns.getColumn(1).setPreferredWidth(adjustedSize);
+	        columns.getColumn(2).setPreferredWidth(adjustedSize);
+        }
+	}
+
+	/**
+	 *  When the component it's shown, the columns widths are recalculated for a better look.
+	 */
+	
+	public void componentShown(ComponentEvent e) {
+        TableColumnModel columns = table.getColumnModel();
+        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() 
+        		- columns.getColumn(3).getWidth() - columns.getColumn(4).getWidth())/2;
+        columns.getColumn(1).setPreferredWidth(adjustedSize);
+        columns.getColumn(2).setPreferredWidth(adjustedSize);
+        
 	}
 	
 	// Chart progress listener
-
-	public void componentShown(ComponentEvent e) {
-        splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-
-	// Action Listener
 	
 	/**
 	 * A JFreeChart is created with the input data.
@@ -606,6 +684,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		panel.setBackground(Color.DARK_GRAY);
 		return panel;
 	}
+
 
 	private JPanel createPiePanel(PieDataset data,int numCalls) {
         chart = createChart(data,numCalls);
