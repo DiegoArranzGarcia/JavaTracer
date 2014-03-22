@@ -8,10 +8,9 @@ import com.profiler.presenter.ProfilerPresenterInterface;
 
 public interface ProfilerViewInterface {
 
-	public void load(ProfilerTree currentProfileTree);
+	public void load(HashMap<String, Integer> classes, int numCalledMethods);
 	public void setPresenter(ProfilerPresenterInterface presenter);
 	public HashMap<List<String>,Boolean> getDataState();
 	public void setVisible(boolean b);
-
 
 }

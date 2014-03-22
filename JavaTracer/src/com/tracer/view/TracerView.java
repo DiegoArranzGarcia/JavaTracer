@@ -23,7 +23,6 @@ import com.alee.laf.button.WebButton;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.menu.WebMenuItem;
-import com.alee.laf.text.WebTextField;
 import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
@@ -36,7 +35,6 @@ import com.tracer.controller.TracerController;
 @SuppressWarnings("serial")
 public class TracerView extends JFrame implements ActionListener, FilesSelectionListener{
 	
-	private static final String PROFILER_EXT = "-profile";
 	private static final String ADD_ARGUMENTS = "Add arguments";
 	private static final String ABOUT = "About";
 	private static final String HELP = "Help";
@@ -56,7 +54,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static String LABEL_PATH = "Select a directory";
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
 	private static String LABEL_NAME_CLASS = "Select a class";
-	private static String XML_FILE_TOOLTIP = "Write the name of the file without any extensions";
 	
 	private TracerController presenter;
 	
@@ -352,8 +349,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	private void clickedOnAbout() {
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+		presenter.clickedOnAbout();
 	}
 
 	private void clickedOnHelp() {

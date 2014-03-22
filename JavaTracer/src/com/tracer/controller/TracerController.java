@@ -11,6 +11,7 @@ import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.console.presenter.ConsolePresenter;
 import com.tracer.model.Tracer;
+import com.tracer.view.AboutDialog;
 import com.tracer.view.TracerView;
 
 public class TracerController {
@@ -204,5 +205,9 @@ public class TracerController {
 
 	public void setVisible(boolean b) {
 		tracerView.setVisible(b);
+	}
+
+	public void clickedOnAbout() {
+		presenter.clickedOnAbout();
 	}
 }

@@ -54,7 +54,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			view.setPresenter(this);
 		}
 		
-		view.load(currentProfileTree);
+		view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
 		view.setVisible(true);
 	}
 	
@@ -200,6 +200,14 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			chooser.cancelSelection();
 		}
 		
+	}
+
+	public void clickedOnSettings() {
+		controller.clickedOnSettings();
+	}
+
+	public void clickedOnAbout() {
+		controller.clickedOnAbout();
 	}
 
 }

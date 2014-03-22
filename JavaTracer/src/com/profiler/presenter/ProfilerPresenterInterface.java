@@ -16,5 +16,7 @@ public interface ProfilerPresenterInterface {
 	public ProfilerTree getTree();
 	public void doubleClick(String completeName);
 	public void clickedOnOpenProfile();
+	public void clickedOnSettings();
+	public void clickedOnAbout();
 
 }

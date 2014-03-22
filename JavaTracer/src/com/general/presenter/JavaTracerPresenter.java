@@ -12,6 +12,7 @@ import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.controller.TracerController;
+import com.tracer.view.AboutDialog;
 
 public class JavaTracerPresenter {
 
@@ -142,6 +143,11 @@ public class JavaTracerPresenter {
 
 	public void clickedOnLoadProfile() {
 		profilerPresenter.clickedOnOpenProfile();
+	}
+
+	public void clickedOnAbout() {
+		AboutDialog aboutDialog = new AboutDialog();
+		aboutDialog.setVisible(true);
 	}
 
 }

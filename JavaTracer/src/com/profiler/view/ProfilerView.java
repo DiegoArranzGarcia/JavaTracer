@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -62,10 +63,14 @@ import com.general.view.jtreetable.TableTreeNode;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
+import com.tracer.view.AboutDialog;
 
 @SuppressWarnings("serial")
 public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener, TableModelListener{
 
+	private static final String SETTINGS = "Settings";
+	private static final String HELP = "Help";
+	private static final String ABOUT = "About";
 	private static final String NUM_CALLS = "Total calls: ";
 	private static final String FILE = "File";
 	private static final String OPEN_PROFILE = "Open profile";
@@ -117,6 +122,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JPanel panel;
 	private JMenuItem mntmExit;
 	private boolean tableLoaded;
+	private JMenuItem mntmSettings;
+	private AbstractButton mntmHelp;
+	private JMenuItem mntmAbout;
 	
     		    
 	/**
@@ -258,6 +266,17 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         mntmInvertClasses.addActionListener(this);
         mnEdit.add(mntmInvertClasses);
         
+        mntmSettings = new JMenuItem(SETTINGS);
+        mntmSettings.addActionListener(this);
+        menuBar.add(mntmSettings);
+        
+        mntmHelp = new JMenuItem(HELP);
+        mntmHelp.addActionListener(this);
+        menuBar.add(mntmHelp);
+        
+        mntmAbout = new JMenuItem(ABOUT);
+        mntmAbout.addActionListener(this);
+        menuBar.add(mntmAbout);
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -279,11 +298,29 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			clickedInvertClasses();
 		} else if (source.equals(btnSave)){
 			clickedOnSave();
+		} else if (source.equals(mntmSettings)){
+			clickedOnSettings();
+		} else if (source.equals(mntmHelp)){
+			clickedOnHelp();
+		} else if (source.equals(mntmAbout)){
+			clickedOnAbout();
 		} else if (source.equals(btnCancel)){
 			clickedOnCancel();
 		}
 	}
     
+	private void clickedOnAbout() {
+		presenter.clickedOnAbout();
+	}
+
+	private void clickedOnHelp() {
+		
+	}
+
+	private void clickedOnSettings() {
+		presenter.clickedOnSettings();
+	}
+
 	private void clickedCheckAllClasses() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0;i<model.getRowCount();i++){
@@ -395,6 +432,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	 * @param dataset - data to show in the chart.
 	 * @return - JFreeChart
 	 */
+	
     private JFreeChart createChart(PieDataset dataset,int numCalls) {
     	
         JFreeChart chart = ChartFactory.createPieChart(
@@ -562,6 +600,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
      * This panel is created when there is no data to show.
      * @return returns and empty panel.
      */
+    
 	private JPanel createNoLoadPanel() {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
@@ -610,24 +649,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	}
 
 	public void load(HashMap<String, Integer> classes, int numCalledMethods) {
-		
+		table.clearTable();
 		if (numCalledMethods > 0 )
 			pieChartPanel = createPiePanel(createDataset(classes,numCalledMethods),numCalledMethods);
 		else 
 			pieChartPanel = createNoLoadPanel();
 		
 		tableLoaded = false;
-    	splitPane.setLeftComponent(pieChartPanel);
-    	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
-	}
-
-	public void load(ProfilerTree currentProfileTree) {
-		table.clearTable();
-    	if (currentProfileTree.getNumCalls() > 0 )
-			pieChartPanel = createPiePanel(createDataset(currentProfileTree.getClasses(),currentProfileTree.getNumCalls()),currentProfileTree.getNumCalls());
-		else 
-			pieChartPanel = createNoLoadPanel();
-		
     	splitPane.setLeftComponent(pieChartPanel);
     	splitPane.setDividerLocation(SPLIT_PERCENTAGE);
 	}
