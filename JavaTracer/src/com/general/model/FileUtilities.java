@@ -7,6 +7,7 @@ import java.io.File;
 public class FileUtilities {
 	
 	private static String EXTENSIONS ="[.][^.]+$";
+	public static String CURRENT_DIR = System.getProperty("user.dir");
 	public static String SEPARATOR = java.io.File.separator ;
 	public static String EXTENSION_XML = ".xml";
 	

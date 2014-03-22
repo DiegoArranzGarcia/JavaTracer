@@ -45,7 +45,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String PROFILE = "Profile";
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
-	private static final String XML = "xml";
 	
 	private static final int WINDOW_WIDTH = 1000;
 	private static final int WINDOW_HEIGHT_NO_CONSOLE = 285;
@@ -286,32 +285,35 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public String getNameXml(boolean trace) {
-		nameXml= (String) nameClass.getSelectedItem();
+		String nameXml = (String) nameClass.getSelectedItem();
 		
 		if(nameXml.contains(".")){
-			String aux=nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
+			String aux = nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
 		
 			if (aux.equals("jar")||aux.equals("class"))
-				nameXml=nameXml.substring(0,nameXml.lastIndexOf("."));
+				nameXml = nameXml.substring(0,nameXml.lastIndexOf("."));
 		
 			if (nameXml.contains("."))
-					nameXml=nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
+				nameXml = nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
 		}
-		
-		
-		
+			
 		if(trace)
-			nameXml=nameXml+"Trace";
+			nameXml += "_trace";
 		else
-			nameXml=nameXml+"Profile";
+			nameXml += "_profile";
+		 
 		
-		int i=0;
-		
-		while(existFileXml(nameXml+FileUtilities.EXTENSION_XML))
-		{nameXml=nameXml+ Integer.toString(i);
-		 i=i+1;
+		if (existFileXml(nameXml + FileUtilities.EXTENSION_XML)){
+			int i=1;	
+			while(existFileXml(nameXml + "_" + i + FileUtilities.EXTENSION_XML)){
+				i=i+1;
+			}
+			nameXml += "_" + Integer.toString(i);
 		}
-	return nameXml;
+		
+		nameXml += FileUtilities.EXTENSION_XML;
+		
+		return nameXml;
 	}
 
 	public void enableMainClassCombo() {
@@ -432,15 +434,17 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private boolean existFileXml(String name){
 		int i=0;
 	 	boolean found=false;
-	 	File files = new File("./");
+	 	File files = new File(FileUtilities.CURRENT_DIR);
 	 	String[] classes=files.list();
 		
 	 	while(i<classes.length && !found){
 	 			
-	 	if(classes[i].equals(name)) found=true;
-	 		i++;
+	 		if(classes[i].equals(name)) 
+	 			found=true;
 	 		
+	 		i++;
 	 	} 		
+	 	
 	 	return found;	 		
 	}
 

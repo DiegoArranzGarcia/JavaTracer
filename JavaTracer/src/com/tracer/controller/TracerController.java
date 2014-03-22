@@ -11,7 +11,6 @@ import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.console.presenter.ConsolePresenter;
 import com.tracer.model.Tracer;
-import com.tracer.view.AboutDialog;
 import com.tracer.view.TracerView;
 
 public class TracerController {
@@ -72,7 +71,7 @@ public class TracerController {
 		String classPath = "";
 		if (!jar) 
 			classPath = processPath(mainClassPath,main);
-		String nameXml = getNameXml(true);
+		String nameXml = tracerView.getNameXml(!profile_mode);
 		String[] args = argumentsPresenter.getArguments();
 		String[] external_jars = new String[0];
 		if (!jar)
@@ -88,30 +87,15 @@ public class TracerController {
 		File file = new File(path);
 		return (file.isFile() && FileUtilities.isExtension(file,"jar"));
 	}
-
-	public String getNameXml(boolean trace) {
-		return tracerView.getNameXml(trace);
-	}
-
 	
 	private String processPath(String file, String name) {
-		
-		boolean equals=false;
-		String path_file= classFinder.getPath(name);
-		file=path_file.substring(0, path_file.lastIndexOf("\\"));
-		
-		path_file=file.replaceAll("\\\\", ".");
-			
-		while(!equals){
-		    	
-			if(name.contains(path_file.substring(path_file.lastIndexOf(".")+1,path_file.length())))
-				file=file.substring(0, file.lastIndexOf("\\"));
-			else 
-				equals=true;
+		String path_file = classFinder.getPath(name);
+		file = path_file.substring(0, path_file.lastIndexOf(FileUtilities.SEPARATOR));	
+		String[] split = name.split("\\.");
 	
-			path_file=path_file.substring(0, path_file.lastIndexOf("."));
-	
-		}		
+		for (int index = split.length-2;index >= 0;index--){
+			file = file.substring(0,file.indexOf(FileUtilities.SEPARATOR+split[index]));
+		}
 		
 		return file;
 	}
@@ -209,5 +193,9 @@ public class TracerController {
 
 	public void clickedOnAbout() {
 		presenter.clickedOnAbout();
+	}
+
+	public String getXmlName() {
+		return lastConfig.getNameXml();
 	}
 }
