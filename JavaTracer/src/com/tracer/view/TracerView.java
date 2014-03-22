@@ -288,8 +288,17 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	public String getNameXml(boolean trace) {
 		nameXml= (String) nameClass.getSelectedItem();
 		
-		if(nameXml.contains("."))
-			nameXml=nameXml.substring(0, nameXml.indexOf("."));
+		if(nameXml.contains(".")){
+			String aux=nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
+		
+			if (aux.equals("jar")||aux.equals("class"))
+				nameXml=nameXml.substring(0,nameXml.lastIndexOf("."));
+		
+			if (nameXml.contains("."))
+					nameXml=nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
+		}
+		
+		
 		
 		if(trace)
 			nameXml=nameXml+"Trace";
