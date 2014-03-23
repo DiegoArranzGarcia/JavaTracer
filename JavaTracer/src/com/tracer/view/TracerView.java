@@ -222,7 +222,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	public void finishedTrace(String xmlName) {
 		JOptionPane.setDefaultLocale(new Locale("en"));
 		
-		String xmlPath = FileUtilities.CURRENT_DIR + FileUtilities.SEPARATOR + xmlName + FileUtilities.EXTENSION_XML;	
+		String xmlPath = FileUtilities.CURRENT_DIR + FileUtilities.SEPARATOR + xmlName;	
 		
 		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, "", JOptionPane.YES_NO_CANCEL_OPTION, 
 				JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");

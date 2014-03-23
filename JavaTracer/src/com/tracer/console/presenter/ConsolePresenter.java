@@ -5,10 +5,13 @@ import javax.swing.JComponent;
 import com.tracer.console.model.Console;
 import com.tracer.console.view.ConsoleView;
 
-public class ConsolePresenter implements ConsolePresenterInterface{
+public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 	
 	private Console console;
 	private ConsoleView view;
+	private UpdaterSizeThread updater;
+	
+	private String lastFileName;
 	
 	public ConsolePresenter(){
 		this.console = new Console();
@@ -49,6 +52,8 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 
 	public void launching() {
 		view.launching();
+		updater = new UpdaterSizeThread(lastFileName,this);
+		updater.start();
 	}
 
 	public void tracing() {
@@ -61,6 +66,15 @@ public class ConsolePresenter implements ConsolePresenterInterface{
 	
 	public void finished(){
 		view.finished();
+		updater.finish();
+	}
+
+	public void setLastFileName(String lastFilename){
+		this.lastFileName = lastFilename;
+	}
+
+	public void updateSize(double size) {
+		view.updateSize(lastFileName,size);
 	}
 
 }

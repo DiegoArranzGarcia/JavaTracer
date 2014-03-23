@@ -111,6 +111,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
     	excludesList.add("javax.*");
     	excludesList.add("sun.*");
     	excludesList.add("com.sun.*");    
+    	excludesList.add("org.eclipse.jdt.internal.jarinjarloader.*");
     }
 	
 	/**

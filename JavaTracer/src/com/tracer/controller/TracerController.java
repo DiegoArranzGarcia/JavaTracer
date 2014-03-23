@@ -162,6 +162,7 @@ public class TracerController {
 	}
 
 	public void launching() {
+		consolePresenter.setLastFileName(lastConfig.getNameXml());
 		consolePresenter.launching();
 	}
 

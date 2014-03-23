@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import sun.org.mozilla.javascript.internal.Synchronizer;
-
 /**
 * StreamRedirectThread is a thread which copies it's input to
 * it's output and terminates when it completes.

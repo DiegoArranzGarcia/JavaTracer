@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -26,9 +27,12 @@ public class ConsoleView extends JPanel implements ActionListener{
 	
 	private static final String CONSOLE_TEXT = "Console";
 	private static final String CLEAR_CONSOLE = "Clear console";
+	private enum Status{LAUNCHING,TRACING,PROFILING,FINISHED};
 	
 	private ConsolePresenter presenter; 
 	private ImageLoader imageLoader;
+	private Status status;
+	private double lastSize;
 	
 	private WebToggleButton btnClearConsole;
 	private WebToggleButton btnMinimizeConsole;
@@ -38,6 +42,10 @@ public class ConsoleView extends JPanel implements ActionListener{
 	private JPanel panel_1;
 	
 	public ConsoleView(){
+		
+		lastSize = 0;
+		status = Status.LAUNCHING;
+		
 		setRequestFocusEnabled(false);
 		imageLoader = ImageLoader.getInstance();
 		setLayout(new BorderLayout(0, 0));
@@ -127,20 +135,73 @@ public class ConsoleView extends JPanel implements ActionListener{
 	}
 
 	public void launching() {
-		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Launching ) ");
+		status = Status.LAUNCHING;
+		updateLabel();
 	}
 
 	public void finished() {
-		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Finished ) ");
+		status = Status.FINISHED;
+		updateLabel();
 	}
 
 	public void tracing() {
-		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Tracing ) ");
+		status = Status.TRACING;
+		updateLabel();
 	}
 
 	public void profiling() {
-		lblConsoleStatus.setText(CONSOLE_TEXT + " ( Profiling ) ");
+		status = Status.PROFILING; 
+		updateLabel();
+	}
+
+	public void updateSize(String lastFileName, double size) {
+		lastSize = size;
+		updateLabel();
 	}
 	
-	
+	private void updateLabel(){
+		String text = CONSOLE_TEXT;
+		switch (status) {
+			case FINISHED:
+				text += " ( Finished ) ";
+				break;
+			case LAUNCHING:
+				text += " ( Launching ) ";
+				break;
+			case PROFILING:
+				text += " ( Profiling ) ";
+				break;
+			case TRACING:
+				text += " ( Tracing ) ";
+				break;
+			default:
+				break;
+		}
+		
+		text += getTextSize();
+		lblConsoleStatus.setText(text);
+	}
+
+	private String getTextSize() {
+		
+		double bytes = lastSize;
+		double kilobytes = (bytes / 1024);
+		double megabytes = (kilobytes / 1024);
+		double gigabytes = (megabytes / 1024);
+		
+		String text = "";
+		DecimalFormat df = new DecimalFormat("0.00");
+	  	    
+		if (gigabytes >= 1){
+			text = df.format(gigabytes) + " GB";
+		} else if (megabytes >= 1){
+			text = df.format(megabytes) + " MB";
+		} else if (kilobytes >= 1){
+			text = df.format(kilobytes) + " KB";
+		} else {
+			text = df.format(bytes) + " B";
+		}
+		
+		return text;
+	}
 }

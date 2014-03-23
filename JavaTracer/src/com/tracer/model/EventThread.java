@@ -179,18 +179,12 @@ public class EventThread extends Thread {
         if (event instanceof ExceptionEvent) {
         	if (!enableProfiling)
         		exceptionManager.exceptionEvent((ExceptionEvent)event);
-        } else if (event instanceof ModificationWatchpointEvent) {
-        	//fieldwatch.fieldWatchEvent((ModificationWatchpointEvent)event);
         } else if (event instanceof MethodEntryEvent) {
         	methodEntryEvent((MethodEntryEvent)event);
         } else if (event instanceof MethodExitEvent) {
         	methodExitEvent((MethodExitEvent)event);
-        } else if (event instanceof StepEvent) {
-            //step.stepEvent((StepEvent)event);
         } else if (event instanceof ThreadDeathEvent) {
             threadeath.threadDeathEvent((ThreadDeathEvent)event);
-        } else if (event instanceof ClassPrepareEvent) {
-            //prepare.classPrepareEvent((ClassPrepareEvent)event);
         } else if (event instanceof VMDeathEvent) {
         	vmDeathEvent((VMDeathEvent)event);
         } else if (event instanceof VMDisconnectEvent) {

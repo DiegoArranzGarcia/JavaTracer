@@ -8,8 +8,6 @@ import com.tracer.model.methods.data.MethodEntryInfo;
 import com.tracer.model.methods.data.MethodExitInfo;
 
 public class TraceWriter extends XStreamUtil{
-
-	public static String FILE_EXT = ".xml";
 		
 	private FileWriter fileWriter;
 	private int idNode = 0;
@@ -17,10 +15,10 @@ public class TraceWriter extends XStreamUtil{
 	
 	public TraceWriter(String nameXlm){
 		try {
-			this.fileWriter = new FileWriter(nameXlm + FILE_EXT);
+			this.fileWriter = new FileWriter(nameXlm);
 			this.depth = 1;
 			
-			write(TAG_XML);
+			write(startTag(TAG_XML));
 			write(startTag(TAG_TRACE));
 			
 		} catch (Exception e) {
@@ -99,6 +97,7 @@ public class TraceWriter extends XStreamUtil{
 	
 	private void write(String string) throws Exception {
 		fileWriter.write(string + "\n");
+		fileWriter.flush();
 	}
 	
 }
