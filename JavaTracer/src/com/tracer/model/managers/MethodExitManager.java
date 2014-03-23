@@ -7,8 +7,8 @@ import com.general.model.variables.data.Data;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
 import com.tracer.model.ClassUtils;
+import com.tracer.model.TraceWriter;
 import com.tracer.model.methods.data.MethodExitInfo;
-import com.tracer.model.writers.TraceWriter;
 
 public class MethodExitManager{
 		

@@ -1,4 +1,4 @@
-package com.tracer.model.writers;
+package com.tracer.model;
 
 import java.io.FileWriter;
 

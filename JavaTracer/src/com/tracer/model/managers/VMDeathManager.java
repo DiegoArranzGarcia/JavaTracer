@@ -1,7 +1,7 @@
 package com.tracer.model.managers;
 
 import com.sun.jdi.event.VMDeathEvent;
-import com.tracer.model.writers.TraceWriter;
+import com.tracer.model.TraceWriter;
 
 
 public class VMDeathManager {

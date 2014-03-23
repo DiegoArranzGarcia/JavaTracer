@@ -27,7 +27,8 @@ import com.tracer.model.methods.data.MethodExitInfo;
 public abstract class XStreamUtil {
 	
 	public static String TAG_TRACE = "trace";
-	public static String TAG_XML = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
+	public static String TAG_XML = "?xml version=\"1.0\" encoding=\"ISO-8859-1\"?";
+	
 	public static String TAG_METHOD = "method-call";
 	public static String TAG_CALLED_METHODS = "called-methods";
 	public static String TAG_METHOD_ENTRY_EVENT = "method-entry-event";

@@ -74,8 +74,8 @@ public class JavaTracerPresenter {
 	
 	public void showProfile() {
 		profilerPresenter.loadTempProfile();
-		profilerPresenter.showProfile();
 		String nameFile = tracerController.getXmlName();
+		profilerPresenter.showProfile(nameFile);
 		profilerPresenter.saveProfile(new File(nameFile));
 	}	
 	

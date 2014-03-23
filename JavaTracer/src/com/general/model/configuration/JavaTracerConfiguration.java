@@ -19,6 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.general.model.FileUtilities;
 import com.general.model.XStreamUtil;
 import com.profiler.model.data.ExcludedClassesMethods;
 import com.thoughtworks.xstream.XStream;
@@ -26,10 +27,11 @@ import com.thoughtworks.xstream.XStream;
 
 public class JavaTracerConfiguration extends XStreamUtil{
 	private final static String CONFIG_FILE_NAME = "java-tracer-properties";
+	
 	/*
 	 * General
 	 */
-	private String FILE_EXT = ".xml";
+	
 	private Document xmlDocument;
 	private XPath xPath;	
 	private static JavaTracerConfiguration instance;
@@ -61,7 +63,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		/*
 		 * Create default file xml
 		 */
-		this.fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);		
+		this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
 		
 		if (!fileXml.exists()) {
 			/*
@@ -74,7 +76,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			
 			generateFile();
 			try {
-		        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+		        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 		        xPath = XPathFactory.newInstance().newXPath();
 	        }
 			catch (Exception e){
@@ -83,7 +85,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}else {
 			try {
 				try {
-			        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+			        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 			        xPath = XPathFactory.newInstance().newXPath();
 		        }
 				catch (Exception e){
@@ -118,6 +120,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
     	
 		try {
 	    		  writer = new FileWriter(fileXml);
+	    		  write(startTag(TAG_XML));
 	    		  write(startTag(TAG_CONFIGURATION));	
 	    		  
 	    		  write(startTag(TAG_EXCLUDES));	
@@ -272,11 +275,11 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	
 	public void saveConfiguration() { 
 		this.xStream = new XStream();
-		fileXml = new File(CONFIG_FILE_NAME + FILE_EXT);
+		fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 		generateFile();
 		
 		try {
-	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FILE_EXT);
+	        xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 	        xPath = XPathFactory.newInstance().newXPath();
         }catch (Exception e){
 			e.printStackTrace();

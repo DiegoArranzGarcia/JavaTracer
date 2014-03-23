@@ -47,7 +47,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		this.controller = javaTracerController;
 	}
 		
-	public void showProfile(){
+	public void showProfile(String profileFile){
 		
 		if (view == null){
 			view = new ProfilerView();
@@ -56,6 +56,8 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		
 		view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
 		view.setVisible(true);
+		view.setTitle(profileFile);
+		controller.setVisible(false);
 	}
 	
 	public void loadTempProfile(){
@@ -109,7 +111,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 
 	public void openProfile(File file) {
 		currentProfileTree = profiler.openProfile(file);
-		showProfile();
+		showProfile(file.getName());
 	}
 	
 	public void saveProfile(File file) {

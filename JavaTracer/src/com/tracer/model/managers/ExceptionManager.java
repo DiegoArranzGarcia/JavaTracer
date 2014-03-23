@@ -15,8 +15,8 @@ import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.event.ExceptionEvent;
 import com.tracer.model.ClassUtils;
+import com.tracer.model.TraceWriter;
 import com.tracer.model.methods.data.MethodExitInfo;
-import com.tracer.model.writers.TraceWriter;
 
 public class ExceptionManager {
 	

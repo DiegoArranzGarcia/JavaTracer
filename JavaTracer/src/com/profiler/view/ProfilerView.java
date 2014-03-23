@@ -137,7 +137,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
     public ProfilerView() {
         
-        setTitle(TITLE);
 		addWindowListener(new WindowAdapter() {
 	    	public void windowClosing(WindowEvent e) {
 	    		presenter.cancel();
@@ -588,6 +587,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		
 	}
 
+	public void setTitle(String pathFile){
+		super.setTitle(TITLE + " - " + pathFile);
+	}
 	
 	private int calculateTotalCalls(HashMap<String, Integer> classes) {
 		

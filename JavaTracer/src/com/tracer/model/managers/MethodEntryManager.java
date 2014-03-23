@@ -7,8 +7,8 @@ import com.general.model.variables.data.Data;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodEntryEvent;
 import com.tracer.model.ClassUtils;
+import com.tracer.model.TraceWriter;
 import com.tracer.model.methods.data.MethodEntryInfo;
-import com.tracer.model.writers.TraceWriter;
 
 /**
  * This class handles every time that a method is called. In there the information 
