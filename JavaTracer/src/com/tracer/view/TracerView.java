@@ -71,6 +71,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmSettings;
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
+	private String nameXml;
 	
 	public TracerView(JComponent console) {
 		
@@ -280,7 +281,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public String getNameXml(boolean trace) {
-		String nameXml = (String) nameClass.getSelectedItem();
+		nameXml = (String) nameClass.getSelectedItem();
 		
 		if(nameXml.contains(".")){
 			String aux = nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
@@ -293,9 +294,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		}
 			
 		if(trace)
-			nameXml += "_trace";
+			nameXml += "_trace"+FileUtilities.EXTENSION_XML;
 		else
-			nameXml += "_profile";
+			nameXml += "_profile"+FileUtilities.EXTENSION_XML;
 		 
 		
 		if (existFileXml(nameXml + FileUtilities.EXTENSION_XML)){
@@ -306,7 +307,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			nameXml += "_" + Integer.toString(i);
 		}
 		
-		nameXml += FileUtilities.EXTENSION_XML;
 		
 		return nameXml;
 	}
