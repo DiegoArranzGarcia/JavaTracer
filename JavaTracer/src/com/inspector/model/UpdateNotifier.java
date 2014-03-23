@@ -7,5 +7,6 @@ public interface UpdateNotifier {
 
 	public void updateInfo(int current,int total,int percentage);
 	public void finishLoading(DefaultTreeLayout<Box> loadedTree);
+	public void opening();
 	
 }

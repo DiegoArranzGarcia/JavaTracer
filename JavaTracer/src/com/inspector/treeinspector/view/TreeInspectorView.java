@@ -22,7 +22,7 @@ public class TreeInspectorView extends TreePanel {
 	
 	public TreeInspectorView(){
 		configuration = new DefaultConfiguration<Box>(GAP_BETWEEN_LEVELS,GAP_BETWEEN_NODES);
-		nodeExtentProvider = new TextInBoxNodeExtentProvider();	
+		nodeExtentProvider = new BoxExtentProvider();	
 	}
 			 	
 	public void repaintTree(DefaultTreeLayout<Box> tree) {

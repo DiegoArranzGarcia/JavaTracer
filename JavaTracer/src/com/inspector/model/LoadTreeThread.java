@@ -20,11 +20,13 @@ public class LoadTreeThread extends Thread{
 	private DefaultTreeLayout<Box> tree;
 	private UpdateNotifier notifier;
 	private XmlManager xml;
+	private String xmlName;
 	
-	public LoadTreeThread(XmlManager xml,UpdateNotifier notifier){
+	public LoadTreeThread(XmlManager xml,String xmlName,UpdateNotifier notifier){
 		
 		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		
+		this.xmlName = xmlName;
 		this.xml = xml;
 		this.notifier = notifier;
 		numNodes = 0;
@@ -35,6 +37,8 @@ public class LoadTreeThread extends Thread{
 	
 	public void run() {
 		
+		notifier.opening();
+		xml = new XmlManager(xmlName);
 		Node rootNode = xml.getRootNode();
 		ThreadBox threadBox = getThreadBoxFromNode(rootNode);
 		tree = new DefaultTreeLayout<Box>(threadBox); 

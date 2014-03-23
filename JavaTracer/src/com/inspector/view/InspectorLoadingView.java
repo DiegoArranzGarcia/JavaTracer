@@ -29,13 +29,14 @@ public class InspectorLoadingView extends JDialog{
 		
 		getContentPane().add(progressBar);
 		
-		infoLabel = new JLabel("Loading nodes...");
+		infoLabel = new JLabel("Opening ...");
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setBounds(204, 30, 223, 16);
 		getContentPane().add(infoLabel);
 		setTitle("Please wait");
 		
 		setSize(650,170);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		
 	}
@@ -48,4 +49,9 @@ public class InspectorLoadingView extends JDialog{
 		progressBar.setValue(percentage);
 		infoLabel.setText("Loading... " + numNodes + "/" + total); 
 	}
+
+	public void opening() {
+		infoLabel.setText("Opening...");
+	}
+
 }

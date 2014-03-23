@@ -1,5 +1,6 @@
 package com.inspector.controller;
 
+import java.awt.Dialog.ModalityType;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
@@ -70,8 +71,8 @@ public class InspectorController {
 		view.setVisible(true);
 		controller.setVisible(false);
 		
-		treeManager.showTree(xmlPath);
-    	createLoadingView();	
+		treeManager.showTree(xmlPath);	
+		createLoadingView();
 	}
     
     public void finishLoading(){
@@ -81,7 +82,8 @@ public class InspectorController {
     }
     
     public void updateInfo(int numNodes, int total,int percentage) {
-    	loadingView.updateInfo(numNodes,total,percentage);
+    	if (loadingView != null)
+    		loadingView.updateInfo(numNodes,total,percentage);
 	}
 
 	private void createLoadingView() {
@@ -110,6 +112,11 @@ public class InspectorController {
 	public void back() {
 		view.setVisible(false);
 		controller.back();		
+	}
+
+	public void opening() {
+		if (loadingView != null)
+			loadingView.opening();
 	}
 
 }

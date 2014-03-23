@@ -281,7 +281,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public String getNameXml(boolean trace) {
-		nameXml = (String) nameClass.getSelectedItem();
+		String nameXml = (String) nameClass.getSelectedItem();
 		
 		if(nameXml.contains(".")){
 			String aux = nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
@@ -294,9 +294,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		}
 			
 		if(trace)
-			nameXml += "_trace"+FileUtilities.EXTENSION_XML;
+			nameXml += "_trace";
 		else
-			nameXml += "_profile"+FileUtilities.EXTENSION_XML;
+			nameXml += "_profile";
 		 
 		
 		if (existFileXml(nameXml + FileUtilities.EXTENSION_XML)){
@@ -307,6 +307,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			nameXml += "_" + Integer.toString(i);
 		}
 		
+		nameXml += FileUtilities.EXTENSION_XML;
 		
 		return nameXml;
 	}
