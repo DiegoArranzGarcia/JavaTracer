@@ -178,7 +178,7 @@ public class TracerController {
 		if (lastConfig.isProfiling_mode()){
 			presenter.showProfile();	
 		} else {
-			tracerView.finishedTrace();
+			tracerView.finishedTrace(lastConfig.getNameXml());
 		}
 		tracerView.setEnableProfileAndTracer(true);
 	}

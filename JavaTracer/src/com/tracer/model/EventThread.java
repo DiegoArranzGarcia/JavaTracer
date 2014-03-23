@@ -34,21 +34,20 @@ import com.sun.jdi.request.MethodEntryRequest;
 import com.sun.jdi.request.MethodExitRequest;
 import com.sun.jdi.request.ThreadDeathRequest;
 import com.tracer.controller.RunConfiguration;
-import com.tracer.model.managers.VMDeathManager;
 import com.tracer.model.managers.DisconnectManager;
 import com.tracer.model.managers.ExceptionManager;
 import com.tracer.model.managers.MethodEntryManager;
 import com.tracer.model.managers.MethodExitManager;
 import com.tracer.model.managers.ThreadDeathManager;
+import com.tracer.model.managers.VMDeathManager;
 import com.tracer.model.writers.TraceWriter;
 
 
 public class EventThread extends Thread {
 
     private final VirtualMachine vm; // Running VM
-    private boolean connected = true; // Connected to VM
+    private boolean connected; // Connected to VM
     private boolean enableProfiling;
-	private boolean vmDied = false; // VMDeath occurred
 	
     // Maps ThreadReference to ThreadTrace instances
     private Map<ThreadReference, ThreadTrace> traceMap = new HashMap<>();
@@ -74,6 +73,7 @@ public class EventThread extends Thread {
     public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
+        this.connected = true;
         this.profiler = profiler;
         this.tracer = tracer;
         
@@ -135,7 +135,7 @@ public class EventThread extends Thread {
 	* @param watchFields Do we want to watch assignments to fields
 	*/
     
-    void setEventRequests(boolean watchFields) {
+    void setEventRequests() {
             
     	EventRequestManager mgr = vm.eventRequestManager();
         // want all exceptions

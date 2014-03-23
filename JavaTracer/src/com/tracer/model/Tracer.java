@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.general.model.configuration.JavaTracerConfiguration;
+import com.general.model.FileUtilities;
 import com.profiler.model.ProfilerModelInterface;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
@@ -29,9 +29,6 @@ public class Tracer {
     
     // Mode for tracing the Trace program (default= 0 off)
     private int debugTraceMode = VirtualMachine.TRACE_NONE;
-
-    // Do we want to watch assignments to fields
-    private boolean watchFields;
 
     // Class patterns for which we don't want events
     
@@ -73,7 +70,7 @@ public class Tracer {
         
     	vm.setDebugTraceMode(debugTraceMode);
         EventThread eventThread = new EventThread(vm,this,config,profiler);
-        eventThread.setEventRequests(watchFields);
+        eventThread.setEventRequests();
         eventThread.start();
         tracerController.redirectStreams(vm.process());
         tracerController.started();
@@ -138,8 +135,8 @@ public class Tracer {
             
         	for (int i=0;i<jars.length;i++)
         		external_jars += jars[i] + "\\*;"; 
-            
-        	options = "-cp " + '"' + config.getMainClassPath() + ";" + external_jars + "\"";
+        	
+        	options = "-cp " + '"' + config.getMainClassPath() + FileUtilities.PATH_SEPARTATOR + external_jars + "\"";
         }
         String[] args = config.getArgs();
         

@@ -72,8 +72,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
 	
-	private String nameXml;
-	
 	public TracerView(JComponent console) {
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -221,13 +219,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		setEnableProfileAndTracer(false);
 	}
 		
-	public void finishedTrace() {
+	public void finishedTrace(String xmlName) {
 		JOptionPane.setDefaultLocale(new Locale("en"));
-		String curDir = System.getProperty("user.dir");
-		String s= File.separator;
-		String xmlName = nameXml;
 		
-		String xmlPath = curDir+s+xmlName+FileUtilities.EXTENSION_XML;	
+		String xmlPath = FileUtilities.CURRENT_DIR + FileUtilities.SEPARATOR + xmlName + FileUtilities.EXTENSION_XML;	
 		
 		int selected = JOptionPane.showOptionDialog(null, Message.FINISHED, "", JOptionPane.YES_NO_CANCEL_OPTION, 
 				JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "Cancel"}, "Ok");
