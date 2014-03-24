@@ -64,7 +64,7 @@ public class ClassUtils {
 		else if (value instanceof ArrayReference)
 			type = ClassUtils.getClass(((ArrayReference)value).referenceType());
 		
-		if (!basicType(type) && (value instanceof ObjectReference || value instanceof ArrayReference)){
+		if (!basicType(type) && !isJavaDataStructure(type) && (value instanceof ObjectReference || value instanceof ArrayReference)){
 			if (!excludedClasses.containsKey(type)){
 				excluded = isExcluded(type);
 				excludedClasses.put(type,excluded);
@@ -74,6 +74,11 @@ public class ClassUtils {
 		return excluded;
 	}
 	
+	private boolean isJavaDataStructure(String className) {
+		return (className.equals("java.util.ArrayList") || className.equals("java.util.HashMap") || className.equals("java.util.Vector")
+		||  className.equals("java.util.HashSet") ||  className.equals("java.util.HashMap$Entry"));
+	}
+
 	/**
 	 * Returns if the class/package it's excluded in the current configuration.
 	 * @param name - name of the class.
@@ -111,28 +116,32 @@ public class ClassUtils {
 	}
 
 	public Data getObj(String name,Value value,List<Long> objectProcessed){
+		return getObj(false,name,value,objectProcessed);
+	}
+	
+	public Data getObj(boolean force,String name,Value value,List<Long> objectProcessed){
 		
 		Data object = null;
 		if (value instanceof ArrayReference){
-			object = getArrayFromArrayReference(name,(ArrayReference)value,objectProcessed);
+			object = getArrayFromArrayReference(force,name,(ArrayReference)value,objectProcessed);
 		} else if (value instanceof PrimitiveValue){
 			object = getPrimitiveObject(name,value);
 		} else if (value instanceof StringReference){
 			object = getStringFromStringReference(name,(StringReference)value);
 		} else if (value instanceof ObjectReference){
-			object = getObjectFromObjectReference(name,(ObjectReference)value,objectProcessed);
+			object = getObjectFromObjectReference(force,name,(ObjectReference)value,objectProcessed);
 		} else if (value == null){
 			object = new NullData(name);
 		}
 		return object;
 	}
 
-	private Data getArrayFromArrayReference(String name,ArrayReference value, List<Long> objectsProcessed) {
+	private Data getArrayFromArrayReference(boolean forceWriteContent, String name,ArrayReference value, List<Long> objectsProcessed) {
 		
 		Data object = null;
 		long arrayID = value.uniqueID();
-		
-		if (!isExcludedClass(value)){ 
+				
+		if (forceWriteContent || !isExcludedClass(value)){ 
 		
 			if (objectsProcessed.contains(arrayID)){
 				
@@ -167,12 +176,12 @@ public class ClassUtils {
 		return object;
 	}
 	
-	private Data getObjectFromObjectReference(String name,ObjectReference value,List<Long> objectsProcessed){
+	private Data getObjectFromObjectReference(boolean force, String name,ObjectReference value,List<Long> objectsProcessed){
 		
 		Data result = null;
 		long objectId = value.uniqueID();
 		
-		if (!isExcludedClass(value)){
+		if (force || !isExcludedClass(value)){
 			
 			if (objectsProcessed.contains(objectId)){
 				result = new ObjectData(name,objectId,null,null,null,getClass(value.referenceType()));
@@ -188,20 +197,22 @@ public class ClassUtils {
 				List<Data> inheritData = new ArrayList<>();
 				List<Data> fieldsData = new ArrayList<>();
 
+				boolean forceChild = isJavaDataStructure(getClass(value.referenceType()));
+				
 				for (int i=0;i<allFields.size();i++){
 					Field f = allFields.get(i);
 					Value v = value.getValue(f);
 					Data object = null;
 
 					if (fields.contains(f) || (!fields.contains(f) && getInheritFields)){
-
+						
 						if ((v instanceof ArrayReference)){
-							ArrayReference objectValue = (ArrayReference)v;
-							object = getArrayFromArrayReference(f.name(),objectValue,objectsProcessed);
+							ArrayReference arrayValue = (ArrayReference)v;
+							object = getArrayFromArrayReference(forceChild,f.name(),arrayValue,objectsProcessed);
 						}
 						else if (v instanceof ObjectReference && !(v instanceof StringReference)){
 							ObjectReference objectValue = (ObjectReference)v;
-							object = getObjectFromObjectReference(f.name(),objectValue,objectsProcessed);
+							object = getObjectFromObjectReference(forceChild,f.name(),objectValue,objectsProcessed);
 						}
 						else {
 							object = getObj(f.name(),v,objectsProcessed);
