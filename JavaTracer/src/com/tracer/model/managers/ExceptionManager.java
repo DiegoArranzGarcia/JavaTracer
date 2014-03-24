@@ -110,8 +110,17 @@ public class ExceptionManager {
 			for (int i=0;i<variables.size();i++){
 				LocalVariable var = variables.get(i);
 				String nameVar = var.name();
-				Data varObj = utils.getObj(nameVar,stack.getValue(var),new ArrayList<Long>());
+			
+				Data varObj=null;
+				if(nameVar.equals("args"))
+					varObj = utils.getObj(nameVar,null,new ArrayList<Long>());
+				else 
+					varObj = utils.getObj(nameVar,stack.getValue(var),new ArrayList<Long>());
+				
 				arguments.add(varObj);
+					
+			
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
