@@ -84,7 +84,7 @@ public class JavaTracerPresenter {
 	}
 
 	public void clickedOnInspectTrace() {
-		inspectorController.clickedOpen();
+		inspectorController.clickedOnOpen();
 	}
 
 	public void clickedOnTraceProfile() {

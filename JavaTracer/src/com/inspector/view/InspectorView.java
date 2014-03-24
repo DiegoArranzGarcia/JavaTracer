@@ -30,7 +30,12 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	private static double PERCENTAGE = 0.75;
 	
 	private InspectorController controller;
-	private JMenuItem[] items;
+
+	private JMenuItem menuOpen;
+	private JMenuItem menuExit;
+	private JMenuItem mntmSettings;
+	private JMenuItem mntmHelp;
+	private JMenuItem mntmAbout;
 	
 	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
 		
@@ -62,22 +67,31 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	
 	private void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		items = new JMenuItem[2];
 		
 		JMenu menuFile = new JMenu("File");
 		menuBar.add(menuFile);
 		
-		JMenuItem menuOpen = new JMenuItem("Open");
-		JMenuItem menuExit = new JMenuItem("Exit");
-		menuFile.add(menuOpen,0);
-		menuFile.add(menuExit,1);
-		items[0] = menuOpen;
-		items[1] = menuExit;
+		menuOpen = new JMenuItem("Open");
+		menuOpen.addActionListener(this);
+		menuExit = new JMenuItem("Exit");
+		menuExit.addActionListener(this);
 		
 		setJMenuBar(menuBar);
 		
-		menuOpen.addActionListener(this);
-		menuExit.addActionListener(this); 
+		mntmSettings = new JMenuItem("Settings");
+		menuBar.add(mntmSettings);
+		mntmSettings.addActionListener(this);
+		
+		mntmHelp = new JMenuItem("Help");
+		menuBar.add(mntmHelp);
+		mntmHelp.addActionListener(this);
+		
+		mntmAbout = new JMenuItem("About");
+		menuBar.add(mntmAbout);
+		mntmAbout.addActionListener(this);
+
+		
+		menuFile.add(menuExit);
 	}
 
 	public void componentHidden(ComponentEvent e) {
@@ -93,10 +107,18 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	public void componentShown(ComponentEvent e) {}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == items[0]){
-			controller.clickedOpen();
-		}else if(e.getSource() == items[1])
+		Object source = e.getSource();
+		if (source.equals(menuOpen)){
+			controller.clickedOnOpen();
+		} else if(source.equals(menuExit)){
 			controller.back();
+		} else if(source.equals(mntmSettings)){
+			controller.clickedOnSettings();
+		} else if(source.equals(mntmHelp)){
+			controller.clickedOnHelp();
+		} else if(source.equals(mntmAbout)){
+			controller.clickedOnAbout();
+		}
 	}
 
 	public void setController(InspectorController controller){

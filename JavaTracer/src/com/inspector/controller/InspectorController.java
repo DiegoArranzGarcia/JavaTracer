@@ -36,7 +36,7 @@ public class InspectorController {
 		objectInspector.showTable();
 	}
 
-	public void clickedOpen(){
+	public void clickedOnOpen(){
 		
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filtroXml=new FileNameExtensionFilter("xml","xml");
@@ -116,6 +116,18 @@ public class InspectorController {
 	public void opening() {
 		if (loadingView != null)
 			loadingView.opening();
+	}
+
+	public void clickedOnSettings() {
+		controller.clickedOnSettings();
+	}
+
+	public void clickedOnHelp() {
+		controller.clickedOnHelp();
+	}
+
+	public void clickedOnAbout() {
+		controller.clickedOnAbout();
 	}
 
 }
