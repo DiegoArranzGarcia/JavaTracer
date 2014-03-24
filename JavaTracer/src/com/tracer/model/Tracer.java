@@ -136,7 +136,7 @@ public class Tracer {
         	for (int i=0;i<jars.length;i++)
         		external_jars += jars[i] + "\\*;"; 
         	
-        	options = "-cp " + '"' + config.getMainClassPath() + FileUtilities.PATH_SEPARTATOR + external_jars + "\"";
+        	options = "-cp " + '"' + config.getClassPath() + FileUtilities.PATH_SEPARTATOR + external_jars + "\"";
         }
         String[] args = config.getArgs();
         

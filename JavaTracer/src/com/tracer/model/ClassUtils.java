@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.general.model.FileUtilities;
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.IgnoredData;
@@ -26,20 +27,26 @@ import com.sun.jdi.ReferenceType;
 import com.sun.jdi.ShortValue;
 import com.sun.jdi.StringReference;
 import com.sun.jdi.Value;
+import com.sun.org.apache.bcel.internal.classfile.ClassParser;
+import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 
 public class ClassUtils {
 	
 	private HashMap<String,Boolean> excludedClasses;
 	private List<String> excludes;
+	private HashMap<String,Boolean> fieldsOfClass;
+	private String classPath;
 	
 	/**
 	 * Initialise the ClassUtils class. 
 	 * @param excludes - The excluded list of packages/class it's required to use this class.
 	 */
 	
-	public ClassUtils(List<String> excludes){
+	public ClassUtils(String classPath,List<String> excludes){
 		this.excludedClasses = new HashMap<>();
+		this.fieldsOfClass = new HashMap<>();
 		this.excludes = excludes;
+		this.classPath = classPath;
 	}
 
 	/**
@@ -79,8 +86,8 @@ public class ClassUtils {
 		while (!excluded && i<excludes.size()){
 			String exclude = excludes.get(i);
 			//It's a package
-			if (exclude.contains("\\.*")){
-				excluded = name.startsWith(exclude.substring(0,exclude.length()-2));
+			if (exclude.contains(".*")){
+				excluded = name.startsWith(exclude.substring(0,exclude.length()-1));
 			} else {
 				excluded = name.equals(exclude);
 			}
@@ -166,54 +173,100 @@ public class ClassUtils {
 		long objectId = value.uniqueID();
 		
 		if (!isExcludedClass(value)){
-						
+			
 			if (objectsProcessed.contains(objectId)){
 				result = new ObjectData(name,objectId,null,null,null,getClass(value.referenceType()));
 			} else {
-				
+
 				objectsProcessed.add(objectId);
+
+				boolean getInheritFields = getInheritFields(value); 
 				List<Field> allFields = value.referenceType().allFields();
 				List<Field> fields = value.referenceType().fields();
-				
+
 				List<Data> constantData = new ArrayList<>();
 				List<Data> inheritData = new ArrayList<>();
 				List<Data> fieldsData = new ArrayList<>();
-				
+
 				for (int i=0;i<allFields.size();i++){
 					Field f = allFields.get(i);
 					Value v = value.getValue(f);
 					Data object = null;
-					
-					if ((v instanceof ArrayReference)){
-						ArrayReference objectValue = (ArrayReference)v;
-						object = getArrayFromArrayReference(f.name(),objectValue,objectsProcessed);
-					}
-					else if (v instanceof ObjectReference && !(v instanceof StringReference)){
-						ObjectReference objectValue = (ObjectReference)v;
-						object = getObjectFromObjectReference(f.name(),objectValue,objectsProcessed);
-					}
-					else {
-						object = getObj(f.name(),v,objectsProcessed);
-					}
-					
-					if (fields.contains(f))
-						if (f.isStatic() || f.isFinal())
-							constantData.add(object);
+
+					if (fields.contains(f) || (!fields.contains(f) && getInheritFields)){
+
+						if ((v instanceof ArrayReference)){
+							ArrayReference objectValue = (ArrayReference)v;
+							object = getArrayFromArrayReference(f.name(),objectValue,objectsProcessed);
+						}
+						else if (v instanceof ObjectReference && !(v instanceof StringReference)){
+							ObjectReference objectValue = (ObjectReference)v;
+							object = getObjectFromObjectReference(f.name(),objectValue,objectsProcessed);
+						}
+						else {
+							object = getObj(f.name(),v,objectsProcessed);
+						}
+
+						if (fields.contains(f))
+							if (f.isStatic() || f.isFinal())
+								constantData.add(object);
+							else
+								fieldsData.add(object);
 						else
-							fieldsData.add(object);
-					else
-						inheritData.add(object);
-					
+							inheritData.add(object);
+					}
+
 				}
-				
+
 				result = new ObjectData(name,objectId,constantData,inheritData,fieldsData,getClass(value.referenceType()));
-			}		
+			} 
+			
 		} else {
 			result = new IgnoredData(getClass(value.referenceType()),name);
 		}
+		
 		return result;
 	}
 
+
+	private boolean getInheritFields(ObjectReference value) {
+		
+		boolean getInherit = false;
+		if (!isExcludedClass(value)){
+			String className =  ClassUtils.getClass(value.referenceType());
+			if (!fieldsOfClass.containsKey(className)){
+				getInherit = getInheritFields(className,value);
+				fieldsOfClass.put(className,getInherit);
+			} else {
+				getInherit = fieldsOfClass.get(className); 
+			}
+		}
+		return getInherit;
+	}
+
+	private boolean getInheritFields(String className, ObjectReference value) {		
+		JavaClass javaClass = getJavaClass(className);
+		return (javaClass != null) && !basicType(className) && !isExcluded(javaClass.getSuperclassName());
+	}
+
+	private JavaClass getJavaClass(String className) {
+		JavaClass jc = null;
+		try {
+			String path = getPathForClass(classPath,className);
+			ClassParser cp = new ClassParser(path);
+			jc = cp.parse();
+		} catch (Exception e){
+			
+		}
+		return jc;
+	}
+
+	private String getPathForClass(String classPath,String className) {
+		String path = "";
+		className = className.replace(".",FileUtilities.SEPARATOR);
+		path = classPath + FileUtilities.SEPARATOR + className + ".class";
+		return path;
+	}
 
 	private Data getPrimitiveObject(String name, Value value) {
 		Data object = null;
@@ -247,6 +300,7 @@ public class ClassUtils {
 		String[] aux = reference.toString().split(" ");
 		boolean found = false;
 		int i = 0;
+		
 		while (!found && i<aux.length){
 			if (aux[i].equals("class")){
 				className = aux[i+1];
@@ -254,6 +308,7 @@ public class ClassUtils {
 			}
 			i++;
 		}
+		
 		if (className.contains("[]")) 
 			className = className.replace("[]", "");
 		return className;

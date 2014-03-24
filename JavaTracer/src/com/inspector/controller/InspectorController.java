@@ -1,6 +1,5 @@
 package com.inspector.controller;
 
-import java.awt.Dialog.ModalityType;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;

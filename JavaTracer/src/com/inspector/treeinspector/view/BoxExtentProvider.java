@@ -41,7 +41,7 @@ import com.inspector.treeinspector.data.Box;
  * 
  * @author Udo Borkowski (ub@abego.org)
  */
-public class TextInBoxNodeExtentProvider implements NodeExtentProvider<Box> {
+public class BoxExtentProvider implements NodeExtentProvider<Box> {
 
 	public double getHeight(Box box) {
 		return TreePanel.DEFAULT_HEIGHT_BOX;

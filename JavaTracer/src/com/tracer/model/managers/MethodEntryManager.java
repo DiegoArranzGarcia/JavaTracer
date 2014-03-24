@@ -47,16 +47,18 @@ public class MethodEntryManager{
     	
     	ThreadReference thread = event.thread();
        	Method method = event.method();
-       	ReferenceType ref=method.declaringType(); //"class" where is declare 
-       	String methodName = method.name();
-        List<Data> arguments = processArguments(method,thread);
-        String className = ClassUtils.getClass(method.declaringType());
-        Data argument_this = processThis(event,ref,thread);
-        MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
-        
-        synchronized (writer) {
-        	writer.writeMethodEntryInfo(info);
-		}
+       	String className = ClassUtils.getClass(method.declaringType());
+       	if (!className.contains("$")){
+       		String methodName = method.name();
+       		ReferenceType ref=method.declaringType(); //"class" where is declare 
+       		List<Data> arguments = processArguments(method,thread);
+       		Data argument_this = processThis(event,ref,thread);
+       		MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
+
+       		synchronized (writer) {
+       			writer.writeMethodEntryInfo(info);
+       		}	
+       	}
         
     }
 

@@ -88,7 +88,7 @@ public class EventThread extends Thread {
         	writer.writeThreadInfo(new ThreadInfo());
         }  
         
-        ClassUtils utils = new ClassUtils(excludes);
+        ClassUtils utils = new ClassUtils(config.getClassPath(),excludes);
         
         disconnect = new DisconnectManager();
         threadeath = new ThreadDeathManager(traceMap);

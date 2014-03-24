@@ -56,7 +56,7 @@ public class RunConfiguration {
 		this.nameXml = nameXml;
 	}
 
-	public String getMainClassPath() {
+	public String getClassPath() {
 		return mainClassPath;
 	}
 

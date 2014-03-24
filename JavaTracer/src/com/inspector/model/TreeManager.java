@@ -17,7 +17,7 @@ public class TreeManager implements UpdateNotifier{
 		
 	public void showTree(String xmlName) {
 		
-		LoadTreeThread loadTreeThread = new LoadTreeThread(xml,xmlName,this);
+		LoadTreeThread loadTreeThread = new LoadTreeThread(xmlName,this);
 		loadTreeThread.start();
 		
 	}
@@ -89,6 +89,10 @@ public class TreeManager implements UpdateNotifier{
 
 	public void opening() {
 		controller.opening();
+	}
+
+	public void opened(XmlManager xml) {
+		this.xml = xml;
 	}
 
 }
