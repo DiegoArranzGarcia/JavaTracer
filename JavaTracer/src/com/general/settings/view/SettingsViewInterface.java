@@ -9,12 +9,14 @@ public interface SettingsViewInterface {
 	
 	public void loadExcludes(String[] args); 
 	public void loadExcludedThis(boolean excludedThis);
-	public  void loadUnlimited(boolean unlimited);
+	public  void loadUnlimitedLevels(boolean unlimited);
+	public void loadUnlimitedNodes(boolean unlimited);
 	public void loadNumLevels(int numLevels);
 	public void loadNumNodes(int numNodes);
 	public String[] getExcludes();
 	public boolean getExcludedThis();
-	public boolean getUnlimited();
+	public boolean getUnlimitedLevels();
+	public boolean getUnlimitedNodes();
 	public int getNumLevels();
 	public int getNumNodes();
 	public void setVisible(boolean visible);

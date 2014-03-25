@@ -60,7 +60,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private JPanel _panel_1;
 	private JCheckBox excludedThis;
 	private JPanel _panel_2;
-	private JCheckBox unlimited;
+	private JCheckBox unlimitedLevels,unlimitedNodes;
 	
 	
 	public SettingsView() {
@@ -236,15 +236,15 @@ private void initTracerSettings() {
 			_panel_2.add(nodesField);
 			nodesField.setColumns(10);
 			
-			unlimited = new JCheckBox("Unlimited");
-			unlimited.setBounds(291, 95, 97, 23);
-			_panel_2.add(unlimited);
-			unlimited.setBackground(Color.WHITE);
+			unlimitedLevels = new JCheckBox("Unlimited");
+			unlimitedLevels.setBounds(291, 95, 97, 23);
+			_panel_2.add(unlimitedLevels);
+			unlimitedLevels.setBackground(Color.WHITE);
 			
-			JCheckBox checkBox = new JCheckBox("Unlimited");
-			checkBox.setBackground(Color.WHITE);
-			checkBox.setBounds(291, 43, 97, 23);
-			_panel_2.add(checkBox);
+			unlimitedNodes = new JCheckBox("Unlimited");
+			unlimitedNodes.setBackground(Color.WHITE);
+			unlimitedNodes.setBounds(291, 43, 97, 23);
+			_panel_2.add(unlimitedNodes);
 			
 		    
 	    }
@@ -417,8 +417,12 @@ private void initTracerSettings() {
     	this.excludedThis.setSelected(excludedThis);
     }
     
-    public void loadUnlimited(boolean unlimited) {
-    	this.unlimited.setSelected(unlimited);
+    public void loadUnlimitedLevels(boolean unlimited) {
+    	this.unlimitedLevels.setSelected(unlimited);
+    }
+    
+    public void loadUnlimitedNodes(boolean unlimited) {
+    	this.unlimitedNodes.setSelected(unlimited);
     }
 
     public String[] getExcludes() {
@@ -472,8 +476,12 @@ private void initTracerSettings() {
     	return nNodes;
     }
 
-    public boolean getUnlimited() {
-    	return unlimited.isSelected();
+    public boolean getUnlimitedLevels() {
+    	return unlimitedLevels.isSelected();
+    }
+    
+    public boolean getUnlimitedNodes() {
+    	return unlimitedNodes.isSelected();
     }
 
     public void loadNumLevels(int numLevels) {

@@ -18,7 +18,8 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	private String[] excludes;
 	private boolean excludedThis;
-	private boolean unlimited;
+	private boolean unlimitedLevels;
+	private boolean unlimitedNodes;
 	private int numLevels;
 	private int numNodes;
 	
@@ -28,9 +29,10 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	public SettingsPresenter(){
 		addExludesFromConfiguration();
 		addExcludedThisFromConfiguration();
-		addUnlimitedThisFromConfiguration();
+		addUnlimitedLevelsFromConfiguration();
 		addNumLevelsFromConfiguration();
 		addNumNodesFromConfiguration();
+		addUnlimitedNodesFromConfiguration();
 	}
 
 	public void show() {
@@ -48,7 +50,8 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 				excludes[i] =listExcludes.get(i);
 			
 			excludedThis = configuration.getExcludedThisFromFile();
-			unlimited =configuration.getUnlimitedFromFile();
+			unlimitedLevels = configuration.getUnlimitedLevelsFromFile();
+			unlimitedNodes = configuration.getUnlimitedNodesFromFile(); 
 			numLevels = configuration.getNumLevelsFromFile();
 			numNodes = configuration.getNumNodesFromFile();
 
@@ -61,7 +64,8 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		view.loadExcludes(excludes);
 		view.loadExcludedThis(excludedThis);
 		
-		view.loadUnlimited(unlimited);
+		view.loadUnlimitedLevels(unlimitedLevels);
+		view.loadUnlimitedNodes(unlimitedNodes);
 		view.loadNumLevels(numLevels);
 		view.loadNumNodes(numNodes);
 	}
@@ -107,8 +111,11 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 			if (numNodes != -1) {
 				numNodes = nNodes;
 				configuration.setNumNodes(numNodes);
-				unlimited = view.getUnlimited();
-				configuration.setUnlimited(unlimited) ;
+				unlimitedLevels = view.getUnlimitedLevels();
+				configuration.setUnlimitedLevels(unlimitedLevels) ;
+				unlimitedNodes = view.getUnlimitedNodes();
+				configuration.setUnlimitedNodes(unlimitedNodes);
+				
 				configuration.saveConfiguration();
 			}
 
@@ -157,14 +164,25 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 			ex.printStackTrace();
 		}
 	}
-	public void addUnlimitedThisFromConfiguration() {
+	
+	public void addUnlimitedLevelsFromConfiguration() {
 		try {
-			unlimited =JavaTracerConfiguration.getInstance().getUnlimitedFromFile();
+			unlimitedLevels =JavaTracerConfiguration.getInstance().getUnlimitedLevelsFromFile();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void addUnlimitedNodesFromConfiguration() {
+		try {
+			unlimitedNodes =JavaTracerConfiguration.getInstance().getUnlimitedLevelsFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 	private void addNumLevelsFromConfiguration() {
 		try {
 			numLevels =JavaTracerConfiguration.getInstance().getNumLevelsFromFile();
@@ -192,11 +210,11 @@ public class SettingsPresenter implements SettingsPresenterInterface {
     }
 
 	public boolean isUnlimited() {
-	    return unlimited;
+	    return unlimitedLevels;
     }
 
 	public void setUnlimited(boolean p_unlimited) {
-	    unlimited = p_unlimited;
+	    unlimitedLevels = p_unlimited;
     }
 
 

@@ -43,7 +43,9 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private List<String>excludesList;
 	private ExcludedClassesMethods excludedClassesMethods;
 	private boolean excludedThis;
-	private boolean unlimited;
+	private boolean unlimitedLevels;
+
+	private boolean unlimitedNodes;
 
 	/*
 	 * Inspector
@@ -73,7 +75,8 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			 */
 			initExcludes();
 			this.excludedThis = false;
-			this.unlimited = false;
+			this.unlimitedLevels = false;
+			this.unlimitedNodes = false;
 			this.numlevels = 4;
 			this.numNodes = 30;
 			this.excludedClassesMethods = new ExcludedClassesMethods();
@@ -97,7 +100,8 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				}
 				excludesList = getExludesFromFile();
 				excludedThis = getExcludedThisFromFile();
-				unlimited = getUnlimitedFromFile();
+				unlimitedLevels = getUnlimitedLevelsFromFile();
+				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
 				excludedClassesMethods = getExcludesClassesMethodFromFile();
@@ -139,10 +143,14 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			writeExcludedThis();
 			write(endTag(TAG_EXCLUDED_THIS));
 
-			write(startTag(TAG_UNLIMITED));
-			writeUnlimited();
-			write(endTag(TAG_UNLIMITED));
+			write(startTag(TAG_UNLIMITED_LEVELS));
+			writeUnlimitedLevels();
+			write(endTag(TAG_UNLIMITED_LEVELS));
 
+			write(startTag(TAG_UNLIMITED_NODES));
+			writeUnlimitedNodes();
+			write(endTag(TAG_UNLIMITED_NODES));	
+			
 			write(startTag(TAG_NUM_LEVELS));	
 			writeNumLevels();
 			write(endTag(TAG_NUM_LEVELS));
@@ -212,14 +220,23 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}
 	}
 
-	public void writeUnlimited() {
+	public void writeUnlimitedLevels() {
 		try {
-			writeXStream(unlimited);
+			writeXStream(unlimitedLevels);
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void writeUnlimitedNodes() {
+		try {
+			writeXStream(unlimitedNodes);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}	
 
 	private void write(String string) throws IOException {
 		writer.write(string + "\n");
@@ -291,24 +308,45 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		 return numlevels;
 	 }
-	 public boolean getUnlimitedFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED;  
+	 
+	 public boolean getUnlimitedLevelsFromFile() {
+		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_LEVELS;  
 
-		 boolean  unlimitedThis =false;
+		 boolean  unlimitedLevels =false;
 		 String unlimited_query ="";
 		 try {
 			 XPathExpression xPathExpression = xPath.compile(expression);
 			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
 			 unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
 			 String result_query = unlimited_query.replaceAll("\n", ""); 
-			 unlimited = Boolean.parseBoolean(result_query);	       
+			 unlimitedLevels = Boolean.parseBoolean(result_query);	       
 		 }
 		 catch (Exception ex) {
-			 return unlimitedThis;
+			 return unlimitedLevels;
 		 }	
 
-		 return unlimited;
+		 return unlimitedLevels;
 	 }
+	 
+	 public boolean getUnlimitedNodesFromFile() {
+		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_NODES;  
+
+		 boolean  unlimited_nodes =false;
+		 String unlimited_query ="";
+		 try {
+			 XPathExpression xPathExpression = xPath.compile(expression);
+			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			 unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
+			 String result_query = unlimited_query.replaceAll("\n", ""); 
+			 unlimitedNodes = Boolean.parseBoolean(result_query);	       
+		 }
+		 catch (Exception ex) {
+			 return unlimited_nodes;
+		 }	
+
+		 return unlimitedNodes;
+	 }
+	 
 	 public int getNumNodesFromFile() {
 		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
 		 int numNodes = 30;
@@ -385,12 +423,21 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	 public void setExcludedThis(boolean excludedThis) {
 		 this.excludedThis = excludedThis;
 	 }
+	 
+	 public boolean isUnlimitedLevels() {
+			return unlimitedLevels;
+		}
 
-	 public boolean isUnlimited() {
-		 return unlimited;
-	 }
+		public void setUnlimitedLevels(boolean unlimitedLevels) {
+			this.unlimitedLevels = unlimitedLevels;
+		}
 
-	 public void setUnlimited(boolean unlimited) {
-		 this.unlimited = unlimited;
-	 }
+		public boolean isUnlimitedNodes() {
+			return unlimitedNodes;
+		}
+
+		public void setUnlimitedNodes(boolean unlimitedNodes) {
+			this.unlimitedNodes = unlimitedNodes;
+		}
+
 }
