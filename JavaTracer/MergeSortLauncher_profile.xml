@@ -1,0 +1,97 @@
+<com.profiler.model.ProfilerTree>
+  <rootNode class="com.profiler.model.data.ProfilePackage">
+    <children>
+      <com.profiler.model.data.ProfilePackage>
+        <children>
+          <com.profiler.model.data.ProfilePackage>
+            <children>
+              <com.profiler.model.data.ProfileClass>
+                <children>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>1</numCalls>
+                    <methodName>main(java.lang.String[])</methodName>
+                    <completeMethodName>com.prueba.MergeSortLauncher.main(java.lang.String[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>1</numCalls>
+                    <methodName>printArray(int[])</methodName>
+                    <completeMethodName>com.prueba.MergeSortLauncher.printArray(int[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                </children>
+                <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+                <numCalls>2</numCalls>
+                <className>MergeSortLauncher</className>
+                <completeClassName>com.prueba.MergeSortLauncher</completeClassName>
+              </com.profiler.model.data.ProfileClass>
+              <com.profiler.model.data.ProfileClass>
+                <children>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>1</numCalls>
+                    <methodName>&lt;init&gt;()</methodName>
+                    <completeMethodName>com.prueba.MergeSort.&lt;init&gt;()</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>1</numCalls>
+                    <methodName>randomizeArray(int[])</methodName>
+                    <completeMethodName>com.prueba.MergeSort.randomizeArray(int[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>1</numCalls>
+                    <methodName>merge()</methodName>
+                    <completeMethodName>com.prueba.MergeSort.merge()</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>19</numCalls>
+                    <methodName>mergesort(int[])</methodName>
+                    <completeMethodName>com.prueba.MergeSort.mergesort(int[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>9</numCalls>
+                    <methodName>merge(int[], int[])</methodName>
+                    <completeMethodName>com.prueba.MergeSort.merge(int[], int[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                  <com.profiler.model.data.ProfileMethod>
+                    <children/>
+                    <parent class="com.profiler.model.data.ProfileClass" reference="../../.."/>
+                    <numCalls>34</numCalls>
+                    <methodName>delete(int[])</methodName>
+                    <completeMethodName>com.prueba.MergeSort.delete(int[])</completeMethodName>
+                  </com.profiler.model.data.ProfileMethod>
+                </children>
+                <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+                <numCalls>65</numCalls>
+                <className>MergeSort</className>
+                <completeClassName>com.prueba.MergeSort</completeClassName>
+              </com.profiler.model.data.ProfileClass>
+            </children>
+            <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+            <numCalls>67</numCalls>
+            <packageName>prueba</packageName>
+            <completePackageName>com.prueba</completePackageName>
+          </com.profiler.model.data.ProfilePackage>
+        </children>
+        <parent class="com.profiler.model.data.ProfilePackage" reference="../../.."/>
+        <numCalls>67</numCalls>
+        <packageName>com</packageName>
+        <completePackageName>com</completePackageName>
+      </com.profiler.model.data.ProfilePackage>
+    </children>
+    <numCalls>67</numCalls>
+    <packageName>All packages</packageName>
+    <completePackageName></completePackageName>
+  </rootNode>
+</com.profiler.model.ProfilerTree>

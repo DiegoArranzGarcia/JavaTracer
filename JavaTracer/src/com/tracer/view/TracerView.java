@@ -78,7 +78,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		setTitle("Java Tracer");
-		setSize(876,285);  
+		setSize(WINDOW_WIDTH,WINDOW_HEIGHT_NO_CONSOLE); 
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,10 +87,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		this.console = console;
 		
 		chooser = new WebFileChooserField();
-		chooser.getLastComponent().setBounds(427, 2, 21, 26);
-		chooser.getFirstComponent().setBounds(3, 2, 425, 26);
-		chooser.getChooseButton().setBounds(427, 2, 21, 26);
-		chooser.setBounds(175, 60, 450, 30);
+		
 		chooser.setTitle("Select a directory or jar file");
 		String currentDirectory = System.getProperty("user.dir");
 		chooser.setCurrentDirectory(currentDirectory);
@@ -101,73 +98,98 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		chooser.addSelectedFilesListener(this);
 		
 		helpPath = new WebLabel();
-		helpPath.setBounds(667, 60, 24, 24);
 		helpPath.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpPath.setToolTipText(HELP_PATH_TOOLTIP);
 		
 		addArgument = new WebButton(ADD_ARGUMENTS);
-		addArgument.setBounds(716, 115, 120, 24);
 		addArgument.addActionListener(this);
 				
 		nameClass = new WebComboBox();
-		nameClass.setBounds(175, 115, 450, 30);
 		nameClass.setBackground(Color.white); 
 		nameClass.setEditable(false);
 		nameClass.setEnabled(false); 
 		nameClass.addActionListener(this);
 		
 		helpNameClass = new WebLabel();
-		helpNameClass.setBounds(667, 115, 24, 24);
 		helpNameClass.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpNameClass.setToolTipText(LABEL_NAME_CLASS);
 			 
 		exit =new WebButton(EXIT);
-		exit.setBounds(497, 182, 120, 30);
 		exit.setBackground(Color.white); 
 		exit.addActionListener(this);
 		
 		trace = new WebButton(TRACE);
-		trace.setBounds(335, 182, 120, 30);
 		trace.setLayout(new GridLayout(1,1));
 		trace.setBackground(Color.white);  
 		trace.setEnabled(false); 
 		trace.addActionListener(this);
 	
 		profile = new WebButton(PROFILE);
-		profile.setBounds(170, 182, 120, 30);
 		profile.setLayout(new GridLayout(1,1));
 		profile.setBackground(Color.white);  
 		profile.setEnabled(false); 
 		profile.addActionListener(this);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+		                                            				ColumnSpec.decode("5px"),
+		                                            				ColumnSpec.decode("5dlu"),
+		                                            				ColumnSpec.decode("default:grow"),
+		                                            				ColumnSpec.decode("10dlu"),
+		                                            				ColumnSpec.decode("120px"),
+		                                            				ColumnSpec.decode("50px"),
+		                                            				ColumnSpec.decode("100px"),
+		                                            				ColumnSpec.decode("50px"),
+		                                            				ColumnSpec.decode("130px"),
+		                                            				ColumnSpec.decode("20px"),
+		                                            				ColumnSpec.decode("25px"),
+		                                            				ColumnSpec.decode("35px"),
+		                                            				ColumnSpec.decode("120px"),
+		                                            				ColumnSpec.decode("10px"),},
+		                                            			new RowSpec[] {
+		                                            				RowSpec.decode("26px"),
+		                                            				RowSpec.decode("34px"),
+		                                            				RowSpec.decode("30px"),
+		                                            				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+		                                            				RowSpec.decode("30px"),
+		                                            				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+		                                            				RowSpec.decode("30px"),
+		                                            				RowSpec.decode("6dlu"),
+		                                            				RowSpec.decode("20dlu"),
+		                                            				RowSpec.decode("40px"),
+		                                            				RowSpec.decode("20dlu:grow"),
+		                                            				RowSpec.decode("default:grow"),
+		                                            				RowSpec.decode("10px"),}));
+
+		
 		
 		labelPath = new WebLabel(LABEL_PATH);
-		labelPath.setBounds(23, 60, 130, 30);
 		labelPath.setBackground(Color.white);
-		getContentPane().add(labelPath);
-		getContentPane().add(chooser);
-		chooser.setLayout(null);
+
 		
 		labelNameClass = new WebLabel(LABEL_NAME_CLASS);
-		labelNameClass.setBounds(23, 115, 100, 30);
+		
 		labelNameClass.setBackground(Color.white); 
-		getContentPane().add(labelNameClass);
+		getContentPane().add(labelNameClass, "3, 5, left, fill");
+		getContentPane().add(labelPath, "3, 3, left, fill");
+		getContentPane().add(chooser, "5, 3, 5, 1, fill, fill");
 		
 		
-		getContentPane().add(trace);
-		getContentPane().add(exit);
-		getContentPane().add(nameClass);
-		getContentPane().add(helpPath);
-		getContentPane().add(helpNameClass);
-		getContentPane().add(addArgument);
-		getContentPane().add(profile);
+		
+		
+		getContentPane().add(trace, "7, 7, fill, fill");
+		getContentPane().add(exit, "9, 7, fill, fill");
+		getContentPane().add(nameClass, "5, 5, 5, 1, fill, fill");
+		getContentPane().add(helpPath, "11, 3, center, center");
+		getContentPane().add(helpNameClass, "11, 5, center, center");
+		getContentPane().add(addArgument, "13, 5, center, center");
+		getContentPane().add(profile, "5, 7, fill, fill");
+
 		getContentPane().add(console, "3, 11, 11, 2, fill, fill");
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 994, 26);
-		getContentPane().add(menuBar);
-		
+
+		getContentPane().add(menuBar, "1, 1, 14, 1, fill, top");
 		JMenu mnFile = new JMenu(FILE);
+		
 		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnFile);
 		
