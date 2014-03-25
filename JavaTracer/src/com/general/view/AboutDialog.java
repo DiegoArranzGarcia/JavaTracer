@@ -1,4 +1,4 @@
-package com.tracer.view;
+package com.general.view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;

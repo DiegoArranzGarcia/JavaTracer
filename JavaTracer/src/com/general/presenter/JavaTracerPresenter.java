@@ -7,12 +7,12 @@ import javax.swing.UIManager;
 import com.alee.laf.WebLookAndFeel;
 import com.general.resources.FontLoader;
 import com.general.settings.presenter.SettingsPresenter;
+import com.general.view.AboutDialog;
 import com.inspector.controller.InspectorController;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.controller.TracerController;
-import com.tracer.view.AboutDialog;
 
 public class JavaTracerPresenter {
 

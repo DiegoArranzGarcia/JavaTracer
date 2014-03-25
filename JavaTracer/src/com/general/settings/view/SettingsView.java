@@ -11,6 +11,7 @@ import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.alee.laf.combobox.WebComboBox;
 import com.general.resources.ImageLoader;
 import com.general.settings.presenter.SettingsPresenterInterface;
 
@@ -55,19 +56,15 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	 */
 	private JTextField levelsField,nodesField;
 	private JLabel levelsLabel, nodesLabel;
-	private JButton deleteAllButtonInspector;
 	private JPanel _panel;
 	private JPanel _panel_1;
 	private JCheckBox excludedThis;
 	private JPanel _panel_2;
-	private JPanel _panel_3;
-	@SuppressWarnings("rawtypes")
-    private JComboBox _comboBox;
-	private JButton _button;
 	private JCheckBox unlimited;
 	
 	
 	public SettingsView() {
+		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
 		
 		initGeneralView(); 
@@ -85,16 +82,41 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		imageLoader = ImageLoader.getInstance();
 		getContentPane().setLayout(null);
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 10, 607, 429);
+		tabbedPane.setBackground(Color.WHITE);
+		tabbedPane.setBounds(10, 103, 607, 336);
 		getContentPane().add(tabbedPane);
 		
 		saveButton = new JButton(SAVE);
-		saveButton.setBounds(402, 450, 90, 25);
+		saveButton.setBounds(255, 450, 90, 25);
 		getContentPane().add(saveButton);
 		
 		cancelButton = new JButton(CANCEL);
 		cancelButton.setBounds(502, 450, 90, 25);
 		getContentPane().add(cancelButton);
+		
+		_panel = new JPanel();
+		_panel.setBounds(10, 13, 608, 75);
+		getContentPane().add(_panel);
+		_panel.setOpaque(false);
+		_panel.setBorder(new CompoundBorder(null, new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Configuration", TitledBorder.LEADING, TitledBorder.TOP, null, null)));
+		_panel.setBackground(Color.WHITE);
+		_panel.setLayout(null);
+		
+		WebComboBox comboBox = new WebComboBox();
+		comboBox.setOpaque(false);
+		comboBox.setEditable(true);
+		comboBox.setBackground(Color.WHITE);
+		comboBox.setBounds(10, 30, 230, 23);
+		_panel.add(comboBox);
+		
+		JButton btnSaveConfiguration = new JButton("Save");
+		btnSaveConfiguration.setBounds(270, 29, 124, 25);
+		_panel.add(btnSaveConfiguration);
+		
+		JButton btnRestoreDefaults = new JButton("Restore Defaults");
+		btnRestoreDefaults.addActionListener(this);
+		btnRestoreDefaults.setBounds(357, 450, 133, 25);
+		getContentPane().add(btnRestoreDefaults);
 		cancelButton.addActionListener(this);
 		saveButton.addActionListener(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -125,87 +147,63 @@ private void initTracerSettings() {
 			tracerSettings.setSize(690, 330);
 			tracerSettings.setLayout(null);
 			
-			excludes = new JTextField();
-			excludes.setBounds(20, 140, 385, 30);
-			tracerSettings.add(excludes);
-			excludes.setColumns(10);
-			excludes.getDocument().addDocumentListener(this);
-			
-			addButton = new JButton(ADD);
-			addButton.setBounds(459, 148, 115, 25);
-			tracerSettings.add(addButton);
-			addButton.addActionListener(this);
-			
-			deleteButton = new JButton(DELETE);
-			deleteButton.setLocation(459, 188);
-			deleteButton.setSize(115, 25);
-			tracerSettings.add(deleteButton);
-			deleteButton.addActionListener(this);
-			
-			deleteAllButton = new JButton(DELETE_ALL);
-			deleteAllButton.setBounds(459, 232, 115, 25);
-			tracerSettings.add(deleteAllButton);
-			deleteAllButton.addActionListener(this);
-			
-			downButton = new JButton("");
-			downButton.setBounds(362, 321, 43, 25);
-			downButton.setIcon(imageLoader.getArrowDownIcon());
-			downButton.setEnabled(false);
-			tracerSettings.add(downButton);
-			downButton.addActionListener(this);
-			
-			upButton = new JButton("");
-			upButton.setBounds(362, 185, 43, 25);
-			upButton.setIcon(imageLoader.getArrowUpIcon());
-			upButton.setEnabled(false);
-			upButton.addActionListener(this);
-			tracerSettings.add(upButton);
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(20, 181, 321, 165);
-			scrollPane.setBackground(Color.WHITE);
-			tracerSettings.add(scrollPane);
-			
-			excludesList = new JList<String>();
-			excludesList.setToolTipText("");
-			scrollPane.setViewportView(excludesList);
-			excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-			excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			excludesList.setModel(model);
-			
-			_panel = new JPanel();
-			_panel.setOpaque(false);
-			_panel.setBorder(new CompoundBorder(null, new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Configuration", TitledBorder.LEADING, TitledBorder.TOP, null, null)));
-			_panel.setBackground(new Color(255, 255, 255));
-			_panel.setBounds(10, 11, 578, 75);
-			tracerSettings.add(_panel);
-			_panel.setLayout(null);
-			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setOpaque(false);
-			comboBox.setEditable(true);
-			comboBox.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			comboBox.setBackground(Color.WHITE);
-			comboBox.setBounds(10, 30, 230, 23);
-			_panel.add(comboBox);
-			
-			JButton btnSaveConfiguration = new JButton("Save");
-			btnSaveConfiguration.setBounds(270, 29, 124, 25);
-			_panel.add(btnSaveConfiguration);
-			
 			_panel_1 = new JPanel();
 			_panel_1.setBorder(new TitledBorder(null, "Excluded", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			_panel_1.setBackground(new Color(255, 255, 255));
-			_panel_1.setBounds(10, 108, 578, 282);
+			_panel_1.setBounds(12, 13, 578, 280);
 			tracerSettings.add(_panel_1);
 			_panel_1.setLayout(null);
 			
-			excludedThis = new JCheckBox("Excluded this");
+			excludedThis = new JCheckBox("Exclude this");
+			excludedThis.setBackground(Color.WHITE);
 			excludedThis.setToolTipText("It is recommended checking this box, in the case of very large traces");
-			excludedThis.setBounds(17, 252, 137, 23);
+			excludedThis.setBounds(17, 241, 137, 23);
 			_panel_1.add(excludedThis);
+			
+			excludes = new JTextField();
+			excludes.setBounds(17, 27, 385, 30);
+			_panel_1.add(excludes);
+			excludes.setColumns(10);
+			
+			addButton = new JButton(ADD);
+			addButton.setBounds(451, 112, 115, 25);
+			_panel_1.add(addButton);
+			
+			deleteButton = new JButton(DELETE);
+			deleteButton.setBounds(451, 160, 115, 25);
+			_panel_1.add(deleteButton);
+			
+			deleteAllButton = new JButton(DELETE_ALL);
+			deleteAllButton.setBounds(451, 207, 115, 25);
+			_panel_1.add(deleteAllButton);
+			
+			downButton = new JButton("");
+			downButton.setBounds(359, 207, 43, 25);
+			_panel_1.add(downButton);
+			downButton.setIcon(imageLoader.getArrowDownIcon());
+			downButton.setEnabled(false);
+			
+			upButton = new JButton("");
+			upButton.setBounds(359, 70, 43, 25);
+			_panel_1.add(upButton);
+			upButton.setIcon(imageLoader.getArrowUpIcon());
+			upButton.setEnabled(false);
+			
+			excludesList = new JList<String>();
+			excludesList.setBounds(17, 69, 330, 163);
+			_panel_1.add(excludesList);
+			excludesList.setToolTipText("");
+			excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+			excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			excludesList.setModel(model);
 			excludesList.addMouseListener(this);
 			excludesList.addKeyListener(this); 
+			upButton.addActionListener(this);
+			downButton.addActionListener(this);
+			deleteAllButton.addActionListener(this);
+			deleteButton.addActionListener(this);
+			addButton.addActionListener(this);
+			excludes.getDocument().addDocumentListener(this);
 			inspectorSettings= new Panel();
 			inspectorSettings.setBackground(Color.WHITE);
 			tabbedPane.addTab("Display tree", null, inspectorSettings, null);
@@ -213,59 +211,40 @@ private void initTracerSettings() {
 			inspectorSettings.setLayout(null);
 			inspectorSettings.setSize(660, 330);
 			
-			levelsLabel = new JLabel("Number of tree levels");
-			levelsLabel.setBounds(28, 249, 156, 14);
-			inspectorSettings.add(levelsLabel);
-			
-			nodesLabel = new JLabel("Number of tree nodes");
-			nodesLabel.setBounds(28, 181, 156, 14);
-			inspectorSettings.add(nodesLabel);
-			
-			levelsField = new JTextField();
-			levelsField.setBounds(205, 176, 50, 25);
-			inspectorSettings.add(levelsField);
-			levelsField.setColumns(10);
-			
-			nodesField = new JTextField();
-			nodesField.setColumns(10);
-			nodesField.setBounds(205, 244, 50, 25);
-			inspectorSettings.add(nodesField);
-			
-			deleteAllButtonInspector = new JButton("Delete All");
-			deleteAllButtonInspector.setBounds(446, 177, 115, 23);
-			deleteAllButtonInspector.addActionListener(this); 
-			inspectorSettings.add(deleteAllButtonInspector);
-			
-			unlimited = new JCheckBox("Unlimited");
-			unlimited.setBackground(Color.WHITE);
-			unlimited.setBounds(295, 177, 97, 23);
-			inspectorSettings.add(unlimited);
-			
 			_panel_2 = new JPanel();
 			_panel_2.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tree ", TitledBorder.LEADING, TitledBorder.TOP, null, null), null));
 			_panel_2.setBackground(Color.WHITE);
-			_panel_2.setBounds(10, 108, 578, 282);
+			_panel_2.setBounds(12, 13, 578, 289);
 			inspectorSettings.add(_panel_2);
+			_panel_2.setLayout(null);
 			
-			_panel_3 = new JPanel();
-			_panel_3.setLayout(null);
-			_panel_3.setOpaque(false);
-			_panel_3.setBorder(new CompoundBorder(null, new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Configuration", TitledBorder.LEADING, TitledBorder.TOP, null, null)));
-			_panel_3.setBackground(Color.WHITE);
-			_panel_3.setBounds(10, 22, 578, 75);
-			inspectorSettings.add(_panel_3);
+			nodesLabel = new JLabel("Number of tree nodes");
+			nodesLabel.setBounds(25, 47, 156, 16);
+			_panel_2.add(nodesLabel);
 			
-			_comboBox = new JComboBox();
-			_comboBox.setOpaque(false);
-			_comboBox.setEditable(true);
-			_comboBox.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			_comboBox.setBackground(Color.WHITE);
-			_comboBox.setBounds(10, 30, 230, 23);
-			_panel_3.add(_comboBox);
+			levelsLabel = new JLabel("Number of tree levels");
+			levelsLabel.setBounds(25, 99, 156, 14);
+			_panel_2.add(levelsLabel);
 			
-			_button = new JButton("Save");
-			_button.setBounds(270, 29, 91, 25);
-			_panel_3.add(_button);
+			levelsField = new JTextField();
+			levelsField.setBounds(193, 43, 77, 25);
+			_panel_2.add(levelsField);
+			levelsField.setColumns(10);
+			
+			nodesField = new JTextField();
+			nodesField.setBounds(193, 94, 77, 25);
+			_panel_2.add(nodesField);
+			nodesField.setColumns(10);
+			
+			unlimited = new JCheckBox("Unlimited");
+			unlimited.setBounds(291, 95, 97, 23);
+			_panel_2.add(unlimited);
+			unlimited.setBackground(Color.WHITE);
+			
+			JCheckBox checkBox = new JCheckBox("Unlimited");
+			checkBox.setBackground(Color.WHITE);
+			checkBox.setBounds(291, 43, 97, 23);
+			_panel_2.add(checkBox);
 			
 		    
 	    }
@@ -313,10 +292,6 @@ private void initTracerSettings() {
 			
 			if (source == upButton){
 				clickedOnUpButton();
-			}
-			
-			if (source == deleteAllButtonInspector) {
-				clickedOnDeleteAllInspector();
 			}
 			if (source == downButton){
 				clickedOnDownButton();
@@ -457,12 +432,6 @@ private void initTracerSettings() {
 
     public boolean getExcludedThis() {
     	return excludedThis.isSelected();
-    }
-    
-    private void clickedOnDeleteAllInspector() {
-	    nodesField.setText("");
-	    levelsField.setText(""); 
-	    
     }
     
     /*
