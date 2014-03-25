@@ -88,7 +88,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		
 		chooser = new WebFileChooserField();
 		chooser.getLastComponent().setBounds(427, 2, 21, 26);
-		chooser.getFirstComponent().setBounds(10, 2, 422, 26);
+		chooser.getFirstComponent().setBounds(3, 2, 425, 26);
 		chooser.getChooseButton().setBounds(427, 2, 21, 26);
 		chooser.setBounds(175, 60, 450, 30);
 		chooser.setTitle("Select a directory or jar file");
