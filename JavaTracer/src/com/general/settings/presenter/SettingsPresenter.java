@@ -17,129 +17,188 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	private JavaTracerPresenter presenter;
 
 	private String[] excludes;
+	private boolean excludedThis;
+	private boolean unlimited;
 	private int numLevels;
 	private int numNodes;
 	
+
 	private List<String> excludesFromConfiguration;
-	
+
 	public SettingsPresenter(){
 		addExludesFromConfiguration();
+		addExcludedThisFromConfiguration();
+		addUnlimitedThisFromConfiguration();
 		addNumLevelsFromConfiguration();
 		addNumNodesFromConfiguration();
 	}
-	
+
 	public void show() {
-		
+
 		if (view == null){
 			view = new SettingsView();
 			view.setPresenter(this);
 		}
 		List<String> listExcludes = new ArrayList<>();
-        try {
-	        JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		try {
+			JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 			listExcludes = configuration.getExludesFromFile();
-	        excludes = new String[listExcludes.size()];
-	        for (int i=0;i<listExcludes.size();i++)
+			excludes = new String[listExcludes.size()];
+			for (int i=0;i<listExcludes.size();i++)
 				excludes[i] =listExcludes.get(i);
-	        
-	        numLevels = configuration.getNumLevelsFromFile();
-	        numNodes = configuration.getNumNodesFromFile();
-	        
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }
-		
+			
+			excludedThis = configuration.getExcludedThisFromFile();
+			unlimited =configuration.getUnlimitedFromFile();
+			numLevels = configuration.getNumLevelsFromFile();
+			numNodes = configuration.getNumNodesFromFile();
+
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 		view.setVisible(true); 
 		view.loadExcludes(excludes);
+		view.loadExcludedThis(excludedThis);
+		
+		view.loadUnlimited(unlimited);
 		view.loadNumLevels(numLevels);
 		view.loadNumNodes(numNodes);
- 	}
+	}
 
-	
+
 	public String[] getExcludes(){
 		return excludes;
 	}
 
-    public void saveActionTracer() {
-    	
-    	excludes = view.getExcludes();
-    	System.out.println("Excludes: "+excludes.length);
-    	List<String >excludesAux =new ArrayList<>();
-    	for(int i=0;i<excludes.length;i++) {
-    		excludesAux.add(excludes[i]);
-    	}
-    	JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+	public void save() {
+		saveActionTracer();
+		saveActionInspector();
+		view.setVisible(false);	
+		presenter.back();
+
+	}
+
+	public void saveActionTracer() {
+
+		excludes = view.getExcludes();
+		List<String >excludesAux =new ArrayList<>();
+		for(int i=0;i<excludes.length;i++) {
+			excludesAux.add(excludes[i]);
+		}
+		
+		excludedThis =view.getExcludedThis();
+		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		configuration.setExcludes(excludesAux); 
+		configuration.setExcludedThis(excludedThis);
 		configuration.saveConfiguration();
-    }
 
-    public void cancelActionTracer() {
-    	view.setVisible(false);	    
-    	presenter.back();
-    }
-
-    public void saveActionInspector() {
-    	int nLevels =  view.getNumLevels();
+	}
 	
-    	if (nLevels != -1) {
-    		numLevels =nLevels;
-    		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-    		configuration.setNumlevels(numLevels);
-		 
-    		int nNodes = view.getNumNodes(); 
-    		if (numNodes != -1) {
-    			numNodes = nNodes;
-    			configuration.setNumNodes(numNodes);
-    			configuration.saveConfiguration();
-    		}
-		 
-    	}
-    }
+	public void saveActionInspector() {
+		int nLevels =  view.getNumLevels();
 
-    public void cancelActionInspector() {
-    	view.setVisible(false);	
-    	presenter.back();
-	    
-    }
-    
-    public void closeWindow() {
-    	presenter.back();
-    }
-    
-    public void setController(JavaTracerPresenter javaTracerController) {
+		if (nLevels != -1) {
+			numLevels =nLevels;
+			JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+			configuration.setNumlevels(numLevels);
+
+			int nNodes = view.getNumNodes(); 
+			if (numNodes != -1) {
+				numNodes = nNodes;
+				configuration.setNumNodes(numNodes);
+				unlimited = view.getUnlimited();
+				configuration.setUnlimited(unlimited) ;
+				configuration.saveConfiguration();
+			}
+
+		}
+	}
+
+	public void cancelAction() {
+		view.setVisible(false);	    
+		presenter.back();
+	}
+
+
+	public void cancelActionInspector() {
+		view.setVisible(false);	
+		presenter.back();
+
+	}
+
+	public void closeWindow() {
+		presenter.back();
+	}
+
+	public void setController(JavaTracerPresenter javaTracerController) {
 		this.presenter = javaTracerController;
 	}
-    
-    private void addExludesFromConfiguration() {
-    	try {
-	        excludesFromConfiguration = JavaTracerConfiguration.getInstance().getExludesFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }
-    	
-    	excludes = new String[excludesFromConfiguration.size()];
+
+	private void addExludesFromConfiguration() {
+		try {
+			excludesFromConfiguration = JavaTracerConfiguration.getInstance().getExludesFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		excludes = new String[excludesFromConfiguration.size()];
 		for (int i=0;i<excludesFromConfiguration.size();i++){
-				excludes[i] = excludesFromConfiguration.get(i);
+			excludes[i] = excludesFromConfiguration.get(i);
 		} 
 	}
-    
-    private void addNumLevelsFromConfiguration() {
-    	try {
-    		numLevels =JavaTracerConfiguration.getInstance().getNumLevelsFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }
+	
+	public void addExcludedThisFromConfiguration() {
+		try {
+			excludedThis =JavaTracerConfiguration.getInstance().getExcludedThisFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void addUnlimitedThisFromConfiguration() {
+		try {
+			unlimited =JavaTracerConfiguration.getInstance().getUnlimitedFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	private void addNumLevelsFromConfiguration() {
+		try {
+			numLevels =JavaTracerConfiguration.getInstance().getNumLevelsFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void addNumNodesFromConfiguration() {
+		try {
+			numNodes =JavaTracerConfiguration.getInstance().getNumNodesFromFile();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public boolean isExcludedThis() {
+	    return excludedThis;
     }
-    
-    private void addNumNodesFromConfiguration() {
-    	try {
-    		numNodes =JavaTracerConfiguration.getInstance().getNumNodesFromFile();
-        }
-        catch (Exception ex) {
-	        ex.printStackTrace();
-        }
+
+	public void setExcludedThis(boolean p_excludedThis) {
+	    excludedThis = p_excludedThis;
     }
+
+	public boolean isUnlimited() {
+	    return unlimited;
+    }
+
+	public void setUnlimited(boolean p_unlimited) {
+	    unlimited = p_unlimited;
+    }
+
+
+
 }
