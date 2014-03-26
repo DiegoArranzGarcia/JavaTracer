@@ -45,14 +45,12 @@ public class TracerController {
 	
 	public void clickedOnTrace(){
 		this.lastConfig = getAllConfig(false);
-		tracerView.showConsole();
 		consolePresenter.resetConsole();
 		tracer.trace(lastConfig);		
 	}
 	
 	public void clickedOnProfile(){
 		this.lastConfig = getAllConfig(true);		
-		tracerView.showConsole();
 		consolePresenter.resetConsole();
 		tracer.profile(lastConfig,presenter.getProfiler());	
 	}

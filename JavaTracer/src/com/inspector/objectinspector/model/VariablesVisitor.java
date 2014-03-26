@@ -19,8 +19,6 @@ import com.tracer.model.ChangeDetector;
 public class VariablesVisitor implements InfoVisitor{
 	
 	private static String LENGTH = ChangeDetector.LENGTH;
-	private static String VALUE = "value";
-	private static String DOUBLE_QUOTES = "\"";
 	private static String EMPTY = "";
 	
 	private List<TableTreeNode> parents;

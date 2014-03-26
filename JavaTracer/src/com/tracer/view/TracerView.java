@@ -26,10 +26,6 @@ import com.alee.laf.menu.WebMenuItem;
 import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
 import com.tracer.controller.TracerController;
 
 @SuppressWarnings("serial")
@@ -46,9 +42,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
 	
-	private static final int WINDOW_WIDTH = 1000;
-	private static final int WINDOW_HEIGHT_NO_CONSOLE = 285;
-	private static final int WINDOW_HEIGHT_CONSOLE = 600;
+	private static final int WINDOW_WIDTH = 950;
+	private static final int WINDOW_HEIGHT = 500;
 	
 	private static String LABEL_PATH = "Select a directory";
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
@@ -61,7 +56,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebFileChooserField chooser;
 	private WebLabel labelPath,labelNameClass;
 	private WebLabel helpNameClass,helpPath;
-	private JComponent console;
 	
 	private WebMenuItem mntmLoadProfile;
 	private WebMenuItem mntmLoadTrace;
@@ -71,26 +65,23 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmSettings;
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
-	private String nameXml;
 	
 	public TracerView(JComponent console) {
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		setTitle("Java Tracer");
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT_NO_CONSOLE); 
+		setSize(WINDOW_WIDTH,WINDOW_HEIGHT); 
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(imageLoader.getApplicationIcon().getImage());
 		
-		this.console = console;
-		
 		chooser = new WebFileChooserField();
+		chooser.setBounds(245, 60, 450, 30);
 		
 		chooser.setTitle("Select a directory or jar file");
-		String currentDirectory = System.getProperty("user.dir");
-		chooser.setCurrentDirectory(currentDirectory);
+		chooser.setCurrentDirectory(FileUtilities.CURRENT_DIR);
 		FileNameExtensionFilter jarFilter = new FileNameExtensionFilter("Jar Files","jar");
 		chooser.setFileFilter(jarFilter);
 		chooser.setMultiSelectionEnabled(false);
@@ -98,96 +89,75 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		chooser.addSelectedFilesListener(this);
 		
 		helpPath = new WebLabel();
+		helpPath.setBounds(707, 62, 24, 24);
 		helpPath.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpPath.setToolTipText(HELP_PATH_TOOLTIP);
 		
 		addArgument = new WebButton(ADD_ARGUMENTS);
+		addArgument.setBounds(761, 107, 141, 28);
 		addArgument.addActionListener(this);
 				
 		nameClass = new WebComboBox();
+		nameClass.setBounds(245, 105, 450, 30);
 		nameClass.setBackground(Color.white); 
 		nameClass.setEditable(false);
 		nameClass.setEnabled(false); 
 		nameClass.addActionListener(this);
 		
 		helpNameClass = new WebLabel();
+		helpNameClass.setBounds(707, 111, 24, 24);
 		helpNameClass.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpNameClass.setToolTipText(LABEL_NAME_CLASS);
 			 
 		exit =new WebButton(EXIT);
+		exit.setBounds(564, 150, 130, 30);
 		exit.setBackground(Color.white); 
 		exit.addActionListener(this);
 		
 		trace = new WebButton(TRACE);
+		trace.setBounds(423, 150, 100, 30);
 		trace.setLayout(new GridLayout(1,1));
 		trace.setBackground(Color.white);  
 		trace.setEnabled(false); 
 		trace.addActionListener(this);
 	
 		profile = new WebButton(PROFILE);
+		profile.setBounds(245, 150, 120, 30);
 		profile.setLayout(new GridLayout(1,1));
 		profile.setBackground(Color.white);  
 		profile.setEnabled(false); 
 		profile.addActionListener(this);
-		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-		                                            				ColumnSpec.decode("5px"),
-		                                            				ColumnSpec.decode("5dlu"),
-		                                            				ColumnSpec.decode("default:grow"),
-		                                            				ColumnSpec.decode("10dlu"),
-		                                            				ColumnSpec.decode("120px"),
-		                                            				ColumnSpec.decode("50px"),
-		                                            				ColumnSpec.decode("100px"),
-		                                            				ColumnSpec.decode("50px"),
-		                                            				ColumnSpec.decode("130px"),
-		                                            				ColumnSpec.decode("20px"),
-		                                            				ColumnSpec.decode("25px"),
-		                                            				ColumnSpec.decode("35px"),
-		                                            				ColumnSpec.decode("120px"),
-		                                            				ColumnSpec.decode("10px"),},
-		                                            			new RowSpec[] {
-		                                            				RowSpec.decode("26px"),
-		                                            				RowSpec.decode("34px"),
-		                                            				RowSpec.decode("30px"),
-		                                            				FormFactory.PARAGRAPH_GAP_ROWSPEC,
-		                                            				RowSpec.decode("30px"),
-		                                            				FormFactory.PARAGRAPH_GAP_ROWSPEC,
-		                                            				RowSpec.decode("30px"),
-		                                            				RowSpec.decode("6dlu"),
-		                                            				RowSpec.decode("20dlu"),
-		                                            				RowSpec.decode("40px"),
-		                                            				RowSpec.decode("20dlu:grow"),
-		                                            				RowSpec.decode("default:grow"),
-		                                            				RowSpec.decode("10px"),}));
 
 		
 		
 		labelPath = new WebLabel(LABEL_PATH);
+		labelPath.setBounds(72, 62, 168, 30);
 		labelPath.setBackground(Color.white);
+		getContentPane().setLayout(null);
 
 		
 		labelNameClass = new WebLabel(LABEL_NAME_CLASS);
-		
+		labelNameClass.setBounds(72, 105, 168, 30);
 		labelNameClass.setBackground(Color.white); 
-		getContentPane().add(labelNameClass, "3, 5, left, fill");
-		getContentPane().add(labelPath, "3, 3, left, fill");
-		getContentPane().add(chooser, "5, 3, 5, 1, fill, fill");
 		
+		console.setBounds(10,200,WINDOW_WIDTH-30,WINDOW_HEIGHT-250);
 		
-		
-		
-		getContentPane().add(trace, "7, 7, fill, fill");
-		getContentPane().add(exit, "9, 7, fill, fill");
-		getContentPane().add(nameClass, "5, 5, 5, 1, fill, fill");
-		getContentPane().add(helpPath, "11, 3, center, center");
-		getContentPane().add(helpNameClass, "11, 5, center, center");
-		getContentPane().add(addArgument, "13, 5, center, center");
-		getContentPane().add(profile, "5, 7, fill, fill");
-
-		getContentPane().add(console, "3, 11, 11, 2, fill, fill");
+		getContentPane().add(labelNameClass);
+		getContentPane().add(labelPath);
+		getContentPane().add(chooser);
+		getContentPane().add(trace);
+		getContentPane().add(exit);
+		getContentPane().add(nameClass);
+		getContentPane().add(helpPath);
+		getContentPane().add(helpNameClass);
+		getContentPane().add(addArgument);
+		getContentPane().add(profile);
+		getContentPane().add(console);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 994, 26);
 
-		getContentPane().add(menuBar, "1, 1, 14, 1, fill, top");
+		getContentPane().add(menuBar);
 		JMenu mnFile = new JMenu(FILE);
 		
 		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
@@ -222,8 +192,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		mntmHelp.addActionListener(this);
 		
 		mntmAbout = new WebMenuItem(ABOUT);
-		menuBar.add(mntmAbout);	
-		
+		menuBar.add(mntmAbout);			
 		mntmAbout.addActionListener(this);
 
 		setEnableProfileAndTracer(false);
@@ -241,18 +210,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			presenter.open(xmlPath);
 		}
 		
-	}
-	
-	public void showConsole(){
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT_CONSOLE);
-		console.setVisible(true);
-		setLocationRelativeTo(null);
-	}
-	
-	public void hideConsole(){
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT_NO_CONSOLE);
-		console.setVisible(false);
-		setLocationRelativeTo(null);
 	}
 
 	public void errorNameXml(){
@@ -452,5 +409,4 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	 	
 	 	return found;	 		
 	}
-
 }

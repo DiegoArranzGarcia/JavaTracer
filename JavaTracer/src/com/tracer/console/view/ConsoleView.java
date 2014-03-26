@@ -54,6 +54,7 @@ public class ConsoleView extends JPanel implements ActionListener{
 		add(scrollPane);
 
 		console = new ConsoleTextPane(this);
+		console.setEditable(false);
 		scrollPane.setViewportView(console);
 		
 		JPanel panel = new JPanel();
