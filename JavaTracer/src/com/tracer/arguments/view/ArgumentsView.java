@@ -321,20 +321,30 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 	}
 
 	
-    public void keyPressed(KeyEvent e) {
-    	if (e.getSource().equals(argumentsList)) {
-    		int index = -1;
-    		 if (e.getKeyCode() == KeyEvent.VK_UP) {
-    			  index = argumentsList.getSelectedIndex()-1;
-    			 System.out.println("Index up : "+index);
-    		 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-    			  index = argumentsList.getSelectedIndex()+1;
-    			 System.out.println("Index down : "+index);
-    		 }
-    		refreshButtons(index);  
-    		
-    	}
-    }
+    
+	public void keyPressed(KeyEvent e) {
+		 if (e.getSource().equals(argumentsList)) {
+			 int index = -1;
+			
+			 if (e.getKeyCode() == KeyEvent.VK_UP) {
+				 int selected =  argumentsList.getSelectedIndex();
+				 if (selected == 0)
+					 index = 0;
+				 else
+					 index =selected-1;
+				
+			 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+				 int selected = argumentsList.getSelectedIndex()+1;
+				 int maxList = argumentsList.getModel().getSize()-1;
+				 if (selected >= maxList) {
+					 index = argumentsList.getModel().getSize()-1;
+				 } else index = selected;
+			 }
+			 refreshButtons(index);  
+
+		 }
+
+	 }
 
 	
     public void keyReleased(KeyEvent e) {}

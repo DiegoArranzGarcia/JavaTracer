@@ -65,6 +65,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 
 	private JPanel _panel_2;
 	private JCheckBox unlimitedLevels,unlimitedNodes;
+	private JScrollPane _scrollPane_1;
 
 
 	public SettingsView() {
@@ -191,22 +192,25 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		_panel_1.add(upButton);
 		upButton.setIcon(imageLoader.getArrowUpIcon());
 		upButton.setEnabled(false);
-		
-		excludesList = new JList<String>();
-		excludesList.setBackground(Color.WHITE);
-		excludesList.setBounds(17, 71, 330, 146);
-		_panel_1.add(excludesList);
-		excludesList.setToolTipText("");
-		
-		excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		excludesList.setModel(model);
 
 		excludeJavaDataStructures = new JCheckBox("Exclude java data structures");
 		excludeJavaDataStructures.setToolTipText("It is recommended checking this box, in the case of very large traces");
 		excludeJavaDataStructures.setBackground(Color.WHITE);
 		excludeJavaDataStructures.setBounds(17, 250, 208, 23);
 		_panel_1.add(excludeJavaDataStructures);
+		
+		_scrollPane_1 = new JScrollPane();
+		_scrollPane_1.setBounds(17, 71, 330, 146);
+		_panel_1.add(_scrollPane_1);
+		
+		excludesList = new JList<String>();
+		_scrollPane_1.setViewportView(excludesList);
+		excludesList.setBackground(Color.WHITE);
+		excludesList.setToolTipText("");
+		
+		excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		excludesList.setModel(model);
 		
 		
 		excludesList.addMouseListener(this);
