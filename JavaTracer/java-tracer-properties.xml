@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+<excludes>
+<list>
+  <string>java.*</string>
+  <string>javax.*</string>
+  <string>sun.*</string>
+  <string>com.sun.*</string>
+  <string>org.eclipse.jdt.internal.jarinjarloader.*</string>
+</list>
+</excludes>
+<excluded-this>
+<boolean>false</boolean>
+</excluded-this>
+<methods-excludes>
+<com.profiler.model.data.ExcludedClassesMethods>
+  <classList/>
+</com.profiler.model.data.ExcludedClassesMethods>
+</methods-excludes>
+<excluded-data-estructure>
+<boolean>false</boolean>
+</excluded-data-estructure>
+<unlimited-depth-tree>
+<boolean>false</boolean>
+</unlimited-depth-tree>
+<unlimited-nodes>
+<boolean>false</boolean>
+</unlimited-nodes>
+<num-levels>
+<int>4</int>
+</num-levels>
+<num-nodes>
+<int>30</int>
+</num-nodes>
+</configuration>

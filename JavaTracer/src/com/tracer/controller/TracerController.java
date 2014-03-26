@@ -117,7 +117,7 @@ public class TracerController {
 	}
 
 	public void editArguments() {
-		tracerView.setVisible(false); 
+		//tracerView.setVisible(false); 
 		presenter.clickedOnEditArguments();
 	}
 
@@ -138,7 +138,7 @@ public class TracerController {
 	}
 
 	public void clickOnSettings() {
-		tracerView.setVisible(false);
+		//tracerView.setVisible(false);
 		presenter.clickedOnSettings();
 	}
 	
