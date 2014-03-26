@@ -3,6 +3,7 @@ package com.profiler.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -75,9 +76,16 @@ public class Profiler implements ProfilerModelInterface{
 		return profilerTree.getClasses().entrySet().iterator();
 	}
 
+	private static List<String> splitByDot(String completeName) {
+		List<String> namesList = new ArrayList<String>();
+		String[] split = completeName.split("\\.");
+		for (int i = 0;i<split.length;i++)
+			namesList.add(split[i]);
+		return namesList;
+	}
 	
-	public ProfileData getData(List<String> list) {
-		return profilerTree.getData(list);
+	public ProfileData getData(String completeName) {
+		return profilerTree.getData(splitByDot(completeName));
 	}
 	
 }

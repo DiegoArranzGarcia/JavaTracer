@@ -2,7 +2,6 @@ package com.profiler.model;
 
 import java.io.File;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 import com.profiler.model.data.ProfileData;
@@ -16,6 +15,6 @@ public interface ProfilerModelInterface {
 	public ProfilerTree openProfile(File file);
 	public void clean();
 	public Iterator<Entry<String, Integer>> getClassesInfo();
-	public ProfileData getData(List<String> list);
+	public ProfileData getData(String completeName);
 
 }

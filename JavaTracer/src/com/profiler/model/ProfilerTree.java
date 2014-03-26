@@ -191,7 +191,7 @@ public class ProfilerTree {
 		return data;
 	}
 
-	public void setCheckedClasses(HashMap<List<String>, Boolean> dataState) {
+	public void setCheckedClasses(HashMap<String, Boolean> hashMap) {
 		
 	}
 

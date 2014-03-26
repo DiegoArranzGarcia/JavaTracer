@@ -10,7 +10,7 @@
 </list>
 </excludes>
 <excluded-this>
-<boolean>true</boolean>
+<boolean>false</boolean>
 </excluded-this>
 <methods-excludes>
 <com.profiler.model.data.ExcludedClassesMethods>
@@ -18,7 +18,7 @@
 </com.profiler.model.data.ExcludedClassesMethods>
 </methods-excludes>
 <excluded-data-estructure>
-<boolean>true</boolean>
+<boolean>false</boolean>
 </excluded-data-estructure>
 <unlimited-depth-tree>
 <boolean>false</boolean>

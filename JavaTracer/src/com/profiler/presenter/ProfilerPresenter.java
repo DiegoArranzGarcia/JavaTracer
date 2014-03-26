@@ -66,15 +66,15 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 
 	public void save() {
 		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
-		HashMap<List<String>, Boolean> classes = view.getDataState();
-		Iterator<Entry<List<String>,Boolean>> iterator = classes.entrySet().iterator();
+		HashMap<String, Boolean> classes = view.getDataState();
+		Iterator<Entry<String,Boolean>> iterator = classes.entrySet().iterator();
 		
 		ExcludedClassesMethods excludedMethods = configuration.getExcludeClassMethods();
 		List<String> excludesData = configuration.getExcludesList();
 		
 		while (iterator.hasNext()){
-			Entry<List<String>,Boolean> entry = iterator.next();
-			List<String> keys = new ArrayList<String>(entry.getKey());
+			Entry<String,Boolean> entry = iterator.next();
+			String keys = entry.getKey();
 			ProfileData data = profiler.getData(keys);
 			if (entry.getValue()){
 				if (data instanceof ProfilePackage){

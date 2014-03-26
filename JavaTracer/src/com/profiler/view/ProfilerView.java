@@ -20,7 +20,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -62,6 +61,7 @@ import org.jfree.util.SortOrder;
 import com.general.model.FileUtilities;
 import com.general.view.jtreetable.JTreeTable;
 import com.general.view.jtreetable.TableTreeNode;
+import com.general.view.jtreetable.TreeModel;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
@@ -709,27 +709,16 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		}
 	}
 
-	public HashMap<List<String>, Boolean> getDataState() {
-		HashMap<List<String>,Boolean> classesState = new HashMap<>();
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		for (int i=0;i<model.getRowCount();i++){
-			List<String> path = getPath(i);
-			boolean checked = (boolean) model.getValueAt(i,4);
-			classesState.put(path, checked);
+	public HashMap<String,Boolean> getDataState() {
+		HashMap<String, Boolean> classesState = new HashMap<>();
+		TreeModel model = (TreeModel) table.getTreeModel();
+		List<TableTreeNode> nodes = model.getRoot().getPreorder();
+		for (int i=1;i<nodes.size();i++){
+			ProfilerRowData row = (ProfilerRowData)nodes.get(i).getUserObject();
+			classesState.put(row.getCompleteNameClass(),row.isExcluded());
 		}
+		
 		return classesState;
-	}
-	
-	private List<String> getPath(int i) {
-		List<String> path = new ArrayList<String>();
-		TableTreeNode node = table.getTreeModel().getNodeFromRow(i+1);
-		
-		while (!node.isRoot()){
-			path.add(0,((ProfilerRowData)node.getUserObject()).getName());
-			node = node.getParent();
-		}
-		
-		return path;
 	}
 
 	public void load(HashMap<String, Integer> classes, int numCalledMethods) {

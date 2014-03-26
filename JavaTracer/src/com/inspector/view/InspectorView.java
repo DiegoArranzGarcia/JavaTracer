@@ -90,7 +90,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 		menuBar.add(mntmAbout);
 		mntmAbout.addActionListener(this);
 
-		
+		menuFile.add(menuOpen);
 		menuFile.add(menuExit);
 	}
 
