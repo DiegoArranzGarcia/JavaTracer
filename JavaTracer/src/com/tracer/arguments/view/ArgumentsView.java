@@ -22,6 +22,7 @@ import javax.swing.event.DocumentListener;
 
 import com.general.resources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class ArgumentsView extends JFrame implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface,KeyListener{
@@ -45,14 +46,16 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 	
 	private ArgumentsPresenterInterface presenter;
 	private JList<String> argumentsList;
+	private JScrollPane _scrollPane;
 
 	/**
 	 * Create the frame.
 	 */
 	public ArgumentsView() {
+		setMaximumSize(new Dimension(2147483590, 2147483647));
 		setTitle(WINDOWS_TITLE);
-		setMinimumSize(new Dimension(660, 330));
-		setSize(new Dimension(660, 330));
+		setMinimumSize(new Dimension(500, 330));
+		setSize(new Dimension(607, 345));
 		setLocationRelativeTo(null);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,94 +73,76 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		
 		
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
 		contentPane.addMouseListener(this);
+		contentPane.setLayout(null);
 
 		argument = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.WEST, argument, 39, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, argument, -244, SpringLayout.EAST, contentPane);
+		argument.setBounds(30, 59, 357, 25);
 		contentPane.add(argument);
 		argument.setColumns(10);
 		argument.getDocument().addDocumentListener(this);
 		
-		JLabel argumentLabel = new JLabel("Argument");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, argument, 20, SpringLayout.SOUTH, argumentLabel);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, argumentLabel, 20, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, argumentLabel, 39, SpringLayout.WEST, contentPane);
-		contentPane.add(argumentLabel);
-		
-		addButton = new JButton(ADD);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, addButton, 107, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, addButton, -31, SpringLayout.EAST, contentPane);
-		contentPane.add(addButton);
-		addButton.addActionListener(this);
-		
-		deleteButton = new JButton(DELETE);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteButton, 17, SpringLayout.SOUTH, addButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, deleteButton, 0, SpringLayout.WEST, addButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, deleteButton, -31, SpringLayout.EAST, contentPane);
-		contentPane.add(deleteButton);
-		deleteButton.addActionListener(this);
-		
-		deleteAllButton = new JButton(DELETE_ALL);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, deleteAllButton, 189, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, deleteButton, -15, SpringLayout.NORTH, deleteAllButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, deleteAllButton, 0, SpringLayout.WEST, addButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, deleteAllButton, -31, SpringLayout.EAST, contentPane);
-		contentPane.add(deleteAllButton);
-		deleteAllButton.addActionListener(this);
-		
 		cancelButton = new JButton(CANCEL);
+		cancelButton.setBounds(292, 260, 100, 35);
 		contentPane.add(cancelButton);
 		cancelButton.addActionListener(this);
 		
 		saveButton = new JButton(SAVE);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, cancelButton, 0, SpringLayout.NORTH, saveButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, cancelButton, 92, SpringLayout.EAST, saveButton);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, saveButton, -10, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, saveButton, 97, SpringLayout.WEST, contentPane);
+		saveButton.setBackground(Color.WHITE);
+		saveButton.setBounds(147, 260, 100, 35);
 		contentPane.add(saveButton);
 		saveButton.addActionListener(this);
 		
 		downButton = new JButton("");
-		sl_contentPane.putConstraint(SpringLayout.WEST, downButton, 367, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, downButton, -59, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, downButton, -94, SpringLayout.WEST, deleteAllButton);
+		downButton.setBounds(362, 202, 27, 27);
 		downButton.setIcon(imageLoader.getArrowDownIcon());
 		downButton.setEnabled(false);
 		contentPane.add(downButton);
 		downButton.addActionListener(this);
 		
 		upButton = new JButton("");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, upButton, 31, SpringLayout.SOUTH, argument);
-		sl_contentPane.putConstraint(SpringLayout.WEST, upButton, 367, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, upButton, -141, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, upButton, -240, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, downButton, 57, SpringLayout.SOUTH, upButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, addButton, 94, SpringLayout.EAST, upButton);
+		upButton.setBounds(362, 114, 27, 27);
 		upButton.setIcon(imageLoader.getArrowUpIcon());
 		upButton.setEnabled(false);
 		upButton.addActionListener(this);
 		contentPane.add(upButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.NORTH, addButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, argument);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, downButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, scrollPane, -6, SpringLayout.WEST, downButton);
-		scrollPane.setBackground(Color.WHITE);
-		contentPane.add(scrollPane);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new TitledBorder(null, "Arguments", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 27, 571, 222);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		addButton = new JButton(ADD);
+		addButton.setBounds(432, 30, 115, 28);
+		panel.add(addButton);
+		
+		deleteButton = new JButton(DELETE);
+		deleteButton.setBounds(432, 69, 115, 28);
+		panel.add(deleteButton);
+		
+		deleteAllButton = new JButton(DELETE_ALL);
+		deleteAllButton.setBounds(432, 108, 115, 28);
+		panel.add(deleteAllButton);
+		
+		_scrollPane = new JScrollPane();
+		_scrollPane.setBounds(23, 90, 320, 113);
+		panel.add(_scrollPane);
 		
 		argumentsList = new JList<String>();
+		_scrollPane.setViewportView(argumentsList);
 		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		argumentsList.setBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setViewportView(argumentsList);
 		argumentsList.setModel(model);
 		argumentsList.addMouseListener(this);
-		argumentsList.addKeyListener(this); 
+		argumentsList.addKeyListener(this);
+		deleteAllButton.addActionListener(this);
+		deleteButton.addActionListener(this);
+		addButton.addActionListener(this);
 		
 	}
 	

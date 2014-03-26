@@ -82,7 +82,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private void initGeneralView() {
 		setTitle(WINDOWS_TITLE);
 		setMinimumSize(new Dimension(600, 330));
-		setSize(new Dimension(636, 515));
+		setSize(new Dimension(636, 530));
 		setLocationRelativeTo(null);	
 		imageLoader = ImageLoader.getInstance();
 		getContentPane().setLayout(null);
@@ -92,11 +92,11 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		getContentPane().add(tabbedPane);
 
 		saveButton = new JButton(SAVE);
-		saveButton.setBounds(255, 450, 90, 25);
+		saveButton.setBounds(189, 450, 115, 32);
 		getContentPane().add(saveButton);
 
 		cancelButton = new JButton(CANCEL);
-		cancelButton.setBounds(502, 450, 90, 25);
+		cancelButton.setBounds(476, 450, 115, 32);
 		getContentPane().add(cancelButton);
 
 		_panel = new JPanel();
@@ -111,16 +111,20 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		comboBox.setOpaque(false);
 		comboBox.setEditable(true);
 		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(10, 30, 230, 23);
+		comboBox.setBounds(10, 30, 404, 23);
 		_panel.add(comboBox);
 
 		JButton btnSaveConfiguration = new JButton("Save");
-		btnSaveConfiguration.setBounds(270, 29, 124, 25);
+		btnSaveConfiguration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSaveConfiguration.setBounds(460, 30, 115, 30);
 		_panel.add(btnSaveConfiguration);
 
 		restoreDefaults = new JButton("Restore Defaults");
 		restoreDefaults.addActionListener(this);
-		restoreDefaults.setBounds(357, 450, 133, 25);
+		restoreDefaults.setBounds(324, 450, 133, 32);
 		restoreDefaults.addActionListener(this); 
 		getContentPane().add(restoreDefaults);
 
@@ -170,15 +174,15 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		excludes.setColumns(10);
 
 		addButton = new JButton(ADD);
-		addButton.setBounds(451, 112, 115, 25);
+		addButton.setBounds(451, 70, 115, 30);
 		_panel_1.add(addButton);
 
 		deleteButton = new JButton(DELETE);
-		deleteButton.setBounds(451, 160, 115, 25);
+		deleteButton.setBounds(451, 109, 115, 30);
 		_panel_1.add(deleteButton);
 
 		deleteAllButton = new JButton(DELETE_ALL);
-		deleteAllButton.setBounds(451, 207, 115, 25);
+		deleteAllButton.setBounds(451, 145, 115, 30);
 		_panel_1.add(deleteAllButton);
 
 		downButton = new JButton("");
