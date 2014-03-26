@@ -16,6 +16,10 @@ public class ImageLoader {
 	private static String ARROW_DOWN = "arrow-down.png";
 	private static String DELETE = "delete.png";
 	private static String MINIMIZE = "minimize.png";
+	private static String MAXIMIZE = "maximize.png";
+	private static String RESTORE = "restore.png";
+	private static String PLAY = "play.png";
+	private static String STOP = "stop.png";
 	
 	private ImageIcon applicationIcon;
 	private ImageIcon helpIcon;
@@ -27,6 +31,10 @@ public class ImageLoader {
 	private ImageIcon arrowDownIcon;
 	private ImageIcon deleteIcon;
 	private ImageIcon minimizeIcon;
+	private ImageIcon maximizeIcon;
+	private ImageIcon restoreIcon;
+	private ImageIcon stopIcon;
+	private ImageIcon playIcon;
 
 	public void setPlusIcon(ImageIcon plusIcon) {
 		this.plusIcon = plusIcon;
@@ -48,6 +56,10 @@ public class ImageLoader {
 		arrowDownIcon = new ImageIcon(getClass().getResource(ARROW_DOWN));
 		deleteIcon = new ImageIcon(getClass().getResource(DELETE));
 		minimizeIcon = new ImageIcon(getClass().getResource(MINIMIZE));
+		restoreIcon = new ImageIcon(getClass().getResource(RESTORE));
+		maximizeIcon = new ImageIcon(getClass().getResource(MAXIMIZE));
+		playIcon = new ImageIcon(getClass().getResource(PLAY));
+		stopIcon = new ImageIcon(getClass().getResource(STOP));
 	}
 	
 	public static ImageLoader getInstance(){
@@ -93,6 +105,22 @@ public class ImageLoader {
 
 	public ImageIcon getMinimizeIcon() {
 		return minimizeIcon;
+	}
+
+	public ImageIcon getMaximizeIcon() {
+		return maximizeIcon;
+	}
+
+	public ImageIcon getRestoreIcon() {
+		return restoreIcon;
+	}
+
+	public ImageIcon getStopIcon() {
+		return stopIcon;
+	}
+
+	public ImageIcon getPlayIcon() {
+		return playIcon;
 	}
 
 }

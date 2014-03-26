@@ -40,6 +40,9 @@ public class ConsoleView extends JPanel implements ActionListener{
 	private ConsoleTextPane console;
 	private JLabel lblConsoleStatus;
 	private JPanel panel_1;
+	private WebToggleButton playButton;
+	private WebToggleButton stopButton;
+	private WebToggleButton maximizeButton;
 	
 	public ConsoleView(){
 		
@@ -78,6 +81,24 @@ public class ConsoleView extends JPanel implements ActionListener{
 		flowLayout.setHgap(0);
 		panel.add(panel_1, BorderLayout.EAST);
 		
+		stopButton = new WebToggleButton();
+		stopButton.setVisible(false);
+		stopButton.setToolTipText("Clear console");
+		stopButton.setRolloverDecoratedOnly(true);
+		stopButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		stopButton.setDrawFocus(false);
+		stopButton.setIcon(new ImageIcon(imageLoader.getStopIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		panel_1.add(stopButton);
+		
+		playButton = new WebToggleButton();
+		playButton.setEnabled(false);
+		playButton.setToolTipText("Clear console");
+		playButton.setRolloverDecoratedOnly(true);
+		playButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		playButton.setIcon(new ImageIcon(imageLoader.getPlayIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		playButton.setDrawFocus(false);
+		panel_1.add(playButton);
+		
 		btnMinimizeConsole = new WebToggleButton();
 		panel_1.add(btnMinimizeConsole);
 		btnMinimizeConsole.setRolloverDecoratedOnly(true);
@@ -86,6 +107,15 @@ public class ConsoleView extends JPanel implements ActionListener{
 		btnMinimizeConsole.setIcon(new ImageIcon(imageLoader.getMinimizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMinimizeConsole.setDrawFocus(false);
 		btnMinimizeConsole.addActionListener(this);
+		
+		maximizeButton = new WebToggleButton();
+		maximizeButton.setVisible(false);
+		maximizeButton.setToolTipText("Clear console");
+		maximizeButton.setRolloverDecoratedOnly(true);
+		maximizeButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		maximizeButton.setIcon(new ImageIcon(imageLoader.getMaximizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		maximizeButton.setDrawFocus(false);
+		panel_1.add(maximizeButton);
 		
 		btnClearConsole = new WebToggleButton();
 		panel_1.add(btnClearConsole);
