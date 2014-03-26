@@ -1,10 +1,12 @@
 package com.inspector.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.general.model.FileUtilities;
 import com.general.model.data.MethodInfo;
 import com.general.presenter.JavaTracerPresenter;
 import com.inspector.model.TreeManager;
@@ -36,14 +38,14 @@ public class InspectorController {
 		objectInspector.showTable();
 	}
 
-	public void clickedOnOpen(){
+	public void clickedOnLoadTrace(){
 		
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filtroXml=new FileNameExtensionFilter("xml","xml");
 	    chooser.setFileFilter(filtroXml);
 		//Title window
-		chooser.setDialogTitle("Java Tracer");
-		chooser.setCurrentDirectory(new java.io.File("."));
+		chooser.setDialogTitle("Open trace");
+		chooser.setCurrentDirectory(new File(FileUtilities.CURRENT_DIR));
 		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
 		//return directory file
 		
@@ -65,6 +67,7 @@ public class InspectorController {
 		
 		if (view == null){
 			view = new InspectorView(treeInspector,objectInspector);
+			view.setTitle(new File(xmlPath).getName());
 			view.setController(this);
 		}
 		view.setVisible(true);

@@ -158,7 +158,7 @@ public class TracerController {
 	}
 
 	public void clickedOnLoadTrace() {
-		presenter.clickedOnInspectTrace();
+		presenter.clickedOnLoadTrace();
 	}
 
 	public void launching() {

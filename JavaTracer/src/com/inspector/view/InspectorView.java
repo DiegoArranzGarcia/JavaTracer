@@ -24,7 +24,9 @@ import com.inspector.treeinspector.view.TreeInspectorView;
 @SuppressWarnings("serial")
 public class InspectorView extends JFrame implements ComponentListener,ActionListener{
 	
-	private static String WINDOW_TITLE = "Inspector";
+	private static final String TITLE = "Inspector";
+
+	private static String WINDOW_TITLE = TITLE;
 	
 	private static double DIVIDER_SPLIT = 0.75;
 	private static double PERCENTAGE = 0.75;
@@ -71,7 +73,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 		JMenu menuFile = new JMenu("File");
 		menuBar.add(menuFile);
 		
-		menuOpen = new JMenuItem("Open");
+		menuOpen = new JMenuItem("Load Trace");
 		menuOpen.addActionListener(this);
 		menuExit = new JMenuItem("Exit");
 		menuExit.addActionListener(this);
@@ -94,6 +96,10 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 		menuFile.add(menuExit);
 	}
 
+	public void setTitle(String title){
+		super.setTitle(TITLE + " - " + title);
+	}
+	
 	public void componentHidden(ComponentEvent e) {
 		controller.back();
 	}
@@ -109,7 +115,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source.equals(menuOpen)){
-			controller.clickedOnOpen();
+			controller.clickedOnLoadTrace();
 		} else if(source.equals(menuExit)){
 			controller.back();
 		} else if(source.equals(mntmSettings)){

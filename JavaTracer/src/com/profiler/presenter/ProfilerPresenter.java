@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.general.model.FileUtilities;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
 import com.profiler.model.Profiler;
@@ -187,7 +188,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		chooser.setAcceptAllFileFilterUsed(false);
 		//Title window
 		chooser.setDialogTitle(OPEN_PROFILE);
-		chooser.setCurrentDirectory(new java.io.File("."));
+		chooser.setCurrentDirectory(new File(FileUtilities.CURRENT_DIR));
 		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
 		//return directory file
 		

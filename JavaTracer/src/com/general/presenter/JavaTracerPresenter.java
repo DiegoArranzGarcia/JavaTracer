@@ -84,12 +84,8 @@ public class JavaTracerPresenter {
 		System.exit(0);
 	}
 
-	public void clickedOnInspectTrace() {
-		inspectorController.clickedOnOpen();
-	}
-
-	public void clickedOnTraceProfile() {
-		tracerController.open();		
+	public void clickedOnLoadTrace() {
+		inspectorController.clickedOnLoadTrace();
 	}
 
 	public void clickedOnSettings() {
