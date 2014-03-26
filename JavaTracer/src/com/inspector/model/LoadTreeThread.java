@@ -29,8 +29,8 @@ public class LoadTreeThread extends Thread{
 		this.xmlName = xmlName;
 		this.notifier = notifier;
 		numNodes = 0;
-		DEFAULT_DEPTH = configuration.getNumLevelsFromFile();
-	    DEFAULT_NUM_NODES = configuration.getNumNodesFromFile();
+		DEFAULT_DEPTH = configuration.getNumLevels();
+	    DEFAULT_NUM_NODES = configuration.getNumNodes();
 	    
 	}
 	

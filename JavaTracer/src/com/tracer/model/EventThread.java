@@ -56,11 +56,9 @@ public class EventThread extends Thread {
     private DisconnectManager disconnect;
     private ExceptionManager exceptionManager;
     private ThreadDeathManager threadeath;
-    //private FieldWatchManager fieldwatch;
     private MethodEntryManager methodEntryManager;
     private MethodExitManager methodExitManager;
-    //private StepManager step;
-    //private PrepareManager prepare;
+
     private TraceWriter writer;
     
     private ProfilerModelInterface profiler;
@@ -76,7 +74,7 @@ public class EventThread extends Thread {
         this.profiler = profiler;
         this.tracer = tracer;
         
-        this.excludes = JavaTracerConfiguration.getInstance().getExludesFromFile();
+        this.excludes = JavaTracerConfiguration.getInstance().getExcludesList();
         this.excludesClassMethods = JavaTracerConfiguration.getInstance().getExcludeClassMethods();
         
         this.enableProfiling = config.isProfiling_mode();
@@ -175,6 +173,7 @@ public class EventThread extends Thread {
     /**
 	* Dispatch incoming events
 	*/
+    
     private void handleEvent(Event event) {
         if (event instanceof ExceptionEvent) {
         	if (!enableProfiling)
@@ -202,7 +201,7 @@ public class EventThread extends Thread {
 	private void methodExitEvent(MethodExitEvent event) {
     	String methodName = event.method().toString();
 		String className = ClassUtils.getClass(event.method().declaringType());
-		if (!excludesClassMethods.isExcluded(className,methodName)){
+		if (!excludesClassMethods.isExcluded(className,methodName) && !className.contains("$")){
 			if (!enableProfiling)
 				methodExitManager.methodExitEvent((MethodExitEvent)event);
 		}
@@ -211,7 +210,7 @@ public class EventThread extends Thread {
 	private void methodEntryEvent(MethodEntryEvent event) {
 		String methodName = event.method().toString();
 		String className = ClassUtils.getClass(event.method().declaringType());
-		if (!excludesClassMethods.isExcluded(className,methodName)){
+		if (!excludesClassMethods.isExcluded(className,methodName) && !className.contains("$")){
 	    	if (enableProfiling)
 	        	profiler.profileEvent(event);
 	        else 

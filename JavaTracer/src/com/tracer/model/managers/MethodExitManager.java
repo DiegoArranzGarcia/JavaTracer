@@ -28,23 +28,21 @@ public class MethodExitManager{
     	Method method = event.method();
         String className = ClassUtils.getClass(method.declaringType());
         
-        if (!className.contains("$")){
-        	String methodName = method.name();
-	        List<Data> arguments = processArguments(method,thread);
-	         
-	        Value returnValue = event.returnValue();
-	        Data returnObject = null; 
-	         
-	        if (!(returnValue instanceof VoidValue)) 
-	        	 returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());         
-	                  
-	        ReferenceType ref = method.declaringType(); // "class" where is declaring the method
-	        Data object_this = processThis(event,ref, thread);
-	        MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
-	         
-	    	synchronized (writer) { 
-	    		writer.writeMethodExitInfo(info);	
-			}
+        String methodName = method.name();
+        List<Data> arguments = processArguments(method,thread);
+
+        Value returnValue = event.returnValue();
+        Data returnObject = null; 
+
+        if (!(returnValue instanceof VoidValue)) 
+        	returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());         
+
+        ReferenceType ref = method.declaringType(); // "class" where is declaring the method
+        Data object_this = processThis(event,ref, thread);
+        MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
+
+        synchronized (writer) { 
+        	writer.writeMethodExitInfo(info);	
         }
          
     }

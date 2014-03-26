@@ -70,7 +70,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		Iterator<Entry<List<String>,Boolean>> iterator = classes.entrySet().iterator();
 		
 		ExcludedClassesMethods excludedMethods = configuration.getExcludeClassMethods();
-		List<String> excludesData = configuration.getExludesFromFile();
+		List<String> excludesData = configuration.getExcludesList();
 		
 		while (iterator.hasNext()){
 			Entry<List<String>,Boolean> entry = iterator.next();

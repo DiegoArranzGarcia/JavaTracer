@@ -69,6 +69,27 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private boolean unlimitedLevels;
 	private boolean unlimitedNodes;
 
+	public List<String> getExcludesList() {
+		return excludesList;
+	}
+
+	public void setExcludesList(List<String> excludesList) {
+		this.excludesList = excludesList;
+	}
+
+	public ExcludedClassesMethods getExcludedClassesMethods() {
+		return excludedClassesMethods;
+	}
+
+	public void setExcludedClassesMethods(
+			ExcludedClassesMethods excludedClassesMethods) {
+		this.excludedClassesMethods = excludedClassesMethods;
+	}
+
+	public int getNumNodes() {
+		return numNodes;
+	}
+
 	public static JavaTracerConfiguration getInstance(){
 		/*
 		 * Instance class
@@ -221,7 +242,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		} 
 	}
 	
-	public void writeExcludedThis() {
+	private void writeExcludedThis() {
 		try {
 			writeXStream(excludedThis);
 		}
@@ -230,7 +251,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}
 	}
 
-	public void writeExcludedDataStructures() {
+	private void writeExcludedDataStructures() {
 		try {
 			writeXStream(excludedDataStructure);
 		}
@@ -262,7 +283,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
-	public void writeUnlimitedLevels() {
+	private void writeUnlimitedLevels() {
 		try {
 			writeXStream(unlimitedLevels);
 		}
@@ -271,7 +292,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}
 	}
 
-	public void writeUnlimitedNodes() {
+	private void writeUnlimitedNodes() {
 		try {
 			writeXStream(unlimitedNodes);
 		}
@@ -285,7 +306,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	 * Get Information from file xml : Tracer
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> getExludesFromFile() {
+	private List<String> getExludesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_EXCLUDES + "/*";  
 
 		try {
@@ -319,7 +340,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		return excludedClassMethods;
 	}
 	
-	public boolean getExcludedThisFromFile() {
+	private boolean getExcludedThisFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_THIS;  
 
 		boolean  excluded_this =false;
@@ -338,7 +359,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		return excludedThis;
 	}
 
-	public boolean getExcludedDataStructureFromFile() {
+	private boolean getExcludedDataStructureFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_DATA_STRUCTURE;  
 
 		boolean  excluded_data_structure =false;
@@ -361,7 +382,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	 * Get Information from file xml : Display-tree
 	 */
 
-	public int getNumLevelsFromFile() {
+	private int getNumLevelsFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
 
 		String nLevels ="4";
@@ -381,7 +402,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	}
 
 
-	public boolean getUnlimitedLevelsFromFile() {
+	private boolean getUnlimitedLevelsFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_LEVELS;  
 
 		boolean  unlimited_levels =false;
@@ -400,7 +421,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		return unlimitedLevels;
 	}
 
-	public boolean getUnlimitedNodesFromFile() {
+	private boolean getUnlimitedNodesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_NODES;  
 
 		boolean  unlimited_nodes =false;
@@ -419,7 +440,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		return unlimitedNodes;
 	}
 
-	public int getNumNodesFromFile() {
+	private int getNumNodesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
 		int numNodes = DEFAULT_NUM_NODES;
 
@@ -467,7 +488,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	/*
 	 * Getters and Setters
 	 */
-	public int getNumlevels() {
+	public int getNumLevels() {
 		return numlevels;
 	}
 

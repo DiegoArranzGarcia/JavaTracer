@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.general.model.FileUtilities;
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.IgnoredData;
@@ -36,6 +37,7 @@ public class ClassUtils {
 	private List<String> excludes;
 	private HashMap<String,Boolean> fieldsOfClass;
 	private String classPath;
+	private JavaTracerConfiguration config;
 	
 	/**
 	 * Initialise the ClassUtils class. 
@@ -47,6 +49,7 @@ public class ClassUtils {
 		this.fieldsOfClass = new HashMap<>();
 		this.excludes = excludes;
 		this.classPath = classPath;
+		this.config = JavaTracerConfiguration.getInstance();
 	}
 
 	/**
@@ -57,26 +60,29 @@ public class ClassUtils {
 	
 	private boolean isExcludedClass(Value value) {
 		boolean excluded = false;
-		String type = "";
+		String className = "";
 		
 		if (value instanceof ObjectReference)
-			type = ClassUtils.getClass(((ObjectReference)value).referenceType());
+			className = ClassUtils.getClass(((ObjectReference)value).referenceType());
 		else if (value instanceof ArrayReference)
-			type = ClassUtils.getClass(((ArrayReference)value).referenceType());
+			className = ClassUtils.getClass(((ArrayReference)value).referenceType());
 		
-		if (!basicType(type) && !isJavaDataStructure(type) && (value instanceof ObjectReference || value instanceof ArrayReference)){
-			if (!excludedClasses.containsKey(type)){
-				excluded = isExcluded(type);
-				excludedClasses.put(type,excluded);
+		if (!basicType(className) && (value instanceof ObjectReference || value instanceof ArrayReference)){
+			if (!excludedClasses.containsKey(className)){
+				
+				excluded = (isJavaDataStructure(className) && config.isExcludedDataStructure()) || (!isJavaDataStructure(className) && isExcluded(className));
+				excludedClasses.put(className,excluded);
+			
+			
 			} else 
-				excluded = excludedClasses.get(type);
+				excluded = excludedClasses.get(className);
 		}
 		return excluded;
 	}
 	
-	private boolean isJavaDataStructure(String className) {
-		return (className.equals("java.util.ArrayList") || className.equals("java.util.HashMap") || className.equals("java.util.Vector")
-		||  className.equals("java.util.HashSet") ||  className.equals("java.util.HashMap$Entry"));
+	private boolean isJavaDataStructure(String className){
+		return (className.equals("java.util.ArrayList") || className.equals("java.util.HashMap") || className.equals("java.util.Vector") || 
+				className.equals("java.util.HashSet") ||  className.equals("java.util.HashMap$Entry"));
 	}
 
 	/**
@@ -197,7 +203,7 @@ public class ClassUtils {
 				List<Data> inheritData = new ArrayList<>();
 				List<Data> fieldsData = new ArrayList<>();
 
-				boolean forceChild = isJavaDataStructure(getClass(value.referenceType()));
+				boolean forceChild = isJavaDataStructure(getClass(value.referenceType())) && !config.isExcludedDataStructure();
 				
 				for (int i=0;i<allFields.size();i++){
 					Field f = allFields.get(i);
@@ -239,14 +245,13 @@ public class ClassUtils {
 		return result;
 	}
 
-
 	private boolean getInheritFields(ObjectReference value) {
 		
 		boolean getInherit = false;
 		if (!isExcludedClass(value)){
 			String className =  ClassUtils.getClass(value.referenceType());
 			if (!fieldsOfClass.containsKey(className)){
-				getInherit = getInheritFields(className,value);
+				getInherit = getInheritFields(className);
 				fieldsOfClass.put(className,getInherit);
 			} else {
 				getInherit = fieldsOfClass.get(className); 
@@ -254,12 +259,26 @@ public class ClassUtils {
 		}
 		return getInherit;
 	}
-
-	private boolean getInheritFields(String className, ObjectReference value) {		
+	
+	
+	/**
+	 * Returns if the super class of class is excluded or not.
+	 * @param className - The complete name class.
+	 * @return True if the super class is not excluded, else false.
+	 */
+	
+	private boolean getInheritFields(String className) {		
 		JavaClass javaClass = getJavaClass(className);
 		return (javaClass != null) && !basicType(className) && !isExcluded(javaClass.getSuperclassName());
 	}
 
+	/**
+	 * Gets the JavaClass (File) of the class passed as argument.
+	 * The path that will look for is classpath + class name.
+	 * @param className - The complete name of the class.
+	 * @return A JavaClass, if not founded it will return null.
+	 */
+	
 	private JavaClass getJavaClass(String className) {
 		JavaClass jc = null;
 		try {
@@ -272,6 +291,13 @@ public class ClassUtils {
 		return jc;
 	}
 
+	/**
+	 * Transforms the class path and class name into a correct directory.
+	 * @param classPath - The execution class path
+	 * @param className - The class we are looking for.
+	 * @return A String of the location of the ".class" file of the className
+	 */
+	
 	private String getPathForClass(String classPath,String className) {
 		String path = "";
 		className = className.replace(".",FileUtilities.SEPARATOR);
