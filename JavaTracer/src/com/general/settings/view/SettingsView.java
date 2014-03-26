@@ -248,12 +248,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		_panel_2.add(levelsLabel);
 
 		levelsField = new JTextField();
-		levelsField.setBounds(193, 43, 77, 25);
+		levelsField.setBounds(193, 94, 77, 25);
 		_panel_2.add(levelsField);
 		levelsField.setColumns(10);
 
 		nodesField = new JTextField();
-		nodesField.setBounds(193, 94, 77, 25);
+		nodesField.setBounds(193, 43, 77, 25);
 		_panel_2.add(nodesField);
 		nodesField.setColumns(10);
 

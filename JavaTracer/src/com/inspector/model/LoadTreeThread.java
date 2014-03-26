@@ -1,3 +1,4 @@
+
 package com.inspector.model;
 
 import java.util.List;
@@ -15,12 +16,14 @@ import com.inspector.treeinspector.view.DefaultTreeLayout;
 public class LoadTreeThread extends Thread{
 	
 	private int numNodes;
-	private int DEFAULT_DEPTH;
-	private int DEFAULT_NUM_NODES;
+	private int max_depth;
+	private int max_num_nodes;
 	private DefaultTreeLayout<Box> tree;
 	private UpdateNotifier notifier;
 	private XmlManager xml;
 	private String xmlName;
+	private boolean unlimited_levels;
+	private boolean unlimited_nodes;
 	
 	public LoadTreeThread(String xmlName,UpdateNotifier notifier){
 		
@@ -29,8 +32,10 @@ public class LoadTreeThread extends Thread{
 		this.xmlName = xmlName;
 		this.notifier = notifier;
 		numNodes = 0;
-		DEFAULT_DEPTH = configuration.getNumLevels();
-	    DEFAULT_NUM_NODES = configuration.getNumNodes();
+		unlimited_nodes = configuration.isUnlimitedNodes();
+		unlimited_levels = configuration.isUnlimitedLevels();
+		max_depth = configuration.getNumLevels();
+		max_num_nodes = configuration.getNumNodes();
 	    
 	}
 	
@@ -50,11 +55,17 @@ public class LoadTreeThread extends Thread{
 	private void generateTree() {
 		
 		int depth = 0;
-		while (depth<DEFAULT_DEPTH && numNodes<DEFAULT_NUM_NODES){
-			loadLevel(depth);
+		boolean finished = false;
+		while (!finished && canLoadNextLevel(depth)){
+			int loadedNodes = loadLevel(depth);
+			finished = (loadedNodes == 0);
 			depth++;
 		}
 		
+	}
+
+	private boolean canLoadNextLevel(int depth) {
+		return (!unlimited_levels && depth<max_depth) || unlimited_levels;
 	}
 
 	private ThreadBox getThreadBoxFromNode(Node rootNode) {
@@ -68,15 +79,21 @@ public class LoadTreeThread extends Thread{
 		return threadBox;
 	}
 
-	private void loadLevel(int level){
+	private int loadLevel(int level){
 		
 		int i = 0;
 		List<Box> nodes = tree.getNodesAtLevel(level);
-		while (i<nodes.size() && numNodes<DEFAULT_NUM_NODES){
+		while (i<nodes.size()){
 			loadNode(nodes.get(i));
 			i++;
 		}
 		
+		return nodes.size();
+		
+	}
+
+	private boolean canLoadMoreNodes() {
+		return (!unlimited_nodes && numNodes<max_num_nodes) || unlimited_nodes;
 	}
 
 	private void loadNode(Box box) {
@@ -84,7 +101,7 @@ public class LoadTreeThread extends Thread{
 		int i = 1;
 		boolean stop = false;
 		
-		while (!stop && numNodes<DEFAULT_NUM_NODES){
+		while (!stop && canLoadMoreNodes()){
 			
 			String path = xml.getPath(box,i);
 	
@@ -99,7 +116,7 @@ public class LoadTreeThread extends Thread{
 				tree.addChild(box,node);
 			
 				numNodes++;
-				notifier.updateInfo(numNodes,DEFAULT_NUM_NODES,(int)calculatePercentage());
+				notifier.updateInfo(numNodes,max_num_nodes,(int)calculatePercentage());
 				i++;
 			}
 			
@@ -110,7 +127,7 @@ public class LoadTreeThread extends Thread{
 	}
 	
 	private double calculatePercentage() {
-		double percentage = ((double)numNodes/DEFAULT_NUM_NODES)*100;
+		double percentage = ((double)numNodes/max_num_nodes)*100;
 		return percentage;
 	}
 
