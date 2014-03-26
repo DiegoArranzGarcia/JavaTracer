@@ -13,19 +13,28 @@ import com.general.settings.view.SettingsViewInterface;
 
 public class SettingsPresenter implements SettingsPresenterInterface {
 
+	/*
+	 * General
+	 */
 	private SettingsViewInterface view;
 	private JavaTracerPresenter presenter;
 
+	/*
+	 * Tracer
+	 */
 	private String[] excludes;
+	private List<String> excludesFromConfiguration;
 	private boolean excludedThis;
 	private boolean excludedDataStructure;
+	
+	/*
+	 * Display-tree
+	 */
 	private boolean unlimitedLevels;
 	private boolean unlimitedNodes;
 	private int numLevels;
 	private int numNodes;
-	
 
-	private List<String> excludesFromConfiguration;
 
 	public SettingsPresenter(){
 		addExludesFromConfiguration();
@@ -34,8 +43,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		addUnlimitedLevelsFromConfiguration();
 		addNumLevelsFromConfiguration();
 		addNumNodesFromConfiguration();
-		addUnlimitedNodesFromConfiguration();
-		
+		addUnlimitedNodesFromConfiguration();	
 	}
 
 	public void show() {
@@ -65,6 +73,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		}
 
 		view.setVisible(true); 
+		
 		view.loadExcludes(excludes);
 		view.loadExcludedThis(excludedThis);
 		view.loadExcludedDataStructure(excludedDataStructure); 

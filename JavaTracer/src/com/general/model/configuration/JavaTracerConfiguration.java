@@ -26,7 +26,22 @@ import com.thoughtworks.xstream.XStream;
 
 
 public class JavaTracerConfiguration extends XStreamUtil{
-	private final static String CONFIG_FILE_NAME = "java-tracer-properties";
+
+	public final static String CONFIG_FILE_NAME = "java-tracer-properties";
+	/*
+	 * Defaults Tracer
+	 */
+	public final static String JAVA = "java.*";
+	public final static String JAVAX = "javax.*";
+	public final static String SUN ="sun.*";
+	public final static String COM_SUN = "com.sun.*";
+	public final static String JARS = "org.eclipse.jdt.internal.jarinjarloader.*";
+	/*
+	 * Defaults Display tree
+	 */
+	public final static int DEFAULT_NUM_LEVELS = 4;
+	public final static int DEFAULT_NUM_NODES  = 30;
+
 
 	/*
 	 * General
@@ -44,15 +59,15 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private ExcludedClassesMethods excludedClassesMethods;
 	private boolean excludedThis;
 	private boolean excludedDataStructure;
-	private boolean unlimitedLevels;
-
-	private boolean unlimitedNodes;
+	
 
 	/*
 	 * Inspector
 	 */
 	private int numlevels;
 	private int numNodes;
+	private boolean unlimitedLevels;
+	private boolean unlimitedNodes;
 
 	public static JavaTracerConfiguration getInstance(){
 		/*
@@ -78,14 +93,14 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			this.excludedThis = false;
 			this.excludedDataStructure = false;
 			this.excludedClassesMethods = new ExcludedClassesMethods();
-			
+
 			this.unlimitedLevels = false;
 			this.unlimitedNodes = false;
-			this.numlevels = 4;
-			this.numNodes = 30;
-			
+			this.numlevels = DEFAULT_NUM_LEVELS;;
+			this.numNodes = DEFAULT_NUM_NODES;
 
 			generateFile();
+			
 			try {
 				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
@@ -102,16 +117,17 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				catch (Exception e){
 					e.printStackTrace();
 				}
+				
 				excludesList = getExludesFromFile();
 				excludedThis = getExcludedThisFromFile();
 				excludedDataStructure = getExcludedDataStructureFromFile();
 				excludedClassesMethods = getExcludesClassesMethodFromFile();
-				
+
 				unlimitedLevels = getUnlimitedLevelsFromFile();
 				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-				
+
 
 			}
 			catch (Exception ex) {
@@ -122,15 +138,15 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
-
 	private void initExcludes() {
 		excludesList = new ArrayList<>();
-		excludesList.add("java.*");
-		excludesList.add("javax.*");
-		excludesList.add("sun.*");
-		excludesList.add("com.sun.*");    
-		excludesList.add("org.eclipse.jdt.internal.jarinjarloader.*");
+		excludesList.add(JAVA);
+		excludesList.add( JAVAX);
+		excludesList.add(SUN);
+		excludesList.add(COM_SUN);    
+		excludesList.add(JARS);
 	}
+
 
 	/**
 	 * Write in xml file the configuration
@@ -143,17 +159,17 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			write(startTag(TAG_CONFIGURATION));	
 
 			write(startTag(TAG_EXCLUDES));	
-			writeExcludes();
+			writeExcluded();
 			write(endTag(TAG_EXCLUDES));
 
 			write(startTag(TAG_EXCLUDED_THIS));
 			writeExcludedThis();
 			write(endTag(TAG_EXCLUDED_THIS));
-			
+
 			write(startTag(TAG_METHODS_EXCLUDES));
-			writeExcludesClassesMethods();
+			writeExcludedClassesMethods();
 			write(endTag(TAG_METHODS_EXCLUDES));
-			
+
 			write(startTag(TAG_EXCLUDED_DATA_STRUCTURE));
 			writeExcludedDataStructures();
 			write(endTag(TAG_EXCLUDED_DATA_STRUCTURE));			
@@ -165,7 +181,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			write(startTag(TAG_UNLIMITED_NODES));
 			writeUnlimitedNodes();
 			write(endTag(TAG_UNLIMITED_NODES));	
-			
+
 			write(startTag(TAG_NUM_LEVELS));	
 			writeNumLevels();
 			write(endTag(TAG_NUM_LEVELS));
@@ -184,7 +200,19 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
-	private void writeExcludesClassesMethods() {
+	/*
+	 * Write in the file the configuration : Tracer
+	 */
+	private void writeExcluded() {
+		try {
+			writeXStream(excludesList);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	private void writeExcludedClassesMethods() {
 		try {
 			writeXStream(excludedClassesMethods);
 		}
@@ -192,6 +220,28 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		} 
 	}
+	
+	public void writeExcludedThis() {
+		try {
+			writeXStream(excludedThis);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void writeExcludedDataStructures() {
+		try {
+			writeXStream(excludedDataStructure);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	/*
+	 * Write in file the configuration: Display tree
+	 */
 
 	private void writeNumNodes() {
 		try {
@@ -212,34 +262,6 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
-	private void writeExcludes() {
-		try {
-			writeXStream(excludesList);
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-	}
-
-	public void writeExcludedThis() {
-		try {
-			writeXStream(excludedThis);
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	public void writeExcludedDataStructures() {
-		try {
-			writeXStream(excludedDataStructure);
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
 	public void writeUnlimitedLevels() {
 		try {
 			writeXStream(unlimitedLevels);
@@ -248,7 +270,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public void writeUnlimitedNodes() {
 		try {
 			writeXStream(unlimitedNodes);
@@ -258,6 +280,168 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}
 	}	
 
+
+	/*
+	 * Get Information from file xml : Tracer
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getExludesFromFile() {
+		String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_EXCLUDES + "/*";  
+
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			NodeList excludes  = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
+			for (int i=0;i<excludes.getLength();i++) {
+				String nodeString = nodeToString(excludes.item(i));
+				excludesList = (List<String>) xStream.fromXML(nodeString);
+			}
+		}
+		catch (Exception ex) {
+			initExcludes();
+			return excludesList;
+		}	
+
+		return excludesList;
+	}
+
+	private ExcludedClassesMethods getExcludesClassesMethodFromFile() {
+
+		ExcludedClassesMethods excludedClassMethods = null;
+		try { 
+			String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_METHODS_EXCLUDES; 
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node methodsExcludes  = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			excludedClassMethods = (ExcludedClassesMethods) xStream.fromXML(nodeToString(methodsExcludes));
+		} catch (Exception e){
+			excludedClassMethods = new ExcludedClassesMethods();
+		}
+
+		return excludedClassMethods;
+	}
+	
+	public boolean getExcludedThisFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_THIS;  
+
+		boolean  excluded_this =false;
+		String excluded_this_query ="";
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			excluded_this_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
+			String result_query = excluded_this_query.replaceAll("\n", ""); 
+			excludedThis = Boolean.parseBoolean(result_query);	       
+		}
+		catch (Exception ex) {
+			return excluded_this;
+		}	
+
+		return excludedThis;
+	}
+
+	public boolean getExcludedDataStructureFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_DATA_STRUCTURE;  
+
+		boolean  excluded_data_structure =false;
+		String unlimited_query ="";
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
+			String result_query = unlimited_query.replaceAll("\n", ""); 
+			excludedDataStructure = Boolean.parseBoolean(result_query);	       
+		}
+		catch (Exception ex) {
+			return excluded_data_structure;
+		}	
+
+		return excludedDataStructure;
+	}
+	
+	/*
+	 * Get Information from file xml : Display-tree
+	 */
+
+	public int getNumLevelsFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
+
+		String nLevels ="4";
+		int numLevels = DEFAULT_NUM_LEVELS;
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_levels = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			nLevels =  (String) xPathExpression.evaluate(node_levels,XPathConstants.STRING);
+			String s = nLevels.replaceAll("\n", "");
+			numlevels = Integer.parseInt(s); 
+		}
+		catch (Exception ex) {
+			return numLevels;
+		}	
+
+		return numlevels;
+	}
+
+
+	public boolean getUnlimitedLevelsFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_LEVELS;  
+
+		boolean  unlimited_levels =false;
+		String unlimited_query ="";
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
+			String result_query = unlimited_query.replaceAll("\n", ""); 
+			unlimitedLevels = Boolean.parseBoolean(result_query);	       
+		}
+		catch (Exception ex) {
+			return unlimited_levels;
+		}	
+
+		return unlimitedLevels;
+	}
+
+	public boolean getUnlimitedNodesFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_NODES;  
+
+		boolean  unlimited_nodes =false;
+		String unlimited_query ="";
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
+			String result_query = unlimited_query.replaceAll("\n", ""); 
+			unlimitedNodes = Boolean.parseBoolean(result_query);	       
+		}
+		catch (Exception ex) {
+			return unlimited_nodes;
+		}	
+
+		return unlimitedNodes;
+	}
+
+	public int getNumNodesFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
+		int numNodes = DEFAULT_NUM_NODES;
+
+		Node node_nodes;
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			node_nodes = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			String nNodes =  (String) xPathExpression.evaluate(node_nodes,XPathConstants.STRING);
+
+			String s = nNodes.replaceAll("\n", "");
+			numNodes = Integer.parseInt(s); 
+		}
+		catch (Exception ex) {
+			return numNodes;
+		}		
+
+		return numNodes;
+	}
+
+	/*
+	 * General
+	 */
 	private void write(String string) throws IOException {
 		writer.write(string + "\n");
 	}
@@ -267,224 +451,83 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		write(string);
 	}
 
+	public void saveConfiguration() { 
+		this.xStream = new XStream();
+		fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+		generateFile();
+
+		try {
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xPath = XPathFactory.newInstance().newXPath();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	/*
-	 * Get Information from file xml
+	 * Getters and Setters
 	 */
-	 @SuppressWarnings("unchecked")
-	 public List<String> getExludesFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_EXCLUDES + "/*";  
+	public int getNumlevels() {
+		return numlevels;
+	}
 
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 NodeList excludes  = (NodeList) xPathExpression.evaluate(xmlDocument,XPathConstants.NODESET);
-			 for (int i=0;i<excludes.getLength();i++) {
-				 String nodeString = nodeToString(excludes.item(i));
-				 excludesList = (List<String>) xStream.fromXML(nodeString);
-			 }
-		 }
-		 catch (Exception ex) {
-			 initExcludes();
-			 return excludesList;
-		 }	
+	public void setNumlevels(int numlevels) {
+		this.numlevels = numlevels;
+	}
 
-		 return excludesList;
-	 }
+	public void setNumNodes(int numNodes) {
+		this.numNodes = numNodes;
+	}
 
-	 public boolean getExcludedThisFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_THIS;  
+	public void setExcludes(List<String>newEcludes) {
+		this.excludesList = newEcludes;
 
-		 boolean  excluded_this =false;
-		 String excluded_this_query ="";
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 excluded_this_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
-			 String result_query = excluded_this_query.replaceAll("\n", ""); 
-			 excludedThis = Boolean.parseBoolean(result_query);	       
-		 }
-		 catch (Exception ex) {
-			 return excluded_this;
-		 }	
+	}
 
-		 return excludedThis;
-	 }
-	
+	public ExcludedClassesMethods getExcludeClassMethods() {
+		return this.excludedClassesMethods;
+	}
 
-	 public int getNumLevelsFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_LEVELS;  
+	public boolean isExcludedThis() {
+		return excludedThis;
+	}
 
-		 String nLevels ="4";
-		 int numLevels = 4;
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node node_levels = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 nLevels =  (String) xPathExpression.evaluate(node_levels,XPathConstants.STRING);
-			 String s = nLevels.replaceAll("\n", "");
-			 numlevels = Integer.parseInt(s); 
-		 }
-		 catch (Exception ex) {
-			 return numLevels;
-		 }	
+	public void setExcludedThis(boolean excludedThis) {
+		this.excludedThis = excludedThis;
+	}
 
-		 return numlevels;
-	 }
-	 
-	 public boolean getExcludedDataStructureFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_DATA_STRUCTURE;  
+	public boolean isUnlimitedLevels() {
+		return unlimitedLevels;
+	}
 
-		 boolean  excluded_data_structure =false;
-		 String unlimited_query ="";
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
-			 String result_query = unlimited_query.replaceAll("\n", ""); 
-			 excludedDataStructure = Boolean.parseBoolean(result_query);	       
-		 }
-		 catch (Exception ex) {
-			 return excluded_data_structure;
-		 }	
+	public void setUnlimitedLevels(boolean unlimitedLevels) {
+		this.unlimitedLevels = unlimitedLevels;
+	}
 
-		 return excludedDataStructure;
-	 }
-	 
-	 public boolean getUnlimitedLevelsFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_LEVELS;  
+	public boolean isUnlimitedNodes() {
+		return unlimitedNodes;
+	}
 
-		 boolean  unlimited_levels =false;
-		 String unlimited_query ="";
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
-			 String result_query = unlimited_query.replaceAll("\n", ""); 
-			 unlimitedLevels = Boolean.parseBoolean(result_query);	       
-		 }
-		 catch (Exception ex) {
-			 return unlimited_levels;
-		 }	
+	public void setUnlimitedNodes(boolean unlimitedNodes) {
+		this.unlimitedNodes = unlimitedNodes;
+	}
 
-		 return unlimitedLevels;
-	 }
-	 
-	 public boolean getUnlimitedNodesFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_UNLIMITED_NODES;  
+	public boolean isExcludedDataStructure() {
+		return excludedDataStructure;
+	}
 
-		 boolean  unlimited_nodes =false;
-		 String unlimited_query ="";
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node node_excluded_this = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 unlimited_query =  (String) xPathExpression.evaluate(node_excluded_this,XPathConstants.STRING);
-			 String result_query = unlimited_query.replaceAll("\n", ""); 
-			 unlimitedNodes = Boolean.parseBoolean(result_query);	       
-		 }
-		 catch (Exception ex) {
-			 return unlimited_nodes;
-		 }	
+	public void setExcludedDataStructure(boolean excludedDataStructure) {
+		this.excludedDataStructure = excludedDataStructure;
+	}
 
-		 return unlimitedNodes;
-	 }
-	 
-	 public int getNumNodesFromFile() {
-		 String expression = "/" +TAG_CONFIGURATION+"/" + TAG_NUM_NODES;  
-		 int numNodes = 30;
-
-		 Node node_nodes;
-		 try {
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 node_nodes = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 String nNodes =  (String) xPathExpression.evaluate(node_nodes,XPathConstants.STRING);
-
-			 String s = nNodes.replaceAll("\n", "");
-			 numNodes = Integer.parseInt(s); 
-		 }
-		 catch (Exception ex) {
-			 return numNodes;
-		 }		
-
-		 return numNodes;
-	 }
-
-	 private ExcludedClassesMethods getExcludesClassesMethodFromFile() {
-
-		 ExcludedClassesMethods excludedClassMethods = null;
-		 try { 
-			 String expression = "/" +TAG_CONFIGURATION +"/"+ TAG_METHODS_EXCLUDES; 
-			 XPathExpression xPathExpression = xPath.compile(expression);
-			 Node methodsExcludes  = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			 excludedClassMethods = (ExcludedClassesMethods) xStream.fromXML(nodeToString(methodsExcludes));
-		 } catch (Exception e){
-			 excludedClassMethods = new ExcludedClassesMethods();
-		 }
-
-		 return excludedClassMethods;
-	 }
-
-	 public void saveConfiguration() { 
-		 this.xStream = new XStream();
-		 fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
-		 generateFile();
-
-		 try {
-			 xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
-			 xPath = XPathFactory.newInstance().newXPath();
-		 }catch (Exception e){
-			 e.printStackTrace();
-		 }
-	 }
-
-	 public int getNumlevels() {
-		 return numlevels;
-	 }
-
-	 public void setNumlevels(int numlevels) {
-		 this.numlevels = numlevels;
-	 }
-
-	 public void setNumNodes(int numNodes) {
-		 this.numNodes = numNodes;
-	 }
-
-	 public void setExcludes(List<String>newEcludes) {
-		 this.excludesList = newEcludes;
-
-	 }
-
-	 public ExcludedClassesMethods getExcludeClassMethods() {
-		 return this.excludedClassesMethods;
-	 }
-
-	 public boolean isExcludedThis() {
-		 return excludedThis;
-	 }
-
-	 public void setExcludedThis(boolean excludedThis) {
-		 this.excludedThis = excludedThis;
-	 }
-	 
-	 public boolean isUnlimitedLevels() {
-			return unlimitedLevels;
-		}
-
-		public void setUnlimitedLevels(boolean unlimitedLevels) {
-			this.unlimitedLevels = unlimitedLevels;
-		}
-
-		public boolean isUnlimitedNodes() {
-			return unlimitedNodes;
-		}
-
-		public void setUnlimitedNodes(boolean unlimitedNodes) {
-			this.unlimitedNodes = unlimitedNodes;
-		}
-
-		public boolean isExcludedDataStructure() {
-	        return excludedDataStructure;
-        }
-
-		public void setExcludedDataStructure(boolean excludedDataStructure) {
-	        this.excludedDataStructure = excludedDataStructure;
-        }
+	public List<String> getDefaultExcluded(){
+		List<String>excludesList = new ArrayList<>();
+		excludesList.add(JAVA);
+		excludesList.add( JAVAX);
+		excludesList.add(SUN);
+		excludesList.add(COM_SUN);    
+		excludesList.add(JARS);
+		return excludesList;
+	}
 
 }
