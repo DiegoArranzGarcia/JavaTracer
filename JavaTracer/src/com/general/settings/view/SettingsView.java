@@ -460,6 +460,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	}
 
 	private void refreshButtons(int index) {
+	
 		if (index != -1){
 			if (index == 0)
 				upButton.setEnabled(false);
@@ -583,10 +584,20 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	 public void keyPressed(KeyEvent e) {
 		 if (e.getSource().equals(excludesList)) {
 			 int index = -1;
+			
 			 if (e.getKeyCode() == KeyEvent.VK_UP) {
-				 index = excludesList.getSelectedIndex()-1;
+				 int selected =  excludesList.getSelectedIndex();
+				 if (selected == 0)
+					 index = 0;
+				 else
+					 index =selected-1;
+				
 			 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-				 index = excludesList.getSelectedIndex()+1;
+				 int selected = excludesList.getSelectedIndex()+1;
+				 int maxList = excludesList.getModel().getSize()-1;
+				 if (selected >= maxList) {
+					 index = excludesList.getModel().getSize()-1;
+				 } else index = selected;
 			 }
 			 refreshButtons(index);  
 
