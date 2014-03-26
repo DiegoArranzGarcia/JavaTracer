@@ -2,6 +2,7 @@ package com.general.presenter;
 
 import java.io.File;
 
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import com.alee.laf.WebLookAndFeel;
@@ -152,6 +153,10 @@ public class JavaTracerPresenter {
 
 	public void setVisible(boolean b) {
 		tracerController.setVisible(false);
+	}
+
+	public JFrame getView() {
+		return tracerController.getView();
 	}
 
 }

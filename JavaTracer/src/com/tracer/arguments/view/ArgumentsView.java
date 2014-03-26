@@ -2,32 +2,38 @@ package com.tracer.arguments.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.general.resources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
-import javax.swing.border.TitledBorder;
+import com.tracer.view.TracerView;
 
 @SuppressWarnings("serial")
-public class ArgumentsView extends JFrame implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface,KeyListener{
+public class ArgumentsView extends JDialog implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface,KeyListener{
 
-	private static String WINDOWS_TITLE = "Add main arguments";
+	private static String WINDOWS_TITLE = "Main arguments";
 	
 	private static String ADD = "Add";
 	private static String DELETE = "Delete";
@@ -51,11 +57,12 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 	/**
 	 * Create the frame.
 	 */
-	public ArgumentsView() {
-		setMaximumSize(new Dimension(2147483590, 2147483647));
+	public ArgumentsView(JFrame view) {
+		super(view,true);
 		setTitle(WINDOWS_TITLE);
 		setMinimumSize(new Dimension(500, 330));
 		setSize(new Dimension(607, 345));
+		setResizable(false);
 		setLocationRelativeTo(null);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -69,8 +76,6 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		model = new DefaultListModel<String>();
-		
-		
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -86,13 +91,13 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		argument.getDocument().addDocumentListener(this);
 		
 		cancelButton = new JButton(CANCEL);
-		cancelButton.setBounds(292, 260, 100, 35);
+		cancelButton.setBounds(326, 260, 100, 35);
 		contentPane.add(cancelButton);
 		cancelButton.addActionListener(this);
 		
 		saveButton = new JButton(SAVE);
 		saveButton.setBackground(Color.WHITE);
-		saveButton.setBounds(147, 260, 100, 35);
+		saveButton.setBounds(129, 260, 100, 35);
 		contentPane.add(saveButton);
 		saveButton.addActionListener(this);
 		
@@ -103,17 +108,10 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		contentPane.add(downButton);
 		downButton.addActionListener(this);
 		
-		upButton = new JButton("");
-		upButton.setBounds(362, 114, 27, 27);
-		upButton.setIcon(imageLoader.getArrowUpIcon());
-		upButton.setEnabled(false);
-		upButton.addActionListener(this);
-		contentPane.add(upButton);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Arguments", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 27, 571, 222);
+		panel.setBounds(10, 13, 571, 236);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -130,14 +128,20 @@ public class ArgumentsView extends JFrame implements ActionListener,MouseListene
 		panel.add(deleteAllButton);
 		
 		_scrollPane = new JScrollPane();
-		_scrollPane.setBounds(23, 90, 320, 113);
+		_scrollPane.setBounds(22, 78, 321, 125);
 		panel.add(_scrollPane);
 		
 		argumentsList = new JList<String>();
 		_scrollPane.setViewportView(argumentsList);
 		argumentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		argumentsList.setBorder(new LineBorder(new Color(0, 0, 0)));
 		argumentsList.setModel(model);
+		
+		upButton = new JButton("");
+		upButton.setBounds(350, 78, 27, 27);
+		panel.add(upButton);
+		upButton.setIcon(imageLoader.getArrowUpIcon());
+		upButton.setEnabled(false);
+		upButton.addActionListener(this);
 		argumentsList.addMouseListener(this);
 		argumentsList.addKeyListener(this);
 		deleteAllButton.addActionListener(this);

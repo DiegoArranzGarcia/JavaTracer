@@ -42,7 +42,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
 	
-	private static final int WINDOW_WIDTH = 950;
+	private static final int WINDOW_WIDTH = 800;
 	private static final int WINDOW_HEIGHT = 500;
 	
 	private static String LABEL_PATH = "Select a directory";
@@ -51,7 +51,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	
 	private TracerController presenter;
 	
-	private WebButton trace,exit,addArgument,profile;
+	private WebButton trace,btnArguments,profile;
 	private WebComboBox nameClass;
 	private WebFileChooserField chooser;
 	private WebLabel labelPath,labelNameClass;
@@ -93,9 +93,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		helpPath.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpPath.setToolTipText(HELP_PATH_TOOLTIP);
 		
-		addArgument = new WebButton(ADD_ARGUMENTS);
-		addArgument.setBounds(761, 107, 141, 28);
-		addArgument.addActionListener(this);
+		btnArguments = new WebButton(ADD_ARGUMENTS);
+		btnArguments.setText("Arguments");
+		btnArguments.setBounds(556, 151, 141, 28);
+		btnArguments.addActionListener(this);
 				
 		nameClass = new WebComboBox();
 		nameClass.setBounds(245, 105, 450, 30);
@@ -108,14 +109,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		helpNameClass.setBounds(707, 111, 24, 24);
 		helpNameClass.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
 		helpNameClass.setToolTipText(LABEL_NAME_CLASS);
-			 
-		exit =new WebButton(EXIT);
-		exit.setBounds(564, 150, 130, 30);
-		exit.setBackground(Color.white); 
-		exit.addActionListener(this);
 		
 		trace = new WebButton(TRACE);
-		trace.setBounds(423, 150, 100, 30);
+		trace.setBounds(400, 150, 120, 30);
 		trace.setLayout(new GridLayout(1,1));
 		trace.setBackground(Color.white);  
 		trace.setEnabled(false); 
@@ -146,11 +142,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		getContentPane().add(labelPath);
 		getContentPane().add(chooser);
 		getContentPane().add(trace);
-		getContentPane().add(exit);
 		getContentPane().add(nameClass);
 		getContentPane().add(helpPath);
 		getContentPane().add(helpNameClass);
-		getContentPane().add(addArgument);
+		getContentPane().add(btnArguments);
 		getContentPane().add(profile);
 		getContentPane().add(console);
 		
@@ -289,10 +284,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
-		if (source.equals(addArgument)){
+		if (source.equals(btnArguments)){
 			clickedEditOnArguments();
-		} else if (source.equals(exit)){
-			clickedOnExit();
 		} else if (source.equals(trace)){
 			clickedOnTrace();			
 		} else if (source.equals(profile)){

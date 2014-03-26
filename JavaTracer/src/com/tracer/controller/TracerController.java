@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import com.general.model.ClassFinder;
 import com.general.model.FileUtilities;
 import com.general.model.JarFinder;
@@ -196,5 +198,9 @@ public class TracerController {
 
 	public String getXmlName() {
 		return lastConfig.getNameXml();
+	}
+
+	public JFrame getView() {
+		return tracerView;
 	}
 }

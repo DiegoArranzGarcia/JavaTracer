@@ -17,7 +17,7 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 	
 	public void show() {
 		if (view == null){
-			view = new ArgumentsView();
+			view = new ArgumentsView(presenter.getView());
 			view.setPresenter(this);
 		}
 		
