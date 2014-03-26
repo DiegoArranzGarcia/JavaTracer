@@ -3,6 +3,7 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.variables.data.Data;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodEntryEvent;
@@ -51,7 +52,12 @@ public class MethodEntryManager{
        	String methodName = method.name();
        	ReferenceType ref=method.declaringType(); //"class" where is declare 
        	List<Data> arguments = processArguments(method,thread);
-       	Data argument_this = processThis(event,ref,thread);
+       	
+       	Data argument_this = null;
+       	
+       	if (!JavaTracerConfiguration.getInstance().isExcludedThis())
+       		argument_this = processThis(event,ref,thread);
+       	
        	MethodEntryInfo info = new MethodEntryInfo(methodName,className,arguments,argument_this);
 
        	synchronized (writer) {

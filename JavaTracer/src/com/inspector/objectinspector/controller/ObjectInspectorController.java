@@ -49,7 +49,8 @@ public class ObjectInspectorController {
 		Data returnValue = method.getReturn_data();		
 		
 		variables.add(thisValue);
-		thisValue.accept(visitor);
+		if (thisValue != null)
+			thisValue.accept(visitor);
 		
 		if (returnValue != null){
 			returnValue.accept(visitor);

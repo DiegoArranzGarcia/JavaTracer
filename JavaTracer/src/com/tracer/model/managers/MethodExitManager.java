@@ -3,6 +3,7 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.variables.data.Data;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
@@ -38,7 +39,13 @@ public class MethodExitManager{
         	returnObject = utils.getObj("return",returnValue,new ArrayList<Long>());         
 
         ReferenceType ref = method.declaringType(); // "class" where is declaring the method
-        Data object_this = processThis(event,ref, thread);
+        
+        Data object_this = null;
+        
+        if (!JavaTracerConfiguration.getInstance().isExcludedThis())
+        	object_this = processThis(event,ref, thread);
+        
+        
         MethodExitInfo info = new MethodExitInfo(methodName,className,returnObject,arguments,object_this);
 
         synchronized (writer) { 
@@ -82,9 +89,6 @@ public class MethodExitManager{
     	return arguments;
 
 	}
-    /**
-     * Returns the ThreadTrace instance for the specified thread,
-	 * creating one if needed.
-	 */
+
   
 }

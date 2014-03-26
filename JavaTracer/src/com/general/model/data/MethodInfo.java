@@ -40,7 +40,8 @@ public class MethodInfo {
 			changes.addAll(detector.getChangesBetween(entryArguments.get(i),exitArguments.get(i)));
 		}
 		
-		changes.addAll(detector.getChangesBetween(entry.getThis_data(), exit.getThis_data()));
+		if ((entry.getThis_data() != null) && (exit.getThis_data() != null))
+			changes.addAll(detector.getChangesBetween(entry.getThis_data(), exit.getThis_data()));
 		
 		return changes;
 	}
