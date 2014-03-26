@@ -80,7 +80,8 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private JLabel levelsLabel, nodesLabel;
 	private JPanel _panel;
 	private JPanel _panel_1;
-	private JCheckBox excludedThis;
+	private JCheckBox excludedThis,excludeJavaDataStructures;
+
 	private JPanel _panel_2;
 	private JCheckBox unlimitedLevels,unlimitedNodes;
 	
@@ -176,7 +177,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 			excludedThis = new JCheckBox("Exclude this");
 			excludedThis.setBackground(Color.WHITE);
 			excludedThis.setToolTipText("It is recommended checking this box, in the case of very large traces");
-			excludedThis.setBounds(17, 241, 137, 23);
+			excludedThis.setBounds(17, 224, 137, 23);
 			_panel_1.add(excludedThis);
 			
 			excludes = new JTextField();
@@ -197,7 +198,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 			_panel_1.add(deleteAllButton);
 			
 			downButton = new JButton("");
-			downButton.setBounds(359, 207, 43, 25);
+			downButton.setBounds(359, 190, 43, 25);
 			_panel_1.add(downButton);
 			downButton.setIcon(imageLoader.getArrowDownIcon());
 			downButton.setEnabled(false);
@@ -209,12 +210,18 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 			upButton.setEnabled(false);
 			
 			excludesList = new JList<String>();
-			excludesList.setBounds(17, 69, 330, 163);
+			excludesList.setBounds(17, 69, 330, 146);
 			_panel_1.add(excludesList);
 			excludesList.setToolTipText("");
 			excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 			excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			excludesList.setModel(model);
+			
+			excludeJavaDataStructures = new JCheckBox("Exclude java data structures");
+			excludeJavaDataStructures.setToolTipText("It is recommended checking this box, in the case of very large traces");
+			excludeJavaDataStructures.setBackground(Color.WHITE);
+			excludeJavaDataStructures.setBounds(17, 250, 208, 23);
+			_panel_1.add(excludeJavaDataStructures);
 			excludesList.addMouseListener(this);
 			excludesList.addKeyListener(this); 
 			upButton.addActionListener(this);
@@ -267,6 +274,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 			
 		    
 	    }
+    
 	 /*
 	  * Tracer/Inspector
 	  */
@@ -436,6 +444,10 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
     	this.excludedThis.setSelected(excludedThis);
     }
     
+    public void loadExcludedDataStructure(boolean excludedThis) {
+    	this.excludeJavaDataStructures.setSelected(excludedThis);
+    }
+    
     public void loadUnlimitedLevels(boolean unlimited) {
     	this.unlimitedLevels.setSelected(unlimited);
     }
@@ -501,6 +513,10 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
     
     public boolean getUnlimitedNodes() {
     	return unlimitedNodes.isSelected();
+    }
+    
+    public boolean getExcludedDataStructure() {
+    	return excludeJavaDataStructures.isSelected();
     }
 
     public void loadNumLevels(int numLevels) {
