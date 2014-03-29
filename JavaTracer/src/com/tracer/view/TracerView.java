@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,6 +25,7 @@ import com.alee.laf.menu.WebMenuItem;
 import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
+import com.tracer.console.view.ConsoleView;
 import com.tracer.controller.TracerController;
 
 @SuppressWarnings("serial")
@@ -42,8 +42,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final String FILE = "File";
 	private static final String TRACE = "Trace";
 
-	private static final int WINDOW_WIDTH = 800;
-	private static final int WINDOW_HEIGHT = 500;
+	private static final int DEFAULT_WINDOW_WIDTH = 800;
+	private static final int DEFAULT_WINDOW_HEIGHT = 500;
 
 	private static String LABEL_PATH = "Select a directory";
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
@@ -65,13 +65,16 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmSettings;
 	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
+	
+	private ConsoleView console;
 
-	public TracerView(JComponent console) {
+	public TracerView(ConsoleView console) {
 
+		this.console = console;
 		ImageLoader imageLoader = ImageLoader.getInstance();
 
 		setTitle("Java Tracer");
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT); 
+		setSize(DEFAULT_WINDOW_WIDTH,DEFAULT_WINDOW_HEIGHT); 
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,7 +139,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		labelNameClass.setBounds(72, 105, 168, 30);
 		labelNameClass.setBackground(Color.white); 
 
-		console.setBounds(10,200,WINDOW_WIDTH-30,WINDOW_HEIGHT-250);
+		console.setBounds(10,200,DEFAULT_WINDOW_WIDTH-30,DEFAULT_WINDOW_HEIGHT-250);
 
 		getContentPane().add(labelNameClass);
 		getContentPane().add(labelPath);
@@ -403,5 +406,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		} 		
 
 		return found;	 		
+	}
+
+	public void consoleMinimize() {
+		setSize(DEFAULT_WINDOW_WIDTH,console.defaultHeight() - console.getHeight());
 	}
 }

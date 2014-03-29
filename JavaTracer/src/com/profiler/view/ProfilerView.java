@@ -33,7 +33,8 @@ import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
 
 @SuppressWarnings("serial")
-public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface, ActionListener,MouseListener, TableModelListener{
+public class ProfilerView extends JFrame implements ChartProgressListener,ComponentListener,ProfilerViewInterface,
+	ActionListener,MouseListener,TableModelListener {
 
 	private static final String SETTINGS = "Settings";
 	private static final String HELP = "Help";
@@ -715,7 +716,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 		if (e.getClickCount() == 2){ 
 			int row = table.getSelectedRow();
-			String completeName=(String)table.getValueAt(row, 2);
+			String completeName=(String)table.getValueAt(row,3);
 			presenter.doubleClick(completeName);
 		}
 	
@@ -737,7 +738,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void updateProfileRowData(int row) {
 		TableTreeNode node = table.getTreeModel().getNodeFromRow(row+1);
-		((ProfilerRowData)node.getUserObject()).setExcluded((boolean) table.getModel().getValueAt(row, 4));
+		((ProfilerRowData)node.getUserObject()).setExcluded((boolean) table.getModel().getValueAt(row, 5));
 	}
 
 }

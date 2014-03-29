@@ -120,7 +120,7 @@ public class TracerController {
 
 	public void editArguments() {
 		//tracerView.setVisible(false); 
-		presenter.clickedOnEditArguments();
+		argumentsPresenter.show();
 	}
 
 	public void redirectStreams(Process process){
@@ -147,6 +147,8 @@ public class TracerController {
 	
 	private void setControllers() {
 		tracer.setController(this);
+		argumentsPresenter.setController(this);
+		consolePresenter.setController(this);
 	}
 
 	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
@@ -202,5 +204,9 @@ public class TracerController {
 
 	public JFrame getView() {
 		return tracerView;
+	}
+
+	public void minimize() {
+		tracerView.consoleMinimize();
 	}
 }

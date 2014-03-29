@@ -13,17 +13,18 @@ import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.alee.laf.button.WebToggleButton;
+import com.alee.laf.panel.WebPanel;
+import com.alee.laf.scroll.WebScrollPane;
 import com.general.resources.ImageLoader;
 import com.tracer.console.presenter.ConsolePresenter;
 
 @SuppressWarnings("serial")
-public class ConsoleView extends JPanel implements ActionListener{
+public class ConsoleView extends WebPanel implements ActionListener{
 	
 	private static final String CONSOLE_TEXT = "Console";
 	private static final String CLEAR_CONSOLE = "Clear console";
@@ -33,38 +34,35 @@ public class ConsoleView extends JPanel implements ActionListener{
 	private ImageLoader imageLoader;
 	private Status status;
 	private double lastSize;
+	private int height;
 	
 	private WebToggleButton btnClearConsole;
 	private WebToggleButton btnMinimizeConsole;
 		
 	private ConsoleTextPane console;
 	private JLabel lblConsoleStatus;
-	private JPanel panel_1;
-	private WebToggleButton playButton;
-	private WebToggleButton stopButton;
-	private WebToggleButton maximizeButton;
+	private JPanel header;
+	private WebToggleButton btnPlay;
+	private WebToggleButton btnStop;
+	private WebToggleButton btnMaximizeConsole;
+	private WebScrollPane scrollPane;
 	
 	public ConsoleView(){
 		
 		lastSize = 0;
 		status = Status.LAUNCHING;
+		setDrawFocus(false);
 		
-		setRequestFocusEnabled(false);
 		imageLoader = ImageLoader.getInstance();
 		setLayout(new BorderLayout(0, 0));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane);
-
+				
 		console = new ConsoleTextPane(this);
 		console.setEditable(false);
-		scrollPane.setViewportView(console);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("MenuBar.border"));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(new Rectangle(1, 1, 1, 1));
-		scrollPane.setColumnHeaderView(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		lblConsoleStatus = new JLabel(CONSOLE_TEXT);
@@ -74,33 +72,33 @@ public class ConsoleView extends JPanel implements ActionListener{
 		lblConsoleStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblConsoleStatus, BorderLayout.WEST);
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		header = new JPanel();
+		header.setBackground(Color.WHITE);
+		FlowLayout flowLayout = (FlowLayout) header.getLayout();
 		flowLayout.setVgap(0);
 		flowLayout.setHgap(0);
-		panel.add(panel_1, BorderLayout.EAST);
+		panel.add(header, BorderLayout.EAST);
 		
-		stopButton = new WebToggleButton();
-		stopButton.setVisible(false);
-		stopButton.setToolTipText("Clear console");
-		stopButton.setRolloverDecoratedOnly(true);
-		stopButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		stopButton.setDrawFocus(false);
-		stopButton.setIcon(new ImageIcon(imageLoader.getStopIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
-		panel_1.add(stopButton);
+		btnStop = new WebToggleButton();
+		btnStop.setVisible(false);
+		btnStop.setToolTipText("Clear console");
+		btnStop.setRolloverDecoratedOnly(true);
+		btnStop.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnStop.setDrawFocus(false);
+		btnStop.setIcon(new ImageIcon(imageLoader.getStopIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		header.add(btnStop);
 		
-		playButton = new WebToggleButton();
-		playButton.setEnabled(false);
-		playButton.setToolTipText("Clear console");
-		playButton.setRolloverDecoratedOnly(true);
-		playButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		playButton.setIcon(new ImageIcon(imageLoader.getPlayIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
-		playButton.setDrawFocus(false);
-		panel_1.add(playButton);
+		btnPlay = new WebToggleButton();
+		btnPlay.setEnabled(false);
+		btnPlay.setToolTipText("Clear console");
+		btnPlay.setRolloverDecoratedOnly(true);
+		btnPlay.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnPlay.setIcon(new ImageIcon(imageLoader.getPlayIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		btnPlay.setDrawFocus(false);
+		header.add(btnPlay);
 		
 		btnMinimizeConsole = new WebToggleButton();
-		panel_1.add(btnMinimizeConsole);
+		header.add(btnMinimizeConsole);
 		btnMinimizeConsole.setRolloverDecoratedOnly(true);
 		btnMinimizeConsole.setToolTipText("Clear console");
 		btnMinimizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -108,23 +106,28 @@ public class ConsoleView extends JPanel implements ActionListener{
 		btnMinimizeConsole.setDrawFocus(false);
 		btnMinimizeConsole.addActionListener(this);
 		
-		maximizeButton = new WebToggleButton();
-		maximizeButton.setVisible(false);
-		maximizeButton.setToolTipText("Clear console");
-		maximizeButton.setRolloverDecoratedOnly(true);
-		maximizeButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		maximizeButton.setIcon(new ImageIcon(imageLoader.getMaximizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
-		maximizeButton.setDrawFocus(false);
-		panel_1.add(maximizeButton);
+		btnMaximizeConsole = new WebToggleButton();
+		btnMaximizeConsole.setVisible(false);
+		btnMaximizeConsole.setToolTipText("Clear console");
+		btnMaximizeConsole.setRolloverDecoratedOnly(true);
+		btnMaximizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnMaximizeConsole.setIcon(new ImageIcon(imageLoader.getMaximizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		btnMaximizeConsole.setDrawFocus(false);
+		header.add(btnMaximizeConsole);
 		
 		btnClearConsole = new WebToggleButton();
-		panel_1.add(btnClearConsole);
+		header.add(btnClearConsole);
 		btnClearConsole.setRolloverDecoratedOnly(true);
 		btnClearConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnClearConsole.setToolTipText(CLEAR_CONSOLE);
 		btnClearConsole.setIcon(new ImageIcon(imageLoader.getDeleteIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnClearConsole.setDrawFocus(false);
 		btnClearConsole.addActionListener(this);
+		
+		scrollPane = new WebScrollPane(console);
+		scrollPane.setColumnHeaderView(panel);
+		scrollPane.setDrawFocus(false);
+		add(scrollPane);
 	}
 	
 	public void setPresenter(ConsolePresenter presenter){
@@ -135,14 +138,36 @@ public class ConsoleView extends JPanel implements ActionListener{
 		Object source = event.getSource();
 		if (source.equals(btnClearConsole)){
 			clear();
-		} else {
+		} else if (source.equals(btnMinimizeConsole)){
 			minimize();
+		} else if (source.equals(btnMaximizeConsole)){
+			maximize();
+		} else if (source.equals(btnPlay)){
+			play();
+		} else if (source.equals(btnStop)){
+			stop();
 		}
 		
 	}
 
+	private void stop() {
+	}
+
+	private void play() {
+	}
+
+	private void maximize() {
+		scrollPane.setSize(scrollPane.getWidth(),header.getHeight()+4);
+		btnMaximizeConsole.setVisible(true);
+		btnMinimizeConsole.setVisible(true);
+		presenter.minimize();
+	}
+
 	private void minimize() {
-		
+		height = header.getHeight()+4;
+		scrollPane.setSize(scrollPane.getWidth(),height);
+		btnMaximizeConsole.setVisible(true);
+		btnMinimizeConsole.setVisible(true);
 	}
 
 	public void clear() {
@@ -235,4 +260,10 @@ public class ConsoleView extends JPanel implements ActionListener{
 		
 		return text;
 	}
+
+	public int defaultHeight() {
+		
+		return 0;
+	}
+	
 }

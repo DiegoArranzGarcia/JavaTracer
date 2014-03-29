@@ -1,11 +1,12 @@
 package com.tracer.console.presenter;
 
-import javax.swing.JComponent;
-
 import com.tracer.console.model.Console;
 import com.tracer.console.view.ConsoleView;
+import com.tracer.controller.TracerController;
 
 public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
+	
+	private TracerController presenter;
 	
 	private Console console;
 	private ConsoleView view;
@@ -41,7 +42,7 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 		console.input(string);
 	}
 
-	public JComponent getConsole() {
+	public ConsoleView getConsole() {
 		return view;
 	}
 
@@ -75,6 +76,14 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 
 	public void updateSize(double size) {
 		view.updateSize(lastFileName,size);
+	}
+
+	public void minimize() {
+		presenter.minimize();
+	}
+
+	public void setController(TracerController tracerController) {
+		this.presenter = tracerController;
 	}
 
 }
