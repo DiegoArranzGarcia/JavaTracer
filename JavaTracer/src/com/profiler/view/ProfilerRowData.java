@@ -25,7 +25,7 @@ public class ProfilerRowData implements TableRowData{
 	}
 
 	public Object[] getValues() {	
-		return new Object[]{"",name,completeName,count,excluded};
+		return new Object[]{"","",name,completeName,count,excluded};
 	}
 	
 	public String getName() {

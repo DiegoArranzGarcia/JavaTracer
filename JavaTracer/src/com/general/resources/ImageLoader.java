@@ -6,10 +6,10 @@ public class ImageLoader {
 	
 	private static ImageLoader instance;
 	
-	private static String INFO_IMAGE = "info.png";
-	private static String APPLICATION_IMAGE = "app.jpe";
-	private static String EXPANDED_ICON = "expanded.gif";
-	private static String FOLDED_ICON = "folded.gif";
+	private static String INFO = "info.png";
+	private static String APPLICATION = "app.jpe";
+	private static String EXPANDED = "expanded.gif";
+	private static String FOLDED = "folded.gif";
 	private static String PLUS_ICON = "plus.png";
 	private static String MINUS_ICON = "minus.png";
 	private static String ARROW_UP = "arrow-up.png";
@@ -20,6 +20,9 @@ public class ImageLoader {
 	private static String RESTORE = "restore.png";
 	private static String PLAY = "play.png";
 	private static String STOP = "stop.png";
+	private static String CLASS = "class.gif";
+	private static String PACKAGE = "package.png";
+	private static String METHOD = "method.gif";
 	
 	private ImageIcon applicationIcon;
 	private ImageIcon helpIcon;
@@ -35,21 +38,16 @@ public class ImageLoader {
 	private ImageIcon restoreIcon;
 	private ImageIcon stopIcon;
 	private ImageIcon playIcon;
-
-	public void setPlusIcon(ImageIcon plusIcon) {
-		this.plusIcon = plusIcon;
-	}
-
-	public void setMinusIcon(ImageIcon minusIcon) {
-		this.minusIcon = minusIcon;
-	}
+	private ImageIcon classIcon;
+	private ImageIcon packageIcon;
+	private ImageIcon methodIcon;
 
 	private ImageLoader(){
 		instance = this;
-		applicationIcon = new ImageIcon(getClass().getResource(APPLICATION_IMAGE));
-		helpIcon = new ImageIcon(getClass().getResource(INFO_IMAGE));
-		expandedIcon = new ImageIcon(getClass().getResource(EXPANDED_ICON));
-		foldedIcon = new ImageIcon(getClass().getResource(FOLDED_ICON));
+		applicationIcon = new ImageIcon(getClass().getResource(APPLICATION));
+		helpIcon = new ImageIcon(getClass().getResource(INFO));
+		expandedIcon = new ImageIcon(getClass().getResource(EXPANDED));
+		foldedIcon = new ImageIcon(getClass().getResource(FOLDED));
 		plusIcon = new ImageIcon(getClass().getResource(PLUS_ICON));
 		minusIcon = new ImageIcon(getClass().getResource(MINUS_ICON));
 		arrowUpIcon = new ImageIcon(getClass().getResource(ARROW_UP));
@@ -60,6 +58,9 @@ public class ImageLoader {
 		maximizeIcon = new ImageIcon(getClass().getResource(MAXIMIZE));
 		playIcon = new ImageIcon(getClass().getResource(PLAY));
 		stopIcon = new ImageIcon(getClass().getResource(STOP));
+		packageIcon = new ImageIcon(getClass().getResource(PACKAGE));
+		classIcon = new ImageIcon(getClass().getResource(CLASS));
+		methodIcon = new ImageIcon(getClass().getResource(METHOD));
 	}
 	
 	public static ImageLoader getInstance(){
@@ -123,4 +124,23 @@ public class ImageLoader {
 		return playIcon;
 	}
 
+	public ImageIcon getClassIcon() {
+		return classIcon;
+	}
+
+	public ImageIcon getPackageIcon() {
+		return packageIcon;
+	}
+
+	public ImageIcon getMethodIcon() {
+		return methodIcon;
+	}
+	
+	public void setPlusIcon(ImageIcon plusIcon) {
+		this.plusIcon = plusIcon;
+	}
+
+	public void setMinusIcon(ImageIcon minusIcon) {
+		this.minusIcon = minusIcon;
+	}
 }

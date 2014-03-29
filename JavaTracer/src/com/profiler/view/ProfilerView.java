@@ -67,7 +67,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static double SPLIT_PERCENTAGE = 0.52;
 	private static double PERCENTAGE_WIDTH = 0.75;
 	private static double PERCENTAGE_HEIGHT = 0.75;
-	private static final int NUM_CLASSES=10;
+	private static final int NUM_CLASSES = 10;
 	
 	private ProfilerPresenterInterface presenter;
 	private ProfileCellRenderer renderer;
@@ -138,30 +138,16 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         panelRight.add(scrollPane, BorderLayout.CENTER);
         
         table = new JTreeTable();
-        table.setModel(new DefaultTableModel(
-        	new Object[][] {
-        	},
-        	new String[] {
-        		"", "Name", "Complete name", "Count", "Excluded"
-        	}
-        ) {
-        	boolean[] columnEditables = new boolean[] {
-        		false, false, false, false, false
-        	};
-        	public boolean isCellEditable(int row, int column) {
-        		return columnEditables[column];
-        	}
-        });
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         ProfilerHeaderData headerData = new ProfilerHeaderData();
         table.setRoot(headerData);
         table.setModel(new DefaultTableModel(headerData.getValues(),0) {
         	Class<?>[] columnTypes = new Class[] {
-        		Object.class, Object.class, Object.class, Object.class,Boolean.class
+        		Object.class, Object.class, Object.class, Object.class, Object.class,Boolean.class
         	};
         	boolean[] columnEditables = new boolean[] {
-        		false, false, false, false, true
+        		false, false, false, false, false, true
         	};
         	public Class<?> getColumnClass(int columnIndex) {
         		return columnTypes[columnIndex];
@@ -174,12 +160,13 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         renderer = new ProfileCellRenderer(table.getTreeModel());
         table.setCellRenderer(renderer);
         table.getTableHeader().setReorderingAllowed(false);
-        table.setExpandbleColumn(1);       
+        table.setExpandbleColumn(2);       
         table.getModel().addTableModelListener(this);
         
         table.getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getColumnModel().getColumn(0).setMinWidth(25);
         table.getColumnModel().getColumn(0).setMaxWidth(25);
+        table.getColumnModel().getColumn(1).setMaxWidth(25);
         table.getColumnModel().getColumn(4).setPreferredWidth(80);
         
         scrollPane.setViewportView(table);
@@ -452,11 +439,11 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	public void componentResized(ComponentEvent e) {
 		if (table.getWidth() < splitPane.getRightComponent().getWidth()){
-	        TableColumnModel columns = table.getColumnModel();
-	        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() 
-	        		- columns.getColumn(3).getWidth() - columns.getColumn(4).getWidth())/2;
-	        columns.getColumn(1).setPreferredWidth(adjustedSize);
+			TableColumnModel columns = table.getColumnModel();
+	        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() - columns.getColumn(1).getWidth() 
+	        		- columns.getColumn(4).getWidth() - columns.getColumn(5).getWidth())/2;
 	        columns.getColumn(2).setPreferredWidth(adjustedSize);
+	        columns.getColumn(3).setPreferredWidth(adjustedSize);
         }
 	}
 
@@ -466,10 +453,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	
 	public void componentShown(ComponentEvent e) {
         TableColumnModel columns = table.getColumnModel();
-        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() 
-        		- columns.getColumn(3).getWidth() - columns.getColumn(4).getWidth())/2;
-        columns.getColumn(1).setPreferredWidth(adjustedSize);
+        int adjustedSize =  (splitPane.getRightComponent().getWidth() - columns.getColumn(0).getWidth() - columns.getColumn(1).getWidth() 
+        		- columns.getColumn(4).getWidth() - columns.getColumn(5).getWidth())/2;
         columns.getColumn(2).setPreferredWidth(adjustedSize);
+        columns.getColumn(3).setPreferredWidth(adjustedSize);
         
 	}
 	
