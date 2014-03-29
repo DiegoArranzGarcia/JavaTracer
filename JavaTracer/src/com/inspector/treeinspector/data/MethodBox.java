@@ -8,6 +8,8 @@ import com.general.model.variables.data.*;
 
 public class MethodBox extends Box {
 
+	private static int MAX_LENGTH = 35;
+	private static String SUSPENSION_POINTS = " ......";
 	private MethodInfo method;
 		
 	public MethodBox(String pathOfNode, long id, MethodInfo method, boolean haveChildren) {
@@ -27,13 +29,19 @@ public class MethodBox extends Box {
 		 }		 
 		 
 		 if(i==0)
-			 name = name.substring(0, name.length()) +" )";
+			 name = name.substring(0, name.length()) +")";
 		 else 
-			 name = name.substring(0, name.length()-2) +" )";
+			 name = name.substring(0, name.length()-2) +")";
 		 
 		 Data returnValue = method.getReturn_data();
 		 if(returnValue != null)
 			name += " -> " + returnString(returnValue);
+		 
+		int name_length =  name.getBytes().length ;
+		 if (name_length > MAX_LENGTH) {
+			 name = name.substring(0, MAX_LENGTH) +SUSPENSION_POINTS;
+		}
+		 
 		 
 		 return name;
 	} 

@@ -58,7 +58,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
 		view.setVisible(true);
 		view.setTitle(profileFile);
-		controller.setVisible(false);
+		//controller.setVisible(false);
 	}
 	
 	public void loadTempProfile(){
@@ -107,7 +107,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 
 	public void cancel() {
 		view.setVisible(false);
-		controller.back();
+		//controller.back();
 	}
 
 	public void openProfile(File file) {

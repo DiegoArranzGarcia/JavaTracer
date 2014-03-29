@@ -71,7 +71,7 @@ public class InspectorController {
 			view.setController(this);
 		}
 		view.setVisible(true);
-		controller.setVisible(false);
+		//controller.setVisible(false);
 		
 		treeManager.showTree(xmlPath);	
 		createLoadingView();
@@ -113,7 +113,7 @@ public class InspectorController {
 
 	public void back() {
 		view.setVisible(false);
-		controller.back();		
+		//controller.back();		
 	}
 
 	public void opening() {

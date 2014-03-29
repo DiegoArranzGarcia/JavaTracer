@@ -9,7 +9,7 @@ import javax.swing.plaf.FontUIResource;
 
 public class FontLoader {
 	
-	private static String APP_FONT_NAME = "QuattrocentoSans-Regular";
+	public static String APP_FONT_NAME = "QuattrocentoSans-Regular";
 	private static String APP_FONT_FILE = APP_FONT_NAME + ".ttf";
 	private static FontLoader instance;
 	
@@ -29,9 +29,6 @@ public class FontLoader {
 		return instance;	
 	}
 	
-	public Font getFont(){
-		return app_font;
-	}
 	
 	public void initAppFont(){
 		FontUIResource f = new FontUIResource(new Font(APP_FONT_NAME,Font.PLAIN,15));

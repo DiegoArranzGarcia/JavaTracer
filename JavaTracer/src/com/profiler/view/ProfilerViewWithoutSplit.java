@@ -1,24 +1,14 @@
 package com.profiler.view;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.awt.*;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.*;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.TextTitle;
@@ -33,6 +23,7 @@ public class ProfilerViewWithoutSplit extends JFrame {
 	public static final String OTHERS_CLASSES = "Others Classes";
 	private static final String PIE_FONT = "Courier New";
 	private static final String FONT_TITLE = "Arial";
+
 
 	private static double PERCENTAGE= 0.35;
 	private static final int CLASSCHART=5;
@@ -112,7 +103,7 @@ public class ProfilerViewWithoutSplit extends JFrame {
 		plot.setBaseSectionOutlineStroke(new BasicStroke(2.0f));
 
 		// customise the section label appearance
-		plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 20));
+		plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 16));
 		plot.setLabelLinkPaint(Color.WHITE);
 		plot.setLabelLinkStroke(new BasicStroke(2.0f));
 		plot.setLabelOutlineStroke(null);
@@ -136,6 +127,7 @@ public class ProfilerViewWithoutSplit extends JFrame {
 		}
 
 		DefaultPieDataset definitivedataset= chosenClasses(dataset); 
+		
 
 		return definitivedataset;
 	}
@@ -153,6 +145,7 @@ public class ProfilerViewWithoutSplit extends JFrame {
 	private JPanel createPiePanel(PieDataset data) {
 		chart = createChart(data);
 		chart.setPadding(new RectangleInsets(4, 8, 2, 2));
+		
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setMouseWheelEnabled(true);
 		chartPanel.setPopupMenu(null);

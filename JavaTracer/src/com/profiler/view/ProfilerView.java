@@ -1,53 +1,21 @@
 package com.profiler.view;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.List;
 
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.KeyStroke;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.*;
 import org.jfree.chart.event.ChartProgressEvent;
 import org.jfree.chart.event.ChartProgressListener;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
@@ -59,9 +27,7 @@ import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
 
 import com.general.model.FileUtilities;
-import com.general.view.jtreetable.JTreeTable;
-import com.general.view.jtreetable.TableTreeNode;
-import com.general.view.jtreetable.TreeModel;
+import com.general.view.jtreetable.*;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
 import com.profiler.presenter.ProfilerPresenterInterface;
@@ -94,6 +60,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	public static final String OTHERS_CLASSES = "Others Classes";
 	private static final String PIE_FONT = "Courier New";
 	private static final String FONT_TITLE = "Arial";
+	private static final int FONT_SIZE_TITLE = 26;
+	private static final int FONT_SIZE_LABEL_PLOT = 16;
 	
 	private static String TITLE = "Profiling stats";
 	private static double SPLIT_PERCENTAGE = 0.52;
@@ -530,7 +498,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         // customise the title position and font
         TextTitle t = chart.getTitle();
         t.setPaint(new Color(240, 240, 240));
-        t.setFont(new Font(FONT_TITLE, Font.BOLD, 26));
+        t.setFont(new Font(FONT_TITLE, Font.BOLD,FONT_SIZE_TITLE ));
 
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setBackgroundPaint(null);
@@ -543,7 +511,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         plot.setBaseSectionOutlineStroke(new BasicStroke(2.0f));
 
         // customise the section label appearance
-        plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, 20));
+        plot.setLabelFont(new Font(PIE_FONT, Font.BOLD, FONT_SIZE_LABEL_PLOT ));
         plot.setLabelLinkPaint(Color.WHITE);
         plot.setLabelLinkStroke(new BasicStroke(2.0f));
         plot.setLabelOutlineStroke(null);
@@ -564,6 +532,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         	double times = entry.getValue().doubleValue();
         	double percentage = (times/numCalledMethods)*100;
         	dataset.setValue(entry.getKey(),percentage);
+        	
         }
         
         DefaultPieDataset definitiveDataSet= chosenClasses(dataset); 
@@ -584,6 +553,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		
 		((PiePlot)chart.getPlot()).setDataset(createDataset(classes,calls));
 		chart.setTitle(NUM_CALLS + calls);
+		
 		
 	}
 
@@ -727,6 +697,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			pieChartPanel = createPiePanel(createDataset(classes,numCalledMethods),numCalledMethods);
 		else 
 			pieChartPanel = createNoLoadPanel();
+		
 		
 		tableLoaded = false;
     	splitPane.setLeftComponent(pieChartPanel);
