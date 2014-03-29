@@ -92,7 +92,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		getContentPane().add(tabbedPane);
 
 		saveButton = new JButton(SAVE);
-		saveButton.setBounds(189, 450, 115, 32);
+		saveButton.setBounds(165, 452, 115, 32);
 		getContentPane().add(saveButton);
 
 		cancelButton = new JButton(CANCEL);
@@ -124,7 +124,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 
 		restoreDefaults = new JButton("Restore Defaults");
 		restoreDefaults.addActionListener(this);
-		restoreDefaults.setBounds(324, 450, 133, 32);
+		restoreDefaults.setBounds(292, 450, 172, 32);
 		restoreDefaults.addActionListener(this); 
 		getContentPane().add(restoreDefaults);
 
@@ -165,7 +165,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		excludedThis = new JCheckBox("Exclude this");
 		excludedThis.setBackground(Color.WHITE);
 		excludedThis.setToolTipText("It is recommended checking this box, in the case of very large traces");
-		excludedThis.setBounds(17, 224, 137, 23);
+		excludedThis.setBounds(17, 224, 330, 23);
 		_panel_1.add(excludedThis);
 
 		excludes = new JTextField();
@@ -200,7 +200,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		excludeJavaDataStructures = new JCheckBox("Exclude java data structures");
 		excludeJavaDataStructures.setToolTipText("It is recommended checking this box, in the case of very large traces");
 		excludeJavaDataStructures.setBackground(Color.WHITE);
-		excludeJavaDataStructures.setBounds(17, 250, 208, 23);
+		excludeJavaDataStructures.setBounds(17, 250, 330, 23);
 		_panel_1.add(excludeJavaDataStructures);
 		
 		_scrollPane_1 = new JScrollPane();

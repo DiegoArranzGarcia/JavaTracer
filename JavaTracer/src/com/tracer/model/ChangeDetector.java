@@ -27,8 +27,8 @@ public class ChangeDetector {
 	 * 
 	 * @see {@link #compareArrays(String, ArrayData, ArrayData)} </br>
 	 * @see {@link #compareObjects(String, ObjectData, ObjectData)} </br>
-	 * @see {@link #getChangesCreatedObject(String, ObjectData)} </br> 
-	 * @see {@link #getChangesDeletedObject(String)}
+	 * @see {@link #createdObject(String, ObjectData)} </br> 
+	 * @see {@link #deletedObject(String)}
 	 */
 	
 	public List<ChangeInfo> getChangesBetween(Data variable1,Data variable2){
@@ -50,12 +50,16 @@ public class ChangeDetector {
 		
 		if (variable1 instanceof ArrayData && variable2 instanceof ArrayData){
 			changes = compareArrays(name,(ArrayData)variable1,(ArrayData)variable2);
+		} else if (variable1 instanceof ArrayData && variable2 instanceof NullData){
+			changes = deteledArray(name);
+		} else if (variable1 instanceof NullData && variable2 instanceof ArrayData){
+			changes = createdArray(name,(ArrayData)variable2);
 		} else if (variable1 instanceof ObjectData && variable2 instanceof ObjectData){
 			changes = compareObjects(name,(ObjectData)variable1,(ObjectData)variable2);
 		} else if (variable1 instanceof ObjectData && variable2 instanceof NullData){
-			changes = getChangesDeletedObject(name);
+			changes = deletedObject(name);
 		} else if (variable1 instanceof NullData && variable2 instanceof ObjectData){
-			changes = getChangesCreatedObject(name,(ObjectData)variable2);
+			changes = createdObject(name,(ObjectData)variable2);
 		} else if (variable1 instanceof IgnoredData || variable2 instanceof IgnoredData){
 			changes = new ArrayList<>();
 		}
@@ -63,6 +67,26 @@ public class ChangeDetector {
 		return changes;
 	}
 	
+	private List<ChangeInfo> createdArray(String name, ArrayData variable1) {
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		ChangeInfo changeInfo = new ChangeInfo(name,variable1);
+		changes.add(changeInfo);
+		
+		return changes;
+	}
+
+	private List<ChangeInfo> deteledArray(String name) {
+		
+		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
+		
+		ChangeInfo changeInfo = new ChangeInfo(name,new NullData(name));
+		changes.add(changeInfo);
+		
+		return changes;
+	}
+
 	private List<ChangeInfo> getChangesSimpleData(String name,SimpleData variable1,SimpleData variable2) {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
@@ -121,7 +145,7 @@ public class ChangeDetector {
 	 * @return A list where there is a change of the object deleted.
 	 */
 	
-	private List<ChangeInfo> getChangesDeletedObject(String name) {
+	private List<ChangeInfo> deletedObject(String name) {
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
@@ -140,7 +164,7 @@ public class ChangeDetector {
 	 * @return The list of the changes of the created object.
 	 */
 	
-	private List<ChangeInfo> getChangesCreatedObject(String name,ObjectData variable2){
+	private List<ChangeInfo> createdObject(String name,ObjectData variable2){
 		
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
@@ -153,7 +177,7 @@ public class ChangeDetector {
 	/**
 	 * Returns the changes between the two objects.
 	 * If the id changes, the attributes of the object and the id are included on the changes list.
-	 * If the id doesnt changes, the attributes are compared one by one.
+	 * If the id doesn't changes, the attributes are compared one by one.
 	 *  
 	 * @param name - The name of the variable.
 	 * @param variable1 - The first object.
