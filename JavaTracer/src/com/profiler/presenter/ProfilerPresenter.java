@@ -53,6 +53,9 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		if (view == null){
 			view = new ProfilerView();
 			view.setPresenter(this);
+			view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
+			view.setVisible(true);
+			view.setTitle(profileFile);
 		}
 		
 		view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
