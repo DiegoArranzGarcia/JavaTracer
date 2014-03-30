@@ -28,6 +28,7 @@ import com.thoughtworks.xstream.XStream;
 public class JavaTracerConfiguration extends XStreamUtil{
 
 	public final static String CONFIG_FILE_NAME = "java-tracer-properties";
+	public final static String CONFIG_FOLDER_NAME = "config";
 	/*
 	 * Defaults Tracer
 	 */
@@ -51,6 +52,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private XPath xPath;	
 	private static JavaTracerConfiguration instance;
 	private File fileXml;
+	private File folderCofig;
 	private FileWriter writer;
 	/*
 	 * Tracer
@@ -59,7 +61,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private ExcludedClassesMethods excludedClassesMethods;
 	private boolean excludedThis;
 	private boolean excludedDataStructure;
-	
+
 
 	/*
 	 * Inspector
@@ -104,7 +106,13 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		/*
 		 * Create default file xml
 		 */
-		this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
+		/*	this.folderCofig =  new File(CONFIG_FOLDER_NAME);
+		if (!folderCofig.exists())
+			folderCofig.mkdir();*/
+
+
+		//this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
+		this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
 
 		if (!fileXml.exists()) {
 			/*
@@ -121,7 +129,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			this.numNodes = DEFAULT_NUM_NODES;
 
 			generateFile();
-			
+
 			try {
 				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
@@ -138,7 +146,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				catch (Exception e){
 					e.printStackTrace();
 				}
-				
+
 				excludesList = getExludesFromFile();
 				excludedThis = getExcludedThisFromFile();
 				excludedDataStructure = getExcludedDataStructureFromFile();
@@ -232,7 +240,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		}
 	}
-	
+
 	private void writeExcludedClassesMethods() {
 		try {
 			writeXStream(excludedClassesMethods);
@@ -241,7 +249,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		} 
 	}
-	
+
 	private void writeExcludedThis() {
 		try {
 			writeXStream(excludedThis);
@@ -259,7 +267,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Write in file the configuration: Display tree
 	 */
@@ -339,7 +347,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		return excludedClassMethods;
 	}
-	
+
 	private boolean getExcludedThisFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_THIS;  
 
@@ -377,7 +385,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		return excludedDataStructure;
 	}
-	
+
 	/*
 	 * Get Information from file xml : Display-tree
 	 */

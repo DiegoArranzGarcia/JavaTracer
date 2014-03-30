@@ -8,47 +8,52 @@ import com.general.model.variables.data.*;
 
 public class MethodBox extends Box {
 
-	private static int MAX_LENGTH = 35;
+	private static int MAX_LENGTH = 10;
 	private static String SUSPENSION_POINTS = " ......";
 	private MethodInfo method;
-		
+
 	public MethodBox(String pathOfNode, long id, MethodInfo method, boolean haveChildren) {
 		super(pathOfNode,id,haveChildren);
 		this.method = method;
 	}
 
 	public String getBoxText() {
-		
-		 int i=0;
-		 String name = method.getMethodName() + " (";
-		 List<Data> arguments = method.getArguments();
-		 
-		 while(i<arguments.size()){
+
+		int i=0;
+		String name = method.getMethodName() + " (";
+		List<Data> arguments = method.getArguments();
+
+
+		while(i<arguments.size()){
 			name= name + completeArgumentString(arguments.get(i));
-	    	i++;
-		 }		 
-		 
-		 if(i==0)
-			 name = name.substring(0, name.length()) +")";
-		 else 
-			 name = name.substring(0, name.length()-2) +")";
-		 
-		 Data returnValue = method.getReturn_data();
-		 if(returnValue != null)
-			name += " -> " + returnString(returnValue);
-		 
-		int name_length =  name.getBytes().length ;
+			i++;
+		}		 
+
+		if(i==0)
+			name = name.substring(0, name.length()) +")";
+		else 
+			name = name.substring(0, name.length()-2) +")";
+
+		Data returnValue = method.getReturn_data();
+		if(returnValue != null) {
+			String return_value =  returnString(returnValue);
+
+			name += " -> " + return_value;
+		}
+
+
+		/*int name_length =  name.getBytes().length ;
 		 if (name_length > MAX_LENGTH) {
 			 name = name.substring(0, MAX_LENGTH) +SUSPENSION_POINTS;
-		}
-		 
-		 
-		 return name;
+		}*/
+
+
+		return name;
 	} 
 
 	private String returnString(Data var) {
 		String text = "";
-		
+
 		if (var instanceof ArrayData){
 			ArrayData array = ((ArrayData)var);
 			text= array.getClassName() +"[ ]";
@@ -59,7 +64,11 @@ public class MethodBox extends Box {
 			text= "null" ;
 		}else if (var instanceof StringData){
 			StringData string = ((StringData)var);
+
 			text= "\"" + string.getValue() + "\"" ;
+			if (text.length() > MAX_LENGTH) {
+				text = text.substring(0,MAX_LENGTH)+SUSPENSION_POINTS;
+			}
 		}else if (var instanceof SimpleData){
 			SimpleData data = ((SimpleData)var);
 			text= data.getValue().toString();		
@@ -67,14 +76,14 @@ public class MethodBox extends Box {
 			IgnoredData data = ((IgnoredData)var);
 			text= data.getName().toString();	
 		}
-		
+
 		return text;
 	}
 
 	public String completeArgumentString(Object var) {
 
 		String text = "";
-		
+
 		if (var instanceof ArrayData){
 			ArrayData array = ((ArrayData)var);
 			text= array.getClassName() +"[ ]"+" "+ array.getName() + ", " ;
@@ -85,7 +94,11 @@ public class MethodBox extends Box {
 			text= ((NullData) var).getName() + " = null, " ;
 		}else if (var instanceof StringData){
 			StringData string = ((StringData)var);
-			text= string.getName() + " = \"" + string.getValue() + "\", " ;
+			String value_string = string.getValue();
+			if (value_string.length() > MAX_LENGTH) {
+				value_string = value_string.substring(0,MAX_LENGTH)+SUSPENSION_POINTS;
+			}
+			text= string.getName() + " = \"" + value_string  + "\", " ;
 		}else if (var instanceof SimpleData){
 			SimpleData data = ((SimpleData)var);
 			text= data.getName() + " = " + data.getValue().toString() + ", " ;		
@@ -93,14 +106,14 @@ public class MethodBox extends Box {
 			IgnoredData data = ((IgnoredData)var);
 			text = data.getClassName() +" "+ data.getName() + ", " ;
 		}
-		
+
 		return text;
 	}
-	
+
 	public MethodInfo getMethodInfo(){
 		return this.method;
 	}
-	
+
 	public void setMethodInfo(MethodInfo method){
 		this.method = method;
 	}
