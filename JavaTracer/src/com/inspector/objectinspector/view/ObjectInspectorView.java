@@ -1,5 +1,7 @@
 package com.inspector.objectinspector.view;
 
+import java.awt.Color;
+
 import com.general.view.jtreetable.JTreeTable;
 import com.inspector.objectinspector.controller.ObjectInspectorController;
 
@@ -12,6 +14,7 @@ public class ObjectInspectorView extends JTreeTable {
 		VariableRowData rootNode = new VariableRowData("Name", "Value");
 		setRoot(rootNode);
 		setCellRenderer(new CellRenderer(treeModel));
+		setGridColor(Color.BLACK);
 	}
 
 	public void refreshTable() {

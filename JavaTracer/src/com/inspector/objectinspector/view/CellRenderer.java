@@ -16,6 +16,7 @@ import com.general.view.jtreetable.TreeModel;
 @SuppressWarnings("serial")
 public class CellRenderer extends DefaultTableCellRenderer{
 	
+	private static final Color RED = new Color(0x009933);
 	private TreeModel treeModel;
 	private ImageLoader imageLoader;
 	private Border paddingBorder;
@@ -29,19 +30,24 @@ public class CellRenderer extends DefaultTableCellRenderer{
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		JLabel d = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 
-		try{
-			TableTreeNode node = treeModel.getNodeFromRow(row+1);
-			VariableRowData data = ((VariableRowData) node.getUserObject());
+		try {
 			
-			boolean changed = data.isChanged();
+			TableTreeNode node = treeModel.getNodeFromRow(row+1);
+			
 			boolean expandable = node.isExpandable();
 			boolean expanded = node.isExpanded();
-		
+			boolean changed = ((VariableRowData)node.getUserObject()).isChanged();
+			
 			if (!isSelected){
-			    if (changed) {
-			        setBackground(Color.RED);
+				
+				
+				boolean childChanges = haveChanges(node);
+				if (changed || (!expanded && childChanges)){
+					setBackground(RED);
+					setForeground(Color.WHITE);
 			    } else {
 			    	setBackground(Color.WHITE);
+			    	setForeground(Color.BLACK);
 			    }
 			}
 		
@@ -76,8 +82,24 @@ public class CellRenderer extends DefaultTableCellRenderer{
 		} catch (Exception e){
 			
 		}
-		
+				
 		return this;
+	}
+
+	private boolean haveChanges(TableTreeNode node) {
+		
+		
+		int children = node.getChildCount();
+		boolean haveChanges = false;
+		
+		int i = 0;
+		while (!haveChanges && i<children){
+			VariableRowData child = (VariableRowData) node.getChildAt(i).getUserObject();
+			haveChanges = child.isChanged() || haveChanges(node.getChildAt(i));				
+			i++;
+		}
+		
+		return haveChanges;
 	}
 	
 }

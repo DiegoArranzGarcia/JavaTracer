@@ -42,6 +42,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		variableVisitor.visit(arrayData);
 		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
 		
+		
 	}
 
 	public void visit(StringData stringData) {
@@ -49,6 +50,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		String oldValue = rowData.getValue();
 		String newValue = oldValue + " -> " + "\"" + stringData.getValue() + "\"";
 		rowData.setValue(newValue);
+		
 	}
 
 	public void visit(NullData nullData) {
@@ -71,6 +73,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		VariablesVisitor variableVisitor = new VariablesVisitor(rootNode);
 		variableVisitor.visit(nullData);
 		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
+		
 	}
 	
 	public void visit(IgnoredData ignoredClass) {
@@ -97,6 +100,7 @@ public class ChangeInfoVisitor implements InfoVisitor {
 		VariablesVisitor variableVisitor = new VariablesVisitor(rootNode);
 		variableVisitor.visit(objectInfo);
 		((VariableRowData)((TableTreeNode) rootNode.getChildAt(1)).getUserObject()).setName(OUT);
+		
 	}
 
 	public void visit(SimpleData simpleData) {
