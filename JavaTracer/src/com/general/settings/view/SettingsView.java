@@ -35,6 +35,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private static String ERROR_NUMBER = "Should be a number the entered value";
 	private static String ERROR_EMPTY_NUM_LEVELS = "You should enter the number of levels";
 	private static String ERROR_EMPTY_NUM_NODES = "You should enter the number of nodes";
+	
 	/*
 	 * General view
 	 */
@@ -43,6 +44,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private Panel tracerSettings,inspectorSettings;
 	private SettingsPresenterInterface presenter;
 	private JButton restoreDefaults,saveButton,cancelButton;
+	private WebComboBox configuration; 
 
 	/*
 	 * Tracer view
@@ -106,20 +108,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		_panel.setBackground(Color.WHITE);
 		_panel.setLayout(null);
 
-		WebComboBox comboBox = new WebComboBox();
-		comboBox.setOpaque(false);
-		comboBox.setEditable(true);
-		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(10, 30, 404, 23);
-		_panel.add(comboBox);
-
-		JButton btnSaveConfiguration = new JButton("Save");
-		btnSaveConfiguration.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnSaveConfiguration.setBounds(460, 30, 115, 30);
-		_panel.add(btnSaveConfiguration);
+		configuration = new WebComboBox();
+		configuration.setOpaque(false);
+		configuration.setEditable(true);
+		configuration.setBackground(Color.WHITE);
+		configuration.setBounds(10, 30, 404, 34);
+		_panel.add(configuration);
 
 		restoreDefaults = new JButton("Restore Defaults");
 		restoreDefaults.addActionListener(this);
@@ -136,6 +130,8 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 				presenter.closeWindow();
 			}
 		});
+		
+		
 	}
 
 	private void initTracerSettings() {
@@ -633,4 +629,17 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	 public void keyReleased(KeyEvent e) {}
 
 	 public void keyTyped(KeyEvent e) {}
+	 
+	 /*public void initComboxConfiguration() {
+		 System.out.println("Antes presenter");
+		presenter.loadXmls();
+	 }*/
+	 
+	 public void loadAllXmls(List<String>xmlNames) {
+		 
+		 for (int i=0;i<xmlNames.size();i++) {
+			 configuration.addItem(xmlNames.get(i));
+		 }
+		 
+	 }
 }

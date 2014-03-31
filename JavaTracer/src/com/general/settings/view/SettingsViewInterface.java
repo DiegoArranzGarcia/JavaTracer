@@ -3,6 +3,8 @@
  */
 package com.general.settings.view;
 
+import java.util.List;
+
 import com.general.settings.presenter.SettingsPresenterInterface;
 
 public interface SettingsViewInterface {
@@ -25,5 +27,6 @@ public interface SettingsViewInterface {
 	public int getNumNodes();
 	public void setVisible(boolean visible);
 	public void setPresenter(SettingsPresenterInterface presenter);
+    public void loadAllXmls(List<String> xmlOnlyNames);
 
 }

@@ -86,6 +86,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
 		//this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
+	
 
 		if (!fileXml.exists()) {
 			/*
@@ -132,7 +133,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-
+				
 
 			}
 			catch (Exception ex) {
@@ -616,4 +617,11 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	    this.excludedLibraries = excludedLibrary;
     }
 
+	public File getFolderCofig() {
+		return folderCofig;
+	}
+
+	public void setFolderCofig(File folderCofig) {
+		this.folderCofig = folderCofig;
+	}
 }

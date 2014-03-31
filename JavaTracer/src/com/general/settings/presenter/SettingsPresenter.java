@@ -3,9 +3,11 @@
  */
 package com.general.settings.presenter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.general.model.FileUtilities;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
 import com.general.settings.view.SettingsView;
@@ -46,6 +48,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		addNumLevelsFromConfiguration();
 		addNumNodesFromConfiguration();
 		addUnlimitedNodesFromConfiguration();	
+		
 	}
 
 	public void show() {
@@ -86,6 +89,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		view.loadUnlimitedNodes(unlimitedNodes);
 		view.loadNumLevels(numLevels);
 		view.loadNumNodes(numNodes);
+		loadXmls();
 	}
 
 
@@ -102,7 +106,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	}
 
 	public void saveNewConfiguration() {
-		//TODO
+		//TODO 
 	}
 	
 	public void saveActionTracer() {
@@ -148,6 +152,21 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		}
 	}
 
+	public void loadXmls() {
+		File[] xmlFiles = JavaTracerConfiguration.getInstance().getFolderCofig().listFiles();
+
+		List<String> xmlOnlyNames = new ArrayList<>();
+	
+		for(int i=0;i<xmlFiles.length;i++) {
+			String extension = FileUtilities.getExtension(xmlFiles[i]);
+			if (extension.equals("xml")) {
+				String onlyName = FileUtilities.getOnlyName(xmlFiles[i].getName());
+				xmlOnlyNames.add(onlyName);
+			}
+		}
+		view.loadAllXmls(xmlOnlyNames);
+	}
+	
 	public void cancelAction() {
 		view.setVisible(false);	    
 		presenter.back();

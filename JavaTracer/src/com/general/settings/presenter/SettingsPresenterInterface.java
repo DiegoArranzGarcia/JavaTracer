@@ -12,5 +12,6 @@ public interface SettingsPresenterInterface {
 	public void cancelActionInspector();
 	public void save();
 	public void closeWindow();
+    public void loadXmls();
 
 }
