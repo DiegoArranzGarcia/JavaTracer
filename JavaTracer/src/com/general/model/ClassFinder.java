@@ -1,9 +1,7 @@
 package com.general.model;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -11,7 +9,6 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.general.model.FileUtilities;
 import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import com.sun.org.apache.bcel.internal.classfile.Method;
@@ -24,7 +21,7 @@ public class ClassFinder {
 
 	private HashMap<String,String> pathsForFile;
 	
-	public List<String> getAllClasesFromFile(File file) {
+	public List<String> getAllClassesFromFile(File file) {
 		
 		this.pathsForFile = new HashMap<String,String>();
 		List<String> classes = null;
@@ -46,71 +43,34 @@ public class ClassFinder {
 		
 	}
 
-	private List<String> getClassFromJar(File file) {
-		String temp_jar_directory = TEMP + FileUtilities.getFileNameWithoutExtension(file.getName()) + FILES;
-		extractJarOnDirectory(file,temp_jar_directory);
-		List<String> classes = getAllClasesFromFile(new File(temp_jar_directory));
+	public List<String> getClassFromJar(File file) {
 		
-		return classes;
-	}
-	
-	
-	@SuppressWarnings("resource")
-	private void extractJarOnDirectory(File file, String temp_jar_directory) {
+		List<String> classes = new ArrayList<>();
 		try {
-			
 			JarFile jarFile = new JarFile(file);
-			
-			File temp_directory = new File(temp_jar_directory);
-			temp_directory.mkdir();
-			
 			Enumeration<JarEntry> enumeration = jarFile.entries();
 			
 			while (enumeration.hasMoreElements()){
 				
 				JarEntry entry = enumeration.nextElement();	
 				
-				String fileName = temp_jar_directory + java.io.File.separator + entry.getName(); 
-				File temp_file = new File(fileName);
-				
-				if (fileName.endsWith("/")) {
-					temp_file.mkdirs();
-				} 
-				
-			}
-			
-			enumeration = jarFile.entries();
-			
-			while (enumeration.hasMoreElements()){
-				
-				JarEntry entry = enumeration.nextElement();	
-				 
-				String fileName = temp_jar_directory + java.io.File.separator + entry.getName(); 
-				File temp_file = new File(fileName);
-				
-				if (!fileName.endsWith("/") && !fileName.contains("MANIFEST.MF")) {
-					InputStream is = jarFile.getInputStream(entry);
-					FileOutputStream fos = new FileOutputStream(temp_file);
-	 
-					// write contents of 'is' to 'fos'
-					while (is.available() > 0) {
-						fos.write(is.read());
-					}
-	 
-					fos.close();
-					is.close();
+				if (FileUtilities.isExtension(entry.getName(),"class")){
+					String className = entry.getName().replace("/",".");
+					className = className.substring(0,className.indexOf(".class"));
+					if (!classes.contains(className))
+						classes.add(className);
 				}
-				
+								
 			}
-			
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
-		
+						
+		return classes;
 	}
-
-	private List<String> getClassesFromFile(File file){
+	
+	public List<String> getClassesFromFile(File file){
 		
 		List<String> classes = new ArrayList<String>();
 	    

@@ -24,13 +24,24 @@ public class FileUtilities {
 		return extension;
 	}
 	
+	public static String getExtension(String path) {
+		String extension = "";
+
+		int i = path.lastIndexOf('.');
+		if (i > 0) {
+		    extension = path.substring(i+1);
+		}
+		
+		return extension;
+	}
+	
 	public static String getOnlyName(String nameWithExtension) {
 		String onlyName = nameWithExtension;
 		int i = onlyName.lastIndexOf('.');
 		onlyName = onlyName.substring(0, i);
 		return onlyName;
 	}
-	
+
 	public static String getFileNameWithoutExtension(String filename){
 		return filename.replaceFirst(EXTENSIONS, "");
 	}
@@ -39,9 +50,8 @@ public class FileUtilities {
 		return getExtension(file).equals(extension);
 	}
 	
-	public static boolean isExtension(String nameXml,String extension) {
-		File file = new File(nameXml);
-		return getExtension(file).equals(extension);
+	public static boolean isExtension(String fileName,String extension) {
+		return getExtension(fileName).equals(extension);
 	}
 	
 }

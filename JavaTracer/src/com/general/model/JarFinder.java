@@ -6,13 +6,13 @@ import java.util.List;
 
 public class JarFinder {
 
-	public String[] getJarDirectories(String path) {
+	public String[] getJars(String path) {
 		
 		List<String> jarDirectories = new ArrayList<String>();
 		
 		try {	
 			File file = new File(path);
-			getJarDirectoriesRec(file,jarDirectories);
+			getJarsRec(file,jarDirectories);
 						
 		} catch (Exception e){
 			e.printStackTrace();
@@ -21,19 +21,19 @@ public class JarFinder {
 		return jarDirectories.toArray(new String[jarDirectories.size()]);
 	}
 
-	public void getJarDirectoriesRec(File file,List<String> jars) {
+	public void getJarsRec(File file,List<String> jars) {
 			    
 	    if (file.isDirectory()){
 			
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++)
-				getJarDirectoriesRec(folderFiles[i],jars);
+				getJarsRec(folderFiles[i],jars);
 		
 		}
 		
 		else if (file.isFile() && FileUtilities.getExtension(file).equals("jar")){
-			if (!jars.contains(file.getParent()))
-				jars.add(file.getParent());
+			if (!jars.contains(file.getAbsolutePath()))
+				jars.add(file.getAbsolutePath());
 		}
 		
 	}

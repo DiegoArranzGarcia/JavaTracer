@@ -130,7 +130,7 @@ public class Tracer {
         	options = "-jar";
         } else {
             main = config.getMain();
-            String[] jars = config.getExternal_jars();
+            String[] jars = config.getExternalJarPaths();
             String external_jars = "";
             
         	for (int i=0;i<jars.length;i++)

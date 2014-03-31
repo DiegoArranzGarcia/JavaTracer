@@ -73,15 +73,17 @@ public class TracerController {
 			classPath = processPath(mainClassPath,main);
 		String nameXml = tracerView.getNameXml(!profile_mode);
 		String[] args = argumentsPresenter.getArguments();
+		String[] external_jars_path = new String[0];
 		String[] external_jars = new String[0];
-		if (!jar)
-			external_jars = jarFinder.getJarDirectories(mainClassPath);
+		if (!jar){
+			external_jars = jarFinder.getJars(mainClassPath);
+		}
 		RunConfiguration config = new RunConfiguration(profile_mode,jar,main, classPath, nameXml, args, external_jars);
 		
 		return config;
 		
 	}
-
+	
 	private boolean checkIfJar() {
 		String path = tracerView.getPath();
 		File file = new File(path);
@@ -107,7 +109,7 @@ public class TracerController {
 			classes = new ArrayList<>();
 			classes.add(file.getName());
 		} else {
-			classes = classFinder.getAllClasesFromFile(file);
+			classes = classFinder.getAllClassesFromFile(file);
 			tracerView.enableMainClassCombo();
 		}
 	

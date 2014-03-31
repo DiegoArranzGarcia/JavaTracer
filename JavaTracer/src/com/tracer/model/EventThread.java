@@ -1,10 +1,14 @@
 package com.tracer.model;
 
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.general.model.ClassFinder;
+import com.general.model.FileUtilities;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.ThreadInfo;
 import com.profiler.model.ProfilerModelInterface;
@@ -12,7 +16,6 @@ import com.profiler.model.data.ExcludedClassesMethods;
 import com.sun.jdi.ThreadReference;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
-import com.sun.jdi.event.ClassPrepareEvent;
 import com.sun.jdi.event.Event;
 import com.sun.jdi.event.EventIterator;
 import com.sun.jdi.event.EventQueue;
@@ -20,8 +23,6 @@ import com.sun.jdi.event.EventSet;
 import com.sun.jdi.event.ExceptionEvent;
 import com.sun.jdi.event.MethodEntryEvent;
 import com.sun.jdi.event.MethodExitEvent;
-import com.sun.jdi.event.ModificationWatchpointEvent;
-import com.sun.jdi.event.StepEvent;
 import com.sun.jdi.event.ThreadDeathEvent;
 import com.sun.jdi.event.ThreadStartEvent;
 import com.sun.jdi.event.VMDeathEvent;
@@ -64,7 +65,8 @@ public class EventThread extends Thread {
     private ProfilerModelInterface profiler;
     private Tracer tracer;
     
-    private List<String>  excludes; // Packages to exclude
+    private List<String> excludes;
+    private List<String> libraryExcludes;
     private ExcludedClassesMethods excludesClassMethods;
 
     public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
@@ -74,11 +76,13 @@ public class EventThread extends Thread {
         this.profiler = profiler;
         this.tracer = tracer;
         
-        this.excludes = JavaTracerConfiguration.getInstance().getExcludesList();
+        this.excludes = new ArrayList<String>();
+        this.excludes.addAll(JavaTracerConfiguration.getInstance().getExcludesList());
+        this.excludes.addAll(getLibraryExcludes(config));
         this.excludesClassMethods = JavaTracerConfiguration.getInstance().getExcludeClassMethods();
-        
+         
         this.enableProfiling = config.isProfiling_mode();
-        
+       
         if (profiler != null) {
         	profiler.clean();
         } else {
@@ -97,7 +101,25 @@ public class EventThread extends Thread {
 		
     }
 
-    /**
+    private List<String> getLibraryExcludes(RunConfiguration config) {
+    	
+    	List<String> librayExcludes = new ArrayList<>();
+    	String[] external_jars = config.getExternalJars();
+    	
+    	for (int i=0;i<external_jars.length;i++)
+    		librayExcludes.addAll(excludeJar(config,external_jars[i]));
+    	
+    	return librayExcludes;
+	}
+
+	private List<String> excludeJar(RunConfiguration config, String external_jars){
+		File jar = new File(external_jars);
+		ClassFinder classFinder = new ClassFinder();
+		List<String> classes = classFinder.getClassFromJar(jar);
+		return classes;		
+	}
+
+	/**
 	* Run the event handling thread.
 	* As long as we are connected, get event sets off
 	* the queue and dispatch the events within them.
@@ -135,9 +157,7 @@ public class EventThread extends Thread {
     void setEventRequests() {
             
     	EventRequestManager mgr = vm.eventRequestManager();
-        // want all exceptions
         ExceptionRequest excReq = mgr.createExceptionRequest(null,true, true);
-        // suspend so we can step
         excReq.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         excReq.enable();
 
@@ -145,6 +165,7 @@ public class EventThread extends Thread {
         for (int i=0; i<excludes.size(); ++i) {
             menr.addClassExclusionFilter(excludes.get(i));
         }
+        
         menr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         menr.enable();
 
@@ -156,17 +177,9 @@ public class EventThread extends Thread {
         mexr.enable();
         
         ThreadDeathRequest tdr = mgr.createThreadDeathRequest();
-        // Make sure we sync on thread death
         tdr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         tdr.enable();
-
-        ClassPrepareRequest cpr = mgr.createClassPrepareRequest();
-        for (int i=0; i<excludes.size(); ++i) {
-            cpr.addClassExclusionFilter(excludes.get(i));
-        }
-        cpr.setSuspendPolicy(EventRequest.SUSPEND_ALL);
-        cpr.enable();
-        
+       
     }
 
 
