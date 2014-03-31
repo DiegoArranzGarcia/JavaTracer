@@ -25,6 +25,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	private String[] excludes;
 	private List<String> excludesFromConfiguration;
 	private boolean excludedThis;
+	private boolean excludedLibraries;
 	private boolean excludedDataStructure;
 	
 	/*
@@ -39,6 +40,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	public SettingsPresenter(){
 		addExludesFromConfiguration();
 		addExcludedThisFromConfiguration();
+		addExcludedLibrariesFromConfiguration();
 		addExcludedDataStructureFromConfiguration();
 		addUnlimitedLevelsFromConfiguration();
 		addNumLevelsFromConfiguration();
@@ -61,6 +63,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 				excludes[i] =listExcludes.get(i);
 			
 			excludedThis = configuration.isExcludedThis();
+			excludedLibraries = configuration.isExcludedLibrary();
 			excludedDataStructure = configuration.isExcludedDataStructure();
 			unlimitedLevels = configuration.isUnlimitedLevels();
 			unlimitedNodes = configuration.isUnlimitedNodes(); 
@@ -76,6 +79,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		
 		view.loadExcludes(excludes);
 		view.loadExcludedThis(excludedThis);
+		view.loadExcludedLibraries(excludedLibraries);
 		view.loadExcludedDataStructure(excludedDataStructure); 
 		
 		view.loadUnlimitedLevels(unlimitedLevels);
@@ -97,6 +101,10 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	}
 
+	public void saveNewConfiguration() {
+		//TODO
+	}
+	
 	public void saveActionTracer() {
 
 		excludes = view.getExcludes();
@@ -109,8 +117,10 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
 		configuration.setExcludes(excludesAux); 
 		configuration.setExcludedThis(excludedThis);
+		excludedLibraries = view.getExcludedLibraries();
 		excludedDataStructure =view.getExcludedDataStructure();
 		configuration.setExcludedDataStructure(excludedDataStructure);
+		configuration.setExcludedLibrary(excludedLibraries);
 		configuration.saveConfiguration();
 
 	}
@@ -175,6 +185,15 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	public void addExcludedThisFromConfiguration() {
 		try {
 			excludedThis =JavaTracerConfiguration.getInstance().isExcludedThis();
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void addExcludedLibrariesFromConfiguration() {
+		try {
+			excludedLibraries =JavaTracerConfiguration.getInstance().isExcludedLibrary();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -248,6 +267,14 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	public void setExcludedDataStructure(boolean excludedDataStructure) {
 	   this. excludedDataStructure = excludedDataStructure;
+    }
+
+	public boolean isExcludedLibraries() {
+	    return excludedLibraries;
+    }
+
+	public void setExcludedLibraries(boolean excludedLibraries) {
+	    this.excludedLibraries = excludedLibraries;
     }
 
 
