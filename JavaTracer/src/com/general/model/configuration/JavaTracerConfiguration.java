@@ -79,13 +79,13 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		/*
 		 * Create default file xml
 		 */
-		/*	this.folderCofig =  new File(CONFIG_FOLDER_NAME);
+		this.folderCofig =  new File(CONFIG_FOLDER_NAME);
 		if (!folderCofig.exists())
-			folderCofig.mkdir();*/
+			folderCofig.mkdir();
 
 
-		//this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
-		this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
+		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
+		//this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
 
 		if (!fileXml.exists()) {
 			/*
@@ -105,7 +105,8 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			generateFile();
 
 			try {
-				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+				 
+				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
 			}
 			catch (Exception e){
@@ -114,7 +115,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}else {
 			try {
 				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 					xPath = XPathFactory.newInstance().newXPath();
 				}
 				catch (Exception e){
@@ -491,12 +492,16 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	}
 
 	public void saveConfiguration() { 
-		this.xStream = new XStream();
-		fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+		this.folderCofig =  new File(CONFIG_FOLDER_NAME);
+		if (!folderCofig.exists())
+			folderCofig.mkdir();
+
+
+		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
 		generateFile();
 
 		try {
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+	FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 			xPath = XPathFactory.newInstance().newXPath();
 		}catch (Exception e){
 			e.printStackTrace();
@@ -509,7 +514,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		generateFile();
 
 		try {
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 			xPath = XPathFactory.newInstance().newXPath();
 		}catch (Exception e){
 			e.printStackTrace();
