@@ -59,6 +59,7 @@ public abstract class XStreamUtil {
 	public static String TAG_NUM_NODES = "num-nodes";
 	public static String TAG_METHODS_EXCLUDES = "methods-excludes";
 	public static String TAG_EXCLUDED_THIS = "excluded-this";
+	public static String TAG_EXCLUDED_LIBRARIES = "exclude-libraries";
 	public static String TAG_EXCLUDED_DATA_STRUCTURE = "excluded-data-estructure";
 	public static String TAG_UNLIMITED_LEVELS = "unlimited-depth-tree";
 	public static String TAG_UNLIMITED_NODES = "unlimited-nodes";

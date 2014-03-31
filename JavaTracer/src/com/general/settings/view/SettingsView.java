@@ -61,12 +61,11 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private JLabel levelsLabel, nodesLabel;
 	private JPanel _panel;
 	private JPanel _panel_1;
-	private JCheckBox excludedThis,excludeJavaDataStructures;
+	private JCheckBox excludedThis,excludedLibraries,excludeJavaDataStructures;
 
 	private JPanel _panel_2;
 	private JCheckBox unlimitedLevels,unlimitedNodes;
 	private JScrollPane _scrollPane_1;
-
 
 	public SettingsView() {
 		getContentPane().setBackground(Color.WHITE);
@@ -92,7 +91,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		getContentPane().add(tabbedPane);
 
 		saveButton = new JButton(SAVE);
-		saveButton.setBounds(165, 452, 115, 32);
+		saveButton.setBounds(165, 450, 115, 32);
 		getContentPane().add(saveButton);
 
 		cancelButton = new JButton(CANCEL);
@@ -158,14 +157,14 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		_panel_1 = new JPanel();
 		_panel_1.setBorder(new TitledBorder(null, "Excluded", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		_panel_1.setBackground(new Color(255, 255, 255));
-		_panel_1.setBounds(12, 13, 578, 280);
+		_panel_1.setBounds(12, 13, 578, 284);
 		tracerSettings.add(_panel_1);
 		_panel_1.setLayout(null);
 
 		excludedThis = new JCheckBox("Exclude this");
 		excludedThis.setBackground(Color.WHITE);
 		excludedThis.setToolTipText("It is recommended checking this box, in the case of very large traces");
-		excludedThis.setBounds(17, 224, 330, 23);
+		excludedThis.setBounds(17, 224, 135, 23);
 		_panel_1.add(excludedThis);
 
 		excludes = new JTextField();
@@ -200,7 +199,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		excludeJavaDataStructures = new JCheckBox("Exclude java data structures");
 		excludeJavaDataStructures.setToolTipText("It is recommended checking this box, in the case of very large traces");
 		excludeJavaDataStructures.setBackground(Color.WHITE);
-		excludeJavaDataStructures.setBounds(17, 250, 330, 23);
+		excludeJavaDataStructures.setBounds(17, 250, 249, 23);
 		_panel_1.add(excludeJavaDataStructures);
 		
 		_scrollPane_1 = new JScrollPane();
@@ -215,6 +214,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		excludesList.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		excludesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		excludesList.setModel(model);
+		
+		excludedLibraries = new JCheckBox("Exclude libraries");
+		excludedLibraries.setSelected(true);
+		excludedLibraries.setBackground(Color.WHITE);
+		excludedLibraries.setBounds(200, 224, 147, 23);
+		_panel_1.add(excludedLibraries);
 		
 		
 		excludesList.addMouseListener(this);
@@ -341,6 +346,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
     	deleteAllExcludes();
     	restoreExcluded();
     	restoreExcludedThis();
+    	restoreExcludedLibraries();
     	restoreExcludedDataStructure();	    
     }
 
@@ -353,7 +359,11 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private void restoreExcludedThis() {
 		loadExcludedThis(false);  
     }
-
+	
+	private void restoreExcludedLibraries() {
+		loadExcludedLibraries(true);
+    }
+	
 
 	private void restoreExcluded() {
 	    JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
@@ -498,9 +508,13 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	public void loadExcludedThis(boolean excludedThis) {
 		this.excludedThis.setSelected(excludedThis);
 	}
+	
+	public void loadExcludedLibraries(boolean excludedLibraries) {
+		this.excludedLibraries.setSelected(excludedLibraries);
+	}
 
-	public void loadExcludedDataStructure(boolean excludedThis) {
-		this.excludeJavaDataStructures.setSelected(excludedThis);
+	public void loadExcludedDataStructure(boolean excludeDataStructure) {
+		this.excludeJavaDataStructures.setSelected(excludeDataStructure);
 	}
 
 	public void loadUnlimitedLevels(boolean unlimited) {
@@ -524,6 +538,9 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		return excludedThis.isSelected();
 	}
 
+	public boolean getExcludedLibraries() {
+		return excludedLibraries.isSelected();
+	}
 	/*
 	 * Inspector methods
 	 */

@@ -3,21 +3,14 @@
  */
 package com.general.model.configuration;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.*;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import com.general.model.FileUtilities;
 import com.general.model.XStreamUtil;
@@ -61,6 +54,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private ExcludedClassesMethods excludedClassesMethods;
 	private boolean excludedThis;
 	private boolean excludedDataStructure;
+	private boolean excludedLibraries;
 
 
 	/*
@@ -70,27 +64,6 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private int numNodes;
 	private boolean unlimitedLevels;
 	private boolean unlimitedNodes;
-
-	public List<String> getExcludesList() {
-		return excludesList;
-	}
-
-	public void setExcludesList(List<String> excludesList) {
-		this.excludesList = excludesList;
-	}
-
-	public ExcludedClassesMethods getExcludedClassesMethods() {
-		return excludedClassesMethods;
-	}
-
-	public void setExcludedClassesMethods(
-			ExcludedClassesMethods excludedClassesMethods) {
-		this.excludedClassesMethods = excludedClassesMethods;
-	}
-
-	public int getNumNodes() {
-		return numNodes;
-	}
 
 	public static JavaTracerConfiguration getInstance(){
 		/*
@@ -121,6 +94,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			initExcludes();
 			this.excludedThis = false;
 			this.excludedDataStructure = false;
+			this.excludedLibraries = true;			
 			this.excludedClassesMethods = new ExcludedClassesMethods();
 
 			this.unlimitedLevels = false;
@@ -151,7 +125,8 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				excludedThis = getExcludedThisFromFile();
 				excludedDataStructure = getExcludedDataStructureFromFile();
 				excludedClassesMethods = getExcludesClassesMethodFromFile();
-
+				excludedLibraries = getExcludedLibrariesFromFile();
+				
 				unlimitedLevels = getUnlimitedLevelsFromFile();
 				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
@@ -198,6 +173,10 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			write(startTag(TAG_METHODS_EXCLUDES));
 			writeExcludedClassesMethods();
 			write(endTag(TAG_METHODS_EXCLUDES));
+			
+			write(startTag(TAG_EXCLUDED_LIBRARIES));
+			writeExcludedLibraries();
+			write(endTag(TAG_EXCLUDED_LIBRARIES));
 
 			write(startTag(TAG_EXCLUDED_DATA_STRUCTURE));
 			writeExcludedDataStructures();
@@ -229,6 +208,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
+   
 	/*
 	 * Write in the file the configuration : Tracer
 	 */
@@ -258,6 +238,17 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		}
 	}
+	
+	 private void writeExcludedLibraries() {
+		 try {
+				writeXStream(excludedLibraries);
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		    
+	    }
+
 
 	private void writeExcludedDataStructures() {
 		try {
@@ -365,6 +356,25 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}	
 
 		return excludedThis;
+	}
+	
+	private boolean getExcludedLibrariesFromFile() {
+		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_LIBRARIES;  
+
+		boolean  excluded_libraries =true;
+		String excluded_libraries_query ="";
+		try {
+			XPathExpression xPathExpression = xPath.compile(expression);
+			Node node_excluded_libraries = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
+			excluded_libraries_query =  (String) xPathExpression.evaluate(node_excluded_libraries,XPathConstants.STRING);
+			String result_query = excluded_libraries_query.replaceAll("\n", ""); 
+			excludedLibraries = Boolean.parseBoolean(result_query);	       
+		}
+		catch (Exception ex) {
+			return excluded_libraries;
+		}	
+
+		return excludedLibraries;
 	}
 
 	private boolean getExcludedDataStructureFromFile() {
@@ -492,6 +502,19 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			e.printStackTrace();
 		}
 	}
+	
+	public void saveNewConfiguration(String nameXml) { 
+		this.xStream = new XStream();
+		File fileXml = new File(nameXml + FileUtilities.EXTENSION_XML);
+		generateFile();
+
+		try {
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xPath = XPathFactory.newInstance().newXPath();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
 	/*
 	 * Getters and Setters
@@ -549,6 +572,27 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		this.excludedDataStructure = excludedDataStructure;
 	}
 
+	public List<String> getExcludesList() {
+		return excludesList;
+	}
+
+	public void setExcludesList(List<String> excludesList) {
+		this.excludesList = excludesList;
+	}
+
+	public ExcludedClassesMethods getExcludedClassesMethods() {
+		return excludedClassesMethods;
+	}
+
+	public void setExcludedClassesMethods(
+			ExcludedClassesMethods excludedClassesMethods) {
+		this.excludedClassesMethods = excludedClassesMethods;
+	}
+
+	public int getNumNodes() {
+		return numNodes;
+	}
+	
 	public List<String> getDefaultExcluded(){
 		List<String>excludesList = new ArrayList<>();
 		excludesList.add(JAVA);
@@ -558,5 +602,13 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		excludesList.add(JARS);
 		return excludesList;
 	}
+
+	public boolean isExcludedLibrary() {
+	    return excludedLibraries;
+    }
+
+	public void setExcludedLibrary(boolean excludedLibrary) {
+	    this.excludedLibraries = excludedLibrary;
+    }
 
 }
