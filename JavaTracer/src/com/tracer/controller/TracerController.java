@@ -73,7 +73,6 @@ public class TracerController {
 			classPath = processPath(mainClassPath,main);
 		String nameXml = tracerView.getNameXml(!profile_mode);
 		String[] args = argumentsPresenter.getArguments();
-		String[] external_jars_path = new String[0];
 		String[] external_jars = new String[0];
 		if (!jar){
 			external_jars = jarFinder.getJars(mainClassPath);

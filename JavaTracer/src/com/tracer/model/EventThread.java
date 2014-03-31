@@ -66,7 +66,6 @@ public class EventThread extends Thread {
     private Tracer tracer;
     
     private List<String> excludes;
-    private List<String> libraryExcludes;
     private ExcludedClassesMethods excludesClassMethods;
 
     public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
@@ -76,10 +75,16 @@ public class EventThread extends Thread {
         this.profiler = profiler;
         this.tracer = tracer;
         
-        this.excludes = new ArrayList<String>();
-        this.excludes.addAll(JavaTracerConfiguration.getInstance().getExcludesList());
-        this.excludes.addAll(getLibraryExcludes(config));
-        this.excludesClassMethods = JavaTracerConfiguration.getInstance().getExcludeClassMethods();
+        excludes = new ArrayList<String>();
+        JavaTracerConfiguration javaTracerConfiguration = JavaTracerConfiguration.getInstance();
+        
+        
+		excludes.addAll(javaTracerConfiguration.getExcludesList());
+		
+        if (javaTracerConfiguration.isExcludedLibrary())
+        	excludes.addAll(getLibraryExcludes(config));
+        
+        excludesClassMethods = javaTracerConfiguration.getExcludeClassMethods();
          
         this.enableProfiling = config.isProfiling_mode();
        
