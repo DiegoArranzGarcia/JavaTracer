@@ -210,4 +210,9 @@ public class TracerController {
 	public void minimize() {
 		tracerView.consoleMinimize();
 	}
+	
+	public boolean isExecutableJar(File file){
+		
+		return classFinder.ExecutableJar(file);
+	}
 }

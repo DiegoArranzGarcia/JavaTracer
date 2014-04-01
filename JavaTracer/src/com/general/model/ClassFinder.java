@@ -2,10 +2,12 @@ package com.general.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -142,4 +144,34 @@ public class ClassFinder {
 		return pathsForFile.get(className);
 		
 	}
+
+
+	public boolean ExecutableJar(File file) {
+		boolean isExecutable=false;
+		try{
+		JarFile jar = new JarFile(file);
+ 
+		// fist get all directories,
+		// then make those directory on the destination Path
+		for (Enumeration<JarEntry> enums = jar.entries(); enums.hasMoreElements();) {
+			JarEntry entry = (JarEntry) enums.nextElement();
+			String fileName =entry.getName();
+			if(fileName.contains("MANIFEST")){
+				InputStream is = jar.getInputStream(entry);
+				String inputStreamString = new Scanner(is,"UTF-8").useDelimiter("\\A").next();
+				is.close();
+					
+				if(inputStreamString.contains("Main")||inputStreamString.contains("main"))	
+					isExecutable=true;	
+			}
+		}
+	}catch(Exception e){ 
+		e.printStackTrace();
+		}
+		
+		return isExecutable;
+	}
+
+
+
 }
