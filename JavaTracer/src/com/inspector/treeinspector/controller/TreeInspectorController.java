@@ -1,16 +1,16 @@
 package com.inspector.treeinspector.controller;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D.Double;
-import java.util.*;
+import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.treeinspector.data.Box;
-import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
 public class TreeInspectorController implements MouseListener {

@@ -113,9 +113,9 @@ public class TreePanel extends JPanel {
 		}
 	}
 
-	private void paintBox(Graphics g,Box textInBox) {
+	private void paintBox(Graphics g,Box box) {
 		
-		String[] lines = textInBox.getBoxText().split("\n");
+		String[] lines = box.getBoxText().split("\n");
 		
 		if(lines[0].contains("Exception"))
 			g.setColor(Color.red);
@@ -124,35 +124,35 @@ public class TreePanel extends JPanel {
 		
 		Font font = new Font("Verdana", Font.BOLD, 12);
 		g.setFont(font);
-		Rectangle2D.Double box = getBoundsOfNode(textInBox);
-		g.fillRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
-				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+		Rectangle2D.Double rect = getBoundsOfNode(box);
+		g.fillRoundRect((int) rect.x, (int) rect.y, (int) rect.width - 1,
+				(int) rect.height - 1, ARC_SIZE, ARC_SIZE);
 		g.setColor(BORDER_COLOR);
 				
-		if(textInBox.haveChildren()){
-			if(!textInBox.isLoaded()){
-				g.drawImage(imageLoader.getPlusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
+		if(box.haveChildren()){
+			if(!box.isExpanded() || (box.isExpanded() && !box.isLoaded())){
+				g.drawImage(imageLoader.getPlusIcon().getImage(),(int) rect.getMaxX()-22,(int) rect.getMaxY()-22,16,16,null);
 			}else{
-				g.drawImage(imageLoader.getMinusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
+				g.drawImage(imageLoader.getMinusIcon().getImage(),(int) rect.getMaxX()-22,(int) rect.getMaxY()-22,16,16,null);
 			}
 		}
 		
 		Graphics2D g2D = (Graphics2D)g; 
 		
-		if (textInBox.isSelected())
+		if (box.isSelected())
 			g2D.setStroke(new BasicStroke(SELECTED_STROKE));
 		else 
 			g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
 		
-		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
-				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
+		g.drawRoundRect((int) rect.x, (int) rect.y, (int) rect.width - 1,
+				(int) rect.height - 1, ARC_SIZE, ARC_SIZE);
 		g2D.setStroke(new BasicStroke());
 				
 		g.setColor(TEXT_COLOR);
 		
 		FontMetrics m = getFontMetrics(getFont());
-		int x = (int) box.x + ARC_SIZE / 2;
-		int y = (int) ((int) box.y + (int)DEFAULT_HEIGHT_BOX/2.5 + m.getAscent()/2.5);
+		int x = (int) rect.x + ARC_SIZE / 2;
+		int y = (int) ((int) rect.y + (int)DEFAULT_HEIGHT_BOX/2.5 + m.getAscent()/2.5);
 		for (int i = 0; i < lines.length; i++) {
 			g.drawString(lines[i], x, y);
 			y += m.getHeight();

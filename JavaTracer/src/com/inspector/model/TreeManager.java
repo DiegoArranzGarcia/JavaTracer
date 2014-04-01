@@ -21,8 +21,9 @@ public class TreeManager implements UpdateNotifier {
 	}
 
 	public void expandNode(Box box) {
-		int i = 1;
+		
 		int childs = xml.getNumChildrenOfNode(box);
+		int i = tree.getChildrenList(box).size()+1;
 		
 		while (i <= childs){
 			
