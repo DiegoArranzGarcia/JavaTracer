@@ -650,9 +650,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
     public void loadAllXmls(List<String>xmlNames) {
 		 
 		 configuration.removeAllItems();
+		 String xmlDefaultName = JavaTracerConfiguration.getInstance().CONFIG_FILE_NAME;
+		 configuration.addItem(xmlDefaultName);
 		 
 		 for (int i=0;i<xmlNames.size();i++) {
-			 configuration.addItem(xmlNames.get(i));
+			 if (!xmlNames.get(i).equals(xmlDefaultName))
+				 configuration.addItem(xmlNames.get(i));
 		 }
 		
 		 int size = configuration.getItemCount();
