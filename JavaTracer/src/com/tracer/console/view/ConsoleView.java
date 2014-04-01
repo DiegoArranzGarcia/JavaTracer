@@ -28,19 +28,19 @@ import com.tracer.console.presenter.ConsolePresenter;
 
 @SuppressWarnings("serial")
 public class ConsoleView extends WebPanel implements ActionListener,ComponentListener{
-	
+
 	private static final String CONSOLE_TEXT = "Console";
 	private static final String CLEAR_CONSOLE = "Clear console";
 	private enum Status{LAUNCHING,TRACING,PROFILING,FINISHED};
-	
+
 	private ConsolePresenter presenter; 
 	private ImageLoader imageLoader;
 	private Status status;
 	private double lastSize;
-	
+
 	private WebToggleButton btnClearConsole;
 	private WebToggleButton btnMinimizeConsole;
-		
+
 	private ConsoleTextPane console;
 	private JLabel lblConsoleStatus;
 	private JPanel header;
@@ -50,39 +50,42 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 	private WebScrollPane scrollPane;
 	private int defaultHeight;
 	private int currentHeight;
-	
+	private boolean isProfiling;
+
 	public ConsoleView(){
-		
+
+		isProfiling = false;
+
 		lastSize = 0;
 		status = Status.LAUNCHING;
 		setDrawFocus(false);
-		
+
 		imageLoader = ImageLoader.getInstance();
 		setLayout(new BorderLayout(0, 0));
-				
+
 		console = new ConsoleTextPane(this);
 		console.setEditable(false);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("MenuBar.border"));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(new Rectangle(1, 1, 1, 1));
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		lblConsoleStatus = new JLabel(CONSOLE_TEXT);
 		lblConsoleStatus.setBorder(new EmptyBorder(0, 5, 0, 0));
 		lblConsoleStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblConsoleStatus.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblConsoleStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblConsoleStatus, BorderLayout.WEST);
-		
+
 		header = new JPanel();
 		header.setBackground(Color.WHITE);
 		FlowLayout flowLayout = (FlowLayout) header.getLayout();
 		flowLayout.setVgap(0);
 		flowLayout.setHgap(0);
 		panel.add(header, BorderLayout.EAST);
-		
+
 		btnStop = new WebToggleButton();
 		btnStop.setVisible(false);
 		btnStop.setToolTipText("Clear console");
@@ -92,7 +95,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnStop.setIcon(new ImageIcon(imageLoader.getStopIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnStop.addActionListener(this);
 		header.add(btnStop);
-		
+
 		btnPlay = new WebToggleButton();
 		btnPlay.setEnabled(false);
 		btnPlay.setToolTipText("Clear console");
@@ -102,7 +105,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnPlay.setDrawFocus(false);
 		btnPlay.addActionListener(this);
 		header.add(btnPlay);
-		
+
 		btnMinimizeConsole = new WebToggleButton();
 		header.add(btnMinimizeConsole);
 		btnMinimizeConsole.setRolloverDecoratedOnly(true);
@@ -111,7 +114,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnMinimizeConsole.setIcon(new ImageIcon(imageLoader.getMinimizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMinimizeConsole.setDrawFocus(false);
 		btnMinimizeConsole.addActionListener(this);
-		
+
 		btnMaximizeConsole = new WebToggleButton();
 		btnMaximizeConsole.setVisible(false);
 		btnMaximizeConsole.setToolTipText("Clear console");
@@ -121,7 +124,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnMaximizeConsole.setDrawFocus(false);
 		btnMaximizeConsole.addActionListener(this);
 		header.add(btnMaximizeConsole);
-		
+
 		btnClearConsole = new WebToggleButton();
 		header.add(btnClearConsole);
 		btnClearConsole.setRolloverDecoratedOnly(true);
@@ -130,15 +133,15 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnClearConsole.setIcon(new ImageIcon(imageLoader.getDeleteIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnClearConsole.setDrawFocus(false);
 		btnClearConsole.addActionListener(this);
-		
+
 		scrollPane = new WebScrollPane(console);
 		scrollPane.setColumnHeaderView(panel);
 		scrollPane.setDrawFocus(false);
 		add(scrollPane);
-		
+
 		addComponentListener(this);
 	}
-	
+
 	public void setPresenter(ConsolePresenter presenter){
 		this.presenter = presenter;
 	}
@@ -156,15 +159,15 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		} else if (source.equals(btnStop)){
 			clickedOnStop();
 		}
-		
+
 	}
-	
+
 	public void stop(){
 		btnPlay.setVisible(true);
 		btnStop.setVisible(false);
 		btnStop.setSelected(false);
 	}
-	
+
 	public void clickedOnStop() {
 		presenter.clickedOnStop();
 	}
@@ -227,11 +230,13 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 	}
 
 	public void tracing() {
+		isProfiling = false;
 		status = Status.TRACING;
 		updateLabel();
 	}
 
 	public void profiling() {
+		isProfiling = true;
 		status = Status.PROFILING; 
 		updateLabel();
 	}
@@ -240,7 +245,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		lastSize = size;
 		updateLabel();
 	}
-	
+
 	private void updateLabel(){
 		String text = CONSOLE_TEXT;
 		switch (status) {
@@ -259,24 +264,24 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 			default:
 				break;
 		}
-		
-		if (!status.equals(Status.PROFILING)) {
+
+		if (!(status.equals(Status.PROFILING) || (isProfiling && status.equals(Status.FINISHED)))) {
 			text += getTextSize();
 		}
-		
+
 		lblConsoleStatus.setText(text);
 	}
 
 	private String getTextSize() {
-		
+
 		double bytes = lastSize;
 		double kilobytes = (bytes / 1024);
 		double megabytes = (kilobytes / 1024);
 		double gigabytes = (megabytes / 1024);
-		
+
 		String text = "";
 		DecimalFormat df = new DecimalFormat("0.00");
-	  	    
+
 		if (gigabytes >= 1){
 			text = df.format(gigabytes) + " GB";
 		} else if (megabytes >= 1){
@@ -286,19 +291,19 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		} else {
 			text = df.format(bytes) + " B";
 		}
-		
+
 		return text;
 	}
 
 	public void componentHidden(ComponentEvent e) {}
 	public void componentMoved(ComponentEvent e) {}
 	public void componentShown(ComponentEvent e) {}
-	
+
 	public void componentResized(ComponentEvent e){
 		if (defaultHeight == 0)
 			defaultHeight = getHeight();
 	}
-	
+
 	public int getDefaultHeight(){
 		return defaultHeight;
 	}
@@ -320,5 +325,5 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 	public void setPlayEnabled(boolean enable) {
 		btnPlay.setEnabled(enable);
 	}
-	
+
 }

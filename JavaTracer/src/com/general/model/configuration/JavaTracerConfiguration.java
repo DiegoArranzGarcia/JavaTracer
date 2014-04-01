@@ -47,6 +47,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private File folderCofig;
 	private FileWriter writer;
 	private String nameActualXML;
+	
 	/*
 	 * Tracer
 	 */
@@ -70,58 +71,28 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		 * Instance class
 		 */
 		if (instance==null) {
-			 instance = new JavaTracerConfiguration();
-			 instance.loadFromFileInit();
-			 
+			instance = new JavaTracerConfiguration();
+			instance.loadFromFileInit();
+
 		}	
-			return instance;
+		return instance;
 	}
 
 	private JavaTracerConfiguration() {
 		/*
-		 * Create default file xml
+		 * Create folder config
 		 */
 		this.folderCofig =  new File(CONFIG_FOLDER_NAME);
 		if (!folderCofig.exists())
 			folderCofig.mkdir();
-		
+
 		nameActualXML = CONFIG_FILE_NAME; 
 
 	}
-	
-	public void loadFromFile(String nameXML) {
-		this.fileXml = new File(folderCofig,nameXML + FileUtilities.EXTENSION_XML);		
-		this.nameActualXML = nameXML;
 
-		if (fileXml.exists()) {
-			try {
-				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
-					xPath = XPathFactory.newInstance().newXPath();
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
-
-				excludesList = getExludesFromFile();
-				excludedThis = getExcludedThisFromFile();
-				excludedDataStructure = getExcludedDataStructureFromFile();
-				excludedClassesMethods = getExcludesClassesMethodFromFile();
-				excludedLibraries = getExcludedLibrariesFromFile();
-				
-				unlimitedLevels = getUnlimitedLevelsFromFile();
-				unlimitedNodes = getUnlimitedNodesFromFile();
-				numlevels =  getNumLevelsFromFile();
-				numNodes = getNumNodesFromFile();
-				
-
-			}
-			catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
-	
+	/*
+	 *The first time , if does not exist a file with the default name, if there gets the data directly from there
+	 */
 	public void loadFromFileInit() {
 		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
 		this.nameActualXML = CONFIG_FILE_NAME;
@@ -144,7 +115,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			generateFile();
 
 			try {
-				 
+
 				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
 			}
@@ -166,12 +137,48 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				excludedDataStructure = getExcludedDataStructureFromFile();
 				excludedClassesMethods = getExcludesClassesMethodFromFile();
 				excludedLibraries = getExcludedLibrariesFromFile();
-				
+
 				unlimitedLevels = getUnlimitedLevelsFromFile();
 				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-				
+
+
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	/*
+	 * Obtains information about the file whose name is passed as a parameter
+	 */
+	public void loadFromFile(String nameXML) {
+		this.fileXml = new File(folderCofig,nameXML + FileUtilities.EXTENSION_XML);		
+		this.nameActualXML = nameXML;
+
+		if (fileXml.exists()) {
+			try {
+				try {
+					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
+					xPath = XPathFactory.newInstance().newXPath();
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+
+				excludesList = getExludesFromFile();
+				excludedThis = getExcludedThisFromFile();
+				excludedDataStructure = getExcludedDataStructureFromFile();
+				excludedClassesMethods = getExcludesClassesMethodFromFile();
+				excludedLibraries = getExcludedLibrariesFromFile();
+
+				unlimitedLevels = getUnlimitedLevelsFromFile();
+				unlimitedNodes = getUnlimitedNodesFromFile();
+				numlevels =  getNumLevelsFromFile();
+				numNodes = getNumNodesFromFile();
+
 
 			}
 			catch (Exception ex) {
@@ -180,6 +187,10 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}
 	}
 
+	
+	/*
+	 * Initialices default values excluded
+	 */
 	private void initExcludes() {
 		excludesList = new ArrayList<>();
 		excludesList.add(JAVA);
@@ -190,7 +201,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	}
 
 
-	/**
+	/*
 	 * Write in xml file the configuration
 	 */
 	private void generateFile() { 
@@ -211,7 +222,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			write(startTag(TAG_METHODS_EXCLUDES));
 			writeExcludedClassesMethods();
 			write(endTag(TAG_METHODS_EXCLUDES));
-			
+
 			write(startTag(TAG_EXCLUDED_LIBRARIES));
 			writeExcludedLibraries();
 			write(endTag(TAG_EXCLUDED_LIBRARIES));
@@ -246,7 +257,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 	}
 
-   
+
 	/*
 	 * Write in the file the configuration : Tracer
 	 */
@@ -276,16 +287,16 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			ex.printStackTrace();
 		}
 	}
-	
-	 private void writeExcludedLibraries() {
-		 try {
-				writeXStream(excludedLibraries);
-			}
-			catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		    
-	    }
+
+	private void writeExcludedLibraries() {
+		try {
+			writeXStream(excludedLibraries);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
 
 
 	private void writeExcludedDataStructures() {
@@ -395,7 +406,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		return excludedThis;
 	}
-	
+
 	private boolean getExcludedLibrariesFromFile() {
 		String expression = "/" +TAG_CONFIGURATION+"/" + TAG_EXCLUDED_LIBRARIES;  
 
@@ -544,9 +555,9 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			e.printStackTrace();
 		}
 	}
-	
 
-	
+
+
 	/*
 	 * Getters and Setters
 	 */
@@ -623,7 +634,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	public int getNumNodes() {
 		return numNodes;
 	}
-	
+
 	public List<String> getDefaultExcluded(){
 		List<String>excludesList = new ArrayList<>();
 		excludesList.add(JAVA);
@@ -633,15 +644,15 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		excludesList.add(JARS);
 		return excludesList;
 	}
-	
+
 
 	public boolean isExcludedLibrary() {
-	    return excludedLibraries;
-    }
+		return excludedLibraries;
+	}
 
 	public void setExcludedLibrary(boolean excludedLibrary) {
-	    this.excludedLibraries = excludedLibrary;
-    }
+		this.excludedLibraries = excludedLibrary;
+	}
 
 	public File getFolderCofig() {
 		return folderCofig;
@@ -652,10 +663,10 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	}
 
 	public String getNameActualXML() {
-	    return nameActualXML;
-    }
+		return nameActualXML;
+	}
 
 	public void setNameActualXML(String nameActualXML) {
-	    this.nameActualXML = nameActualXML;
-    }
+		this.nameActualXML = nameActualXML;
+	}
 }
