@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.general.model.ClassFinder;
-import com.general.model.FileUtilities;
 import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.ThreadInfo;
 import com.profiler.model.ProfilerModelInterface;
@@ -27,7 +26,6 @@ import com.sun.jdi.event.ThreadDeathEvent;
 import com.sun.jdi.event.ThreadStartEvent;
 import com.sun.jdi.event.VMDeathEvent;
 import com.sun.jdi.event.VMDisconnectEvent;
-import com.sun.jdi.request.ClassPrepareRequest;
 import com.sun.jdi.request.EventRequest;
 import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.ExceptionRequest;
@@ -67,10 +65,12 @@ public class EventThread extends Thread {
     
     private List<String> excludes;
     private ExcludedClassesMethods excludesClassMethods;
+    private volatile boolean forceExit;
 
     public EventThread(VirtualMachine vm, Tracer tracer, RunConfiguration config, ProfilerModelInterface profiler){
         super("event-handler");
         this.vm = vm;
+        this.forceExit = false;
         this.connected = true;
         this.profiler = profiler;
         this.tracer = tracer;
@@ -133,7 +133,7 @@ public class EventThread extends Thread {
     public void run() {
         EventQueue queue = vm.eventQueue();
                 
-        while (connected) {
+        while (connected && !forceExit) {
             try {
             	
                  EventSet eventSet = queue.remove();
@@ -149,6 +149,11 @@ public class EventThread extends Thread {
                 handleDisconnectedException();
                 break;
             }
+        }
+        
+        if (forceExit){
+        	vm.exit(-1);
+        	tracer.finishedTrace();
         }
     }
 
@@ -262,6 +267,10 @@ public class EventThread extends Thread {
                 exc.printStackTrace();
             }
         }
+    }
+    
+    public void terminate(){
+    	forceExit = true;
     }
 
 

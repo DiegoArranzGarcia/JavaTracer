@@ -391,6 +391,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		mntmTrace.setEnabled(enable);
 		trace.setEnabled(enable);
 		profile.setEnabled(enable);
+		console.setPlayEnabled(enable);
 	}
 
 	public void setEnableTracer(boolean enable) {

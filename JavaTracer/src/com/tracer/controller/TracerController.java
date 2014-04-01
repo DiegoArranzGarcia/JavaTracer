@@ -48,12 +48,14 @@ public class TracerController {
 	public void clickedOnTrace(){
 		this.lastConfig = getAllConfig(false);
 		consolePresenter.resetConsole();
+		consolePresenter.play();
 		tracer.trace(lastConfig);		
 	}
 	
 	public void clickedOnProfile(){
 		this.lastConfig = getAllConfig(true);		
 		consolePresenter.resetConsole();
+		consolePresenter.play();
 		tracer.profile(lastConfig,presenter.getProfiler());	
 	}
 	
@@ -215,9 +217,11 @@ public class TracerController {
 		tracerView.consoleMaximize();
 	}
 
-	
 	public boolean isExecutableJar(File file){
-		
 		return classFinder.ExecutableJar(file);
+	}
+
+	public void clickedOnStop() {
+		tracer.stopTrace();
 	}
 }

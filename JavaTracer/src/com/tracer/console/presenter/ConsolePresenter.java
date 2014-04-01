@@ -68,6 +68,7 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 	public void finished(){
 		view.finished();
 		updater.finish();
+		view.stop();
 	}
 
 	public void setLastFileName(String lastFilename){
@@ -88,6 +89,18 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 
 	public void maximize() {
 		presenter.maximize();
+	}
+
+	public void clickedOnStop() {
+		presenter.clickedOnStop();
+	}
+
+	public void clickedOnPlay() {
+		presenter.clickedOnTrace();
+	}
+
+	public void play() {
+		view.play();
 	}
 
 }

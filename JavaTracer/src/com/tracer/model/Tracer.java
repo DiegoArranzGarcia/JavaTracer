@@ -33,6 +33,8 @@ public class Tracer {
     // Class patterns for which we don't want events
     
    private TracerController tracerController;
+
+private EventThread eventThread;
       
     /**
 	  * Parse the command line arguments.
@@ -69,7 +71,7 @@ public class Tracer {
     void generateTrace(RunConfiguration config,ProfilerModelInterface profiler) {
         
     	vm.setDebugTraceMode(debugTraceMode);
-        EventThread eventThread = new EventThread(vm,this,config,profiler);
+        eventThread = new EventThread(vm,this,config,profiler);
         eventThread.setEventRequests();
         eventThread.start();
         tracerController.redirectStreams(vm.process());
@@ -152,6 +154,10 @@ public class Tracer {
 
 	public void finishedTrace() {
 		tracerController.finishedTrace();
+	}
+
+	public void stopTrace() {
+		eventThread.terminate();
 	}  
       
 }

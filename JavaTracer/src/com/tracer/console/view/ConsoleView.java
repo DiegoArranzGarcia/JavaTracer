@@ -166,11 +166,11 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 	}
 	
 	public void clickedOnStop() {
-		//presenter.clickedOnStop();
+		presenter.clickedOnStop();
 	}
 
 	public void clickedOnPlay() {
-		//presenter.clickedOnplay();
+		presenter.clickedOnPlay();
 	}
 
 	public void maximize() {
@@ -312,6 +312,10 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnPlay.setVisible(false);
 		btnStop.setVisible(true);
 		btnPlay.setSelected(false);
+	}
+
+	public void setPlayEnabled(boolean enable) {
+		btnPlay.setEnabled(enable);
 	}
 	
 }
