@@ -182,7 +182,7 @@ public class ClassUtils {
 		return object;
 	}
 	
-	private Data getObjectFromObjectReference(boolean force, String name,ObjectReference value,List<Long> objectsProcessed){
+	public Data getObjectFromObjectReference(boolean force, String name,ObjectReference value,List<Long> objectsProcessed){
 		
 		Data result = null;
 		long objectId = value.uniqueID();
