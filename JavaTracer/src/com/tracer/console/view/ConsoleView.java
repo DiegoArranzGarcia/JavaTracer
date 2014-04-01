@@ -260,7 +260,10 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 				break;
 		}
 		
-		text += getTextSize();
+		if (!status.equals(Status.PROFILING)) {
+			text += getTextSize();
+		}
+		
 		lblConsoleStatus.setText(text);
 	}
 

@@ -295,9 +295,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		}		
 		
 		if (source == configuration) {
-			System.out.println("Index: " +configuration.getSelectedIndex());
 			if (configuration.getSelectedIndex() !=- 1) {
-				System.out.println("cambia");
 				changeConfiguration();
 			}
 			
