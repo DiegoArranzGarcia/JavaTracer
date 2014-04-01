@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.treeinspector.data.Box;
+import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
 public class TreeInspectorController implements MouseListener {
@@ -45,10 +46,10 @@ public class TreeInspectorController implements MouseListener {
 			
 		if (box!=null){
 			
-			if (box.isExpanded())
-				fold(box);
-			else 
+			if (!box.isLoaded() || !box.isExpanded())
 				expand(box);
+			else 
+				fold(box);
 			    
 		}	
 	}
@@ -70,13 +71,14 @@ public class TreeInspectorController implements MouseListener {
 	}
 
 	private void fold(Box box) {	
-		//treeManager.foldNode(treeManager.getTree(),box);
-		//box.setExpanded(false);
+
 		Iterator<Box> iterator = treeManager.getTree().getChildren(box).iterator();
 		box.setExpanded(false);
 		
 		while (iterator.hasNext()){
-			iterator.next().setVisible(false);
+			Box child = iterator.next();
+			child.setVisible(false);
+			fold(child);			
 		}
 		
 		view.repaintTree(treeManager.getTree());

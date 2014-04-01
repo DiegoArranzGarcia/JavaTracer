@@ -11,18 +11,11 @@ import java.util.Map;
 
 import org.abego.treelayout.util.AbstractTreeForTreeLayout;
 
-public class DefaultTreeLayout<E> extends
-			AbstractTreeForTreeLayout<E> {
+import com.inspector.treeinspector.data.Box;
+
+public class DefaultTreeLayout<E> extends AbstractTreeForTreeLayout<E> {
 
 	private List<E> emptyList;
-
-	private List<E> getEmptyList() {
-		if (emptyList == null) {
-			emptyList = new ArrayList<E>();
-		}
-		return emptyList;
-	}
-
 	private Map<E, List<E>> childrenMap = new HashMap<E, List<E>>();
 	private Map<E, E> parents = new HashMap<E, E>();
 
@@ -32,6 +25,14 @@ public class DefaultTreeLayout<E> extends
 	 * @param root
 	 *            the node to be used as the root.
 	 */
+	
+	private List<E> getEmptyList() {
+		if (emptyList == null) {
+			emptyList = new ArrayList<E>();
+		}
+		return emptyList;
+	}
+	
 	public DefaultTreeLayout(E root) {
 		super(root);
 	}
@@ -118,6 +119,14 @@ public class DefaultTreeLayout<E> extends
 			
 		}
 		return list;
+	}
+
+	public DefaultTreeLayout<E> getCopy() {
+		DefaultTreeLayout<E> new_tree = new DefaultTreeLayout<E>(getRoot());
+		new_tree.childrenMap = new HashMap<>(this.childrenMap);
+		new_tree.emptyList = new ArrayList<>(this.emptyList);
+		new_tree.parents = new HashMap<>(this.parents);
+		return new_tree;
 	}
 
 }

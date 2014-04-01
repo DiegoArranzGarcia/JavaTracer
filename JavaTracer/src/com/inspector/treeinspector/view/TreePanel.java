@@ -130,7 +130,7 @@ public class TreePanel extends JPanel {
 		g.setColor(BORDER_COLOR);
 				
 		if(textInBox.haveChildren()){
-			if(!textInBox.isExpanded()){
+			if(!textInBox.isLoaded()){
 				g.drawImage(imageLoader.getPlusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
 			}else{
 				g.drawImage(imageLoader.getMinusIcon().getImage(),(int) box.getMaxX()-22,(int) box.getMaxY()-22,16,16,null);
