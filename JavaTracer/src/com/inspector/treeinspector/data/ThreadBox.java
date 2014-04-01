@@ -6,6 +6,7 @@ public class ThreadBox extends Box{
 	
 	public ThreadBox(String path,long id, String threadName) {
 		super(path,id,true);
+		this.threadName = threadName;
 	}
 
 	public String getBoxText() {

@@ -128,7 +128,7 @@ public class XmlManager extends XStreamUtil{
 	}
 
 	public ThreadInfo getThreadName(Node infoNode) throws XPathExpressionException {
-		String expression = "./" + TAG_THREAD_INFO   ;  
+		String expression = "./" + TAG_THREAD_INFO;  
 	    XPath xPath = XPathFactory.newInstance().newXPath();
 	    XPathExpression xPathExpression = xPath.compile(expression);
 	    Node node = (Node) xPathExpression.evaluate(infoNode,XPathConstants.NODE);
