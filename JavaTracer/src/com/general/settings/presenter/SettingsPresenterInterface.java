@@ -13,5 +13,6 @@ public interface SettingsPresenterInterface {
 	public void save();
 	public void closeWindow();
     public void loadXmls();
+    public void loadConfiguration(String nameXML);
 
 }

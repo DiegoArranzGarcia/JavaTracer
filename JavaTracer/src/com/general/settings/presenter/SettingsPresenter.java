@@ -109,6 +109,30 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		//TODO 
 	}
 	
+	public void loadConfiguration(String nameXML) {
+		
+		//TODO
+		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance(); 
+		configuration.loadFromFile(nameXML); 
+		
+		addExludesFromConfiguration();
+		addExcludedThisFromConfiguration();
+		addExcludedLibrariesFromConfiguration();
+		addExcludedDataStructureFromConfiguration();
+		addUnlimitedLevelsFromConfiguration();
+		addNumLevelsFromConfiguration();
+		addNumNodesFromConfiguration();
+		addUnlimitedNodesFromConfiguration();
+		view.loadExcludes(excludes);
+		view.loadExcludedThis(excludedThis);
+		view.loadExcludedLibraries(excludedLibraries);
+		view.loadExcludedDataStructure(excludedDataStructure);
+		view.loadUnlimitedLevels(unlimitedLevels);
+		view.loadUnlimitedNodes(unlimitedNodes);
+		view.loadNumLevels(numLevels);
+		view.loadNumNodes(numNodes);
+	}
+	
 	public void saveActionTracer() {
 
 		excludes = view.getExcludes();

@@ -113,6 +113,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		configuration.setEditable(true);
 		configuration.setBackground(Color.WHITE);
 		configuration.setBounds(10, 30, 404, 34);
+		configuration.addActionListener(this); 
 		_panel.add(configuration);
 
 		restoreDefaults = new JButton("Restore Defaults");
@@ -292,6 +293,11 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 			clickedOnAdd();
 		}		
 		
+		if (source == configuration) {
+			System.out.println("cambia");
+			changeConfiguration();
+		}
+		
 		if (source == restoreDefaults) {
 			clickedOnRestoreDefaults();
 		}
@@ -320,10 +326,14 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		}
 	}
 
+   
+    private void changeConfiguration() {
+    	presenter.loadConfiguration(configuration.getSelectedItem().toString());
+	    
+    }
 
 
-
-    private void clickedOnRestoreDefaults() {
+	private void clickedOnRestoreDefaults() {
     	restoreTracerConfiguration();
     	restoreDisplayTreeConfiguration();
 	    
@@ -629,11 +639,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	 public void keyReleased(KeyEvent e) {}
 
 	 public void keyTyped(KeyEvent e) {}
-	 
-	 /*public void initComboxConfiguration() {
-		 System.out.println("Antes presenter");
-		presenter.loadXmls();
-	 }*/
+	
 	 
 	 public void loadAllXmls(List<String>xmlNames) {
 		 

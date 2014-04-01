@@ -69,9 +69,11 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		/*
 		 * Instance class
 		 */
-		if (instance==null) 
-			return instance = new JavaTracerConfiguration();
-		else 
+		if (instance==null) {
+			 instance = new JavaTracerConfiguration();
+			 instance.loadFromFile(CONFIG_FILE_NAME);
+			 
+		}	
 			return instance;
 	}
 
@@ -83,10 +85,10 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		if (!folderCofig.exists())
 			folderCofig.mkdir();
 
-
-		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
-		//this.fileXml = new File(CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
+	}
 	
+	public void loadFromFile(String nameXML) {
+		this.fileXml = new File(folderCofig,nameXML + FileUtilities.EXTENSION_XML);		
 
 		if (!fileXml.exists()) {
 			/*
@@ -107,7 +109,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 			try {
 				 
-				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
 			}
 			catch (Exception e){
@@ -116,7 +118,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}else {
 			try {
 				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
 					xPath = XPathFactory.newInstance().newXPath();
 				}
 				catch (Exception e){
@@ -140,8 +142,6 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				ex.printStackTrace();
 			}
 		}
-
-
 	}
 
 	private void initExcludes() {
@@ -521,7 +521,9 @@ public class JavaTracerConfiguration extends XStreamUtil{
 			e.printStackTrace();
 		}
 	}
+	
 
+	
 	/*
 	 * Getters and Setters
 	 */
@@ -608,6 +610,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		excludesList.add(JARS);
 		return excludesList;
 	}
+	
 
 	public boolean isExcludedLibrary() {
 	    return excludedLibraries;
