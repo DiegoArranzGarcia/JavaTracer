@@ -1,14 +1,12 @@
 package com.inspector.model;
 
-import java.util.Iterator;
-
 import com.general.model.data.MethodInfo;
 import com.inspector.controller.InspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
 
-public class TreeManager implements UpdateNotifier{
+public class TreeManager implements UpdateNotifier {
 
 	private DefaultTreeLayout<Box> tree;
 	
@@ -22,26 +20,7 @@ public class TreeManager implements UpdateNotifier{
 		
 	}
 
-	public MethodBox getTextInBoxFromId(DefaultTreeLayout<MethodBox> tree, long id){
-		
-		MethodBox textInBoxExt = null;
-		boolean found = false;
-		Iterator<MethodBox> allChildren = tree.getChildren(tree.getRoot()).iterator();
-		
-		while(!found && allChildren.hasNext()){
-			
-			MethodBox child = allChildren.next();
-			found = (child.getId() == id);
-			if (found){
-				textInBoxExt = child;
-			}
-			
-		}
-		
-		return textInBoxExt;
-	}
-
-	public void expandNode(DefaultTreeLayout<Box> tree,Box box) {
+	public void expandNode(Box box) {
 		int i = 1;
 		int childs = xml.getNumChildrenOfNode(box);
 		
@@ -59,15 +38,7 @@ public class TreeManager implements UpdateNotifier{
 			i++;
 		}
 		
-		
-		box.setExpanded(true);
-	}
-
-	public void foldNode(DefaultTreeLayout<Box> tree,Box treeNode) {
-		
-		tree.removeChilds(treeNode);
-		treeNode.setExpanded(false);
-		
+		box.setLoaded(true);
 	}
 
 	public DefaultTreeLayout<Box> getTree() {

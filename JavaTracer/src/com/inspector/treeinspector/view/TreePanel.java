@@ -84,7 +84,7 @@ public class TreePanel extends JPanel {
 	}
 
 	private void paintEdges(Graphics g, Box parent) {
-		if (!getTree().isLeaf(parent)) {
+		if (!getTree().isLeaf(parent) && parent.isExpanded()) {
 			
 			Graphics2D  g2D = (Graphics2D)g;
 			Rectangle2D.Double b1 = getBoundsOfNode(parent);
@@ -98,17 +98,18 @@ public class TreePanel extends JPanel {
 				
 				Rectangle2D.Double b2 = getBoundsOfNode(child);
 				double x2 = b2.getCenterX();
-				
+
 				g2D.setStroke(new BasicStroke(DEFAULT_STROKE));
 				g.drawLine((int)x1,(int)(y1+verticalGap/2),(int)x2,(int)(y1+verticalGap/2));
 				g.drawLine((int)x2,(int)(y1+verticalGap/2),(int)x2,(int)(y1+verticalGap));
 				g2D.setStroke(new BasicStroke());
-				
+
 				paintEdges(g, child);
 				
 			}
+
 			g2D.setStroke(new BasicStroke());
-			
+
 		}
 	}
 
@@ -146,9 +147,7 @@ public class TreePanel extends JPanel {
 		g.drawRoundRect((int) box.x, (int) box.y, (int) box.width - 1,
 				(int) box.height - 1, ARC_SIZE, ARC_SIZE);
 		g2D.setStroke(new BasicStroke());
-		
-		
-		
+				
 		g.setColor(TEXT_COLOR);
 		
 		FontMetrics m = getFontMetrics(getFont());
@@ -165,10 +164,12 @@ public class TreePanel extends JPanel {
 		
 		if (treeLayout!=null){			
 			paintEdges(g, getTree().getRoot());
-	
-			for (Box textInBox : treeLayout.getNodeBounds().keySet()) {
-				paintBox(g, textInBox);
+			
+			for (Box box : treeLayout.getNodeBounds().keySet()){
+				if (box.isVisible())
+					paintBox(g, box);
 			}
+						
 		}
 	}
 }

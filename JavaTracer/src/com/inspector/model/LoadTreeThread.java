@@ -122,7 +122,7 @@ public class LoadTreeThread extends Thread{
 			
 		}
 		
-		
+		box.setLoaded(stop);
 		box.setExpanded(true);
 	}
 	

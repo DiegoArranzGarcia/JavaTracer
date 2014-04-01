@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.treeinspector.data.Box;
-import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
 public class TreeInspectorController implements MouseListener {
@@ -48,7 +47,7 @@ public class TreeInspectorController implements MouseListener {
 			
 			if (box.isExpanded())
 				fold(box);
-			else
+			else 
 				expand(box);
 			    
 		}	
@@ -56,13 +55,30 @@ public class TreeInspectorController implements MouseListener {
 
 	private void expand(Box box) {
 		
-		treeManager.expandNode(treeManager.getTree(),box);
+		if (!box.isLoaded())
+			treeManager.expandNode(box);
+		
+		Iterator<Box> iterator = treeManager.getTree().getChildren(box).iterator();
+		box.setExpanded(true);
+		
+		while (iterator.hasNext()){
+			iterator.next().setVisible(true);
+		}
+		
 		view.repaintTree(treeManager.getTree());
 		
 	}
 
 	private void fold(Box box) {	
-		treeManager.foldNode(treeManager.getTree(),box);
+		//treeManager.foldNode(treeManager.getTree(),box);
+		//box.setExpanded(false);
+		Iterator<Box> iterator = treeManager.getTree().getChildren(box).iterator();
+		box.setExpanded(false);
+		
+		while (iterator.hasNext()){
+			iterator.next().setVisible(false);
+		}
+		
 		view.repaintTree(treeManager.getTree());
 	}
 
@@ -112,11 +128,8 @@ public class TreeInspectorController implements MouseListener {
 	}
 	
 	public void mouseEntered(MouseEvent e) {}
-
 	public void mouseExited(MouseEvent e) {}
-
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
 
 	public void selectNode(Box box) {

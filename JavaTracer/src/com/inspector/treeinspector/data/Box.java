@@ -7,6 +7,8 @@ public abstract class Box {
 	protected boolean expanded;
 	protected boolean selected;
 	protected boolean haveChildren;
+	private boolean visible;
+	private boolean loaded;
 	
 	public abstract String getBoxText();
 	
@@ -14,6 +16,8 @@ public abstract class Box {
 		this.expanded = false;
 		this.selected = false;
 		this.haveChildren = false;
+		this.visible = true;
+		this.loaded = false;
 	}
 		
 	public Box(String path, long id, boolean haveChildren) {
@@ -21,7 +25,9 @@ public abstract class Box {
 		this.id = id;
 		this.expanded = false;
 		this.selected = false;
+		this.visible = true;
 		this.haveChildren = haveChildren;
+		this.loaded = !haveChildren;
 	}
 
 	public long getId() {
@@ -58,5 +64,21 @@ public abstract class Box {
 
 	public String getPath() {
 		return this.path;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public void setLoaded(boolean loaded){
+		this.loaded = loaded;
+	}
+	
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }
