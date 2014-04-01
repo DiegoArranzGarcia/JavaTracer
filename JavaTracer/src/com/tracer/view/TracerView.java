@@ -366,8 +366,19 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	public void selectionChanged(List<File> arg0) {
 
 		if (!arg0.isEmpty()){
-			String file_selected = arg0.get(0).toString();
-			presenter.selectedPath(file_selected);
+			
+			if(presenter.isExecutableJar(arg0.get(0))){
+				String file_selected = arg0.get(0).toString();
+				presenter.selectedPath(file_selected);
+				
+			}else{
+				nameClass.removeAllItems();
+				setEnableProfileAndTracer(false);
+				JOptionPane.showMessageDialog(null,Message.JARNOTEXECUTABLE);
+				
+			     
+					
+				}
 		} else {
 			nameClass.setEnabled(false);
 			nameClass.removeAllItems();

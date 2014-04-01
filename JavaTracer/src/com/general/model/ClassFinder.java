@@ -146,7 +146,7 @@ public class ClassFinder {
 	}
 
 
-	private boolean ExecutableJar(File file) {
+	public boolean ExecutableJar(File file) {
 		boolean isExecutable=false;
 		try{
 		JarFile jar = new JarFile(file);
