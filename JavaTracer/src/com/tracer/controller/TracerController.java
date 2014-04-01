@@ -70,7 +70,7 @@ public class TracerController {
 			main = tracerView.getPath();
 			File file= new File(main);
 			if(!FileUtilities.getExtension(file).equals("jar"))
-				main=tracerView.getMainClass();
+				main=classFinder.getPath(tracerView.getMainClass());
 		
 		}else
 			main = tracerView.getMainClass();
@@ -91,7 +91,7 @@ public class TracerController {
 	
 	private boolean checkIfJar() {
 		String path = tracerView.getPath();
-		String pathJar=tracerView.getMainClass();
+		String pathJar=classFinder.getPath(tracerView.getMainClass());
 		File file = new File(path);
 		File fileJar = new File(pathJar);
 		
