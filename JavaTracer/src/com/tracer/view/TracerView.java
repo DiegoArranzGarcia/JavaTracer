@@ -256,6 +256,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			if (nameXml.contains("."))
 				nameXml = nameXml.substring(nameXml.lastIndexOf(".")+1, nameXml.length());
 		}
+		
+		if(nameXml.contains("\\"))
+			nameXml = nameXml.substring(nameXml.lastIndexOf("\\")+1, nameXml.length());
+
 
 		if(trace)
 			nameXml += "_trace";

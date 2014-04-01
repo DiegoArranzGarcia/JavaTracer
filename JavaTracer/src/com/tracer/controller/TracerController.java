@@ -66,9 +66,13 @@ public class TracerController {
 		boolean jar = checkIfJar();
 		boolean profile_mode = profileMode;
 		String main;
-		if (jar)
+		if (jar){
 			main = tracerView.getPath();
-		else
+			File file= new File(main);
+			if(!FileUtilities.getExtension(file).equals("jar"))
+				main=tracerView.getMainClass();
+		
+		}else
 			main = tracerView.getMainClass();
 		String classPath = "";
 		if (!jar) 
@@ -87,8 +91,11 @@ public class TracerController {
 	
 	private boolean checkIfJar() {
 		String path = tracerView.getPath();
+		String pathJar=tracerView.getMainClass();
 		File file = new File(path);
-		return (file.isFile() && FileUtilities.isExtension(file,"jar"));
+		File fileJar = new File(pathJar);
+		
+		return (file.isFile() && FileUtilities.isExtension(file,"jar"))||(fileJar.isFile() && FileUtilities.isExtension(fileJar,"jar"));
 	}
 	
 	private String processPath(String file, String name) {

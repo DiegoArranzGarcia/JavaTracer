@@ -82,6 +82,9 @@ public class ClassFinder {
 			File[] folderFiles = file.listFiles();
 			for (int i=0;i<folderFiles.length;i++){
 			
+				if(folderFiles[i].isFile() && FileUtilities.getExtension(folderFiles[i]).equals("jar") && ExecutableJar(folderFiles[i]))	
+					classes.add(folderFiles[i].toString());
+				
 				classesFile = getClassesFromFile(folderFiles[i]);
 				classes.addAll(classesFile);
 
