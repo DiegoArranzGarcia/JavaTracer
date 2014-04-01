@@ -28,6 +28,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	private static String DELETE_ALL = "Delete All";
 	private static String SAVE = "Save";
 	private static String CANCEL = "Cancel";
+	private static String NEW_FILE = "new file";
 
 	private static String ERROR = "Error";
 	private static String ERROR_EMPTY_DELETE = "Should select at least one";
@@ -294,8 +295,12 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		}		
 		
 		if (source == configuration) {
-			System.out.println("cambia");
-			changeConfiguration();
+			System.out.println("Index: " +configuration.getSelectedIndex());
+			if (configuration.getSelectedIndex() !=- 1) {
+				System.out.println("cambia");
+				changeConfiguration();
+			}
+			
 		}
 		
 		if (source == restoreDefaults) {
@@ -641,11 +646,34 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	 public void keyTyped(KeyEvent e) {}
 	
 	 
-	 public void loadAllXmls(List<String>xmlNames) {
+	 @SuppressWarnings("unchecked")
+    public void loadAllXmls(List<String>xmlNames) {
+		 
+		 configuration.removeAllItems();
 		 
 		 for (int i=0;i<xmlNames.size();i++) {
 			 configuration.addItem(xmlNames.get(i));
 		 }
+		
+		 int size = configuration.getItemCount();
+		 int j = 0;
+		 boolean found = false;
+		 while (j < size && !found) {
+			 	found = configuration.getItemAt(j).equals(NEW_FILE);
+			 j++;
+		 }
+		 if (!found) {
+			 configuration.addItem(NEW_FILE);
+		 }
 		 
 	 }
+	 
+	 public void removeComboboxConfig() {
+		 configuration.removeAllItems();
+	 }
+	 
+	 public String getSelectedCombobox() {
+		 return configuration.getSelectedItem().toString();
+	 }
+
 }

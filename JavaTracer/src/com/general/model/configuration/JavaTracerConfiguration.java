@@ -15,7 +15,6 @@ import org.w3c.dom.*;
 import com.general.model.FileUtilities;
 import com.general.model.XStreamUtil;
 import com.profiler.model.data.ExcludedClassesMethods;
-import com.thoughtworks.xstream.XStream;
 
 
 public class JavaTracerConfiguration extends XStreamUtil{
@@ -47,6 +46,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private File fileXml;
 	private File folderCofig;
 	private FileWriter writer;
+	private String nameActualXML;
 	/*
 	 * Tracer
 	 */
@@ -71,7 +71,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		 */
 		if (instance==null) {
 			 instance = new JavaTracerConfiguration();
-			 instance.loadFromFile(CONFIG_FILE_NAME);
+			 instance.loadFromFileInit();
 			 
 		}	
 			return instance;
@@ -84,11 +84,47 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		this.folderCofig =  new File(CONFIG_FOLDER_NAME);
 		if (!folderCofig.exists())
 			folderCofig.mkdir();
+		
+		nameActualXML = CONFIG_FILE_NAME; 
 
 	}
 	
 	public void loadFromFile(String nameXML) {
 		this.fileXml = new File(folderCofig,nameXML + FileUtilities.EXTENSION_XML);		
+		this.nameActualXML = nameXML;
+
+		if (fileXml.exists()) {
+			try {
+				try {
+					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
+					xPath = XPathFactory.newInstance().newXPath();
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+
+				excludesList = getExludesFromFile();
+				excludedThis = getExcludedThisFromFile();
+				excludedDataStructure = getExcludedDataStructureFromFile();
+				excludedClassesMethods = getExcludesClassesMethodFromFile();
+				excludedLibraries = getExcludedLibrariesFromFile();
+				
+				unlimitedLevels = getUnlimitedLevelsFromFile();
+				unlimitedNodes = getUnlimitedNodesFromFile();
+				numlevels =  getNumLevelsFromFile();
+				numNodes = getNumNodesFromFile();
+				
+
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public void loadFromFileInit() {
+		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);		
+		this.nameActualXML = CONFIG_FILE_NAME;
 
 		if (!fileXml.exists()) {
 			/*
@@ -109,7 +145,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 			try {
 				 
-				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
+				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 				xPath = XPathFactory.newInstance().newXPath();
 			}
 			catch (Exception e){
@@ -118,7 +154,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		}else {
 			try {
 				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
+					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
 					xPath = XPathFactory.newInstance().newXPath();
 				}
 				catch (Exception e){
@@ -492,30 +528,17 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		write(string);
 	}
 
-	public void saveConfiguration() { 
+	public void saveConfiguration(String nameXML) { 
 		this.folderCofig =  new File(CONFIG_FOLDER_NAME);
 		if (!folderCofig.exists())
 			folderCofig.mkdir();
 
 
-		this.fileXml = new File(folderCofig,CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);	
+		this.fileXml = new File(folderCofig,nameXML + FileUtilities.EXTENSION_XML);	
 		generateFile();
 
 		try {
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+	FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
-			xPath = XPathFactory.newInstance().newXPath();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	public void saveNewConfiguration(String nameXml) { 
-		this.xStream = new XStream();
-		File fileXml = new File(nameXml + FileUtilities.EXTENSION_XML);
-		generateFile();
-
-		try {
-			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+	FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
 			xPath = XPathFactory.newInstance().newXPath();
 		}catch (Exception e){
 			e.printStackTrace();
@@ -627,4 +650,12 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	public void setFolderCofig(File folderCofig) {
 		this.folderCofig = folderCofig;
 	}
+
+	public String getNameActualXML() {
+	    return nameActualXML;
+    }
+
+	public void setNameActualXML(String nameActualXML) {
+	    this.nameActualXML = nameActualXML;
+    }
 }

@@ -79,6 +79,8 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		}
 
 		view.setVisible(true); 
+
+		view.removeComboboxConfig();
 		
 		view.loadExcludes(excludes);
 		view.loadExcludedThis(excludedThis);
@@ -89,6 +91,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		view.loadUnlimitedNodes(unlimitedNodes);
 		view.loadNumLevels(numLevels);
 		view.loadNumNodes(numNodes);
+		
 		loadXmls();
 	}
 
@@ -105,13 +108,9 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	}
 
-	public void saveNewConfiguration() {
-		//TODO 
-	}
 	
 	public void loadConfiguration(String nameXML) {
 		
-		//TODO
 		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance(); 
 		configuration.loadFromFile(nameXML); 
 		
@@ -123,6 +122,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		addNumLevelsFromConfiguration();
 		addNumNodesFromConfiguration();
 		addUnlimitedNodesFromConfiguration();
+		
 		view.loadExcludes(excludes);
 		view.loadExcludedThis(excludedThis);
 		view.loadExcludedLibraries(excludedLibraries);
@@ -149,7 +149,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		excludedDataStructure =view.getExcludedDataStructure();
 		configuration.setExcludedDataStructure(excludedDataStructure);
 		configuration.setExcludedLibrary(excludedLibraries);
-		configuration.saveConfiguration();
+		configuration.saveConfiguration(view.getSelectedCombobox());
 
 	}
 	
@@ -170,7 +170,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 				unlimitedNodes = view.getUnlimitedNodes();
 				configuration.setUnlimitedNodes(unlimitedNodes);
 				
-				configuration.saveConfiguration();
+				configuration.saveConfiguration(view.getSelectedCombobox());
 			}
 
 		}

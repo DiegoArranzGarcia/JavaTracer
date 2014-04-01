@@ -105,7 +105,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			}
 		}
 		
-		configuration.saveConfiguration();
+		configuration.saveConfiguration(JavaTracerConfiguration.getInstance().getNameActualXML());
 	}
 
 	public void cancel() {

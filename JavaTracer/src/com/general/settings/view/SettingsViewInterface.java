@@ -28,5 +28,7 @@ public interface SettingsViewInterface {
 	public void setVisible(boolean visible);
 	public void setPresenter(SettingsPresenterInterface presenter);
     public void loadAllXmls(List<String> xmlOnlyNames);
+    public void removeComboboxConfig();
+    public String getSelectedCombobox();
 
 }
