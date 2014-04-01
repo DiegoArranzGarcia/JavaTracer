@@ -86,4 +86,8 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 		this.presenter = tracerController;
 	}
 
+	public void maximize() {
+		presenter.maximize();
+	}
+
 }

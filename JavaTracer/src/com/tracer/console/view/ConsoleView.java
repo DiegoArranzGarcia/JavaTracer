@@ -8,11 +8,14 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +27,7 @@ import com.general.resources.ImageLoader;
 import com.tracer.console.presenter.ConsolePresenter;
 
 @SuppressWarnings("serial")
-public class ConsoleView extends WebPanel implements ActionListener{
+public class ConsoleView extends WebPanel implements ActionListener,ComponentListener{
 	
 	private static final String CONSOLE_TEXT = "Console";
 	private static final String CLEAR_CONSOLE = "Clear console";
@@ -34,7 +37,6 @@ public class ConsoleView extends WebPanel implements ActionListener{
 	private ImageLoader imageLoader;
 	private Status status;
 	private double lastSize;
-	private int height;
 	
 	private WebToggleButton btnClearConsole;
 	private WebToggleButton btnMinimizeConsole;
@@ -46,6 +48,8 @@ public class ConsoleView extends WebPanel implements ActionListener{
 	private WebToggleButton btnStop;
 	private WebToggleButton btnMaximizeConsole;
 	private WebScrollPane scrollPane;
+	private int defaultHeight;
+	private int currentHeight;
 	
 	public ConsoleView(){
 		
@@ -86,6 +90,7 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		btnStop.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnStop.setDrawFocus(false);
 		btnStop.setIcon(new ImageIcon(imageLoader.getStopIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+		btnStop.addActionListener(this);
 		header.add(btnStop);
 		
 		btnPlay = new WebToggleButton();
@@ -95,6 +100,7 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		btnPlay.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnPlay.setIcon(new ImageIcon(imageLoader.getPlayIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnPlay.setDrawFocus(false);
+		btnPlay.addActionListener(this);
 		header.add(btnPlay);
 		
 		btnMinimizeConsole = new WebToggleButton();
@@ -113,6 +119,7 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		btnMaximizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMaximizeConsole.setIcon(new ImageIcon(imageLoader.getMaximizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMaximizeConsole.setDrawFocus(false);
+		btnMaximizeConsole.addActionListener(this);
 		header.add(btnMaximizeConsole);
 		
 		btnClearConsole = new WebToggleButton();
@@ -128,6 +135,8 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		scrollPane.setColumnHeaderView(panel);
 		scrollPane.setDrawFocus(false);
 		add(scrollPane);
+		
+		addComponentListener(this);
 	}
 	
 	public void setPresenter(ConsolePresenter presenter){
@@ -143,35 +152,52 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		} else if (source.equals(btnMaximizeConsole)){
 			maximize();
 		} else if (source.equals(btnPlay)){
-			play();
+			clickedOnPlay();
 		} else if (source.equals(btnStop)){
-			stop();
+			clickedOnStop();
 		}
 		
 	}
-
-	private void stop() {
+	
+	public void stop(){
+		btnPlay.setVisible(true);
+		btnStop.setVisible(false);
+		btnStop.setSelected(false);
+	}
+	
+	public void clickedOnStop() {
+		//presenter.clickedOnStop();
 	}
 
-	private void play() {
+	public void clickedOnPlay() {
+		//presenter.clickedOnplay();
 	}
 
-	private void maximize() {
-		scrollPane.setSize(scrollPane.getWidth(),header.getHeight()+4);
-		btnMaximizeConsole.setVisible(true);
+	public void maximize() {
+		currentHeight = defaultHeight;
+		presenter.maximize();
+		Rectangle bound = getBounds();
+		setBounds(bound.x, bound.y, bound.width, currentHeight);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		btnMinimizeConsole.setVisible(true);
+		btnMaximizeConsole.setVisible(false);
+		btnMaximizeConsole.setSelected(false);
+	}
+
+	public void minimize() {
+		currentHeight = header.getHeight() + 6;
 		presenter.minimize();
-	}
-
-	private void minimize() {
-		height = header.getHeight()+4;
-		scrollPane.setSize(scrollPane.getWidth(),height);
+		Rectangle bound = getBounds();
+		setBounds(bound.x, bound.y, bound.width, currentHeight);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		btnMinimizeConsole.setVisible(false);
 		btnMaximizeConsole.setVisible(true);
-		btnMinimizeConsole.setVisible(true);
+		btnMinimizeConsole.setSelected(false);
 	}
 
 	public void clear() {
 		console.clear();
+		btnClearConsole.setSelected(false);
 	}
 
 	public void writeError(String string) {
@@ -261,9 +287,31 @@ public class ConsoleView extends WebPanel implements ActionListener{
 		return text;
 	}
 
-	public int defaultHeight() {
-		
-		return 0;
+	public void componentHidden(ComponentEvent e) {}
+	public void componentMoved(ComponentEvent e) {}
+	public void componentShown(ComponentEvent e) {}
+	
+	public void componentResized(ComponentEvent e){
+		if (defaultHeight == 0)
+			defaultHeight = getHeight();
+	}
+	
+	public int getDefaultHeight(){
+		return defaultHeight;
+	}
+
+	public int getCurrentHeight() {		
+		return currentHeight;
+	}
+
+	public void setEnabledStart(boolean enable){
+		btnPlay.setEnabled(enable);
+	}
+
+	public void play() {
+		btnPlay.setVisible(false);
+		btnStop.setVisible(true);
+		btnPlay.setSelected(false);
 	}
 	
 }

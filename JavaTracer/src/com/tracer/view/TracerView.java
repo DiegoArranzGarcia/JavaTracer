@@ -420,6 +420,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	public void consoleMinimize() {
-		setSize(DEFAULT_WINDOW_WIDTH,console.defaultHeight() - console.getHeight());
+		setSize(DEFAULT_WINDOW_WIDTH,DEFAULT_WINDOW_HEIGHT-(console.getDefaultHeight() - console.getCurrentHeight()));
+	}
+
+	public void consoleMaximize() {
+		setSize(DEFAULT_WINDOW_WIDTH,DEFAULT_WINDOW_HEIGHT);
 	}
 }

@@ -210,6 +210,11 @@ public class TracerController {
 	public void minimize() {
 		tracerView.consoleMinimize();
 	}
+
+	public void maximize() {
+		tracerView.consoleMaximize();
+	}
+
 	
 	public boolean isExecutableJar(File file){
 		
