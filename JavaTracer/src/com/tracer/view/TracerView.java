@@ -367,6 +367,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 
 		if (!arg0.isEmpty()){
 			
+		if(arg0.get(0).isFile()&& FileUtilities.getExtension(arg0.get(0)).equals("jar"))
 			if(presenter.isExecutableJar(arg0.get(0))){
 				String file_selected = arg0.get(0).toString();
 				presenter.selectedPath(file_selected);
