@@ -74,10 +74,11 @@ public class EventThread extends Thread {
         this.connected = true;
         this.profiler = profiler;
         this.tracer = tracer;
+        this.excludes = new ArrayList<String>();
         
-        excludes = new ArrayList<String>();
         JavaTracerConfiguration javaTracerConfiguration = JavaTracerConfiguration.getInstance();
         
+        // Excludes
         
 		excludes.addAll(javaTracerConfiguration.getExcludesList());
 		
@@ -85,6 +86,8 @@ public class EventThread extends Thread {
         	excludes.addAll(getLibraryExcludes(config));
         
         excludesClassMethods = javaTracerConfiguration.getExcludeClassMethods();
+        
+        // Profiler
          
         this.enableProfiling = config.isProfiling_mode();
        
@@ -94,6 +97,8 @@ public class EventThread extends Thread {
         	writer = new TraceWriter(config.getNameXml());
         	writer.writeThreadInfo(new ThreadInfo());
         }  
+        
+        // Managers
         
         ClassUtils utils = new ClassUtils(config.getClassPath(),excludes);
         
@@ -153,6 +158,7 @@ public class EventThread extends Thread {
         
         if (forceExit){
         	vm.exit(-1);
+        	writer.close();
         	tracer.finishedTrace();
         }
     }

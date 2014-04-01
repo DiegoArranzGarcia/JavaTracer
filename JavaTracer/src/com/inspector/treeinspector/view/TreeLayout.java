@@ -49,45 +49,7 @@ import org.abego.treelayout.NodeExtentProvider;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
 
-/**
- * Implements the actual tree layout algorithm.
- * <p>
- * The nodes with their final layout can be retrieved through
- * {@link #getNodeBounds()}.
- * <p>
- * See <a href="package-summary.html">this summary</a> to get an overview how to
- * use TreeLayout.
- * 
- * 
- * @author Udo Borkowski (ub@abego.org)
- * 
- * @param <TreeNode>
- */
 public class TreeLayout<TreeNode> {
-	/*
-	 * Differences between this implementation and original algorithm
-	 * --------------------------------------------------------------
-	 * 
-	 * For easier reference the same names (or at least similar names) as in the
-	 * paper of Buchheim, J&uuml;nger, and Leipert are used in this
-	 * implementation. However in the external interface "first" and "last" are
-	 * used instead of "left most" and "right most". The implementation also
-	 * supports tree layouts with the root at the left (or right) side. In that
-	 * case using "left most" would refer to the "top" child, i.e. using "first"
-	 * is less confusing.
-	 * 
-	 * Also the y coordinate is not the level but directly refers the y
-	 * coordinate of a level, taking node's height and gapBetweenLevels into
-	 * account. When the root is at the left or right side the y coordinate
-	 * actually becomes an x coordinate.
-	 * 
-	 * Instead of just using a constant "distance" to calculate the position to
-	 * the next node we refer to the "size" (width or height) of the node and a
-	 * "gapBetweenNodes".
-	 */
-
-	// ------------------------------------------------------------------------
-	// tree
 
 	private final TreeForTreeLayout<TreeNode> tree;
 

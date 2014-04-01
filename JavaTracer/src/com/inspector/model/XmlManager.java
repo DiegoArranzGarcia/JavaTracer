@@ -165,7 +165,13 @@ public class XmlManager extends XStreamUtil{
 			expression = path + "/" + TAG_METHOD_EXIT_EVENT;  
 		    xPathExpression = xPath.compile(expression);
 		    node = (Node) xPathExpression.evaluate(xmlDocument,XPathConstants.NODE);
-			MethodExitInfo exit = (MethodExitInfo) xStream.fromXML(nodeToString(node));
+		    
+		    MethodExitInfo exit = null;
+		    try {
+		    	exit = (MethodExitInfo) xStream.fromXML(nodeToString(node));
+		    } catch (Exception e){
+		    	//There where no exit method
+		    }
 			
 			info = new MethodInfo(entry,exit);
 			

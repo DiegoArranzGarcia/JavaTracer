@@ -33,14 +33,6 @@ import org.abego.treelayout.NodeExtentProvider;
 
 import com.inspector.treeinspector.data.Box;
 
-/**
- * A {@link NodeExtentProvider} for nodes of type {@link TextInBox}.
- * <p>
- * As one would expect this NodeExtentProvider returns the width and height as
- * specified with each TextInBox.
- * 
- * @author Udo Borkowski (ub@abego.org)
- */
 public class BoxExtentProvider implements NodeExtentProvider<Box> {
 
 	public double getHeight(Box box) {

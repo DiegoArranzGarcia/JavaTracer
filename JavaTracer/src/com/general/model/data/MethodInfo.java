@@ -28,21 +28,26 @@ public class MethodInfo {
 	}
 
 	public Data getReturn_data() {
-		return exit.getReturnData();
+		if (exit != null)
+			return exit.getReturnData();
+		else
+			return null;
 	}
 
 	public List<ChangeInfo> getChanges() {
-		ChangeDetector detector = new ChangeDetector();
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
-		List<Data> entryArguments = entry.getArguments();
-		List<Data> exitArguments = exit.getArguments();
-		for (int i=0;i<entryArguments.size();i++){
-			changes.addAll(detector.getChangesBetween(entryArguments.get(i),exitArguments.get(i)));
+		
+		if (exit != null){
+			ChangeDetector detector = new ChangeDetector();
+			List<Data> entryArguments = entry.getArguments();
+			List<Data> exitArguments = exit.getArguments();
+			for (int i=0;i<entryArguments.size();i++){
+				changes.addAll(detector.getChangesBetween(entryArguments.get(i),exitArguments.get(i)));
+			}
+			
+			if ((entry.getThis_data() != null) && (exit.getThis_data() != null))
+				changes.addAll(detector.getChangesBetween(entry.getThis_data(), exit.getThis_data()));
 		}
-		
-		if ((entry.getThis_data() != null) && (exit.getThis_data() != null))
-			changes.addAll(detector.getChangesBetween(entry.getThis_data(), exit.getThis_data()));
-		
 		return changes;
 	}
 
