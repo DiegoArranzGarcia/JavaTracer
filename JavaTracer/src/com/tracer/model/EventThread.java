@@ -158,7 +158,8 @@ public class EventThread extends Thread {
         
         if (forceExit){
         	vm.exit(-1);
-        	writer.close();
+        	if (!enableProfiling)
+        		writer.close();
         	tracer.finishedTrace();
         }
     }
