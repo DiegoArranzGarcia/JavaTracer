@@ -78,9 +78,22 @@ public class Profiler implements ProfilerModelInterface{
 
 	private static List<String> splitByDot(String completeName) {
 		List<String> namesList = new ArrayList<String>();
-		String[] split = completeName.split("\\.");
+		int index = completeName.indexOf('(');
+		String splitedString = completeName;
+		int lastDot = 0;
+		if (index != -1){
+			lastDot = completeName.substring(0,index).lastIndexOf('.');
+			splitedString = completeName.substring(0,lastDot);
+		}
+		
+		String[] split = splitedString.split("\\.");
 		for (int i = 0;i<split.length;i++)
 			namesList.add(split[i]);
+		
+		if (index != -1){
+			namesList.add(completeName.substring(lastDot+1));
+		}
+		
 		return namesList;
 	}
 	
