@@ -46,8 +46,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static final int DEFAULT_WINDOW_HEIGHT = 500;
 
 	private static String LABEL_PATH = "Select a directory";
-	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class are located.";
-	private static String LABEL_NAME_CLASS = "Select a class";
+	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class or .jar are located.";
+	private static String LABEL_NAME_CLASS = "Select a class / jar";
 
 	private TracerController presenter;
 
@@ -83,10 +83,10 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		chooser = new WebFileChooserField();
 		chooser.setBounds(245, 60, 450, 30);
 
-		chooser.setTitle("Select a directory or jar file");
+		chooser.setTitle("Select a directory");
 		chooser.setCurrentDirectory(FileUtilities.CURRENT_DIR);
-		FileNameExtensionFilter jarFilter = new FileNameExtensionFilter("Jar Files","jar");
-		chooser.setFileFilter(jarFilter);
+		FileNameExtensionFilter Filter = new FileNameExtensionFilter("Only Directories","Folders");
+		chooser.setFileFilter(Filter);
 		chooser.setMultiSelectionEnabled(false);
 		chooser.setShowFileShortName(false);	
 		chooser.addSelectedFilesListener(this);
