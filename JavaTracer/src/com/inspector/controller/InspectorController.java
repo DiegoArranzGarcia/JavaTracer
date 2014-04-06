@@ -6,14 +6,19 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.w3c.dom.Node;
+
 import com.general.model.FileUtilities;
 import com.general.model.data.MethodInfo;
 import com.general.presenter.JavaTracerPresenter;
 import com.inspector.model.TreeManager;
+import com.inspector.model.XmlManager;
 import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
+import com.inspector.treeinspector.data.ThreadBox;
+import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.view.InspectorLoadingView;
 import com.inspector.view.InspectorView;
 
@@ -27,7 +32,8 @@ public class InspectorController {
 	private ObjectInspectorController objectInspector;
 	
 	private	TreeManager treeManager;
-
+	
+	
 	public InspectorController(){
 		treeManager = new TreeManager();
 		treeInspector = new TreeInspectorController(treeManager);
@@ -36,7 +42,7 @@ public class InspectorController {
 		objectInspector.setController(this);
 		treeManager.setController(this);
 		objectInspector.showTable();
-	}
+		}
 
 	public void clickedOnLoadTrace(){
 		
@@ -83,9 +89,18 @@ public class InspectorController {
     		loadingView.dispose();
     }
     
-    public void updateInfo(int numNodes, int total,int percentage) {
+    public void updateInfo(int numNodes, int total,int percentage,XmlManager xml) {
+    	
+    	if(total==0)
+    		{total=getNumberNodes(xml);
+    		percentage=(numNodes*100)/total;
+    		}
+    		
+    	   
+    	
     	if (loadingView != null)
     		loadingView.updateInfo(numNodes,total,percentage);
+    	
 	}
 
 	private void createLoadingView() {
@@ -133,4 +148,19 @@ public class InspectorController {
 		controller.clickedOnAbout();
 	}
 
+	private int getNumberNodes(XmlManager xml){
+		int i=0;
+		
+		
+		Node node=xml.getNode(i);
+		
+		while(node!=null){
+			i++;
+			node=xml.getNode(i);
+		}
+		
+		
+	 return i+1;
+	}
+	
 }
