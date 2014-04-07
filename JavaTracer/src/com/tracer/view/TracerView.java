@@ -33,7 +33,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 
 	private static final String ADD_ARGUMENTS = "Add arguments";
 	private static final String ABOUT = "About";
-	private static final String HELP = "Help";
 	private static final String SETTINGS = "Settings";
 	private static final String EXIT = "Exit";
 	private static final String LOAD_TRACE = "Load Trace";
@@ -63,7 +62,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private WebMenuItem mntmTrace;
 	private WebMenuItem mntmProfile;
 	private WebMenuItem mntmSettings;
-	private WebMenuItem mntmHelp;
 	private WebMenuItem mntmAbout;
 	
 	private ConsoleView console;
@@ -185,9 +183,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		menuBar.add(mntmSettings);
 		mntmSettings.addActionListener(this);
 
-		mntmHelp = new WebMenuItem(HELP);
-		menuBar.add(mntmHelp);
-		mntmHelp.addActionListener(this);
 
 		mntmAbout = new WebMenuItem(ABOUT);
 		menuBar.add(mntmAbout);			
@@ -309,8 +304,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 			dataChangedComboBox();
 		} else if (source.equals(mntmSettings)){
 			clickedOnSettings();
-		} else if (source.equals(mntmHelp)){
-			clickedOnHelp();
 		} else if (source.equals(mntmAbout)){
 			clickedOnAbout();
 		}
@@ -320,9 +313,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		presenter.clickedOnAbout();
 	}
 
-	private void clickedOnHelp() {
-		//TODO : SHOW HELP
-	}
 
 	private void clickedOnSettings() {
 		presenter.clickOnSettings();

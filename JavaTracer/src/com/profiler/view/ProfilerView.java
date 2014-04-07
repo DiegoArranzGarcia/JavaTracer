@@ -26,7 +26,9 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
 
+import com.alee.laf.label.WebLabel;
 import com.general.model.FileUtilities;
+import com.general.resources.ImageLoader;
 import com.general.view.jtreetable.*;
 import com.profiler.model.ProfilerTree;
 import com.profiler.model.data.ProfileData;
@@ -69,6 +71,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static double PERCENTAGE_WIDTH = 0.75;
 	private static double PERCENTAGE_HEIGHT = 0.75;
 	private static final int NUM_CLASSES = 10;
+	private static String HELP_SAVE_TOOLTIP ="Exclude useless methods/classes/packages the trace will be faster ";
+	private static String HELP_DOUBLECLICK_TOOLTIP ="class's methods by double click in her";
+	private static String HELP_EXCLUDES_TOOLTIP ="recalculate the chart but you must save for next trace";
 	
 	private ProfilerPresenterInterface presenter;
 	private ProfileCellRenderer renderer;
@@ -93,9 +98,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private JMenuItem mntmExit;
 	private boolean tableLoaded;
 	private JMenuItem mntmSettings;
-	private AbstractButton mntmHelp;
 	private JMenuItem mntmAbout;
-	
+	private WebLabel helpSave;
+	private WebLabel helpDoubleClick;
     		    
 	/**
 	 * Creates the profile view. This view is not visible until the presenter (which must be set), make the
@@ -124,21 +129,43 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         splitPane.setRightComponent(panelRight);
         panelRight.setLayout(new BorderLayout(0, 0));
         
+       
+        
         panel = new JPanel();
         panelRight.add(panel, BorderLayout.SOUTH);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 7));
         
         btnSave = new JButton("Save");
-        panel.add(btnSave);
+        
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        helpSave = new WebLabel();
+		helpSave.setBounds(707, 62, 24, 24);
+		helpSave.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
+		helpSave.setToolTipText(HELP_SAVE_TOOLTIP);
+
+        helpDoubleClick= new WebLabel();
+		helpDoubleClick.setBounds(707, 62, 24, 24);
+		helpDoubleClick.setIcon(new ImageIcon(imageLoader.getHelpIcon().getImage().getScaledInstance(24,24,Image.SCALE_SMOOTH)));
+		helpDoubleClick.setToolTipText(HELP_DOUBLECLICK_TOOLTIP);
+
+		
+        panel.add(helpSave);
+		panel.add(btnSave);
         btnSave.addActionListener(this);        
         
         btnCancel = new JButton("Cancel");
         panel.add(btnCancel);
         
         JScrollPane scrollPane = new JScrollPane();
+        panelRight.add(helpDoubleClick, BorderLayout.NORTH); 
         panelRight.add(scrollPane, BorderLayout.CENTER);
         
+
+        
+        
+        
         table = new JTreeTable();
+        table.setToolTipText(HELP_EXCLUDES_TOOLTIP);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         ProfilerHeaderData headerData = new ProfilerHeaderData();
@@ -176,9 +203,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         pieChartPanel = new JPanel();
         splitPane.setLeftComponent(pieChartPanel);
         
+        
         addComponentListener(this);
         table.addMouseListener(this);
-        
         splitPane.setDividerLocation(560);
         
         menuBar = new JMenuBar();
@@ -225,9 +252,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         mntmSettings.addActionListener(this);
         menuBar.add(mntmSettings);
         
-        mntmHelp = new JMenuItem(HELP);
-        mntmHelp.addActionListener(this);
-        menuBar.add(mntmHelp);
         
         mntmAbout = new JMenuItem(ABOUT);
         mntmAbout.addActionListener(this);
@@ -259,8 +283,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			clickedOnSave();
 		} else if (source.equals(mntmSettings)){
 			clickedOnSettings();
-		} else if (source.equals(mntmHelp)){
-			clickedOnHelp();
 		} else if (source.equals(mntmAbout)){
 			clickedOnAbout();
 		} else if (source.equals(btnCancel)){
@@ -284,10 +306,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
      * @see {@link com.general.presenter.JavaTracerPresenter#clickedOnHelp()}
      */
 	
-	private void clickedOnHelp() {
-		
-	}
-
+	
 	 /**
      * Action performed when clicked on Settings. 
      * The final result it's to show the settings of application. 
