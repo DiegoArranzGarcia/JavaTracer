@@ -39,7 +39,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	ActionListener,MouseListener,TableModelListener {
 
 	private static final String SETTINGS = "Settings";
-	private static final String HELP = "Help";
 	private static final String ABOUT = "About";
 	private static final String NUM_CALLS = "Total calls: ";
 	private static final String FILE = "File";

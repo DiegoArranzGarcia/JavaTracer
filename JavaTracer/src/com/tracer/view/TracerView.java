@@ -26,10 +26,10 @@ import com.general.model.FileUtilities;
 import com.general.resources.ImageLoader;
 import com.general.view.WebFileChooserField;
 import com.tracer.console.view.ConsoleView;
-import com.tracer.controller.TracerController;
+import com.tracer.presenter.TracerPresenterInterface;
 
 @SuppressWarnings("serial")
-public class TracerView extends JFrame implements ActionListener, FilesSelectionListener{
+public class TracerView extends JFrame implements ActionListener, FilesSelectionListener,TracerViewInterface{
 
 	private static final String ADD_ARGUMENTS = "Add arguments";
 	private static final String ABOUT = "About";
@@ -48,7 +48,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	private static String HELP_PATH_TOOLTIP = "Select a directory where all .class or .jar are located.";
 	private static String LABEL_NAME_CLASS = "Select a class / jar";
 
-	private TracerController presenter;
+	private TracerPresenterInterface presenter;
 
 	private WebButton trace,btnArguments,profile;
 	private WebComboBox nameClass;
@@ -280,8 +280,8 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		nameClass.setEnabled(true);		
 	}
 
-	public void setController(TracerController controller){
-		presenter = controller;
+	public void setController(TracerPresenterInterface presenter){
+		this.presenter = presenter;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -424,5 +424,9 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 
 	public void consoleMaximize() {
 		setSize(DEFAULT_WINDOW_WIDTH,DEFAULT_WINDOW_HEIGHT);
+	}
+	
+	public JFrame getView() {
+		return this;
 	}
 }

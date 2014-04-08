@@ -13,12 +13,12 @@ import com.inspector.controller.InspectorController;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
-import com.tracer.controller.TracerController;
+import com.tracer.presenter.TracerPresenter;
 import com.tracer.view.TracerView;
 
 public class JavaTracerPresenter {
 
-	private TracerController tracerController;
+	private TracerPresenter tracerController;
 	private ProfilerPresenter profilerPresenter;
 	private InspectorController inspectorController;
 	private SettingsPresenter settingsPresenter;
@@ -37,7 +37,7 @@ public class JavaTracerPresenter {
 	public JavaTracerPresenter(){
 		setLookAndFeel();
 		setUIFont();
-		this.tracerController = new TracerController();
+		this.tracerController = new TracerPresenter();
 		this.profilerPresenter = new ProfilerPresenter();
 		this.inspectorController = new InspectorController();
 		this.settingsPresenter = new SettingsPresenter();
@@ -113,7 +113,7 @@ public class JavaTracerPresenter {
 	
 	// Getters and setters
 	
-	public TracerController getTracerController() {
+	public TracerPresenter getTracerController() {
 		return tracerController;
 	}
 
@@ -125,7 +125,7 @@ public class JavaTracerPresenter {
 		return inspectorController;
 	}
 
-	public void setTracerController(TracerController tracerController) {
+	public void setTracerController(TracerPresenter tracerController) {
 		this.tracerController = tracerController;
 	}
 

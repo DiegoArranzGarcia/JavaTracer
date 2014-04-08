@@ -3,12 +3,12 @@ package com.tracer.arguments.presenter;
 import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.view.ArgumentsView;
 import com.tracer.arguments.view.ArgumentsViewInterface;
-import com.tracer.controller.TracerController;
+import com.tracer.presenter.TracerPresenter;
 
 public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 	
 	private ArgumentsViewInterface view;
-	private TracerController presenter;
+	private TracerPresenter presenter;
 
 	private String[] arguments;
 	
@@ -36,7 +36,7 @@ public class ArgumentsPresenter implements ArgumentsPresenterInterface{
 		view.setVisible(false);	
 	}
 	
-	 public void setController(TracerController tracerController) {
+	 public void setController(TracerPresenter tracerController) {
 			this.presenter = tracerController;
 		}
 	

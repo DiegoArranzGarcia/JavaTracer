@@ -2,11 +2,11 @@ package com.tracer.console.presenter;
 
 import com.tracer.console.model.Console;
 import com.tracer.console.view.ConsoleView;
-import com.tracer.controller.TracerController;
+import com.tracer.presenter.TracerPresenter;
 
 public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 	
-	private TracerController presenter;
+	private TracerPresenter presenter;
 	
 	private Console console;
 	private ConsoleView view;
@@ -83,7 +83,7 @@ public class ConsolePresenter implements ConsolePresenterInterface,SizeUpdater{
 		presenter.minimize();
 	}
 
-	public void setController(TracerController tracerController) {
+	public void setController(TracerPresenter tracerController) {
 		this.presenter = tracerController;
 	}
 

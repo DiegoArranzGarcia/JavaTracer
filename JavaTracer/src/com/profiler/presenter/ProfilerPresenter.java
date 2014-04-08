@@ -33,7 +33,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	private static final String XML_EXT = "xml";
 	private static final String OPEN_PROFILE = "Open profile";
 	
-	private JavaTracerPresenter controller;
+	private JavaTracerPresenter javaTracerPresenter;
 	
 	private ProfilerModelInterface profiler;
 	private ProfilerViewInterface view;
@@ -46,7 +46,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 	
 	public void setController(JavaTracerPresenter javaTracerController) {
-		this.controller = javaTracerController;
+		this.javaTracerPresenter = javaTracerController;
 	}
 		
 	public void showProfile(String profileFile){
@@ -210,11 +210,11 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void clickedOnSettings() {
-		controller.clickedOnSettings();
+		javaTracerPresenter.clickedOnSettings();
 	}
 
 	public void clickedOnAbout() {
-		controller.clickedOnAbout();
+		javaTracerPresenter.clickedOnAbout();
 	}
 
 }

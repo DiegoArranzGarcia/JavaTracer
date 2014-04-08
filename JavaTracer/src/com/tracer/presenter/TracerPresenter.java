@@ -1,4 +1,4 @@
-package com.tracer.controller;
+package com.tracer.presenter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,11 +14,12 @@ import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.console.presenter.ConsolePresenter;
 import com.tracer.model.Tracer;
 import com.tracer.view.TracerView;
+import com.tracer.view.TracerViewInterface;
 
-public class TracerController {
+public class TracerPresenter implements TracerPresenterInterface {
 	
-	private TracerView tracerView;
-	private JavaTracerPresenter presenter;
+	private TracerViewInterface tracerView;
+	private JavaTracerPresenter javaTracerPresenter;
 	private ArgumentsPresenter argumentsPresenter;
 	private ConsolePresenter consolePresenter;
 	
@@ -28,7 +29,7 @@ public class TracerController {
 	private ClassFinder classFinder;
 	private JarFinder jarFinder;
 	
-	public TracerController(){
+	public TracerPresenter(){
 		tracer = new Tracer();
 		jarFinder = new JarFinder();
 		classFinder = new ClassFinder();
@@ -56,7 +57,7 @@ public class TracerController {
 		this.lastConfig = getAllConfig(true);		
 		consolePresenter.resetConsole();
 		consolePresenter.play();
-		tracer.profile(lastConfig,presenter.getProfiler());	
+		tracer.profile(lastConfig,javaTracerPresenter.getProfiler());	
 	}
 	
 	private RunConfiguration getAllConfig(boolean profileMode) {
@@ -151,7 +152,7 @@ public class TracerController {
 
 	public void clickOnSettings() {
 		//tracerView.setVisible(false);
-		presenter.clickedOnSettings();
+		javaTracerPresenter.clickedOnSettings();
 	}
 	
 	
@@ -162,15 +163,15 @@ public class TracerController {
 	}
 
 	public void setPresenter(JavaTracerPresenter javaTracerPresenter) {
-		this.presenter = javaTracerPresenter; 
+		this.javaTracerPresenter = javaTracerPresenter; 
 	}
 
 	public void clickedOnLoadProfile() {
-		presenter.clickedOnLoadProfile(tracerView);
+		javaTracerPresenter.clickedOnLoadProfile(tracerView.getView());
 	}
 
 	public void clickedOnLoadTrace() {
-		presenter.clickedOnLoadTrace(tracerView);
+		javaTracerPresenter.clickedOnLoadTrace(tracerView.getView());
 	}
 
 	public void launching() {
@@ -189,7 +190,7 @@ public class TracerController {
 		consolePresenter.closeStreams();
 		consolePresenter.finished();
 		if (lastConfig.isProfiling_mode()){
-			presenter.showProfile();	
+			javaTracerPresenter.showProfile();	
 		} else {
 			tracerView.finishedTrace(lastConfig.getNameXml());
 		}
@@ -197,7 +198,7 @@ public class TracerController {
 	}
 
 	public void open(String xmlPath) {
-		presenter.openTrace(xmlPath);
+		javaTracerPresenter.openTrace(xmlPath);
 	}
 
 	public void setVisible(boolean b) {
@@ -205,7 +206,7 @@ public class TracerController {
 	}
 
 	public void clickedOnAbout() {
-		presenter.clickedOnAbout();
+		javaTracerPresenter.clickedOnAbout();
 	}
 
 	public String getXmlName() {
@@ -213,7 +214,7 @@ public class TracerController {
 	}
 
 	public JFrame getView() {
-		return tracerView;
+		return tracerView.getView();
 	}
 
 	public void minimize() {

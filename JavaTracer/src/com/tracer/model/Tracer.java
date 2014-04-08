@@ -12,8 +12,8 @@ import com.sun.jdi.connect.Connector;
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
 import com.sun.jdi.connect.LaunchingConnector;
 import com.sun.jdi.connect.VMStartException;
-import com.tracer.controller.RunConfiguration;
-import com.tracer.controller.TracerController;
+import com.tracer.presenter.RunConfiguration;
+import com.tracer.presenter.TracerPresenter;
 
 /**
 * This program traces the execution of another program.
@@ -32,7 +32,7 @@ public class Tracer {
 
     // Class patterns for which we don't want events
     
-   private TracerController tracerController;
+   private TracerPresenter tracerController;
 
 private EventThread eventThread;
       
@@ -56,7 +56,7 @@ private EventThread eventThread;
         generateTrace(config,profile);
     }
     
-	public void setController(TracerController javaTracerController) {
+	public void setController(TracerPresenter javaTracerController) {
 		this.tracerController = javaTracerController;	
 	}
 
