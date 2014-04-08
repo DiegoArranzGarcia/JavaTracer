@@ -3,15 +3,9 @@ package com.inspector.treeinspector.view;
 
 import static org.abego.treelayout.internal.util.Contract.checkArg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.abego.treelayout.util.AbstractTreeForTreeLayout;
-
-import com.inspector.treeinspector.data.Box;
 
 public class DefaultTreeLayout<E> extends AbstractTreeForTreeLayout<E> {
 

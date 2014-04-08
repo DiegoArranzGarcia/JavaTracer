@@ -47,6 +47,14 @@ public class FontLoader {
 	public String getFontName() {
 		return APP_FONT_NAME;
 	}
+
+	public Font getApp_font() {
+	    return app_font;
+    }
+
+	public void setApp_font(Font p_app_font) {
+	    app_font = p_app_font;
+    }
 	
 	
 }

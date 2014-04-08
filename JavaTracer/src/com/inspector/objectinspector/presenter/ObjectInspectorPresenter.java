@@ -7,15 +7,15 @@ import com.general.model.data.MethodInfo;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.InfoVisitor;
 import com.general.view.jtreetable.TableTreeNode;
-import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.model.ChangeInfoVisitor;
 import com.inspector.objectinspector.model.VariablesVisitor;
 import com.inspector.objectinspector.view.*;
+import com.inspector.presenter.InspectorPresenter;
 
 public class ObjectInspectorPresenter implements ObjectInspectorPresenterInterface {
 	
-	private InspectorController controller;
+	private InspectorPresenter presenter;
 	private TreeManager treeManager;
 	
 	private List<Data> variables;
@@ -147,8 +147,8 @@ public class ObjectInspectorPresenter implements ObjectInspectorPresenterInterfa
 		return array;
     }
 
-	public void setController(InspectorController inspectorController) {
-		this.controller = inspectorController;
+	public void setController(InspectorPresenter inspectorController) {
+		this.presenter = inspectorController;
 	}
 
 	public void showTable() {
@@ -157,5 +157,21 @@ public class ObjectInspectorPresenter implements ObjectInspectorPresenterInterfa
 			view.setController(this);
 		}
 	}
+
+	public InspectorPresenter getPresenter() {
+	    return presenter;
+    }
+
+	public void setPresenter(InspectorPresenter p_presenter) {
+	    presenter = p_presenter;
+    }
+
+	public TreeManager getTreeManager() {
+	    return treeManager;
+    }
+
+	public void setTreeManager(TreeManager p_treeManager) {
+	    treeManager = p_treeManager;
+    }
 
 }

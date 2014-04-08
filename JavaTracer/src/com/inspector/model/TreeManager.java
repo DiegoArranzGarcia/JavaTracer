@@ -1,7 +1,7 @@
 package com.inspector.model;
 
 import com.general.model.data.MethodInfo;
-import com.inspector.controller.InspectorController;
+import com.inspector.presenter.InspectorPresenter;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
@@ -11,7 +11,7 @@ public class TreeManager implements UpdateNotifier {
 	private DefaultTreeLayout<Box> tree;
 	
 	private XmlManager xml;
-	private InspectorController controller;
+	private InspectorPresenter controller;
 		
 	public void showTree(String xmlName) {
 		
@@ -46,7 +46,7 @@ public class TreeManager implements UpdateNotifier {
 		return tree;
 	}
 	
-	public void setController(InspectorController controller){
+	public void setController(InspectorPresenter controller){
 		this.controller = controller;
 	}
 

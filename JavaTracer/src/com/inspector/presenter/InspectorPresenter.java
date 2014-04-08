@@ -1,4 +1,4 @@
-package com.inspector.controller;
+package com.inspector.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +17,13 @@ import com.inspector.model.XmlManager;
 import com.inspector.objectinspector.presenter.ObjectInspectorPresenter;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
-import com.inspector.treeinspector.data.ThreadBox;
 import com.inspector.treeinspector.presenter.TreeInspectorPresenter;
-import com.inspector.treeinspector.view.DefaultTreeLayout;
-import com.inspector.view.InspectorLoadingView;
-import com.inspector.view.InspectorView;
+import com.inspector.view.*;
 
-public class InspectorController {
+public class InspectorPresenter implements InspectorPresenterInterface {
 
 	private JavaTracerPresenter controller;
-	private InspectorView view;
+	private InspectorViewInterface view;
 	private InspectorLoadingView loadingView;
 	
 	private TreeInspectorPresenter treeInspector;
@@ -35,7 +32,7 @@ public class InspectorController {
 	private	TreeManager treeManager;
 	
 	
-	public InspectorController(){
+	public InspectorPresenter(){
 		treeManager = new TreeManager();
 		treeInspector = new TreeInspectorPresenter(treeManager);
 		objectInspector = new ObjectInspectorPresenter(treeManager);
@@ -106,7 +103,7 @@ public class InspectorController {
 
 	private void createLoadingView() {
 		if (loadingView == null){
-			loadingView = new InspectorLoadingView(view);
+			loadingView = new InspectorLoadingView(view.getView());
 		}
 		loadingView.setPercentage(0);
 		loadingView.setVisible(true);
@@ -163,5 +160,7 @@ public class InspectorController {
 		
 	 return i+1;
 	}
+
+
 	
 }

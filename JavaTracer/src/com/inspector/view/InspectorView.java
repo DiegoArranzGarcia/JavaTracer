@@ -7,16 +7,15 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import com.general.resources.ImageLoader;
-import com.inspector.controller.InspectorController;
 import com.inspector.objectinspector.presenter.ObjectInspectorPresenter;
 import com.inspector.objectinspector.view.ObjectInspectorViewInterface;
+import com.inspector.presenter.InspectorPresenterInterface;
 import com.inspector.treeinspector.presenter.TreeInspectorPresenter;
-import com.inspector.treeinspector.view.TreeInspectorView;
 import com.inspector.treeinspector.view.TreeInspectorViewInterface;
 
 
 @SuppressWarnings("serial")
-public class InspectorView extends JFrame implements ComponentListener,ActionListener{
+public class InspectorView extends JFrame implements ComponentListener,ActionListener,InspectorViewInterface{
 	
 	private static final String TITLE = "Inspector";
 
@@ -25,7 +24,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	private static double DIVIDER_SPLIT = 0.75;
 	private static double PERCENTAGE = 0.75;
 	
-	private InspectorController controller;
+	private InspectorPresenterInterface presenter;
 
 	private JMenuItem menuOpen;
 	private JMenuItem menuExit;
@@ -96,7 +95,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	}
 	
 	public void componentHidden(ComponentEvent e) {
-		controller.back();
+		presenter.back();
 	}
 
 	public void componentMoved(ComponentEvent e) {}
@@ -110,20 +109,23 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source.equals(menuOpen)){
-			controller.clickedOnLoadTrace(this);
+			presenter.clickedOnLoadTrace(this);
 		} else if(source.equals(menuExit)){
-			controller.back();
+			presenter.back();
 		} else if(source.equals(mntmSettings)){
-			controller.clickedOnSettings();
+			presenter.clickedOnSettings();
 		} else if(source.equals(mntmHelp)){
-			controller.clickedOnHelp();
+			presenter.clickedOnHelp();
 		} else if(source.equals(mntmAbout)){
-			controller.clickedOnAbout();
+			presenter.clickedOnAbout();
 		}
 	}
 
-	public void setController(InspectorController controller){
-		this.controller = controller;
+	public void setController(InspectorPresenterInterface presenter){
+		this.presenter = presenter;
 	}
 
+	public InspectorView getView() {
+		return this;
+	}
 }

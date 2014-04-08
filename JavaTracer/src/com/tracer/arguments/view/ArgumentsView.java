@@ -2,25 +2,9 @@ package com.tracer.arguments.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
@@ -28,7 +12,6 @@ import javax.swing.event.DocumentListener;
 
 import com.general.resources.ImageLoader;
 import com.tracer.arguments.presenter.ArgumentsPresenterInterface;
-import com.tracer.view.TracerView;
 
 @SuppressWarnings("serial")
 public class ArgumentsView extends JDialog implements ActionListener,MouseListener,DocumentListener,ArgumentsViewInterface,KeyListener{

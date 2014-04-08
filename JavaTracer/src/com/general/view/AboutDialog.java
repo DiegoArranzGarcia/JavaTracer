@@ -1,29 +1,14 @@
 package com.general.view;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-
-
-
 
 import com.general.resources.FontLoader;
 import com.general.resources.ImageLoader;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
 
 @SuppressWarnings("serial")
 public class AboutDialog extends JDialog {

@@ -9,18 +9,16 @@ import com.alee.laf.WebLookAndFeel;
 import com.general.resources.FontLoader;
 import com.general.settings.presenter.SettingsPresenter;
 import com.general.view.AboutDialog;
-import com.inspector.controller.InspectorController;
+import com.inspector.presenter.InspectorPresenter;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
-import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.presenter.TracerPresenter;
-import com.tracer.view.TracerView;
 
 public class JavaTracerPresenter {
 
-	private TracerPresenter tracerController;
+	private TracerPresenter tracerPresenter;
 	private ProfilerPresenter profilerPresenter;
-	private InspectorController inspectorController;
+	private InspectorPresenter inspectorPresenter;
 	private SettingsPresenter settingsPresenter;
 	
 	/**
@@ -37,12 +35,12 @@ public class JavaTracerPresenter {
 	public JavaTracerPresenter(){
 		setLookAndFeel();
 		setUIFont();
-		this.tracerController = new TracerPresenter();
+		this.tracerPresenter = new TracerPresenter();
 		this.profilerPresenter = new ProfilerPresenter();
-		this.inspectorController = new InspectorController();
+		this.inspectorPresenter = new InspectorPresenter();
 		this.settingsPresenter = new SettingsPresenter();
 		setPresenter();
-		tracerController.open();
+		tracerPresenter.open();
 	}
 	
 	private void setUIFont() {
@@ -65,15 +63,15 @@ public class JavaTracerPresenter {
 	 */
 	
 	private void setPresenter() {
-		tracerController.setPresenter(this);
+		tracerPresenter.setPresenter(this);
 		profilerPresenter.setController(this);
-		inspectorController.setController(this);
+		inspectorPresenter.setController(this);
 		settingsPresenter.setController(this); 
 	}
 	
 	public void showProfile() {
 		profilerPresenter.loadTempProfile();
-		String nameFile = tracerController.getXmlName();
+		String nameFile = tracerPresenter.getXmlName();
 		profilerPresenter.showProfile(nameFile);
 		profilerPresenter.saveProfile(new File(nameFile));
 	}	
@@ -83,7 +81,7 @@ public class JavaTracerPresenter {
 	}
 
 	public void clickedOnLoadTrace(JFrame frame) {
-		inspectorController.clickedOnLoadTrace(frame);
+		inspectorPresenter.clickedOnLoadTrace(frame);
 	}
 
 	public void clickedOnSettings() {
@@ -91,7 +89,7 @@ public class JavaTracerPresenter {
 	}
 	
 	public void back() {
-		tracerController.open();
+		tracerPresenter.open();
 	}
 	
 	public void clickedOnLoadProfile(JFrame frame) {
@@ -108,33 +106,33 @@ public class JavaTracerPresenter {
 	}
 	
 	public void openTrace(String xmlPath) {
-		inspectorController.open(xmlPath);
+		inspectorPresenter.open(xmlPath);
 	}
 	
 	// Getters and setters
 	
 	public TracerPresenter getTracerController() {
-		return tracerController;
+		return tracerPresenter;
 	}
 
 	public ProfilerPresenter getProfilerController() {
 		return profilerPresenter;
 	}
 
-	public InspectorController getInspectorController() {
-		return inspectorController;
+	public InspectorPresenter getInspectorController() {
+		return inspectorPresenter;
 	}
 
 	public void setTracerController(TracerPresenter tracerController) {
-		this.tracerController = tracerController;
+		this.tracerPresenter = tracerController;
 	}
 
 	public void setProfilerController(ProfilerPresenter profilerController) {
 		this.profilerPresenter = profilerController;
 	}
 
-	public void setInspectorController(InspectorController inspectorController) {
-		this.inspectorController = inspectorController;
+	public void setInspectorController(InspectorPresenter inspectorController) {
+		this.inspectorPresenter = inspectorController;
 	}
 
 	public ProfilerModelInterface getProfiler() {
@@ -142,11 +140,11 @@ public class JavaTracerPresenter {
 	}
 
 	public void setVisible(boolean b) {
-		tracerController.setVisible(false);
+		tracerPresenter.setVisible(false);
 	}
 
 	public JFrame getView() {
-		return tracerController.getView();
+		return tracerPresenter.getView();
 	}
 
 }

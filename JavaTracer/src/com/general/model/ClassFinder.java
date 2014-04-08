@@ -1,19 +1,11 @@
 package com.general.model;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.sun.org.apache.bcel.internal.classfile.ClassParser;
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
-import com.sun.org.apache.bcel.internal.classfile.Method;
+import com.sun.org.apache.bcel.internal.classfile.*;
 import com.sun.org.apache.bcel.internal.generic.Type;
 
 public class ClassFinder {
@@ -49,7 +41,8 @@ public class ClassFinder {
 		
 		List<String> classes = new ArrayList<>();
 		try {
-			JarFile jarFile = new JarFile(file);
+			@SuppressWarnings("resource")
+            JarFile jarFile = new JarFile(file);
 			Enumeration<JarEntry> enumeration = jarFile.entries();
 			
 			while (enumeration.hasMoreElements()){
@@ -154,7 +147,8 @@ public class ClassFinder {
 	public boolean ExecutableJar(File file) {
 		boolean isExecutable=false;
 		try{
-		JarFile jar = new JarFile(file);
+		@SuppressWarnings("resource")
+        JarFile jar = new JarFile(file);
  
 		// fist get all directories,
 		// then make those directory on the destination Path
@@ -163,7 +157,8 @@ public class ClassFinder {
 			String fileName =entry.getName();
 			if(fileName.contains("MANIFEST")){
 				InputStream is = jar.getInputStream(entry);
-				String inputStreamString = new Scanner(is,"UTF-8").useDelimiter("\\A").next();
+				@SuppressWarnings("resource")
+                String inputStreamString = new Scanner(is,"UTF-8").useDelimiter("\\A").next();
 				is.close();
 					
 				if(inputStreamString.contains("Main")||inputStreamString.contains("main"))	

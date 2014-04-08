@@ -6,9 +6,9 @@ import com.inspector.objectinspector.presenter.ObjectInspectorPresenterInterface
 
 public interface ObjectInspectorViewInterface {
 
-    void setController(ObjectInspectorPresenterInterface objectInspectorPresenter);
-    void clearTable();
-    TableTreeNode getRoot();
-    void refreshTable();
+	public void setController(ObjectInspectorPresenterInterface objectInspectorPresenter);
+	public void clearTable();
+	public TableTreeNode getRoot();
+	public void refreshTable();
     public ObjectInspectorView getView() ;
 }

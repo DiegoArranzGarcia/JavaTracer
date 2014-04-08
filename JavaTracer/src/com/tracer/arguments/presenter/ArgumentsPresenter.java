@@ -1,6 +1,5 @@
 package com.tracer.arguments.presenter;
 
-import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.view.ArgumentsView;
 import com.tracer.arguments.view.ArgumentsViewInterface;
 import com.tracer.presenter.TracerPresenter;

@@ -8,15 +8,15 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
+import com.inspector.presenter.InspectorPresenter;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.view.TreeInspectorView;
 import com.inspector.treeinspector.view.TreeInspectorViewInterface;
 
 public class TreeInspectorPresenter implements MouseListener, TreeInspectorPresenterInterface{
 		
-	private InspectorController controller;
+	private InspectorPresenter controller;
 	private TreeInspectorViewInterface view;
 	private TreeManager treeManager;
 	
@@ -156,7 +156,7 @@ public class TreeInspectorPresenter implements MouseListener, TreeInspectorPrese
 		
 	}
 
-	public void setController(InspectorController inspectorController) {
+	public void setController(InspectorPresenter inspectorController) {
 		this.controller = inspectorController;
 	}
 
