@@ -557,7 +557,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		((PiePlot)chart.getPlot()).setDataset(createDataset(classes,calls));
 		chart.setTitle(NUM_CALLS + calls);
 		
-		
 	}
 
 	public void setTitle(String pathFile){
@@ -625,8 +624,10 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	}
 
 	public void chartProgress(ChartProgressEvent event) {
-		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED && !tableLoaded)
+		if (event.getType() == ChartProgressEvent.DRAWING_FINISHED && !tableLoaded){
 			loadTable();
+			refreshChart();
+		}
 	}
    
     @SuppressWarnings("unchecked")
