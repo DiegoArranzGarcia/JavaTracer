@@ -15,10 +15,10 @@ import com.general.presenter.JavaTracerPresenter;
 import com.inspector.model.TreeManager;
 import com.inspector.model.XmlManager;
 import com.inspector.objectinspector.presenter.ObjectInspectorPresenter;
-import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.data.ThreadBox;
+import com.inspector.treeinspector.presenter.TreeInspectorPresenter;
 import com.inspector.treeinspector.view.DefaultTreeLayout;
 import com.inspector.view.InspectorLoadingView;
 import com.inspector.view.InspectorView;
@@ -29,7 +29,7 @@ public class InspectorController {
 	private InspectorView view;
 	private InspectorLoadingView loadingView;
 	
-	private TreeInspectorController treeInspector;
+	private TreeInspectorPresenter treeInspector;
 	private ObjectInspectorPresenter objectInspector;
 	
 	private	TreeManager treeManager;
@@ -37,7 +37,7 @@ public class InspectorController {
 	
 	public InspectorController(){
 		treeManager = new TreeManager();
-		treeInspector = new TreeInspectorController(treeManager);
+		treeInspector = new TreeInspectorPresenter(treeManager);
 		objectInspector = new ObjectInspectorPresenter(treeManager);
 		treeInspector.setController(this);
 		objectInspector.setController(this);

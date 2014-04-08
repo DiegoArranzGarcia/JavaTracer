@@ -7,12 +7,11 @@ import java.util.Map;
 import org.abego.treelayout.NodeExtentProvider;
 import org.abego.treelayout.util.DefaultConfiguration;
 
-import com.inspector.treeinspector.view.TreeLayout;
-import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.data.Box;
+import com.inspector.treeinspector.presenter.TreeInspectorPresenter;
 
 @SuppressWarnings("serial")
-public class TreeInspectorView extends TreePanel {
+public class TreeInspectorView extends TreePanel implements TreeInspectorViewInterface {
 
 	public static double GAP_BETWEEN_LEVELS = 50;
 	public static double GAP_BETWEEN_NODES= 10;
@@ -48,8 +47,12 @@ public class TreeInspectorView extends TreePanel {
 		this.treeLayout = treeLayout;
 	}
 
-	public void setController(TreeInspectorController treeInspector) {
+	public void setController(TreeInspectorPresenter treeInspector) {
 		addMouseListener(treeInspector);
+	}
+
+	public TreeInspectorView getView() {
+		return this;
 	}
 	
 }

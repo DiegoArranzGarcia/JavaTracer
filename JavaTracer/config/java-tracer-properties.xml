@@ -7,11 +7,6 @@
   <string>sun.*</string>
   <string>com.sun.*</string>
   <string>org.eclipse.jdt.internal.jarinjarloader.*</string>
-  <string>constraints.*</string>
-  <string>terms.*</string>
-  <string>program.*</string>
-  <string>datatypes.*</string>
-  <string>transformation.*</string>
 </list>
 </excludes>
 <excluded-this>

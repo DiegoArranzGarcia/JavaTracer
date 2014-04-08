@@ -1,4 +1,4 @@
-package com.inspector.treeinspector.controller;
+package com.inspector.treeinspector.presenter;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -12,16 +12,17 @@ import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.view.TreeInspectorView;
+import com.inspector.treeinspector.view.TreeInspectorViewInterface;
 
-public class TreeInspectorController implements MouseListener {
+public class TreeInspectorPresenter implements MouseListener, TreeInspectorPresenterInterface{
 		
 	private InspectorController controller;
-	private TreeInspectorView view;
+	private TreeInspectorViewInterface view;
 	private TreeManager treeManager;
 	
 	private Box lastSelected;
 	
-	public TreeInspectorController(TreeManager treeManager){
+	public TreeInspectorPresenter(TreeManager treeManager){
 		
 		this.treeManager = treeManager;
 		this.lastSelected = null;
@@ -85,7 +86,7 @@ public class TreeInspectorController implements MouseListener {
 	}
 
 
-	public TreeInspectorView getView() {
+	public TreeInspectorViewInterface getView() {
 		if (view == null){
 			view = new TreeInspectorView();
 			view.setController(this);

@@ -10,8 +10,9 @@ import com.general.resources.ImageLoader;
 import com.inspector.controller.InspectorController;
 import com.inspector.objectinspector.presenter.ObjectInspectorPresenter;
 import com.inspector.objectinspector.view.ObjectInspectorViewInterface;
-import com.inspector.treeinspector.controller.TreeInspectorController;
+import com.inspector.treeinspector.presenter.TreeInspectorPresenter;
 import com.inspector.treeinspector.view.TreeInspectorView;
+import com.inspector.treeinspector.view.TreeInspectorViewInterface;
 
 
 @SuppressWarnings("serial")
@@ -32,7 +33,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	private JMenuItem mntmHelp;
 	private JMenuItem mntmAbout;
 	
-	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorPresenter objectInspector) {
+	public InspectorView(TreeInspectorPresenter treeInspector, ObjectInspectorPresenter objectInspector) {
 		
 		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -51,8 +52,8 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 		JScrollPane scrollPane_1 = new JScrollPane();
 		splitPane.setLeftComponent(scrollPane_1);
 		
-		TreeInspectorView treeView = treeInspector.getView();
-		scrollPane_1.setViewportView(treeView);
+		TreeInspectorViewInterface treeView = treeInspector.getView();
+		scrollPane_1.setViewportView(treeView.getView());
 		splitPane.setDividerLocation((int)(getWidth()*DIVIDER_SPLIT));
 		
 		ObjectInspectorViewInterface objectview = objectInspector.getView();
