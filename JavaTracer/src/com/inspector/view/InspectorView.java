@@ -2,22 +2,14 @@ package com.inspector.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
+import javax.swing.*;
 
 import com.general.resources.ImageLoader;
 import com.inspector.controller.InspectorController;
-import com.inspector.objectinspector.controller.ObjectInspectorController;
-import com.inspector.objectinspector.view.ObjectInspectorView;
+import com.inspector.objectinspector.presenter.ObjectInspectorPresenter;
+import com.inspector.objectinspector.view.ObjectInspectorViewInterface;
 import com.inspector.treeinspector.controller.TreeInspectorController;
 import com.inspector.treeinspector.view.TreeInspectorView;
 
@@ -40,7 +32,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	private JMenuItem mntmHelp;
 	private JMenuItem mntmAbout;
 	
-	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
+	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorPresenter objectInspector) {
 		
 		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -63,8 +55,8 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 		scrollPane_1.setViewportView(treeView);
 		splitPane.setDividerLocation((int)(getWidth()*DIVIDER_SPLIT));
 		
-		ObjectInspectorView objectview = objectInspector.getView();
-		scrollPane.setViewportView(objectview);
+		ObjectInspectorViewInterface objectview = objectInspector.getView();
+		scrollPane.setViewportView(objectview.getView());
 		
 		createMenu();
 	}	
@@ -132,4 +124,5 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	public void setController(InspectorController controller){
 		this.controller = controller;
 	}
+
 }

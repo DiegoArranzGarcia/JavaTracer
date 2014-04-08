@@ -1,8 +1,6 @@
 
-package com.inspector.objectinspector.controller;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+package com.inspector.objectinspector.presenter;
+import java.util.*;
 
 import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
@@ -13,23 +11,22 @@ import com.inspector.controller.InspectorController;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.model.ChangeInfoVisitor;
 import com.inspector.objectinspector.model.VariablesVisitor;
-import com.inspector.objectinspector.view.ObjectInspectorView;
-import com.inspector.objectinspector.view.VariableRowData;
+import com.inspector.objectinspector.view.*;
 
-public class ObjectInspectorController {
+public class ObjectInspectorPresenter implements ObjectInspectorPresenterInterface {
 	
 	private InspectorController controller;
 	private TreeManager treeManager;
 	
 	private List<Data> variables;
-	private ObjectInspectorView view;
+	private ObjectInspectorViewInterface view;
 	
-	public ObjectInspectorController(TreeManager treeManager){
+	public ObjectInspectorPresenter(TreeManager treeManager){
 		this.treeManager = treeManager;
 		this.variables =  new ArrayList<>();
 	}
 	
-	public ObjectInspectorView getView(){
+	public ObjectInspectorViewInterface getView(){
 		if (view == null) {
 			view = new ObjectInspectorView();
 			view.setController(this);
