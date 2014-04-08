@@ -10,6 +10,7 @@ public class ProfileMethod extends ProfileData{
 	public ProfileMethod(String methodName){
 		this.methodName = methodName;
 		this.children = new ArrayList<ProfileData>();
+		this.excluded = false;
 		this.numCalls = 0;
 	}
 	

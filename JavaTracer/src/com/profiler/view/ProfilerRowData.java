@@ -44,7 +44,7 @@ public class ProfilerRowData implements TableRowData{
 		this.color = color;
 	}
 
-	public String getCompleteNameClass() {
+	public String getCompleteName() {
 		return completeName;
 	}
 

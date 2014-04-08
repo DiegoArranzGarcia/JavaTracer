@@ -20,5 +20,6 @@ public interface ProfilerPresenterInterface {
 	public void clickedOnOpenProfile(JFrame frame);
 	public void clickedOnSettings();
 	public void clickedOnAbout();
+	public void setExcludes(String completeName, boolean excluded);
 
 }

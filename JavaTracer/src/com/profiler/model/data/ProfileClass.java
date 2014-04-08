@@ -9,6 +9,7 @@ public class ProfileClass extends ProfileData{
 
 	public ProfileClass(String className) {
 		this.className = className;
+		this.excluded = false;
 		this.children = new ArrayList<ProfileData>();
 		this.numCalls = 0;
 	}

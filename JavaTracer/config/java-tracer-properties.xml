@@ -8,6 +8,8 @@
   <string>com.sun.*</string>
   <string>org.eclipse.jdt.internal.jarinjarloader.*</string>
   <string>com.prueba.MergeSortLauncher</string>
+  <string>show.*</string>
+  <string>datatypes.*</string>
 </list>
 </excludes>
 <excluded-this>

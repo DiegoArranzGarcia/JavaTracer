@@ -662,7 +662,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		this.folderCofig = folderCofig;
 	}
 
-	public String getNameActualXML() {
+	public String getCurrentXMLName() {
 		return nameActualXML;
 	}
 

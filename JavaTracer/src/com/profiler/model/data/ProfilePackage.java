@@ -10,6 +10,7 @@ public class ProfilePackage extends ProfileData{
 	public ProfilePackage(String packageName) {
 		this.packageName = packageName;
 		this.children = new ArrayList<ProfileData>();
+		this.excluded = false;
 		this.numCalls = 0;
 	}
 

@@ -39,6 +39,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	private ProfilerViewInterface view;
 	
 	private ProfilerTree currentProfileTree;
+	private File currentFile;
 	
 	public ProfilerPresenter(){
 		this.profiler = new Profiler();
@@ -54,15 +55,13 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		if (view == null){
 			view = new ProfilerView();
 			view.setPresenter(this);
-			/*view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
-			view.setVisible(true);
-			view.setTitle(profileFile);*/
 		}
 		
+		currentFile = new File(profileFile);
 		view.load(currentProfileTree.getClasses(),currentProfileTree.getNumCalls());
 		view.setVisible(true);
 		view.setTitle(profileFile);
-		//controller.setVisible(false);
+
 	}
 	
 	public void loadTempProfile(){
@@ -106,12 +105,12 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			}
 		}
 		
-		configuration.saveConfiguration(JavaTracerConfiguration.getInstance().getNameActualXML());
+		configuration.saveConfiguration(JavaTracerConfiguration.getInstance().getCurrentXMLName());
+		saveProfile(currentFile);
 	}
 
 	public void cancel() {
 		view.setVisible(false);
-		//controller.back();
 	}
 
 	public void openProfile(File file) {
@@ -215,6 +214,11 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 
 	public void clickedOnAbout() {
 		javaTracerPresenter.clickedOnAbout();
+	}
+
+	public void setExcludes(String completeName, boolean excluded) {
+		ProfileData data = profiler.getData(completeName);
+		data.setExcluded(excluded);		
 	}
 
 }

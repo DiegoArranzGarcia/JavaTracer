@@ -8,11 +8,16 @@ public abstract class ProfileData {
 	protected List<ProfileData> children;
 	protected ProfileData parent;
 	protected int numCalls;
+	protected boolean excluded;
 	
 	public abstract String getName();
 	public abstract String getCompleteName();
 	public abstract void setCompleteName(String completeName);
 	public abstract void accept(ProfileDataVisitor visitor);
+	
+	public boolean isExcluded() {
+		return excluded;
+	}
 	
 	public List<ProfileData> getChildren(){
 		return children;
@@ -30,7 +35,6 @@ public abstract class ProfileData {
 	private void setParent(ProfileData profileData) {
 		this.parent = profileData;
 	}
-
 	
 	public void remove(){
 		
@@ -64,17 +68,15 @@ public abstract class ProfileData {
 
 	
 	public ProfileData getParent(){
-		return parent;
-		
-		
+		return parent;		
 	}
 	
 	private void setChildren(List<ProfileData> children){
-		this.children=children;
-		
+		this.children = children;
 	}
-
-	
+	public void setExcluded(boolean excluded){
+		this.excluded = excluded;
+	}	
 	
 }
 

@@ -158,11 +158,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         
         JScrollPane scrollPane = new JScrollPane();
         panelRight.add(helpDoubleClick, BorderLayout.NORTH); 
-        panelRight.add(scrollPane, BorderLayout.CENTER);
-        
-
-        
-        
+        panelRight.add(scrollPane, BorderLayout.CENTER);      
         
         table = new JTreeTable();
         table.setToolTipText(HELP_EXCLUDES_TOOLTIP);
@@ -623,7 +619,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 			}
 			
 			if (numCalls>0)
-				classes.put(data.getCompleteNameClass(),numCalls);
+				classes.put(data.getCompleteName(),numCalls);
 		
 		}
 	}
@@ -692,7 +688,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		List<TableTreeNode> nodes = model.getRoot().getPreorder();
 		for (int i=1;i<nodes.size();i++){
 			ProfilerRowData row = (ProfilerRowData)nodes.get(i).getUserObject();
-			classesState.put(row.getCompleteNameClass(),row.isExcluded());
+			classesState.put(row.getCompleteName(),row.isExcluded());
 		}
 		
 		return classesState;
@@ -757,7 +753,9 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 
 	private void updateProfileRowData(int row) {
 		TableTreeNode node = table.getTreeModel().getNodeFromRow(row+1);
-		((ProfilerRowData)node.getUserObject()).setExcluded((boolean) table.getModel().getValueAt(row, 5));
+		ProfilerRowData profilerRowData = (ProfilerRowData)node.getUserObject();
+		profilerRowData.setExcluded((boolean) table.getModel().getValueAt(row, 5));
+		presenter.setExcludes(profilerRowData.getCompleteName(),profilerRowData.isExcluded());
 	}
 
 }
