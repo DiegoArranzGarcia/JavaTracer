@@ -116,7 +116,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	    		presenter.cancel();
 	    	   }
 		});
-
+		
+		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
         Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setSize((int)(d.width*PERCENTAGE_WIDTH),(int)(d.height*PERCENTAGE_HEIGHT));
         setLocationRelativeTo(null);
@@ -370,7 +371,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
 		//return directory file
 		
-		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				
 				String file_path = chooser.getSelectedFile().getCanonicalPath();
@@ -421,7 +422,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	 */
 	
 	public void clickedOpenProfile() {
-		presenter.clickedOnOpenProfile();
+		presenter.clickedOnOpenProfile(this);
 	}
 	
 	private void clickedSaveProfile() {
@@ -434,7 +435,7 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 		chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
 		//return directory file
 		
-		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
 			if (FileUtilities.isExtension(file,XML)){
 				presenter.saveProfile(file);

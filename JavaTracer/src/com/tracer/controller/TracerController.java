@@ -166,11 +166,11 @@ public class TracerController {
 	}
 
 	public void clickedOnLoadProfile() {
-		presenter.clickedOnLoadProfile();
+		presenter.clickedOnLoadProfile(tracerView);
 	}
 
 	public void clickedOnLoadTrace() {
-		presenter.clickedOnLoadTrace();
+		presenter.clickedOnLoadTrace(tracerView);
 	}
 
 	public void launching() {

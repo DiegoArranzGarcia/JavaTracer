@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.w3c.dom.Node;
@@ -44,7 +45,7 @@ public class InspectorController {
 		objectInspector.showTable();
 		}
 
-	public void clickedOnLoadTrace(){
+	public void clickedOnLoadTrace(JFrame parent){
 		
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filtroXml=new FileNameExtensionFilter("xml","xml");
@@ -55,7 +56,7 @@ public class InspectorController {
 		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
 		//return directory file
 		
-		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String xmlName = chooser.getSelectedFile().getCanonicalPath();
 				open(xmlName);

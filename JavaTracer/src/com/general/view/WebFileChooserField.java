@@ -51,6 +51,7 @@ import com.alee.laf.panel.WebPanel;
 import com.alee.laf.scroll.WebScrollPane;
 import com.alee.utils.CollectionUtils;
 import com.alee.utils.FileUtils;
+import com.general.resources.ImageLoader;
 
 /**
  * User: mgarin Date: 07.08.11 Time: 15:44
@@ -101,7 +102,8 @@ public class WebFileChooserField extends WebPanel
     public WebFileChooserField ( final Window owner, final boolean showChooseButton )
     {
         super ( true );
-
+        
+        	
         this.showChooseButton = showChooseButton;
 
         setOpaque ( false );
@@ -391,7 +393,7 @@ public class WebFileChooserField extends WebPanel
         public FilePlate ( final File file )
         {
             super ( true );
-
+            
             setLayout ( new BorderLayout () );
             setDrawSides ( false, false, false, true );
             setShadeWidth ( 0 );

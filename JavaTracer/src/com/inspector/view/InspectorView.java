@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
+import com.general.resources.ImageLoader;
 import com.inspector.controller.InspectorController;
 import com.inspector.objectinspector.controller.ObjectInspectorController;
 import com.inspector.objectinspector.view.ObjectInspectorView;
@@ -41,6 +42,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	
 	public InspectorView(TreeInspectorController treeInspector, ObjectInspectorController objectInspector) {
 		
+		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle(WINDOW_TITLE);
 		Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -115,7 +117,7 @@ public class InspectorView extends JFrame implements ComponentListener,ActionLis
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source.equals(menuOpen)){
-			controller.clickedOnLoadTrace();
+			controller.clickedOnLoadTrace(this);
 		} else if(source.equals(menuExit)){
 			controller.back();
 		} else if(source.equals(mntmSettings)){

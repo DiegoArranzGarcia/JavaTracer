@@ -14,6 +14,7 @@ import com.profiler.model.ProfilerModelInterface;
 import com.profiler.presenter.ProfilerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.controller.TracerController;
+import com.tracer.view.TracerView;
 
 public class JavaTracerPresenter {
 
@@ -81,8 +82,8 @@ public class JavaTracerPresenter {
 		System.exit(0);
 	}
 
-	public void clickedOnLoadTrace() {
-		inspectorController.clickedOnLoadTrace();
+	public void clickedOnLoadTrace(JFrame frame) {
+		inspectorController.clickedOnLoadTrace(frame);
 	}
 
 	public void clickedOnSettings() {
@@ -93,8 +94,8 @@ public class JavaTracerPresenter {
 		tracerController.open();
 	}
 	
-	public void clickedOnLoadProfile() {
-		profilerPresenter.clickedOnOpenProfile();
+	public void clickedOnLoadProfile(JFrame frame) {
+		profilerPresenter.clickedOnOpenProfile(frame);
 	}
 
 	public void clickedOnAbout() {

@@ -78,7 +78,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(imageLoader.getApplicationIcon().getImage());
 
-		chooser = new WebFileChooserField();
+		chooser = new WebFileChooserField(this);
 		chooser.setBounds(245, 60, 450, 30);
 
 		chooser.setTitle("Select a directory");
@@ -336,7 +336,6 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 	}
 
 	private void clickedOnLoadTrace() {
-
 		presenter.clickedOnLoadTrace();
 	}
 

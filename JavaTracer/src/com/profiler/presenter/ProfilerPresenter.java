@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.model.FileUtilities;
@@ -185,7 +186,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			}
 	}
 
-	public void clickedOnOpenProfile() {
+	public void clickedOnOpenProfile(JFrame frame) {
 		JFileChooser chooser = new JFileChooser();
 		chooser.addChoosableFileFilter(new FileNameExtensionFilter(XML_FILTER_FILES, XML_EXT));
 		chooser.setAcceptAllFileFilterUsed(false);
@@ -195,7 +196,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 		chooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
 		//return directory file
 		
-		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
 			try {
 				String path = chooser.getSelectedFile().getCanonicalPath();
 				openProfile(new File(path));

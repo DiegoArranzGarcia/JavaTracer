@@ -7,7 +7,7 @@ public class ImageLoader {
 	private static ImageLoader instance;
 	
 	private static String INFO = "info.png";
-	private static String APPLICATION = "app.jpe";
+	private static String APPLICATION = "app.png";
 	private static String EXPANDED = "expanded.gif";
 	private static String FOLDED = "folded.gif";
 	private static String PLUS_ICON = "plus.png";

@@ -2,15 +2,19 @@ package com.general.view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+
 
 
 
@@ -30,6 +34,7 @@ public class AboutDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AboutDialog() {
+		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
 		setResizable(false);
 		dialog = this;
 		
@@ -41,74 +46,48 @@ public class AboutDialog extends JDialog {
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("10px"),
-				ColumnSpec.decode("70px"),
-				ColumnSpec.decode("10dlu"),
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC},
-			new RowSpec[] {
-				RowSpec.decode("10dlu"),
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("16px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC}));
+		contentPanel.setLayout(null);
 		{
 			JLabel lblJavatracer = new JLabel("JavaTracer 1.0.0");
+			lblJavatracer.setBounds(93, 27, 142, 24);
 			lblJavatracer.setFont(new Font(FontLoader.getInstance().getFontName(), Font.BOLD, 18));
-			contentPanel.add(lblJavatracer, "4, 2, center, top");
+			contentPanel.add(lblJavatracer);
 		}
 		{
 			JLabel lblNewLabel = new JLabel("Application developed by:");
+			lblNewLabel.setBounds(64, 64, 200, 27);
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			contentPanel.add(lblNewLabel, "4, 6, center, top");
+			contentPanel.add(lblNewLabel);
 		}
 		{
 			JLabel label = new JLabel("");
-			contentPanel.add(label, "2, 8, 1, 3, center, default");
-			label.setIcon(ImageLoader.getInstance().getHelpIcon());
+			label.setBounds(24, 116, 83, 78);
+			contentPanel.add(label);
+			label.setIcon(new ImageIcon(ImageLoader.getInstance().getApplicationIcon().getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH)));
+			
 		}
 		{
 			JLabel lblSaskyaMosqueraLogroo = new JLabel("Saskya Mosquera Logro\u00F1o");
+			lblSaskyaMosqueraLogroo.setBounds(113, 116, 184, 24);
 			lblSaskyaMosqueraLogroo.setHorizontalAlignment(SwingConstants.CENTER);
-			contentPanel.add(lblSaskyaMosqueraLogroo, "4, 10");
+			contentPanel.add(lblSaskyaMosqueraLogroo);
 		}
 		{
 			JLabel lblDiegoArranzGarca = new JLabel("Diego Arranz Garc\u00EDa");
+			lblDiegoArranzGarca.setBounds(119, 142, 172, 21);
 			lblDiegoArranzGarca.setHorizontalAlignment(SwingConstants.CENTER);
-			contentPanel.add(lblDiegoArranzGarca, "4, 12");
+			contentPanel.add(lblDiegoArranzGarca);
 		}
 		{
 			JLabel lblJavierAlejosCastroviejo = new JLabel("Javier Alejos Castroviejo");
+			lblJavierAlejosCastroviejo.setBounds(119, 165, 172, 24);
 			lblJavierAlejosCastroviejo.setHorizontalAlignment(SwingConstants.CENTER);
-			contentPanel.add(lblJavierAlejosCastroviejo, "4, 14");
+			contentPanel.add(lblJavierAlejosCastroviejo);
 		}
 		{
 			JButton btnClose = new JButton("Close");
-			contentPanel.add(btnClose, "3, 18, 3, 1");
+			btnClose.setBounds(103, 226, 123, 25);
+			contentPanel.add(btnClose);
 			btnClose.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					dialog.dispose();

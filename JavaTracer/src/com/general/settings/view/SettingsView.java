@@ -82,6 +82,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 
 
 	private void initGeneralView() {
+		setIconImage(ImageLoader.getInstance().getApplicationIcon().getImage());
 		setTitle(WINDOWS_TITLE);
 		setMinimumSize(new Dimension(600, 330));
 		setSize(new Dimension(636, 530));
