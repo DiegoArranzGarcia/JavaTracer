@@ -30,7 +30,7 @@
 <boolean>false</boolean>
 </unlimited-depth-tree>
 <unlimited-nodes>
-<boolean>false</boolean>
+<boolean>true</boolean>
 </unlimited-nodes>
 <num-levels>
 <int>4</int>

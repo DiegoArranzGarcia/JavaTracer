@@ -259,7 +259,7 @@ public class TracerView extends JFrame implements ActionListener, FilesSelection
 
 
 		if (existFileXml(nameXml + FileUtilities.EXTENSION_XML)){
-			int selected = JOptionPane.showOptionDialog(null, Message.ERROR_EXIST, "", JOptionPane.YES_NO_CANCEL_OPTION, 
+			int selected = JOptionPane.showOptionDialog(null,nameXml + " " + Message.ERROR_EXIST, "", JOptionPane.YES_NO_CANCEL_OPTION, 
 					JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Ok", "No"}, "Ok");
 			if (selected == 0) {
 				nameXml += FileUtilities.EXTENSION_XML;
