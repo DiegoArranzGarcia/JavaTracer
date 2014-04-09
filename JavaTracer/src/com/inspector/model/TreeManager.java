@@ -50,8 +50,8 @@ public class TreeManager implements UpdateNotifier {
 		this.controller = controller;
 	}
 
-	public void updateInfo(int current, int total, int percentage) {
-		controller.updateInfo(current, total, percentage,xml);
+	public void updateInfo(int current) {
+		controller.updateInfo(current);
 	}
 
 	public void finishLoading(DefaultTreeLayout<Box> loadedTree) {

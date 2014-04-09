@@ -116,7 +116,7 @@ public class LoadTreeThread extends Thread{
 				tree.addChild(box,node);
 			
 				numNodes++;
-				notifier.updateInfo(numNodes,max_num_nodes,(int)calculatePercentage());
+				notifier.updateInfo(numNodes);
 				i++;
 			}
 			
@@ -124,11 +124,6 @@ public class LoadTreeThread extends Thread{
 		
 		box.setLoaded(stop);
 		box.setExpanded(true);
-	}
-	
-	private double calculatePercentage() {
-		double percentage = ((double)numNodes/max_num_nodes)*100;
-		return percentage;
 	}
 
 }

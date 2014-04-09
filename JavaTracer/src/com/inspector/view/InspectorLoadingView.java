@@ -7,14 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.alee.laf.progressbar.WebProgressBar;
+import com.general.model.configuration.JavaTracerConfiguration;
 
 @SuppressWarnings("serial")
 public class InspectorLoadingView extends JDialog{
 	private WebProgressBar progressBar;
 	private JLabel infoLabel;
+	private JavaTracerConfiguration config;
 	
 	public InspectorLoadingView(InspectorView view) {
 		super(view,true);
+		
+		this.config = JavaTracerConfiguration.getInstance();
 		getContentPane().setLayout(null);
 		
 		progressBar = new WebProgressBar(0,100);
@@ -26,6 +30,8 @@ public class InspectorLoadingView extends JDialog{
 		progressBar.setProgressBottomColor(Color.BLUE);
 		progressBar.setIndeterminate(false);
 		progressBar.setStringPainted(true);
+		
+		progressBar.setVisible(!config.isUnlimitedNodes());
 		
 		getContentPane().add(progressBar);
 		
@@ -45,9 +51,14 @@ public class InspectorLoadingView extends JDialog{
 		progressBar.setValue(value);
 	}
 
-	public void updateInfo(int numNodes, int total, int percentage) {
-		progressBar.setValue(percentage);
-		infoLabel.setText("Loading... " + numNodes + "/" + total); 
+	public void updateInfo(int numNodes) {
+		
+		if (config.isUnlimitedNodes()){
+			infoLabel.setText("Loaded " + numNodes + " nodes"); 
+		} else {
+			infoLabel.setText("Loading... " + numNodes + "/" + config.getNumNodes()); 
+		}
+		
 	}
 
 	public void opening() {

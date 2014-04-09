@@ -87,17 +87,10 @@ public class InspectorPresenter implements InspectorPresenterInterface {
     		loadingView.dispose();
     }
     
-    public void updateInfo(int numNodes, int total,int percentage,XmlManager xml) {
-    	
-    	if(total==0)
-    		{total=getNumberNodes(xml);
-    		percentage=(numNodes*100)/total;
-    		}
-    		
-    	   
-    	
+    public void updateInfo(int numNodes) {
+    	    		   	
     	if (loadingView != null)
-    		loadingView.updateInfo(numNodes,total,percentage);
+    		loadingView.updateInfo(numNodes);
     	
 	}
 

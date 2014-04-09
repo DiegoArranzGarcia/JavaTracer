@@ -6,7 +6,7 @@ public class MergeSort{
 	 public int[] array;
 	 
 	 public MergeSort(){
-		 this.array = new int[10];
+		 this.array = new int[50];
 		 randomizeArray(this.array);
 	 }
 	 
