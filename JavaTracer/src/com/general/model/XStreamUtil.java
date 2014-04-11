@@ -28,10 +28,14 @@ import com.tracer.model.methods.data.MethodExitInfo;
 
 public abstract class XStreamUtil {
 	
+	
 	public static String TAG_TRACE = "trace";
 	public static String TAG_XML = "?xml version=\"1.0\" encoding=\"ISO-8859-1\"?";
 	
-	public static String TAG_CONFIGURATION_DTD = "!DOCTYPE configuration SYSTEM \"settings.dtd\"";
+	public static String CONFIGURATION_DTD_NAME = "settings.dtd";
+	public static String DTD_DIRECTORY = ".." + FileUtilities.SEPARATOR + "dtd" + FileUtilities.SEPARATOR;
+	
+	public static String TAG_CONFIGURATION_DTD = "!DOCTYPE configuration SYSTEM \""  + DTD_DIRECTORY + CONFIGURATION_DTD_NAME + "\"";
 	
 	public static String TAG_METHOD = "method-call";
 	public static String TAG_CALLED_METHODS = "called-methods";
@@ -69,7 +73,7 @@ public abstract class XStreamUtil {
 	public static String TAG_UNLIMITED_NODES = "unlimited-nodes";
 	public static String TAG_EXCLUDED_CLASSES_METHODS = "excluded-classes-methods";
 	public static String TAG_CLASS_METHODS = "class-methods";
-	
+		
 	public static String ATTR_ID = "id";
 	
 	public static String DOUBLE_QUOTES = "\"";

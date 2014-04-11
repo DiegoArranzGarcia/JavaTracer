@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE configuration SYSTEM "..\dtd\settings.dtd">
-<configuration>
+<configurasdasdasdsation>
 <excludes>
 <list>
   <string>java.*</string>
@@ -11,7 +11,7 @@
 </list>
 </excludes>
 <exclude-this>
-<boolean>false</boolean>
+<boolean>true</boolean>
 </exclude-this>
 <methods-excludes>
 <excluded-classes-methods>
@@ -22,7 +22,7 @@
 <boolean>true</boolean>
 </exclude-libraries>
 <exclude-data-structure>
-<boolean>false</boolean>
+<boolean>true</boolean>
 </exclude-data-structure>
 <unlimited-depth-tree>
 <boolean>false</boolean>
