@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.general.model.configuration;
+package com.general.settings.model;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import com.general.model.XStreamUtil;
 import com.profiler.model.data.ExcludedClassesMethods;
 
 
-public class JavaTracerConfiguration extends XStreamUtil{
+public class Settings extends XStreamUtil{
 
 	public final static String CONFIG_FILE_NAME = "java-tracer-properties";
 	public final static String CONFIG_FOLDER_NAME = "config";
@@ -35,14 +35,13 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	public final static int DEFAULT_NUM_LEVELS = 4;
 	public final static int DEFAULT_NUM_NODES  = 30;
 
-
 	/*
 	 * General
 	 */
 
 	private Document xmlDocument;
 	private XPath xPath;	
-	private static JavaTracerConfiguration instance;
+	private static Settings instance;
 	private File fileXml;
 	private File folderCofig;
 	private FileWriter writer;
@@ -66,19 +65,19 @@ public class JavaTracerConfiguration extends XStreamUtil{
 	private boolean unlimitedLevels;
 	private boolean unlimitedNodes;
 
-	public static JavaTracerConfiguration getInstance(){
+	public static Settings getInstance(){
 		/*
 		 * Instance class
 		 */
 		if (instance==null) {
-			instance = new JavaTracerConfiguration();
+			instance = new Settings();
 			instance.loadFromFileInit();
 
 		}	
 		return instance;
 	}
 
-	private JavaTracerConfiguration() {
+	private Settings() {
 		/*
 		 * Create folder config
 		 */
@@ -98,57 +97,43 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		this.nameActualXML = CONFIG_FILE_NAME;
 
 		if (!fileXml.exists()) {
-			/*
-			 *If the file does not exist, create a new one with the default settings
-			 */
-			initExcludes();
-			this.excludedThis = false;
-			this.excludedDataStructure = false;
-			this.excludedLibraries = true;			
-			this.excludedClassesMethods = new ExcludedClassesMethods();
-
-			this.unlimitedLevels = false;
-			this.unlimitedNodes = false;
-			this.numlevels = DEFAULT_NUM_LEVELS;;
-			this.numNodes = DEFAULT_NUM_NODES;
-
-			generateFile();
-
-			try {
-
-				xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
-				xPath = XPathFactory.newInstance().newXPath();
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
+			createInitFile();
 		}else {
-			try {
-				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
-					xPath = XPathFactory.newInstance().newXPath();
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
+			excludesList = getExludesFromFile();
+			excludedThis = getExcludedThisFromFile();
+			excludedDataStructure = getExcludedDataStructureFromFile();
+			excludedClassesMethods = getExcludesClassesMethodFromFile();
+			excludedLibraries = getExcludedLibrariesFromFile();
 
-				excludesList = getExludesFromFile();
-				excludedThis = getExcludedThisFromFile();
-				excludedDataStructure = getExcludedDataStructureFromFile();
-				excludedClassesMethods = getExcludesClassesMethodFromFile();
-				excludedLibraries = getExcludedLibrariesFromFile();
+			unlimitedLevels = getUnlimitedLevelsFromFile();
+			unlimitedNodes = getUnlimitedNodesFromFile();
+			numlevels =  getNumLevelsFromFile();
+			numNodes = getNumNodesFromFile();
 
-				unlimitedLevels = getUnlimitedLevelsFromFile();
-				unlimitedNodes = getUnlimitedNodesFromFile();
-				numlevels =  getNumLevelsFromFile();
-				numNodes = getNumNodesFromFile();
-
-
-			}
-			catch (Exception ex) {
-				ex.printStackTrace();
-			}
 		}
+		
+		try {
+			xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+CONFIG_FILE_NAME + FileUtilities.EXTENSION_XML);
+			xPath = XPathFactory.newInstance().newXPath();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	private void createInitFile() {
+		initExcludes();
+		this.excludedThis = false;
+		this.excludedDataStructure = false;
+		this.excludedLibraries = true;			
+		this.excludedClassesMethods = new ExcludedClassesMethods();
+
+		this.unlimitedLevels = false;
+		this.unlimitedNodes = false;
+		this.numlevels = DEFAULT_NUM_LEVELS;;
+		this.numNodes = DEFAULT_NUM_NODES;
+
+		generateFile();
 	}
 	
 	/*
@@ -160,14 +145,11 @@ public class JavaTracerConfiguration extends XStreamUtil{
 
 		if (fileXml.exists()) {
 			try {
-				try {
-					xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
-					xPath = XPathFactory.newInstance().newXPath();
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
-
+				DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+				domFactory.setValidating(true);
+				xmlDocument = domFactory.newDocumentBuilder().parse(CONFIG_FOLDER_NAME+FileUtilities.SEPARATOR+nameXML + FileUtilities.EXTENSION_XML);
+				xPath = XPathFactory.newInstance().newXPath();
+				
 				excludesList = getExludesFromFile();
 				excludedThis = getExcludedThisFromFile();
 				excludedDataStructure = getExcludedDataStructureFromFile();
@@ -178,12 +160,11 @@ public class JavaTracerConfiguration extends XStreamUtil{
 				unlimitedNodes = getUnlimitedNodesFromFile();
 				numlevels =  getNumLevelsFromFile();
 				numNodes = getNumNodesFromFile();
-
-
+			} catch (Exception e){
+				e.printStackTrace();
+				loadFromFileInit();
 			}
-			catch (Exception ex) {
-				ex.printStackTrace();
-			}
+
 		}
 	}
 
@@ -209,6 +190,7 @@ public class JavaTracerConfiguration extends XStreamUtil{
 		try {
 			writer = new FileWriter(fileXml);
 			write(startTag(TAG_XML));
+			write(startTag(TAG_CONFIGURATION_DTD));
 			write(startTag(TAG_CONFIGURATION));	
 
 			write(startTag(TAG_EXCLUDES));	

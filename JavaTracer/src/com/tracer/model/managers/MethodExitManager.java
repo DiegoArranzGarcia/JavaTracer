@@ -3,8 +3,8 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.variables.data.Data;
+import com.general.settings.model.Settings;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
 import com.tracer.model.ClassUtils;
@@ -42,7 +42,7 @@ public class MethodExitManager{
         
         Data object_this = null;
         
-        if (!JavaTracerConfiguration.getInstance().isExcludedThis())
+        if (!Settings.getInstance().isExcludedThis())
         	object_this = processThis(event,ref, thread);
         
         

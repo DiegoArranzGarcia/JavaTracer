@@ -7,18 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.alee.laf.progressbar.WebProgressBar;
-import com.general.model.configuration.JavaTracerConfiguration;
+import com.general.settings.model.Settings;
 
 @SuppressWarnings("serial")
 public class InspectorLoadingView extends JDialog{
 	private WebProgressBar progressBar;
 	private JLabel infoLabel;
-	private JavaTracerConfiguration config;
+	private Settings config;
 	
 	public InspectorLoadingView(InspectorView view) {
 		super(view,true);
 		
-		this.config = JavaTracerConfiguration.getInstance();
+		this.config = Settings.getInstance();
 		getContentPane().setLayout(null);
 		
 		progressBar = new WebProgressBar(0,100);

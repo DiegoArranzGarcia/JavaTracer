@@ -13,8 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.general.model.FileUtilities;
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
+import com.general.settings.model.Settings;
 import com.profiler.model.Profiler;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.model.ProfilerTree;
@@ -69,7 +69,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 	}
 
 	public void save() {
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		Settings configuration = Settings.getInstance();
 		HashMap<String, Boolean> classes = view.getDataState();
 		Iterator<Entry<String,Boolean>> iterator = classes.entrySet().iterator();
 		
@@ -105,7 +105,7 @@ public class ProfilerPresenter implements ProfilerPresenterInterface {
 			}
 		}
 		
-		configuration.saveConfiguration(JavaTracerConfiguration.getInstance().getCurrentXMLName());
+		configuration.saveConfiguration(Settings.getInstance().getCurrentXMLName());
 		saveProfile(currentFile);
 	}
 

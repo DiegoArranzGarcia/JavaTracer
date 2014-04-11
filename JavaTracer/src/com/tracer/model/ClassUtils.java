@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.general.model.FileUtilities;
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.variables.data.ArrayData;
 import com.general.model.variables.data.Data;
 import com.general.model.variables.data.IgnoredData;
@@ -13,6 +12,7 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
+import com.general.settings.model.Settings;
 import com.sun.jdi.ArrayReference;
 import com.sun.jdi.BooleanValue;
 import com.sun.jdi.ByteValue;
@@ -37,7 +37,7 @@ public class ClassUtils {
 	private List<String> excludes;
 	private HashMap<String,Boolean> fieldsOfClass;
 	private String classPath;
-	private JavaTracerConfiguration config;
+	private Settings config;
 	
 	/**
 	 * Initialise the ClassUtils class. 
@@ -49,7 +49,7 @@ public class ClassUtils {
 		this.fieldsOfClass = new HashMap<>();
 		this.excludes = excludes;
 		this.classPath = classPath;
-		this.config = JavaTracerConfiguration.getInstance();
+		this.config = Settings.getInstance();
 	}
 
 	/**

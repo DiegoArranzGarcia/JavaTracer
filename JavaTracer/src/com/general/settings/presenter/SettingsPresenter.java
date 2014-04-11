@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.FileUtilities;
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.presenter.JavaTracerPresenter;
+import com.general.settings.model.Settings;
 import com.general.settings.view.SettingsView;
 import com.general.settings.view.SettingsViewInterface;
 
@@ -59,7 +59,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		}
 		List<String> listExcludes = new ArrayList<>();
 		try {
-			JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+			Settings configuration = Settings.getInstance();
 			listExcludes = configuration.getExcludesList();
 			excludes = new String[listExcludes.size()];
 			for (int i=0;i<listExcludes.size();i++)
@@ -111,7 +111,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void loadConfiguration(String nameXML) {
 		
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance(); 
+		Settings configuration = Settings.getInstance(); 
 		configuration.loadFromFile(nameXML); 
 		
 		addExludesFromConfiguration();
@@ -142,7 +142,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 		}
 		
 		excludedThis =view.getExcludedThis();
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		Settings configuration = Settings.getInstance();
 		configuration.setExcludes(excludesAux); 
 		configuration.setExcludedThis(excludedThis);
 		excludedLibraries = view.getExcludedLibraries();
@@ -158,7 +158,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 		if (nLevels != -1) {
 			numLevels =nLevels;
-			JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+			Settings configuration = Settings.getInstance();
 			configuration.setNumlevels(numLevels);
 
 			int nNodes = view.getNumNodes(); 
@@ -177,7 +177,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	}
 
 	public void loadXmls() {
-		File[] xmlFiles = JavaTracerConfiguration.getInstance().getFolderCofig().listFiles();
+		File[] xmlFiles = Settings.getInstance().getFolderCofig().listFiles();
 
 		List<String> xmlOnlyNames = new ArrayList<>();
 	
@@ -213,7 +213,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	private void addExludesFromConfiguration() {
 		try {
-			excludesFromConfiguration = JavaTracerConfiguration.getInstance().getExcludesList();
+			excludesFromConfiguration = Settings.getInstance().getExcludesList();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -227,7 +227,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void addExcludedThisFromConfiguration() {
 		try {
-			excludedThis =JavaTracerConfiguration.getInstance().isExcludedThis();
+			excludedThis =Settings.getInstance().isExcludedThis();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -236,7 +236,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void addExcludedLibrariesFromConfiguration() {
 		try {
-			excludedLibraries =JavaTracerConfiguration.getInstance().isExcludedLibrary();
+			excludedLibraries =Settings.getInstance().isExcludedLibrary();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -245,7 +245,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void addUnlimitedLevelsFromConfiguration() {
 		try {
-			unlimitedLevels =JavaTracerConfiguration.getInstance().isUnlimitedLevels();
+			unlimitedLevels =Settings.getInstance().isUnlimitedLevels();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -254,7 +254,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void addExcludedDataStructureFromConfiguration() {
 		try {
-			excludedDataStructure =JavaTracerConfiguration.getInstance().isUnlimitedLevels();
+			excludedDataStructure =Settings.getInstance().isUnlimitedLevels();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -263,7 +263,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	public void addUnlimitedNodesFromConfiguration() {
 		try {
-			unlimitedNodes =JavaTracerConfiguration.getInstance().isUnlimitedLevels();
+			unlimitedNodes =Settings.getInstance().isUnlimitedLevels();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -272,7 +272,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 	
 	private void addNumLevelsFromConfiguration() {
 		try {
-			numLevels =JavaTracerConfiguration.getInstance().getNumLevels();
+			numLevels =Settings.getInstance().getNumLevels();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -281,7 +281,7 @@ public class SettingsPresenter implements SettingsPresenterInterface {
 
 	private void addNumNodesFromConfiguration() {
 		try {
-			numNodes =JavaTracerConfiguration.getInstance().getNumNodes();
+			numNodes =Settings.getInstance().getNumNodes();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();

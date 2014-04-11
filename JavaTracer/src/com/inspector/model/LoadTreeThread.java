@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.w3c.dom.Node;
 
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
+import com.general.settings.model.Settings;
 import com.inspector.treeinspector.data.Box;
 import com.inspector.treeinspector.data.MethodBox;
 import com.inspector.treeinspector.data.ThreadBox;
@@ -27,7 +27,7 @@ public class LoadTreeThread extends Thread{
 	
 	public LoadTreeThread(String xmlName,UpdateNotifier notifier){
 		
-		JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+		Settings configuration = Settings.getInstance();
 		
 		this.xmlName = xmlName;
 		this.notifier = notifier;

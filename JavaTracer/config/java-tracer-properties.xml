@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE configuration SYSTEM "settings.dtd">
 <configuration>
 <excludes>
 <list>
@@ -7,30 +8,27 @@
   <string>sun.*</string>
   <string>com.sun.*</string>
   <string>org.eclipse.jdt.internal.jarinjarloader.*</string>
-  <string>com.prueba.MergeSortLauncher</string>
-  <string>show.*</string>
-  <string>datatypes.*</string>
 </list>
 </excludes>
-<excluded-this>
+<exclude-this>
 <boolean>false</boolean>
-</excluded-this>
+</exclude-this>
 <methods-excludes>
-<com.profiler.model.data.ExcludedClassesMethods>
+<excluded-classes-methods>
   <classList/>
-</com.profiler.model.data.ExcludedClassesMethods>
+</excluded-classes-methods>
 </methods-excludes>
 <exclude-libraries>
 <boolean>true</boolean>
 </exclude-libraries>
-<excluded-data-estructure>
+<exclude-data-structure>
 <boolean>false</boolean>
-</excluded-data-estructure>
+</exclude-data-structure>
 <unlimited-depth-tree>
 <boolean>false</boolean>
 </unlimited-depth-tree>
 <unlimited-nodes>
-<boolean>true</boolean>
+<boolean>false</boolean>
 </unlimited-nodes>
 <num-levels>
 <int>4</int>

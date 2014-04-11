@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.general.model.ClassFinder;
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.model.data.ThreadInfo;
+import com.general.settings.model.Settings;
 import com.profiler.model.ProfilerModelInterface;
 import com.profiler.model.data.ExcludedClassesMethods;
 import com.sun.jdi.ThreadReference;
@@ -76,7 +76,7 @@ public class EventThread extends Thread {
         this.tracer = tracer;
         this.excludes = new ArrayList<String>();
         
-        JavaTracerConfiguration javaTracerConfiguration = JavaTracerConfiguration.getInstance();
+        Settings javaTracerConfiguration = Settings.getInstance();
         
         // Excludes
         

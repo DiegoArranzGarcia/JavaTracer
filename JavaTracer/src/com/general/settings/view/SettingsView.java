@@ -13,8 +13,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.alee.laf.combobox.WebComboBox;
-import com.general.model.configuration.JavaTracerConfiguration;
 import com.general.resources.ImageLoader;
+import com.general.settings.model.Settings;
 import com.general.settings.presenter.SettingsPresenterInterface;
 
 @SuppressWarnings("serial")
@@ -345,8 +345,8 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 
     
     private void restoreDisplayTreeConfiguration() {
-	   loadNumLevels(JavaTracerConfiguration.DEFAULT_NUM_LEVELS);
-	   loadNumNodes(JavaTracerConfiguration.DEFAULT_NUM_NODES);
+	   loadNumLevels(Settings.DEFAULT_NUM_LEVELS);
+	   loadNumNodes(Settings.DEFAULT_NUM_NODES);
 	   loadUnlimitedLevels(false);
 	   loadUnlimitedNodes(false); 
     }
@@ -376,7 +376,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 	
 
 	private void restoreExcluded() {
-	    JavaTracerConfiguration configuration = JavaTracerConfiguration.getInstance();
+	    Settings configuration = Settings.getInstance();
 	    List<String> defaultExcluded = configuration.getDefaultExcluded();
 	    for (int i=0;i<defaultExcluded.size();i++) {
 	    	addOnlyExclude(defaultExcluded.get(i));
@@ -650,7 +650,7 @@ public class SettingsView extends JFrame implements ActionListener,MouseListener
 		 
 		 configuration.removeAllItems();
 		 @SuppressWarnings("static-access")
-        String xmlDefaultName = JavaTracerConfiguration.getInstance().CONFIG_FILE_NAME;
+        String xmlDefaultName = Settings.getInstance().CONFIG_FILE_NAME;
 		 configuration.addItem(xmlDefaultName);
 		 
 		 for (int i=0;i<xmlNames.size();i++) {

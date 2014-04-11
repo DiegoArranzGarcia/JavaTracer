@@ -20,6 +20,8 @@ import com.general.model.variables.data.NullData;
 import com.general.model.variables.data.ObjectData;
 import com.general.model.variables.data.SimpleData;
 import com.general.model.variables.data.StringData;
+import com.profiler.model.data.ClassMethods;
+import com.profiler.model.data.ExcludedClassesMethods;
 import com.thoughtworks.xstream.XStream;
 import com.tracer.model.methods.data.MethodEntryInfo;
 import com.tracer.model.methods.data.MethodExitInfo;
@@ -28,6 +30,8 @@ public abstract class XStreamUtil {
 	
 	public static String TAG_TRACE = "trace";
 	public static String TAG_XML = "?xml version=\"1.0\" encoding=\"ISO-8859-1\"?";
+	
+	public static String TAG_CONFIGURATION_DTD = "!DOCTYPE configuration SYSTEM \"settings.dtd\"";
 	
 	public static String TAG_METHOD = "method-call";
 	public static String TAG_CALLED_METHODS = "called-methods";
@@ -58,11 +62,13 @@ public abstract class XStreamUtil {
 	public static String TAG_NUM_LEVELS ="num-levels";
 	public static String TAG_NUM_NODES = "num-nodes";
 	public static String TAG_METHODS_EXCLUDES = "methods-excludes";
-	public static String TAG_EXCLUDED_THIS = "excluded-this";
+	public static String TAG_EXCLUDED_THIS = "exclude-this";
 	public static String TAG_EXCLUDED_LIBRARIES = "exclude-libraries";
-	public static String TAG_EXCLUDED_DATA_STRUCTURE = "excluded-data-estructure";
+	public static String TAG_EXCLUDED_DATA_STRUCTURE = "exclude-data-structure";
 	public static String TAG_UNLIMITED_LEVELS = "unlimited-depth-tree";
 	public static String TAG_UNLIMITED_NODES = "unlimited-nodes";
+	public static String TAG_EXCLUDED_CLASSES_METHODS = "excluded-classes-methods";
+	public static String TAG_CLASS_METHODS = "class-methods";
 	
 	public static String ATTR_ID = "id";
 	
@@ -109,6 +115,10 @@ public abstract class XStreamUtil {
 		xStream.alias(TAG_ARRAY, ArrayData.class);
 		xStream.alias(TAG_STRING,StringData.class);
 		xStream.alias(TAG_NULL,NullData.class);
+		
+		//Profiler alias
+		xStream.alias(TAG_EXCLUDED_CLASSES_METHODS,ExcludedClassesMethods.class);
+		xStream.alias(TAG_CLASS_METHODS,ClassMethods.class);
 	}
 
 	protected String startTag(String tag){
