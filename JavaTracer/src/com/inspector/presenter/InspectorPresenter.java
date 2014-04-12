@@ -98,7 +98,7 @@ public class InspectorPresenter implements InspectorPresenterInterface {
 		if (loadingView == null){
 			loadingView = new InspectorLoadingView(view.getView());
 		}
-		loadingView.setPercentage(0);
+		loadingView.reset();
 		loadingView.setVisible(true);
 	}
 

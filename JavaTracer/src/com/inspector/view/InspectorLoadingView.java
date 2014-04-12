@@ -30,7 +30,6 @@ public class InspectorLoadingView extends JDialog{
 		progressBar.setProgressBottomColor(Color.BLUE);
 		progressBar.setIndeterminate(false);
 		progressBar.setStringPainted(true);
-		
 		progressBar.setVisible(!config.isUnlimitedNodes());
 		
 		getContentPane().add(progressBar);
@@ -47,22 +46,26 @@ public class InspectorLoadingView extends JDialog{
 		
 	}
 
-	public void setPercentage(int value) {
-		progressBar.setValue(value);
-	}
-
 	public void updateInfo(int numNodes) {
 		
 		if (config.isUnlimitedNodes()){
 			infoLabel.setText("Loaded " + numNodes + " nodes"); 
 		} else {
 			infoLabel.setText("Loading... " + numNodes + "/" + config.getNumNodes()); 
+			double percentaje = (double) numNodes / (double) config.getNumNodes();
+			progressBar.setValue((int)(percentaje*100));
 		}
 		
 	}
 
 	public void opening() {
 		infoLabel.setText("Opening...");
+		progressBar.setVisible(!config.isUnlimitedNodes());
+	}
+
+	public void reset() {
+		progressBar.setValue(0);
+		progressBar.setVisible(!config.isUnlimitedNodes());
 	}
 
 }

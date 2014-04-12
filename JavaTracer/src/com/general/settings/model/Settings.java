@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.general.settings.model;
 
 import java.io.*;
@@ -96,28 +93,25 @@ public class Settings extends XStreamUtil {
 	 * gets the data directly from there
 	 */
 	public void loadFromFileInit() {
-		this.fileXml = new File(folderCofig, CONFIG_FILE_NAME
-				+ FileUtilities.EXTENSION_XML);
+		this.fileXml = new File(folderCofig, CONFIG_FILE_NAME+ FileUtilities.EXTENSION_XML);
 		this.nameActualXML = CONFIG_FILE_NAME;
-
+		
 		if (!fileXml.exists()) {
 			createInitFile();
 		}
 
 		try {
 
-			DocumentBuilderFactory domFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 			domFactory.setValidating(true);
 
 			DocumentBuilder builder = domFactory.newDocumentBuilder();
 			settingsErrorHandler = new SettingsErrorHandler(this);
 			builder.setErrorHandler(settingsErrorHandler);
+			
 			xPath = XPathFactory.newInstance().newXPath();
 
-			xmlDocument = builder.parse(CONFIG_FOLDER_NAME
-					+ FileUtilities.SEPARATOR + CONFIG_FILE_NAME
-					+ FileUtilities.EXTENSION_XML);
+			xmlDocument = builder.parse(CONFIG_FOLDER_NAME+ FileUtilities.SEPARATOR + CONFIG_FILE_NAME+ FileUtilities.EXTENSION_XML);
 			
 			if (settingsErrorHandler.error())
 				error();
@@ -158,15 +152,13 @@ public class Settings extends XStreamUtil {
 	 * Obtains information about the file whose name is passed as a parameter
 	 */
 	public void loadFromFile(String nameXML) {
-		this.fileXml = new File(folderCofig, nameXML
-				+ FileUtilities.EXTENSION_XML);
+		this.fileXml = new File(folderCofig, nameXML + FileUtilities.EXTENSION_XML);
 		this.nameActualXML = nameXML;
 
 		if (fileXml.exists()) {
 
 			try {
-				DocumentBuilderFactory domFactory = DocumentBuilderFactory
-						.newInstance();
+				DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 				domFactory.setValidating(true);
 
 				DocumentBuilder builder = domFactory.newDocumentBuilder();
@@ -174,9 +166,7 @@ public class Settings extends XStreamUtil {
 				builder.setErrorHandler(settingsErrorHandler);
 				xPath = XPathFactory.newInstance().newXPath();
 
-				xmlDocument = builder.parse(CONFIG_FOLDER_NAME
-						+ FileUtilities.SEPARATOR + nameXML
-						+ FileUtilities.EXTENSION_XML);
+				xmlDocument = builder.parse(CONFIG_FOLDER_NAME+ FileUtilities.SEPARATOR + nameXML+ FileUtilities.EXTENSION_XML);
 
 				if (settingsErrorHandler.error())
 					error();

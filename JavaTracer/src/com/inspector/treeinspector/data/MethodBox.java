@@ -3,13 +3,19 @@ package com.inspector.treeinspector.data;
 import java.util.List;
 
 import com.general.model.data.MethodInfo;
-import com.general.model.variables.data.*;
+import com.general.model.variables.data.ArrayData;
+import com.general.model.variables.data.Data;
+import com.general.model.variables.data.IgnoredData;
+import com.general.model.variables.data.NullData;
+import com.general.model.variables.data.ObjectData;
+import com.general.model.variables.data.SimpleData;
+import com.general.model.variables.data.StringData;
 
 
 public class MethodBox extends Box {
 
 	private static int MAX_LENGTH = 10;
-	private static String SUSPENSION_POINTS = " ......";
+	private static String SUSPENSION_POINTS = "...";
 	private MethodInfo method;
 
 	public MethodBox(String pathOfNode, long id, MethodInfo method, boolean haveChildren) {
@@ -41,13 +47,6 @@ public class MethodBox extends Box {
 			name += " -> " + return_value;
 		}
 
-
-		/*int name_length =  name.getBytes().length ;
-		 if (name_length > MAX_LENGTH) {
-			 name = name.substring(0, MAX_LENGTH) +SUSPENSION_POINTS;
-		}*/
-
-
 		return name;
 	} 
 
@@ -64,11 +63,12 @@ public class MethodBox extends Box {
 			text= "null" ;
 		}else if (var instanceof StringData){
 			StringData string = ((StringData)var);
-
-			text= "\"" + string.getValue() + "\"" ;
+			text = string.getValue();
 			if (text.length() > MAX_LENGTH) {
-				text = text.substring(0,MAX_LENGTH)+SUSPENSION_POINTS;
+				text = string.getValue().substring(0,MAX_LENGTH)+SUSPENSION_POINTS;
 			}
+			
+			text= "\"" + text + "\"" ;
 		}else if (var instanceof SimpleData){
 			SimpleData data = ((SimpleData)var);
 			text= data.getValue().toString();		
