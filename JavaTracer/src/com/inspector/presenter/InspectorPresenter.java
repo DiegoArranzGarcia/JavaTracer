@@ -36,7 +36,7 @@ public class InspectorPresenter implements InspectorPresenterInterface {
 		treeManager = new TreeManager();
 		treeInspector = new TreeInspectorPresenter(treeManager);
 		objectInspector = new ObjectInspectorPresenter(treeManager);
-		treeInspector.setController(this);
+		treeInspector.setPresenter(this);
 		objectInspector.setController(this);
 		treeManager.setController(this);
 		objectInspector.showTable();

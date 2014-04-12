@@ -3,6 +3,8 @@ package com.inspector.model;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.w3c.dom.Node;
 
 import com.general.model.data.MethodInfo;
@@ -42,12 +44,18 @@ public class LoadTreeThread extends Thread{
 	public void run() {
 		
 		notifier.opening();
-		xml = new XmlManager(xmlName);
-		notifier.opened(xml);
-		Node rootNode = xml.getRootNode();
-		ThreadBox threadBox = getThreadBoxFromNode(rootNode);
-		tree = new DefaultTreeLayout<Box>(threadBox); 
-		generateTree();
+		try{
+			xml = new XmlManager(xmlName);
+			notifier.opened(xml);
+			Node rootNode = xml.getRootNode();
+			ThreadBox threadBox = getThreadBoxFromNode(rootNode);
+			tree = new DefaultTreeLayout<Box>(threadBox); 
+			generateTree();
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null,"Corrupted trace file. The program will not load this file.",
+					"Error", JOptionPane.ERROR_MESSAGE);
+			tree = null;
+		}
 		notifier.finishLoading(tree);
 		
 	}
@@ -68,14 +76,10 @@ public class LoadTreeThread extends Thread{
 		return (!unlimited_levels && depth<max_depth) || unlimited_levels;
 	}
 
-	private ThreadBox getThreadBoxFromNode(Node rootNode) {
+	private ThreadBox getThreadBoxFromNode(Node rootNode) throws Exception{
 		ThreadBox threadBox = null;
-		try{
-			ThreadInfo threadInfo = xml.getThreadName(rootNode);
-			threadBox = new ThreadBox("/trace/thread",0,threadInfo.getNameThread());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+		ThreadInfo threadInfo = xml.getThreadName(rootNode);
+		threadBox = new ThreadBox("/trace/thread",0,threadInfo.getNameThread());
 		return threadBox;
 	}
 

@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import com.profiler.model.data.ProfileData;
 import com.sun.jdi.Method;
 import com.sun.jdi.event.MethodEntryEvent;
@@ -53,8 +55,14 @@ public class Profiler implements ProfilerModelInterface{
 	}
 
 	public ProfilerTree openProfile(File file){
-		XStream xStream = new XStream();
-		profilerTree = (ProfilerTree) xStream.fromXML(file);
+		try{
+			XStream xStream = new XStream();
+			profilerTree = (ProfilerTree) xStream.fromXML(file);
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null,"Corrupted profiler file. The program will not load this file.",
+					"Error", JOptionPane.ERROR_MESSAGE);
+			profilerTree = null;
+		}
 		return profilerTree;
 	}
 

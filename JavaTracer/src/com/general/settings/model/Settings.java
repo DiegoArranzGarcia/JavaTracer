@@ -1,15 +1,22 @@
 package com.general.settings.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.general.model.FileUtilities;
 import com.general.model.XStreamUtil;
@@ -61,8 +68,6 @@ public class Settings extends XStreamUtil {
 	private int numNodes;
 	private boolean unlimitedLevels;
 	private boolean unlimitedNodes;
-	private DocumentBuilder builder;
-	private SettingsErrorHandler settingsErrorHandler;
 
 	public static Settings getInstance() {
 		/*
@@ -103,18 +108,11 @@ public class Settings extends XStreamUtil {
 		try {
 
 			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-			domFactory.setValidating(true);
-
 			DocumentBuilder builder = domFactory.newDocumentBuilder();
-			settingsErrorHandler = new SettingsErrorHandler(this);
-			builder.setErrorHandler(settingsErrorHandler);
 			
 			xPath = XPathFactory.newInstance().newXPath();
 
 			xmlDocument = builder.parse(CONFIG_FOLDER_NAME+ FileUtilities.SEPARATOR + CONFIG_FILE_NAME+ FileUtilities.EXTENSION_XML);
-			
-			if (settingsErrorHandler.error())
-				error();
 
 		} catch (Exception e) {
 			error();
@@ -159,29 +157,22 @@ public class Settings extends XStreamUtil {
 
 			try {
 				DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-				domFactory.setValidating(true);
 
 				DocumentBuilder builder = domFactory.newDocumentBuilder();
-				settingsErrorHandler = new SettingsErrorHandler(this);
-				builder.setErrorHandler(settingsErrorHandler);
 				xPath = XPathFactory.newInstance().newXPath();
 
 				xmlDocument = builder.parse(CONFIG_FOLDER_NAME+ FileUtilities.SEPARATOR + nameXML+ FileUtilities.EXTENSION_XML);
+				excludesList = getExludesFromFile();
+				excludedThis = getExcludedThisFromFile();
+				excludedDataStructure = getExcludedDataStructureFromFile();
+				excludedClassesMethods = getExcludesClassesMethodFromFile();
+				excludedLibraries = getExcludedLibrariesFromFile();
 
-				if (settingsErrorHandler.error())
-					error();
-				else {
-					excludesList = getExludesFromFile();
-					excludedThis = getExcludedThisFromFile();
-					excludedDataStructure = getExcludedDataStructureFromFile();
-					excludedClassesMethods = getExcludesClassesMethodFromFile();
-					excludedLibraries = getExcludedLibrariesFromFile();
-
-					unlimitedLevels = getUnlimitedLevelsFromFile();
-					unlimitedNodes = getUnlimitedNodesFromFile();
-					numlevels = getNumLevelsFromFile();
-					numNodes = getNumNodesFromFile();
-				}
+				unlimitedLevels = getUnlimitedLevelsFromFile();
+				unlimitedNodes = getUnlimitedNodesFromFile();
+				numlevels = getNumLevelsFromFile();
+				numNodes = getNumNodesFromFile();
+				
 
 			} catch (Exception e) {
 				error();
@@ -210,7 +201,6 @@ public class Settings extends XStreamUtil {
 		try {
 			writer = new FileWriter(fileXml);
 			write(startTag(TAG_XML));
-			write(startTag(TAG_CONFIGURATION_DTD));
 			write(startTag(TAG_CONFIGURATION));
 
 			write(startTag(TAG_EXCLUDES));

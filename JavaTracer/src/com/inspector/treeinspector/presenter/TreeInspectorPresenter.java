@@ -156,8 +156,8 @@ public class TreeInspectorPresenter implements MouseListener, TreeInspectorPrese
 		
 	}
 
-	public void setController(InspectorPresenter inspectorController) {
-		this.controller = inspectorController;
+	public void setPresenter(InspectorPresenter inspectorPresenter) {
+		this.controller = inspectorPresenter;
 	}
 
 	public void showTree(){
@@ -165,7 +165,9 @@ public class TreeInspectorPresenter implements MouseListener, TreeInspectorPrese
 			view = new TreeInspectorView();
 			view.setController(this);
 		}
-		view.repaintTree(treeManager.getTree());
+		
+		if (treeManager.getTree() != null)
+			view.repaintTree(treeManager.getTree());
 	}
 	
 }
