@@ -3,13 +3,13 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 import com.general.settings.model.Settings;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodExitEvent;
 import com.tracer.model.ClassUtils;
 import com.tracer.model.TraceWriter;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 public class MethodExitManager{
 		

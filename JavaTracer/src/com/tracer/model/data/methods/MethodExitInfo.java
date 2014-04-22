@@ -1,8 +1,8 @@
-package com.tracer.model.methods.data;
+package com.tracer.model.data.methods;
 
 import java.util.List;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 
 public class MethodExitInfo {
 

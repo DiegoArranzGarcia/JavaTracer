@@ -3,13 +3,13 @@ package com.inspector.treeinspector.data;
 import java.util.List;
 
 import com.general.model.data.MethodInfo;
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.Data;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
+import com.general.model.data.variables.ArrayData;
+import com.general.model.data.variables.Data;
+import com.general.model.data.variables.IgnoredData;
+import com.general.model.data.variables.NullData;
+import com.general.model.data.variables.ObjectData;
+import com.general.model.data.variables.SimpleData;
+import com.general.model.data.variables.StringData;
 
 
 public class MethodBox extends Box {

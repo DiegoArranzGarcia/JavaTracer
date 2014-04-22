@@ -4,8 +4,8 @@ import java.util.*;
 
 import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
-import com.general.model.variables.data.Data;
-import com.general.model.variables.data.InfoVisitor;
+import com.general.model.data.variables.Data;
+import com.general.model.data.variables.InfoVisitor;
 import com.general.view.jtreetable.TableTreeNode;
 import com.inspector.model.TreeManager;
 import com.inspector.objectinspector.model.ChangeInfoVisitor;

@@ -3,10 +3,10 @@ package com.general.model.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 import com.tracer.model.ChangeDetector;
-import com.tracer.model.methods.data.MethodEntryInfo;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodEntryInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 	
 public class MethodInfo {

@@ -3,13 +3,13 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 import com.general.settings.model.Settings;
 import com.sun.jdi.*;
 import com.sun.jdi.event.MethodEntryEvent;
 import com.tracer.model.ClassUtils;
 import com.tracer.model.TraceWriter;
-import com.tracer.model.methods.data.MethodEntryInfo;
+import com.tracer.model.data.methods.MethodEntryInfo;
 
 /**
  * This class handles every time that a method is called. In there the information 

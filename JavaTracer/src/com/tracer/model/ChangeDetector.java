@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.data.ChangeInfo;
-import com.general.model.variables.data.*;
+import com.general.model.data.variables.*;
 	
 /**
  * Class used to detect changes between Data objects. The changes are return in

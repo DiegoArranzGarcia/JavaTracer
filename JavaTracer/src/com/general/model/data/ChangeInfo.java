@@ -1,6 +1,6 @@
 package com.general.model.data;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 
 public class ChangeInfo {
 	

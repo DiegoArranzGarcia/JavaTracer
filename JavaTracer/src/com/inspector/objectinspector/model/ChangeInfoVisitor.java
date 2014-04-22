@@ -3,13 +3,13 @@ package com.inspector.objectinspector.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.InfoVisitor;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
+import com.general.model.data.variables.ArrayData;
+import com.general.model.data.variables.IgnoredData;
+import com.general.model.data.variables.InfoVisitor;
+import com.general.model.data.variables.NullData;
+import com.general.model.data.variables.ObjectData;
+import com.general.model.data.variables.SimpleData;
+import com.general.model.data.variables.StringData;
 import com.general.view.jtreetable.TableTreeNode;
 import com.inspector.objectinspector.view.VariableRowData;
 

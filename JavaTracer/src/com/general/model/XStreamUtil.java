@@ -14,17 +14,17 @@ import org.w3c.dom.Node;
 import com.general.model.data.ChangeInfo;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
-import com.general.model.variables.data.ArrayData;
-import com.general.model.variables.data.IgnoredData;
-import com.general.model.variables.data.NullData;
-import com.general.model.variables.data.ObjectData;
-import com.general.model.variables.data.SimpleData;
-import com.general.model.variables.data.StringData;
+import com.general.model.data.variables.ArrayData;
+import com.general.model.data.variables.IgnoredData;
+import com.general.model.data.variables.NullData;
+import com.general.model.data.variables.ObjectData;
+import com.general.model.data.variables.SimpleData;
+import com.general.model.data.variables.StringData;
 import com.profiler.model.data.ClassMethods;
 import com.profiler.model.data.ExcludedClassesMethods;
 import com.thoughtworks.xstream.XStream;
-import com.tracer.model.methods.data.MethodEntryInfo;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodEntryInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 public abstract class XStreamUtil {
 	

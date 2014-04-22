@@ -4,8 +4,8 @@ import java.io.FileWriter;
 
 import com.general.model.XStreamUtil;
 import com.general.model.data.ThreadInfo;
-import com.tracer.model.methods.data.MethodEntryInfo;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodEntryInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 public class TraceWriter extends XStreamUtil{
 		

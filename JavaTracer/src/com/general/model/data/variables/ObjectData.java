@@ -1,4 +1,4 @@
-package com.general.model.variables.data;
+package com.general.model.data.variables;
 
 import java.util.ArrayList;
 import java.util.List;

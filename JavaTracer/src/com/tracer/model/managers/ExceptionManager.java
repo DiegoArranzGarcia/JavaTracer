@@ -3,7 +3,7 @@ package com.tracer.model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 import com.sun.jdi.IncompatibleThreadStateException;
 import com.sun.jdi.LocalVariable;
 import com.sun.jdi.Location;
@@ -14,7 +14,7 @@ import com.sun.jdi.ThreadReference;
 import com.sun.jdi.event.ExceptionEvent;
 import com.tracer.model.ClassUtils;
 import com.tracer.model.TraceWriter;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 public class ExceptionManager {
 

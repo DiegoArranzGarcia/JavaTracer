@@ -1,4 +1,4 @@
-package com.general.model.variables.data;
+package com.general.model.data.variables;
 
 public class StringData extends Data{
 	

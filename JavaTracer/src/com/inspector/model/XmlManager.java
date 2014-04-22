@@ -17,10 +17,10 @@ import org.w3c.dom.NodeList;
 import com.general.model.XStreamUtil;
 import com.general.model.data.MethodInfo;
 import com.general.model.data.ThreadInfo;
-import com.general.model.variables.data.Data;
+import com.general.model.data.variables.Data;
 import com.inspector.treeinspector.data.Box;
-import com.tracer.model.methods.data.MethodEntryInfo;
-import com.tracer.model.methods.data.MethodExitInfo;
+import com.tracer.model.data.methods.MethodEntryInfo;
+import com.tracer.model.data.methods.MethodExitInfo;
 
 public class XmlManager extends XStreamUtil{
       
