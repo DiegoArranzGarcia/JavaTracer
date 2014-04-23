@@ -76,6 +76,8 @@ public class ProfileCellRenderer extends DefaultTableCellRenderer{
 			
 			if (column == 2 || column == 3)
 				setToolTipText((String) value);
+			else 
+				setToolTipText(null);
 			
 		} catch (Exception e){
 			

@@ -70,9 +70,8 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
 	private static double PERCENTAGE_WIDTH = 0.75;
 	private static double PERCENTAGE_HEIGHT = 0.75;
 	private static final int NUM_CLASSES = 10;
-	private static String HELP_SAVE_TOOLTIP ="Exclude useless methods/classes/packages the trace will be faster ";
-	private static String HELP_DOUBLECLICK_TOOLTIP ="class's methods by double click in her";
-	private static String HELP_EXCLUDES_TOOLTIP ="recalculate the chart but you must save for next trace";
+	private static String HELP_SAVE_TOOLTIP ="Exclude methods/classes/packages for ignore them for the trace";
+	private static String HELP_DOUBLECLICK_TOOLTIP ="Double click for see a chart of class methods";
 	
 	private ProfilerPresenterInterface presenter;
 	private ProfileCellRenderer renderer;
@@ -161,7 +160,6 @@ public class ProfilerView extends JFrame implements ChartProgressListener,Compon
         panelRight.add(scrollPane, BorderLayout.CENTER);      
         
         table = new JTreeTable();
-        table.setToolTipText(HELP_EXCLUDES_TOOLTIP);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         ProfilerHeaderData headerData = new ProfilerHeaderData();

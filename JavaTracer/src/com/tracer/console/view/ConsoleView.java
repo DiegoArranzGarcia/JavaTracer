@@ -88,7 +88,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 
 		btnStop = new WebToggleButton();
 		btnStop.setVisible(false);
-		btnStop.setToolTipText("Clear console");
+		btnStop.setToolTipText("Stop the program");
 		btnStop.setRolloverDecoratedOnly(true);
 		btnStop.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnStop.setDrawFocus(false);
@@ -98,7 +98,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 
 		btnPlay = new WebToggleButton();
 		btnPlay.setEnabled(false);
-		btnPlay.setToolTipText("Clear console");
+		btnPlay.setToolTipText("Trace the program");
 		btnPlay.setRolloverDecoratedOnly(true);
 		btnPlay.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnPlay.setIcon(new ImageIcon(imageLoader.getPlayIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
@@ -109,7 +109,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 		btnMinimizeConsole = new WebToggleButton();
 		header.add(btnMinimizeConsole);
 		btnMinimizeConsole.setRolloverDecoratedOnly(true);
-		btnMinimizeConsole.setToolTipText("Clear console");
+		btnMinimizeConsole.setToolTipText("Minimize the console");
 		btnMinimizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMinimizeConsole.setIcon(new ImageIcon(imageLoader.getMinimizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
 		btnMinimizeConsole.setDrawFocus(false);
@@ -117,7 +117,7 @@ public class ConsoleView extends WebPanel implements ActionListener,ComponentLis
 
 		btnMaximizeConsole = new WebToggleButton();
 		btnMaximizeConsole.setVisible(false);
-		btnMaximizeConsole.setToolTipText("Clear console");
+		btnMaximizeConsole.setToolTipText("Maximize console");
 		btnMaximizeConsole.setRolloverDecoratedOnly(true);
 		btnMaximizeConsole.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMaximizeConsole.setIcon(new ImageIcon(imageLoader.getMaximizeIcon().getImage().getScaledInstance(16,16,Image.SCALE_SMOOTH)));
