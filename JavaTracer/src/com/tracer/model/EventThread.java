@@ -38,7 +38,6 @@ import com.tracer.model.managers.MethodEntryManager;
 import com.tracer.model.managers.MethodExitManager;
 import com.tracer.model.managers.ThreadDeathManager;
 import com.tracer.model.managers.VMDeathManager;
-import com.tracer.presenter.RunConfiguration;
 
 
 public class EventThread extends Thread {

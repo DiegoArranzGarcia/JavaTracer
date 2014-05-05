@@ -12,6 +12,7 @@ import com.general.model.JarFinder;
 import com.general.presenter.JavaTracerPresenter;
 import com.tracer.arguments.presenter.ArgumentsPresenter;
 import com.tracer.console.presenter.ConsolePresenter;
+import com.tracer.model.RunConfiguration;
 import com.tracer.model.Tracer;
 import com.tracer.view.TracerView;
 import com.tracer.view.TracerViewInterface;

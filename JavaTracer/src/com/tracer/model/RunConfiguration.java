@@ -1,4 +1,4 @@
-package com.tracer.presenter;
+package com.tracer.model;
 
 import java.util.ArrayList;
 import java.util.List;
