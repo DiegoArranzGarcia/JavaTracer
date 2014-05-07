@@ -158,7 +158,7 @@ public class TracerPresenter implements TracerPresenterInterface {
 	
 	
 	private void setControllers() {
-		tracer.setController(this);
+		tracer.setPresenter(this);
 		argumentsPresenter.setController(this);
 		consolePresenter.setController(this);
 	}

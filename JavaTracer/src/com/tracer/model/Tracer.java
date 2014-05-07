@@ -30,7 +30,7 @@ public class Tracer {
 
 	// Class patterns for which we don't want events
 
-	private TracerPresenter tracerController;
+	private TracerPresenter tracerPresenter;
 
 	private EventThread eventThread;
 
@@ -41,20 +41,20 @@ public class Tracer {
 	 */
 	public void trace(RunConfiguration config) {
 
-		tracerController.launching();
+		tracerPresenter.launching();
 		vm = launchTarget(config);
 		generateTrace(config, null);
 
 	}
 
 	public void profile(RunConfiguration config, ProfilerModelInterface profile) {
-		tracerController.launching();
+		tracerPresenter.launching();
 		vm = launchTarget(config);
 		generateTrace(config, profile);
 	}
 
-	public void setController(TracerPresenter javaTracerController) {
-		this.tracerController = javaTracerController;
+	public void setPresenter(TracerPresenter javaTracerController) {
+		this.tracerPresenter = javaTracerController;
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class Tracer {
 		eventThread = new EventThread(vm, this, config, profiler);
 		eventThread.setEventRequests();
 		eventThread.start();
-		tracerController.redirectStreams(vm.process());
-		tracerController.started();
+		tracerPresenter.redirectStreams(vm.process());
+		tracerPresenter.started();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class Tracer {
 	}
 
 	public void finishedTrace() {
-		tracerController.finishedTrace();
+		tracerPresenter.finishedTrace();
 	}
 
 	public void stopTrace() {

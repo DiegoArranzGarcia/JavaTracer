@@ -217,9 +217,7 @@ public class EventThread extends Thread {
         	vmDeathEvent((VMDeathEvent)event);
         } else if (event instanceof VMDisconnectEvent) {
             connected = disconnect.vmDisconnectEvent((VMDisconnectEvent)event);
-        } else if (event instanceof ThreadStartEvent){
-        	
-        }
+        } 
     }
 
     private void vmDeathEvent(VMDeathEvent event) {
