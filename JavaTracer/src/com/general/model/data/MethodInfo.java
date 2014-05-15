@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.general.model.data.variables.Data;
+import com.general.model.data.variables.IgnoredData;
+import com.general.model.data.variables.StringData;
 import com.tracer.model.ChangeDetector;
 import com.tracer.model.data.methods.MethodEntryInfo;
 import com.tracer.model.data.methods.MethodExitInfo;
@@ -33,7 +35,7 @@ public class MethodInfo {
 		else
 			return null;
 	}
-
+	
 	public List<ChangeInfo> getChanges() {
 		List<ChangeInfo> changes = new ArrayList<ChangeInfo>();
 		
@@ -53,6 +55,10 @@ public class MethodInfo {
 
 	public String getMethodName() {
 		return entry.getMethodName();
+	}
+
+	public Data getCalledFromClass() {
+		return new IgnoredData(entry.getCalledFromClass(),"Called from class");
 	}
 	
 }

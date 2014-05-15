@@ -80,8 +80,7 @@ public class Tracer {
 	 */
 	VirtualMachine launchTarget(RunConfiguration config) {
 		LaunchingConnector connector = findLaunchingConnector();
-		Map<String, Connector.Argument> arguments = connectorArguments(
-				connector, config);
+		Map<String, Connector.Argument> arguments = connectorArguments(connector, config);
 		try {
 			return connector.launch(arguments);
 		} catch (IOException exc) {
@@ -111,10 +110,8 @@ public class Tracer {
 	/**
 	 * Return the launching connector's arguments.
 	 */
-	Map<String, Connector.Argument> connectorArguments(
-			LaunchingConnector connector, RunConfiguration config) {
-		Map<String, Connector.Argument> arguments = connector
-				.defaultArguments();
+	Map<String, Connector.Argument> connectorArguments(LaunchingConnector connector, RunConfiguration config) {
+		Map<String, Connector.Argument> arguments = connector.defaultArguments();
 
 		Connector.Argument mainArg = (Connector.Argument) arguments.get("main");
 		Connector.Argument optionArg = (Connector.Argument) arguments

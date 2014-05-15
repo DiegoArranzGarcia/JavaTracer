@@ -44,6 +44,10 @@ public class ObjectInspectorPresenter implements ObjectInspectorPresenterInterfa
 		List<Data> arguments = method.getArguments();
 		Data thisValue = method.getThis_data();
 		Data returnValue = method.getReturn_data();		
+		Data calledValue = method.getCalledFromClass();
+		
+		variables.add(calledValue);
+		calledValue.accept(visitor);
 		
 		variables.add(thisValue);
 		if (thisValue != null)

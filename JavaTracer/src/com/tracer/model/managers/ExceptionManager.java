@@ -122,9 +122,5 @@ public class ExceptionManager {
 		return arguments;
 
 	}
-	/**
-	 * Returns the ThreadTrace instance for the specified thread, creating one
-	 * if needed.
-	 */
 
 }
