@@ -73,10 +73,23 @@ public class ClassUtils {
 				excluded = (isJavaDataStructure(className) && config.isExcludedDataStructure()) || (!isJavaDataStructure(className) && isExcluded(className));
 				excludedClasses.put(className,excluded);
 			
-			
 			} else 
 				excluded = excludedClasses.get(className);
 		}
+		return excluded;
+	}
+	
+	public boolean isExcludedClass(String className){
+		
+		boolean excluded;
+		if (!excludedClasses.containsKey(className)){
+			
+			excluded = (isJavaDataStructure(className) && config.isExcludedDataStructure()) || (!isJavaDataStructure(className) && isExcluded(className));
+			excludedClasses.put(className,excluded);
+		
+		} else 
+			excluded = excludedClasses.get(className);
+		
 		return excluded;
 	}
 	

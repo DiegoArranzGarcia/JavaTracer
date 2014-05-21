@@ -11,6 +11,7 @@ import com.sun.jdi.Method;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.StackFrame;
 import com.sun.jdi.ThreadReference;
+import com.sun.jdi.Value;
 import com.sun.jdi.event.ExceptionEvent;
 import com.tracer.model.ClassUtils;
 import com.tracer.model.TraceWriter;
@@ -46,31 +47,32 @@ public class ExceptionManager {
 
 					StackFrame frame = list.get(i);
 
-					String method = frame.location().method().name();
-					String clasName = frame.location().declaringType().name();
+					String className = frame.location().declaringType().name();
+					
+					if (!utils.isExcludedClass(className)){
+						String method = frame.location().method().name();
+						
+						List<Data> arguments = processArguments(frame.location()
+								.method(), frame.thread());
 
-					List<Data> arguments = processArguments(frame.location()
-							.method(), frame.thread());
+						Data returnObject = utils.getObjectFromObjectReference(
+								false, "Exception", event.exception(),
+								new ArrayList<Long>());
 
-					Data returnObject = utils.getObjectFromObjectReference(
-							false, "Exception", event.exception(),
-							new ArrayList<Long>());
+						ReferenceType ref = event.location().method()
+								.declaringType(); // "class" where is declaring the
+													// method
+						Data object_this = processThis(event, ref, thread);
 
-					ReferenceType ref = event.location().method()
-							.declaringType(); // "class" where is declaring the
-												// method
-					Data object_this = processThis(event, ref, thread);
-
-					MethodExitInfo info = new MethodExitInfo(method, clasName,
-							returnObject, arguments, object_this);
-					writer.writeMethodExitInfo(info);
-
+						MethodExitInfo info = new MethodExitInfo(method, className,
+								returnObject, arguments, object_this);
+						writer.writeMethodExitInfo(info);
+					}
+					
 					i++;
 				}
 
 			} catch (IncompatibleThreadStateException e) {
-
-				e.printStackTrace();
 
 			}
 
@@ -98,9 +100,16 @@ public class ExceptionManager {
 	private List<Data> processArguments(Method method, ThreadReference thread) {
 
 		List<Data> arguments = new ArrayList<>();
-
+		StackFrame stack = null;
+		
 		try {
-			StackFrame stack = thread.frame(0);
+			stack = thread.frame(0);
+		} catch (IncompatibleThreadStateException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			
 			List<LocalVariable> variables = method.arguments();
 			for (int i = 0; i < variables.size(); i++) {
 				LocalVariable var = variables.get(i);
@@ -110,14 +119,30 @@ public class ExceptionManager {
 				if (nameVar.equals("args"))
 					varObj = utils.getObj(nameVar, null, new ArrayList<Long>());
 				else
-					varObj = utils.getObj(nameVar, stack.getValue(var),
-							new ArrayList<Long>());
+					varObj = utils.getObj(nameVar, stack.getValue(var),new ArrayList<Long>());
 
 				arguments.add(varObj);
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			List<Value> variables = stack.getArgumentValues();
+			for (int i = 0; i < variables.size(); i++) {
+				Value var = variables.get(i);
+				String nameVar = "arg " + i; 
+
+				Data varObj = null;
+				if (nameVar.equals("args"))
+					varObj = utils.getObj(nameVar, null, new ArrayList<Long>());
+				else
+					varObj = utils.getObj(nameVar,var,new ArrayList<Long>());
+
+				arguments.add(varObj);
+
+			}
+			
+			
 		}
 		return arguments;
 
